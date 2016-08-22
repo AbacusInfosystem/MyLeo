@@ -1,0 +1,388 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Product Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Product Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 320px;">
+
+          <div class="block">
+
+                <h4 style="margin-top: 15px;">Primary detail.</h4>
+
+                <form role="form">
+
+                    <div class="form-group">
+                        
+                        <input type="text" class="form-control" placeholder="Enter article number." />
+
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Select vendor.</span>
+                        <select class="form-control select" placeholder="Select vendor.">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Launch date.</span>
+                        <div class="input-group date" id="dp-2" data-date="05-07-2014" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control datepicker" value="05-07-2014" disabled="disabled" />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">End date.</span>
+                        <div class="input-group date" id="dp-2" data-date="05-07-2014" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control datepicker" value="05-07-2014" disabled="disabled" />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 320px;">
+
+          <div class="block">
+
+                <h4 style="margin-top: 15px;">Association detail.</h4>
+
+                <form role="form">
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Select brand.</span>
+                        <select class="form-control select" placeholder="Select brand.">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Select category.</span>
+                        <select class="form-control select" placeholder="Select category.">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Select subcategory.</span>
+                        <select class="form-control select" placeholder="Select subcategory.">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 320px;">
+
+          <div class="block">
+
+                <h4 style="margin-top: 15px;">Attibutes.</h4>
+
+                <form role="form">
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Select color.</span>
+                        <select class="form-control select" placeholder="Select color.">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Select size group.</span>
+                        <select class="form-control select" placeholder="Select size group.">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Select center size.</span>
+                        <select class="form-control select" placeholder="Select center size.">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+        
+        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02);height: 320px;">
+
+          <div class="block">
+
+                <h4 style="margin-top: 15px;">Price configuration.</h4>
+
+                <form role="form">
+
+                   
+                    <div class="form-group">
+                        
+                        <input type="text" class="form-control" placeholder="Enter size difference." />
+                    
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <input type="text" class="form-control" placeholder="Enter purchase price." />
+                    
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <input type="text" class="form-control" placeholder="Enter MRP difference." />
+                    
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." />
+                    
+                    </div>
+
+                    <div class="form-group">
+                        
+                        <input type="text" class="form-control" placeholder="Enter MRP price." />
+                    
+                    </div>
+
+                   
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-md-12" style="padding: 10px; border-top:1px solid #DDD; border-bottom:1px solid #DDD;">
+            <div class="block" style="margin-bottom:0px;">
+             <h4 style="margin-top: 0px;">Size details:</h4>
+
+                <table class="table table-bordered table-hover">
+
+                <tbody>
+                    <tr>
+                        <td>
+                           Size.
+                        </td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">S</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">M</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">L</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">XL</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">XXL</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">XXXL</span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                           Whole Sale Price.
+                        </td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                        <td><input type="text" class="form-control" placeholder="WSR." /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                           MRP.
+                        </td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                        <td><input type="text" class="form-control" placeholder="MRP." /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                           SKU.
+                        </td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">11212354546</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">11212354546</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">11212354546</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">11212354546</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">11212354546</span></td>
+                        <td><span class="label label-primary label-form" style="margin-bottom: 1px;">11212354546</span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                           Barcode.
+                        </td>
+                        <td><i class="fa fa-barcode fa-3x"></i></td>
+                        <td><i class="fa fa-barcode fa-3x"></i></td>
+                        <td><i class="fa fa-barcode fa-3x"></i></td>
+                        <td><i class="fa fa-barcode fa-3x"></i></td>
+                        <td><i class="fa fa-barcode fa-3x"></i></td>
+                        <td><i class="fa fa-barcode fa-3x"></i></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+           
+            </table>
+
+            </div>
+            <div class="block" style="margin-bottom:0px;">
+                <button type="button" class="btn btn-success">Print all barcodes.</button>
+            </div>
+        </div>
+
+        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 320px;">
+
+          <div class="block">
+
+                <h4 style="margin-top: 15px;">Upload product image.</h4>
+
+                <form role="form">
+
+                    <div class="form-group">
+                        
+                        <input type="file" id="myFile">
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="col-md-9" style="background: rgba(0, 0, 0, 0.02); height: 320px;">
+
+           <div class="gallery" id="links">
+                             
+                            <a class="gallery-item" href="assets/images/gallery/nature-1.jpg" title="Nature Image 1" data-gallery>
+                                <div class="image">                              
+                                    <img src="../Content/Atlant/assets/images/gallery/nature-1.jpg" alt="Nature Image 1"/>                                        
+                                    <ul class="gallery-item-controls">
+                                        <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
+                                        <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                    </ul>                                                                    
+                                </div>
+                                <div class="meta">
+                                    <strong>Nature image 1</strong>
+                                    <span>Description</span>
+                                </div>                                
+                            </a>
+
+                            <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
+                                <div class="image">
+                                    <img src="../Content/Atlant/assets/images/gallery/music-1.jpg" alt="Music picture 1"/>    
+                                    <ul class="gallery-item-controls">
+                                        <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
+                                        <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                    </ul>                                                                    
+                                </div>
+                                <div class="meta">
+                                    <strong>Music picture 1</strong>
+                                    <span>Other description</span>
+                                </div>                                
+                            </a>                            
+
+                            <a class="gallery-item" href="assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
+                                <div class="image">
+                                    <img src="../Content/Atlant/assets/images/gallery/girls-1.jpg" alt="Girls Image 1"/>                                        
+                                    <ul class="gallery-item-controls">
+                                        <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
+                                        <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                    </ul>                                                                    
+                                </div>
+                                <div class="meta">
+                                    <strong>Girls image 1</strong>
+                                    <span>Description</span>
+                                </div>                                
+                            </a>
+
+                            <a class="gallery-item" href="assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
+                                <div class="image">
+                                    <img src="../Content/Atlant/assets/images/gallery/nature-2.jpg" alt="Nature Image 2"/>    
+                                    <ul class="gallery-item-controls">
+                                        <li><label class="check"><input type="checkbox" class="icheckbox"/></label></li>
+                                        <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                    </ul>                                                                    
+                                </div>
+                                <div class="meta">
+                                    <strong>Nature image 2</strong>
+                                    <span>Description</span>
+                                </div>                                
+                            </a>
+
+               </div>
+
+        </div>
+
+        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+            
+                <div class="btn-group">
+                    <button class="btn btn-success active">Save</button>
+                    <button class="btn btn-danger active">Cancel</button>
+                </div>
+            
+        </div>
+    </div>
+
+</div>

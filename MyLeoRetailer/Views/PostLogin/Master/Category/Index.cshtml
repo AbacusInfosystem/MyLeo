@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="/Scripts/Modules/common_methods.js"></script>
+<script src="/Scripts/Modules/Category/category_methods.js"></script>
+<script src="/Scripts/Modules/Category/category_events.js"></script>
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Category - Sub category Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Category - Sub category Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-6" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 517px;">
+
+            <div class="block" style="margin-bottom:0px;">
+                <h4 style="margin-top: 0px;">Create - Update category.</h4>
+
+                <form role="form" id="frmCategory">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter category." name="Category.Category" />
+						<input type="hidden" name="Category.Category_Id">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 5px; float: right;">
+                        <label class="switch">
+                            <input checked="" value="0" type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div style="padding-left: 0px; padding-top: 0px; padding-bottom: 20px; margin-bottom: 15px; border-bottom: 1px solid #DDD;">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success active" id="btnSaveCategory">Save</button>
+                            <button class="btn btn-danger active">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+
+                <h4 style="margin-top: 0px;">Category listing.</h4>
+
+                <div class="form-group">
+                    <input type="text" class="form-control category-filter" name="Filter.Category" placeholder="Enter category to search" />
+                </div>
+
+                <div class="list-group border-bottom push-down-20" id="Category_Grid">
+                    
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="padding: 0px;text-align:center;" id="divCategoryPager">
+
+				</div>
+            </div>
+        </div>
+
+        <div class="col-md-6" style="padding: 10px; height: 517px;" id="dvSubCategory">
+          
+		</div>
+	</div>
+</div>

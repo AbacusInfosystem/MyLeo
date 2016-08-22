@@ -1,0 +1,310 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Role Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Role Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 517px;">
+
+            <div class="block" style="margin-bottom:0px;">
+                <h4 style="margin-top: 0px;">Create - Update role.</h4>
+
+                <form role="form">
+                    <div class="form-group">
+                        @*<label>Create / Update size group:</label>*@
+                        <input type="text" class="form-control" placeholder="Enter role." />
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 5px; float: right;">
+                        @*<label>Set Active:</label>*@
+                        <label class="switch">
+                            <input checked="" value="0" type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div style="padding-left: 0px; padding-top: 0px; padding-bottom: 20px; margin-bottom: 15px; border-bottom: 1px solid #DDD;">
+                        <div class="btn-group">
+                            <button class="btn btn-success active">Save</button>
+                            <button class="btn btn-danger active">Cancel</button>
+                        </div>
+                    </div>
+
+                </form>
+
+                <h4 style="margin-top: 0px;">Role listing.</h4>
+
+                <div class="form-group">
+                    @*<label>Create / Update size group:</label>*@
+                    <input type="text" class="form-control" placeholder="Enter role to search" />
+                </div>
+
+                <div class="list-group border-bottom push-down-20">
+                    <a href="#" class="list-group-item active">Company admin</a>
+                    <a href="#" class="list-group-item">Branch admin</a>
+                    <a href="#" class="list-group-item">Manager</a>
+                    <a href="#" class="list-group-item">Back office</a>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12" style="padding: 0px;text-align:center;">
+
+            <ul class="pagination pagination-sm">
+                <li class="disabled"><a href="#">First</a></li>
+                <li class="disabled"><a href="#">«</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">»</a></li>
+                <li><a href="#">Last</a></li>
+            </ul>
+
+        </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8" style="padding: 10px; height: 517px;">
+            <div class="block">
+                <h4 style="margin-top: 0px;">Set access functions to. <span class="label label-primary">Role which is selected.</span></h4>
+
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>Access Function</th>
+                            <th>Access</th>
+                            <th>Create</th>
+                            <th>Edit</th>
+                            <th>View</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Employee Management</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked value="0" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Role Management</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked value="0" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Brand Management</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked value="0" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Color Management</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked value="0" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Size Management</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked value="0" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tax Management</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked value="0" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Category Management</td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" checked value="0" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>
+                                <label class="switch">
+                                    <input type="checkbox" value="1" />
+                                    <span></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

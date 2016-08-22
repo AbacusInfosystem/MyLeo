@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Color Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Color Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row" style="background: rgba(0, 0, 0, 0.02); ">
+
+        <div class="col-md-6" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 517px;">
+
+            <div class="block" style="margin-bottom:0px;">
+                <h4 style="margin-top: 0px;">Color listing.</h4>
+
+                <div class="form-group">
+                    @*<label>Create / Update size group:</label>*@
+                    <input type="text" class="form-control" placeholder="Enter color to search" />
+                </div>
+
+                <div class="list-group border-bottom push-down-20">
+                    <a href="#" class="list-group-item active">Blue</a>
+                    <a href="#" class="list-group-item">Green</a>
+                    <a href="#" class="list-group-item">Orange</a>
+                    <a href="#" class="list-group-item">Red</a>
+                    <a href="#" class="list-group-item">Yellow</a>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12" style="padding: 0px;text-align:center;">
+
+            <ul class="pagination pagination-sm">
+                <li class="disabled"><a href="#">First</a></li>
+                <li class="disabled"><a href="#">«</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">»</a></li>
+                <li><a href="#">Last</a></li>
+            </ul>
+
+        </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6" style="padding: 10px; height: 517px;">
+
+            <div class="block">
+                <h4 style="margin-top: 0px;">Create - Update color.</h4>
+
+                <form role="form">
+                    <div class="form-group">
+                        @*<label>Create / Update size group:</label>*@
+                        <input type="text" class="form-control" placeholder="Enter color name." />
+                    </div>
+
+                    <div class="form-group input-group color" data-color="rgb(255, 146, 180)" data-color-format="rgb" id="colorpicker">
+                        <input class="form-control" readonly="" type="text">
+                        <span class="input-group-addon"><i style="background-color: rgb(154, 42, 77);"></i></span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 5px; float: right;">
+                        @*<label>Set Active:</label>*@
+                        <label class="switch">
+                            <input checked="" value="0" type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <div style="padding-left: 0px; padding-top: 0px; padding-bottom: 20px; margin-bottom: 15px;">
+                        <div class="btn-group">
+                            <button class="btn btn-success active">Save</button>
+                            <button class="btn btn-danger active">Cancel</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
