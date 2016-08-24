@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailerHelper;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace MyLeoRetailer.Controllers
 {
     public class BaseController : Controller
     {
+
+		//public CategoryInfo category = null;
 
 		public GridInfo Set_Grid_Details(bool all_Columns, string show_Columns, string identity_Columns)
 		{
@@ -123,5 +126,13 @@ namespace MyLeoRetailer.Controllers
 				}
 			}
 		}
+
+		//public void Set_Sestion()
+		//{
+		//	category = new CategoryInfo();
+
+		//	category.Category_Id = 1;
+		//}
+
     }
 }
