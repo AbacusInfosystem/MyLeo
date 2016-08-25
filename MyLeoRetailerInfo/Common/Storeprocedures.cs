@@ -30,6 +30,11 @@ namespace MyLeoRetailerInfo.Common
             //Vendor Contact
             sp_Insert_Vendor_Contact,
             sp_Update_Vendor_Contact,
+
+            //Color
+            sp_Insert_Color,
+            sp_Update_Color,
+            sp_Get_Colors_By_Id,
 		}
 	
 }
