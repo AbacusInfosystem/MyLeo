@@ -15,6 +15,10 @@ namespace MyLeoRetailerInfo.Common
 
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
+
+            sp_Insert_Tax,
+            sp_Update_Tax,
+            sp_Get_Tax_By_Id,
 		}
 	
 }
