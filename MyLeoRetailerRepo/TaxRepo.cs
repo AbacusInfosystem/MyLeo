@@ -16,7 +16,7 @@ namespace MyLeoRetailerRepo
     {
        SQL_Repo sqlHelper = null;
 
-       public TaxRepo()
+        public TaxRepo()
 		{
 			sqlHelper = new SQL_Repo();
 		}
@@ -74,7 +74,6 @@ namespace MyLeoRetailerRepo
             return Tax_Value;
 
         }
-
 
         //public string Get_Colors_By_Id(int Color_Id)
         //{

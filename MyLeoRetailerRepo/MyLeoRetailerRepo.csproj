@@ -46,6 +46,7 @@
     <Compile Include="SubCategoryRepo.cs" />
     <Compile Include="TaxRepo.cs" />
     <Compile Include="Utility\SQL_Repo.cs" />
+    <Compile Include="VendorContactRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyLeoRetailerInfo\MyLeoRetailerInfo.csproj">
