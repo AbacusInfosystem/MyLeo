@@ -81,7 +81,7 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-        }
+		}
 
 		public static FriendlyMessage Get(string code)
 		{
