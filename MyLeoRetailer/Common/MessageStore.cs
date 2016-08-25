@@ -68,6 +68,19 @@ namespace MyLeoRetailer.Common
 
 			#endregion
 
+            #region Tax
+
+            FriendlyMessage TCAT01 = new FriendlyMessage("TCAT01", MessageType.Success, "Tax added successfully.");
+            hash.Add("TCAT01", TCAT01);
+
+            FriendlyMessage TCAT02 = new FriendlyMessage("TCAT02", MessageType.Success, "Tax updated successfully.");
+            hash.Add("TCAT02", TCAT02);
+
+            FriendlyMessage TCAT03 = new FriendlyMessage("TCAT03", MessageType.Information, "No records found.");
+            hash.Add("TCAT03", TCAT03);
+
+            #endregion
+
             #region Color
 
             FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
@@ -78,7 +91,7 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-        }
+		}
 
 		public static FriendlyMessage Get(string code)
 		{

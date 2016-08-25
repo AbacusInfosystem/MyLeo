@@ -194,16 +194,19 @@
     <Compile Include="Controllers\PostLogin\Master\SizeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TagController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TaxController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\VendorContactController.cs" />
     <Compile Include="Controllers\PostLogin\Master\VendorController.cs" />
     <Compile Include="Controllers\PreLogin\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
+    <Compile Include="Models\TaxViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -943,6 +946,8 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Modules\Brand\brand_events.js" />
+    <Content Include="Scripts\Modules\Brand\brand_methods.js" />
     <Content Include="Scripts\Modules\Category\category_events.js" />
     <Content Include="Scripts\Modules\Category\category_methods.js" />
     <Content Include="Scripts\Modules\Category\category_validation.js" />
@@ -952,6 +957,9 @@
     <Content Include="Scripts\Modules\Color\color_methods.js" />
     <Content Include="Scripts\Modules\Color\color_validation.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\Tax\tax_events.js" />
+    <Content Include="Scripts\Modules\Tax\tax_methods.js" />
+    <Content Include="Scripts\Modules\Tax\Tax_validation.js" />
     <Content Include="Scripts\Modules\Employee\employee_events.js" />
     <Content Include="Scripts\Modules\Employee\employee_methods.js" />
     <Content Include="Scripts\Modules\Employee\employee_validation.js" />
@@ -998,6 +1006,8 @@
     <Content Include="Views\PostLogin\Master\Product\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Product\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\Category\_SubCategory.cshtml" />
+    <Content Include="Views\PostLogin\Master\VendorContact\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\VendorContact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
