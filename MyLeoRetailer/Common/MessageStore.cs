@@ -68,7 +68,17 @@ namespace MyLeoRetailer.Common
 
 			#endregion
 
-		}
+            #region Color
+
+            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
+            hash.Add("COL1", COL1);
+
+            FriendlyMessage COL2 = new FriendlyMessage("COL2", MessageType.Success, "Colour Updated successfully.");
+            hash.Add("COL2", COL2);
+
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{

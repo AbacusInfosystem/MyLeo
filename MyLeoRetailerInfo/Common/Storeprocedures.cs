@@ -15,6 +15,10 @@ namespace MyLeoRetailerInfo.Common
 
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
+
+            sp_Insert_Color,
+            sp_Update_Color,
+            sp_Get_Colors_By_Id,
 		}
 	
 }

@@ -41,9 +41,12 @@
   <ItemGroup>
     <Compile Include="Category\CategoryInfo.cs" />
     <Compile Include="Category\SubCategoryInfo.cs" />
+    <Compile Include="Color\ColorInfo.cs" />
     <Compile Include="Common\ExceptionInfo.cs" />
     <Compile Include="Common\FriendlyMessage.cs" />
+    <Compile Include="Common\LookupInfo.cs" />
     <Compile Include="Common\Storeprocedures.cs" />
+    <Compile Include="Employee\EmployeeInfo.cs" />
     <Compile Include="Enum_Collection.cs" />
     <Compile Include="GridInfo.cs" />
     <Compile Include="Interface\IGridInfo.cs" />

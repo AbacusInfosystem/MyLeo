@@ -200,7 +200,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
+    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -946,7 +948,15 @@
     <Content Include="Scripts\Modules\Category\category_validation.js" />
     <Content Include="Scripts\Modules\Category\sub_category_events.js" />
     <Content Include="Scripts\Modules\Category\sub_category_methods.js" />
+    <Content Include="Scripts\Modules\Color\color_events.js" />
+    <Content Include="Scripts\Modules\Color\color_methods.js" />
+    <Content Include="Scripts\Modules\Color\color_validation.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_events.js" />
+    <Content Include="Scripts\Modules\Employee\employee_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_validation.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
