@@ -42,9 +42,12 @@
     <Compile Include="Brand\BrandInfo.cs" />
     <Compile Include="Category\CategoryInfo.cs" />
     <Compile Include="Category\SubCategoryInfo.cs" />
+    <Compile Include="Color\ColorInfo.cs" />
     <Compile Include="Common\ExceptionInfo.cs" />
     <Compile Include="Common\FriendlyMessage.cs" />
+    <Compile Include="Common\LookupInfo.cs" />
     <Compile Include="Common\Storeprocedures.cs" />
+    <Compile Include="Employee\EmployeeInfo.cs" />
     <Compile Include="Enum_Collection.cs" />
     <Compile Include="GridInfo.cs" />
     <Compile Include="Interface\IGridInfo.cs" />
@@ -55,6 +58,10 @@
     <Compile Include="Tax\TaxInfo.cs" />
     <Compile Include="VendorContact\VendorContactInfo.cs" />
     <Compile Include="Vendor\VendorInfo.cs" />
+    <Compile Include="Size\SizeGroupInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="VendorContact\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

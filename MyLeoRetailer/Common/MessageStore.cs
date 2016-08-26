@@ -95,7 +95,25 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-        }
+            #region Color
+
+            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
+            hash.Add("COL1", COL1);
+
+            FriendlyMessage COL2 = new FriendlyMessage("COL2", MessageType.Success, "Colour Updated successfully.");
+            hash.Add("COL2", COL2);
+
+            #endregion
+
+            #region Employee
+            FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
+            hash.Add("EMP01", EMP01);
+
+            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
+            hash.Add("EMP02", EMP02);
+            #endregion
+
+		}
 
 		public static FriendlyMessage Get(string code)
 		{

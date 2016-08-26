@@ -202,7 +202,10 @@
     </Compile>
     <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
+    <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
     <Compile Include="Models\VendorContactViewModel.cs" />
@@ -952,6 +955,9 @@
     <Content Include="Scripts\Modules\Category\category_validation.js" />
     <Content Include="Scripts\Modules\Category\sub_category_events.js" />
     <Content Include="Scripts\Modules\Category\sub_category_methods.js" />
+    <Content Include="Scripts\Modules\Color\color_events.js" />
+    <Content Include="Scripts\Modules\Color\color_methods.js" />
+    <Content Include="Scripts\Modules\Color\color_validation.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
     <Content Include="Scripts\Modules\Tax\tax_events.js" />
     <Content Include="Scripts\Modules\Tax\tax_methods.js" />
@@ -961,6 +967,14 @@
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_events.js" />
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_methode.js" />
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_validation.js" />
+    <Content Include="Scripts\Modules\Employee\employee_events.js" />
+    <Content Include="Scripts\Modules\Employee\employee_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_validation.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
+    <Content Include="Scripts\Modules\Size\size_group_events.js" />
+    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
+    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
