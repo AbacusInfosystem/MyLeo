@@ -10,7 +10,7 @@ namespace MyLeoRetailer.Models
 {
 	public class SubCategoryViewModel
 	{
-		public SubCategoryViewModel()
+        public SubCategoryViewModel()
 		{
 			Grid_Detail = new GridInfo();
 

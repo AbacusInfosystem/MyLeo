@@ -205,6 +205,7 @@
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -965,6 +966,9 @@
     <Content Include="Scripts\Modules\Employee\employee_validation.js" />
     <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
     <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
+    <Content Include="Scripts\Modules\Size\size_group_events.js" />
+    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
+    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -13,7 +13,7 @@ $(function ()
 		Get_Sub_Category_By_Id(this);
 	});
 
-	$("[name='Filter.Sub_Category']").focusout(function ()
+	$("[name='Filter.Size_Name']").focusout(function ()
 	{
 		Get_Sub_Categories();
 	});
