@@ -33,6 +33,29 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Vendor_Contact_By_Id,
             Get_Vendor_Sp,
             Get_Vendor_By_Id_Sp,
+
+            //Color
+            sp_Insert_Color,
+            sp_Update_Color,
+            sp_Get_Colors_By_Id,
+
+            //SizeGroup
+
+            sp_Insert_SizeGroup,
+            sp_Update_Size_Group,
+
+            //Size
+
+            sp_Insert_Size,
+            sp_Update_Size,
+            sp_Get_Sizes_By_Size_Group_Id,
+            Sp_Delete_Size_By_Id,
+
+
+            //Employee
+            sp_Insert_Employee,
+            sp_Update_Employee,
+            sp_Get_Employees_By_Id,
             //Customer
             sp_Insert_Customer,
             sp_Update_Customer,
