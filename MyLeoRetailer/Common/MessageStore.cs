@@ -81,7 +81,18 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+            #region Customer
 
+            FriendlyMessage CUST01 = new FriendlyMessage("CUST01", MessageType.Success, "Customer added successfully.");
+            hash.Add("CUST01", CUST01);
+
+            FriendlyMessage CUST02 = new FriendlyMessage("CUST02", MessageType.Success, "Customer updated successfully.");
+            hash.Add("CUST02", CUST02);
+
+            FriendlyMessage CUST03 = new FriendlyMessage("CUST03", MessageType.Information, "No records found.");
+            hash.Add("CUST03", CUST03);
+
+            #endregion
 		}
 
 		public static FriendlyMessage Get(string code)

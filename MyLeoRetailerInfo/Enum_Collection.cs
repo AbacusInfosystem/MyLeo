@@ -14,6 +14,13 @@ namespace MyLeoRetailerInfo
         Boolean,
     }
 
+    public enum GenderType
+    {
+        Male,
+        Female,
+        Transgender,
+    }
+
     public enum StoredProdures
     {
         ABC_sp,

@@ -32,6 +32,8 @@ function Bind_Grid(obj, name)
 	// Table 
 	table.addClass("table").addClass("table-bordered").addClass("table-striped");
 
+    //$("#divDynamicTable").html(table[0].innerHTML); //.html(table_str);
+
 	$("#divDynamicTable").html(table); //.html(table_str);
 
 	$("#divPager").html(obj.Grid_Detail['Pager']['PageHtmlString'])
@@ -59,7 +61,7 @@ function Bind_Header(table, obj)
 }
 
 function Bind_Rows(table, obj, name)
-{
+{   
 	var tbody = $("<tbody>").appendTo(table);
 
 	for (var i = 0; i < obj.Grid_Detail['Records'].length; i++)

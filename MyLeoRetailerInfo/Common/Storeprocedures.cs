@@ -22,6 +22,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Insert_Brand,
             sp_Update_Brand,
 
+            //Customer
+            sp_Insert_Customer,
+            sp_Update_Customer,
+            sp_Get_Customer_By_Id,
+            sp_Get_Customer_By_Mobile,
 		}
 	
 }

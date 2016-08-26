@@ -202,6 +202,7 @@
     <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -944,12 +945,18 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Modules\Brand\brand_events.js" />
     <Content Include="Scripts\Modules\Brand\brand_methods.js" />
+    <Content Include="Scripts\Modules\Brand\brand_validation.js" />
     <Content Include="Scripts\Modules\Category\category_events.js" />
     <Content Include="Scripts\Modules\Category\category_methods.js" />
     <Content Include="Scripts\Modules\Category\category_validation.js" />
     <Content Include="Scripts\Modules\Category\sub_category_events.js" />
     <Content Include="Scripts\Modules\Category\sub_category_methods.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\Customer\customer_events.js" />
+    <Content Include="Scripts\Modules\Customer\customer_methods.js" />
+    <Content Include="Scripts\Modules\Customer\customer_validation.js" />
+    <Content Include="Scripts\Modules\Customer\search_customer_events.js" />
+    <Content Include="Scripts\Modules\Customer\search_customer_methods.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
