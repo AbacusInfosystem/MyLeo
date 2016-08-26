@@ -1,5 +1,4 @@
-﻿using MyLeoRetailerInfo.State;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +10,7 @@ namespace MyLeoRetailerInfo.Customer
     {
         public CustomerInfo()
 		{
-            States = new List<StateInfo>();
+            
 		}
 
 		public int Customer_Id { get; set; }
@@ -88,7 +87,7 @@ namespace MyLeoRetailerInfo.Customer
 
         public string Last_Name { get; set; }
 
-        public List<StateInfo> States { get; set; }
+
 
     }
 }
