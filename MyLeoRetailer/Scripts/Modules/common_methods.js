@@ -54,9 +54,11 @@ function Bind_Header(table, obj)
 
 	for (var i = 0; i < obj.Grid_Detail['Show_Columns'].length; i++)
 	{
-		var th = $("<th>").appendTo(row);
+	    var th = $("<th>").appendTo(row);
 
-		th.text(obj.Grid_Detail['Show_Columns'][i]);
+	    var Show_Coloumns = obj.Grid_Detail['Show_Columns'][i].replace("_", " ");
+
+		th.text(Show_Coloumns);
 	}
 }
 
@@ -78,7 +80,7 @@ function Bind_Rows(table, obj, name)
 
 			for (var j = 0; j < obj.Grid_Detail['Identity_Columns'].length; j++)
 			{
-				$("<input>", { type: "hidden", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][j]], name: obj.Grid_Detail['Identity_Columns'][j] }).appendTo(td);
+			    $("<input>", { type: "hidden",  value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][j]], name: obj.Grid_Detail['Identity_Columns'][j] }).appendTo(td);
 			}
 		}
 

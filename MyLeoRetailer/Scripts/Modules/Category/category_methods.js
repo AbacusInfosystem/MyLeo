@@ -18,13 +18,13 @@ function Get_Categories()
 
 		url: "/Category/Get_Catgories",
 
-		data: JSON.stringify(cViewModel),
+		data: JSON.stringify(cViewModel),// data we are sending to server
 
-		dataType: 'json',
+		dataType: 'json',  //WHAT WE ARE EXPECTING
 
 		type: 'POST',
 
-		contentType: 'application/json',
+		contentType: 'application/json', //WHAT WE ARE SENDING
 
 		success: function (response)
 		{
@@ -117,6 +117,10 @@ function Get_SubCategories(obj)
 {
 	$("#dvSubCategory").load("/Category/Get_Sub_Category_By_Category_Id", { catgeory_Id: $(obj).attr("data-identity"), category: $(obj).text() });
 }
+
+
+
+
 
 
 

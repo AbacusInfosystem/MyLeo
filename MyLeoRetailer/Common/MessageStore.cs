@@ -68,19 +68,50 @@ namespace MyLeoRetailer.Common
 
 			#endregion
 
-            #region Brand
+            #region Tax
 
-            FriendlyMessage BRND01 = new FriendlyMessage("BRND01", MessageType.Success, "Brand added successfully.");
-            hash.Add("BRND01", BRND01);
+            FriendlyMessage TCAT01 = new FriendlyMessage("TCAT01", MessageType.Success, "Tax added successfully.");
+            hash.Add("TCAT01", TCAT01);
 
-            FriendlyMessage BRND02 = new FriendlyMessage("BRND02", MessageType.Success, "Brand updated successfully.");
-            hash.Add("BRND02", BRND02);
+            FriendlyMessage TCAT02 = new FriendlyMessage("TCAT02", MessageType.Success, "Tax updated successfully.");
+            hash.Add("TCAT02", TCAT02);
 
-            FriendlyMessage BRND03 = new FriendlyMessage("BRND03", MessageType.Information, "No records found.");
-            hash.Add("BRND03", BRND03);
+            FriendlyMessage TCAT03 = new FriendlyMessage("TCAT03", MessageType.Information, "No records found.");
+            hash.Add("TCAT03", TCAT03);
 
             #endregion
 
+            #region Vendor Contact
+
+            FriendlyMessage VCAT01 = new FriendlyMessage("VCAT01", MessageType.Success, "Vendor Contact added successfully.");
+            hash.Add("VCAT01", VCAT01);
+
+            FriendlyMessage VCAT02 = new FriendlyMessage("VCAT02", MessageType.Success, "Vendor Contact updated successfully.");
+            hash.Add("VCAT02", VCAT02);
+
+            FriendlyMessage VCAT03 = new FriendlyMessage("VCAT03", MessageType.Information, "No records found.");
+            hash.Add("VCAT03", VCAT03);
+
+
+            #endregion
+
+            #region Color
+
+            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
+            hash.Add("COL1", COL1);
+
+            FriendlyMessage COL2 = new FriendlyMessage("COL2", MessageType.Success, "Colour Updated successfully.");
+            hash.Add("COL2", COL2);
+
+            #endregion
+
+            #region Employee
+            FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
+            hash.Add("EMP01", EMP01);
+
+            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
+            hash.Add("EMP02", EMP02);
+            #endregion
             #region Customer
 
             FriendlyMessage CUST01 = new FriendlyMessage("CUST01", MessageType.Success, "Customer added successfully.");

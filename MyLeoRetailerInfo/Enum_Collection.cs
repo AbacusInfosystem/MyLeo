@@ -34,4 +34,19 @@ namespace MyLeoRetailerInfo
 		Success = 3,
 		Warning = 4,
 	}
+
+    public enum Gender
+    {
+        Male = 1,
+        Female = 2,
+        Transgender = 3, 
+    }
+
+    public enum Designation
+    {
+        Owner = 1,
+        Partner = 2,
+        Branch_Manager = 3,
+        Sales_Person = 4,
+    }
 }
