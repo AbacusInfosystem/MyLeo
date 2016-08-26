@@ -76,7 +76,6 @@ namespace MyLeoRetailer.Models
         }
 
 	}
-
         public class Filter_Vendor_Contact
 	{
         public string Vendor_Contact_Name
