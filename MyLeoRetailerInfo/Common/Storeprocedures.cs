@@ -48,11 +48,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
 
-
-        //Employee
-        sp_Insert_Employee,
-        sp_Update_Employee,
-        sp_Get_Employees_By_Id,
+            //Employee
+            sp_Insert_Employee,
+            sp_Update_Employee,
+            sp_Get_Employees_By_Id,
 		}
 	
 }
