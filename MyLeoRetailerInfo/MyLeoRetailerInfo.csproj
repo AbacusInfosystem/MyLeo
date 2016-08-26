@@ -54,6 +54,7 @@
     <Compile Include="QueryInfo.cs" />
     <Compile Include="Tax\TaxInfo.cs" />
     <Compile Include="VendorContact\VendorContactInfo.cs" />
+    <Compile Include="Vendor\VendorInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

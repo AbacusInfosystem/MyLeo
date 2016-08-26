@@ -205,6 +205,7 @@
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
+    <Compile Include="Models\VendorContactViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -955,6 +956,11 @@
     <Content Include="Scripts\Modules\Tax\tax_events.js" />
     <Content Include="Scripts\Modules\Tax\tax_methods.js" />
     <Content Include="Scripts\Modules\Tax\Tax_validation.js" />
+    <Content Include="Scripts\Modules\VendorContact\search_vendorcontact_events.js" />
+    <Content Include="Scripts\Modules\VendorContact\search_vendorcontact_methode.js" />
+    <Content Include="Scripts\Modules\VendorContact\vendorcontact_events.js" />
+    <Content Include="Scripts\Modules\VendorContact\vendorcontact_methode.js" />
+    <Content Include="Scripts\Modules\VendorContact\vendorcontact_validation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

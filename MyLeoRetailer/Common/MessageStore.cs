@@ -81,7 +81,21 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-		}
+            #region Vendor Contact
+
+            FriendlyMessage VCAT01 = new FriendlyMessage("VCAT01", MessageType.Success, "Vendor Contact added successfully.");
+            hash.Add("VCAT01", VCAT01);
+
+            FriendlyMessage VCAT02 = new FriendlyMessage("VCAT02", MessageType.Success, "Vendor Contact updated successfully.");
+            hash.Add("VCAT02", VCAT02);
+
+            FriendlyMessage VCAT03 = new FriendlyMessage("VCAT03", MessageType.Information, "No records found.");
+            hash.Add("VCAT03", VCAT03);
+
+
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{
