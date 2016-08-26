@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
+    <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -947,6 +948,9 @@
     <Content Include="Scripts\Modules\Category\sub_category_events.js" />
     <Content Include="Scripts\Modules\Category\sub_category_methods.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\Size\size_group_events.js" />
+    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
+    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

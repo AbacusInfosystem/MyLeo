@@ -16,7 +16,7 @@ namespace MyLeoRetailerRepo
 	{
 		SQL_Repo sqlHelper = null;
 
-		public SubCategoryRepo()
+        public SubCategoryRepo()
 		{
 			sqlHelper = new SQL_Repo();
 		}

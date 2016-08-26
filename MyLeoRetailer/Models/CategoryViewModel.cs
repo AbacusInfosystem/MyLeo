@@ -12,7 +12,7 @@ namespace MyLeoRetailer.Models
 {
 	public class CategoryViewModel:IGridInfo, IQueryInfo
 	{
-		public CategoryViewModel() 
+        public CategoryViewModel() 
 		{
 			Grid_Detail = new GridInfo();
 
