@@ -52,6 +52,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Insert_Employee,
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
+
+            //Login
+            Get_User_Data_By_Token_sp,
+            Authenticate_User_sp,
+            Insert_Token_In_User_Table_Sp,
 		}
 	
 }
