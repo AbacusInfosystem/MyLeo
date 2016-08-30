@@ -63,7 +63,7 @@ function Get_Vendor_Contact_By_Id(obj) {
 
     $("[name='VendorContact.Email_Id']").val($(obj).text());
 
-    $("[name='VendorContact.Is_Active']").val($(obj).text());
+    $("[name='VendorContact.IsActive']").val($(obj).text());
 
     $("[name='VendorContact.VendorContact_Id']").val($(obj).attr("data-identity"));
 

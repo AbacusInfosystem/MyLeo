@@ -45,6 +45,7 @@
     <Compile Include="CategoryRepo.cs" />
     <Compile Include="ColorRepo.cs" />
     <Compile Include="EmployeeRepo.cs" />
+    <Compile Include="GiftVoucherRepo.cs" />
     <Compile Include="CustomerRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateRepo.cs" />

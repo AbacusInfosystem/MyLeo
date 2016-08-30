@@ -64,6 +64,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Customer_By_Id,
             sp_Get_Customer_By_Mobile,
 
+            //GiftVoucher
+            sp_Insert_Gift_Voucher,
+            sp_Update_Gift_Voucher,
+            sp_Get_Gift_Voucher_By_Id,
+
             //Branch
             sp_Insert_Branch,
             sp_Update_Branch,

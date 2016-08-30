@@ -46,15 +46,16 @@ function Save_Vendor_Contact() {
 		}
 
     var url = "";
-
+    
+    if ($("#frmCVendorContactPrimaryInfo").valid()) {
         if ($("[name='VendorContact.VendorContact_Id']").val() == "" || $("[name='VendorContact.VendorContact_Id']").val() == 0) {
 
-        url = "/VendorContact/Insert_Vendor_Contact";
+            url = "/VendorContact/Insert_Vendor_Contact";
+        }
+        else {
+            url = "/VendorContact/Update_Vendor_Contact";
+        }
     }
-    else {
-        url = "/VendorContact/Update_Vendor_Contact";
-    }
-
     $.ajax({
 
         url: url,

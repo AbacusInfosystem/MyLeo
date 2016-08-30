@@ -1,7 +1,7 @@
 ﻿$(function () {
     $("#frmTax").validate({
         rules: {
-            "Tax.Tax_Name": { required: true },
+            "Tax.Tax_Name": { required: true }
         },
         messages: {
 
