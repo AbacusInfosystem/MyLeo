@@ -74,7 +74,9 @@
         <script type='text/javascript' src='../Content/Atlant/js/plugins/noty/layouts/topRight.js'></script>            
             
         <script type='text/javascript' src='../Content/Atlant/js/plugins/noty/themes/default.js'></script>
-            
+
+		<script src="/Scripts/jquery.validate.js"></script>
+        <script src="/Scripts/generic.custom.validation.js"></script>
 
         <!-- END THIS PAGE PLUGINS-->        
 
@@ -114,11 +116,6 @@
     </body>
 </html>
 
-
-
-
-
-
  <!-- START TEMPLATE -->
         <script type="text/javascript" src="../Content/Atlant/js/settings.js"></script>
         <script type="text/javascript" src="../Content/Atlant/js/plugins.js"></script>        
@@ -126,3 +123,32 @@
         
         @*<script type="text/javascript" src="../Content/Atlant/js/demo_dashboard.js"></script>*@
         <!-- END TEMPLATE -->
+
+<script>
+	$(function ()
+	{
+		$(document).on("change", "input[type='checkbox']", function ()
+		{
+			if ($(this).prop("checked"))
+			{
+				$(this).val(1);
+			}
+			else
+			{
+				$(this).val(0);
+			}
+		});
+
+		$(document).on("change", "input[type='radio']", function ()
+		{
+			if ($(this).prop("checked"))
+			{
+				$(this).val(1);
+			}
+			else
+			{
+				$(this).val(0);
+			}
+		});
+	});
+</script>

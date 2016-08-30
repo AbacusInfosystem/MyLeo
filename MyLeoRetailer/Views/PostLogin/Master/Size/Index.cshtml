@@ -2,6 +2,12 @@
     ViewBag.Title = "Index";
 }
 
+
+<script src="/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Size/size_group_events.js"></script>
+<script src="~/Scripts/Modules/Size/size_group_methods.js"></script>
+<script src="~/Scripts/Modules/Size/size_group_validation.js"></script>
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -32,10 +38,10 @@
             <div class="block" style="margin-bottom:0px;">
                 <h4 style="margin-top: 0px;">Create - Update size group.</h4>
 
-                <form role="form">
+                <form id="frmSizeGroup">@*role="form"*@ 
                     <div class="form-group">
-                        @*<label>Create / Update size group:</label>*@
-                        <input type="text" class="form-control" placeholder="Enter size group." />
+                        <input type="text" class="form-control" placeholder="Enter size group." name="SizeGroup.Size_Group_Name" />
+                        <input type="hidden" name="SizeGroup.Size_Group_Id" id="hdnSizeGroupID">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 5px; float: right;">
@@ -45,11 +51,15 @@
                             <span></span>
                         </label>
                     </div>
+                    
+
+                @*<input type="button" id="btnSaveSizeGroup" value="Save" />*@
 
                     <div style="padding-left: 0px; padding-top: 0px; padding-bottom: 20px; margin-bottom: 15px; border-bottom: 1px solid #DDD;">
                         <div class="btn-group">
-                            <button class="btn btn-success active">Save</button>
-                            <button class="btn btn-danger active">Cancel</button>
+                            <button type="button" class="btn btn-success active" id="btnSaveSizeGroup">Save</button>
+                            @*<button type="button" class="btn btn-default" id="abc">Default</button>*@
+                            <button type ="button" class="btn btn-danger active">Cancel</button>
                         </div>
                     </div>
 
@@ -59,95 +69,91 @@
 
                 <div class="form-group">
                     @*<label>Create / Update size group:</label>*@
-                    <input type="text" class="form-control" placeholder="Enter size group to search" />
+                    <input type="text" class="form-control sizegroup-filter" name="Filter.Size_Group_Name" placeholder="Enter size group to search" />
                 </div>
 
-                <div class="list-group border-bottom push-down-20">
-                    <a href="#" class="list-group-item active">Toddler</a>
-                    <a href="#" class="list-group-item">Boy</a>
-                    <a href="#" class="list-group-item">Girl</a>
-                    <a href="#" class="list-group-item">Men</a>
-                    <a href="#" class="list-group-item">Woman</a>
-                    <a href="#" class="list-group-item">Boy</a>
-                    
+                <div class="list-group border-bottom push-down-20" id="Size_Group_Name_Grid">
+                   
+
                 </div>
 
             </div>
 
             <div class="row">
 
-                <div class="col-md-12" style="padding: 0px;text-align:center;">
+                <div class="col-md-12" style="padding: 0px;text-align:center;" id="divSizeGroupPager">    
 
-            <ul class="pagination pagination-sm">
-                <li class="disabled"><a href="#">First</a></li>
-                <li class="disabled"><a href="#">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-                <li><a href="#">Last</a></li>
-            </ul>
-
-        </div>
+                </div>
 
             </div>
 
         </div>
 
-        <div class="col-md-8" style="padding: 10px;">
+        <div class="col-md-8" style="padding: 10px;" id="divSize">
             <div class="block">
              <h4 style="margin-top: 0px;">Size details:</h4>
 
-            <form role="form">
+            <form id="frmSize" role="form">
                 <div class="row">
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" value="S" />
+                    <input type="text" class="form-control" name="SizeGroup.Size1" id="txtSize1" />
+                    <input type="hidden" id="hdnSize1"/>
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" value="M" />
+                    <input type="text" class="form-control" name="SizeGroup.Size2" id="txtSize2" />
+                    <input type="hidden" id="hdnSize2" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" value="L" />
+                    <input type="text" class="form-control" name="SizeGroup.Size3" id="txtSize3" />
+                    <input type="hidden" id="hdnSize3" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" value="XL" />
+                    <input type="text" class="form-control" name="SizeGroup.Size4" id="txtSize4" />
+                    <input type="hidden" id="hdnSize4" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" value="XXL" />
+                    <input type="text" class="form-control" name="SizeGroup.Size5" id="txtSize5" />
+                    <input type="hidden" id="hdnSize5" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" value="XXXL" />
+                    <input type="text" class="form-control" name="SizeGroup.Size6" id="txtSize6" />
+                    <input type="hidden" id="hdnSize6" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="SizeGroup.Size7" id="txtSize7" />
+                    <input type="hidden" id="hdnSize7" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="SizeGroup.Size8" id="txtSize8" />
+                    <input type="hidden" id="hdnSize8" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="SizeGroup.Size9" id="txtSize9" />
+                    <input type="hidden" id="hdnSize9" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="SizeGroup.Size10" id="txtSize10" />
+                    <input type="hidden" id="hdnSize10" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="SizeGroup.Size11" id="txtSize11" />
+                    <input type="hidden" id="hdnSize11" />
                 </div>
                 <div class="col-md-1" style="padding-left: 0px;">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" name="SizeGroup.Size12" id="txtSize12" />
+                    <input type="hidden" id="hdnSize12" />
                 </div>
 </div>
                  <div class="row">
-                     <div class="col-md-12" style="padding-left: 0px;padding-top:15px; padding-bottom: 20px; margin-bottom: 15px; border-bottom: 1px solid #DDD;"">
+                     <div class="col-md-12" style="padding-left: 0px;padding-top:15px; padding-bottom: 20px; margin-bottom: 15px; border-bottom: 1px solid #DDD;">
                         <div class="btn-group">
-                            <button class="btn btn-success active">Save</button>
-                            <button class="btn btn-danger active">Cancel</button>
+                            <button type ="button" id="btnSaveSize" class="btn btn-success active">Save</button>
+                            <button type="button" class="btn btn-danger active">Cancel</button>
                         </div>
                      </div>
                     </div>
             </form>
+
                 </div>
         </div>
 

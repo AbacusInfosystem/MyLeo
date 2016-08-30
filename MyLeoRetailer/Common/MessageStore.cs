@@ -68,6 +68,76 @@ namespace MyLeoRetailer.Common
 
 			#endregion
 
+            #region Tax
+
+            FriendlyMessage TCAT01 = new FriendlyMessage("TCAT01", MessageType.Success, "Tax added successfully.");
+            hash.Add("TCAT01", TCAT01);
+
+            FriendlyMessage TCAT02 = new FriendlyMessage("TCAT02", MessageType.Success, "Tax updated successfully.");
+            hash.Add("TCAT02", TCAT02);
+
+            FriendlyMessage TCAT03 = new FriendlyMessage("TCAT03", MessageType.Information, "No records found.");
+            hash.Add("TCAT03", TCAT03);
+
+            #endregion
+
+            #region Vendor Contact
+
+            FriendlyMessage VCAT01 = new FriendlyMessage("VCAT01", MessageType.Success, "Vendor Contact added successfully.");
+            hash.Add("VCAT01", VCAT01);
+
+            FriendlyMessage VCAT02 = new FriendlyMessage("VCAT02", MessageType.Success, "Vendor Contact updated successfully.");
+            hash.Add("VCAT02", VCAT02);
+
+            FriendlyMessage VCAT03 = new FriendlyMessage("VCAT03", MessageType.Information, "No records found.");
+            hash.Add("VCAT03", VCAT03);
+
+
+            #endregion
+
+            #region Color
+
+            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
+            hash.Add("COL1", COL1);
+
+            FriendlyMessage COL2 = new FriendlyMessage("COL2", MessageType.Success, "Colour Updated successfully.");
+            hash.Add("COL2", COL2);
+
+            #endregion
+
+            #region Employee
+            FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
+            hash.Add("EMP01", EMP01);
+
+            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
+            hash.Add("EMP02", EMP02);
+            #endregion
+
+            #region Customer
+
+            FriendlyMessage CUST01 = new FriendlyMessage("CUST01", MessageType.Success, "Customer added successfully.");
+            hash.Add("CUST01", CUST01);
+
+            FriendlyMessage CUST02 = new FriendlyMessage("CUST02", MessageType.Success, "Customer updated successfully.");
+            hash.Add("CUST02", CUST02);
+
+            FriendlyMessage CUST03 = new FriendlyMessage("CUST03", MessageType.Information, "No records found.");
+            hash.Add("CUST03", CUST03);
+
+            #endregion
+
+            #region Gift Voucher
+
+            FriendlyMessage GVAT01 = new FriendlyMessage("GVAT01", MessageType.Success, "Gift Voucher added successfully.");
+            hash.Add("GVAT01", GVAT01);
+
+            FriendlyMessage GVAT02 = new FriendlyMessage("GVAT02", MessageType.Success, "Gift Voucher updated successfully.");
+            hash.Add("GVAT02", GVAT02);
+
+            FriendlyMessage GVAT03 = new FriendlyMessage("GVAT03", MessageType.Information, "No records found.");
+            hash.Add("GVAT03", GVAT03);
+
+            #endregion
 		}
 
 		public static FriendlyMessage Get(string code)

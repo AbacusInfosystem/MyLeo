@@ -6,7 +6,10 @@ $(function ()
 
 	$("#btnSaveCategory").click(function ()
 	{
-		Save_Category();
+		if ($("#frmCategory").valid())
+		{
+			Save_Category();
+		}
 	});
 
 	$(document).on("click", "[name='Category_List']", function ()
@@ -20,4 +23,6 @@ $(function ()
 	{
 		Get_Categories();
 	});
+
+
 });
