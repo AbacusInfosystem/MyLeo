@@ -5,7 +5,7 @@ $(function () {
         rules: {
             "VendorContact.First_Name": { required: true },
 
-            "VendorContact.Last_Name": { required: true },
+            "VendorContact.Last_Name": { required: true }
         },
         messages: {
 
@@ -15,3 +15,5 @@ $(function () {
         }
     });
 });
+
+

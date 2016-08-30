@@ -45,8 +45,21 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Created_By", brand.Created_By));
 			}
-
+            
             sqlParam.Add(new SqlParameter("@Brand_Name", brand.Brand_Name));
+
+            //Set Is_Active Flag
+            if (brand.IsActive == 0)
+            {
+                brand.Is_Active = false;
+            }
+            else
+            {
+                brand.Is_Active = true;
+            }
+            //End
+
+            sqlParam.Add(new SqlParameter("@Is_Active", brand.Is_Active));
 
             sqlParam.Add(new SqlParameter("@Updated_Date", brand.Updated_Date));
 
@@ -59,6 +72,29 @@ namespace MyLeoRetailerRepo
 		{
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
-		
+
+        public int Get_Brand_By_Id(int Brand_Id)
+        {            
+            int isactive = 0;
+
+            DataTable dt = null;
+            List<SqlParameter> sqlParamList = new List<SqlParameter>();
+            sqlParamList.Add(new SqlParameter("@Brand_Id", Brand_Id));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Brand_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!dr.IsNull("Is_Active"))
+                {
+                    isactive = Convert.ToInt32(dr["Is_Active"]);                                     
+                }
+            }
+            return isactive;
+
+
+            
+
+        }
 	}
 }

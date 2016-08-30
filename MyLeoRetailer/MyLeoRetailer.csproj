@@ -185,11 +185,13 @@
     <Compile Include="Common\MessageStore.cs" />
     <Compile Include="Controllers\AutocompleteLookupController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
     <Compile Include="Controllers\PostLogin\Master\CategoryController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ColorController.cs" />
     <Compile Include="Controllers\PostLogin\Master\CustomerController.cs" />
     <Compile Include="Controllers\PostLogin\Master\EmployeeController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\GiftVoucherController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductController.cs" />
     <Compile Include="Controllers\PostLogin\Master\RoleController.cs" />
     <Compile Include="Controllers\PostLogin\Master\SizeController.cs" />
@@ -201,12 +203,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BranchViewModel.cs" />
     <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
+    <Compile Include="Models\GiftVoucherViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
@@ -953,6 +957,11 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Modules\Branch\branch_events.js" />
+    <Content Include="Scripts\Modules\Branch\branch_methods.js" />
+    <Content Include="Scripts\Modules\Branch\branch_validation.js" />
+    <Content Include="Scripts\Modules\Branch\search_branch_events.js" />
+    <Content Include="Scripts\Modules\Branch\search_branch_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_events.js" />
     <Content Include="Scripts\Modules\Brand\brand_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_validation.js" />
@@ -965,6 +974,28 @@
     <Content Include="Scripts\Modules\Color\color_methods.js" />
     <Content Include="Scripts\Modules\Color\color_validation.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_event.js" />
+    <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_methode.js" />
+    <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
+    <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_events.js" />
+    <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_method.js" />
+    <Content Include="Scripts\Modules\PrintThis.js" />
+    <Content Include="Scripts\Modules\Tax\tax_events.js" />
+    <Content Include="Scripts\Modules\Tax\tax_methods.js" />
+    <Content Include="Scripts\Modules\Tax\Tax_validation.js" />
+    <Content Include="Scripts\Modules\VendorContact\search_vendorcontact_events.js" />
+    <Content Include="Scripts\Modules\VendorContact\search_vendorcontact_methode.js" />
+    <Content Include="Scripts\Modules\VendorContact\vendorcontact_events.js" />
+    <Content Include="Scripts\Modules\VendorContact\vendorcontact_methode.js" />
+    <Content Include="Scripts\Modules\VendorContact\vendorcontact_validation.js" />
+    <Content Include="Scripts\Modules\Employee\employee_events.js" />
+    <Content Include="Scripts\Modules\Employee\employee_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_validation.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
+    <Content Include="Scripts\Modules\Size\size_group_events.js" />
+    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
+    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1009,6 +1040,14 @@
     <Content Include="Views\PostLogin\Master\VendorContact\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Index.cshtml" />
     <Content Include="Views\PostLogin\AutocompleteLookup\_Lookup.cshtml" />
+
+    <Content Include="Views\PostLogin\Master\Branch\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Branch\Search.cshtml" />
+
+    <Content Include="Views\PostLogin\Master\GiftVoucher\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\GiftVoucher\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\GiftVoucher\Print.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

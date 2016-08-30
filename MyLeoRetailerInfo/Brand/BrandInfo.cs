@@ -44,5 +44,9 @@ namespace MyLeoRetailerInfo.Brand
 			set;
 		}
 
+        public int IsActive { get; set; }
+
+        public bool Is_Active { get; set; }
+
 	}
 }

@@ -17,8 +17,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class CustomerController : BaseController
     {
-        //
-        // GET: /Customer/
+        public CustomerRepo cRepo;
+
+        public CustomerController()
+        {
+            cRepo = new CustomerRepo();
+        }
 
         public ActionResult Index(CustomerViewModel cViewModel)
         {
@@ -53,9 +57,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public ActionResult Get_Customer_By_Id(CustomerViewModel cViewModel)
-        {           
-            CustomerRepo cRepo = new CustomerRepo();
-
+        {  
             cViewModel.Customer = cRepo.Get_Customer_By_Id(cViewModel.Customer.Customer_Id);            
             
             return View("Index", cViewModel);
@@ -63,8 +65,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Customer_By_Mobile(CustomerViewModel cViewModel)
         {
-            CustomerRepo cRepo = new CustomerRepo();
-
             cViewModel.Customer = cRepo.Get_Customer_By_Mobile(Convert.ToString(cViewModel.Customer.Mobile));
 
             return Json(JsonConvert.SerializeObject(cViewModel));
@@ -72,8 +72,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Customer(CustomerViewModel cViewModel)
         {
-            CustomerRepo cRepo = new CustomerRepo();
-
             try
             {                
                 Set_Date_Session(cViewModel.Customer);
@@ -92,8 +90,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Update_Customer(CustomerViewModel cViewModel)
         {
-            CustomerRepo cRepo = new CustomerRepo();
-
             try
             {
                 Set_Date_Session(cViewModel.Customer);
@@ -112,10 +108,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Customers(CustomerViewModel cViewModel)
         {
-            CustomerRepo cRepo = new CustomerRepo();
-
-            CommonManager cMan = new CommonManager();
-                        
             string filter = "";
 
             string dataOperator = "";

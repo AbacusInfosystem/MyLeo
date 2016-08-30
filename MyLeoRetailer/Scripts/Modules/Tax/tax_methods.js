@@ -52,11 +52,13 @@ function Save_Tax() {
 
     var url = "";
 
-    if ($("[name='Tax.Tax_Id']").val() == "") {
-        url = "/Tax/Insert_Tax";
-    }
-    else {
-        url = "/Tax/Update_Tax";
+    if ($("#frmTax").valid()) {
+        if ($("[name='Tax.Tax_Id']").val() == "") {
+            url = "/Tax/Insert_Tax";
+        }
+        else {
+            url = "/Tax/Update_Tax";
+        }
     }
 
     $.ajax({
