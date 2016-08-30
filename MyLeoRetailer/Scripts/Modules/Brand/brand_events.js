@@ -1,6 +1,7 @@
 ﻿
 
-$(function () {
+//$(function () {
+$(document).ready(function () {
     Get_Brands();
 
     $("#btnSaveBrand").click(function () {
@@ -17,4 +18,10 @@ $(function () {
     $("[name='Filter.Brand_Name']").focusout(function () {
         Get_Brands();
     });
+
+    $(document).on("change", "#hdnBrandId", function () {
+        Get_Brands();
+    });
+
+
 });
