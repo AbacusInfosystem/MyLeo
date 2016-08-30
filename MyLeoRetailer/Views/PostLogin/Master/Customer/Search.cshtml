@@ -1,6 +1,9 @@
-﻿@{
-    ViewBag.Title = "Search";
-}
+﻿@model MyLeoRetailer.Models.CustomerViewModel
+
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Customer/search_customer_events.js"></script>
+<script src="~/Scripts/Modules/Customer/search_customer_methods.js"></script>
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -31,22 +34,23 @@
 
             <div class="block">
 
-                <form role="form">
+                <form role="form" id="frmCustomer">
 
                     <div class="row">
 
                         <div class="col-md-5">
 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter customer name to search." />
+                                <input type="text" class="form-control" name="Filter.Customer_Name" placeholder="Enter customer name to search." />
+                                <input type="hidden" id="hdnCustomer_Id" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id">
                             </div>
 
                         </div>
 
-                         <div class="col-md-5">
+                        <div class="col-md-5">
 
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter customer mobile number to search." />
+                                <input type="text" class="form-control" name="Filter.Customer_Mobile1" placeholder="Enter customer mobile number to search." />
                             </div>
 
                         </div>
@@ -54,8 +58,8 @@
                         <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
-                                <button class="btn btn-success active">Create</button>
-                                <button class="btn btn-danger active">Edit</button>
+                                <button role="button" class="btn btn-success active" value="Create" id="btnCreateCustomer">Create</button>
+                                <button class="btn btn-danger active" value="Edit" id="btnEditCustomer">Edit</button>
                             </div>
 
                         </div>
@@ -66,134 +70,14 @@
 
             </div>
 
+            
         </div>
 
-        <div class="col-md-12" style="padding: 0px;">
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+                       
+        </div>   
 
-            <table class="table table-bordered table-hover">
-
-                <thead>
-
-                    <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                    </tr>
-                
-                </thead>
-                
-                <tbody>
-                    <tr>
-                        <td>
-                            <label class="switch">
-                                <input name="switch-radio1" checked="" type="radio">
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="switch">
-                                <input name="switch-radio1" type="radio">
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="switch">
-                                <input name="switch-radio1" type="radio">
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="switch">
-                                <input name="switch-radio1" type="radio">
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="switch">
-                                <input name="switch-radio1" type="radio">
-                                <span></span>
-                            </label>
-                        </td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>fat</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>mdo</td>
-                    </tr>
-                </tbody>
-           
-            </table>
-
-        </div>
-
-        <div class="col-md-12" style="padding: 0px;text-align:center;">
-
-            <ul class="pagination pagination-sm">
-                <li class="disabled"><a href="#">First</a></li>
-                <li class="disabled"><a href="#">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-                <li><a href="#">Last</a></li>
-            </ul>
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPager">
 
         </div>
 

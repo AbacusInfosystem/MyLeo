@@ -56,6 +56,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Insert_Employee,
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
+            //Customer
+            sp_Insert_Customer,
+            sp_Update_Customer,
+            sp_Get_Customer_By_Id,
+            sp_Get_Customer_By_Mobile,
 
             //GiftVoucher
             sp_Insert_Gift_Voucher,

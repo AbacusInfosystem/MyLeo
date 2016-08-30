@@ -3,6 +3,7 @@
 }
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Brand/brand_validation.js"></script>
 <script src="~/Scripts/Modules/Brand/brand_methods.js"></script>
 <script src="~/Scripts/Modules/Brand/brand_events.js"></script>
 
@@ -36,15 +37,13 @@
             <div class="block" style="margin-bottom:0px;">
                 <h4 style="margin-top: 0px;">Create - Update brand.</h4>
 
-                <form role="form">
+                <form role="form" id="frmBrand">
                     <div class="form-group">
-                        @*<label>Create / Update size group:</label>*@
                         <input type="text" class="form-control" placeholder="Enter brand." name="Brand.Brand_Name" />
                         <input type="hidden" name="Brand.Brand_Id">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 5px; float: right;">
-                        @*<label>Set Active:</label>*@
                         <label class="switch">
                             <input checked="" value="0" type="checkbox">
                             <span></span>

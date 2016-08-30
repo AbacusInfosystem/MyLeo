@@ -4,7 +4,10 @@ $(function () {
     Get_Brands();
 
     $("#btnSaveBrand").click(function () {
-        Save_Brand();
+        if ($("#frmBrand").valid()) {
+            Save_Brand();
+        }
+       
     });
 
     $(document).on("click", "[name='Brand_List']", function () {

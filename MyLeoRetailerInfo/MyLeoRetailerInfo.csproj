@@ -48,6 +48,7 @@
     <Compile Include="Common\LookupInfo.cs" />
     <Compile Include="Common\Storeprocedures.cs" />
     <Compile Include="Employee\EmployeeInfo.cs" />
+    <Compile Include="Customer\CustomerInfo.cs" />
     <Compile Include="Enum_Collection.cs" />
     <Compile Include="GiftVoucher\GiftVoucherInfo.cs" />
     <Compile Include="GridInfo.cs" />

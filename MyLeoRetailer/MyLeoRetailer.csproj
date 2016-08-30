@@ -208,6 +208,7 @@
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
     <Compile Include="Models\VendorContactViewModel.cs" />
@@ -952,6 +953,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\Modules\Brand\brand_events.js" />
     <Content Include="Scripts\Modules\Brand\brand_methods.js" />
+    <Content Include="Scripts\Modules\Brand\brand_validation.js" />
     <Content Include="Scripts\Modules\Category\category_events.js" />
     <Content Include="Scripts\Modules\Category\category_methods.js" />
     <Content Include="Scripts\Modules\Category\category_validation.js" />
