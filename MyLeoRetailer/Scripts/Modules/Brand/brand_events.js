@@ -6,8 +6,7 @@ $(function () {
     $("#btnSaveBrand").click(function () {
         if ($("#frmBrand").valid()) {
             Save_Brand();
-        }
-       
+        }       
     });
 
     $(document).on("click", "[name='Brand_List']", function () {

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Branch\BranchInfo.cs" />
     <Compile Include="Brand\BrandInfo.cs" />
     <Compile Include="Category\CategoryInfo.cs" />
     <Compile Include="Category\SubCategoryInfo.cs" />
@@ -61,9 +62,7 @@
     <Compile Include="Vendor\VendorInfo.cs" />
     <Compile Include="Size\SizeGroupInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VendorContact\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

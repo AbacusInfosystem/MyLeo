@@ -112,6 +112,7 @@ namespace MyLeoRetailer.Common
             FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
             hash.Add("EMP02", EMP02);
             #endregion
+
             #region Customer
 
             FriendlyMessage CUST01 = new FriendlyMessage("CUST01", MessageType.Success, "Customer added successfully.");
@@ -122,6 +123,19 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage CUST03 = new FriendlyMessage("CUST03", MessageType.Information, "No records found.");
             hash.Add("CUST03", CUST03);
+
+            #endregion
+
+            #region Branch
+
+            FriendlyMessage BRNCH01 = new FriendlyMessage("BRNCH01", MessageType.Success, "Branch added successfully.");
+            hash.Add("BRNCH01", BRNCH01);
+
+            FriendlyMessage BRNCH02 = new FriendlyMessage("BRNCH02", MessageType.Success, "Branch updated successfully.");
+            hash.Add("BRNCH02", BRNCH02);
+
+            FriendlyMessage BRNCH03 = new FriendlyMessage("BRNCH03", MessageType.Information, "No records found.");
+            hash.Add("BRNCH03", BRNCH03);
 
             #endregion
 		}
