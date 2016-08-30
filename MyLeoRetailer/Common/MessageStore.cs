@@ -113,7 +113,20 @@ namespace MyLeoRetailer.Common
             hash.Add("EMP02", EMP02);
             #endregion
 
-		}
+            #region Gift Voucher
+
+            FriendlyMessage GVAT01 = new FriendlyMessage("GVAT01", MessageType.Success, "Gift Voucher added successfully.");
+            hash.Add("GVAT01", GVAT01);
+
+            FriendlyMessage GVAT02 = new FriendlyMessage("GVAT02", MessageType.Success, "Gift Voucher updated successfully.");
+            hash.Add("GVAT02", GVAT02);
+
+            FriendlyMessage GVAT03 = new FriendlyMessage("GVAT03", MessageType.Information, "No records found.");
+            hash.Add("GVAT03", GVAT03);
+
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{

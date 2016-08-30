@@ -49,6 +49,7 @@
     <Compile Include="Common\Storeprocedures.cs" />
     <Compile Include="Employee\EmployeeInfo.cs" />
     <Compile Include="Enum_Collection.cs" />
+    <Compile Include="GiftVoucher\GiftVoucherInfo.cs" />
     <Compile Include="GridInfo.cs" />
     <Compile Include="Interface\IGridInfo.cs" />
     <Compile Include="Interface\IQueryInfo.cs" />
@@ -60,9 +61,7 @@
     <Compile Include="Vendor\VendorInfo.cs" />
     <Compile Include="Size\SizeGroupInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VendorContact\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -42,4 +42,10 @@ namespace MyLeoRetailerInfo
         Branch_Manager = 3,
         Sales_Person = 4,
     }
+
+    public enum PaymentMode
+    {
+        Cash=1,
+        Card=2,
+    }
 }
