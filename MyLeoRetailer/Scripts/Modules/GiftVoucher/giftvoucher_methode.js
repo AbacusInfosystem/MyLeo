@@ -29,15 +29,16 @@ function Save_Gift_Voucher() {
 		}
 
     var url = "";
+    if ($("#frmGiftVoucher").valid()) {
 
-    if ($("[name='GiftVoucher.Gift_Voucher_Id']").val() == "" || $("[name='GiftVoucher.Gift_Voucher_Id']").val() == 0) {
+        if ($("[name='GiftVoucher.Gift_Voucher_Id']").val() == "" || $("[name='GiftVoucher.Gift_Voucher_Id']").val() == 0) {
 
-        url = "/GiftVoucher/Insert_Gift_Voucher";
+            url = "/GiftVoucher/Insert_Gift_Voucher";
+        }
+        else {
+            url = "/GiftVoucher/Update_Gift_Voucher";
+        }
     }
-    else {
-        url = "/GiftVoucher/Update_Gift_Voucher";
-    }
-
     $.ajax({
 
         url: url,

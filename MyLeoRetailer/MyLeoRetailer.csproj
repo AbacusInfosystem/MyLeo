@@ -965,6 +965,7 @@
     <Content Include="Scripts\Modules\common_methods.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_event.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_methode.js" />
+    <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_events.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_method.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />

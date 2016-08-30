@@ -112,10 +112,19 @@ namespace MyLeoRetailer.Common
             FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
             hash.Add("EMP02", EMP02);
             #endregion
+
             #region Customer
 
             FriendlyMessage CUST01 = new FriendlyMessage("CUST01", MessageType.Success, "Customer added successfully.");
             hash.Add("CUST01", CUST01);
+
+            FriendlyMessage CUST02 = new FriendlyMessage("CUST02", MessageType.Success, "Customer updated successfully.");
+            hash.Add("CUST02", CUST02);
+
+            FriendlyMessage CUST03 = new FriendlyMessage("CUST03", MessageType.Information, "No records found.");
+            hash.Add("CUST03", CUST03);
+
+            #endregion
 
             #region Gift Voucher
 
@@ -127,14 +136,6 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage GVAT03 = new FriendlyMessage("GVAT03", MessageType.Information, "No records found.");
             hash.Add("GVAT03", GVAT03);
-
-            #endregion
-
-            FriendlyMessage CUST02 = new FriendlyMessage("CUST02", MessageType.Success, "Customer updated successfully.");
-            hash.Add("CUST02", CUST02);
-
-            FriendlyMessage CUST03 = new FriendlyMessage("CUST03", MessageType.Information, "No records found.");
-            hash.Add("CUST03", CUST03);
 
             #endregion
 		}
