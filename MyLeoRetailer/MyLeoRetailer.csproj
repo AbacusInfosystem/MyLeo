@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
     <Compile Include="Common\MessageStore.cs" />
+    <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
     <Compile Include="Controllers\PostLogin\Master\CategoryController.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Controllers\PostLogin\Master\VendorContactController.cs" />
     <Compile Include="Controllers\PostLogin\Master\VendorController.cs" />
     <Compile Include="Controllers\PreLogin\HomeController.cs" />
+    <Compile Include="Controllers\PreLogin\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +207,8 @@
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\PreLogin\LoginViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
@@ -958,6 +962,11 @@
     <Content Include="Scripts\Modules\Color\color_methods.js" />
     <Content Include="Scripts\Modules\Color\color_validation.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\Product\product_events.js" />
+    <Content Include="Scripts\Modules\Product\product_methods.js" />
+    <Content Include="Scripts\Modules\Product\product_validation.js" />
+    <Content Include="Scripts\Modules\Product\search_product_event.js" />
+    <Content Include="Scripts\Modules\Product\search_product_method.js" />
     <Content Include="Scripts\Modules\Tax\tax_events.js" />
     <Content Include="Scripts\Modules\Tax\tax_methods.js" />
     <Content Include="Scripts\Modules\Tax\Tax_validation.js" />
@@ -1012,6 +1021,7 @@
     <Content Include="Views\PostLogin\Master\Category\_SubCategory.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Index.cshtml" />
+    <Content Include="Views\PreLogin\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

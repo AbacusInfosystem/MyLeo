@@ -11,6 +11,7 @@ namespace MyLeoRetailerInfo.Common
 		public enum Storeprocedures
 		{
             //Category
+            Get_Category_Sp,
 			sp_Insert_Category,
 			sp_Update_Category,
 
@@ -19,6 +20,7 @@ namespace MyLeoRetailerInfo.Common
 			sp_Update_Sub_Category,
 
             //brand
+            Get_Brands_Sp,
             sp_Insert_Brand,
             sp_Update_Brand,
 
@@ -32,12 +34,13 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_Contact,
 
             //Color
+            Get_Colors_Sp,
             sp_Insert_Color,
             sp_Update_Color,
             sp_Get_Colors_By_Id,
 
             //SizeGroup
-
+            Get_SizeGroup_Sp,
             sp_Insert_SizeGroup,
             sp_Update_Size_Group,
 
