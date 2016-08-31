@@ -77,6 +77,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Far_Branch_Location_By_Id,
             sp_Get_Near_Branch_Location_By_Id,
             sp_Update_Branch_Location,
+            
+            //Alteration
+            sp_Insert_Alteration,
+            sp_Update_Alteration,
+            sp_Get_Alteration_By_Id,
 		}
 	
 }
