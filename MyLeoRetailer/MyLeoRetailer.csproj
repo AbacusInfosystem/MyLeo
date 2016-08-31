@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
     <Compile Include="Common\MessageStore.cs" />
+    <Compile Include="Controllers\PostLogin\AutocompleteLookup\AutocompleteLookupController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
@@ -938,7 +940,10 @@
     <Content Include="Content\Atlant\js\plugins\jquery\jquery-2.1.1.min.map" />
     <Content Include="Content\Atlant\js\plugins\tableexport\simple_html_dom.php" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\generic.autocomplete.js" />
     <Content Include="Scripts\generic.custom.validation.js" />
+    <Content Include="Scripts\generic.lookup.js" />
+    <Content Include="Scripts\generic.popup.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1035,6 +1040,7 @@
     <Content Include="Views\PostLogin\Master\Category\_SubCategory.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Index.cshtml" />
+    <Content Include="Views\PostLogin\AutocompleteLookup\_Lookup.cshtml" />
     <Content Include="Views\PostLogin\Master\Branch\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Branch\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Index.cshtml" />

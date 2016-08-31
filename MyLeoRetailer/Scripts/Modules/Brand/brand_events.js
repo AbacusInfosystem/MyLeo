@@ -1,7 +1,8 @@
 ﻿
-
-$(function () {
+$(document).ready(function () {
     Get_Brands();
+
+    InitializeAutoComplete($("#txtBrand_Name"));
 
     $("#btnSaveBrand").click(function () {
         if ($("#frmBrand").valid()) {
@@ -16,4 +17,10 @@ $(function () {
     $("[name='Filter.Brand_Name']").focusout(function () {
         Get_Brands();
     });
+
+    $(document).on("change", "#hdnBrandId", function () {
+        Get_Brands();
+    });
+
+
 });
