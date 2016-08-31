@@ -18,10 +18,14 @@ namespace MyLeoRetailerInfo.Common
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
 
-            //brand
+            #region brand
+
             sp_Insert_Brand,
             sp_Update_Brand,
             sp_Get_Brand_By_Id,
+            Get_Brands_By_Name_Autocomplete_Sp,
+
+            #endregion
 
             //tax
             sp_Insert_Tax,
