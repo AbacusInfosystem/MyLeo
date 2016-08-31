@@ -2,6 +2,8 @@
 
 $(function ()
 {
+    InitializeAutoComplete($("#txtColor_Name"));
+
 	Get_Colors();
 
 	$("#btnSaveColor").click(function ()
@@ -23,4 +25,10 @@ $(function ()
 	{
 		Get_Colors();
 	});
+
+	$(document).on("change", "#hdnColourId", function () {
+	    Get_Colors();
+	});
+
+
 });

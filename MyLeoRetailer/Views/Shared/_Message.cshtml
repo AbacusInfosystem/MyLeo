@@ -1,134 +1,128 @@
-﻿<!-- Message Boxes -->
-<!-- default -->
-<div class="message-box animated fadeIn" id="message-box-default">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-globe"></span> Some <strong>Title</strong></div>
-            <div class="mb-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>                    
-            </div>
-            <div class="mb-footer">
-                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end default -->
+﻿@using MyLeoRetailerInfo
+
+<style>
+
+    .ul-topCenter {
+        top: 20px;
+        left: 636.5px;
+        position: fixed;
+        width: 310px;
+        height: auto;
+        margin: 0px;
+        padding: 0px;
+        list-style-type: none;
+        z-index: 10000000;
+    }
+
+    .noty-msg {
+        font-size: 11px;
+        line-height: 14px;
+        text-align: center;
+        padding: 8px 10px 9px;
+        width: auto;
+        position: relative;
+    }
+
+    .li-top-center {
+        overflow: hidden;
+        border-radius: 3px;
+        opacity: 1;
+        width: 310px;
+        cursor: pointer;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+        color: rgb(255, 255, 255);
+    }
+
+    .li-color-information {
+        background: rgb(63, 186, 228) none repeat scroll 0% 0%;
+        border: 1px solid rgb(63, 186, 228);
+    }
+
+    .li-color-error {
+        background: rgb(182, 70, 69) none repeat scroll 0% 0%;
+        border: 1px solid rgb(182, 70, 69);
+    }
+
+    .li-color-success {
+        background: rgb(149, 183, 93) none repeat scroll 0% 0%;
+        border: 1px solid rgb(149, 183, 93);
+    }
+
+    .li-color-warning {
+        background: rgb(254, 162, 35) none repeat scroll 0% 0%;
+        border: 1px solid rgb(254, 162, 35);
+    }
+
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#noty_topCenter_layout_container').delay(5000).queue(function () {
+          
+            $(this).css('display', 'none');
         
-<!-- default with sound -->
-<div class="message-box animated fadeIn" data-sound="alert" id="message-box-sound-1">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-globe"></span> Alert</div>
-            <div class="mb-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>                    
-            </div>
-            <div class="mb-footer">
-                <button class="btn btn-info btn-lg pull-right mb-control-close">Got it!</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end default with sound -->
-        
-<!-- danger with sound -->
-<div class="message-box message-box-danger animated fadeIn" data-sound="fail" id="message-box-sound-2">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-times"></span> DANGER!</div>
-            <div class="mb-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>                    
-            </div>
-            <div class="mb-footer">
-                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end danger with sound -->
-        
-<!-- success -->
-<div class="message-box message-box-success animated fadeIn" id="message-box-success">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-check"></span> Success</div>
-            <div class="mb-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
-            </div>
-            <div class="mb-footer">
-                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end success -->
-        
-<!-- warning -->
-<div class="message-box message-box-warning animated fadeIn" id="message-box-warning">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-warning"></span> Warning</div>
-            <div class="mb-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>                  
-            </div>
-            <div class="mb-footer">
-                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end danger -->
-        
-<!-- info -->
-<div class="message-box message-box-info animated fadeIn" id="message-box-info">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-info"></span> Information</div>
-            <div class="mb-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
-            </div>
-            <div class="mb-footer">
-                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end info -->
-        
-<!-- danger -->
-<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-times"></span> Danger</div>
-            <div class="mb-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec at tellus sed mauris mollis pellentesque nec a ligula. Quisque ultricies eleifend lacinia. Nunc luctus quam pretium massa semper tincidunt. Praesent vel mollis eros. Fusce erat arcu, feugiat ac dignissim ac, aliquam sed urna. Maecenas scelerisque molestie justo, ut tempor nunc.</p>
-            </div>
-            <div class="mb-footer">
-                <button class="btn btn-default btn-lg pull-right mb-control-close">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end danger -->
-        
-<!-- END Message Boxes -->
-        
-<!-- MESSAGE BOX-->
-<div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
-    <div class="mb-container">
-        <div class="mb-middle">
-            <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
-            <div class="mb-content">
-                <p>Are you sure you want to log out?</p>                    
-                <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
-            </div>
-            <div class="mb-footer">
-                <div class="pull-right">
-                    <a href="pages-login.html" class="btn btn-success btn-lg">Yes</a>
-                    <button class="btn btn-default btn-lg mb-control-close">No</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END MESSAGE BOX-->
+        });
+    });
+</script>
+
+@if (Model != null && Model.FriendlyMessages != null && Model.FriendlyMessages.Count > 0)
+{
+    foreach (var msg in Model.FriendlyMessages)
+    {
+        if (msg != null)
+        {
+            if (msg.Type == MessageType.Information)
+            {
+                <ul id="noty_topCenter_layout_container" class="i-am-new ul-topCenter">
+                    <li class="li-top-center li-color-information">
+                        <div class="noty_bar noty_type_information" id="noty_510241398606609200">
+                            <div class="noty_message noty-msg">
+                                <span class="noty_text">@msg.Text</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            }
+            if (msg.Type == MessageType.Error)
+            {
+                <ul id="noty_topCenter_layout_container" class="i-am-new ul-topCenter" >
+                    <li class="li-top-center li-color-error">
+                        <div class="noty_bar noty_type_error" id="noty_363898729879327940">
+                            <div class="noty_message noty-msg">
+                                <span class="noty_text">@msg.Text</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            }
+            if (msg.Type == MessageType.Success)
+            {
+                <ul id="noty_topCenter_layout_container" class="i-am-new ul-topCenter">
+                    <li class="li-top-center li-color-success">
+                        <div class="noty_bar noty_type_success" id="noty_264083774035278530">
+                            <div class="noty_message noty-msg">
+                                <span class="noty_text">@msg.Text</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            }
+            if (msg.Type == MessageType.Warning)
+            {
+                <ul id="noty_topCenter_layout_container" class="i-am-new ul-topCenter" >
+                    <li class="li-top-center li-color-warning">
+                        <div class="noty_bar noty_type_warning" id="noty_1125259726555880000">
+                            <div class="noty_message noty-msg">
+                                <span class="noty_text">@msg.Text</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            }
+        }
+    }
+}
+
+
+
+
