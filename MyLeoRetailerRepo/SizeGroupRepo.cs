@@ -161,5 +161,29 @@ namespace MyLeoRetailerRepo
         }
 
 
+
+        public List<SizeGroupInfo> Get_All_SizeGroups()
+        {
+            List<SizeGroupInfo> SizeGroups = new List<SizeGroupInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_SizeGroup_Sp.ToString(), CommandType.StoredProcedure);
+            List<DataRow> drList = new List<DataRow>();
+            drList = dt.AsEnumerable().ToList();
+            foreach (DataRow dr in drList)
+            {
+                SizeGroups.Add(Get_SizeGroups_Values(dr));
+            }
+            return SizeGroups;
+        }
+
+        private SizeGroupInfo Get_SizeGroups_Values(DataRow dr)
+        {
+            SizeGroupInfo SizeGroup = new SizeGroupInfo();
+
+            SizeGroup.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+
+            if (!dr.IsNull("Size_Group_Name"))
+                SizeGroup.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+            return SizeGroup;
+        }
     }
 }

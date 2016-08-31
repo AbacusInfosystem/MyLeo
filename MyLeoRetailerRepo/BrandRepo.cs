@@ -45,7 +45,7 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Created_By", brand.Created_By));
 			}
-            
+
             sqlParam.Add(new SqlParameter("@Brand_Name", brand.Brand_Name));
 
             //Set Is_Active Flag
@@ -119,6 +119,30 @@ namespace MyLeoRetailerRepo
             return autoList;
         }
 
+		
 
+        public List<BrandInfo> Get_All_Barnds()
+        {
+            List<BrandInfo> Brands = new List<BrandInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Brands_Sp.ToString(), CommandType.StoredProcedure);
+            List<DataRow> drList = new List<DataRow>();
+            drList = dt.AsEnumerable().ToList();
+            foreach (DataRow dr in drList)
+            {
+                Brands.Add(Get_Brands_Values(dr));
+            }
+            return Brands;
+        }
+
+        private BrandInfo Get_Brands_Values(DataRow dr)
+        {
+            BrandInfo Brand = new BrandInfo();
+
+            Brand.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+            if (!dr.IsNull("Brand_Name"))
+                Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+            return Brand;
+        }
 	}
 }

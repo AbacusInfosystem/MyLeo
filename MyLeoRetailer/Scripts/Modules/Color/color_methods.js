@@ -128,6 +128,15 @@ function Get_Color_By_Id(obj)
 	        $("[name='Color.Colour_Code']").val(obj.Color.Colour_Code);
 
 	        document.getElementById('iRGBColor').style.backgroundColor = obj.Color.Colour_Code; //"rgb(" + randR + ", " + randG + ", " + randB + ")";
+
+	        if (obj.Color.IsActive == true) {
+	            $("[name='Color.IsActive']")[0].checked = true;
+	            $("[name='Color.IsActive']").val(true);
+	        }
+	        else {
+	            $("[name='Color.IsActive']")[0].checked = false;
+	            $("[name='Color.IsActive']").val(false);
+	        }
 	    }
 	});
 

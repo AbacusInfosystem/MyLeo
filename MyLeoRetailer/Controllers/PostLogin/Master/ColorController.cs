@@ -23,9 +23,22 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             cRepo = new ColorRepo();
         }
 
-        public ActionResult Index()
+        public ActionResult Index(ColorViewModel cViewModel)
         {
-            return View();
+            try
+            {
+                if (TempData["cViewModel"] != null)
+                {
+                    cViewModel = (ColorViewModel)TempData["cViewModel"];
+                }
+            }
+            catch (Exception ex)
+            {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                //Logger.Error("VendorController - Index " + ex.Message);
+            }
+
+            return View("Index",cViewModel);
         }
 
         public JsonResult Insert_Color(ColorViewModel cViewModel)
@@ -112,7 +125,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             //ColorRepo cRepo = new ColorRepo();   
             try
             {
-                cViewModel.Color.Colour_Code = cRepo.Get_Colors_By_Id(Convert.ToInt32(color_Id));
+                cViewModel.Color = cRepo.Get_Colors_By_Id(Convert.ToInt32(color_Id));
             }
             catch (Exception ex)
             { 

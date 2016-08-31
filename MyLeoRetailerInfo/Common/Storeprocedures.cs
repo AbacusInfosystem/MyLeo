@@ -11,6 +11,7 @@ namespace MyLeoRetailerInfo.Common
 		public enum Storeprocedures
 		{
             //Category
+            Get_Category_Sp,
 			sp_Insert_Category,
 			sp_Update_Category,
 
@@ -20,6 +21,8 @@ namespace MyLeoRetailerInfo.Common
 
             #region brand
 
+            //brand
+            Get_Brands_Sp,
             sp_Insert_Brand,
             sp_Update_Brand,
             sp_Get_Brand_By_Id,
@@ -41,6 +44,7 @@ namespace MyLeoRetailerInfo.Common
 
             #region Color
 
+            Get_Colors_Sp,
             sp_Insert_Color,
             sp_Update_Color,
             sp_Get_Colors_By_Id,
@@ -49,7 +53,7 @@ namespace MyLeoRetailerInfo.Common
             #endregion
 
             //SizeGroup
-
+            Get_SizeGroup_Sp,
             sp_Insert_SizeGroup,
             sp_Update_Size_Group,
 
@@ -59,7 +63,6 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Size,
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
-
 
             //Employee
             sp_Insert_Employee,
@@ -85,6 +88,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Far_Branch_Location_By_Id,
             sp_Get_Near_Branch_Location_By_Id,
             sp_Update_Branch_Location,
+
+            //Login
+            Get_User_Data_By_Token_sp,
+            Authenticate_User_sp,
+            Insert_Token_In_User_Table_Sp,
 		}
 	
 }

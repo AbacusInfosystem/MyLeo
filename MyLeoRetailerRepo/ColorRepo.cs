@@ -50,6 +50,8 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Color_Code", Color.Colour_Code));
 
+            sqlParam.Add(new SqlParameter("@IsActive", Color.IsActive));
+
             sqlParam.Add(new SqlParameter("@Updated_Date", Color.Updated_Date));
 
             sqlParam.Add(new SqlParameter("@Updated_By", Color.Updated_By));
@@ -62,9 +64,9 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
-        public string Get_Colors_By_Id(int Color_Id)
+        public ColorInfo Get_Colors_By_Id(int Color_Id)
         {
-            string Color_Code = null;
+            ColorInfo colorInfo = new ColorInfo();
             DataTable dt = null;
             List<SqlParameter> sqlParamList = new List<SqlParameter>();
             sqlParamList.Add(new SqlParameter("@Color_Id", Color_Id));
@@ -74,12 +76,13 @@ namespace MyLeoRetailerRepo
             foreach (DataRow dr in dt.Rows)
             {
                 if (!dr.IsNull("Colour_Code"))
-                    Color_Code = Convert.ToString(dr["Colour_Code"]); 
+                    colorInfo.Colour_Code = Convert.ToString(dr["Colour_Code"]);
+                    colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]); 
             }
-            return Color_Code;
+            return colorInfo;
 
-        }
-
+        } 
+        
         public List<AutocompleteInfo> Get_Colors_By_Name_Autocomplete(string color_Name)
         {
             List<AutocompleteInfo> autoList = new List<AutocompleteInfo>();
@@ -102,5 +105,29 @@ namespace MyLeoRetailerRepo
             return autoList;
         }
 
+
+        public List<ColorInfo> Get_Colours()
+        {
+            List<ColorInfo> colors = new List<ColorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Colors_Sp.ToString(), CommandType.StoredProcedure);
+            List<DataRow> drList = new List<DataRow>();
+            drList = dt.AsEnumerable().ToList();
+            foreach (DataRow dr in drList)
+            {
+                colors.Add(Get_Color_Values(dr));
+            }
+            return colors;
+        }
+
+        private ColorInfo Get_Color_Values(DataRow dr)
+        {
+            ColorInfo Color = new ColorInfo();
+
+            Color.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+
+            if (!dr.IsNull("Colour_Name"))
+                Color.Colour = Convert.ToString(dr["Colour_Name"]);
+            return Color;
+        }
     }
 }
