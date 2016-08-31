@@ -126,6 +126,20 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+//<<<<<<< HEAD
+            #region Branch
+
+            FriendlyMessage BRNCH01 = new FriendlyMessage("BRNCH01", MessageType.Success, "Branch added successfully.");
+            hash.Add("BRNCH01", BRNCH01);
+
+            FriendlyMessage BRNCH02 = new FriendlyMessage("BRNCH02", MessageType.Success, "Branch updated successfully.");
+            hash.Add("BRNCH02", BRNCH02);
+
+            FriendlyMessage BRNCH03 = new FriendlyMessage("BRNCH03", MessageType.Information, "No records found.");
+            hash.Add("BRNCH03", BRNCH03);
+
+            #endregion
+            //=======
             #region Gift Voucher
 
             FriendlyMessage GVAT01 = new FriendlyMessage("GVAT01", MessageType.Success, "Gift Voucher added successfully.");
@@ -136,6 +150,7 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage GVAT03 = new FriendlyMessage("GVAT03", MessageType.Information, "No records found.");
             hash.Add("GVAT03", GVAT03);
+//>>>>>>> origin/master
 
             #endregion
 		}

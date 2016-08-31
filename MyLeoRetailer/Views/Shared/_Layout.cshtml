@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" id="theme" href="../Content/Atlant/css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->                                    
         
-
+        @*<link href="~/Content/Atlant/css/fontawesome/font-awesome.min.css" rel="stylesheet" />*@
 
         
  <!-- START SCRIPTS -->
@@ -78,6 +78,9 @@
 		<script src="/Scripts/jquery.validate.js"></script>
         <script src="/Scripts/generic.custom.validation.js"></script>
 
+        <script src="~/Scripts/generic.popup.js"></script>
+        <script src="~/Scripts/generic.lookup.js"></script>
+
         <!-- END THIS PAGE PLUGINS-->        
 
        
@@ -112,7 +115,30 @@
         <audio id="audio-alert" src="../Content/Atlant/audio/alert.mp3" preload="auto"></audio>
 
         <audio id="audio-fail" src="../Content/Atlant/audio/fail.mp3" preload="auto"></audio>
-        <!-- END PRELOADS -->                  
+        <!-- END PRELOADS -->    
+        
+        <input type="hidden" id="hdnLookupLabelId" name="Label" />
+        <input type="hidden" id="hdnLookupHiddenId" name="Hidden" />
+        <input type="hidden" id="hdnLookupHiddenValue" name="Hidden" />
+        <input type="hidden" id="hdnEditLookupValue" name="EditLookupValue">
+
+        <div class="modal fade" id="div_Parent_Modal_Fade" role="dialog" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content edit_modal_content">
+                    <div class="modal-header" id="div_Parent_Modal_Header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#fff;">x</button>
+                        <h4 class="modal-title">&nbsp;</h4>
+                    </div>
+                    <div class="modal-body" id="div_Parent_Modal_Body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnOK" class="btn btn-success btn-sm">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                      
     </body>
 </html>
 

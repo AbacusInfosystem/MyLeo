@@ -23,4 +23,10 @@ $(function ()
 	{
 		Get_Colors();
 	});
+
+	$(document).on("change", "#hdnColourId", function () {
+	    Get_Colors();
+	});
+
+
 });

@@ -21,6 +21,7 @@ namespace MyLeoRetailerInfo.Common
             //brand
             sp_Insert_Brand,
             sp_Update_Brand,
+            sp_Get_Brand_By_Id,
 
             //tax
             sp_Insert_Tax,
@@ -56,6 +57,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Insert_Employee,
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
+
             //Customer
             sp_Insert_Customer,
             sp_Update_Customer,
@@ -66,6 +68,15 @@ namespace MyLeoRetailerInfo.Common
             sp_Insert_Gift_Voucher,
             sp_Update_Gift_Voucher,
             sp_Get_Gift_Voucher_By_Id,
+
+            //Branch
+            sp_Insert_Branch,
+            sp_Update_Branch,
+            sp_Get_Branch_By_Id,
+            sp_Insert_Branch_Location,
+            sp_Get_Far_Branch_Location_By_Id,
+            sp_Get_Near_Branch_Location_By_Id,
+            sp_Update_Branch_Location,
 		}
 	
 }

@@ -183,7 +183,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
     <Compile Include="Common\MessageStore.cs" />
+    <Compile Include="Controllers\AutocompleteLookupController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
     <Compile Include="Controllers\PostLogin\Master\CategoryController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ColorController.cs" />
@@ -201,11 +203,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BranchViewModel.cs" />
     <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
@@ -937,6 +941,8 @@
     <Content Include="Content\Atlant\js\plugins\tableexport\simple_html_dom.php" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\generic.custom.validation.js" />
+    <Content Include="Scripts\generic.lookup.js" />
+    <Content Include="Scripts\generic.popup.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -951,6 +957,11 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Modules\Branch\branch_events.js" />
+    <Content Include="Scripts\Modules\Branch\branch_methods.js" />
+    <Content Include="Scripts\Modules\Branch\branch_validation.js" />
+    <Content Include="Scripts\Modules\Branch\search_branch_events.js" />
+    <Content Include="Scripts\Modules\Branch\search_branch_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_events.js" />
     <Content Include="Scripts\Modules\Brand\brand_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_validation.js" />
@@ -1028,9 +1039,15 @@
     <Content Include="Views\PostLogin\Master\Category\_SubCategory.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Index.cshtml" />
+    <Content Include="Views\PostLogin\AutocompleteLookup\_Lookup.cshtml" />
+
+    <Content Include="Views\PostLogin\Master\Branch\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Branch\Search.cshtml" />
+
     <Content Include="Views\PostLogin\Master\GiftVoucher\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Print.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
