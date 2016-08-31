@@ -130,5 +130,23 @@ namespace MyLeoRetailerRepo
             employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
             return employee;
         }
+
+        public List<EmployeeInfo> Get_Employees()
+        {
+            List<EmployeeInfo> Employees = new List<EmployeeInfo>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Employee_Sp.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                EmployeeInfo Employee = new EmployeeInfo();
+
+                Employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+
+                Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+
+                Employees.Add(Employee);
+            }
+            return Employees;
+        }
     }
 }

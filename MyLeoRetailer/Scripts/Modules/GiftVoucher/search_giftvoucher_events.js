@@ -4,11 +4,11 @@ $(function () {
 
     Get_Gift_Vouchers();
 
-    $(document).on("click", "[name='Gift_Voucher_List']", function () {
+    //$(document).on("click", "[name='Gift_Voucher_List']", function () {
 
-        Get_Gift_Voucher_By_Id(this);
+    //    Get_Gift_Voucher_By_Id(this);
 
-    });
+    //});
 
     $(document).on('change', '[name="Gift_Voucher_List"]', function (event) {
       

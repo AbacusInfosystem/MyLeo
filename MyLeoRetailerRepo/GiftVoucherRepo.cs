@@ -63,8 +63,6 @@ namespace MyLeoRetailerRepo
 
            sqlParam.Add(new SqlParameter("@Credit_Card_No", GiftVoucher.Credit_Card_No));
 
-          
-
            //Set Is_Active Flag
            if (GiftVoucher.IsActive == 0)
            {

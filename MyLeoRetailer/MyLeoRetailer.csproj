@@ -184,6 +184,7 @@
     <Compile Include="Common\CustomRazorViewEngine.cs" />
     <Compile Include="Common\MessageStore.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\AlterationController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
     <Compile Include="Controllers\PostLogin\Master\CategoryController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ColorController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlterationViewModel.cs" />
     <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ColorViewModel.cs" />
@@ -951,6 +953,11 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Modules\Alteration\Alteration_events.js" />
+    <Content Include="Scripts\Modules\Alteration\Alteration_methods.js" />
+    <Content Include="Scripts\Modules\Alteration\Alteration_validation.js" />
+    <Content Include="Scripts\Modules\Alteration\search_Alteration_events.js" />
+    <Content Include="Scripts\Modules\Alteration\search_Alteration_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_events.js" />
     <Content Include="Scripts\Modules\Brand\brand_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_validation.js" />
@@ -1031,6 +1038,8 @@
     <Content Include="Views\PostLogin\Master\GiftVoucher\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Print.cshtml" />
+    <Content Include="Views\PostLogin\Master\Alteration\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Alteration\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

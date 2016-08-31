@@ -61,11 +61,22 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Customer,
             sp_Get_Customer_By_Id,
             sp_Get_Customer_By_Mobile,
+            Get_Employee_Sp,
 
             //GiftVoucher
             sp_Insert_Gift_Voucher,
             sp_Update_Gift_Voucher,
             sp_Get_Gift_Voucher_By_Id,
+
+            //Alteration
+            sp_Insert_Alteration,
+            sp_Update_Alteration,
+            sp_Get_Alteration_By_Id,
+
+            //SalesInvoice
+            Get_SalesInvoice_Sp,
+
+           
 		}
 	
 }

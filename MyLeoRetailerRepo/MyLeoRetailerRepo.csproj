@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlterationRepo.cs" />
     <Compile Include="BrandRepo.cs" />
     <Compile Include="CategoryRepo.cs" />
     <Compile Include="ColorRepo.cs" />
