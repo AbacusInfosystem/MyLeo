@@ -183,7 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
     <Compile Include="Common\MessageStore.cs" />
-    <Compile Include="Controllers\AutocompleteLookupController.cs" />
+    <Compile Include="Controllers\PostLogin\AutocompleteLookup\AutocompleteLookupController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
@@ -940,6 +940,7 @@
     <Content Include="Content\Atlant\js\plugins\jquery\jquery-2.1.1.min.map" />
     <Content Include="Content\Atlant\js\plugins\tableexport\simple_html_dom.php" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\generic.autocomplete.js" />
     <Content Include="Scripts\generic.custom.validation.js" />
     <Content Include="Scripts\generic.lookup.js" />
     <Content Include="Scripts\generic.popup.js" />
@@ -1040,14 +1041,11 @@
     <Content Include="Views\PostLogin\Master\VendorContact\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Index.cshtml" />
     <Content Include="Views\PostLogin\AutocompleteLookup\_Lookup.cshtml" />
-
     <Content Include="Views\PostLogin\Master\Branch\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Branch\Search.cshtml" />
-
     <Content Include="Views\PostLogin\Master\GiftVoucher\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Print.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

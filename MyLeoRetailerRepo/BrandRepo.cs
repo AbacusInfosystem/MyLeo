@@ -96,5 +96,29 @@ namespace MyLeoRetailerRepo
             
 
         }
+
+        public List<AutocompleteInfo> Get_Brands_By_Name_Autocomplete(string brand_Name)
+        {
+            List<AutocompleteInfo> autoList = new List<AutocompleteInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            sqlParams.Add(new SqlParameter("@Brand_Name", brand_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.Get_Brands_By_Name_Autocomplete_Sp.ToString(), CommandType.StoredProcedure);
+            List<DataRow> drList = new List<DataRow>();
+            drList = dt.AsEnumerable().ToList();
+            foreach (DataRow dr in drList)
+            {
+                AutocompleteInfo autoData = new AutocompleteInfo();
+
+                autoData.Label = Convert.ToString(dr["Brand_Name"]);
+                autoData.Value = Convert.ToInt32(dr["Brand_Id"]);
+
+                autoList.Add(autoData);
+            }
+            return autoList;
+        }
+
+
 	}
 }

@@ -10,9 +10,9 @@ $(document).ready(function () {
 
         var Textboxname = "#" + $("#hdnLookupLabelId").val();
 
-        //$('.border-bottom').each(function () {
-        //    $('#lookupUlAuto').remove()
-        //});
+        $('.border-bottom').each(function () {
+            $('#lookupUlAuto').remove()
+        });
 
         $('.border-bottom').each(function () {
             $('#lookupUlLookup').remove()

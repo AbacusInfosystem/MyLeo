@@ -44,6 +44,7 @@
     <Compile Include="Category\CategoryInfo.cs" />
     <Compile Include="Category\SubCategoryInfo.cs" />
     <Compile Include="Color\ColorInfo.cs" />
+    <Compile Include="Common\AutocompleteInfo.cs" />
     <Compile Include="Common\ExceptionInfo.cs" />
     <Compile Include="Common\FriendlyMessage.cs" />
     <Compile Include="Common\LookupInfo.cs" />
