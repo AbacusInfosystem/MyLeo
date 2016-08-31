@@ -56,6 +56,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 				bRepo.Update_Brand(bViewModel.Brand);
 
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("BRND02"));
+
 			}
 			catch(Exception ex)
 			{
@@ -75,9 +76,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 			try
 			{
-				filter = bViewModel.Filter.Brand_Name; // Set filter comma seprated
+                filter = bViewModel.Filter.Brand_Name; // Set filter comma seprated
+                //filter = bViewModel.Filter.Brand_Id; // Set filter comma seprated
 
-				dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+                dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+                //dataOperator = DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
 
                 bViewModel.Query_Detail = Set_Query_Details(false, "Brand_Name,Brand_Id", "", "Brand", "Brand_Name", filter, dataOperator); // Set query for grid
 

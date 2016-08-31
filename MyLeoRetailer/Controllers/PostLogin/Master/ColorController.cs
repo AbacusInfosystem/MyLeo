@@ -16,8 +16,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class ColorController :BaseController
     {
-        //
-        // GET: /Color/
+        ColorRepo cRepo;
+
+        public ColorController()
+        {
+            cRepo = new ColorRepo();
+        }
 
         public ActionResult Index()
         {
@@ -26,7 +30,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Color(ColorViewModel cViewModel)
         {
-            ColorRepo cRepo = new ColorRepo();
+            //ColorRepo cRepo = new ColorRepo();
 
             try
             {
@@ -46,7 +50,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Update_Color(ColorViewModel cViewModel)
         {
-            ColorRepo cRepo = new ColorRepo();
+            //ColorRepo cRepo = new ColorRepo();
 
             try
             {
@@ -66,7 +70,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Colors(ColorViewModel cViewModel)
         {
-            ColorRepo cRepo = new ColorRepo();
+            //ColorRepo cRepo = new ColorRepo();
 
             CommonManager cMan = new CommonManager();
 
@@ -105,7 +109,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Get_Colors_By_Id(int color_Id)
         {
             ColorViewModel cViewModel = new ColorViewModel();
-            ColorRepo cRepo = new ColorRepo();   
+            //ColorRepo cRepo = new ColorRepo();   
             try
             {
                 cViewModel.Color.Colour_Code = cRepo.Get_Colors_By_Id(Convert.ToInt32(color_Id));
@@ -116,6 +120,28 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
+        }
+
+        public JsonResult Get_Colors_By_Name_Autocomplete(string color_Name)
+        {
+
+            ColorViewModel cViewModel = new ColorViewModel();
+            List<AutocompleteInfo> brandList = new List<AutocompleteInfo>();
+
+            try
+            {
+
+                brandList = cRepo.Get_Colors_By_Name_Autocomplete(color_Name);
+
+            }
+            catch (Exception ex)
+            {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                //Logger.Error("Brand Controller - Get_Brands_By_Name_Autocomplete: " + ex.ToString());
+            }
+
+            return Json(brandList, JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -2,6 +2,8 @@
 
 $(function ()
 {
+    InitializeAutoComplete($("#txtColor_Name"));
+
 	Get_Colors();
 
 	$("#btnSaveColor").click(function ()

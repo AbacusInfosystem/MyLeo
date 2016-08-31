@@ -29,12 +29,22 @@ namespace MyLeoRetailer
 
             #endregion
 
-            #region Autocomplete
+            #region Brand
 
             routes.MapRoute(
             name: "brand-1",
             url: "brand/get-brand-list-by-name/{brand_Name}",
             defaults: new { controller = "Brand", action = "Get_Brands_By_Name_Autocomplete", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
+
+            #region Colour
+
+            routes.MapRoute(
+            name: "color-1",
+            url: "colour/get-color-list-by-name/{color_Name}",
+            defaults: new { controller = "Color", action = "Get_Colors_By_Name_Autocomplete", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
             #endregion

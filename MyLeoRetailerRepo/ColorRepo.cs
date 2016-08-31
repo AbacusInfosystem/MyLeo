@@ -78,7 +78,29 @@ namespace MyLeoRetailerRepo
             }
             return Color_Code;
 
-        } 
-        
+        }
+
+        public List<AutocompleteInfo> Get_Colors_By_Name_Autocomplete(string color_Name)
+        {
+            List<AutocompleteInfo> autoList = new List<AutocompleteInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            sqlParams.Add(new SqlParameter("@Color_Name", color_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.Get_Colors_By_Name_Autocomplete_Sp.ToString(), CommandType.StoredProcedure);
+            List<DataRow> drList = new List<DataRow>();
+            drList = dt.AsEnumerable().ToList();
+            foreach (DataRow dr in drList)
+            {
+                AutocompleteInfo autoData = new AutocompleteInfo();
+
+                autoData.Label = Convert.ToString(dr["Colour_Name"]);
+                autoData.Value = Convert.ToInt32(dr["Colour_ID"]);
+
+                autoList.Add(autoData);
+            }
+            return autoList;
+        }
+
     }
 }

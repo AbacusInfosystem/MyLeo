@@ -39,10 +39,14 @@ namespace MyLeoRetailerInfo.Common
             Get_Vendor_Sp,
             Get_Vendor_By_Id_Sp,
 
-            //Color
+            #region Color
+
             sp_Insert_Color,
             sp_Update_Color,
             sp_Get_Colors_By_Id,
+            Get_Colors_By_Name_Autocomplete_Sp,
+
+            #endregion
 
             //SizeGroup
 

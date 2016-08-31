@@ -138,6 +138,7 @@ namespace MyLeoRetailer.Common
             FriendlyMessage BRNCH03 = new FriendlyMessage("BRNCH03", MessageType.Information, "No records found.");
             hash.Add("BRNCH03", BRNCH03);
 
+
             #endregion
             //=======
             #region Gift Voucher
