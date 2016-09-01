@@ -105,15 +105,15 @@ namespace MyLeoRetailerRepo
             return categorys;
         }
 
-        private CategoryInfo Get_Category_Values(DataRow dr)
-        {
-            CategoryInfo category = new CategoryInfo();
+        //private CategoryInfo Get_Category_Values(DataRow dr)
+        //{
+        //    CategoryInfo category = new CategoryInfo();
 
-            category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+        //    category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
-            if (!dr.IsNull("Category"))
-                category.Category = Convert.ToString(dr["Category"]); 
-            return category;
-        }
+        //    if (!dr.IsNull("Category"))
+        //        category.Category = Convert.ToString(dr["Category"]); 
+        //    return category;
+        //}
 	}
 }

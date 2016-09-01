@@ -163,7 +163,7 @@ namespace MyLeoRetailerRepo
        {
            VendorInfo vendor = new VendorInfo();
 
-           vendor.Vendor_ID = Convert.ToInt32(dr["Vendor_ID"]);
+           vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
 
            //if (!dr.IsNull("StateName"))
            vendor.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);

@@ -12,6 +12,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Category,
 			sp_Insert_Category,
 			sp_Update_Category,
+            Get_Category_Sp,
 
             //SubCategory
             sp_drp_Get_Sub_Categories,
@@ -26,6 +27,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Brand,
             sp_Get_Brand_By_Id,
             Get_Brands_By_Name_Autocomplete_Sp,
+            Get_Brands_Sp,
 
             #endregion
 
@@ -126,12 +128,6 @@ namespace MyLeoRetailerInfo.Common
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
            
-
-
-        //Alteration
-        //sp_Insert_Alteration,
-        //sp_Update_Alteration,
-        //sp_Get_Alteration_By_Id,
 		}
 	
 }
