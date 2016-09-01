@@ -16,20 +16,17 @@ $(function () {
 
         Get_Size_Group_Name_By_Id(this);
 
-        alert("Size");
-
         Get_Sizes();
 
     });
 
 
     $("#btnSaveSize").click(function () {
- 
+
             if ($("#frmSize").valid()) {
 
                 Save_Size();
-
-            }   
+            }
         
     });
 

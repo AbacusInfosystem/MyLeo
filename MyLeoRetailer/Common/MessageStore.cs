@@ -138,7 +138,6 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-//<<<<<<< HEAD
             #region Branch
 
             FriendlyMessage BRNCH01 = new FriendlyMessage("BRNCH01", MessageType.Success, "Branch added successfully.");
@@ -152,7 +151,7 @@ namespace MyLeoRetailer.Common
 
 
             #endregion
-            //=======
+
             #region Gift Voucher
 
             FriendlyMessage GVAT01 = new FriendlyMessage("GVAT01", MessageType.Success, "Gift Voucher added successfully.");
@@ -163,7 +162,44 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage GVAT03 = new FriendlyMessage("GVAT03", MessageType.Information, "No records found.");
             hash.Add("GVAT03", GVAT03);
-//>>>>>>> origin/master
+
+
+            #endregion
+
+            #region Alteration
+
+            FriendlyMessage ALT01 = new FriendlyMessage("ALT01", MessageType.Success, "Alteration added successfully.");
+            hash.Add("ALT01", ALT01);
+
+            FriendlyMessage ALT02 = new FriendlyMessage("ALT02", MessageType.Success, "Alteration updated successfully.");
+            hash.Add("ALT02", ALT02);
+
+            FriendlyMessage ALT03 = new FriendlyMessage("ALT03", MessageType.Information, "No records found.");
+            hash.Add("ALT03", ALT03);
+
+
+            #endregion
+
+            #region Size
+
+            FriendlyMessage SIZE1 = new FriendlyMessage("SIZE1", MessageType.Success, "Size added successfully.");
+            hash.Add("SIZE1", SIZE1);
+
+            FriendlyMessage SIZE2 = new FriendlyMessage("SIZE2", MessageType.Success, "Size updated successfully.");
+            hash.Add("SIZE2", SIZE2);
+
+            FriendlyMessage SIZE3 = new FriendlyMessage("SIZE3", MessageType.Information, "No records found.");
+            hash.Add("SIZE3", SIZE3);
+
+            FriendlyMessage SIZEG1 = new FriendlyMessage("SIZEG1", MessageType.Success, "Size Group added successfully.");
+            hash.Add("SIZEG1", SIZEG1);
+
+            FriendlyMessage SIZEG2 = new FriendlyMessage("SIZEG2", MessageType.Success, "Size Group updated successfully.");
+            hash.Add("SIZEG2", SIZEG2);
+
+            FriendlyMessage SIZEG3 = new FriendlyMessage("SIZEG3", MessageType.Information, "No records found.");
+            hash.Add("SIZEG3", SIZEG3);
+
 
             #endregion
 

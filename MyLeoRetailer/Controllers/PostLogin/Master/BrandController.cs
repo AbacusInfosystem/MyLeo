@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
-    public class BrandController :BaseController
+    public class BrandController : BaseController
     {
         public BrandRepo bRepo;
 

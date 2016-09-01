@@ -125,26 +125,10 @@ namespace MyLeoRetailerRepo
                GiftVoucher.Created_By = Convert.ToInt32(dr["Created_By"]);
                GiftVoucher.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                GiftVoucher.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-               GiftVoucher.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
-
-               //Set IsActive Flag
-               if (GiftVoucher.Is_Active == false)
-               {
-                   GiftVoucher.IsActive = 0;
-               }
-               else
-               {
-                   GiftVoucher.IsActive = 1;
-               }
-               //End
-
-              
            }
 
            return GiftVoucher;
        }
-
-       
 
     }
 }

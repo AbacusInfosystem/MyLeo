@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace MyLeoRetailerInfo.Common
 {
-	
-
 		public enum Storeprocedures
 		{
             //Category
@@ -61,7 +59,6 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Size_Group,
 
             //Size
-
             sp_Insert_Size,
             sp_Update_Size,
             sp_Get_Sizes_By_Size_Group_Id,
@@ -130,6 +127,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
            
 
+
+        //Alteration
+        sp_Insert_Alteration,
+        sp_Update_Alteration,
+        sp_Get_Alteration_By_Id,
 		}
 	
 }
