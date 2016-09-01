@@ -30,18 +30,18 @@
 
 <div class="page-content-wrap">
 
-    <div class="row">
+    <form role="form" id="frmVendorContact">
 
-        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
+        <div class="row">
 
-            <div class="block" style="border-bottom: 1px solid #DDD; padding-bottom:20px;margin-bottom:0px; ">
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
 
-                <h4 style="margin-top: 0px;">Select vendor.</h4>
+                <div class="block" style="border-bottom: 1px solid #DDD; padding-bottom:20px;margin-bottom:0px; ">
 
-                <form role="form">
+                    <h4 style="margin-top: 0px;">Select vendor.</h4>
 
                     <div class="form-group">
-                        <select class="form-control select"  name="VendorContact.Vendor_ID" placeholder="Select Vendor." >
+                        <select class="form-control select" name="VendorContact.Vendor_ID" placeholder="Select Vendor.">
                             <option value="">Select Vendor</option>
                             @foreach (var item in Model.Vendors)
                             {
@@ -57,31 +57,27 @@
                         </select>
                     </div>
 
-                </form>
-            </div>           
+                </div>
 
-            <div class="block">
+                <div class="block">
 
-                <h4 style="margin-top: 15px;">Primary information.</h4>
+                    <h4 style="margin-top: 15px;">Primary information.</h4>
 
-                <div class="form-group" style="margin-bottom: 5px; float: right;">
-                    <label class="switch">
-                        @if (Model.VendorContact.IsActive == 0)
-                        {
-                            <input value="@Model.VendorContact.IsActive" name="VendorContact.IsActive" type="checkbox" id="Flag">
-                        }
-                        else
-                        {
-                            <input value="@Model.VendorContact.IsActive" name="VendorContact.IsActive" checked="checked" type="checkbox" id="Flag">
-                        }
-                        @*<input checked="" id="Flag" value="0" type="checkbox">*@
-                        <span></span>
-                    </label>
-                </div>  
-                <br />
-                <br />
-                <form role="form" id="frmCVendorContactPrimaryInfo">
-
+                    <div class="form-group" style="margin-bottom: 5px; float: right;">
+                        <label class="switch">
+                            @if (Model.VendorContact.IsActive == 0)
+                            {
+                                <input value="@Model.VendorContact.IsActive" name="VendorContact.IsActive" type="checkbox" id="Flag">
+                            }
+                            else
+                            {
+                                <input value="@Model.VendorContact.IsActive" name="VendorContact.IsActive" checked="checked" type="checkbox" id="Flag">
+                            }
+                            <span></span>
+                        </label>
+                    </div>
+                    <br />
+                    <br />
                     <div class="form-group">
 
                         <input type="text" class="form-control" placeholder="Enter first name." name="VendorContact.First_Name" value="@Model.VendorContact.First_Name" />
@@ -96,26 +92,14 @@
                         <input type="text" class="form-control" placeholder="Enter last name." name="VendorContact.Last_Name" value="@Model.VendorContact.Last_Name" />
 
                     </div>
+                </div>
 
-                    @*<div class="form-group" style="margin-bottom: 5px; float: right;">
-                <label class="switch">
-                    <input checked="" id="Flag" value="0" name="VendorContact.Is_Active" type="checkbox">
-                    <span></span>
-                </label>
-            </div>*@
-
-                </form>
             </div>
 
-        </div>
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
 
-        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
-
-            <div class="block">
-                <h4 style="margin-top: 0px;">Address.</h4>
-
-                <form role="form">
-
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Address.</h4>
                     <div class="form-group">
                         <textarea class="form-control" rows="5" placeholder="Address." name="VendorContact.Address" value="@Model.VendorContact.Address">@Model.VendorContact.Address</textarea>
                     </div>
@@ -135,18 +119,15 @@
                     <div class="form-group">
                         <input type="text" class="form-control" maxlength="6" placeholder="Enter pincode." name="VendorContact.Pincode" value="@Model.VendorContact.Pincode" />
                     </div>
+                </div>
 
-                </form>
             </div>
 
-        </div>
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
 
-        <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Communication detail.</h4>
 
-            <div class="block">
-                <h4 style="margin-top: 0px;">Communication detail.</h4>
-
-                <form role="form">
                     <div class="form-group">
                         <input type="text" class="form-control" maxlength="12" placeholder="Enter mobile number 1." name="VendorContact.Mobile1" value="@Model.VendorContact.Mobile1" />
                     </div>
@@ -156,24 +137,23 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Enter email address." name="VendorContact.Email_Id" value="@Model.VendorContact.Email_Id" />
+                        <input type="text" class="form-control" placeholder="Enter email address." name="VendorContact.Email_Id" value="@Model.VendorContact.Email_Id" />
                     </div>
-                </form>
+                </div>
+
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success active" id="btnSaveVendorContact">Save</button>
+
+                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "VendorContact")'">Cancel</button>
+                </div>
+
             </div>
 
         </div>
-
-        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-success active" id="btnSaveVendorContact">Save</button>
-
-                <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "VendorContact")'">Cancel</button>
-            </div>
-
-        </div>
-
-    </div>
-
+    </form>
 </div>
 

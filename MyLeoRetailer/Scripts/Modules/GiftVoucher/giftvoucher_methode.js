@@ -1,5 +1,4 @@
 ﻿
-
 function Save_Gift_Voucher() {
 
     var gvViewModel =
@@ -57,11 +56,8 @@ function Save_Gift_Voucher() {
             Reset_Gift_Voucher();
 
             Friendly_Messages(obj);
-
         }
     });
-
-
 }
 
 function Reset_Gift_Voucher() {

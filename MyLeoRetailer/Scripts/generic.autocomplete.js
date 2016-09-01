@@ -6,9 +6,9 @@ var InitializeAutoComplete = function (elementObject) {
 
             var urlString = ''
 
-            if ($(elementObject).attr("id") == 'txtBrand_Name') {
-                urlString = "/brand/get-brand-list-by-name/" + $('#txtBrand_Name').val();
-            }
+            //if ($(elementObject).attr("id") == 'txtBrand_Name') {
+            //    urlString = "/brand/get-brand-list-by-name/" + $('#txtBrand_Name').val();
+            //}
 
             if ($(elementObject).attr("id") == 'txtColor_Name') {
                 urlString = "/colour/get-color-list-by-name/" + $('#txtColor_Name').val();

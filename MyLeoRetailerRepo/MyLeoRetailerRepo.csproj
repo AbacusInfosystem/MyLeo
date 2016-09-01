@@ -59,6 +59,7 @@
     <Compile Include="SizeGroupRepo.cs" />
     <Compile Include="Utility\SQL_Repo.cs" />
     <Compile Include="VendorContactRepo.cs" />
+    <Compile Include="VendorRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyLeoRetailerInfo\MyLeoRetailerInfo.csproj">

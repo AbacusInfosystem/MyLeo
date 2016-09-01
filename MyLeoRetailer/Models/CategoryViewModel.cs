@@ -20,6 +20,8 @@ namespace MyLeoRetailer.Models
 
 			Category = new CategoryInfo();
 
+            Categories = new List<CategoryInfo>();
+
 			Filter = new Filter_Category();
 
 			FriendlyMessages = new List<FriendlyMessage>();
@@ -58,6 +60,9 @@ namespace MyLeoRetailer.Models
 			get;
 			set;
 		}
+
+        public List<CategoryInfo> Categories { get; set; }
+
 	}
 
 	public class Filter_Category

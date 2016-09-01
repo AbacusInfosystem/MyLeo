@@ -1,19 +1,174 @@
-﻿using System;
+﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Models;
+using MyLeoRetailerHelper;
+using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
+using MyLeoRetailerManager;
+using MyLeoRetailerRepo;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
-    public class VendorController : Controller
+    public class VendorController : BaseController
     {
-        //
-        // GET: /Vendor/
 
-        public ActionResult Index()
+        CategoryRepo _categoryRepo;
+
+        BrandRepo _brandRepo;
+
+        SubCategoryRepo _subcategoryRepo;
+
+        TaxRepo _taxRepo;
+
+        public VendorController()
+        {
+
+            _categoryRepo = new CategoryRepo();
+
+            _brandRepo = new BrandRepo();
+
+            _subcategoryRepo = new SubCategoryRepo();
+
+            _taxRepo = new TaxRepo();
+
+        }
+      
+        public ActionResult Index(VendorViewModel vViewModel)
+        {
+
+            vViewModel.Categories = _categoryRepo.drp_Get_Categories();
+
+            vViewModel.Brands = _brandRepo.drp_Get_Brands();
+
+            vViewModel.SubCategorys = _subcategoryRepo.drp_Get_Sub_Categories();
+
+            vViewModel.VATS = _taxRepo.drp_Get_VAT();
+
+            vViewModel.CSTS = _taxRepo.drp_Get_CST();
+
+            return View("Index", vViewModel);
+        }
+
+        public ActionResult Search()
         {
             return View();
+        }
+
+        public JsonResult Get_Vendors(VendorViewModel vViewModel)
+        {
+            VendorRepo vRepo = new VendorRepo();
+
+            CommonManager cMan = new CommonManager();
+
+            string filter = "";
+
+            string dataOperator = "";
+
+            Pagination_Info pager = new Pagination_Info();
+
+            try
+            {
+                filter = vViewModel.Filter.Vendor_Name; // Set filter comma seprated
+
+                dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+
+                vViewModel.Query_Detail = Set_Query_Details(false, "Vendor_Name,Vendor_Vat_No,Vendor_Vat_Rate,CST_No,CST_Rate,Vendor_Id", "", "Vendor", "Vendor_Name", filter, dataOperator); // Set query for grid
+
+                pager = vViewModel.Grid_Detail.Pager;
+
+                vViewModel.Grid_Detail = Set_Grid_Details(false, "Vendor_Name,Vendor_Vat_No,Vendor_Vat_Rate,CST_No,CST_Rate", "Vendor_Id"); // Set grid info for front end listing
+
+                vViewModel.Grid_Detail.Records = vRepo.Get_Vendors(vViewModel.Query_Detail); // Call repo method 
+
+                Set_Pagination(pager, vViewModel.Grid_Detail); // set pagination for grid
+
+                vViewModel.Grid_Detail.Pager = pager;
+            }
+            catch (Exception ex)
+            {
+                vViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+            }
+
+            return Json(JsonConvert.SerializeObject(vViewModel));
+        }
+
+        public ActionResult Insert_Vendor(VendorViewModel vViewModel)
+        {
+            VendorRepo vRepo = new VendorRepo();
+
+            try
+            {
+                Set_Date_Session(vViewModel.Vendor);
+
+                vViewModel.Vendor.Vendor_Id = vRepo.Insert_Vendor(vViewModel.Vendor);
+
+                vViewModel.Friendly_Message.Add(MessageStore.Get("V01"));
+            }
+            catch (Exception ex)
+            {
+                vViewModel.Friendly_Message.Add(MessageStore.Get("SY01"));
+            }
+
+            //return Json(JsonConvert.SerializeObject(vViewModel));
+
+            TempData["vViewModel"] = vViewModel;
+
+            return RedirectToAction("Search");
+        }
+
+        public ActionResult Get_Vendor_By_Id(VendorViewModel vViewModel)
+        {
+            VendorRepo vRepo = new VendorRepo();
+
+            try
+            {
+                vViewModel.Vendor = vRepo.Get_Vendor_By_Id(vViewModel.Filter.Vendor_Id);
+
+                vViewModel.Vendor.BankDetailsList = vRepo.Get_Vendor_Bank_Details(vViewModel.Filter.Vendor_Id);
+
+                vViewModel.Vendor.BrandDetailsList = vRepo.Get_Vendor_Brand_Details(vViewModel.Filter.Vendor_Id);
+
+                vViewModel.Vendor.CategoryDetailsList = vRepo.Get_Vendor_Category_Details(vViewModel.Filter.Vendor_Id);
+
+                vViewModel.Vendor.SubCategoryDetailsList = vRepo.Get_Vendor_SubCategory_Details(vViewModel.Filter.Vendor_Id);
+
+            }
+            catch (Exception ex)
+            {
+                vViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+               
+            }
+
+            return Index(vViewModel);
+        }
+
+        public ActionResult Update_Vendor(VendorViewModel vViewModel)
+        {
+            VendorRepo vRepo = new VendorRepo();
+
+            try
+            {
+                Set_Date_Session(vViewModel.Vendor);
+
+                vRepo.Update_Vendor(vViewModel.Vendor);
+
+                vViewModel.Friendly_Message.Add(MessageStore.Get("V02"));
+            }
+            catch (Exception ex)
+            {
+                vViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+
+            }
+
+            TempData["vViewModel"] = vViewModel;
+
+            return RedirectToAction("Search");
         }
 
     }

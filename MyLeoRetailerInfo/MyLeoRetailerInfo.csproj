@@ -46,13 +46,13 @@
     <Compile Include="Category\SubCategoryInfo.cs" />
     <Compile Include="Color\ColorInfo.cs" />
     <Compile Include="Common\AutocompleteInfo.cs" />
+    <Compile Include="Common\EnumCollection.cs" />
     <Compile Include="Common\ExceptionInfo.cs" />
     <Compile Include="Common\FriendlyMessage.cs" />
     <Compile Include="Common\LoginInfo.cs" />
     <Compile Include="Common\LookupInfo.cs" />
     <Compile Include="Common\Storeprocedures.cs" />
     <Compile Include="Employee\EmployeeInfo.cs" />
-    <Compile Include="Customer\CustomerInfo.cs" />
     <Compile Include="Enum_Collection.cs" />
     <Compile Include="GiftVoucher\GiftVoucherInfo.cs" />
     <Compile Include="GridInfo.cs" />
@@ -67,6 +67,11 @@
     <Compile Include="VendorContact\VendorContactInfo.cs" />
     <Compile Include="Vendor\VendorInfo.cs" />
     <Compile Include="Size\SizeGroupInfo.cs" />
+    <Compile Include="Vendor\VendorInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Employee\" />
+    <Folder Include="VendorContact\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

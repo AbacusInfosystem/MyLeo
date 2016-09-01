@@ -112,15 +112,10 @@ namespace MyLeoRetailerRepo
                GiftVoucher.Created_By = Convert.ToInt32(dr["Created_By"]);
                GiftVoucher.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                GiftVoucher.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-              
-
-              
            }
 
            return GiftVoucher;
        }
-
-       
 
     }
 }

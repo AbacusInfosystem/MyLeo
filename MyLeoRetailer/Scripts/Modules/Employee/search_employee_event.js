@@ -3,24 +3,32 @@ $(function () {
 
     Get_Employees();
 
-        $("[name='Filter.Employee']").focusout(function () {
-            Get_Employees();
-        }); 
-         
-        $("#btnEdit").click(function () {
-            
-            $("#frmSearchEmployee").attr("action", "/Employee/Get_Employee_By_Id/");
+    $("[name='Filter.Employee']").focusout(function () {
+        Get_Employees();
+    });
 
-            $("#frmSearchEmployee").attr("method", "post");
+    $("#btnEdit").click(function () {
+        $("#frmEmployee").attr("action", "/Employee/Get_Employee_By_Id/");
+        $("#frmEmployee").attr("method", "post");
+        $("#frmEmployee").submit();
+    });
 
-            $("#frmSearchEmployee").submit();
-        });
+    $(document).on('change', '[name="Employee_List"]', function (event) {
+        if ($(this).prop('checked')) {
+            $("#hdf_EmployeeId").val(this.value);
+            $("#btnEdit").show();
+        }
+    });
 
-        $(document).on('change','[name="Employee_List"]', function (event) {
-           
-            if ($(this).prop('checked')) {
-                $("#hdf_EmployeeId").val(this.value);
-                $("#btnEdit").show();
-            }
-        });
+    $("#btnCreateEmployee").click(function () {
+
+        $("#frmEmployee").attr("action", "/Employee/Index");
+        $("#frmEmployee").submit();
+
+    });
+
+    $("#btnEditEmployee").click(function () {
+        $("#frmEmployee").attr("action", "/Employee/Get_Employee_By_Id");
+        $("#frmEmployee").submit();
+    });
 });
