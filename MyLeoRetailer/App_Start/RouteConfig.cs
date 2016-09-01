@@ -16,7 +16,7 @@ namespace MyLeoRetailer
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Size", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Vendor", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

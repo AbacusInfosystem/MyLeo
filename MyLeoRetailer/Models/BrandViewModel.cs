@@ -20,6 +20,8 @@ namespace MyLeoRetailer.Models
 
 			Brand = new BrandInfo();
 
+            Brands = new List<BrandInfo>();
+
 			Filter = new Filter_Brand();
 
 			FriendlyMessages = new List<FriendlyMessage>();
@@ -58,6 +60,9 @@ namespace MyLeoRetailer.Models
 			get;
 			set;
 		}
+
+        public List<BrandInfo> Brands { get; set; }
+
 	}
 
 	public class Filter_Brand

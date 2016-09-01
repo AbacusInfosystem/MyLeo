@@ -97,5 +97,69 @@ namespace MyLeoRetailerRepo
 		{
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
+
+
+        //Added By Sushant 29/8/2016
+
+        public List<TaxInfo> drp_Get_VAT()
+        {
+            List<TaxInfo> vats = new List<TaxInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_drp_Get_VAT.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    vats.Add(Get_VAT_Values(dr));
+                }
+            }
+            return vats;
+        }
+
+        public TaxInfo Get_VAT_Values(DataRow dr)
+        {
+            TaxInfo retVal = new TaxInfo();
+
+            retVal.Tax_Id = Convert.ToInt32(dr["Tax_Id"]);
+
+            retVal.Tax_Value = Convert.ToInt32(dr["Tax_Value"]);
+
+            return retVal;
+        }
+
+        //Added By Sushant 29/8/2016
+
+        public List<TaxInfo> drp_Get_CST()
+        {
+            List<TaxInfo> csts = new List<TaxInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_drp_Get_CST.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    csts.Add(Get_CST_Values(dr));
+                }
+            }
+            return csts;
+        }
+
+        public TaxInfo Get_CST_Values(DataRow dr)
+        {
+            TaxInfo retVal = new TaxInfo();
+
+            retVal.Tax_Id = Convert.ToInt32(dr["Tax_Id"]);
+
+            retVal.Tax_Value = Convert.ToInt32(dr["Tax_Value"]);
+
+            return retVal;
+        }
+
     }
 }

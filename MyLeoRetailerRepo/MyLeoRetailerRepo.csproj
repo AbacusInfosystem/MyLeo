@@ -43,13 +43,12 @@
     <Compile Include="BrandRepo.cs" />
     <Compile Include="CategoryRepo.cs" />
     <Compile Include="ColorRepo.cs" />
-    <Compile Include="EmployeeRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubCategoryRepo.cs" />
     <Compile Include="TaxRepo.cs" />
     <Compile Include="SizeGroupRepo.cs" />
     <Compile Include="Utility\SQL_Repo.cs" />
-    <Compile Include="VendorContactRepo.cs" />
+    <Compile Include="VendorRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyLeoRetailerInfo\MyLeoRetailerInfo.csproj">

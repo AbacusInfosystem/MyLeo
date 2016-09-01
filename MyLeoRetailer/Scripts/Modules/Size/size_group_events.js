@@ -24,14 +24,12 @@ $(function () {
 
 
     $("#btnSaveSize").click(function () {
-
-            alert();
-            
+ 
             if ($("#frmSize").valid()) {
 
                 Save_Size();
 
-            }
+            }   
         
     });
 

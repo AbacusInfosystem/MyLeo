@@ -204,10 +204,10 @@
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
-    <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
+    <Compile Include="Models\VendorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -969,7 +969,14 @@
     <Content Include="Scripts\Modules\Size\size_group_events.js" />
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\Modules\Vendor\vendor_events.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_methods.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_search_events.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_search_methods.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1012,6 +1019,8 @@
     <Content Include="Views\PostLogin\Master\Category\_SubCategory.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\VendorContact\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

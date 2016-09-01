@@ -175,7 +175,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 sgRepo.Update_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SCAT02"));
+                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SG02"));
             }
             catch (Exception ex)
             {

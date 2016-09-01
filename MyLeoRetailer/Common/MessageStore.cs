@@ -83,13 +83,37 @@ namespace MyLeoRetailer.Common
 
             #region Color
 
-            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
+            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour Added successfully.");
             hash.Add("COL1", COL1);
 
             FriendlyMessage COL2 = new FriendlyMessage("COL2", MessageType.Success, "Colour Updated successfully.");
             hash.Add("COL2", COL2);
 
             #endregion
+
+
+
+            #region SizeGroup
+
+            FriendlyMessage SG01 = new FriendlyMessage("SG01", MessageType.Success, "Size Group Added successfully.");
+            hash.Add("SG01", SG01);
+
+            FriendlyMessage SG02 = new FriendlyMessage("SG02", MessageType.Success, "Size Group Updated successfully.");
+            hash.Add("SG02", SG02);
+
+            #endregion
+
+            #region Vendor
+
+            FriendlyMessage V01 = new FriendlyMessage("V01", MessageType.Success, "Vendor added successfully.");
+            hash.Add("V01", V01);
+
+            FriendlyMessage V02 = new FriendlyMessage("V02", MessageType.Success, "Vendor Updated successfully.");
+            hash.Add("V02", V02);
+
+            #endregion
+
+
 
 		}
 
