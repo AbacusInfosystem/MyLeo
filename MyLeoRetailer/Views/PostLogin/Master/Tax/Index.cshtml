@@ -49,36 +49,7 @@
                 <div class="col-md-12" style="padding: 0px;text-align:center;" id="divTaxPager">
 
 				</div>
-            </div>
-
-                @*<div class="list-group border-bottom push-down-20">
-                    <a href="#" class="list-group-item active">Service tax</a>
-                    <a href="#" class="list-group-item">GST</a>
-                    <a href="#" class="list-group-item">Swatch bharat tax</a>
-                    <a href="#" class="list-group-item">Krishi kalyan tax</a>    
-                </div>*@
-
-            @*<div class="row">
-
-                <div class="col-md-12" style="padding: 0px;text-align:center;">
-
-            <ul class="pagination pagination-sm">
-                <li class="disabled"><a href="#">First</a></li>
-                <li class="disabled"><a href="#">«</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-                <li><a href="#">Last</a></li>
-            </ul>
-
-        </div>
-
-            </div>*@
-
-            
+            </div>     
 
         </div>
 
@@ -89,18 +60,15 @@
 
                 <form role="form" id="frmTax">
                     <div class="form-group">
-                        @*<label>Create / Update size group:</label>*@
                         <input type="text" class="form-control" placeholder="Enter tax name." name="Tax.Tax_Name" />
                         <input type="hidden" name="Tax.Tax_Id">
                     </div>
 
                     <div class="form-group">
-                        @*<label>Create / Update size group:</label>*@
                         <input type="text" class="form-control" placeholder="Enter tax value (in percentage)." name="Tax.Tax_Value" />
                     </div>
 
                     <div class="form-group" style="margin-bottom: 5px; float: right;">
-                        @*<label>Set Active:</label>*@
                         <label class="switch">
                             <input checked="" value="0" type="checkbox">
                             <span></span>
@@ -110,7 +78,8 @@
                     <div style="padding-left: 0px; padding-top: 0px; padding-bottom: 20px; margin-bottom: 15px;">
                         <div class="btn-group">
                             <button type="button" class="btn btn-success active" id="btnSaveTax">Save</button>
-                            <button class="btn btn-danger active">Cancel</button>
+                            <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "Tax")'">Cancel</button>
+                            @*<button class="btn btn-danger active">Cancel</button>*@
                         </div>
                     </div>
 

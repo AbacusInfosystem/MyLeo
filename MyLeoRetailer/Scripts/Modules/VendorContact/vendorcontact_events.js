@@ -3,9 +3,10 @@
 
     $("#btnSaveVendorContact").click(function () {
 
-        Save_Vendor_Contact();
+        if ($("#frmVendorContact").valid()) {
+            Save_Vendor_Contact();
 
-        //if ($("#frmTax").valid()) {
+        }
 
     });
 

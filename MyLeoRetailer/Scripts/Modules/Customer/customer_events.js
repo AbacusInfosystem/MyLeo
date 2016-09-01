@@ -1,7 +1,7 @@
 ﻿$(function () {   
 
     $("#btnSaveCustomer").click(function () {
-        if ($("#frmCustomerPrimaryInfo").valid()) {
+        if ($("#frmCustomer").valid()) {
             Save_Customer();
         }
     });

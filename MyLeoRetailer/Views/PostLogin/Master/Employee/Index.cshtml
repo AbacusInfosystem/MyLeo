@@ -25,7 +25,9 @@
 <!-- END CONTENT FRAME -->
 
 <div class="page-content-wrap">
+
     <form role="form" id="frmEmployee">
+
         <div class="row">
 
             <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 490px;">
@@ -57,8 +59,8 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
-                        <div class="input-group date" id="dp-2" @*data-date="05-07-2014"*@ data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" @*value="05-07-2014"*@ name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("dd-MM-yyyy")))" readonly />
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control datepicker" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("dd-MM-yyyy")))" readonly />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div> 
@@ -127,8 +129,6 @@
                 <div class="block">
                     <h4 style="margin-top: 0px;">Address detail.</h4>
 
-                    @*<form role="form">*@
-
                     <div class="form-group">
                         <textarea class="form-control" rows="5" placeholder="Residential address." name="Employee.Employee_Address">@Model.Employee.Employee_Address</textarea>
                     </div>
@@ -152,7 +152,6 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter city." name="Employee.Employee_City" value="@Model.Employee.Employee_City" />
                     </div>
-                    @*</form>*@
                 </div>
 
             </div>
@@ -162,13 +161,12 @@
                 <div class="block">
                     <h4 style="margin-top: 0px;">Communication detail.</h4>
 
-                    @*<form role="form">*@
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Employee.Employee_Mobile1" value="@Model.Employee.Employee_Mobile1" maxlength="10"/>
+                        <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Employee.Employee_Mobile1" value="@Model.Employee.Employee_Mobile1" maxlength="12"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Employee.Employee_Mobile2" value="@Model.Employee.Employee_Mobile2" maxlength="10"/>
+                        <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Employee.Employee_Mobile2" value="@Model.Employee.Employee_Mobile2" maxlength="12"/>
                     </div>
 
                     <div class="form-group">
@@ -178,7 +176,6 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter email address." name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" />
                     </div>
-                    @*</form>*@
                 </div>
 
             </div>
@@ -186,9 +183,8 @@
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
 
                 <div class="btn-group">
-                    <button class="btn btn-success active" id="btnEmployeeSave">Save</button>
-                    @*<button class="btn btn-danger active">Cancel</button>*@
-                    <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "Employee")">Cancel </a>
+                    <button type="button" class="btn btn-success active" id="btnEmployeeSave">Save</button>
+                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "Employee")'">Cancel</button>                    
                 </div>
 
             </div>

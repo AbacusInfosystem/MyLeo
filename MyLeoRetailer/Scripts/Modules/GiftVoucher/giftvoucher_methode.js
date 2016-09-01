@@ -1,5 +1,4 @@
 ﻿
-
 function Save_Gift_Voucher() {
 
     var gvViewModel =
@@ -22,9 +21,7 @@ function Save_Gift_Voucher() {
 
 		        Bank_Name: $("[name='GiftVoucher.Bank_Name']").val(),
 
-		        Credit_Card_No: $("[name='GiftVoucher.Credit_Card_No']").val(),
-
-		        IsActive: $("[name='GiftVoucher.IsActive']").val(),
+		        Credit_Card_No: $("[name='GiftVoucher.Credit_Card_No']").val()
 		    }
 		}
 
@@ -57,11 +54,8 @@ function Save_Gift_Voucher() {
             Reset_Gift_Voucher();
 
             Friendly_Messages(obj);
-
         }
     });
-
-
 }
 
 function Reset_Gift_Voucher() {
@@ -83,8 +77,5 @@ function Reset_Gift_Voucher() {
     $("[name='GiftVoucher.Bank_Name']").val("");
 
     $("[name='GiftVoucher.Credit_Card_No']").val("");
-
-    $("[name='GiftVoucher.IsActive']").val("");
-
    
 }

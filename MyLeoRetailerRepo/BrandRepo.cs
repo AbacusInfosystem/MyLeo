@@ -90,10 +90,7 @@ namespace MyLeoRetailerRepo
                     isactive = Convert.ToInt32(dr["Is_Active"]);                                     
                 }
             }
-            return isactive;
-
-
-            
+            return isactive;            
 
         }
 

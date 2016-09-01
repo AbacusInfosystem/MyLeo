@@ -178,21 +178,10 @@ namespace MyLeoRetailerRepo
                 Customer.Created_By = Convert.ToInt32(dr["Created_By"]);
                 Customer.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                 Customer.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-
-
+                
+                Customer.IsActive = Convert.ToInt32(dr["Is_Active"]);
                 Customer.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
-
-                //Set IsActive Flag
-                if (Customer.Is_Active == false)
-                {
-                    Customer.IsActive = 0;
-                }
-                else
-                {
-                    Customer.IsActive = 1;
-                }
-                //End
-
+                                
                 //Split Customer_Name
                 string[] nameParts = Customer.Customer_Name.Split(' ');
 
