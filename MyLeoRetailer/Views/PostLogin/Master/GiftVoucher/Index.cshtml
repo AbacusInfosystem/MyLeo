@@ -53,26 +53,6 @@
 
                     </div>
 
-
-
-                    <div class="form-group">
-                        <div class="form-group" style="margin-bottom: 5px; float: right;">
-                            <label class="switch">
-                                @if (Model.GiftVoucher.IsActive == 0)
-                                {
-                                    <input value="@Model.GiftVoucher.IsActive" name="GiftVoucher.IsActive" type="checkbox" id="Flag">
-                                }
-                                else
-                                {
-                                    <input value="@Model.GiftVoucher.IsActive" name="GiftVoucher.IsActive" checked="checked" type="checkbox" id="Flag">
-                                }
-                                @*<input checked="" id="Flag" value="0" type="checkbox">*@
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-
-
                 </div>
 
                 <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 490px;">
@@ -154,7 +134,7 @@
                     <button class="btn btn-success active" type="button" id="btnGiftVoucherSave">Save</button>
                     @*<button class="btn btn-danger active">Cancel</button>*@
                     @*<a class="btn btn-danger active" role="button" href="@Url.Action("Search", "GiftVoucher")">Cancel </a>*@
-                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Search", "GiftVoucher")'">Cancel</button>
+                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "GiftVoucher")'">Cancel</button>
                     <button class="btn btn-twitter active" role="button" id="btnGiftVoucherPrint">Print</button>
 
                     

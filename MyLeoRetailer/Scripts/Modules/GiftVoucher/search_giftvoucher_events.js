@@ -14,6 +14,7 @@ $(function () {
       
         if ($(this).prop('checked')) {
             $("#hdn_GiftVoucherId").val(this.value);
+            $("#btnGiftVoucher").show();
         }
     });
 
@@ -25,7 +26,7 @@ $(function () {
 
   
     if ($('#hdn_GiftVoucherId').val() != "") {
-        alert($('#hdn_GiftVoucherId').val());
+        
         if ($('#mode').val() == 2) {
             $("#bankname").show();
             $("#creditcardno").show();

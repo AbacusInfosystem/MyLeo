@@ -96,7 +96,7 @@ function Reset_Tax() {
 
     $("[name='Tax.Tax_name']").val("");
 
-    $("[name='Tax.Tax_Value']").val("");
+    $("[name='Tax.TaxValue']").val("");
 
     $("[name='Tax.IsActive']").val("");
 
@@ -137,7 +137,9 @@ function Get_Tax_By_Id(obj) {
 
             $("[name='Tax.Tax_Value']").val(obj.Tax.Tax_Value);
 
-            //Set IsActive Button Status
+            $("[name='Tax.IsActive']").val(obj.Tax.IsActive);
+
+            //Set Is_Active Button Status
             var fix = $("[name='Tax.IsActive']").val();
 
             if (fix == "0") {

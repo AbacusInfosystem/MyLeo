@@ -86,6 +86,7 @@ namespace MyLeoRetailerRepo
             foreach (DataRow dr in drList)
             {
                 tax.Tax_Value = Convert.ToDecimal(dr["Tax_Value"]);
+                //tax.Is_Active = Convert.ToBoolean(dr["Tax_Value"]);
                 tax.IsActive = Convert.ToInt32(dr["Is_Active"]);
             }
             return tax;

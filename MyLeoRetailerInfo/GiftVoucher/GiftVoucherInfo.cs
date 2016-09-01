@@ -68,18 +68,6 @@ namespace MyLeoRetailerInfo.GiftVoucher
            set;
        }
 
-       public bool Is_Active
-       {
-           get;
-           set;
-       }
-
-       public int IsActive
-       {
-           get;
-           set;
-       }
-
        public DateTime Created_Date
        {
            get;

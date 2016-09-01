@@ -24,7 +24,7 @@ function Save_Gift_Voucher() {
 
 		        Credit_Card_No: $("[name='GiftVoucher.Credit_Card_No']").val(),
 
-		        IsActive: $("[name='GiftVoucher.IsActive']").val(),
+		        
 		    }
 		}
 
@@ -84,7 +84,7 @@ function Reset_Gift_Voucher() {
 
     $("[name='GiftVoucher.Credit_Card_No']").val("");
 
-    $("[name='GiftVoucher.IsActive']").val("");
+   
 
    
 }
