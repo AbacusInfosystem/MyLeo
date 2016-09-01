@@ -203,19 +203,7 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-            #region Alteration
 
-            FriendlyMessage ALT01 = new FriendlyMessage("ALT01", MessageType.Success, "Alteration added successfully.");
-            hash.Add("ALT01", ALT01);
-
-            FriendlyMessage ALT02 = new FriendlyMessage("ALT02", MessageType.Success, "Alteration updated successfully.");
-            hash.Add("ALT02", ALT02);
-
-            FriendlyMessage ALT03 = new FriendlyMessage("ALT03", MessageType.Information, "No records found.");
-            hash.Add("ALT03", ALT03);
-
-
-            #endregion
 		}
 
 		public static FriendlyMessage Get(string code)
