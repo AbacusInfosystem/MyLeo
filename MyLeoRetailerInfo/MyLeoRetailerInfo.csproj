@@ -67,12 +67,8 @@
     <Compile Include="VendorContact\VendorContactInfo.cs" />
     <Compile Include="Vendor\VendorInfo.cs" />
     <Compile Include="Size\SizeGroupInfo.cs" />
-    <Compile Include="Vendor\VendorInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Employee\" />
-    <Folder Include="VendorContact\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
