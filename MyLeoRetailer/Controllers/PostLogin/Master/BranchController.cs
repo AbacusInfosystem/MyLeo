@@ -105,7 +105,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 bRepo.Update_Far_Branch_Location(bViewModel.Branch);
 
-                bViewModel.FriendlyMessages.Add(MessageStore.Get("BRNCH02"));                
+                bViewModel.FriendlyMessages.Add(MessageStore.Get("BRNCH02"));
+
             }
             catch (Exception ex)
             {

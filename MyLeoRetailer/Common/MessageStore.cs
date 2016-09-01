@@ -97,11 +97,23 @@ namespace MyLeoRetailer.Common
 
             #region Color
 
-            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
+            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour Added successfully.");
             hash.Add("COL1", COL1);
 
             FriendlyMessage COL2 = new FriendlyMessage("COL2", MessageType.Success, "Colour Updated successfully.");
             hash.Add("COL2", COL2);
+
+            #endregion
+
+
+
+            #region SizeGroup
+
+            FriendlyMessage SG01 = new FriendlyMessage("SG01", MessageType.Success, "Size Group Added successfully.");
+            hash.Add("SG01", SG01);
+
+            FriendlyMessage SG02 = new FriendlyMessage("SG02", MessageType.Success, "Size Group Updated successfully.");
+            hash.Add("SG02", SG02);
 
             #endregion
 
@@ -136,6 +148,7 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage BRNCH03 = new FriendlyMessage("BRNCH03", MessageType.Information, "No records found.");
             hash.Add("BRNCH03", BRNCH03);
+
 
             #endregion
 
@@ -186,6 +199,20 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage SIZEG3 = new FriendlyMessage("SIZEG3", MessageType.Information, "No records found.");
             hash.Add("SIZEG3", SIZEG3);
+
+
+            #endregion
+
+            #region Alteration
+
+            FriendlyMessage ALT01 = new FriendlyMessage("ALT01", MessageType.Success, "Alteration added successfully.");
+            hash.Add("ALT01", ALT01);
+
+            FriendlyMessage ALT02 = new FriendlyMessage("ALT02", MessageType.Success, "Alteration updated successfully.");
+            hash.Add("ALT02", ALT02);
+
+            FriendlyMessage ALT03 = new FriendlyMessage("ALT03", MessageType.Information, "No records found.");
+            hash.Add("ALT03", ALT03);
 
 
             #endregion

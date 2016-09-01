@@ -4,11 +4,11 @@ $(function () {
 
     Get_Vendor_Contacts();
 
-    $(document).on("click", "[name='Vendor_Contact_List']", function () {
+    //$(document).on("click", "[name='Vendor_Contact_List']", function () {
 
-        Get_Vendor_Contact_By_Id(this);
+    //    Get_Vendor_Contact_By_Id(this);
 
-    });
+    //});
 
     $(document).on('change', '[name="Vendor_Contact_List"]', function (event) {
         alert();

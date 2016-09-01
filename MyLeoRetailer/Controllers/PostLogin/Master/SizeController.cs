@@ -170,7 +170,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
         }
-
+    
         //public JsonResult Delete_Size_By_Id(int size_Id)
         //{
         //    SizeGroupViewModel sgViewModel = new SizeGroupViewModel();

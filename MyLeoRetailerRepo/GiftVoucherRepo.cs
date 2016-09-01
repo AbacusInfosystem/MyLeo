@@ -62,7 +62,20 @@ namespace MyLeoRetailerRepo
            sqlParam.Add(new SqlParameter("@Bank_Name", GiftVoucher.Bank_Name));
 
            sqlParam.Add(new SqlParameter("@Credit_Card_No", GiftVoucher.Credit_Card_No));
-                     
+
+           //Set Is_Active Flag
+           if (GiftVoucher.IsActive == 0)
+           {
+               GiftVoucher.Is_Active = false;
+           }
+           else
+           {
+               GiftVoucher.Is_Active = true;
+           }
+           //End
+
+           sqlParam.Add(new SqlParameter("@Is_Active", GiftVoucher.Is_Active));
+
            sqlParam.Add(new SqlParameter("@Updated_Date", GiftVoucher.Updated_Date));
 
            sqlParam.Add(new SqlParameter("@Updated_By", GiftVoucher.Updated_By));
@@ -111,11 +124,11 @@ namespace MyLeoRetailerRepo
                GiftVoucher.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
                GiftVoucher.Created_By = Convert.ToInt32(dr["Created_By"]);
                GiftVoucher.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
-               GiftVoucher.Updated_By = Convert.ToInt32(dr["Updated_By"]);              
+               GiftVoucher.Updated_By = Convert.ToInt32(dr["Updated_By"]);
            }
 
            return GiftVoucher;
        }
-       
+
     }
 }

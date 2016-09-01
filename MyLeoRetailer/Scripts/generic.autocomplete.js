@@ -10,9 +10,9 @@ var InitializeAutoComplete = function (elementObject) {
             //    urlString = "/brand/get-brand-list-by-name/" + $('#txtBrand_Name').val();
             //}
 
-            //if ($(elementObject).attr("id") == 'txtEventName') {
-            //    urlString = "/event/get-event-list-by-name/" + $('#txtEventName').val();
-            //}
+            if ($(elementObject).attr("id") == 'txtColor_Name') {
+                urlString = "/colour/get-color-list-by-name/" + $('#txtColor_Name').val();
+            }
 
             $.ajax({
                 url: urlString,

@@ -84,7 +84,7 @@ function Save_Brand()
 			Reset_Brand();
 
 			Get_Brands();
-            
+			
 			Friendly_Messages(obj);
 			
 		}

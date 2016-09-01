@@ -61,5 +61,34 @@ namespace MyLeoRetailerRepo
 		{
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
+
+        public List<SubCategoryInfo> drp_Get_Sub_Categories()
+        {
+            List<SubCategoryInfo> subcategories = new List<SubCategoryInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_drp_Get_Sub_Categories.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    subcategories.Add(Get_SubCategory_Values(dr));
+                }
+            }
+            return subcategories;
+        }
+
+        public SubCategoryInfo Get_SubCategory_Values(DataRow dr)
+        {
+            SubCategoryInfo retVal = new SubCategoryInfo();
+
+            retVal.Sub_Category_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+
+            retVal.Sub_Category = Convert.ToString(dr["Sub_Category"]);
+
+            return retVal;
+        }
 	}
 }

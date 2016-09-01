@@ -60,5 +60,60 @@ namespace MyLeoRetailerRepo
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
 		
+        //Added By Sushant 29/8/2016
+
+        public List<CategoryInfo> drp_Get_Categories()
+        {
+            List<CategoryInfo> categorys = new List<CategoryInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Category.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    categorys.Add(Get_Category_Values(dr));
+                }
+            }
+            return categorys;
+        }
+
+        public CategoryInfo Get_Category_Values(DataRow dr)
+        {
+            CategoryInfo retVal = new CategoryInfo();
+
+            retVal.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
+            retVal.Category = Convert.ToString(dr["Category"]);
+
+            return retVal;
+        }
+
+
+        public List<CategoryInfo> Get_Categorys()
+        {
+            List<CategoryInfo> categorys = new List<CategoryInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Category_Sp.ToString(), CommandType.StoredProcedure);
+            List<DataRow> drList = new List<DataRow>();
+            drList = dt.AsEnumerable().ToList();
+            foreach (DataRow dr in drList)
+            {
+                categorys.Add(Get_Category_Values(dr));
+            }
+            return categorys;
+        }
+
+        private CategoryInfo Get_Category_Values(DataRow dr)
+        {
+            CategoryInfo category = new CategoryInfo();
+
+            category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
+            if (!dr.IsNull("Category"))
+                category.Category = Convert.ToString(dr["Category"]); 
+            return category;
+        }
 	}
 }

@@ -22,7 +22,7 @@ $(function () {
 
 
     $("#btnSaveSize").click(function () {
-                    
+
             if ($("#frmSize").valid()) {
 
                 Save_Size();

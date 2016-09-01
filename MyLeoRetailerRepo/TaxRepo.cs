@@ -16,9 +16,13 @@ namespace MyLeoRetailerRepo
     {
        SQL_Repo sqlHelper = null;
 
+       public TaxInfo tax;
+
         public TaxRepo()
 		{
 			sqlHelper = new SQL_Repo();
+
+            tax = new TaxInfo();
 		}
 
 		public int Insert_Tax(TaxInfo Tax)
@@ -50,6 +54,20 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Tax_Value", Tax.Tax_Value));
 
+
+            //Set Is_Active Flag
+            if (Tax.IsActive == 0)
+            {
+                Tax.Is_Active = false;
+            }
+            else
+            {
+                Tax.Is_Active = true;
+            }
+            //End
+
+            sqlParam.Add(new SqlParameter("@Is_Active", Tax.Is_Active));
+
 			sqlParam.Add(new SqlParameter("@Updated_Date",Tax.Updated_Date));
 
 			sqlParam.Add(new SqlParameter("@Updated_By",Tax.Updated_By));
@@ -57,22 +75,20 @@ namespace MyLeoRetailerRepo
 			return sqlParam;
 		}
 
-        public decimal Get_Tax_By_Id(int Tax_Id)
+        public TaxInfo Get_Tax_By_Id(int Tax_Id)
         {
-            decimal Tax_Value = 0;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Tax_Id", Tax_Id));
             DataTable dt = null;
-            List<SqlParameter> sqlParamList = new List<SqlParameter>();
-            sqlParamList.Add(new SqlParameter("@Tax_Id", Tax_Id));
-
-            dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Tax_By_Id.ToString(), CommandType.StoredProcedure);
-
-            foreach (DataRow dr in dt.Rows)
+            dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Tax_By_Id.ToString(), CommandType.StoredProcedure);
+            List<DataRow> drList = new List<DataRow>();
+            drList = dt.AsEnumerable().ToList();
+            foreach (DataRow dr in drList)
             {
-                if (!dr.IsNull("Tax_Value"))
-                    Tax_Value = Convert.ToDecimal(dr["Tax_Value"]);
+                tax.Tax_Value = Convert.ToDecimal(dr["Tax_Value"]);
+                tax.IsActive = Convert.ToInt32(dr["Is_Active"]);
             }
-            return Tax_Value;
-
+            return tax;
         }
 
         //public string Get_Colors_By_Id(int Color_Id)
@@ -97,5 +113,88 @@ namespace MyLeoRetailerRepo
 		{
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
+
+
+        //Added By Sushant 29/8/2016
+
+        public List<TaxInfo> drp_Get_VAT()
+        {
+            List<TaxInfo> vats = new List<TaxInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_drp_Get_VAT.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    vats.Add(Get_VAT_Values(dr));
+                }
+            }
+            return vats;
+        }
+
+        public TaxInfo Get_VAT_Values(DataRow dr)
+        {
+            TaxInfo retVal = new TaxInfo();
+
+            retVal.Tax_Id = Convert.ToInt32(dr["Tax_Id"]);
+
+            retVal.Tax_Value = Convert.ToInt32(dr["Tax_Value"]);
+
+            return retVal;
+        }
+
+        //Added By Sushant 29/8/2016
+
+        public List<TaxInfo> drp_Get_CST()
+        {
+            List<TaxInfo> csts = new List<TaxInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_drp_Get_CST.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    csts.Add(Get_CST_Values(dr));
+                }
+            }
+            return csts;
+        }
+
+        public TaxInfo Get_CST_Values(DataRow dr)
+        {
+            TaxInfo retVal = new TaxInfo();
+
+            retVal.Tax_Id = Convert.ToInt32(dr["Tax_Id"]);
+
+            retVal.Tax_Value = Convert.ToInt32(dr["Tax_Value"]);
+
+            return retVal;
+        }
+
+
+        //public decimal Get_Tax_By_Id(int Tax_Id)
+        //{
+        //    decimal Tax_Value = 0;
+        //    DataTable dt = null;
+        //    List<SqlParameter> sqlParamList = new List<SqlParameter>();
+        //    sqlParamList.Add(new SqlParameter("@Tax_Id", Tax_Id));
+
+        //    dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Tax_By_Id.ToString(), CommandType.StoredProcedure);
+
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        if (!dr.IsNull("Tax_Value"))
+        //            Tax_Value = Convert.ToDecimal(dr["Tax_Value"]);
+
+        //    }
+        //    return Tax_Value;
+
+        //}
     }
 }
