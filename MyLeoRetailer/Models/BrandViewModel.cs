@@ -72,5 +72,7 @@ namespace MyLeoRetailer.Models
 			get;
 			set;
 		}
+
+        public string Brand_Id { get; set; }
 	}
 }

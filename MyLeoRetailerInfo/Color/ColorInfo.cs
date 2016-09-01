@@ -29,6 +29,13 @@ namespace MyLeoRetailerInfo.Color
             get;
             set;
         }
+
+        public bool IsActive
+        {
+            get;
+            set;
+        }
+        
 		public DateTime Created_Date
 		{
 			get;

@@ -52,5 +52,17 @@ namespace MyLeoRetailerInfo.Common
 
         }
 
+        public static Dictionary<int, string> Get_GiftVoucher_Payment_Mode()
+        {
+            Dictionary<int, string> Get_GiftVoucher_Payment_Mode = new Dictionary<int, string>();
+
+            Get_GiftVoucher_Payment_Mode.Add(1, PaymentMode.Cash.ToString().Replace('_', ' ').ToString());
+
+            Get_GiftVoucher_Payment_Mode.Add(2, PaymentMode.Card.ToString().Replace('_', ' ').ToString());
+
+            return Get_GiftVoucher_Payment_Mode;
+
+        }
+
     }
 }

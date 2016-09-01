@@ -34,7 +34,7 @@ function Get_Brands()
 			Bind_Anchor_Grid(obj, "Brand_List", $("#Brand_Grid"));
 
 			Reset_Brand();
-
+            		   
 			$("#divBrandPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 		}
 	});
@@ -46,7 +46,9 @@ function Save_Brand()
 		{
 		    Brand: {
 
-			    Brand_Name: $("[name='Brand.Brand_Name']").val(),
+		        Brand_Name: $("[name='Brand.Brand_Name']").val(),
+
+		        IsActive: $("[name='Brand.IsActive']").val(),
 
 			    Brand_Id: $("[name='Brand.Brand_Id']").val()
 			}
@@ -82,7 +84,7 @@ function Save_Brand()
 			Reset_Brand();
 
 			Get_Brands();
-
+			
 			Friendly_Messages(obj);
 			
 		}
@@ -95,15 +97,48 @@ function Reset_Brand()
     $("[name='Brand.Brand_Name']").val("");
 
     $("[name='Brand.Brand_Id']").val("");
+
+    $("[name='Brand.IsActive']").val("");
 }
 
 function Get_Brand_By_Id(obj)
 {
     $("[name='Brand_List']").removeClass("active");
 
-	$(obj).addClass("active");
+    $(obj).addClass("active");
 
-	$("[name='Brand.Brand_Name']").val($(obj).text());
+    $("[name='Brand.Brand_Name']").val($(obj).text());
 
-	$("[name='Brand.Brand_Id']").val($(obj).attr("data-identity"));
+    $("[name='Brand.Brand_Id']").val($(obj).attr("data-identity"));
+
+    var Brand_Id = $("[name='Brand.Brand_Id']").val();
+
+    $.ajax({
+
+        url: "/Brand/Get_Brand_By_Id",
+
+        data: { Brand_Id: Brand_Id },
+
+        type: 'POST',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            $("[name='Brand.IsActive']").val(obj.Brand.IsActive);
+
+            //Set IsActive Button Status
+            var fix = $("[name='Brand.IsActive']").val();
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
+            //End
+
+        }
+    });
+
 }

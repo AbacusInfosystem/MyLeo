@@ -20,10 +20,16 @@ namespace MyLeoRetailerInfo.Common
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
 
+            #region brand
+
             //brand
             sp_drp_Get_Brands,
             sp_Insert_Brand,
             sp_Update_Brand,
+            sp_Get_Brand_By_Id,
+            Get_Brands_By_Name_Autocomplete_Sp,
+
+            #endregion
 
             //tax
             sp_Insert_Tax,
@@ -35,14 +41,22 @@ namespace MyLeoRetailerInfo.Common
             //Vendor Contact
             sp_Insert_Vendor_Contact,
             sp_Update_Vendor_Contact,
+            sp_Get_Vendor_Contact_By_Id,
+            Get_Vendor_Sp,
+            Get_Vendor_By_Id_Sp,
 
-            //Color
+            #region Color
+
+            Get_Colors_Sp,
             sp_Insert_Color,
             sp_Update_Color,
             sp_Get_Colors_By_Id,
+            Get_Colors_By_Name_Autocomplete_Sp,
+
+            #endregion
 
             //SizeGroup
-
+            Get_SizeGroup_Sp,
             sp_Insert_SizeGroup,
             sp_Update_Size_Group,
 
@@ -53,6 +67,46 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
 
+            //Employee
+            sp_Insert_Employee,
+            sp_Update_Employee,
+            sp_Get_Employees_By_Id,
+
+            //Customer
+            sp_Insert_Customer,
+            sp_Update_Customer,
+            sp_Get_Customer_By_Id,
+            sp_Get_Customer_By_Mobile,
+            Get_Employee_Sp,
+
+            //GiftVoucher
+            sp_Insert_Gift_Voucher,
+            sp_Update_Gift_Voucher,
+            sp_Get_Gift_Voucher_By_Id,
+
+            //Branch
+            sp_Insert_Branch,
+            sp_Update_Branch,
+            sp_Get_Branch_By_Id,
+            sp_Insert_Branch_Location,
+            sp_Get_Far_Branch_Location_By_Id,
+            sp_Get_Near_Branch_Location_By_Id,
+            sp_Update_Branch_Location,
+
+            //Login
+            Get_User_Data_By_Token_sp,
+            Authenticate_User_sp,
+            Insert_Token_In_User_Table_Sp,
+
+            //Alteration
+            sp_Insert_Alteration,
+            sp_Update_Alteration,
+            sp_Get_Alteration_By_Id,
+
+            //SalesInvoice
+            Get_SalesInvoice_Sp,
+
+           
             //Vendor
 
             sp_Insert_Vendor,

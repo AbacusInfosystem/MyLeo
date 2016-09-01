@@ -44,7 +44,9 @@ function Save_Tax() {
 
 		        Tax_Name: $("[name='Tax.Tax_Name']").val(),
 
-		        Tax_Value:$("[name='Tax.Tax_Value']").val(),
+		        Tax_Value: $("[name='Tax.Tax_Value']").val(),
+
+		        IsActive: $("[name='Tax.IsActive']").val(),
 
 		        Tax_Id: $("[name='Tax.Tax_Id']").val()
 		    }
@@ -52,11 +54,13 @@ function Save_Tax() {
 
     var url = "";
 
-    if ($("[name='Tax.Tax_Id']").val() == "") {
-        url = "/Tax/Insert_Tax";
-    }
-    else {
-        url = "/Tax/Update_Tax";
+    if ($("#frmTax").valid()) {
+        if ($("[name='Tax.Tax_Id']").val() == "") {
+            url = "/Tax/Insert_Tax";
+        }
+        else {
+            url = "/Tax/Update_Tax";
+        }
     }
 
     $.ajax({
@@ -88,11 +92,15 @@ function Save_Tax() {
 
 function Reset_Tax() {
 
+    $("[name='Tax.Tax_Id']").val("");
+
     $("[name='Tax.Tax_name']").val("");
 
     $("[name='Tax.Tax_Value']").val("");
 
-    $("[name='Tax.Tax_Id']").val("");
+    $("[name='Tax.IsActive']").val("");
+
+   
 
    
 }
@@ -129,7 +137,16 @@ function Get_Tax_By_Id(obj) {
 
             $("[name='Tax.Tax_Value']").val(obj.Tax.Tax_Value);
 
-            //document.getElementById('iRGBColor').style.backgroundColor = obj.Tax.Tax_Name; //"rgb(" + randR + ", " + randG + ", " + randB + ")";
+            //Set IsActive Button Status
+            var fix = $("[name='Tax.IsActive']").val();
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
+            //End
         }
     });
 

@@ -120,7 +120,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             TaxRepo tRepo = new TaxRepo();
             try
             {
-                tViewModel.Tax.Tax_Value = tRepo.Get_Tax_By_Id(Convert.ToInt32(Tax_Id));
+                tViewModel.Tax = tRepo.Get_Tax_By_Id(Convert.ToInt32(Tax_Id));
             }
             catch (Exception ex)
             {
