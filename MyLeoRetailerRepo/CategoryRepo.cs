@@ -80,16 +80,16 @@ namespace MyLeoRetailerRepo
             return categorys;
         }
 
-        public CategoryInfo Get_Category_Values(DataRow dr)
-        {
-            CategoryInfo retVal = new CategoryInfo();
+        //public CategoryInfo Get_Category_Values(DataRow dr)
+        //{
+        //    CategoryInfo retVal = new CategoryInfo();
 
-            retVal.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+        //    retVal.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
-            retVal.Category = Convert.ToString(dr["Category"]);
+        //    retVal.Category = Convert.ToString(dr["Category"]);
 
-            return retVal;
-        }
+        //    return retVal;
+        //}
 
 
         public List<CategoryInfo> Get_Categorys()

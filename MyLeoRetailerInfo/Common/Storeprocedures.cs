@@ -129,9 +129,9 @@ namespace MyLeoRetailerInfo.Common
 
 
         //Alteration
-        sp_Insert_Alteration,
-        sp_Update_Alteration,
-        sp_Get_Alteration_By_Id,
+        //sp_Insert_Alteration,
+        //sp_Update_Alteration,
+        //sp_Get_Alteration_By_Id,
 		}
 	
 }
