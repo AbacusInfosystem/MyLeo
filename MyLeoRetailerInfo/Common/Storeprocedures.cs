@@ -6,21 +6,24 @@ using System.Threading.Tasks;
 
 namespace MyLeoRetailerInfo.Common
 {
-	
-
 		public enum Storeprocedures
-        {
+		{
             #region Category
 
             Get_Category_Sp,
+            //Category
+            sp_Get_Category,
 			sp_Insert_Category,
 			sp_Update_Category,
             sp_Get_Category_By_Id,
 
             #endregion
+            Get_Category_Sp,
 
             #region SubCategory
 
+            //SubCategory
+            sp_drp_Get_Sub_Categories,
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
             sp_Get_Sub_Category_By_Id,
@@ -30,11 +33,12 @@ namespace MyLeoRetailerInfo.Common
             #region brand
 
             //brand
-            Get_Brands_Sp,
+            sp_drp_Get_Brands,
             sp_Insert_Brand,
             sp_Update_Brand,
             sp_Get_Brand_By_Id,
             Get_Brands_By_Name_Autocomplete_Sp,
+            Get_Brands_Sp,
 
             #endregion
 
@@ -42,6 +46,8 @@ namespace MyLeoRetailerInfo.Common
             sp_Insert_Tax,
             sp_Update_Tax,
             sp_Get_Tax_By_Id,
+            sp_drp_Get_VAT,
+            sp_drp_Get_CST,
 
             //Vendor Contact
             sp_Insert_Vendor_Contact,
@@ -66,7 +72,6 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Size_Group,
 
             //Size
-
             sp_Insert_Size,
             sp_Update_Size,
             sp_Get_Sizes_By_Size_Group_Id,
@@ -82,6 +87,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Customer,
             sp_Get_Customer_By_Id,
             sp_Get_Customer_By_Mobile,
+            Get_Employee_Sp,
 
             //GiftVoucher
             sp_Insert_Gift_Voucher,
@@ -106,6 +112,38 @@ namespace MyLeoRetailerInfo.Common
             Get_User_Data_By_Token_sp,
             Authenticate_User_sp,
             Insert_Token_In_User_Table_Sp,
+
+            //Alteration
+            sp_Insert_Alteration,
+            sp_Update_Alteration,
+            sp_Get_Alteration_By_Id,
+
+            //SalesInvoice
+            Get_SalesInvoice_Sp,
+
+           
+            //Vendor
+
+            sp_Insert_Vendor,
+            sp_Update_Vendor,
+            sp_Get_Vendor_By_Id,
+            sp_Insert_Vendor_Bank_Details,
+            sp_Update_Vendor_Bank_Details,
+            sp_Delete_Vendor_Bank_Details_By_Vendor_Id,
+            sp_Get_Vendor_Bank_Details_By_Id,
+            sp_Insert_Vendor_Brand_Mapping,
+            sp_Update_Vendor_Brand_Mapping,
+            sp_Delete_Vendor_Brand_Mapping_By_Vendor_Id,
+            sp_Get_Vendor_Brand_Mapping_By_Id,
+            sp_Insert_Vendor_Category_Mapping,
+            sp_Update_Vendor_Category_Mapping,
+            sp_Delete_Vendor_Category_Mapping_By_Vendor_Id,
+            sp_Get_Vendor_Category_Mapping_By_Id,
+            sp_Insert_Vendor_SubCategory_Mapping,
+            sp_Update_Vendor_SubCategory_Mapping,
+            sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
+            sp_Get_Vendor_SubCategory_Mapping_By_Id,
+                  
 		}
 	
 }

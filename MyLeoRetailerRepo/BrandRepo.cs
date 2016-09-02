@@ -72,7 +72,38 @@ namespace MyLeoRetailerRepo
 		{
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
+		
+        //Added By Sushant 29/8/2016
 
+        public List<BrandInfo> drp_Get_Brands()
+        {
+            List<BrandInfo> brands = new List<BrandInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_drp_Get_Brands.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    brands.Add(Get_Brand_Values(dr));
+                }
+            }
+            return brands;
+        }
+
+        public BrandInfo Get_Brand_Values(DataRow dr)
+        {
+            BrandInfo retVal = new BrandInfo();
+
+            retVal.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+            retVal.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+
+            return retVal;
+        }
+		
         public int Get_Brand_By_Id(int Brand_Id)
         {            
             int isactive = 0;
@@ -90,10 +121,7 @@ namespace MyLeoRetailerRepo
                     isactive = Convert.ToInt32(dr["Is_Active"]);                                     
                 }
             }
-            return isactive;
-
-
-            
+            return isactive;            
 
         }
 

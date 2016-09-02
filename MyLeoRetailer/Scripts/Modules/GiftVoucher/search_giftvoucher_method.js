@@ -1,7 +1,4 @@
 ﻿
-
-
-
 function Get_Gift_Vouchers() {
     var gvViewModel =
 		{
@@ -33,14 +30,13 @@ function Get_Gift_Vouchers() {
 
             Bind_Grid(obj, "Gift_Voucher_List");
 
-            // Reset_Vendor_Contact();
-
             $("#divGiftVoucherPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
     });
 }
 
 function Get_Gift_Voucher_By_Id(obj) {
+
     $("[name='Gift_Voucher_List']").removeClass("active");
 
     $(obj).addClass("active");
@@ -60,8 +56,6 @@ function Get_Gift_Voucher_By_Id(obj) {
     $("[name='GiftVoucher.Bank_Name']").val($(obj).text());
 
     $("[name='GiftVoucher.Credit_Card_No']").val($(obj).text());
-
-    $("[name='GiftVoucher.IsActive']").val($(obj).text());
 
     $("[name='GiftVoucher.Gift_Voucher_Id']").val($(obj).attr("data-identity"));
 

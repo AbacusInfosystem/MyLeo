@@ -16,8 +16,6 @@ $(function () {
 
         Get_Size_Group_Name_By_Id(this);
 
-        alert("Size");
-
         Get_Sizes();
 
     });
@@ -25,12 +23,9 @@ $(function () {
 
     $("#btnSaveSize").click(function () {
 
-            alert();
-            
             if ($("#frmSize").valid()) {
 
                 Save_Size();
-
             }
         
     });

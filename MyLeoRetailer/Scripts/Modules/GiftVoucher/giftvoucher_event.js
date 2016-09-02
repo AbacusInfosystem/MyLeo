@@ -1,23 +1,15 @@
 ﻿$(function () {
 
-
     $("#btnGiftVoucherSave").click(function () {
-
         Save_Gift_Voucher();
-
-        //if ($("#frmTax").valid()) {
-
     });
 
-    $("#btnGiftVoucherPrint").click(function () {
-       
+    $("#btnGiftVoucherPrint").click(function () {       
         $("#frmGiftVoucher").attr("action", "/GiftVoucher/Print");
-        $("#frmGiftVoucher").submit();
-           
+        $("#frmGiftVoucher").submit();           
     });
 
-    if ($('#hdn_GiftVoucherId').val() != "") {
-        
+    if ($('#hdn_GiftVoucherId').val() != "") {        
         if ($('#mode').val() == 2) {
             $("#bankname").show();
             $("#creditcardno").show();
@@ -25,12 +17,9 @@
             $("#bankname").hide();
             $("#creditcardno").hide();
         }
-
     }
-
-   
-    $("#mode").change(function () {
-        
+       
+    $("#mode").change(function () {        
         if ($(this).val() == 2) {
             $("#bankname").show();
             $("#creditcardno").show();
@@ -39,8 +28,4 @@
             $("#creditcardno").hide();
         }
     });
-
-
-   
-
 });

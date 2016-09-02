@@ -3,9 +3,10 @@
 
     $("#btnSaveTax").click(function () {
 
-        //if ($("#frmTax").valid()) {
+        if ($("#frmTax").valid()) {
 
             Save_Tax();
+        }
         
     });
 

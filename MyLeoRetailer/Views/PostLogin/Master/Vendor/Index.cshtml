@@ -1,0 +1,749 @@
+﻿@model MyLeoRetailer.Models.VendorViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
+
+
+<script src="~/Scripts/Modules/Vendor/vendor_events.js"></script>
+<script src="~/Scripts/Modules/Vendor/vendor_methods.js"></script>
+<script src="~/Scripts/Modules/Vendor/vendor_validations.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Vendor Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Vendor Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <form id="frmVendor">
+
+            <div class="box box-default">
+
+                <div class="box-body">
+
+                    <input type="hidden" class="form-control input-sm" name="Vendor.Vendor_Id" id="hdf_Vendor_Id" value="@Model.Vendor.Vendor_Id">
+
+                    <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
+
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Name" style="color: #333" class="">Vendor Name</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="drpVendor_Type" style="color: #333" class="">Vendor Type</label>
+                                        <select class="form-control input-sm" id="drpVendor_Type" name="Vendor.Vendor_Type">
+                                            <option value="0">Select Vendor Type</option>
+
+                                            @foreach (var item in LookupInfo.Get_Vendor_Types())
+                                            {
+
+                                                if (Model.Vendor.Vendor_Type == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Email1" style="color: #333" class="">Vendor Email1</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Email1" id="txtVendor_Email1" value="@Model.Vendor.Vendor_Email1" placeholder="Enter Email 1" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Email2" style="color: #333" class="">Vendor Email2</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Email2" id="txtVendor_Email2" value="@Model.Vendor.Vendor_Email2" placeholder="Enter Email 2" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Address" style="color: #333" class="">Address</label>
+                                        <textarea class="form-control input-sm" name="Vendor.Vendor_Address" id="txtVendor_Address" placeholder="Enter Address">@Model.Vendor.Vendor_Address</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_City" style="color: #333" class="">City</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_City" id="txtVendor_City" value="@Model.Vendor.Vendor_City" placeholder="Enter City" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_State" style="color: #333" class="">State</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_State" id="txtVendor_State" value="@Model.Vendor.Vendor_State" placeholder="Enter State" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Country" style="color: #333" class="">Country</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Country" id="txtVendor_Country" value="@Model.Vendor.Vendor_Country" placeholder="Enter Country" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Pincode" style="color: #333" class="">Pincode</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Pincode" id="txtVendor_Pincode" value="@Model.Vendor.Vendor_Pincode" maxlength="6" placeholder="Enter Pincode" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Phone1" style="color: #333" class="">Phone1</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1" placeholder="Enter Phone1" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Phone2" style="color: #333" class="">Phone2</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone2" id="txtVendor_Phone2" value="@Model.Vendor.Vendor_Phone2" placeholder="Enter Phone2" />
+                                    </div>
+                                </div>
+
+                              
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_Vat_No" style="color: #333" class="">Vendor Vat No.</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_No" id="txtVendor_Vat_No" value="@Model.Vendor.Vendor_Vat_No" placeholder="Enter Vat No." />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="drpVendor_Vat_Rate" style="color: #333" class="">Vendor Vat Rate</label>
+                                        <select class="form-control input-sm" id="drpVendor_Vat_Rate" name="Vendor.Vendor_Vat_Rate">
+                                            <option value="0">Select Vat Rate</option>
+
+                                            @foreach (var item in Model.VATS)
+                                            {
+                                                if (Model.Vendor.Vendor_Vat_Rate == item.Tax_Id.ToString())
+                                                {
+                                                    <option value="@item.Tax_Id" selected="selected">@item.Tax_Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Tax_Id">@item.Tax_Value</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="dtpVendor_Vat_Effective_Date" style="color: #333" class="">Vat Effective Date</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_Effective_Date" id="dtpVendor_Vat_Effective_Date" value="@(Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM/dd/yyyy"))" placeholder="Enter Vat Effective Date" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="txtVendor_CST_No" style="color: #333" class="">Vendor CST No.</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_No" id="txtVendor_CST_No" value="@Model.Vendor.Vendor_CST_No" placeholder="Enter CST No." />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="drpVendor_CST_Rate" style="color: #333" class="">Vendor CST Rate</label>
+                                        <select class="form-control input-sm" id="drpVendor_CST_Rate" name="Vendor.Vendor_CST_Rate">
+                                            <option value="0">Select CST Rate</option>
+
+                                            @foreach (var item in Model.CSTS)
+                                            {
+                                                if (Model.Vendor.Vendor_CST_Rate == item.Tax_Id.ToString())
+                                                {
+                                                    <option value="@item.Tax_Id" selected="selected">@item.Tax_Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Tax_Id">@item.Tax_Value</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="dtpVendor_CST_Effective_Date" style="color: #333" class="">CST Effective Date</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_Effective_Date" id="dtpVendor_CST_Effective_Date" value="@(Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM/dd/yyyy"))" placeholder="Enter CST Effective Date" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="drpBrand" style="color: #333" class="">Brand</label>
+                                        <select class="form-control input-sm" id="drpBrand" name="Vendor.Brand_Id">
+                                            <option value="0">Select Brand</option>
+
+                                            @foreach (var item in Model.Brands)
+                                            {
+                                                if (Model.Vendor.Brand_Id == item.Brand_Id)
+                                                {
+                                            <option value="@item.Brand_Id" selected="selected">@item.Brand_Name</option>
+                                                }
+                                                else
+                                                {
+                                            <option value="@item.Brand_Id">@item.Brand_Name</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <br>
+                                        <button type="button" id="btnAddBrand" class="btn btn-default bg-blue">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="drpCategory" style="color: #333" class="">Category</label>
+                                        <select class="form-control input-sm" id="drpCategory" name="Vendor.Category_Id">
+                                            <option value="0">Select Category</option>
+
+                                            @foreach (var item in Model.Categories)
+                                            {
+                                                if (Model.Vendor.Category_Id == item.Category_Id)
+                                                {
+                                                    <option value="@item.Category_Id" selected="selected">@item.Category</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Category_Id">@item.Category</option>
+                                                }
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <br>
+                                        <button type="button" id="btnAddCategory" class="btn btn-default bg-blue">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="drpSubCategory" style="color: #333" class="">Sub Category</label>
+                                        <select class="form-control input-sm" id="drpSubCategory" name="Vendor.SubCategory_Id">
+                                            <option value="0">Select Sub Category</option>
+
+                                            @foreach (var item in Model.SubCategorys)
+                                            {
+                                                if (Model.Vendor.SubCategory_Id == item.Sub_Category_Id)
+                                                {
+                                                    <option value="@item.Sub_Category_Id" selected="selected">@item.Sub_Category</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Sub_Category_Id">@item.Sub_Category</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <br>
+                                        <button type="button" id="btnAddSubCategory" class="btn btn-default bg-blue">+</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+@if ( Model.Vendor.BrandDetailsList.Count() == 0)
+                            {
+             <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBrandDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblBrandDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Brand</th>
+                                                    <th>Action</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+
+
+
+                                <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBrandDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblBrandDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Brand</th>
+                                                    <th>Action</th>
+                                                </tr>
+
+                                                @if (Model.Vendor.BrandDetailsList != null && Model.Vendor.BrandDetailsList.Count() > 0)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var itm in Model.Vendor.BrandDetailsList)
+                                                    {
+                                                        <tr id="tr@(i)">
+                                                            <td>
+                                                                <span id="trBrandName@(i)"> @itm.Brand</span>
+                                                                <input type="hidden" id="hdnbrand_Name@(i)" name="Vendor.BrandDetailsList[@(i-1)].Brand_Detail_Id" value="@itm.Brand_Detail_Id">
+                                                            </td>
+
+                                                            <td class='edit'>
+                                                                <button type='button' id='edit-brand-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBrandDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
+                                                                <button type='button' id='delete-brand-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBrandDetailsData(@(i))'><i class='fa fa-times'></i></button>
+                                                          
+                                                        </tr>
+                                                        i = i + 1;
+                                                    }
+                                                }
+
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+    
+}
+
+@if ( Model.Vendor.CategoryDetailsList.Count() == 0)
+                            {
+                                 <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Category</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+
+
+
+                                <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Category</th>
+                                                    <th>Action</th>
+                                                </tr>
+
+                                                @if (Model.Vendor.CategoryDetailsList != null && Model.Vendor.CategoryDetailsList.Count() > 0)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var itm in Model.Vendor.CategoryDetailsList)
+                                                    {
+                                                        <tr id="tr@(i)">
+                                                            <td>
+                                                                <span id="trCategoryName@(i)"> @itm.Category</span>
+                                                                <input type="hidden" id="hdncategory_Name@(i)" name="Vendor.CategoryDetailsList[@(i-1)].Category_Detail_Id" value="@itm.Category_Detail_Id">
+                                                            </td>
+
+                                                            <td class='edit'>
+                                                                <button type='button' id='edit-category-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
+                                                                <button type='button' id='delete-category-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>
+                                                            
+                                                        </tr>
+                                                        i = i + 1;
+                                                    }
+                                                }
+
+
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+}
+
+@if ( Model.Vendor.SubCategoryDetailsList.Count() == 0)
+                            {
+                                 <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditSubCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblSubCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Sub Category</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>     
+                                            <tbody></tbody>                                      
+                                        </table>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+
+
+                                <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditSubCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblSubCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Sub Category</th>
+                                                    <th>Action</th>
+                                                </tr>
+
+                                                @if (Model.Vendor.SubCategoryDetailsList != null && Model.Vendor.SubCategoryDetailsList.Count() > 0)
+                                                {
+                                                    int i = 1;
+                                                    
+                                                    foreach (var itm in Model.Vendor.SubCategoryDetailsList)
+                                                    {
+                                                        <tr id="tr@(i)">
+                                                            <td>
+                                                                <span id="trSubCategoryName@(i)"> @itm.SubCategory</span>
+                                                                <input type="hidden" id="hdnsubcategory_Name@(i)" name="Vendor.SubCategoryDetailsList[@(i-1)].SubCategory_Id" value="@itm.SubCategory_Id">
+                                                            </td>
+
+                                                            <td class='edit'>
+                                                                <button type='button' id='edit-subcategory-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditSubCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
+                                                                <button type='button' id='delete-subcategory-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteSubCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>
+                                                           
+                                                        </tr>
+                                                                i = i + 1;
+                                                    }
+                                                }
+
+
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtBank_Name" style="color: #333" class="">Bank Name</label>
+                                            <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtAccount_No" style="color: #333" class="">Account No.</label>
+                                            <input type="text" class="form-control input-sm" name="Vendor.Account_No" id="txtAccount_No" value="@Model.Vendor.Account_No" placeholder="Enter Account No" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtBranch_Name" style="color: #333" class="">Branch Name</label>
+                                            <input type="text" class="form-control input-sm" name="Vendor.Branch_Name" id="txtBranch_Name" value="@Model.Vendor.Branch_Name" placeholder="Enter Branch Name" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtIFSC_Code" style="color: #333" class="">IFSC Code</label>
+                                            <input type="text" class="form-control input-sm" name="Vendor.Ifsc_Code" id="txtIFSC_Code" value="@Model.Vendor.Ifsc_Code" placeholder="Enter IFSC Code" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <br>
+                                            <button type="button" id="btnAdd" class="btn btn-default bg-blue">+</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
+
+@if ( Model.Vendor.BankDetailsList.Count() == 0)
+                            {
+                        <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBankDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblBankDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Bank Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Branch Name</th>
+                                                    <th>IFSC Code</th>
+                                                    <th>Action</th>                                                  
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                            else
+                            {
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBankDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblBankDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Bank Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Branch Name</th>
+                                                    <th>IFSC Code</th>
+                                                    @*<th>Status</th>*@
+                                                    <th>Action</th>
+                                                   
+                                                </tr>
+
+                                                @if (Model.Vendor.BankDetailsList != null && Model.Vendor.BankDetailsList.Count() > 0)
+                                            {
+                                                int i = 1;
+                                                foreach (var itm in Model.Vendor.BankDetailsList)
+                                                {
+                                                    <tr id="tr@(i)">
+                                                        <td>
+                                                            <span id="trBankName@(i)"> @itm.Bank_Name</span>
+                                                            <input type="hidden" id="hdnbank_Name@(i)" name="Vendor.BankDetailsList[@(i-1)].Bank_Name" value="@itm.Bank_Name">
+                                                        </td>
+                                                        <td>
+                                                            <span id="trAccount_No@(i)"> @itm.Account_No</span>
+                                                            <input type="hidden" id="hdnaccount_No@(i)" name="Vendor.BankDetailsList[@(i-1)].Account_No" value="@itm.Account_No">
+                                                        </td>
+
+                                                        <td>
+                                                            <span id="trBranch_Name@(i)"> @itm.Branch_Name</span>
+                                                            <input type="hidden" id="hdnbranch_Name@(i)" name="Vendor.BankDetailsList[@(i-1)].Branch_Name" value="@itm.Branch_Name">
+                                                        </td>
+                                                        <td>
+                                                            <span id="trIfsc_Code@(i)"> @itm.Ifsc_Code</span>
+                                                            <input type="hidden" id="hdnifsc_Code@(i)" name="Vendor.BankDetailsList[@(i-1)].Ifsc_Code" value="@itm.Ifsc_Code">
+                                                        </td>
+                                                        @*<td>
+                                                            @if (itm.Status.ToString() == "True")
+                                                            {
+                                                                <span id="trStatus@(i)"> Active</span>
+                                                                <input type="hidden" id="hdnstatus@(i)" name="Vendor.BankDetailsList[@(i-1)].Status" value="true">
+                                                            }
+                                                            else
+                                                            {
+                                                                <span id="trStatus@(i)"> InActive</span>
+                                                                <input type="hidden" id="hdnstatus@(i)" name="Vendor.BankDetailsList[@(i-1)].Status" value="false">
+                                                            }
+
+                                                        </td>*@
+
+                                                        <td class='edit'>
+                                                            <button type='button' id='edit-bank-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBankDetailsData(" + trrow + ")'><i class='fa fa-pencil'></i></button>
+                                                            <button type='button' id='delete-bank-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBankDetailsData(" + trrow + ")'><i class='fa fa-times'></i></button>
+
+                                                        </tr>
+                                                            i = i + 1;
+                                                }
+                                            }
+                                            </thead>
+                                            <tbody></tbody>
+
+
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+    
+}
+
+                        </div>
+
+                        @*<div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            @if (Model.Vendor.Is_Active == false)
+                            {
+                                            <label class="">
+                                                <input type="checkbox" class="chkstatus" />
+                                                &nbsp;&nbsp;&nbsp;&nbsp; Active
+                                            </label>
+                                            }
+                            else
+                            {
+                                <label class="">
+                                    <input type="checkbox" checked="checked" class="chkstatus" />
+                                    &nbsp;&nbsp;&nbsp;&nbsp; Active
+                                </label>
+                            }
+
+                            @*<input type="hidden" id="hdnIs_Active" name="Vendor.Is_Active" value="@Model.Vendor.Is_Active.ToString()">*@
+                                        @*</div>
+                                    </div>
+                                </div>
+
+
+                            </div>*@
+
+                        @*<div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">*@
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                                <div class="btn-group">
+                                    <button type="button" id="btnSaveVendor" class="btn btn-success active">Save</button>
+                                    @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
+                                    <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "Vendor")">Cancel </a>
+                                </div>
+
+                            </div>
+
+                        <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
+                        </div>
+
+
+
+                        </div>
+
+               </div>
+
+           </div>
+        </form>
+    </div>
+</div>
+

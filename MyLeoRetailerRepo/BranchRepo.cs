@@ -88,19 +88,9 @@ namespace MyLeoRetailerRepo
                 Branch.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                 Branch.Updated_By = Convert.ToInt32(dr["Updated_By"]);
 
-
                 Branch.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+                Branch.IsActive = Convert.ToInt32(dr["Is_Active"]);
 
-                //Set IsActive Flag
-                if (Branch.Is_Active == false)
-                {
-                    Branch.IsActive = 0;
-                }
-                else
-                {
-                    Branch.IsActive = 1;
-                }
-                //End               
                 
             }
 
