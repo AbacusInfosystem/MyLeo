@@ -11,6 +11,7 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
+using MyLeoRetailerInfo;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {

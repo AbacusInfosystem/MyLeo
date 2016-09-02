@@ -64,6 +64,7 @@ namespace MyLeoRetailerInfo.Vendor
 
         public string Ifsc_Code { get; set; }
 
+        public int IsActive { get; set; }
 
         public bool Is_Active { get; set; }
 

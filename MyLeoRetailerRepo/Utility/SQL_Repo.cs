@@ -375,6 +375,7 @@ namespace MyLeoRetailerRepo.Utility
 				query = query.Remove(query.Length - 2, 1);
 
 				query.Append("FROM " + query_Details.Table + " ");
+
 			}
 
 			if(query_Details.Input_Params.Count > 0)

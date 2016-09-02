@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alteration\AlterationInfo.cs" />
     <Compile Include="Branch\BranchInfo.cs" />
     <Compile Include="Brand\BrandInfo.cs" />
     <Compile Include="Category\CategoryInfo.cs" />
@@ -70,9 +71,7 @@
     <Compile Include="Size\SizeGroupInfo.cs" />
     <Compile Include="Vendor\VendorInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Alteration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

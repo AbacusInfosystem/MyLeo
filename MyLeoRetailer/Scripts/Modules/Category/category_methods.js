@@ -111,6 +111,8 @@ function Get_Category_By_Id(obj)
 	$("[name='Category.Category']").val($(obj).text());
 
 	$("[name='Category.Category_Id']").val($(obj).attr("data-identity"));
+
+
 }
 
 function Get_SubCategories(obj)

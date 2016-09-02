@@ -65,6 +65,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Size,
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
+            sp_Get_SizeGroup_By_Id,
 
             //Employee
             sp_Insert_Employee,
