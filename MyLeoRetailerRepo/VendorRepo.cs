@@ -143,6 +143,21 @@ namespace MyLeoRetailerRepo
             //sqlParams.Add(new SqlParameter("@Category_Id", vendor.Category_Id));
             //sqlParams.Add(new SqlParameter("@Sub_Category_Id", vendor.SubCategory_Id));
 
+            //Set Is_Active Flag
+
+            if (vendor.IsActive == 0)
+            {
+                vendor.Is_Active = false;
+            }
+            else
+            {
+                vendor.Is_Active = true;
+            }
+
+            //End
+
+            sqlParams.Add(new SqlParameter("@Is_Active", vendor.Is_Active));
+
             if (vendor.Vendor_Id == 0)
             {
                 sqlParams.Add(new SqlParameter("@Created_By", vendor.Created_By));
@@ -285,6 +300,8 @@ namespace MyLeoRetailerRepo
             Vendor.Vendor_CST_Effective_Date = Convert.ToDateTime(dr["CST_Effective_Date"]);
             Vendor.Vendor_Type = Convert.ToInt32(dr["Vendor_Type"]);
 
+            Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]);
+            Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
 
             Vendor.Created_By = Convert.ToInt32(dr["Created_By"]);
             Vendor.Created_Date = Convert.ToDateTime(dr["Created_Date"]);

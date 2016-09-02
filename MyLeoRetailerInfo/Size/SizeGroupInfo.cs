@@ -30,6 +30,10 @@ namespace MyLeoRetailerInfo.Size
 
         public string Size_Name { get; set; }
 
+        public int IsActive { get; set; }
+
+        public bool Is_Active { get; set; }
+
         public DateTime Created_Date
         {
             get;

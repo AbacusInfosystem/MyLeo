@@ -55,9 +55,22 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", vViewModel);
         }
 
-        public ActionResult Search()
+        public ActionResult Search(VendorViewModel vViewModel)
         {
-            return View();
+
+            try
+            {
+                if (TempData["vViewModel"] != null)
+                {
+                    vViewModel = (VendorViewModel)TempData["vViewModel"];
+                }
+            }
+            catch (Exception ex)
+            {
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+
+            return View("Search", vViewModel);
         }
 
         public JsonResult Get_Vendors(VendorViewModel vViewModel)
@@ -92,7 +105,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             catch (Exception ex)
             {
-                vViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
             return Json(JsonConvert.SerializeObject(vViewModel));
@@ -108,16 +121,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 vViewModel.Vendor.Vendor_Id = vRepo.Insert_Vendor(vViewModel.Vendor);
 
-                vViewModel.Friendly_Message.Add(MessageStore.Get("V01"));
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("V01"));
             }
             catch (Exception ex)
             {
-                vViewModel.Friendly_Message.Add(MessageStore.Get("SY01"));
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
             }
 
             //return Json(JsonConvert.SerializeObject(vViewModel));
 
-            TempData["vViewModel"] = vViewModel;
+            TempData["vViewModel"] = (VendorViewModel)vViewModel;
 
             return RedirectToAction("Search");
         }
@@ -141,7 +154,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             catch (Exception ex)
             {
-                vViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
                
             }
 
@@ -158,15 +171,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 vRepo.Update_Vendor(vViewModel.Vendor);
 
-                vViewModel.Friendly_Message.Add(MessageStore.Get("V02"));
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("V02"));
             }
             catch (Exception ex)
             {
-                vViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
             }
 
-            TempData["vViewModel"] = vViewModel;
+            TempData["vViewModel"] = (VendorViewModel)vViewModel;
 
             return RedirectToAction("Search");
         }

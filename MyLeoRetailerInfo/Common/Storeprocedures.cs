@@ -75,6 +75,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Size,
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
+            sp_Get_SizeGroup_By_Id,
 
             #region Employee
 
@@ -146,7 +147,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_SubCategory_Mapping,
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
-
+                  
             #region Role
 
             sp_Insert_Role,
@@ -155,6 +156,6 @@ namespace MyLeoRetailerInfo.Common
 
             #endregion
 
-        }
+		}
 	
 }

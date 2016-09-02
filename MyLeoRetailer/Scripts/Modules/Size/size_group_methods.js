@@ -86,7 +86,9 @@ function Save_SizeGroup()
 
 		        Size_Group_Name: $("[name='SizeGroup.Size_Group_Name']").val(),
 
-		        Size_Group_Id: $("[name='SizeGroup.Size_Group_Id']").val()
+		        Size_Group_Id: $("[name='SizeGroup.Size_Group_Id']").val(),
+
+		        IsActive: $("[name='SizeGroup.IsActive']").val()
 		    }
 		}
 
@@ -215,7 +217,7 @@ function Reset_SizeGroup() {
 }
 
 
-function Get_Size_Group_Name_By_Id(obj) {
+function Get_SizeGroup_By_Id(obj) {
 
     $("[name='Size_Group_List']").removeClass("active");
 
@@ -227,18 +229,36 @@ function Get_Size_Group_Name_By_Id(obj) {
     var Size_Group_Id = $(obj).attr("data-identity");
     $("[name='SizeGroup.Size_Group_Id']").val($(obj).attr("data-identity"));
 
-  
+    $('input[id*="txtSize"]').each(function () {
+        $(this).val('');
+    });
+
     $.ajax({
+        
+        url: "/Size/Get_SizeGroup_By_Id",
 
-        url: "/Size/Get_Size_Group_Name_By_Id",
-
-        data: { size_group_Id: Size_Group_Id, size_group_name: Size_Group_Name },
+        data: { size_group_Id: Size_Group_Id },
 
         type: 'POST',
 
         success: function (response) {
 
             var obj = $.parseJSON(response);
+
+            $("[name='SizeGroup.IsActive']").val(obj.SizeGroup.IsActive);
+
+            //Set IsActive Button Status
+
+            var fix = $("[name='SizeGroup.IsActive']").val();
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
+
+            //End
 
             $("#divSize").show();
           

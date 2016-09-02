@@ -61,7 +61,7 @@ namespace MyLeoRetailerRepo
 		{
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
-
+		
         //Added By Sushant 29/8/2016
 
         public List<CategoryInfo> drp_Get_Categories()
@@ -82,16 +82,16 @@ namespace MyLeoRetailerRepo
             return categorys;
         }
 
-        public CategoryInfo Get_Category_Values(DataRow dr)
-        {
-            CategoryInfo retVal = new CategoryInfo();
+        //public CategoryInfo Get_Category_Values(DataRow dr)
+        //{
+        //    CategoryInfo retVal = new CategoryInfo();
 
-            retVal.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+        //    retVal.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
-            retVal.Category = Convert.ToString(dr["Category"]);
+        //    retVal.Category = Convert.ToString(dr["Category"]);
 
-            return retVal;
-        }
+        //    return retVal;
+        //}
 
 
         public List<CategoryInfo> Get_Categorys()
@@ -107,12 +107,16 @@ namespace MyLeoRetailerRepo
             return categorys;
         }
 
-        //private CategoryInfo Get_Category_Values(DataRow dr)
-        //{
-        //    CategoryInfo category = new CategoryInfo();
+        private CategoryInfo Get_Category_Values(DataRow dr)
+        {
+            CategoryInfo category = new CategoryInfo();
 
-        //    category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+            category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
+            if (!dr.IsNull("Category"))
+                category.Category = Convert.ToString(dr["Category"]);
+            return category;
+        }
         //    if (!dr.IsNull("Category"))
         //        category.Category = Convert.ToString(dr["Category"]); 
         //    return category;
@@ -141,5 +145,5 @@ namespace MyLeoRetailerRepo
         
 
 
-    }
+	}
 }
