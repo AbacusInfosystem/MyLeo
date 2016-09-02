@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyLeoRetailerInfo.Alteration
 {
-   public class AlterationInfo
+    public class AlterationInfo
     {
         public AlterationInfo()
         {
@@ -37,7 +37,7 @@ namespace MyLeoRetailerInfo.Alteration
 
         public int Updated_By { get; set; }
 
-       // public string Branch_Name { get; set; }
+        // public string Branch_Name { get; set; }
 
     }
 }
