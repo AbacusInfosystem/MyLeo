@@ -10,9 +10,12 @@ namespace MyLeoRetailerInfo.Branch
     {
         public BranchInfo()
         {
-            NearLocationDetailsList = new List<Location_Details>();
+            //NearLocationDetailsList = new List<Location_Details>();
 
-            FarLocationDetailsList = new List<Location_Details>();
+            //FarLocationDetailsList = new List<Location_Details>();
+
+            LocationDetailsList = new List<Location_Details>();
+
         }
 
         public int Branch_ID { get; set; }
@@ -47,9 +50,11 @@ namespace MyLeoRetailerInfo.Branch
 
         public List<BranchInfo> BranchLocationList { get; set; }
 
-        public List<Location_Details> NearLocationDetailsList { get; set; }
+        //public List<Location_Details> NearLocationDetailsList { get; set; }
 
-        public List<Location_Details> FarLocationDetailsList { get; set; }
+        //public List<Location_Details> FarLocationDetailsList { get; set; }
+
+        public List<Location_Details> LocationDetailsList { get; set; }
 
         public int Branch_Location_ID { get; set; }
 
@@ -65,9 +70,22 @@ namespace MyLeoRetailerInfo.Branch
     {
         public int Branch_Location_ID { get; set; }
 
+        public int Branch_Id { get; set; }
+
         public int Branch_Location_Flag { get; set; }
 
         public int Branch_Location_Pincode { get; set; }
+
+        public DateTime Created_Date { get; set; }
+
+        public int Created_By { get; set; }
+
+        public DateTime Updated_Date { get; set; }
+
+        public int Updated_By { get; set; }
+
+        public bool Flag { get; set; }
+
     }
 
 }

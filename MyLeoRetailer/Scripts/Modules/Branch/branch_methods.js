@@ -104,16 +104,23 @@ function AddNearLocationDetails() {
     if (isEdit == "false" || isEdit == false) {
         var trrow = $("#tblNearDetails").find('tr').size() - 1;
 
-        var tr = "<tr id='tr" + trrow + "'>";
+        var near_trrow = $("#tblNearDetails").find('tr').size() - 1;
+        var far_trrow = $("#tblFarDetails").find('tr').size() - 1;
+        var index = near_trrow + far_trrow;
+
+        var tr = "<tr id='tr" + index + "'>";
                
         tr += "<td>";
-        tr += "<span id='trNear_Location_Pincode" + trrow + "'>" + pincode + "</span>";
-        tr += "<input type='hidden' id='hdnpincode" + trrow + "' name='Branch.NearLocationDetailsList[" + trrow + "].Branch_Location_Pincode' value='" + pincode + "'>";
+        tr += "<span id='trNear_Location_Pincode" + index + "'>" + pincode + "</span>";
+        tr += "<input type='hidden' id='hdnpincode" + index + "' name='Branch.LocationDetailsList[" + index + "].Branch_Location_Pincode' value='" + pincode + "'>";
+        tr += "<input type='hidden' id='hdnFlag" + index + "' name='Branch.LocationDetailsList[" + index + "].Flag' value='True'/>";
+        tr += "<input type='hidden' id='hdnNear_Branch_Location_Flag" + index + "' name='Branch.LocationDetailsList[" + index + "].Branch_Location_Flag' value='1'/>";
+        tr += "<input type='hidden' id='hdnBranch_Id" + index + "' name='Branch.LocationDetailsList[" + index + "].Branch_Id' value='" + $("#hdnBranch_Id").val() + "'/>";
         tr += "</td>";
 
         tr += "<td class='edit'>";
-        tr += "<button type='button' id='edit-near-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditNearLocationDetailsData(" + trrow + ")'><i class='fa fa-pencil' ></i></button>";
-        tr += "<button type='button' id='delete-near-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteNearLocationDetailsData(" + trrow + ")'><i class='fa fa-times' ></i></button>";
+        tr += "<button type='button' id='edit-near-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditNearLocationDetailsData(" + index + ")'><i class='fa fa-pencil' ></i></button>";
+        tr += "<button type='button' id='delete-near-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteNearLocationDetailsData(" + index + ")'><i class='fa fa-times' ></i></button>";
         tr += "</td>";
         tr += "</tr>";
 
@@ -151,8 +158,10 @@ function EditNearLocationDetailsData(rowId) {
 
 function DeleteNearLocationDetailsData(rowId) {
 
-    $("#tblNearDetails").find("[id='tr" + rowId + "']").remove();
-    ReArrangeNearDetailsData();
+    $("#tblNearDetails").find("[id='hdnFlag" + rowId + "']").val("False");
+    $("#tblNearDetails").find("[id='tr" + rowId + "']").hide();
+    //$("#tblNearDetails").find("[id='tr" + rowId + "']").remove();
+    //ReArrangeNearDetailsData();
 }
 
 function ReArrangeNearDetailsData() {
@@ -193,16 +202,23 @@ function AddFarLocationDetails() {
     if (isEdit == "false" || isEdit == false) {
         var trrow = $("#tblFarDetails").find('tr').size() - 1;
 
-        var tr = "<tr id='tr" + trrow + "'>";
+        var near_trrow = $("#tblNearDetails").find('tr').size() - 1;
+        var far_trrow = $("#tblFarDetails").find('tr').size() - 1;
+        var index = near_trrow + far_trrow;
+
+        var tr = "<tr id='tr" + index + "'>";
 
         tr += "<td>";
-        tr += "<span id='trFar_Location_Pincode" + trrow + "'>" + pincode + "</span>";
-        tr += "<input type='hidden' id='hdnpincode1" + trrow + "' name='Branch.FarLocationDetailsList[" + trrow + "].Branch_Location_Pincode' value='" + pincode + "'>";
+        tr += "<span id='trFar_Location_Pincode" + index + "'>" + pincode + "</span>";
+        tr += "<input type='hidden' id='hdnpincode1" + index + "' name='Branch.LocationDetailsList[" + index + "].Branch_Location_Pincode' value='" + pincode + "'>";
+        tr += "<input type='hidden' id='hdnFlag" + index + "' name='Branch.LocationDetailsList[" + index + "].Flag' value='True'/>";
+        tr += "<input type='hidden' id='hdnNear_Branch_Location_Flag" + index + "' name='Branch.LocationDetailsList[" + index + "].Branch_Location_Flag' value='2'/>";
+        tr += "<input type='hidden' id='hdnBranch_Id" + index + "' name='Branch.LocationDetailsList[" + index + "].Branch_Id' value='" + $("#hdnBranch_Id").val() + "'/>";
         tr += "</td>";
 
         tr += "<td class='edit'>";
-        tr += "<button type='button' id='edit-far-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditFarLocationDetailsData(" + trrow + ")'><i class='fa fa-pencil' ></i></button>";
-        tr += "<button type='button' id='delete-far-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteFarLocationDetailsData(" + trrow + ")'><i class='fa fa-times' ></i></button>";
+        tr += "<button type='button' id='edit-far-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditFarLocationDetailsData(" + index + ")'><i class='fa fa-pencil' ></i></button>";
+        tr += "<button type='button' id='delete-far-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteFarLocationDetailsData(" + index + ")'><i class='fa fa-times' ></i></button>";
         tr += "</td>";
         tr += "</tr>";
 
@@ -240,8 +256,10 @@ function EditFarLocationDetailsData(rowId) {
 
 function DeleteFarLocationDetailsData(rowId) {
 
-    $("#tblFarDetails").find("[id='tr" + rowId + "']").remove();
-    ResetFarLocationDetailsData();
+    $("#tblFarDetails").find("[id='hdnFlag" + rowId + "']").val("False");
+    $("#tblFarDetails").find("[id='tr" + rowId + "']").hide();
+    //$("#tblFarDetails").find("[id='tr" + rowId + "']").remove();
+    //ResetFarLocationDetailsData();
 }
 
 function ReArrangeFarDetailsData() {

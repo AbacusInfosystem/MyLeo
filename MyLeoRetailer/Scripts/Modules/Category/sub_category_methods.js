@@ -41,6 +41,11 @@ function Get_Sub_Categories()
 
 function Save_Sub_Category()
 {
+    var activeFlg = false;
+    if ($("[name='SubCategory.IsActive']").val() == 1) {
+        activeFlg = true;
+    }
+
 	var sViewModel =
 		{
 			SubCategory: {
@@ -49,7 +54,9 @@ function Save_Sub_Category()
 
 				Sub_Category_Id: $("[name='SubCategory.Sub_Category_Id']").val(),
 
-				Category_Id :$("[name='SubCategory.Category_Id']").val()
+				Category_Id: $("[name='SubCategory.Category_Id']").val(),
+
+				IsActive: activeFlg,
 			}
 		}
 
@@ -107,4 +114,32 @@ function Get_Sub_Category_By_Id(obj)
 	$("[name='SubCategory.Sub_Category']").val($(obj).text());
 
 	$("[name='SubCategory.Sub_Category_Id']").val($(obj).attr("data-identity"));
+
+    //
+	var Sub_cate_Id = $("[name='SubCategory.Sub_Category_Id']").val();
+
+	$.ajax({
+
+	    url: "/category/get-sub-category-by-id",
+
+	    data: { Sub_category_Id: Sub_cate_Id },
+
+	    type: 'POST',
+
+	    success: function (response) {
+
+	        var obj = $.parseJSON(response);
+
+	        if (obj.SubCategory.IsActive == true) {
+	            $("[name='SubCategory.IsActive']").val(1);
+	            document.getElementById('SubCateFlag').checked = true;
+	        }
+	        else {
+	            $("[name='SubCategory.IsActive']").val(0);
+	            document.getElementById('SubCateFlag').checked = false;
+	        }
+
+	    }
+	});
+    //
 }

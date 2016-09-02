@@ -50,6 +50,8 @@ namespace MyLeoRetailerRepo
 
 			sqlParam.Add(new SqlParameter("@Sub_Category", sub_Category.Sub_Category));
 
+            sqlParam.Add(new SqlParameter("@IsActive", sub_Category.IsActive));
+
 			sqlParam.Add(new SqlParameter("@Updated_Date", sub_Category.Updated_Date));
 
 			sqlParam.Add(new SqlParameter("@Updated_By", sub_Category.Updated_By));
@@ -61,5 +63,26 @@ namespace MyLeoRetailerRepo
 		{
 			return sqlHelper.Get_Table_With_Where(query_Details);
 		}
+
+        public SubCategoryInfo Get_Sub_Category_By_Id(int Sub_category_Id)
+        {
+            SubCategoryInfo subcategoryInfo = new SubCategoryInfo();
+
+            List<SqlParameter> sqlParamList = new List<SqlParameter>();
+            sqlParamList.Add(new SqlParameter("@Sub_Category_Id", Sub_category_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Sub_Category_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!dr.IsNull("Sub_Category"))
+                    subcategoryInfo.Category = Convert.ToString(dr["Sub_Category"]);
+
+                subcategoryInfo.IsActive = Convert.ToBoolean(dr["IsActive"]);
+            }
+            return subcategoryInfo;
+
+        } 
+
 	}
 }

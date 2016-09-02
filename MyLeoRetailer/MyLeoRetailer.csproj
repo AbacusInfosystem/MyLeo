@@ -975,10 +975,16 @@
     <Content Include="Scripts\Modules\Category\category_validation.js" />
     <Content Include="Scripts\Modules\Category\sub_category_events.js" />
     <Content Include="Scripts\Modules\Category\sub_category_methods.js" />
+    <Content Include="Scripts\Modules\Category\sub_category_validation.js" />
     <Content Include="Scripts\Modules\Color\color_events.js" />
     <Content Include="Scripts\Modules\Color\color_methods.js" />
     <Content Include="Scripts\Modules\Color\color_validation.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\Customer\customer_events.js" />
+    <Content Include="Scripts\Modules\Customer\customer_methods.js" />
+    <Content Include="Scripts\Modules\Customer\customer_validation.js" />
+    <Content Include="Scripts\Modules\Customer\search_customer_events.js" />
+    <Content Include="Scripts\Modules\Customer\search_customer_methods.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_event.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_methode.js" />
     <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />

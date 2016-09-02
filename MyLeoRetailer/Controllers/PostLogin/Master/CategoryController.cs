@@ -17,8 +17,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class CategoryController:BaseController
     {
-        //
-        // GET: /Category/
+        CategoryRepo cRepo;
+        SubCategoryRepo sRepo;
+
+        public CategoryController()
+        {
+            cRepo = new CategoryRepo();
+            sRepo = new SubCategoryRepo();
+        }
 
 		public ActionResult Index()
         {
@@ -27,7 +33,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Insert_Category(CategoryViewModel cViewModel)
 		{
-			CategoryRepo cRepo = new CategoryRepo();
+            //CategoryRepo cRepo = new CategoryRepo();
 
 			try
 			{
@@ -47,7 +53,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Update_Category(CategoryViewModel cViewModel)
 		{
-			CategoryRepo cRepo = new CategoryRepo();
+            //CategoryRepo cRepo = new CategoryRepo();
 
 			try
 			{
@@ -67,7 +73,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Get_Catgories(CategoryViewModel cViewModel)
 		{
-			CategoryRepo cRepo = new CategoryRepo();
+            //CategoryRepo cRepo = new CategoryRepo();
 
 			CommonManager cMan = new CommonManager();
 
@@ -123,7 +129,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Insert_Sub_Category(SubCategoryViewModel sViewModel)
 		{
-			SubCategoryRepo sRepo = new SubCategoryRepo();
+            //SubCategoryRepo sRepo = new SubCategoryRepo();
 
 			try
 			{
@@ -143,7 +149,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Update_Sub_Category(SubCategoryViewModel sViewModel)
 		{
-			SubCategoryRepo sRepo = new SubCategoryRepo();
+            //SubCategoryRepo sRepo = new SubCategoryRepo();
 
 			try
 			{
@@ -163,7 +169,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Get_Sub_Catgories(SubCategoryViewModel sViewModel)
 		{
-			SubCategoryRepo cRepo = new SubCategoryRepo();
+            SubCategoryRepo cRepo = new SubCategoryRepo();
 
 			CommonManager cMan = new CommonManager();
 
@@ -198,6 +204,36 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 			return Json(JsonConvert.SerializeObject(sViewModel));
 		}
+
+        public JsonResult Get_Category_By_Id(int Category_Id)
+        {
+            CategoryViewModel cViewModel = new CategoryViewModel();
+            try
+            {
+                cViewModel.Category = cRepo.Get_Category_By_Id(Category_Id);
+            }
+            catch (Exception ex)
+            {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+
+            return Json(JsonConvert.SerializeObject(cViewModel));
+        }
+
+        public JsonResult Get_Sub_Category_By_Id(int Sub_category_Id)
+        {
+            SubCategoryViewModel sViewModel = new SubCategoryViewModel();
+            try
+            {
+                sViewModel.SubCategory = sRepo.Get_Sub_Category_By_Id(Sub_category_Id);
+            }
+            catch (Exception ex)
+            {
+                sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+
+            return Json(JsonConvert.SerializeObject(sViewModel));
+        }
 
     }
 }
