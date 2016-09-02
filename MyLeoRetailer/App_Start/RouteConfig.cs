@@ -65,6 +65,25 @@ namespace MyLeoRetailer
 
             #endregion
 
+            #region Employee
+
+            routes.MapRoute(
+            name: "employee-1",
+            url: "employee/check-user-name/{user_Name}",
+            defaults: new { controller = "Employee", action = "Check_Existing_User_Name", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
+
+            #region Role
+
+            routes.MapRoute(
+            name: "Role-1",
+            url: "role/save-role",
+            defaults: new { controller = "Role", action = "Save_Role", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
 
             routes.MapRoute(
                 name: "Default",
