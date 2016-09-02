@@ -113,10 +113,10 @@ namespace MyLeoRetailerRepo
 
         //    category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
-            if (!dr.IsNull("Category"))
-                category.Category = Convert.ToString(dr["Category"]); 
-            return category;
-        }
+        //    if (!dr.IsNull("Category"))
+        //        category.Category = Convert.ToString(dr["Category"]); 
+        //    return category;
+        //}
 
         public CategoryInfo Get_Category_By_Id(int Category_Id)
         {

@@ -18,7 +18,6 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Category_By_Id,
 
             #endregion
-            Get_Category_Sp,
 
             #region SubCategory
 
