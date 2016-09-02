@@ -14,10 +14,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class TaxController : BaseController
     {
-        
-        public ActionResult Index()
+
+        public ActionResult Index(TaxViewModel tViewModel)
         {
-            return View();
+            return View("Index", tViewModel);
         }
 
         public JsonResult Insert_Tax(TaxViewModel tViewModel)
@@ -71,6 +71,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             string dataOperator = "";
 
             Pagination_Info pager = new Pagination_Info();
+
+            //int Is_Active = 1;
 
             try
             {

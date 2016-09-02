@@ -4,6 +4,8 @@ $(function () {
 
     Get_Alterations();
 
+   
+
     $(document).on("click", "[name='Alteration_List']", function () {
 
         Get_Alteration_By_Id(this);
@@ -11,9 +13,10 @@ $(function () {
     });
 
     $(document).on('change', '[name="Alteration_List"]', function (event) {
-        alert();
+       
         if ($(this).prop('checked')) {
             $("#hdnAlteration_ID").val(this.value);
+            $("#btnEditAlteration").show();
         }
     });
 

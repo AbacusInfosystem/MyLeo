@@ -49,11 +49,12 @@
 
                         </div>
 
-                        <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-7" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
-                                <button class="btn btn-success active" href="@Url.Action("Index", "VendorContact")">Create</button>
-                                <button class="btn btn-danger active" id="btnVendorContact">Edit</button>
+                                
+                                <button type="button" class="btn btn-success active" onclick="location.href='@Url.Action("Index", "VendorContact")'">Create</button>
+                                <button class="btn btn-danger active" style="display:none;" id="btnVendorContact">Edit</button>
                             </div>
 
                         </div>
@@ -70,7 +71,8 @@
 
         </div>
        
-        <div class="col-md-12" style="padding: 0px;" id="divPager">
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divVendorContactPager">
+
 
         </div>
 

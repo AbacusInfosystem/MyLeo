@@ -49,7 +49,7 @@
                 <div class="col-md-12" style="padding: 0px;text-align:center;" id="divTaxPager">
 
 				</div>
-            </div>     
+            </div>
 
         </div>
 
@@ -68,18 +68,37 @@
                         <input type="text" class="form-control" placeholder="Enter tax value (in percentage)." name="Tax.Tax_Value" />
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 5px; float: right;">
+                    @*<div class="form-group" style="margin-bottom: 5px; float: right;">
+                        @*<label>Set Active:</label
                         <label class="switch">
                             <input checked="" name="Tax.IsActive" value="0" type="checkbox" id="Flag">
                             <span></span>
                         </label>
+                    </div>*@
+                    <div class="form-group">
+                        <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>
+                        </div>
+                    <div class="form-group" style="margin-bottom: 5px; float: right;">
+                        <label class="switch">
+                                @if (Model.Tax.IsActive == 0)
+                                {
+                                    <input value="@Model.Tax.IsActive" name="Tax.IsActive" type="checkbox" id="Flag">
+                                }
+                                else
+                                {
+                                    <input value="@Model.Tax.IsActive" name="Tax.IsActive" checked="checked" type="checkbox" id="Flag">
+                                }
+                                @*<input checked="" id="Flag" value="0" type="checkbox">*@
+                            <span></span>
+                        </label>
+                    </div>
                     </div>
 
                     <div style="padding-left: 0px; padding-top: 0px; padding-bottom: 20px; margin-bottom: 15px;">
                         <div class="btn-group">
                             <button type="button" class="btn btn-success active" id="btnSaveTax">Save</button>
                             <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "Tax")'">Cancel</button>
-                            @*<button class="btn btn-danger active">Cancel</button>*@
                         </div>
                     </div>
 

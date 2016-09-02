@@ -58,5 +58,6 @@ namespace MyLeoRetailerInfo.Size
             set;
         }
 
+
     }
 }

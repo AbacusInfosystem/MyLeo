@@ -21,7 +21,9 @@ function Save_Gift_Voucher() {
 
 		        Bank_Name: $("[name='GiftVoucher.Bank_Name']").val(),
 
-		        Credit_Card_No: $("[name='GiftVoucher.Credit_Card_No']").val()
+		        Credit_Card_No: $("[name='GiftVoucher.Credit_Card_No']").val(),
+
+		        
 		    }
 		}
 
@@ -77,5 +79,8 @@ function Reset_Gift_Voucher() {
     $("[name='GiftVoucher.Bank_Name']").val("");
 
     $("[name='GiftVoucher.Credit_Card_No']").val("");
+
+   
+
    
 }

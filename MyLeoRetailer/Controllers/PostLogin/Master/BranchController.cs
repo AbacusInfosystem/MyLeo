@@ -61,9 +61,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {  
             bViewModel.Branch = bRepo.Get_Branch_By_Id(bViewModel.Branch.Branch_ID);
 
-            bViewModel.Branch.NearLocationDetailsList = bRepo.Get_Near_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+            //bViewModel.Branch.NearLocationDetailsList = bRepo.Get_Near_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
 
-            bViewModel.Branch.FarLocationDetailsList = bRepo.Get_Far_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+            //bViewModel.Branch.FarLocationDetailsList = bRepo.Get_Far_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+
+            bViewModel.Branch.LocationDetailsList = bRepo.Get_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
 
             return View("Index", bViewModel);
         }
@@ -76,9 +78,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 bViewModel.Branch.Branch_ID = bRepo.Insert_Branch(bViewModel.Branch);                
                 
-                bRepo.Insert_Near_Branch_Location(bViewModel.Branch);
+                //bRepo.Insert_Near_Branch_Location(bViewModel.Branch);
 
-                bRepo.Insert_Far_Branch_Location(bViewModel.Branch);
+                //bRepo.Insert_Far_Branch_Location(bViewModel.Branch);
+
+                bViewModel.Branch.LocationDetailsList.ForEach(a => a.Branch_Id = bViewModel.Branch.Branch_ID);
+                
+                foreach (var item in bViewModel.Branch.LocationDetailsList)
+                {
+                    Set_Date_Session(item);
+                }
+
+                bRepo.Save_Branch_Location(bViewModel.Branch);
 
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("BRNCH01"));                
             }
@@ -101,9 +112,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 bRepo.Update_Branch(bViewModel.Branch);
 
-                bRepo.Update_Near_Branch_Location(bViewModel.Branch);
+                //bRepo.Update_Near_Branch_Location(bViewModel.Branch);
 
-                bRepo.Update_Far_Branch_Location(bViewModel.Branch);
+                //bRepo.Update_Far_Branch_Location(bViewModel.Branch);
+
+                bViewModel.Branch.LocationDetailsList.ForEach(a => a.Branch_Id = bViewModel.Branch.Branch_ID);
+
+                foreach (var item in bViewModel.Branch.LocationDetailsList)
+                {
+                    Set_Date_Session(item);
+                }
+
+                bRepo.Save_Branch_Location(bViewModel.Branch);
 
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("BRNCH02"));
 

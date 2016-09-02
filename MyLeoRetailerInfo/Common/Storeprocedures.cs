@@ -8,16 +8,26 @@ namespace MyLeoRetailerInfo.Common
 {
 		public enum Storeprocedures
 		{
+            #region Category
+
+            Get_Category_Sp,
             //Category
             sp_Get_Category,
 			sp_Insert_Category,
 			sp_Update_Category,
-            Get_Category_Sp,
+            sp_Get_Category_By_Id,
+
+            #endregion
+
+            #region SubCategory
 
             //SubCategory
             sp_drp_Get_Sub_Categories,
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
+            sp_Get_Sub_Category_By_Id,
+
+            #endregion
 
             #region brand
 
@@ -84,14 +94,19 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Gift_Voucher,
             sp_Get_Gift_Voucher_By_Id,
 
-            //Branch
+            #region Branch
+
             sp_Insert_Branch,
             sp_Update_Branch,
             sp_Get_Branch_By_Id,
             sp_Insert_Branch_Location,
-            sp_Get_Far_Branch_Location_By_Id,
-            sp_Get_Near_Branch_Location_By_Id,
+            //sp_Get_Far_Branch_Location_By_Id,
+            //sp_Get_Near_Branch_Location_By_Id,
             sp_Update_Branch_Location,
+            sp_Get_Branch_Location_By_Id,
+            sp_Delete_Branch_Location_By_Id,
+
+            #endregion
 
             //Login
             Get_User_Data_By_Token_sp,
