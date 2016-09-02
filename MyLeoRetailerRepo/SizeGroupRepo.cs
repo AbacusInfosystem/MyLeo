@@ -48,6 +48,21 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Size_Group_Name", sizegroup.Size_Group_Name));
 
+            //Set Is_Active Flag
+
+            if (sizegroup.IsActive == 0)
+            {
+                sizegroup.Is_Active = false;
+            }
+            else
+            {
+                sizegroup.Is_Active = true;
+            }
+
+            //End
+
+            sqlParam.Add(new SqlParameter("@Is_Active", sizegroup.Is_Active));
+
             sqlParam.Add(new SqlParameter("@Updated_Date", sizegroup.Updated_Date));
 
             sqlParam.Add(new SqlParameter("@Updated_By", sizegroup.Updated_By));
@@ -58,6 +73,29 @@ namespace MyLeoRetailerRepo
         public DataTable Get_SizeGroups(QueryInfo query_Details)
         {
             return sqlHelper.Get_Table_With_Where(query_Details);
+        }
+
+        public int Get_SizeGroup_By_Id(int size_group_Id)
+        {
+            int isactive = 0;
+
+            DataTable dt = null;
+
+            List<SqlParameter> sqlParamList = new List<SqlParameter>();
+
+            sqlParamList.Add(new SqlParameter("@Size_Group_Id", size_group_Id));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_SizeGroup_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!dr.IsNull("Is_Active"))
+                {
+                    isactive = Convert.ToInt32(dr["Is_Active"]);
+                }
+            }
+            return isactive;
+
         }
 
 
@@ -182,7 +220,13 @@ namespace MyLeoRetailerRepo
             SizeGroup.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
 
             if (!dr.IsNull("Size_Group_Name"))
-                SizeGroup.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+            SizeGroup.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+            SizeGroup.IsActive = Convert.ToInt32(dr["Is_Active"]);
+
+            SizeGroup.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+
             return SizeGroup;
         }
     }

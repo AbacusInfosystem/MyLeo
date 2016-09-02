@@ -217,6 +217,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
@@ -1071,6 +1072,7 @@
     <Content Include="Scripts\Modules\Category\category_validation.js" />
     <Content Include="Scripts\Modules\Category\sub_category_events.js" />
     <Content Include="Scripts\Modules\Category\sub_category_methods.js" />
+    <Content Include="Scripts\Modules\Category\sub_category_validation.js" />
     <Content Include="Scripts\Modules\Color\color_events.js" />
     <Content Include="Scripts\Modules\Color\color_methods.js" />
     <Content Include="Scripts\Modules\Color\color_validation.js" />
@@ -1096,6 +1098,8 @@
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
+    <Content Include="Scripts\Modules\Role\role-event.js" />
+    <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Size\size_group_events.js" />
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />

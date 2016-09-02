@@ -14,6 +14,7 @@ $(function () {
         alert();
         if ($(this).prop('checked')) {
             $("#hdnVendorContact_Id").val(this.value);
+            $("#btnVendorContact").show();
         }
     });
 

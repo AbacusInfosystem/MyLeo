@@ -58,12 +58,12 @@
 
                         </div>
 
-                        <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-7" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
-                                @*<button role="button" class="btn btn-success active" value="Create" id="btnCreateAlteration">Create</button>*@
-                                <button class="btn btn-success active" id="btnCreateAlteration" href="@Url.Action("Index", "Alteration")">Create</button>
-                                <button class="btn btn-danger active" role="button" value="Edit" id="btnEditAlteration">Edit</button>
+                                <button type="button" class="btn btn-success active" onclick="location.href='@Url.Action("Index", "Alteration")'">Create</button>
+                                
+                                <button class="btn btn-danger active" role="button" style="display:none;"  value="Edit" id="btnEditAlteration">Edit</button>
                             </div>
 
                         </div>
@@ -81,7 +81,7 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPager">
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divAlterationPager">
 
         </div>
 

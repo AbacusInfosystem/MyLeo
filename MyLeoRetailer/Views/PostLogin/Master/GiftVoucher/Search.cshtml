@@ -54,8 +54,9 @@
                         <div class="col-md-7" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
-                                <button class="btn btn-success active" type="button" href="@Url.Action("Index", "GiftVoucher")">Create</button>
-                                <button class="btn btn-danger active" type="button" id="btnGiftVoucher">Edit</button>
+                                
+                                <button type="button" class="btn btn-success active" onclick="location.href='@Url.Action("Index", "GiftVoucher")'">Create</button>
+                                <button class="btn btn-danger active" type="button" style="display:none;" id="btnGiftVoucher">Edit</button>
                             </div>
 
                         </div>
@@ -72,7 +73,7 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divPager">
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divGiftVoucherPager">
 
         </div>
 

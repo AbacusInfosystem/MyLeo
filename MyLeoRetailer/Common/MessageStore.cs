@@ -126,6 +126,18 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+
+            #region Vendor
+
+            FriendlyMessage V01 = new FriendlyMessage("V01", MessageType.Success, "Vendor Added successfully.");
+            hash.Add("V01", V01);
+
+            FriendlyMessage V02 = new FriendlyMessage("V02", MessageType.Success, "Vendor Updated successfully.");
+            hash.Add("V02", V02);
+
+            #endregion
+
+
             #region Employee
             FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
             hash.Add("EMP01", EMP01);

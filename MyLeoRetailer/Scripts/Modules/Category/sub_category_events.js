@@ -5,7 +5,10 @@ $(function ()
 
 	$("#btnSaveSubCategory").click(function ()
 	{
-		Save_Sub_Category();
+	    if ($("#frmSubCategory").valid()) {
+	        Save_Sub_Category();
+	    }
+		
 	});
 
 	$(document).on("click", "[name='Sub_Category_List']", function ()
@@ -13,7 +16,7 @@ $(function ()
 		Get_Sub_Category_By_Id(this);
 	});
 
-	$("[name='Filter.Size_Name']").focusout(function ()
+	$("[name='Filter.Sub_Category']").focusout(function ()
 	{
 		Get_Sub_Categories();
 	});

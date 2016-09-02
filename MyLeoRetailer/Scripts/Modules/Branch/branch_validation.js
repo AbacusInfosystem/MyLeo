@@ -16,7 +16,7 @@
             "Branch.Branch_Pincode": {
                 digits: true
             },
-            
+
         },
         messages: {
 
