@@ -105,6 +105,15 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+            #region Brand
+
+            FriendlyMessage BRND01 = new FriendlyMessage("BRND01", MessageType.Success, "Brand Added successfully.");
+            hash.Add("BRND01", BRND01);
+
+            FriendlyMessage BRND02 = new FriendlyMessage("BRND02", MessageType.Success, "Brand Updated successfully.");
+            hash.Add("BRND02", BRND02);
+
+            #endregion
 
 
             #region SizeGroup

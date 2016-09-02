@@ -2,8 +2,6 @@
 $(document).ready(function () {
     Get_Brands();
 
-    InitializeAutoComplete($("#txtBrand_Name"));
-
     $("#btnSaveBrand").click(function () {
         if ($("#frmBrand").valid()) {
             Save_Brand();

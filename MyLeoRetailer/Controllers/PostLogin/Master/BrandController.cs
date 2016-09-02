@@ -117,27 +117,5 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(bViewModel));
         }
 
-        public JsonResult Get_Brands_By_Name_Autocomplete(string brand_Name)
-        {
-
-            BranchViewModel bViewModel = new BranchViewModel();
-            List<AutocompleteInfo> brandList = new List<AutocompleteInfo>();
-
-            try
-            {
-
-                brandList = bRepo.Get_Brands_By_Name_Autocomplete(brand_Name);
-
-            }
-            catch (Exception ex)
-            {
-                bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
-                //Logger.Error("Brand Controller - Get_Brands_By_Name_Autocomplete: " + ex.ToString());
-            }
-
-            return Json(brandList, JsonRequestBehavior.AllowGet);
-        }
-
     }
 }

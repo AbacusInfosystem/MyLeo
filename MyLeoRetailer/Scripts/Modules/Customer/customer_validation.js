@@ -10,31 +10,31 @@
             },
 
             "Customer.Mobile": {
-                number: true
+                digits: true
             },
 
             "Customer.Customer_Billing_Pincode": {
-                number: true,
+                digits: true,
             },
 
             "Customer.Customer_Shipping_Pincode": {
-                number: true,
+                digits: true,
             },
 
             "Customer.Customer_Mobile1": {
-                number: true,
+                digits: true,
             },
 
             "Customer.Customer_Mobile2": {
-                number: true,
+                digits: true,
             },
 
             "Customer.Customer_Landline1": {
-                number: true,
+                digits: true,
             },
 
             "Customer.Customer_Landline2": {
-                number: true,
+                digits: true,
             },
 
             "Customer.Customer_Email1": {
