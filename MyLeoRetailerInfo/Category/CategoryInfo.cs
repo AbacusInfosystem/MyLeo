@@ -45,5 +45,7 @@ namespace MyLeoRetailerInfo.Category
 			set;
 		}
 
+        public bool IsActive { get; set; }
+
 	}
 }

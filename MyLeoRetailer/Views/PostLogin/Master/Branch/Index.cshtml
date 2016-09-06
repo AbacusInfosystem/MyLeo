@@ -58,9 +58,9 @@
                     </div>
                     
                     <div class="form-group">
-
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch name.</span>
                         <input type="text" class="form-control" placeholder="Enter Branch name." name="Branch.Branch_Name" value="@Model.Branch.Branch_Name" />
-                        <input type="hidden" name="Branch.Branch_ID" value="@Model.Branch.Branch_ID" />
+                        <input type="hidden" id="hdnBranch_Id" name="Branch.Branch_ID" value="@Model.Branch.Branch_ID" />
                         <input type="hidden" name="Branch.IsActive" value="@Model.Branch.IsActive" />
                     </div>
 
@@ -70,10 +70,12 @@
                     <h4 style="margin-top: 15px;">Communication detail.</h4>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
                         <input type="text" class="form-control" placeholder="Enter landline number 1." name="Branch.Branch_Landline1" value="@Model.Branch.Branch_Landline1" maxlength="12" />
                     </div>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
                         <input type="text" class="form-control" placeholder="Enter landline number 2." name="Branch.Branch_Landline2" value="@Model.Branch.Branch_Landline2" maxlength="12" />
                     </div>
                 </div>
@@ -86,29 +88,35 @@
                     <h4 style="margin-top: 0px;">Branch address.</h4>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Address.</span>
                         <textarea class="form-control" rows="5" placeholder="Enter address." name="Branch.Branch_Address">@Model.Branch.Branch_Address</textarea>
                     </div>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">City.</span>
                         <input type="text" class="form-control" placeholder="Enter city." name="Branch.Branch_City" value="@Model.Branch.Branch_City" />
                     </div>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">State.</span>
                         <input type="text" class="form-control" placeholder="Enter state." name="Branch.Branch_State" value="@Model.Branch.Branch_State" />                        
                     </div>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Country.</span>
                         <input type="text" class="form-control" placeholder="Enter country." name="Branch.Branch_Country" value="@Model.Branch.Branch_Country" />
                     </div>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Pincode.</span>
                         <input type="text" class="form-control" placeholder="Enter pincode." name="Branch.Branch_Pincode" value="@(Model.Branch.Branch_Pincode == 0 ? "" : Model.Branch.Branch_Pincode.ToString())" maxlength="6" />
                     </div>
 
                 </div>
 
             </div>
-
+        @{
+            var j = 0;
             <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
 
                 <div class="block">
@@ -117,6 +125,7 @@
 
                     <div class="col-md-10">
                         <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Pincode.</span>
                             <input type="text" class="form-control" placeholder="Enter pincode." id="txtNear_Location_Pincode" name="Branch.Near_Branch_Location_Pincode" value="@(Model.Branch.Near_Branch_Location_Pincode == 0 ? "" : Model.Branch.Near_Branch_Location_Pincode.ToString())" maxlength="6" />
                         </div>
                     </div>
@@ -128,7 +137,7 @@
                     </div>
 
                     <br />
-
+                   
                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
                         <input type="hidden" id="hdnIsEditNearDetails" value="false" />
                         <input type="hidden" id="hdnRowIdspecific" value="0" />
@@ -140,17 +149,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model.Branch.NearLocationDetailsList != null && Model.Branch.NearLocationDetailsList.Count() > 0)
+                                @if (Model.Branch.LocationDetailsList != null && Model.Branch.LocationDetailsList.Count() > 0)
                                 {
                                     int i = 0;
-                                    foreach (var itm in Model.Branch.NearLocationDetailsList)
+                                    foreach (var itm in Model.Branch.LocationDetailsList)
                                     {
-                                        <tr id="tr@(i)">
+                                        if (itm.Branch_Location_Flag == 1)
+                                        {
+                                            <tr id="tr@(i)">
                                             <td>
                                                 <span id="trNear_Location_Pincode@(i)"> @itm.Branch_Location_Pincode</span>
-                                                <input type="hidden" id="hdnpincode@(i)" name="Branch.NearLocationDetailsList[@i].Branch_Location_Pincode" value="@itm.Branch_Location_Pincode">
-                                                <input type="hidden" id="hdnNear_Branch_Location_ID@(i)" name="Branch.NearLocationDetailsList[@i].Branch_Location_ID" value="@itm.Branch_Location_ID">
-                                                <input type="hidden" id="hdnNear_Branch_Location_Flag@(i)" name="Branch.NearLocationDetailsList[@i].Branch_Location_Flag" value="@itm.Branch_Location_Flag">
+                                                <input type="hidden" id="hdnpincode@(i)" name="Branch.LocationDetailsList[@i].Branch_Location_Pincode" value="@itm.Branch_Location_Pincode">
+                                                <input type="hidden" id="hdnNear_Branch_Location_ID@(i)" name="Branch.LocationDetailsList[@i].Branch_Location_ID" value="@itm.Branch_Location_ID">
+                                                <input type="hidden" id="hdnFlag@(i)" name="Branch.LocationDetailsList[@i].Flag" value="@itm.Flag.ToString()">
+                                                <input type="hidden" id="hdnNear_Branch_Location_Flag@(i)" name="Branch.LocationDetailsList[@i].Branch_Location_Flag" value="@itm.Branch_Location_Flag">
+                                                <input type="hidden" id="hdnBranch_Id@(i)" name="Branch.LocationDetailsList[@i].Branch_Id" value="@Model.Branch.Branch_ID">
                                             </td>
                                            
                                             <td>
@@ -159,7 +172,9 @@
                                             </td>
                                         </tr>
                                         i = i + 1;
+                                        }
                                     }
+                                    j = i;
                                 }
                             </tbody>
                         </table>
@@ -177,6 +192,7 @@
 
                     <div class="col-md-10">
                         <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Pincode.</span>
                             <input type="text" class="form-control" placeholder="Enter pincode." id="txtFar_Location_Pincode" name="Branch.Far_Branch_Location_Pincode" value="@(Model.Branch.Far_Branch_Location_Pincode == 0 ? "" : Model.Branch.Far_Branch_Location_Pincode.ToString())" maxlength="6" />
                         </div>
                     </div>
@@ -200,18 +216,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model.Branch.FarLocationDetailsList != null && Model.Branch.FarLocationDetailsList.Count() > 0)
+                                @if (Model.Branch.LocationDetailsList != null && Model.Branch.LocationDetailsList.Count() > 0)
                                 {
-                                    int j = 0;
-                                    foreach (var itm in Model.Branch.FarLocationDetailsList)
+                                    
+                                    foreach (var itm in Model.Branch.LocationDetailsList)
                                     {
-                                        <tr id="tr@(j)">
-                                            <td>
+                                        if (itm.Branch_Location_Flag == 2)
+                                        {
+                                            <tr id="tr@(j)">
+                                            @*<td>
                                                 <span id="trFar_Location_Pincode@(j)"> @itm.Branch_Location_Pincode</span>
                                                 <input type="hidden" id="hdnpincode1@(j)" name="Branch.FarLocationDetailsList[@j].Branch_Location_Pincode" value="@itm.Branch_Location_Pincode">
                                                 <input type="hidden" id="hdnFar_Branch_Location_ID@(j)" name="Branch.FarLocationDetailsList[@j].Branch_Location_ID" value="@itm.Branch_Location_ID">
                                                 <input type="hidden" id="hdnFar_Branch_Location_Flag@(j)" name="Branch.FarLocationDetailsList[@j].Branch_Location_Flag" value="@itm.Branch_Location_Flag">
-                                            </td>
+                                            </td>*@
+                                                <td>
+                                                    <span id="trNear_Location_Pincode@(j)"> @itm.Branch_Location_Pincode</span>
+                                                    <input type="hidden" id="hdnpincode@(j)" name="Branch.LocationDetailsList[@j].Branch_Location_Pincode" value="@itm.Branch_Location_Pincode">
+                                                    <input type="hidden" id="hdnNear_Branch_Location_ID@(j)" name="Branch.LocationDetailsList[@j].Branch_Location_ID" value="@itm.Branch_Location_ID">
+                                                    <input type="hidden" id="hdnFlag@(j)" name="Branch.LocationDetailsList[@j].Flag" value="@itm.Flag.ToString()">
+                                                    <input type="hidden" id="hdnNear_Branch_Location_Flag@(j)" name="Branch.LocationDetailsList[@j].Branch_Location_Flag" value="@itm.Branch_Location_Flag">
+                                                    <input type="hidden" id="hdnBranch_Id@(j)" name="Branch.LocationDetailsList[@j].Branch_Id" value="@Model.Branch.Branch_ID">
+                                                </td>
 
                                             <td>
                                                 <button type="button" id="edit-far-details" class="btn btn-box-tool btn-tel-edit" onclick="javascript:EditFarLocationDetailsData(@j)"><i class='fa fa-pencil'></i></button>
@@ -219,6 +245,7 @@
                                             </td>
                                         </tr>
                                         j = j + 1;
+                                        }
                                     }
                                 }
                             </tbody>
@@ -228,12 +255,12 @@
                 </div>
 
             </div>
-
+        }
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-success active" id="btnSaveBranch">Save</button>
-                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "Branch")'">Cancel</button>
+                    <button type="reset" class="btn btn-danger active">Cancel</button>
                 </div>
             </div>
 

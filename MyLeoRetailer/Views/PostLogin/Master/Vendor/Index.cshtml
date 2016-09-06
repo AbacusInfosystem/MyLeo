@@ -149,15 +149,15 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="txtVendor_Phone1" style="color: #333" class="">Phone1</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1" placeholder="Enter Phone1" />
+                                        <label for="txtVendor_Phone1" style="color: #333" class="">Phone1</label>   
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1" maxlength="12" placeholder="Enter Phone1" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Phone2" style="color: #333" class="">Phone2</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone2" id="txtVendor_Phone2" value="@Model.Vendor.Vendor_Phone2" placeholder="Enter Phone2" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone2" id="txtVendor_Phone2" value="@Model.Vendor.Vendor_Phone2" maxlength="12" placeholder="Enter Phone2" />
                                     </div>
                                 </div>
 
@@ -693,33 +693,23 @@
 
                         </div>
 
-                        @*<div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            @if (Model.Vendor.Is_Active == false)
-                            {
-                                            <label class="">
-                                                <input type="checkbox" class="chkstatus" />
-                                                &nbsp;&nbsp;&nbsp;&nbsp; Active
-                                            </label>
-                                            }
-                            else
-                            {
-                                <label class="">
-                                    <input type="checkbox" checked="checked" class="chkstatus" />
-                                    &nbsp;&nbsp;&nbsp;&nbsp; Active
-                                </label>
-                            }
+                        <div class="form-group" style="margin-bottom: 5px; padding-left: 10px; float: left;">
+                            <label class="switch">
+                                @if (Model.Vendor.IsActive == 0)
+                                {
+                                <input value="@Model.Vendor.IsActive" name="Vendor.IsActive" type="checkbox" id="Flag">
+                                }
+                                else
+                                {
+                                    <input value="@Model.Vendor.IsActive" name="Vendor.IsActive" checked="checked" type="checkbox" id="Flag">
+                                }
+                                @*<input checked="" id="Flag" value="0" type="checkbox">*@
+                                <span></span>
+                            </label>
+                        </div>
 
-                            @*<input type="hidden" id="hdnIs_Active" name="Vendor.Is_Active" value="@Model.Vendor.Is_Active.ToString()">*@
-                                        @*</div>
-                                    </div>
-                                </div>
-
-
-                            </div>*@
+                     
 
                         @*<div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">*@
 

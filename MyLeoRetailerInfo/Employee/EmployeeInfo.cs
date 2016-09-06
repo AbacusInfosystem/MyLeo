@@ -55,5 +55,13 @@ namespace MyLeoRetailerInfo.Employee
 
         public int Updated_By { get; set; }
 
+        public bool Is_Online { get; set; }
+
+        public string User_Name { get; set; }
+
+        public string Password { get; set; }
+
+        public int Role_Id { get; set; }
+
     }
 }

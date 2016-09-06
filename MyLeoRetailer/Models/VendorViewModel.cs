@@ -20,9 +20,9 @@ namespace MyLeoRetailer.Models
         {
             Vendor = new VendorInfo();
 
-            Vendors = new List<VendorInfo>();   
-  
-            Friendly_Message = new List<FriendlyMessage>();   
+            Vendors = new List<VendorInfo>();
+
+            FriendlyMessages = new List<FriendlyMessage>();   
    
             Filter = new VendorFilter();
 
@@ -49,8 +49,8 @@ namespace MyLeoRetailer.Models
         public VendorInfo Vendor { get; set; }
 
         public List<VendorInfo> Vendors { get; set; }
-        
-        public List<FriendlyMessage> Friendly_Message { get; set; }
+
+        public List<FriendlyMessage> FriendlyMessages { get; set; }
         
         public VendorFilter Filter { get; set; }
 

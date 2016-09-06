@@ -49,6 +49,41 @@ namespace MyLeoRetailer
 
             #endregion
 
+            #region Category
+
+            routes.MapRoute(
+            name: "category-1",
+            url: "category/get-category-by-id/{Category_Id}",
+            defaults: new { controller = "Category", action = "Get_Category_By_Id", Category_Id = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "category-2",
+            url: "category/get-sub-category-by-id/{Sub_category_Id}",
+            defaults: new { controller = "Category", action = "Get_Sub_Category_By_Id", Sub_category_Id = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
+
+            #region Employee
+
+            routes.MapRoute(
+            name: "employee-1",
+            url: "employee/check-user-name/{user_Name}",
+            defaults: new { controller = "Employee", action = "Check_Existing_User_Name", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
+
+            #region Role
+
+            routes.MapRoute(
+            name: "Role-1",
+            url: "role/save-role",
+            defaults: new { controller = "Role", action = "Save_Role", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
 
             routes.MapRoute(
                 name: "Default",

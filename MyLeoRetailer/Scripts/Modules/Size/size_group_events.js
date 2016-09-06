@@ -14,7 +14,9 @@ $(function () {
 
     $(document).on("click", "[name='Size_Group_List']", function () {
 
-        Get_Size_Group_Name_By_Id(this);
+        //Get_Size_Group_Name_By_Id(this);
+
+        Get_SizeGroup_By_Id(this);
 
         Get_Sizes();
 

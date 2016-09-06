@@ -16,8 +16,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class EmployeeController : BaseController
     {
-        //
-        // GET: /Employee/
+        EmployeeRepo eRepo;
+
+        public EmployeeController()
+        {
+            eRepo = new EmployeeRepo();
+        }
 
         public ActionResult Index(EmployeeViewModel eViewModel)
         {
@@ -56,7 +60,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Insert_Employee(EmployeeViewModel eViewModel)
         {
-            EmployeeRepo eRepo = new EmployeeRepo();
+            //EmployeeRepo eRepo = new EmployeeRepo();
 
             try
             {
@@ -76,7 +80,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Update_Employee(EmployeeViewModel eViewModel)
         {
-            EmployeeRepo eRepo = new EmployeeRepo();
+            //EmployeeRepo eRepo = new EmployeeRepo();
 
             try
             {
@@ -97,7 +101,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Employees(EmployeeViewModel eViewModel)
         {
-            EmployeeRepo eRepo = new EmployeeRepo();
+            //EmployeeRepo eRepo = new EmployeeRepo();
 
             CommonManager cMan = new CommonManager();
 
@@ -138,10 +142,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Employee_By_Id(EmployeeViewModel eViewModel)
         { 
-            EmployeeRepo cRepo = new EmployeeRepo();
+            //EmployeeRepo cRepo = new EmployeeRepo();
             try
             {
-                eViewModel.Employee = cRepo.Get_Employee_By_Id(eViewModel.Employee.Employee_Id);
+                eViewModel.Employee = eRepo.Get_Employee_By_Id(eViewModel.Employee.Employee_Id);
             }
             catch (Exception ex)
             {
@@ -151,5 +155,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
             return RedirectToAction("Index",eViewModel);
         }
+
+        public JsonResult Check_Existing_User_Name(string user_Name)
+        {
+            bool check = false;
+            try
+            {
+                check = eRepo.Check_Existing_User_Name(user_Name);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

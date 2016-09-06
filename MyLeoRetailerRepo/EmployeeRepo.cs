@@ -84,7 +84,15 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Updated_On", Employee.Updated_Date));
 
-            sqlParam.Add(new SqlParameter("@Updated_By", Employee.Updated_By)); 
+            sqlParam.Add(new SqlParameter("@Updated_By", Employee.Updated_By));
+
+            sqlParam.Add(new SqlParameter("@Is_Online", Employee.Is_Online));
+
+            sqlParam.Add(new SqlParameter("@User_Name", Employee.User_Name));
+
+            sqlParam.Add(new SqlParameter("@Password", Employee.Password));
+
+            sqlParam.Add(new SqlParameter("@Role_Id", Employee.Role_Id));
 
             return sqlParam;
         }
@@ -128,6 +136,11 @@ namespace MyLeoRetailerRepo
             employee.Created_By = Convert.ToInt32(dr["Created_By"]);
             employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
             employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
+            employee.Is_Online = Convert.ToBoolean(dr["Is_Online"]);
+            employee.User_Name = Convert.ToString(dr["User_Name"]);
+            employee.Password = Convert.ToString(dr["Password"]);
+            employee.Role_Id = Convert.ToInt32(dr["Role_Id"]);
+
             return employee;
         }
 
@@ -148,5 +161,21 @@ namespace MyLeoRetailerRepo
             }
             return Employees;
         }
+
+        public bool Check_Existing_User_Name(string User_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> mysqlparam = new List<SqlParameter>();
+            mysqlparam.Add(new SqlParameter("@User_Name", User_Name));
+            
+            DataTable dt = sqlHelper.ExecuteDataTable(mysqlparam, Storeprocedures.sp_Check_Existing_User_Name.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                check = Convert.ToBoolean(dr["check_User"]);
+            }
+            return check;
+        }
+
     }
 }

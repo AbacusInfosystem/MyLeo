@@ -53,6 +53,7 @@
     <Compile Include="LoginRepo.cs" />
     <Compile Include="ProductRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleRepo.cs" />
     <Compile Include="StateRepo.cs" />
     <Compile Include="SubCategoryRepo.cs" />
     <Compile Include="TaxRepo.cs" />
@@ -67,6 +68,7 @@
       <Name>MyLeoRetailerInfo</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

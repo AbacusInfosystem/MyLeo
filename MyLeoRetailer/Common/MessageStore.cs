@@ -105,6 +105,15 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+            #region Brand
+
+            FriendlyMessage BRND01 = new FriendlyMessage("BRND01", MessageType.Success, "Brand Added successfully.");
+            hash.Add("BRND01", BRND01);
+
+            FriendlyMessage BRND02 = new FriendlyMessage("BRND02", MessageType.Success, "Brand Updated successfully.");
+            hash.Add("BRND02", BRND02);
+
+            #endregion
 
 
             #region SizeGroup
@@ -116,6 +125,18 @@ namespace MyLeoRetailer.Common
             hash.Add("SG02", SG02);
 
             #endregion
+
+
+            #region Vendor
+
+            FriendlyMessage V01 = new FriendlyMessage("V01", MessageType.Success, "Vendor Added successfully.");
+            hash.Add("V01", V01);
+
+            FriendlyMessage V02 = new FriendlyMessage("V02", MessageType.Success, "Vendor Updated successfully.");
+            hash.Add("V02", V02);
+
+            #endregion
+
 
             #region Employee
             FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");

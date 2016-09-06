@@ -48,6 +48,8 @@ namespace MyLeoRetailerRepo
 
 			sqlParam.Add(new SqlParameter("@Category",category.Category));
 
+            sqlParam.Add(new SqlParameter("@IsActive", category.IsActive));
+
 			sqlParam.Add(new SqlParameter("@Updated_Date",category.Updated_Date));
 
 			sqlParam.Add(new SqlParameter("@Updated_By",category.Updated_By));
@@ -80,16 +82,16 @@ namespace MyLeoRetailerRepo
             return categorys;
         }
 
-        public CategoryInfo Get_Category_Values(DataRow dr)
-        {
-            CategoryInfo retVal = new CategoryInfo();
+        //public CategoryInfo Get_Category_Values(DataRow dr)
+        //{
+        //    CategoryInfo retVal = new CategoryInfo();
 
-            retVal.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+        //    retVal.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
-            retVal.Category = Convert.ToString(dr["Category"]);
+        //    retVal.Category = Convert.ToString(dr["Category"]);
 
-            return retVal;
-        }
+        //    return retVal;
+        //}
 
 
         public List<CategoryInfo> Get_Categorys()
@@ -105,15 +107,43 @@ namespace MyLeoRetailerRepo
             return categorys;
         }
 
-        //private CategoryInfo Get_Category_Values(DataRow dr)
-        //{
-        //    CategoryInfo category = new CategoryInfo();
+        private CategoryInfo Get_Category_Values(DataRow dr)
+        {
+            CategoryInfo category = new CategoryInfo();
 
-        //    category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+            category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
+            if (!dr.IsNull("Category"))
+                category.Category = Convert.ToString(dr["Category"]);
+            return category;
+        }
         //    if (!dr.IsNull("Category"))
         //        category.Category = Convert.ToString(dr["Category"]); 
         //    return category;
         //}
+
+        public CategoryInfo Get_Category_By_Id(int Category_Id)
+        {
+            CategoryInfo categoryInfo = new CategoryInfo();
+
+            List<SqlParameter> sqlParamList = new List<SqlParameter>();
+            sqlParamList.Add(new SqlParameter("@Category_Id", Category_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Category_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!dr.IsNull("Category"))
+                    categoryInfo.Category = Convert.ToString(dr["Category"]);
+
+                categoryInfo.IsActive = Convert.ToBoolean(dr["IsActive"]);
+            }
+            return categoryInfo;
+
+        }
+
+        
+
+
 	}
 }
