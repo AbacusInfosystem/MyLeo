@@ -31,7 +31,7 @@ namespace MyLeoRetailerInfo.Common
 
             Get_Employee_Designation.Add(3, Designation.Branch_Manager.ToString().Replace('_', ' ').ToString());
 
-            Get_Employee_Designation.Add(3, Designation.Sales_Person.ToString().Replace('_', ' ').ToString());
+            Get_Employee_Designation.Add(4, Designation.Sales_Person.ToString().Replace('_', ' ').ToString());
 
             return Get_Employee_Designation;
         }

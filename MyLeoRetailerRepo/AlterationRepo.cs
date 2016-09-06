@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Alteration;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.SalesInvoice;
 using MyLeoRetailerRepo.Utility;
 using System;
 using System.Collections.Generic;

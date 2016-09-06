@@ -45,7 +45,7 @@ function Get_Vendor_Contact_By_Id(obj) {
 
     $("[name='VendorContact.Vendor_Contact_Name']").val($(obj).text());
 
-    $("[name='VendorContact.Vendor_ID']").val($(obj).text());
+    $("[name='VendorContact.Vendor_Id']").val($(obj).text());
 
     $("[name='VendorContact.Address']").val($(obj).text());
 

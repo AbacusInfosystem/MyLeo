@@ -4,8 +4,18 @@ $(function () {
 
     Get_Gift_Vouchers();
 
+    $("[name='Filter.Gift_Voucher_No']").focusout(function () {
+        Get_Gift_Vouchers();
+    });
+
+
     $(document).on("click", "[name='Gift_Voucher_List']", function () {
         Get_Gift_Voucher_By_Id(this);
+    });
+
+    $("#btnGiftVoucher").click(function () {
+        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Get_Gift_Voucher_By_Id");
+        $("#frmGiftVoucher").submit();
     });
 
     $(document).on('change', '[name="Gift_Voucher_List"]', function (event) {
@@ -15,11 +25,15 @@ $(function () {
         }
     });
 
-    $("#btnGiftVoucher").click(function () {
-        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Get_Gift_Voucher_By_Id");
+
+    $("#btncreateGV").click(function () {
+
+        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Index");
         $("#frmGiftVoucher").submit();
+
     });
 
+  
     if ($('#hdn_GiftVoucherId').val() != "") {
         
         if ($('#mode').val() == 2) {
@@ -33,8 +47,5 @@ $(function () {
 
     $('#drpTransaction').trigger('change');
 
-    $("[name='Filter.Gift_Voucher_No']").focusout(function () {
-        Get_Gift_Vouchers();
-    });
-
+   
 });

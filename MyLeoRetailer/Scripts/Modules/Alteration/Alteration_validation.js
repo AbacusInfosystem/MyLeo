@@ -1,7 +1,7 @@
 ﻿
 
 $(function () {
-    $("#frmAlteration").validate({
+    $("#frmAlteration1").validate({
         rules: {
             "Alteration.Customer_Mobile_No": { required: true }
 
@@ -14,3 +14,6 @@ $(function () {
         }
     });
 });
+
+
+
