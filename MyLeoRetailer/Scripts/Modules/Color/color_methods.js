@@ -83,7 +83,7 @@ function Save_Color()
 			Reset_Color(); 
 
 			Get_Colors();
-
+			
 			Friendly_Messages(obj);
 			
 		}

@@ -63,21 +63,6 @@ namespace MyLeoRetailerRepo
 
            sqlParam.Add(new SqlParameter("@Credit_Card_No", GiftVoucher.Credit_Card_No));
 
-          
-
-           //Set Is_Active Flag
-           if (GiftVoucher.IsActive == 0)
-           {
-               GiftVoucher.Is_Active = false;
-           }
-           else
-           {
-               GiftVoucher.Is_Active = true;
-           }
-           //End
-
-           sqlParam.Add(new SqlParameter("@Is_Active", GiftVoucher.Is_Active));
-
            sqlParam.Add(new SqlParameter("@Updated_Date", GiftVoucher.Updated_Date));
 
            sqlParam.Add(new SqlParameter("@Updated_By", GiftVoucher.Updated_By));
@@ -119,7 +104,7 @@ namespace MyLeoRetailerRepo
                GiftVoucher.Person_Name = Convert.ToString(dr["Person_Name"]);
                GiftVoucher.Gift_Voucher_Date = Convert.ToDateTime(dr["Gift_Voucher_Date"]);
                GiftVoucher.Gift_Voucher_Expiry_Date = Convert.ToDateTime(dr["Gift_Voucher_Expiry_Date"]);
-               GiftVoucher.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+               GiftVoucher.Gift_Voucher_Amount = Convert.ToInt32(dr["Gift_Voucher_Amount"]);
                GiftVoucher.Payment_Mode = Convert.ToInt32(dr["Payment_Mode"]);
                GiftVoucher.Bank_Name = Convert.ToString(dr["Bank_Name"]);
                GiftVoucher.Credit_Card_No = Convert.ToString(dr["Credit_Card_No"]);
@@ -127,26 +112,10 @@ namespace MyLeoRetailerRepo
                GiftVoucher.Created_By = Convert.ToInt32(dr["Created_By"]);
                GiftVoucher.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                GiftVoucher.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-               GiftVoucher.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
-
-               //Set IsActive Flag
-               if (GiftVoucher.Is_Active == false)
-               {
-                   GiftVoucher.IsActive = 0;
-               }
-               else
-               {
-                   GiftVoucher.IsActive = 1;
-               }
-               //End
-
-              
            }
 
            return GiftVoucher;
        }
-
-       
 
     }
 }

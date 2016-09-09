@@ -17,10 +17,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class SizeController:BaseController
     {
-
-        public ActionResult Index()
+        public ActionResult Index(SizeGroupViewModel sgViewModel)
         {
-            return View();
+            return View("Index", sgViewModel);
         }
 
         public JsonResult Insert_Size_Group(SizeGroupViewModel sgViewModel)
@@ -33,7 +32,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 sgViewModel.SizeGroup.Size_Group_Id = sgRepo.Insert_Size_Group(sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SG01"));
+                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZEG1"));
             }
             catch (Exception ex)
             {
@@ -53,7 +52,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 sgRepo.Update_Size_Group(sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SG02"));
+                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZEG2"));
             }
             catch (Exception ex)
             {
@@ -101,15 +100,35 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(sgViewModel));
         }
 
-        public JsonResult Get_Size_Group_Name_By_Id(int size_group_Id, string size_group_name)
+        //public JsonResult Get_Size_Group_Name_By_Id(int size_group_Id, string size_group_name)
+        //{
+        //    SizeGroupViewModel sgViewModel = new SizeGroupViewModel();
+
+        //    try
+        //    {
+        //        sgViewModel.SizeGroup.Size_Group_Name = size_group_name;
+
+        //        sgViewModel.SizeGroup.Size_Group_Id = size_group_Id;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(sgViewModel));
+        //}
+
+
+        public JsonResult Get_SizeGroup_By_Id(int size_group_Id)
         {
             SizeGroupViewModel sgViewModel = new SizeGroupViewModel();
 
+            SizeGroupRepo sgRepo = new SizeGroupRepo();
+
             try
             {
-                sgViewModel.SizeGroup.Size_Group_Name = size_group_name;
-
-                sgViewModel.SizeGroup.Size_Group_Id = size_group_Id;
+                sgViewModel.SizeGroup.IsActive = sgRepo.Get_SizeGroup_By_Id(Convert.ToInt32(size_group_Id));
             }
             catch (Exception ex)
             {
@@ -118,6 +137,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
         }
+
+
 
         public JsonResult Get_Sizes(int size_group_Id)
         {
@@ -142,7 +163,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 //sgViewModel.SizeGroup.Size_Id = 
                 sgRepo.Insert_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SCAT01"));
+                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZE1"));
             }
             catch (Exception ex)
             {
@@ -151,19 +172,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
         }
-
-
-        //public JsonResult Delete_Size_By_Id(int size_Id)
-        //{
-        //    SizeGroupViewModel sgViewModel = new SizeGroupViewModel();
-
-        //    SizeGroupRepo sgRepo = new SizeGroupRepo();
-
-        //     sgRepo.Delete_Size_By_Id(size_Id);
-
-        //    return Json(JsonConvert.SerializeObject(sgViewModel));
-        //}
-
 
         public JsonResult Update_Size(SizeGroupViewModel sgViewModel)
         {
@@ -175,7 +183,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 sgRepo.Update_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SCAT02"));
+                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZE2"));
             }
             catch (Exception ex)
             {
@@ -185,6 +193,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(sgViewModel));
         }
     
+        //public JsonResult Delete_Size_By_Id(int size_Id)
+        //{
+        //    SizeGroupViewModel sgViewModel = new SizeGroupViewModel();
+
+        //    SizeGroupRepo sgRepo = new SizeGroupRepo();
+
+        //     sgRepo.Delete_Size_By_Id(size_Id);
+
+        //    return Json(JsonConvert.SerializeObject(sgViewModel));
+        //}   
 
     }
 }

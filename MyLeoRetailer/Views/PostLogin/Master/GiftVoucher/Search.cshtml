@@ -44,25 +44,26 @@
                         <div class="col-md-5">
 
                             <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher no</span>
                                 <input type="text" class="form-control" placeholder="Enter Voucher no to search." name="Filter.Gift_Voucher_No"/>
                                 <input type="hidden" id="hdn_GiftVoucherId" name="GiftVoucher.Gift_Voucher_Id" value="@Model.GiftVoucher.Gift_Voucher_Id">
-
 
                             </div>
 
                         </div>
 
-                        <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-7" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
-                                <button class="btn btn-success active" type="button" href="@Url.Action("Index", "GiftVoucher")">Create</button>
-                                <button class="btn btn-danger active" type="button" id="btnGiftVoucher">Edit</button>
+                                
+                                <button type="button" class="btn btn-success active" value="Create" id="btncreateGV">Create</button>
+                               
+                                <button class="btn btn-danger active" type="button" style="display:none;" id="btnGiftVoucher">Edit</button>
                             </div>
 
                         </div>
 
                     </div>
-
                 </form>
 
             </div>
@@ -73,7 +74,7 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divPager">
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divGiftVoucherPager">
 
         </div>
 

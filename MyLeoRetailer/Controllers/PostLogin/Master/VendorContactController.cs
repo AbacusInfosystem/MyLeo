@@ -35,7 +35,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Index(VendorContactViewModel vcViewModel)
         {
-            VendorContactRepo vcRepo = new VendorContactRepo();
+            VendorRepo vcRepo = new VendorRepo();
 
             vcViewModel.Vendors = vcRepo.Get_Vendors();
 
@@ -55,7 +55,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", vcViewModel);
         }
 
-        public JsonResult Insert_Vendor_Contact(VendorContactViewModel vcViewModel)
+        public ActionResult Insert_Vendor_Contact(VendorContactViewModel vcViewModel)
         {
             VendorContactRepo vcRepo = new VendorContactRepo();
 
@@ -74,10 +74,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(vcViewModel));
+            TempData["vcViewModel"] = (VendorContactViewModel)vcViewModel;
+            return RedirectToAction("Search");
         }
 
-        public JsonResult Update_Vendor_Contact(VendorContactViewModel vcViewModel)
+        public ActionResult Update_Vendor_Contact(VendorContactViewModel vcViewModel)
         {
             VendorContactRepo vcRepo = new VendorContactRepo();
 
@@ -94,7 +95,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(vcViewModel));
+            TempData["vcViewModel"] = (VendorContactViewModel)vcViewModel;
+            return RedirectToAction("Search");
         }
 
         public JsonResult Get_Vendor_Contacts(VendorContactViewModel vcViewModel)
@@ -137,9 +139,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Vendor_Contact_By_Id(VendorContactViewModel vcViewModel)
         {
+            VendorRepo vRepo = new VendorRepo();
+
             VendorContactRepo vcRepo = new VendorContactRepo();
 
-            vcViewModel.Vendors = vcRepo.Get_Vendors();
+            vcViewModel.Vendors = vRepo.Get_Vendors();
 
             vcViewModel.VendorContact = vcRepo.Get_Vendor_Contact_By_Id(vcViewModel.VendorContact.VendorContact_Id);
 

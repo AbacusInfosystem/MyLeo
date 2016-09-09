@@ -88,19 +88,9 @@ namespace MyLeoRetailerRepo
                 Branch.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                 Branch.Updated_By = Convert.ToInt32(dr["Updated_By"]);
 
-
                 Branch.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+                Branch.IsActive = Convert.ToInt32(dr["Is_Active"]);
 
-                //Set IsActive Flag
-                if (Branch.Is_Active == false)
-                {
-                    Branch.IsActive = 0;
-                }
-                else
-                {
-                    Branch.IsActive = 1;
-                }
-                //End               
                 
             }
 
@@ -139,197 +129,276 @@ namespace MyLeoRetailerRepo
 		}
 
 
-        public List<Location_Details> Get_Near_Branch_Location_By_Id(int Branch_Id)
+        //public List<Location_Details> Get_Near_Branch_Location_By_Id(int Branch_Id)
+        //{
+        //    List<SqlParameter> parameters = new List<SqlParameter>();
+        //    parameters.Add(new SqlParameter("@Branch_ID", Branch_Id));
+
+        //    List<Location_Details> Branches = new List<Location_Details>();
+                       
+        //    DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Near_Branch_Location_By_Id.ToString(), CommandType.StoredProcedure);
+        //    List<DataRow> drList = new List<DataRow>();
+        //    drList = dt.AsEnumerable().ToList();
+        //    foreach (DataRow dr in drList)
+        //    {
+        //        Location_Details Branch = new Location_Details();
+                
+        //        Branch.Branch_Location_ID = Convert.ToInt32(dr["Branch_Location_ID"]);
+
+        //        Branch.Branch_Location_Flag = Convert.ToInt32(dr["Branch_Location_Flag"]);
+
+        //        if (Branch.Branch_Location_Flag == 1)
+        //        {
+        //            Branch.Branch_Location_Pincode = Convert.ToInt32(dr["Branch_Location_Pincode"]);
+        //        }
+
+        //        Branches.Add(Branch);
+        //    }
+        //    return Branches;
+        //}
+
+        //public List<Location_Details> Get_Far_Branch_Location_By_Id(int Branch_Id)
+        //{
+        //    List<SqlParameter> parameters = new List<SqlParameter>();
+        //    parameters.Add(new SqlParameter("@Branch_Id", Branch_Id));
+
+        //    List<Location_Details> Branches = new List<Location_Details>();
+
+        //    DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Far_Branch_Location_By_Id.ToString(), CommandType.StoredProcedure);
+        //    List<DataRow> drList = new List<DataRow>();
+        //    drList = dt.AsEnumerable().ToList();
+        //    foreach (DataRow dr in drList)
+        //    {
+        //        Location_Details Branch = new Location_Details();
+
+        //        Branch.Branch_Location_ID = Convert.ToInt32(dr["Branch_Location_ID"]);
+
+        //        Branch.Branch_Location_Flag = Convert.ToInt32(dr["Branch_Location_Flag"]);
+
+        //        if (Branch.Branch_Location_Flag == 2)
+        //        {
+        //            Branch.Branch_Location_Pincode = Convert.ToInt32(dr["Branch_Location_Pincode"]);
+        //        }
+
+        //        Branches.Add(Branch);
+        //    }
+        //    return Branches;
+        //}
+
+        //public void Insert_Near_Branch_Location(BranchInfo Branch)
+        //{
+        //    Branch.Branch_Location_Flag = 1;
+           
+        //        foreach (var item in Branch.NearLocationDetailsList)
+        //        {
+        //            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+        //            sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
+        //            sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
+        //            sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
+        //            sqlparam.Add(new SqlParameter("@Created_Date", Branch.Created_Date));
+        //            sqlparam.Add(new SqlParameter("@Created_By", Branch.Created_By));
+
+        //            //Set Is_Active Flag
+        //            if (Branch.IsActive == 0)
+        //            {
+        //                Branch.Is_Active = false;
+        //            }
+        //            else
+        //            {
+        //                Branch.Is_Active = true;
+        //            }
+        //            //End
+
+        //            sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
+        //            sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
+        //            sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
+
+        //            sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Insert_Branch_Location.ToString(), CommandType.StoredProcedure);
+        //        }           
+                     
+        //}
+
+        //public void Insert_Far_Branch_Location(BranchInfo Branch)
+        //{
+        //    Branch.Branch_Location_Flag = 2;
+           
+        //        foreach (var item in Branch.FarLocationDetailsList)
+        //        {
+        //            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+        //            sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
+        //            sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
+        //            sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
+        //            sqlparam.Add(new SqlParameter("@Created_Date", Branch.Created_Date));
+        //            sqlparam.Add(new SqlParameter("@Created_By", Branch.Created_By));
+                    
+
+        //            //Set Is_Active Flag
+        //            if (Branch.IsActive == 0)
+        //            {
+        //                Branch.Is_Active = false;
+        //            }
+        //            else
+        //            {
+        //                Branch.Is_Active = true;
+        //            }
+        //            //End
+
+        //            sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
+        //            sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
+        //            sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
+
+        //            sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Insert_Branch_Location.ToString(), CommandType.StoredProcedure);
+        //        }
+            
+
+        //}
+
+        //public void Update_Near_Branch_Location(BranchInfo Branch)
+        //{
+        //    Branch.Branch_Location_Flag = 1;
+
+        //    foreach (var item in Branch.NearLocationDetailsList)
+        //    {
+        //        List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+        //        sqlparam.Add(new SqlParameter("@Branch_Location_ID", item.Branch_Location_ID));
+        //        sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
+        //        sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
+        //        sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
+               
+        //        //Set Is_Active Flag
+        //        if (Branch.IsActive == 0)
+        //        {
+        //            Branch.Is_Active = false;
+        //        }
+        //        else
+        //        {
+        //            Branch.Is_Active = true;
+        //        }
+        //        //End
+
+        //        sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
+        //        sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
+        //        sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
+
+        //        sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Update_Branch_Location.ToString(), CommandType.StoredProcedure);
+        //    }
+
+        //}
+
+        //public void Update_Far_Branch_Location(BranchInfo Branch)
+        //{
+        //    Branch.Branch_Location_Flag = 2;
+
+        //    foreach (var item in Branch.FarLocationDetailsList)
+        //    {
+        //        List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+        //        sqlparam.Add(new SqlParameter("@Branch_Location_ID", item.Branch_Location_ID));
+        //        sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
+        //        sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
+        //        sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
+                
+        //        //Set Is_Active Flag
+        //        if (Branch.IsActive == 0)
+        //        {
+        //            Branch.Is_Active = false;
+        //        }
+        //        else
+        //        {
+        //            Branch.Is_Active = true;
+        //        }
+        //        //End
+
+        //        sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
+        //        sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
+        //        sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
+
+        //        sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Update_Branch_Location.ToString(), CommandType.StoredProcedure);
+        //    }
+
+
+        //}
+
+        public List<Location_Details> Get_Branch_Location_By_Id(int Branch_Id)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Branch_ID", Branch_Id));
 
-            List<Location_Details> Branches = new List<Location_Details>();
-                       
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Near_Branch_Location_By_Id.ToString(), CommandType.StoredProcedure);
+            List<Location_Details> locations = new List<Location_Details>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Branch_Location_By_Id.ToString(), CommandType.StoredProcedure);
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)
             {
-                Location_Details Branch = new Location_Details();
+                Location_Details location = new Location_Details();
+
+                location.Branch_Location_ID = Convert.ToInt32(dr["Branch_Location_ID"]);
+
+                location.Branch_Id = Convert.ToInt32(dr["Branch_ID"]);
+
+                location.Branch_Location_Flag = Convert.ToInt32(dr["Branch_Location_Flag"]);
+
+                location.Branch_Location_Pincode = Convert.ToInt32(dr["Branch_Location_Pincode"]);
+
+                location.Flag = true;
+
+                locations.Add(location);
+            }
+            return locations;
+        }
+
+        public void Save_Branch_Location(BranchInfo Branch)
+        {
+            foreach (var item in Branch.LocationDetailsList)
+            {
+                if (item.Flag && item.Branch_Location_ID == 0)
+                {
+                    sqlHelper.ExecuteScalerObj(Set_Values_In_Branch_Location(item), Storeprocedures.sp_Insert_Branch_Location.ToString(), CommandType.StoredProcedure);
+                }
+                else if (item.Flag && item.Branch_Location_ID != 0)
+                {
+                    sqlHelper.ExecuteScalerObj(Set_Values_In_Branch_Location(item), Storeprocedures.sp_Update_Branch_Location.ToString(), CommandType.StoredProcedure);
+                }
+                else if (!item.Flag && item.Branch_Location_ID != 0)
+                {
+                    List<SqlParameter> sqlParams = new List<SqlParameter>();
+                    sqlParams.Add(new SqlParameter("@Branch_Location_ID", item.Branch_Location_ID));
+
+                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Delete_Branch_Location_By_Id.ToString(), CommandType.StoredProcedure);
+                }
                 
-                Branch.Branch_Location_ID = Convert.ToInt32(dr["Branch_Location_ID"]);
-
-                Branch.Branch_Location_Flag = Convert.ToInt32(dr["Branch_Location_Flag"]);
-
-                if (Branch.Branch_Location_Flag == 1)
-                {
-                    Branch.Branch_Location_Pincode = Convert.ToInt32(dr["Branch_Location_Pincode"]);
-                }
-
-                Branches.Add(Branch);
             }
-            return Branches;
+
         }
 
-        public List<Location_Details> Get_Far_Branch_Location_By_Id(int Branch_Id)
+        public List<SqlParameter> Set_Values_In_Branch_Location(Location_Details location)
         {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Branch_Id", Branch_Id));
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
 
-            List<Location_Details> Branches = new List<Location_Details>();
-
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Far_Branch_Location_By_Id.ToString(), CommandType.StoredProcedure);
-            List<DataRow> drList = new List<DataRow>();
-            drList = dt.AsEnumerable().ToList();
-            foreach (DataRow dr in drList)
+            if (location.Branch_Location_ID != 0)
             {
-                Location_Details Branch = new Location_Details();
-
-                Branch.Branch_Location_ID = Convert.ToInt32(dr["Branch_Location_ID"]);
-
-                Branch.Branch_Location_Flag = Convert.ToInt32(dr["Branch_Location_Flag"]);
-
-                if (Branch.Branch_Location_Flag == 2)
-                {
-                    Branch.Branch_Location_Pincode = Convert.ToInt32(dr["Branch_Location_Pincode"]);
-                }
-
-                Branches.Add(Branch);
+                sqlparam.Add(new SqlParameter("@Branch_Location_ID", location.Branch_Location_ID));
             }
-            return Branches;
-        }
+            sqlparam.Add(new SqlParameter("@Branch_ID", location.Branch_Id));
+            sqlparam.Add(new SqlParameter("@Branch_Location_Flag", location.Branch_Location_Flag));
+            sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", location.Branch_Location_Pincode));
 
-        public void Insert_Near_Branch_Location(BranchInfo Branch)
-        {
-            Branch.Branch_Location_Flag = 1;
-           
-                foreach (var item in Branch.NearLocationDetailsList)
-                {
-                    List<SqlParameter> sqlparam = new List<SqlParameter>();
-
-                    sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
-                    sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
-                    sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
-                    sqlparam.Add(new SqlParameter("@Created_Date", Branch.Created_Date));
-                    sqlparam.Add(new SqlParameter("@Created_By", Branch.Created_By));
-
-                    //Set Is_Active Flag
-                    if (Branch.IsActive == 0)
-                    {
-                        Branch.Is_Active = false;
-                    }
-                    else
-                    {
-                        Branch.Is_Active = true;
-                    }
-                    //End
-
-                    sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
-                    sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
-                    sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
-
-                    sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Insert_Branch_Location.ToString(), CommandType.StoredProcedure);
-                }           
-                     
-        }
-
-        public void Insert_Far_Branch_Location(BranchInfo Branch)
-        {
-            Branch.Branch_Location_Flag = 2;
-           
-                foreach (var item in Branch.FarLocationDetailsList)
-                {
-                    List<SqlParameter> sqlparam = new List<SqlParameter>();
-
-                    sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
-                    sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
-                    sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
-                    sqlparam.Add(new SqlParameter("@Created_Date", Branch.Created_Date));
-                    sqlparam.Add(new SqlParameter("@Created_By", Branch.Created_By));
-                    
-
-                    //Set Is_Active Flag
-                    if (Branch.IsActive == 0)
-                    {
-                        Branch.Is_Active = false;
-                    }
-                    else
-                    {
-                        Branch.Is_Active = true;
-                    }
-                    //End
-
-                    sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
-                    sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
-                    sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
-
-                    sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Insert_Branch_Location.ToString(), CommandType.StoredProcedure);
-                }
-            
-
-        }
-
-        public void Update_Near_Branch_Location(BranchInfo Branch)
-        {
-            Branch.Branch_Location_Flag = 1;
-
-            foreach (var item in Branch.NearLocationDetailsList)
+            if (location.Branch_Location_ID == 0)
             {
-                List<SqlParameter> sqlparam = new List<SqlParameter>();
-
-                sqlparam.Add(new SqlParameter("@Branch_Location_ID", item.Branch_Location_ID));
-                sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
-                sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
-                sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
-               
-                //Set Is_Active Flag
-                if (Branch.IsActive == 0)
-                {
-                    Branch.Is_Active = false;
-                }
-                else
-                {
-                    Branch.Is_Active = true;
-                }
-                //End
-
-                sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
-                sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
-                sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
-
-                sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Update_Branch_Location.ToString(), CommandType.StoredProcedure);
+                sqlparam.Add(new SqlParameter("@Created_Date", location.Created_Date));
+                sqlparam.Add(new SqlParameter("@Created_By", location.Created_By));
             }
+            sqlparam.Add(new SqlParameter("@Updated_Date", location.Updated_Date));
+            sqlparam.Add(new SqlParameter("@Updated_By", location.Updated_By));
 
+            return sqlparam;
         }
 
-        public void Update_Far_Branch_Location(BranchInfo Branch)
-        {
-            Branch.Branch_Location_Flag = 2;
-
-            foreach (var item in Branch.FarLocationDetailsList)
-            {
-                List<SqlParameter> sqlparam = new List<SqlParameter>();
-
-                sqlparam.Add(new SqlParameter("@Branch_Location_ID", item.Branch_Location_ID));
-                sqlparam.Add(new SqlParameter("@Branch_ID", Branch.Branch_ID));
-                sqlparam.Add(new SqlParameter("@Branch_Location_Flag", Branch.Branch_Location_Flag));
-                sqlparam.Add(new SqlParameter("@Branch_Location_Pincode", item.Branch_Location_Pincode));
-                
-                //Set Is_Active Flag
-                if (Branch.IsActive == 0)
-                {
-                    Branch.Is_Active = false;
-                }
-                else
-                {
-                    Branch.Is_Active = true;
-                }
-                //End
-
-                sqlparam.Add(new SqlParameter("@Is_Active", Branch.Is_Active));
-                sqlparam.Add(new SqlParameter("@Updated_Date", Branch.Updated_Date));
-                sqlparam.Add(new SqlParameter("@Updated_By", Branch.Updated_By));
-
-                sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Update_Branch_Location.ToString(), CommandType.StoredProcedure);
-            }
 
 
-        }
 	}
 }

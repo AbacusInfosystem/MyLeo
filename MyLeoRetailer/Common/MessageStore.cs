@@ -97,7 +97,7 @@ namespace MyLeoRetailer.Common
 
             #region Color
 
-            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour added successfully.");
+            FriendlyMessage COL1 = new FriendlyMessage("COL1", MessageType.Success, "Colour Added successfully.");
             hash.Add("COL1", COL1);
 
             FriendlyMessage COL2 = new FriendlyMessage("COL2", MessageType.Success, "Colour Updated successfully.");
@@ -105,8 +105,41 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-            #region Product
-            FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Product added successfully.");
+            #region Brand
+
+            FriendlyMessage BRND01 = new FriendlyMessage("BRND01", MessageType.Success, "Brand Added successfully.");
+            hash.Add("BRND01", BRND01);
+
+            FriendlyMessage BRND02 = new FriendlyMessage("BRND02", MessageType.Success, "Brand Updated successfully.");
+            hash.Add("BRND02", BRND02);
+
+            #endregion
+
+
+            #region SizeGroup
+
+            FriendlyMessage SG01 = new FriendlyMessage("SG01", MessageType.Success, "Size Group Added successfully.");
+            hash.Add("SG01", SG01);
+
+            FriendlyMessage SG02 = new FriendlyMessage("SG02", MessageType.Success, "Size Group Updated successfully.");
+            hash.Add("SG02", SG02);
+
+            #endregion
+
+
+            #region Vendor
+
+            FriendlyMessage V01 = new FriendlyMessage("V01", MessageType.Success, "Vendor Added successfully.");
+            hash.Add("V01", V01);
+
+            FriendlyMessage V02 = new FriendlyMessage("V02", MessageType.Success, "Vendor Updated successfully.");
+            hash.Add("V02", V02);
+
+            #endregion
+
+
+            #region Employee
+            FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
             hash.Add("EMP01", EMP01);
 
             FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
@@ -126,7 +159,6 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-//<<<<<<< HEAD
             #region Branch
 
             FriendlyMessage BRNCH01 = new FriendlyMessage("BRNCH01", MessageType.Success, "Branch added successfully.");
@@ -138,8 +170,9 @@ namespace MyLeoRetailer.Common
             FriendlyMessage BRNCH03 = new FriendlyMessage("BRNCH03", MessageType.Information, "No records found.");
             hash.Add("BRNCH03", BRNCH03);
 
+
             #endregion
-            //=======
+
             #region Gift Voucher
 
             FriendlyMessage GVAT01 = new FriendlyMessage("GVAT01", MessageType.Success, "Gift Voucher added successfully.");
@@ -150,7 +183,44 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage GVAT03 = new FriendlyMessage("GVAT03", MessageType.Information, "No records found.");
             hash.Add("GVAT03", GVAT03);
-//>>>>>>> origin/master
+
+
+            #endregion
+
+            #region Alteration
+
+            FriendlyMessage ALT01 = new FriendlyMessage("ALT01", MessageType.Success, "Alteration added successfully.");
+            hash.Add("ALT01", ALT01);
+
+            FriendlyMessage ALT02 = new FriendlyMessage("ALT02", MessageType.Success, "Alteration updated successfully.");
+            hash.Add("ALT02", ALT02);
+
+            FriendlyMessage ALT03 = new FriendlyMessage("ALT03", MessageType.Information, "No records found.");
+            hash.Add("ALT03", ALT03);
+
+
+            #endregion
+
+            #region Size
+
+            FriendlyMessage SIZE1 = new FriendlyMessage("SIZE1", MessageType.Success, "Size added successfully.");
+            hash.Add("SIZE1", SIZE1);
+
+            FriendlyMessage SIZE2 = new FriendlyMessage("SIZE2", MessageType.Success, "Size updated successfully.");
+            hash.Add("SIZE2", SIZE2);
+
+            FriendlyMessage SIZE3 = new FriendlyMessage("SIZE3", MessageType.Information, "No records found.");
+            hash.Add("SIZE3", SIZE3);
+
+            FriendlyMessage SIZEG1 = new FriendlyMessage("SIZEG1", MessageType.Success, "Size Group added successfully.");
+            hash.Add("SIZEG1", SIZEG1);
+
+            FriendlyMessage SIZEG2 = new FriendlyMessage("SIZEG2", MessageType.Success, "Size Group updated successfully.");
+            hash.Add("SIZEG2", SIZEG2);
+
+            FriendlyMessage SIZEG3 = new FriendlyMessage("SIZEG3", MessageType.Information, "No records found.");
+            hash.Add("SIZEG3", SIZEG3);
+
 
             #endregion
 
@@ -162,7 +232,7 @@ namespace MyLeoRetailer.Common
             hash.Add("PROD02", PROD02);
             #endregion
 
-        }
+		}
 
 		public static FriendlyMessage Get(string code)
 		{

@@ -46,6 +46,8 @@ namespace MyLeoRetailerRepo
                 sqlParam.Add(new SqlParameter("@Created_By", Customer.Created_By));
 			}
 
+            Customer.Customer_Name = Customer.First_Name + " " + Customer.Last_Name;
+
             sqlParam.Add(new SqlParameter("@Customer_Name", Customer.Customer_Name));
 
             sqlParam.Add(new SqlParameter("@Customer_Billing_Address", Customer.Customer_Billing_Address));
@@ -66,17 +68,59 @@ namespace MyLeoRetailerRepo
             sqlParam.Add(new SqlParameter("@Customer_Landline2", Customer.Customer_Landline2));
 
             sqlParam.Add(new SqlParameter("@Customer_Gender", Customer.Customer_Gender));
-            sqlParam.Add(new SqlParameter("@Customer_DOB", Customer.Customer_DOB));
+
+            if (Customer.Customer_DOB==DateTime.MinValue)
+            {
+                sqlParam.Add(new SqlParameter("@Customer_DOB", null));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@Customer_DOB", Customer.Customer_DOB));
+            }           
 
             sqlParam.Add(new SqlParameter("@Customer_Child1_Name", Customer.Customer_Child1_Name));
             sqlParam.Add(new SqlParameter("@Customer_Child2_Name", Customer.Customer_Child2_Name));
-            sqlParam.Add(new SqlParameter("@Customer_Child1_DOB", Customer.Customer_Child1_DOB));
-            sqlParam.Add(new SqlParameter("@Customer_Child2_DOB", Customer.Customer_Child2_DOB));
-            sqlParam.Add(new SqlParameter("@Customer_Wedding_Anniversary", Customer.Customer_Wedding_Anniversary));
+
+            if (Customer.Customer_Child1_DOB == DateTime.MinValue)
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Child1_DOB", null));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Child1_DOB", Customer.Customer_Child1_DOB));
+            }
+
+            if (Customer.Customer_Child2_DOB == DateTime.MinValue)
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Child2_DOB", null));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Child2_DOB", Customer.Customer_Child2_DOB));
+            }
+
+            if (Customer.Customer_Wedding_Anniversary == DateTime.MinValue)
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Wedding_Anniversary", null));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Wedding_Anniversary", Customer.Customer_Wedding_Anniversary));
+            }    
+                       
             sqlParam.Add(new SqlParameter("@Customer_Email1", Customer.Customer_Email1));
             sqlParam.Add(new SqlParameter("@Customer_Email2", Customer.Customer_Email2));
             sqlParam.Add(new SqlParameter("@Customer_Spouse_Name", Customer.Customer_Spouse_Name));
-            sqlParam.Add(new SqlParameter("@Customer_Spouse_DOB", Customer.Customer_Spouse_DOB));
+
+            if (Customer.Customer_Spouse_DOB == DateTime.MinValue)
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Spouse_DOB", null));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@Customer_Spouse_DOB", Customer.Customer_Spouse_DOB));
+            }    
+           
 
             //Set Is_Active Flag
             if (Customer.IsActive == 0 )
@@ -165,44 +209,71 @@ namespace MyLeoRetailerRepo
                 Customer.Customer_Email2 = Convert.ToString(dr["Customer_Email2"]);
 
                 Customer.Customer_Gender = Convert.ToInt32(dr["Customer_Gender"]);
-                Customer.Customer_DOB = Convert.ToDateTime(dr["Customer_DOB"]);
+
+                if (dr.IsNull("Customer_DOB"))
+                {
+                    Customer.Customer_DOB = DateTime.MinValue;
+                }
+                else
+                {
+                    Customer.Customer_DOB = Convert.ToDateTime(dr["Customer_DOB"]);
+                }
+               
                 Customer.Customer_Child1_Name = Convert.ToString(dr["Customer_Child1_Name"]);
                 Customer.Customer_Child2_Name = Convert.ToString(dr["Customer_Child2_Name"]);
                 Customer.Customer_Spouse_Name = Convert.ToString(dr["Customer_Spouse_Name"]);
-                Customer.Customer_Child1_DOB = Convert.ToDateTime(dr["Customer_Child1_DOB"]);
-                Customer.Customer_Child2_DOB = Convert.ToDateTime(dr["Customer_Child2_DOB"]);
-                Customer.Customer_Spouse_DOB = Convert.ToDateTime(dr["Customer_Spouse_DOB"]);
-                Customer.Customer_Wedding_Anniversary = Convert.ToDateTime(dr["Customer_Wedding_Anniversary"]);
 
+                if (dr.IsNull("Customer_Child1_DOB"))
+                {
+                    Customer.Customer_Child1_DOB = DateTime.MinValue;
+                }
+                else
+                {
+                    Customer.Customer_Child1_DOB = Convert.ToDateTime(dr["Customer_Child1_DOB"]);
+                }
+
+                if (dr.IsNull("Customer_Child2_DOB"))
+                {
+                    Customer.Customer_Child2_DOB = DateTime.MinValue;
+                }
+                else
+                {
+                    Customer.Customer_Child2_DOB = Convert.ToDateTime(dr["Customer_Child2_DOB"]);
+                }
+
+                if (dr.IsNull("Customer_Spouse_DOB"))
+                {
+                    Customer.Customer_Spouse_DOB = DateTime.MinValue;
+                }
+                else
+                {
+                    Customer.Customer_Spouse_DOB = Convert.ToDateTime(dr["Customer_Spouse_DOB"]);
+                }
+
+                if (dr.IsNull("Customer_Spouse_DOB"))
+                {
+                    Customer.Customer_Wedding_Anniversary = DateTime.MinValue;
+                }
+                else
+                {
+                    Customer.Customer_Wedding_Anniversary = Convert.ToDateTime(dr["Customer_Wedding_Anniversary"]);
+                }
+               
                 Customer.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
                 Customer.Created_By = Convert.ToInt32(dr["Created_By"]);
                 Customer.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                 Customer.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-
-
+                
+                Customer.IsActive = Convert.ToInt32(dr["Is_Active"]);
                 Customer.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
-
-                //Set IsActive Flag
-                if (Customer.Is_Active == false)
-                {
-                    Customer.IsActive = 0;
-                }
-                else
-                {
-                    Customer.IsActive = 1;
-                }
-                //End
-
+                                
                 //Split Customer_Name
                 string[] nameParts = Customer.Customer_Name.Split(' ');
 
                 Customer.First_Name = nameParts[0];
                 Customer.Last_Name = nameParts[1];
                 //End
-
-                //Set Date in dd-mm-yyyy Format
-            
-                //End
+                                
             }
 
             return Customer;

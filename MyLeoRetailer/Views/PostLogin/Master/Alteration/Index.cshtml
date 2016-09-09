@@ -1,0 +1,162 @@
+﻿@model MyLeoRetailer.Models.AlterationViewModel
+
+
+<script src="~/Scripts/Modules/Alteration/Alteration_events.js"></script>
+<script src="~/Scripts/Modules/Alteration/Alteration_methods.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Alteration/Alteration_validation.js"></script>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Alteration Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Alteration Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form role="form" id="frmAlteration1">
+
+        <div class="row" id="frmAlteration">
+
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
+
+                <div class="block">
+
+                    <h4 style="margin-top: 15px;">Primary information.</h4>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice no</span>
+                        <select class="form-control select" name="Alteration.Sales_Invoice_ID" placeholder="Select invoice no.">
+                            <option value="">Select Invoice no</option>
+                            @foreach (var item in Model.SalesInvoices)
+                            {
+                                if (Model.Alteration.Sales_Invoice_ID == item.Sales_Invoice_Id)
+                                {
+                                    <option value="@item.Sales_Invoice_Id" selected="selected">@item.Sales_Invoice_No</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Sales_Invoice_Id">@item.Sales_Invoice_No</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no</span>
+                        <input type="text" class="form-control" placeholder="Enter mobile no." maxlength="12" name="Alteration.Customer_Mobile_No" value="@Model.Alteration.Customer_Mobile_No" />
+                        <input type="hidden" name="Alteration.Alteration_ID" id="hdnAlteration_ID" value="@Model.Alteration.Alteration_ID">
+                        @*<input type="hidden" name="VendorContact.Vendor_Contact_Name" value="@Model.VendorContact.Vendor_Contact_Name">
+                            <input type="hidden" name="VendorContact.IsActive" value="@Model.VendorContact.IsActive">*@
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 475px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Address.</h4>
+
+                    <form role="form">
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Address</span>
+                            <input type="text" class="form-control" placeholder="Enter product name." name="Alteration.Product_Name" value="@Model.Alteration.Product_Name" />
+                        </div>
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Employee name</span>
+                            <select class="form-control select" name="Alteration.Job_Assigned_To" placeholder="Select employee.">
+                                <option value="">Select employee</option>
+                                @foreach (var item in Model.Employees)
+                                {
+                                    if (Model.Alteration.Job_Assigned_To == item.Employee_Id)
+                                    {
+                                        <option value="@item.Employee_Id" selected="selected">@item.Employee_Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Employee_Id">@item.Employee_Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Comment</span>
+                            <textarea class="form-control" rows="5" placeholder="Enter Comment" name="Alteration.Additional_Info" value="@Model.Alteration.Additional_Info">@Model.Alteration.Additional_Info</textarea>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 490px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Date detail.</h4>
+
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Alteration date.</span>
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control datepicker" name="Alteration.Alteration_Date" value="@((Model.Alteration.Alteration_Date == DateTime.MinValue ? "" : Model.Alteration.Alteration_Date.ToString("dd-MM-yyyy")))"  reado readonly />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Delivery date</span>
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control datepicker" name="Alteration.Delivery_Date" value="@((Model.Alteration.Delivery_Date == DateTime.MinValue ? "" : Model.Alteration.Delivery_Date.ToString("dd-MM-yyyy")))"  reado readonly />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>  
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success active" id="btnSaveAlteration">Save</button>
+
+                    <button type="reset" class="btn btn-danger active">Cancel</button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </form>
+
+</div>
+
+

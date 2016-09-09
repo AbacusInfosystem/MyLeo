@@ -25,17 +25,19 @@
 <!-- END CONTENT FRAME -->
 
 <div class="page-content-wrap">
+
     <form role="form" id="frmEmployee">
+
         <div class="row">
 
             <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 490px;">
 
                 <div class="block">
-                    <h4 style="margin-top: 0px;">Basic information.</h4> 
+                    <h4 style="margin-top: 0px;">Basic information.</h4>
 
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" />
-                        <input type="hidden" class="form-control" id="hdn_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id"/>
+                        <input type="hidden" class="form-control" id="hdn_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id" />
                     </div>
 
                     <div class="form-group">
@@ -57,31 +59,31 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
-                        <div class="input-group date" id="dp-2" @*data-date="05-07-2014"*@ data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" @*value="05-07-2014"*@ name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("dd-MM-yyyy")))" readonly />
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control datepicker" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("dd-MM-yyyy")))" readonly />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="form-group">
                         <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>
                         </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;"> 
-                            <label class="switch"> 
+                        <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
+                            <label class="switch">
                                 @if (Model.Employee.IsActive == false)
-                                { 
-                                    <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" type="checkbox"> 
+                                {
+                                    <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" type="checkbox">
                                 }
                                 else
                                 {
-                                     <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" checked="checked" type="checkbox"> 
-                                } 
+                                    <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" checked="checked" type="checkbox">
+                                }
                                 <span></span>
                             </label>
                         </div>
                     </div>
-                     
+
                     <div class="form-group">
                         <select class="form-control select" name="Employee.Branch_Id">
                             <option value="0">Select Branch</option>
@@ -127,8 +129,6 @@
                 <div class="block">
                     <h4 style="margin-top: 0px;">Address detail.</h4>
 
-                    @*<form role="form">*@
-
                     <div class="form-group">
                         <textarea class="form-control" rows="5" placeholder="Residential address." name="Employee.Employee_Address">@Model.Employee.Employee_Address</textarea>
                     </div>
@@ -152,7 +152,6 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter city." name="Employee.Employee_City" value="@Model.Employee.Employee_City" />
                     </div>
-                    @*</form>*@
                 </div>
 
             </div>
@@ -162,23 +161,96 @@
                 <div class="block">
                     <h4 style="margin-top: 0px;">Communication detail.</h4>
 
-                    @*<form role="form">*@
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Employee.Employee_Mobile1" value="@Model.Employee.Employee_Mobile1" maxlength="10"/>
+                        <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Employee.Employee_Mobile1" value="@Model.Employee.Employee_Mobile1" maxlength="12" />
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Employee.Employee_Mobile2" value="@Model.Employee.Employee_Mobile2" maxlength="10"/>
+                        <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Employee.Employee_Mobile2" value="@Model.Employee.Employee_Mobile2" maxlength="12" />
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter landline number." name="Employee.Employee_Home_Lindline" value="@Model.Employee.Employee_Home_Lindline" maxlength="12"/>
+                        <input type="text" class="form-control" placeholder="Enter landline number." name="Employee.Employee_Home_Lindline" value="@Model.Employee.Employee_Home_Lindline" maxlength="12" />
                     </div>
 
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter email address." name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" />
                     </div>
-                    @*</form>*@
+
+                    <div class="form-group">
+                        <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Set Online.</span>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
+                            <label class="switch" id="chkSwitch">
+                                @if (Model.Employee.Is_Online == true)
+                                {
+                                    <input value="@Model.Employee.Is_Online.ToString()" name="Employee.Is_Online" checked type="checkbox">
+                                }
+                                else
+                                {
+                                    <input value="@Model.Employee.Is_Online.ToString()" name="Employee.Is_Online" type="checkbox">
+                                }
+                                <span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @if (Model.Employee.Is_Online == true)
+                        {
+                            <input type="text" class="form-control online-field" id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" />
+                        }
+                        else
+                        {
+                            <input type="text" class="form-control online-field" id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" style="display:none" />
+                        }
+                        <input type="hidden" id="hdnUser_Name" value="@Model.Employee.User_Name" />
+                    </div>
+
+                    <div class="form-group">
+                        @if (Model.Employee.Is_Online == true)
+                        {
+                            <input type="password" class="form-control online-field" id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" />
+                        }
+                        else
+                        {
+                            <input type="password" class="form-control online-field" id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" style="display:none" />
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        @if (Model.Employee.Is_Online == true)
+                        {
+                            <input type="password" class="form-control online-field" id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" />
+                        }
+                        else
+                        {
+                            <input type="password" class="form-control online-field" id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" style="display:none" />
+                        }
+                    </div>
+
+                    @if (Model.Employee.Is_Online == true)
+                    {
+                        <div class="form-group online-field">
+                            <select class="form-control select" name="Employee.Role_Id" id="drpRole">
+                                <option value="">Select Role</option>
+                                <option value="1">Admin</option>
+                                <option value="2">User</option>
+                            </select>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group online-field" style="display:none;">
+                            <select class="form-control select" name="Employee.Role_Id" id="drpRole">
+                                <option value="">Select Role</option>
+                                <option value="1">Admin</option>
+                                <option value="2">User</option>
+                            </select>
+                        </div>
+                    }
+
                 </div>
 
             </div>
@@ -186,9 +258,8 @@
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
 
                 <div class="btn-group">
-                    <button class="btn btn-success active" id="btnEmployeeSave">Save</button>
-                    @*<button class="btn btn-danger active">Cancel</button>*@
-                    <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "Employee")">Cancel </a>
+                    <button type="button" class="btn btn-success active" id="btnEmployeeSave">Save</button>
+                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Index", "Employee")'">Cancel</button>
                 </div>
 
             </div>

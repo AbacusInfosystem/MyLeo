@@ -187,6 +187,7 @@
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\AlterationController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
     <Compile Include="Controllers\PostLogin\Master\CategoryController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ColorController.cs" />
@@ -206,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BranchViewModel.cs" />
+    <Compile Include="Models\AlterationViewModel.cs" />
     <Compile Include="Models\BrandViewModel.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ColorViewModel.cs" />
@@ -215,11 +217,13 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
     <Compile Include="Models\VendorContactViewModel.cs" />
+    <Compile Include="Models\VendorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -943,14 +947,12 @@
     <Content Include="Content\Atlant\css\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Atlant\js\plugins\jquery\jquery-2.1.1.min.map" />
     <Content Include="Content\Atlant\js\plugins\tableexport\simple_html_dom.php" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\generic.autocomplete.js" />
     <Content Include="Scripts\generic.custom.validation.js" />
     <Content Include="Scripts\generic.lookup.js" />
     <Content Include="Scripts\generic.popup.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -962,6 +964,11 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Modules\Alteration\Alteration_events.js" />
+    <Content Include="Scripts\Modules\Alteration\Alteration_methods.js" />
+    <Content Include="Scripts\Modules\Alteration\Alteration_validation.js" />
+    <Content Include="Scripts\Modules\Alteration\search_Alteration_events.js" />
+    <Content Include="Scripts\Modules\Alteration\search_Alteration_methods.js" />
     <Content Include="Scripts\Modules\Branch\branch_events.js" />
     <Content Include="Scripts\Modules\Branch\branch_methods.js" />
     <Content Include="Scripts\Modules\Branch\branch_validation.js" />
@@ -975,10 +982,21 @@
     <Content Include="Scripts\Modules\Category\category_validation.js" />
     <Content Include="Scripts\Modules\Category\sub_category_events.js" />
     <Content Include="Scripts\Modules\Category\sub_category_methods.js" />
+    <Content Include="Scripts\Modules\Category\sub_category_validation.js" />
     <Content Include="Scripts\Modules\Color\color_events.js" />
     <Content Include="Scripts\Modules\Color\color_methods.js" />
     <Content Include="Scripts\Modules\Color\color_validation.js" />
     <Content Include="Scripts\Modules\common_methods.js" />
+    <Content Include="Scripts\Modules\Customer\customer_events.js" />
+    <Content Include="Scripts\Modules\Customer\customer_methods.js" />
+    <Content Include="Scripts\Modules\Customer\customer_validation.js" />
+    <Content Include="Scripts\Modules\Customer\search_customer_events.js" />
+    <Content Include="Scripts\Modules\Customer\search_customer_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_events.js" />
+    <Content Include="Scripts\Modules\Employee\employee_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_validation.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_event.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_methode.js" />
     <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
@@ -992,6 +1010,11 @@
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
+    <Content Include="Scripts\Modules\Role\role-event.js" />
+    <Content Include="Scripts\Modules\Role\role-method.js" />
+    <Content Include="Scripts\Modules\Size\size_group_events.js" />
+    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
+    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
     <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_validation.js" />
     <Content Include="Scripts\Modules\Tax\tax_events.js" />
     <Content Include="Scripts\Modules\Tax\tax_methods.js" />
@@ -1001,22 +1024,21 @@
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_events.js" />
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_methode.js" />
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_validation.js" />
-    <Content Include="Scripts\Modules\Employee\employee_events.js" />
-    <Content Include="Scripts\Modules\Employee\employee_methods.js" />
-    <Content Include="Scripts\Modules\Employee\employee_validation.js" />
-    <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
-    <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
-    <Content Include="Scripts\Modules\Size\size_group_events.js" />
-    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
-    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\Modules\Vendor\vendor_events.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_methods.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_search_events.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_search_methods.js" />
+    <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -1059,6 +1081,10 @@
     <Content Include="Views\PostLogin\Master\GiftVoucher\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\GiftVoucher\Print.cshtml" />
     <Content Include="Views\PreLogin\Login\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Alteration\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Alteration\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1095,6 +1121,10 @@
       <Project>{4b31b810-2723-4309-8083-3cd7b3251355}</Project>
       <Name>MyLeoRetailerRepo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

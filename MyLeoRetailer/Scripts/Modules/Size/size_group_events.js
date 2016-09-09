@@ -14,9 +14,9 @@ $(function () {
 
     $(document).on("click", "[name='Size_Group_List']", function () {
 
-        Get_Size_Group_Name_By_Id(this);
+        //Get_Size_Group_Name_By_Id(this);
 
-        alert("Size");
+        Get_SizeGroup_By_Id(this);
 
         Get_Sizes();
 
@@ -25,12 +25,9 @@ $(function () {
 
     $("#btnSaveSize").click(function () {
 
-            alert();
-            
             if ($("#frmSize").valid()) {
 
                 Save_Size();
-
             }
         
     });

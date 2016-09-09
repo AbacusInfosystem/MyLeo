@@ -63,8 +63,6 @@ function Get_Sizes() {
 
             debugger;
 
-            alert("sizel")
-
                 for (var i = 0; i < obj.SizeList.length; i++) {
 
                     $("#hdnSize" + (i + 1)).val(obj.SizeList[i].Size_Id);
@@ -88,7 +86,9 @@ function Save_SizeGroup()
 
 		        Size_Group_Name: $("[name='SizeGroup.Size_Group_Name']").val(),
 
-		        Size_Group_Id: $("[name='SizeGroup.Size_Group_Id']").val()
+		        Size_Group_Id: $("[name='SizeGroup.Size_Group_Id']").val(),
+
+		        IsActive: $("[name='SizeGroup.IsActive']").val()
 		    }
 		}
 
@@ -135,13 +135,10 @@ function Save_SizeGroup()
 
 
 function Save_Size() {
-
-
-    alert("SaveSize");
-
+    
     var list = [];
 
-    for (var i = 1; i < 13; i++)
+    for (var i = 1; i < 16; i++)
     {
 
         if($("#txtSize" + i).val() != "")
@@ -167,28 +164,11 @@ function Save_Size() {
                 SizeGroup: {
 
                     Size_Group_Id: $("[name='SizeGroup.Size_Group_Id']").val(),
-
-                    //Size_Id: $("[name='SizeGroup.Size_Id']").val()
                 }
             }
         
 
     var url = "";
-
-    alert(url);
-
-   // url = "/Size/Insert_Size";
-    /*
-    if ($("[name='demo.Size_Id']").val() == "") {
-        alert("insert");
-        url = "/Size/Insert_Size";
-        
-    }
-    else {
-
-        alert("update");
-        url = "/Size/Update_Size";
-    }*/
 
     if (list.length > 0) {
         if (list[0].Size_Id > 0) {
@@ -227,7 +207,6 @@ function Save_Size() {
 }
 
 
-
 function Reset_SizeGroup() {
 
     $("[name='SizeGroup.Size_Group_Name']").val("");
@@ -238,13 +217,11 @@ function Reset_SizeGroup() {
 }
 
 
-function Get_Size_Group_Name_By_Id(obj) {
+function Get_SizeGroup_By_Id(obj) {
 
     $("[name='Size_Group_List']").removeClass("active");
 
     $(obj).addClass("active");
-
-    //$("#divSize").show();
 
     var Size_Group_Name = $(obj).text();
     $("[name='SizeGroup.Size_Group_Name']").val($(obj).text());
@@ -252,12 +229,15 @@ function Get_Size_Group_Name_By_Id(obj) {
     var Size_Group_Id = $(obj).attr("data-identity");
     $("[name='SizeGroup.Size_Group_Id']").val($(obj).attr("data-identity"));
 
-  
+    $('input[id*="txtSize"]').each(function () {
+        $(this).val('');
+    });
+
     $.ajax({
+        
+        url: "/Size/Get_SizeGroup_By_Id",
 
-        url: "/Size/Get_Size_Group_Name_By_Id",
-
-        data: { size_group_Id: Size_Group_Id, size_group_name: Size_Group_Name },
+        data: { size_group_Id: Size_Group_Id },
 
         type: 'POST',
 
@@ -265,15 +245,25 @@ function Get_Size_Group_Name_By_Id(obj) {
 
             var obj = $.parseJSON(response);
 
-            $("#divSize").show();
+            $("[name='SizeGroup.IsActive']").val(obj.SizeGroup.IsActive);
 
-            
+            //Set IsActive Button Status
+
+            var fix = $("[name='SizeGroup.IsActive']").val();
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
+
+            //End
+
+            $("#divSize").show();
           
         }
     });
-
-
-
 }
 
 

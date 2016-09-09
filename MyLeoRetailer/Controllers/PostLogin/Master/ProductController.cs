@@ -6,11 +6,12 @@ using System.Web.Mvc;
 using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
-using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Product;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
+using MyLeoRetailerInfo;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {

@@ -36,6 +36,22 @@ namespace MyLeoRetailerInfo.Common
             return Get_Employee_Designation;
         }
 
+        public static Dictionary<int, string> Get_Vendor_Types()
+        {
+            Dictionary<int, string> Get_Vendor_Types = new Dictionary<int, string>();
+
+            Get_Vendor_Types.Add(1, VendorType.Manufacturer.ToString().Replace('_', ' ').ToString());
+
+            Get_Vendor_Types.Add(2, VendorType.Agent.ToString().Replace('_', ' ').ToString());
+
+            Get_Vendor_Types.Add(3, VendorType.Distributor.ToString().Replace('_', ' ').ToString());
+
+            Get_Vendor_Types.Add(4, VendorType.Transporter.ToString().Replace('_', ' ').ToString());
+
+            return Get_Vendor_Types;
+
+        }
+
         public static Dictionary<int, string> Get_GiftVoucher_Payment_Mode()
         {
             Dictionary<int, string> Get_GiftVoucher_Payment_Mode = new Dictionary<int, string>();

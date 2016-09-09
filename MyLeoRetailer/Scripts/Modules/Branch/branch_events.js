@@ -22,11 +22,23 @@
     });
 
     $("#btnAddNear").click(function () {
-        AddNearLocationDetails();
+
+        $('#txtNear_Location_Pincode').rules("add", { required: true, digits: true, minlength: 6, messages: { required: "Required Field.", digits: "Invalid pin", minlength: "atleast 6 digits." } });
+        
+        if ($("#txtNear_Location_Pincode").valid()) {
+            AddNearLocationDetails();
+        }
+        $("#txtNear_Location_Pincode").rules("remove");
+        
     });
 
     $("#btnAddFar").click(function () {
-        AddFarLocationDetails();
+        $('#txtFar_Location_Pincode').rules("add", { required: true, digits: true, minlength: 6, messages: { required: "Required Field.", digits: "Invalid pin", minlength: "atleast 6 digits." } });
+
+        if ($("#txtFar_Location_Pincode").valid()) {
+            AddFarLocationDetails();
+        }
+        $("#txtFar_Location_Pincode").rules("remove");
     });
 
 

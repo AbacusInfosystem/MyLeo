@@ -42,11 +42,19 @@ function Get_Categories()
 
 function Save_Category()
 {
+    var activeFlg = false;
+    if ($("[name='Category.IsActive']").val() == 1){
+        activeFlg = true;
+    }
+
 	var cViewModel =
 		{
 			Category: {
 
 				Category: $("[name='Category.Category']").val(),
+
+			    //IsActive: $("[name='Category.IsActive']").val(),
+				IsActive: activeFlg,
 
 				Category_Id: $("[name='Category.Category_Id']").val()
 			}
@@ -111,6 +119,35 @@ function Get_Category_By_Id(obj)
 	$("[name='Category.Category']").val($(obj).text());
 
 	$("[name='Category.Category_Id']").val($(obj).attr("data-identity"));
+
+    //
+	var Category_Id = $("[name='Category.Category_Id']").val();
+	
+	$.ajax({
+
+	    url: "/category/get-category-by-id",
+
+	    data: { Category_Id: Category_Id },
+
+	    type: 'POST',
+
+	    success: function (response) {
+
+	        var obj = $.parseJSON(response);
+
+	        if (obj.Category.IsActive == true) {
+	            $("[name='Category.IsActive']").val(1);
+	            document.getElementById('Flag').checked = true;
+	        }
+	        else {
+	            $("[name='Category.IsActive']").val(0);
+	            document.getElementById('Flag').checked = false; 
+	        }
+
+	    }
+	});
+    //
+
 }
 
 function Get_SubCategories(obj)

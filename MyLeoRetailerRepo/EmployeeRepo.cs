@@ -86,6 +86,14 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Updated_By", Employee.Updated_By)); 
 
+            sqlParam.Add(new SqlParameter("@Is_Online", Employee.Is_Online));
+
+            sqlParam.Add(new SqlParameter("@User_Name", Employee.User_Name));
+
+            sqlParam.Add(new SqlParameter("@Password", Employee.Password));
+
+            sqlParam.Add(new SqlParameter("@Role_Id", Employee.Role_Id));
+
             return sqlParam;
         }
 

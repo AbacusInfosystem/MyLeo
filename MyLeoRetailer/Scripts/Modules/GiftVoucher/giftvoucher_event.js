@@ -1,46 +1,43 @@
 ﻿$(function () {
 
-
+   
     $("#btnGiftVoucherSave").click(function () {
-
-        Save_Gift_Voucher();
-
-        //if ($("#frmTax").valid()) {
-
+        if ($("#frmGiftVoucher").valid()) {
+            //alert(("#hdnVendorContact_Id"));
+            if ($("#hdn_GiftVoucherId").val() == 0) {
+                $("#frmGiftVoucher").attr("action", "/GiftVoucher/Insert_Gift_Voucher/");
+            }
+            else {
+                $("#frmGiftVoucher").attr("action", "/GiftVoucher/Update_Gift_Voucher/");
+            }
+            $('#frmGiftVoucher').attr("method", "POST");
+            $('#frmGiftVoucher').submit();
+        }
     });
 
-    $("#btnGiftVoucherPrint").click(function () {
-       
+
+    $("#btnGiftVoucherPrint").click(function () {       
         $("#frmGiftVoucher").attr("action", "/GiftVoucher/Print");
-        $("#frmGiftVoucher").submit();
-           
+        $("#frmGiftVoucher").submit();           
     });
 
-    if ($('#hdn_GiftVoucherId').val() != "") {
-        
+    if ($('#hdn_GiftVoucherId').val() != "") {        
         if ($('#mode').val() == 2) {
-            $("#bankname").show();
-            $("#creditcardno").show();
+            $("#divBankName").show();
+            $("#divCreditCardNo").show();
         } else {
-            $("#bankname").hide();
-            $("#creditcardno").hide();
+            $("#divBankName").hide();
+            $("#divCreditCardNo").hide();
         }
-
     }
-
-   
-    $("#mode").change(function () {
-        
+       
+    $("#mode").change(function () {        
         if ($(this).val() == 2) {
-            $("#bankname").show();
-            $("#creditcardno").show();
+            $("#divBankName").show();
+            $("#divCreditCardNo").show();
         } else {
-            $("#bankname").hide();
-            $("#creditcardno").hide();
+            $("#divBankName").hide();
+            $("#divCreditCardNo").hide();
         }
     });
-
-
-   
-
 });

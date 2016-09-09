@@ -41,37 +41,17 @@
                         <h4 style="margin-top: 0px;">Voucher information.</h4>
 
                         <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher no</span>
                             <input type="text" class="form-control" placeholder="Enter Gift Voucher No." name="GiftVoucher.Gift_Voucher_No" value="@Model.GiftVoucher.Gift_Voucher_No" />
                             <input type="hidden" class="form-control" id="hdn_GiftVoucherId" name="GiftVoucher.Gift_Voucher_Id" value="@Model.GiftVoucher.Gift_Voucher_Id" />
-                            @*<input type="hidden" name="GiftVoucher.IsActive" value="@Model.GiftVoucher.IsActive">*@
                         </div>
 
-
                         <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Person name</span>
                             <input type="text" class="form-control" placeholder="Enter person name." name="GiftVoucher.Person_Name" value="@Model.GiftVoucher.Person_Name" />
                         </div>
 
                     </div>
-
-
-
-                    <div class="form-group">
-                        <div class="form-group" style="margin-bottom: 5px; float: right;">
-                            <label class="switch">
-                                @if (Model.GiftVoucher.IsActive == 0)
-                                {
-                                    <input value="@Model.GiftVoucher.IsActive" name="GiftVoucher.IsActive" type="checkbox" id="Flag">
-                                }
-                                else
-                                {
-                                    <input value="@Model.GiftVoucher.IsActive" name="GiftVoucher.IsActive" checked="checked" type="checkbox" id="Flag">
-                                }
-                                @*<input checked="" id="Flag" value="0" type="checkbox">*@
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-
 
                 </div>
 
@@ -80,25 +60,22 @@
                     <div class="block">
                         <h4 style="margin-top: 0px;">Date detail.</h4>
 
-                        @*<form role="form">*@
-
-
-
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher date.</span>
-                            <div class="input-group date" id="dp-2" @*data-date="05-07-2014"*@ data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" @*value="05-07-2014"*@ name="GiftVoucher.Gift_Voucher_Date" value="@((Model.GiftVoucher.Gift_Voucher_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Date.ToString("dd-MM-yyyy")))" readonly />
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" name="GiftVoucher.Gift_Voucher_Date" value="@((Model.GiftVoucher.Gift_Voucher_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Date.ToString("dd-MM-yyyy")))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-                        </div>
+                        </div>  
+
 
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher expiry date</span>
-                            <div class="input-group date" id="dp-2" @*data-date="05-07-2014"*@ data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" @*value="05-07-2014"*@ name="GiftVoucher.Gift_Voucher_Expiry_Date" value="@((Model.GiftVoucher.Gift_Voucher_Expiry_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Expiry_Date.ToString("dd-MM-yyyy")))" readonly />
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" name="GiftVoucher.Gift_Voucher_Expiry_Date" value="@((Model.GiftVoucher.Gift_Voucher_Expiry_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Expiry_Date.ToString("dd-MM-yyyy")))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-                        </div>
+                        </div>  
 
                     </div>
 
@@ -109,14 +86,14 @@
                     <div class="block">
                         <h4 style="margin-top: 0px;">Amount detail.</h4>
 
-                        @*<form role="form">*@
-
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter voucher amount." name="GiftVoucher.Gift_Voucher_Amount" value="@Model.GiftVoucher.Gift_Voucher_Amount" />
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher amount</span>
+                            <input type="text" class="form-control" placeholder="Enter voucher amount." name="GiftVoucher.Gift_Voucher_Amount" value="@(Model.GiftVoucher.Gift_Voucher_Amount == 0 ? "" : Model.GiftVoucher.Gift_Voucher_Amount.ToString())" />
                         </div>
 
 
                         <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
                             <select class="form-control select" placeholder="Select payment mode." id="mode" name="GiftVoucher.Payment_Mode" value="@Model.GiftVoucher.Payment_Mode">
                                 @foreach (var item in LookupInfo.Get_GiftVoucher_Payment_Mode())
                                 {
@@ -134,30 +111,25 @@
 
 
 
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter bank name." id="bankname" name="GiftVoucher.Bank_Name" value="@Model.GiftVoucher.Bank_Name" style="display: none;" />
+                        <div class="form-group" id="divBankName">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank name</span>
+                            <input type="text" class="form-control" placeholder="Enter bank name." id="bankname" name="GiftVoucher.Bank_Name" value="@Model.GiftVoucher.Bank_Name"  />
                         </div>
 
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Enter credit card number." id="creditcardno" name="GiftVoucher.Credit_Card_No" value="@Model.GiftVoucher.Credit_Card_No" style="display: none;" />
+                        <div class="form-group" id="divCreditCardNo">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit-Card no</span>
+                            <input type="text" class="form-control" placeholder="Enter credit card number." id="creditcardno" name="GiftVoucher.Credit_Card_No" value="@Model.GiftVoucher.Credit_Card_No"  />
                         </div>
-                        @*</form>*@
                     </div>
 
                 </div>
-
-           
 
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
 
                 <div class="btn-group">
                     <button class="btn btn-success active" type="button" id="btnGiftVoucherSave">Save</button>
-                    @*<button class="btn btn-danger active">Cancel</button>*@
-                    @*<a class="btn btn-danger active" role="button" href="@Url.Action("Search", "GiftVoucher")">Cancel </a>*@
-                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Search", "GiftVoucher")'">Cancel</button>
+                    <button type="reset" class="btn btn-danger active">Cancel</button>
                     <button class="btn btn-twitter active" role="button" id="btnGiftVoucherPrint">Print</button>
-
-                    
 
                 </div>
 

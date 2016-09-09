@@ -14,6 +14,7 @@ $(function ()
 
 	$(document).on("click", "[name='Category_List']", function ()
 	{
+	  
 		Get_Category_By_Id(this);
 
 		Get_SubCategories(this);
@@ -22,6 +23,10 @@ $(function ()
 	$("[name='Filter.Category']").focusout(function ()
 	{
 		Get_Categories();
+	});
+
+	$("#btnCancel").click(function () {
+	    Reset_Category();
 	});
 
 

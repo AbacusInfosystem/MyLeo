@@ -39,33 +39,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alteration\AlterationInfo.cs" />
     <Compile Include="Branch\BranchInfo.cs" />
     <Compile Include="Brand\BrandInfo.cs" />
     <Compile Include="Category\CategoryInfo.cs" />
     <Compile Include="Category\SubCategoryInfo.cs" />
     <Compile Include="Color\ColorInfo.cs" />
     <Compile Include="Common\AutocompleteInfo.cs" />
+    <Compile Include="Common\EnumCollection.cs" />
     <Compile Include="Common\ExceptionInfo.cs" />
     <Compile Include="Common\FriendlyMessage.cs" />
     <Compile Include="Common\LoginInfo.cs" />
     <Compile Include="Common\LookupInfo.cs" />
     <Compile Include="Common\Storeprocedures.cs" />
-    <Compile Include="Employee\EmployeeInfo.cs" />
     <Compile Include="Customer\CustomerInfo.cs" />
+    <Compile Include="Employee\EmployeeInfo.cs" />
     <Compile Include="Enum_Collection.cs" />
     <Compile Include="GiftVoucher\GiftVoucherInfo.cs" />
     <Compile Include="GridInfo.cs" />
     <Compile Include="Interface\IGridInfo.cs" />
     <Compile Include="Interface\IQueryInfo.cs" />
+    <Compile Include="LookupInfo.cs" />
     <Compile Include="Pagination_Info.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryInfo.cs" />
+    <Compile Include="Role\RoleInfo.cs" />
+    <Compile Include="SalesInvoice\SalesInvoiceInfo.cs" />
+    <Compile Include="State\StateInfo.cs" />
     <Compile Include="Tax\TaxInfo.cs" />
     <Compile Include="VendorContact\VendorContactInfo.cs" />
-    <Compile Include="Vendor\VendorInfo.cs" />
     <Compile Include="Size\SizeGroupInfo.cs" />
+    <Compile Include="Vendor\VendorInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

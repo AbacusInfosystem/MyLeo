@@ -29,9 +29,7 @@ function Get_Employees() {
             var obj = $.parseJSON(response);
 
             Bind_Grid(obj, "Employee_List");
-
-            //Reset_Employee();
-
+             
             $("#divEmployeePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
     });

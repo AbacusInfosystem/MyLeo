@@ -60,7 +60,19 @@ $(function () {
             "SizeGroup.Size11":
               {
                   validate_Textbox_Empty11: true
-              },         
+              },
+            "SizeGroup.Size12":
+              {
+                  validate_Textbox_Empty12: true
+              },
+            "SizeGroup.Size13":
+              {
+                  validate_Textbox_Empty13: true
+              },
+            "SizeGroup.Size14":
+              {
+                  validate_Textbox_Empty14: true
+              },
         },
     });
 });
@@ -80,7 +92,6 @@ jQuery.validator.addMethod("validate_Textbox_Empty", function (value, element) {
 
 }, "Please Enter Size.");
 
-
 jQuery.validator.addMethod("validate_Textbox_Empty2", function (value, element) {
 
     var result = true;
@@ -93,7 +104,6 @@ jQuery.validator.addMethod("validate_Textbox_Empty2", function (value, element) 
     return result;
 
 }, "Please Enter Size.");
-
 
 jQuery.validator.addMethod("validate_Textbox_Empty3", function (value, element) {
 
@@ -205,6 +215,45 @@ jQuery.validator.addMethod("validate_Textbox_Empty11", function (value, element)
     {
 
         if ($("#txtSize11").val() == '' && $("#txtSize12").val() != '') {
+            result = false;
+        }
+    }
+    return result;
+
+}, "Please Enter Size.");
+
+jQuery.validator.addMethod("validate_Textbox_Empty12", function (value, element) {
+
+    var result = true;
+    {
+
+        if ($("#txtSize12").val() == '' && $("#txtSize13").val() != '') {
+            result = false;
+        }
+    }
+    return result;
+
+}, "Please Enter Size.");
+
+jQuery.validator.addMethod("validate_Textbox_Empty13", function (value, element) {
+
+    var result = true;
+    {
+
+        if ($("#txtSize13").val() == '' && $("#txtSize14").val() != '') {
+            result = false;
+        }
+    }
+    return result;
+
+}, "Please Enter Size.");
+
+jQuery.validator.addMethod("validate_Textbox_Empty14", function (value, element) {
+
+    var result = true;
+    {
+
+        if ($("#txtSize14").val() == '' && $("#txtSize15").val() != '') {
             result = false;
         }
     }

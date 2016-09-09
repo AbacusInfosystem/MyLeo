@@ -15,7 +15,7 @@ using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
-    public class BrandController :BaseController
+    public class BrandController : BaseController
     {
         public BrandRepo bRepo;
 
@@ -56,6 +56,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 				bRepo.Update_Brand(bViewModel.Brand);
 
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("BRND02"));
+
 			}
 			catch(Exception ex)
 			{
@@ -75,9 +76,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 			try
 			{
-				filter = bViewModel.Filter.Brand_Name; // Set filter comma seprated
+                filter = bViewModel.Filter.Brand_Name; // Set filter comma seprated
+                //filter = bViewModel.Filter.Brand_Id; // Set filter comma seprated
 
-				dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+                dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+                //dataOperator = DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
 
                 bViewModel.Query_Detail = Set_Query_Details(false, "Brand_Name,Brand_Id", "", "Brand", "Brand_Name", filter, dataOperator); // Set query for grid
 
@@ -112,28 +115,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
 
             return Json(JsonConvert.SerializeObject(bViewModel));
-        }
-
-        public JsonResult Get_Brands_By_Name_Autocomplete(string brand_Name)
-        {
-
-            BranchViewModel bViewModel = new BranchViewModel();
-            List<AutocompleteInfo> brandList = new List<AutocompleteInfo>();
-
-            try
-            {
-
-                brandList = bRepo.Get_Brands_By_Name_Autocomplete(brand_Name);
-
-            }
-            catch (Exception ex)
-            {
-                bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
-                //Logger.Error("Brand Controller - Get_Brands_By_Name_Autocomplete: " + ex.ToString());
-            }
-
-            return Json(brandList, JsonRequestBehavior.AllowGet);
         }
 
     }
