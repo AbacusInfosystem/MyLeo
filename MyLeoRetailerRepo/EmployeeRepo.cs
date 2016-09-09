@@ -98,37 +98,58 @@ namespace MyLeoRetailerRepo
             DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Employees_By_Id.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
-                Employee = Get_Employee_Values(dr);
+                //Employee = Get_Employee_Values(dr);
+                Employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+                Employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+                Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+                Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
+                Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+                Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
+                Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
+                Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
+                Employee.Employee_State = Convert.ToString(dr["Employee_State"]);
+                Employee.Employee_Country = Convert.ToString(dr["Employee_Country"]);
+                Employee.Employee_Pincode = Convert.ToInt32(dr["Employee_Pincode"]);
+                Employee.Employee_Native_Address = Convert.ToString(dr["Employee_Native_Address"]);
+                Employee.Employee_Mobile1 = Convert.ToString(dr["Employee_Mobile1"]);
+                Employee.Employee_Mobile2 = Convert.ToString(dr["Employee_Mobile2"]);
+                Employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
+                Employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
+                Employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
+                Employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
+                Employee.Created_By = Convert.ToInt32(dr["Created_By"]);
+                Employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
+                Employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
             }
             return Employee;
         }
 
-        private EmployeeInfo Get_Employee_Values(DataRow dr)
-        {
-            EmployeeInfo employee = new EmployeeInfo();
+        //private EmployeeInfo Get_Employee_Values(DataRow dr)
+        //{
+        //    EmployeeInfo Employee = new EmployeeInfo();
 
-            employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
-            employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
-            employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
-            employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
-            employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
-            employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
-            employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
-            employee.Employee_City = Convert.ToString(dr["Employee_City"]);
-            employee.Employee_State = Convert.ToString(dr["Employee_State"]);
-            employee.Employee_Country = Convert.ToString(dr["Employee_Country"]);
-            employee.Employee_Pincode = Convert.ToInt32(dr["Employee_Pincode"]);
-            employee.Employee_Native_Address = Convert.ToString(dr["Employee_Native_Address"]);
-            employee.Employee_Mobile1 = Convert.ToString(dr["Employee_Mobile1"]);
-            employee.Employee_Mobile2 = Convert.ToString(dr["Employee_Mobile2"]);
-            employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
-            employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
-            employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
-            employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
-            employee.Created_By = Convert.ToInt32(dr["Created_By"]);
-            employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
-            employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-            return employee;
-        }
+        //    Employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+        //    Employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+        //    Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+        //    Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
+        //    Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+        //    Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
+        //    Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
+        //    Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
+        //    Employee.Employee_State = Convert.ToString(dr["Employee_State"]);
+        //    Employee.Employee_Country = Convert.ToString(dr["Employee_Country"]);
+        //    Employee.Employee_Pincode = Convert.ToInt32(dr["Employee_Pincode"]);
+        //    Employee.Employee_Native_Address = Convert.ToString(dr["Employee_Native_Address"]);
+        //    Employee.Employee_Mobile1 = Convert.ToString(dr["Employee_Mobile1"]);
+        //    Employee.Employee_Mobile2 = Convert.ToString(dr["Employee_Mobile2"]);
+        //    Employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
+        //    Employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
+        //    Employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
+        //    Employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
+        //    Employee.Created_By = Convert.ToInt32(dr["Created_By"]);
+        //    Employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
+        //    Employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
+        //    return Employee;
+        //}
     }
 }

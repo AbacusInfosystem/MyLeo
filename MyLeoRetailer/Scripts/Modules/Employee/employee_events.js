@@ -16,6 +16,12 @@ $(function ()
 	            $('#frmEmployee').attr("method", "POST");
 	            $('#frmEmployee').submit();
 		}
-	}); 
+    });
+
+    $("#btnReset").click(function () {
+
+        ResetForm();
+
+    });
 	 
 });

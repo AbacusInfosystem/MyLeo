@@ -105,11 +105,11 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-            #region Employee
-            FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
+            #region Product
+            FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Product added successfully.");
             hash.Add("EMP01", EMP01);
 
-            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
+            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
             hash.Add("EMP02", EMP02);
             #endregion
 
@@ -153,7 +153,16 @@ namespace MyLeoRetailer.Common
 //>>>>>>> origin/master
 
             #endregion
-		}
+
+            #region Product
+            FriendlyMessage PROD01 = new FriendlyMessage("PROD01", MessageType.Success, "Product added successfully.");
+            hash.Add("PROD01", PROD01);
+
+            FriendlyMessage PROD02 = new FriendlyMessage("PROD02", MessageType.Success, "Product updated successfully.");
+            hash.Add("PROD02", PROD02);
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{

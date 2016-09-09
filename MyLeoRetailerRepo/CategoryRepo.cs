@@ -64,7 +64,7 @@ namespace MyLeoRetailerRepo
         public List<CategoryInfo> Get_Categorys()
         {
             List<CategoryInfo> categorys = new List<CategoryInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Category_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Categorys.ToString(), CommandType.StoredProcedure);
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)
