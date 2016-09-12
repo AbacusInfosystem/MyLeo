@@ -100,7 +100,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
                 return RedirectToAction("Index", "Login", lViewModel);
             }
 
-            return RedirectToAction("Index", "Size");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         private void SetUsersCookies(string userName, string password)

@@ -186,6 +186,7 @@
     <Compile Include="Controllers\PostLogin\AutocompleteLookup\AutocompleteLookupController.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\PostLogin\DashboardController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\AlterationController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
@@ -1086,6 +1087,7 @@
     <Content Include="Views\PostLogin\Master\Vendor\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
+    <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1100,6 +1102,7 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Filters\" />
+    <Folder Include="Scripts\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

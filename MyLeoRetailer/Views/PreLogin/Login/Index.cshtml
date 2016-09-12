@@ -4,6 +4,7 @@
     Layout = null;
 }
  
+<link href="~/Content/Atlant/css/theme-default.css" rel="stylesheet" />
 <style>
     .header_luxe {
         margin-top: 50px;
@@ -15,6 +16,9 @@
             margin: 0 auto;
             padding: 22px 0;
         }
+    option {
+        background-color: #33414e;
+    }
 </style>
 
 
@@ -22,42 +26,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Login | MyLeo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-    <link href="~/Content/css/login.css" rel="stylesheet" />
-    <link href="~/Content/css/ripple.css" rel="stylesheet" />
 </head>
 <body>
 
-    <div class="header_luxe">
-        <img src="~/Images/luxe.JPG" class="img-responsive" alt="" />
-    </div>
+    <div class="login-container">
 
-    <div class="container">
-        @*@{Html.RenderPartial("_ServerMessage");}*@
-        <div class="card"></div>
-        <div class="card">
-            <div class="logo">
-                <h2>Login</h2>
+        <div class="login-box animated fadeInDown">
+            @*<div class="login-logo"></div>*@
+            <div class="login-body">
+                <div class="login-title"><strong>Welcome</strong>, Please login</div>
+                <form action="@Url.Action("Authenticate", "Login")" class="form-horizontal" method="post">
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <select class="form-control select">
+                                <option selected>Select Branch Name</option>
+                                <option>Dadar</option>
+                                <option>Andheri</option>
+                                <option>Virar</option>
+                                <option>Thane</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Username" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" placeholder="Password" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-link btn-block">Forgot your password?</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-info btn-block">Log In</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <form id="frmLogin" action="@Url.Action("Authenticate", "Login")" method="post">
-                @*<input type="hidden" name="Cookies.Brand_Name" id="txtUserName" class="form-control input-sm" required="required" value="Mercedes" />*@
-                <div class="input-container">
-                    <input type="text" name="Cookies.Username" id="txtUserName" class="form-control input-sm" required="required" />
-                    <label for="Username">Username</label>
-                    <div class="bar"></div>
+            <div class="login-footer">
+                @*<div class="pull-left">
+                    &copy; 2014 AppName
                 </div>
-                <div class="input-container">
-                    <input type="password" name="Cookies.Password" id="txtPassword" class="form-control input-sm" required="required" />
-                    <label for="Password">Password</label>
-                    <div class="bar"></div>
-                </div>
-
-                <div class="sign"><button type="submit" id="btnLogin" class="btn ripple">Sign In</button></div>
-                <div class="footer"><a href="@Url.Action("ForgotPassword", "Login")">Forgot Password</a></div>
-            </form>
+                <div class="pull-right">
+                    <a href="#">About</a> |
+                    <a href="#">Privacy</a> |
+                    <a href="#">Contact Us</a>
+                </div>*@
+            </div>
         </div>
+
     </div>
 
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
