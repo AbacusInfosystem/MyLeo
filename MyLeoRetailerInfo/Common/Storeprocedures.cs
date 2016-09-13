@@ -151,7 +151,12 @@ namespace MyLeoRetailerInfo.Common
 
             sp_Insert_Role,
             sp_Update_Role,
-
+            sp_Get_Role_By_Id,
+            sp_Get_Role_Access_Functions,
+            sp_Insert_Role_Access_Function,
+            sp_Update_Role_Access_Function,
+            sp_Check_Existing_Role_Name,
+            sp_Get_Roles,
 
             #endregion
 

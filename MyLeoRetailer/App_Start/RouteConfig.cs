@@ -83,6 +83,30 @@ namespace MyLeoRetailer
             defaults: new { controller = "Role", action = "Save_Role", id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            routes.MapRoute(
+            name: "Role-2",
+            url: "role/get-roles",
+            defaults: new { controller = "Role", action = "Get_Roles", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Role-3",
+            url: "role/get-role-by-id",
+            defaults: new { controller = "Role", action = "Get_Role_By_Id", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Role-4",
+            url: "role/get-role-access-functions/",
+            defaults: new { controller = "Role", action = "Get_Role_Access_Functions", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Role-5",
+            url: "role/check-role-name/{role_Name}",
+            defaults: new { controller = "Role", action = "Check_Existing_Role_Name", role_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
             #endregion
 
             #region Product

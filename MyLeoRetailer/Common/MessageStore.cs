@@ -232,7 +232,18 @@ namespace MyLeoRetailer.Common
             hash.Add("PROD02", PROD02);
             #endregion
 
-		}
+            #region Role
+
+            FriendlyMessage RL01 = new FriendlyMessage("RL01", MessageType.Success, "Role added successfully.");
+            hash.Add("RL01", RL01);
+
+            FriendlyMessage RL02 = new FriendlyMessage("RL02", MessageType.Success, "Role updated successfully.");
+            hash.Add("RL02", RL02);
+
+
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{

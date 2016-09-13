@@ -31,8 +31,9 @@ $(function ()
     });
 
     $('[name = "Employee.Is_Online"]').change(function () {
-        if ($(this).val() == 1){
-
+      
+        if ($(this).val() == 1 || $(this).val() == "true") {
+         
             $(".online-field").hide("");
             $(".online-field").val("");
             $('#drpRole').val("");
@@ -43,7 +44,7 @@ $(function ()
             $('#drpRole').rules("remove");
         }
         else {
-
+          
             $(".online-field").show();
 
             $('#txtUser_Name').rules("add", { required: true, validate_username: true, messages: { required: "User name is required." } });
@@ -54,7 +55,16 @@ $(function ()
         }
         
     });
+    
+    if($('[name = "Employee.Is_Online"]').val() == "True" || $('[name = "Employee.Is_Online"]').val() == 1)
+    {
+        alert($('[name = "Employee.Is_Online"]').val());
 
+        $('#txtUser_Name').rules("add", { required: true, validate_username: true, messages: { required: "User name is required." } });
+        $('#txtPassword').rules("add", { required: true, messages: { required: "Password is required." } });
+        $('#txtConfirmPassword').rules("add", { match_password: true });
+        $('#drpRole').rules("add", { required: true, messages: { required: "Role is required." } });
+    }
     
 
 });

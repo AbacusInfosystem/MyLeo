@@ -7,6 +7,7 @@ using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Employee;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Interface;
+using MyLeoRetailerInfo.Role;
 
 
 namespace MyLeoRetailer.Models
@@ -30,6 +31,8 @@ namespace MyLeoRetailer.Models
             Grid_Detail.Pager.DivObject = "divEmployeePager";
 
 			Grid_Detail.Pager.CallBackMethod = "Get_Employees";
+
+            Role_List = new List<RoleInfo>();
 		}
 
         public GridInfo Grid_Detail
@@ -61,6 +64,9 @@ namespace MyLeoRetailer.Models
             get;
             set;
         }
+
+        public List<RoleInfo> Role_List { get; set; }
+
     }
 
     public class Filter_Employee
