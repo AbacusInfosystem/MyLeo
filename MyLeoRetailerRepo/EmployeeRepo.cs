@@ -128,6 +128,12 @@ namespace MyLeoRetailerRepo
                 Employee.Created_By = Convert.ToInt32(dr["Created_By"]);
                 Employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
                 Employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
+
+                Employee.Is_Online = Convert.ToBoolean(dr["Is_Online"]);
+                Employee.User_Name = Convert.ToString(dr["User_Name"]);
+                Employee.Password = Convert.ToString(dr["Password"]);
+                Employee.Role_Id = Convert.ToInt32(dr["Role_Id"]);
+
             }
             return Employee;
         }
@@ -159,5 +165,33 @@ namespace MyLeoRetailerRepo
         //    Employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
         //    return Employee;
         //}
+
+
+        public bool Check_Existing_User_Name(string User_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("User_Name", User_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_User_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_User"]);
+                }
+            }
+
+            return check;
+        }
+
+
     }
 }
