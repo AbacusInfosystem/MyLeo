@@ -101,7 +101,7 @@ function Reset_Tax() {
     $("[name='Tax.IsActive']").val("");
 
    
-
+    $('#frmTax').trigger("reset");
    
 }
 

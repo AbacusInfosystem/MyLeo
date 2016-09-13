@@ -3,12 +3,12 @@ $(function ()
 {
  
     $("#btnEmployeeSave").click(function ()
-    {
+	{
         if ($('[name="Employee.Is_Online"]').val() == 1){
             $('[name="Employee.Is_Online"]').val('True');
         }
 	    if ($("#frmEmployee").valid())
-	    {
+		{ 
 	            if ($("#hdn_EmployeeId").val() == 0) {
 	                $("#frmEmployee").attr("action", "/Employee/Insert_Employee/");
 	            }
@@ -18,8 +18,14 @@ $(function ()
 	            $('#frmEmployee').attr("method", "POST");
 	            $('#frmEmployee').submit();
 		}
-    });
+	}); 
+	 
+    $("#btnReset").click(function () {
 
+        ResetForm();
+
+    });
+	 
     $("#chkSwitch").find('span').click(function () {
         $('[name="Employee.Is_Online"]').trigger("change");
     });

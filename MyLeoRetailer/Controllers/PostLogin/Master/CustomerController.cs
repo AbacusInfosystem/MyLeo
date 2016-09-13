@@ -70,7 +70,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(cViewModel));
         }
 
-        public JsonResult Insert_Customer(CustomerViewModel cViewModel)
+        public ActionResult Insert_Customer(CustomerViewModel cViewModel)
         {
             try
             {                
@@ -85,10 +85,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(cViewModel));
+            TempData["cViewModel"] = cViewModel;
+
+            return RedirectToAction("Search", cViewModel);
         }
 
-        public JsonResult Update_Customer(CustomerViewModel cViewModel)
+        public ActionResult Update_Customer(CustomerViewModel cViewModel)
         {
             try
             {
@@ -103,7 +105,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(cViewModel));
+            TempData["cViewModel"] = cViewModel;
+
+            return RedirectToAction("Search", cViewModel);
         }
 
         public JsonResult Get_Customers(CustomerViewModel cViewModel)

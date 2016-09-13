@@ -8,6 +8,7 @@
     $(document).on('change', '[name="Branch_List"]', function (event) {        
         if ($(this).prop('checked')) {
             $("#hdnBranch_ID").val(this.value);
+            $("#btnEditBranch").show();
         }
     });
 

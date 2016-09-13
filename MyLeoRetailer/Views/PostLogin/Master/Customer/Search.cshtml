@@ -30,7 +30,7 @@
 
     <div class="row">
 
-        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
 
             <div class="block">
 
@@ -41,6 +41,7 @@
                         <div class="col-md-5">
 
                             <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Customer name.</span>
                                 <input type="text" class="form-control" name="Filter.Customer_Name" placeholder="Enter customer name to search." />
                                 <input type="hidden" id="hdnCustomer_Id" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id">
                             </div>
@@ -50,12 +51,13 @@
                         <div class="col-md-5">
 
                             <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile number.</span>
                                 <input type="text" class="form-control" name="Filter.Customer_Mobile1" placeholder="Enter customer mobile number to search." maxlength="12" />
                             </div>
 
                         </div>
 
-                        <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-2" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
                                 <button role="button" class="btn btn-success active" value="Create" id="btnCreateCustomer">Create</button>

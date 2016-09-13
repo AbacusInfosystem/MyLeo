@@ -947,14 +947,12 @@
     <Content Include="Content\Atlant\css\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\Atlant\js\plugins\jquery\jquery-2.1.1.min.map" />
     <Content Include="Content\Atlant\js\plugins\tableexport\simple_html_dom.php" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\generic.autocomplete.js" />
     <Content Include="Scripts\generic.custom.validation.js" />
     <Content Include="Scripts\generic.lookup.js" />
     <Content Include="Scripts\generic.popup.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -966,16 +964,16 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Modules\Branch\branch_events.js" />
-    <Content Include="Scripts\Modules\Branch\branch_methods.js" />
-    <Content Include="Scripts\Modules\Branch\branch_validation.js" />
-    <Content Include="Scripts\Modules\Branch\search_branch_events.js" />
-    <Content Include="Scripts\Modules\Branch\search_branch_methods.js" />
     <Content Include="Scripts\Modules\Alteration\Alteration_events.js" />
     <Content Include="Scripts\Modules\Alteration\Alteration_methods.js" />
     <Content Include="Scripts\Modules\Alteration\Alteration_validation.js" />
     <Content Include="Scripts\Modules\Alteration\search_Alteration_events.js" />
     <Content Include="Scripts\Modules\Alteration\search_Alteration_methods.js" />
+    <Content Include="Scripts\Modules\Branch\branch_events.js" />
+    <Content Include="Scripts\Modules\Branch\branch_methods.js" />
+    <Content Include="Scripts\Modules\Branch\branch_validation.js" />
+    <Content Include="Scripts\Modules\Branch\search_branch_events.js" />
+    <Content Include="Scripts\Modules\Branch\search_branch_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_events.js" />
     <Content Include="Scripts\Modules\Brand\brand_methods.js" />
     <Content Include="Scripts\Modules\Brand\brand_validation.js" />
@@ -994,6 +992,11 @@
     <Content Include="Scripts\Modules\Customer\customer_validation.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_events.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_events.js" />
+    <Content Include="Scripts\Modules\Employee\employee_methods.js" />
+    <Content Include="Scripts\Modules\Employee\employee_validation.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
+    <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_event.js" />
     <Content Include="Scripts\Modules\GiftVoucher\giftvoucher_methode.js" />
     <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
@@ -1002,11 +1005,17 @@
     <Content Include="Scripts\Modules\PrintThis.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
+    <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_events.js" />
+    <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_methods.js" />
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
+    <Content Include="Scripts\Modules\Size\size_group_events.js" />
+    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
+    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
+    <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_validation.js" />
     <Content Include="Scripts\Modules\Tax\tax_events.js" />
     <Content Include="Scripts\Modules\Tax\tax_methods.js" />
     <Content Include="Scripts\Modules\Tax\Tax_validation.js" />
@@ -1015,19 +1024,12 @@
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_events.js" />
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_methode.js" />
     <Content Include="Scripts\Modules\VendorContact\vendorcontact_validation.js" />
-    <Content Include="Scripts\Modules\Employee\employee_events.js" />
-    <Content Include="Scripts\Modules\Employee\employee_methods.js" />
-    <Content Include="Scripts\Modules\Employee\employee_validation.js" />
-    <Content Include="Scripts\Modules\Employee\search_employee_event.js" />
-    <Content Include="Scripts\Modules\Employee\search_employee_method.js" />
-    <Content Include="Scripts\Modules\Size\size_group_events.js" />
-    <Content Include="Scripts\Modules\Size\size_group_methods.js" />
-    <Content Include="Scripts\Modules\Size\size_group_validation.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_events.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_methods.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_search_events.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_search_methods.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1037,7 +1039,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
@@ -1084,6 +1085,7 @@
     <Content Include="Views\PostLogin\Master\Alteration\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Vendor\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1119,6 +1121,10 @@
       <Project>{4b31b810-2723-4309-8083-3cd7b3251355}</Project>
       <Name>MyLeoRetailerRepo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

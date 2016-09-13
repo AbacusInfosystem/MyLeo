@@ -20,7 +20,7 @@
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
         <div class="page-title">
-            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; VendorContact Management</h2>
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Vendor Contact Management</h2>
         </div>
     </div>
 
@@ -42,6 +42,7 @@
                         <div class="col-md-5">
 
                             <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor contact name</span>
                                 <input type="text" class="form-control" placeholder="Enter Vendor Contact name to search." name="Filter.Vendor_Contact_Name" />
                                 <input type="hidden" id="hdnVendorContact_Id" name="VendorContact.VendorContact_Id" value="@Model.VendorContact.VendorContact_Id">
 
@@ -53,7 +54,7 @@
 
                             <div class="btn-group">
                                 
-                                <button type="button" class="btn btn-success active" onclick="location.href='@Url.Action("Index", "VendorContact")'">Create</button>
+                                <button role="button" class="btn btn-success active" value="Create" id="btncreateVC" @*onclick="location.href='@Url.Action("Index", "VendorContact")'"*@>Create</button>
                                 <button class="btn btn-danger active" style="display:none;" id="btnVendorContact">Edit</button>
                             </div>
 

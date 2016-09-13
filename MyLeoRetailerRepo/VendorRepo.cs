@@ -434,5 +434,17 @@ namespace MyLeoRetailerRepo
             return subcategorydetailslist;
         }
 
+        public List<VendorInfo> Get_Vendors()
+        {
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                Vendors.Add(Get_Vendor_Values(dr));
+            }
+            return Vendors;
+        }
+
+
     }
 }

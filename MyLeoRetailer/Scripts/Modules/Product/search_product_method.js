@@ -1,23 +1,23 @@
 ﻿
 
-function Get_Employees() {
-    var eViewModel =
+function Get_Products() {
+    var pViewModel =
 		{
 		    Filter: {
 
-		        Employee: $("[name='Filter.Employee']").val()
+		        Article_No: $("[name='Filter.Article_No']").val()
 		    },
 		    Grid_Detail: {
 
-		        Pager: Set_Pager($("#divEmployeePager"))
+		        Pager: Set_Pager($("#divProductPager"))
 		    }
 		}
 
     $.ajax({
 
-        url: "/Employee/Get_Employees",
+        url: "/Product/Get_Products",
 
-        data: JSON.stringify(eViewModel),
+        data: JSON.stringify(pViewModel),
 
         dataType: 'json',
 
@@ -28,11 +28,11 @@ function Get_Employees() {
         success: function (response) {
             var obj = $.parseJSON(response);
 
-            Bind_Grid(obj, "Employee_List");
+            Bind_Grid(obj, "Product_List");
 
-            //Reset_Employee();
+            //Reset_Product();
 
-            $("#divEmployeePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+            $("#divProductPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
     });
 }

@@ -30,5 +30,10 @@ $(function ()
 	    Get_Colors();
 	});
 
+	$("#btnReset").click(function () {
+
+	    ResetForm();
+
+	}); 
 
 });

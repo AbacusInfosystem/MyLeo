@@ -29,7 +29,7 @@
 
     <div class="row">
 
-        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+        <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
             <div class="block">
 
@@ -40,17 +40,18 @@
                         <div class="col-md-5">
 
                             <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch name.</span>
                                 <input type="text" class="form-control" name="Filter.Branch_Name" placeholder="Enter Branch name to search." />
                                 <input type="hidden" id="hdnBranch_ID" name="Branch.Branch_ID" value="@Model.Branch.Branch_ID">
                             </div>
 
                         </div>
 
-                        <div class="col-md-7" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-7" style="text-align: right; padding-top: 30px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
                                 <button role="button" class="btn btn-success active" value="Create" id="btnCreateBranch">Create</button>
-                                <button class="btn btn-danger active" role="button" value="Edit" id="btnEditBranch">Edit</button>
+                                <button class="btn btn-danger active" role="button" value="Edit" id="btnEditBranch" style="display:none;">Edit</button>
                             </div>
 
                         </div>

@@ -1,58 +1,66 @@
 ﻿
 $(function ()
 {
-    $("#frmEmployee").validate({
+    $("#frmProduct").validate({
 		rules: {
-		    "Employee.Employee_Name": { required: true },
+		    "Product.Article_No": { required: true },
 
-		    "Employee.Employee_Gender": { required: true },
+		    "Product.Vendor_Name": { required: true },
 
-		    "Employee.Employee_DOB": { required: true },
+		    "Product.Launch_Start_Date": { required: true }, 
 
-		    //"Employee.Branch_Id": { required: true },
+		    "Product.Launch_End_Date": { required: true },
 
-		   // "Employee.Designation_Id": { required: true },
+		    "Product.Brand_Name": { required: true },
 
-		    "Employee.Employee_Address": { required: true },
+		    "Product.Category": { required: true },
 
-		    "Employee.Employee_Pincode": { required: true, digits: true },
+		    "Product.Sub_Category": { required: true },
 
-		    "Employee.Employee_Country": { required: true },
+		    "Product.Size_Group_Name": { required: true },
 
-		    "Employee.Employee_State": { required: true },
+		    "Product.Center_Size": { required: true, digits: true },
 
-		    "Employee.Employee_City": { required: true },
+		    "Product.Size_Difference": { required: true, digits: true },
 
-		    "Employee.Employee_Mobile1": { required: true, digits: true },
+		    "Product.Purchase_Price": { required: true, digits: true },
 
-		    "Employee.Employee_EmailId": { required: true,email: true }, 
+		    "Product.MRP_Difference": { required: true, digits: true },
+
+		    "Product.MRP_Percentage": { required: true, digits: true },
+
+		    "Product.MRP_Price": { required: true, digits: true }, 
             
 		},
 		messages: {
 
-		    "Employee.Employee_Name": { required: "Employee Name is required." },
+		    "Product.Article_No": { required: "Article No is required." },
 
-		    "Employee.Employee_Gender": { required: "Gender is required." },
+		    "Product.Vendor_Name": { required: "Vendor is required." },
 
-		    "Employee.Employee_DOB": { required: "Employee DOB is required." },
+		    "Product.Launch_Start_Date": { required: "Product Launch Date is required." },
 
-		    "Employee.Branch_Id": { required: "Branch is required." },
+		    "Product.Launch_End_Date": { required: " Product End Date is required." },
 
-		    "Employee.Designation_Id": { required: "Designation is required." },
+		    "Product.Brand_Name": { required: "Brand is required." },
 
-		    "Employee.Employee_Address": { required: "Employee Address is required." },
+		    "Product.Category": { required: "Category is required." },
 
-		    "Employee.Employee_Pincode": { required: "Pincode is required.", digits: "Enter Digits" },
+		    "Product.Sub_Category": { required: "Sub Category is required." },
 
-		    "Employee.Employee_Country": { required: "Country is required." },
+		    "Product.Size_Group_Name": { required: "Size Group is required." },
 
-		    "Employee.Employee_State": { required: "State is required." },
+		    "Product.Center_Size": { required: "Center Size is required.", digits: "Enter Digits" },
 
-		    "Employee.Employee_City": { required: "City is required." },
+		    "Product.Size_Difference": { required: "Size Difference is required.", digits: "Enter Digits" },
 
-		    "Employee.Employee_Mobile1": { required: "Mobile No is required.", digits: "Enter Digits" },
+		    "Product.Purchase_Price": { required: "Purchase Price is required.", digits: "Enter Digits" },
 
-		    "Employee.Employee_EmailId": { required: "EmailId is required.", email: "Invalid Email" },
+		    "Product.MRP_Difference": { required: "MRP Difference is required." ,digits: "Enter Digits"},
+
+		    "Product.MRP_Percentage": { required: "MRP Percentage is required.", digits: "Enter Digits" },
+
+		    "Product.MRP_Price": { required: "MRP Price is required.", digits: "Enter Digits" }, 
 		}
 	});
 });

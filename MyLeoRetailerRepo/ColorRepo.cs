@@ -109,7 +109,7 @@ namespace MyLeoRetailerRepo
         public List<ColorInfo> Get_Colours()
         {
             List<ColorInfo> colors = new List<ColorInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Colors_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Colors.ToString(), CommandType.StoredProcedure);
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)

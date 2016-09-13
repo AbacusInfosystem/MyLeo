@@ -79,6 +79,8 @@ function Save_Brand()
 
 		success: function (response)
 		{
+		    debugger;
+
 			var obj = $.parseJSON(response);
 
 			Reset_Brand();
@@ -99,6 +101,8 @@ function Reset_Brand()
     $("[name='Brand.Brand_Id']").val("");
 
     $("[name='Brand.IsActive']").val("");
+
+    document.getElementById('Flag').checked = false;
 }
 
 function Get_Brand_By_Id(obj)
