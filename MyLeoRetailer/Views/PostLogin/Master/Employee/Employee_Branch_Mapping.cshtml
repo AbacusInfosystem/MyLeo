@@ -1,0 +1,121 @@
+﻿@model MyLeoRetailer.Models.BranchViewModel
+@using MyLeoRetailerInfo.Common;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Branch/Branch_events.js"></script>
+<script src="~/Scripts/Modules/Branch/Branch_methods.js"></script>
+<script src="~/Scripts/Modules/Branch/Branch_validation.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Branch Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Branch Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form id="frmBranch">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control select">
+                        <option>Branch</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Branch</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                            <tr>
+                                <td>B</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                            <tr>
+                                <td>C</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                            <tr>
+                                <td>D</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="button" class="btn btn-success">Save</button>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Branch</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                            <tr>
+                                <td>B</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                            <tr>
+                                <td>C</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                            <tr>
+                                <td>D</td>
+                                <td><label class="check"><input type="checkbox" class="icheckbox" /> </label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <button type="button" class="btn btn-success">Save</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+

@@ -140,7 +140,13 @@ function Get_Color_By_Id(obj)
 	    }
 	});
 
-} 
+}
+
+function ResetForm() {
+    $('#frmColor').each(function () {
+        this.reset();
+    });
+}
  
 
 

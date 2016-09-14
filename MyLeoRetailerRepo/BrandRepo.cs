@@ -128,7 +128,7 @@ namespace MyLeoRetailerRepo
         public List<BrandInfo> Get_All_Barnds()
         {
             List<BrandInfo> Brands = new List<BrandInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Brands_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Brands.ToString(), CommandType.StoredProcedure);
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)

@@ -84,7 +84,7 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Updated_On", Employee.Updated_Date));
 
-            sqlParam.Add(new SqlParameter("@Updated_By", Employee.Updated_By));
+            sqlParam.Add(new SqlParameter("@Updated_By", Employee.Updated_By)); 
 
             sqlParam.Add(new SqlParameter("@Is_Online", Employee.Is_Online));
 
@@ -106,76 +106,92 @@ namespace MyLeoRetailerRepo
             DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Employees_By_Id.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
-                Employee = Get_Employee_Values(dr);
+                //Employee = Get_Employee_Values(dr);
+                Employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+                Employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+                Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+                Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
+                Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+                Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
+                Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
+                Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
+                Employee.Employee_State = Convert.ToString(dr["Employee_State"]);
+                Employee.Employee_Country = Convert.ToString(dr["Employee_Country"]);
+                Employee.Employee_Pincode = Convert.ToInt32(dr["Employee_Pincode"]);
+                Employee.Employee_Native_Address = Convert.ToString(dr["Employee_Native_Address"]);
+                Employee.Employee_Mobile1 = Convert.ToString(dr["Employee_Mobile1"]);
+                Employee.Employee_Mobile2 = Convert.ToString(dr["Employee_Mobile2"]);
+                Employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
+                Employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
+                Employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
+                Employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
+                Employee.Created_By = Convert.ToInt32(dr["Created_By"]);
+                Employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
+                Employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
+
+                Employee.Is_Online = Convert.ToBoolean(dr["Is_Online"]);
+                Employee.User_Name = Convert.ToString(dr["User_Name"]);
+                Employee.Password = Convert.ToString(dr["Password"]);
+                Employee.Role_Id = Convert.ToInt32(dr["Role_Id"]);
+
             }
             return Employee;
         }
 
-        private EmployeeInfo Get_Employee_Values(DataRow dr)
-        {
-            EmployeeInfo employee = new EmployeeInfo();
+        //private EmployeeInfo Get_Employee_Values(DataRow dr)
+        //{
+        //    EmployeeInfo Employee = new EmployeeInfo();
 
-            employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
-            employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
-            employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
-            employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
-            employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
-            employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
-            employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
-            employee.Employee_City = Convert.ToString(dr["Employee_City"]);
-            employee.Employee_State = Convert.ToString(dr["Employee_State"]);
-            employee.Employee_Country = Convert.ToString(dr["Employee_Country"]);
-            employee.Employee_Pincode = Convert.ToInt32(dr["Employee_Pincode"]);
-            employee.Employee_Native_Address = Convert.ToString(dr["Employee_Native_Address"]);
-            employee.Employee_Mobile1 = Convert.ToString(dr["Employee_Mobile1"]);
-            employee.Employee_Mobile2 = Convert.ToString(dr["Employee_Mobile2"]);
-            employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
-            employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
-            employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
-            employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
-            employee.Created_By = Convert.ToInt32(dr["Created_By"]);
-            employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
-            employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-            employee.Is_Online = Convert.ToBoolean(dr["Is_Online"]);
-            employee.User_Name = Convert.ToString(dr["User_Name"]);
-            employee.Password = Convert.ToString(dr["Password"]);
-            employee.Role_Id = Convert.ToInt32(dr["Role_Id"]);
+        //    Employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+        //    Employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+        //    Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+        //    Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
+        //    Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+        //    Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
+        //    Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
+        //    Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
+        //    Employee.Employee_State = Convert.ToString(dr["Employee_State"]);
+        //    Employee.Employee_Country = Convert.ToString(dr["Employee_Country"]);
+        //    Employee.Employee_Pincode = Convert.ToInt32(dr["Employee_Pincode"]);
+        //    Employee.Employee_Native_Address = Convert.ToString(dr["Employee_Native_Address"]);
+        //    Employee.Employee_Mobile1 = Convert.ToString(dr["Employee_Mobile1"]);
+        //    Employee.Employee_Mobile2 = Convert.ToString(dr["Employee_Mobile2"]);
+        //    Employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
+        //    Employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
+        //    Employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
+        //    Employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
+        //    Employee.Created_By = Convert.ToInt32(dr["Created_By"]);
+        //    Employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
+        //    Employee.Updated_By = Convert.ToInt32(dr["Updated_By"]);
+        //    return Employee;
+        //}
 
-            return employee;
-        }
-
-        public List<EmployeeInfo> Get_Employees()
-        {
-            List<EmployeeInfo> Employees = new List<EmployeeInfo>();
-
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Employee_Sp.ToString(), CommandType.StoredProcedure);
-            foreach (DataRow dr in dt.Rows)
-            {
-                EmployeeInfo Employee = new EmployeeInfo();
-
-                Employee.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
-
-                Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
-
-                Employees.Add(Employee);
-            }
-            return Employees;
-        }
 
         public bool Check_Existing_User_Name(string User_Name)
         {
             bool check = false;
 
-            List<SqlParameter> mysqlparam = new List<SqlParameter>();
-            mysqlparam.Add(new SqlParameter("@User_Name", User_Name));
-            
-            DataTable dt = sqlHelper.ExecuteDataTable(mysqlparam, Storeprocedures.sp_Check_Existing_User_Name.ToString(), CommandType.StoredProcedure);
-            foreach (DataRow dr in dt.Rows)
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("User_Name", User_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_User_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
             {
-                check = Convert.ToBoolean(dr["check_User"]);
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_User"]);
+                }
             }
+
             return check;
         }
+
 
     }
 }
