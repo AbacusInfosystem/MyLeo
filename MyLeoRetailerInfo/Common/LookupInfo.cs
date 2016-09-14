@@ -64,5 +64,37 @@ namespace MyLeoRetailerInfo.Common
 
         }
 
+        public static Dictionary<int,string> Get_Payment_Status()
+        {
+            Dictionary<int, string> Get_Payment_Status = new Dictionary<int, string>();
+
+            Get_Payment_Status.Add(1, PaymentStatus.Paid.ToString().Replace('_', ' ').ToString());
+
+            Get_Payment_Status.Add(2, PaymentStatus.UnPaid.ToString().Replace('_', ' ').ToString());
+
+            Get_Payment_Status.Add(3, PaymentStatus.Partially_Paid.ToString().Replace('_', ' ').ToString());
+
+            return Get_Payment_Status;
+        }
+
+        public static Dictionary<int, string> Get_Payable_Payment_Mode()
+        {
+            Dictionary<int, string> Get_Payable_Payment_Mode = new Dictionary<int, string>();
+
+            Get_Payable_Payment_Mode.Add(1, PayablePaymentMode.Cash.ToString().Replace('_', ' ').ToString());
+
+            Get_Payable_Payment_Mode.Add(2, PayablePaymentMode.Credit_Card.ToString().Replace('_', ' ').ToString());
+
+            Get_Payable_Payment_Mode.Add(3, PayablePaymentMode.Debit_Card.ToString().Replace('_', ' ').ToString());
+
+            Get_Payable_Payment_Mode.Add(4, PayablePaymentMode.Cheque.ToString().Replace('_', ' ').ToString());
+
+            Get_Payable_Payment_Mode.Add(5, PayablePaymentMode.Credit_Note.ToString().Replace('_', ' ').ToString());
+
+            Get_Payable_Payment_Mode.Add(6, PayablePaymentMode.Gift_Voucher.ToString().Replace('_', ' ').ToString());
+
+            return Get_Payable_Payment_Mode;
+        }
+
     }
 }

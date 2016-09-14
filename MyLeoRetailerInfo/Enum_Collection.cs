@@ -55,4 +55,21 @@ namespace MyLeoRetailerInfo
         Cash=1,
         Card=2,
     }
+
+    public enum PaymentStatus
+    {
+        Paid = 1,
+        UnPaid = 2,
+        Partially_Paid=3,
+    }
+
+    public enum PayablePaymentMode
+    {
+        Cash = 1,
+        Credit_Card = 2,
+        Debit_Card=3,
+        Cheque=4,
+        Credit_Note=5,
+        Gift_Voucher=6,
+    }
 }

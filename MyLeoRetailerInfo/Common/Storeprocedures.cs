@@ -156,6 +156,20 @@ namespace MyLeoRetailerInfo.Common
 
             #endregion
 
-		}
+            #region Payable
+
+            sp_Insert_Payable_Item_Data,
+            sp_Get_PurchaseInvoice_Details_By_All_Three,
+            sp_Temp_Get_Payable_Detail_By_Id1,
+            sp_Get_Payable_Details_By_Id,
+            Get_Payable_Details_By_Id_Sp,
+            Get_Credit_Note_Details_By_Id_Sp,
+            Insert_Payable_Data_Sp,
+            Get_Payable_Data_Item_By_Id_Sp,
+            Get_Payable_Balance_Amount_By_Id_Sp,
+            Get_Payable_Data_By_Id_Sp,
+            #endregion
+
+        }
 	
 }
