@@ -25,18 +25,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Index(EmployeeViewModel eViewModel)
         {
-            //PaginationInfo Pager = new PaginationInfo();
             try
             {
                 if (TempData["eViewModel"] != null)
                 {
                     eViewModel = (EmployeeViewModel)TempData["eViewModel"];
                 }
+                RoleRepo _rRepo = new RoleRepo();
+
+                eViewModel.Role_List = _rRepo.Get_Role_List();
+
             }
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                //Logger.Error("VendorController - Index " + ex.Message);
+
             }
 
             return View("Index", eViewModel);

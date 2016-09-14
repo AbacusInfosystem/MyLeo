@@ -1013,6 +1013,7 @@
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
+    <Content Include="Scripts\Modules\Role\role-validation.js" />
     <Content Include="Scripts\Modules\Size\size_group_events.js" />
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />
