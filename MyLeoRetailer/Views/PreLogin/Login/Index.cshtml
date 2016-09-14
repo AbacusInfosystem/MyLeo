@@ -1,100 +1,122 @@
 ﻿@model MyLeoRetailer.Models.PreLogin.LoginViewModel
-@using MyLeoRetailerInfo.Common; 
+@using MyLeoRetailerInfo.Common;
+
 @{
     Layout = null;
 }
- 
-<style>
-    .header_luxe {
-        margin-top: 50px;
-    }
 
-        .header_luxe img {
-            width: 25%;
-            display: block;
-            margin: 0 auto;
-            padding: 22px 0;
-        }
+<style>
+    .scroll-bar {
+        height: 142px;
+        overflow: auto;
+    }
 </style>
 
-
-<html>
+<html class="body-full-height">
 <head>
     <meta charset="UTF-8">
     <title>Login | MyLeo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
-    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
-    <link href="~/Content/css/login.css" rel="stylesheet" />
-    <link href="~/Content/css/ripple.css" rel="stylesheet" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link type="image/x-icon" href="favicon.ico" rel="icon">
+
+    <link rel="stylesheet" type="text/css" id="theme" href="../Content/Atlant/css/theme-default.css" />
+
+    <script type="text/javascript" src="../Content/Atlant/js/plugins/jquery/jquery.min.js"></script>
+
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/generic.custom.validation.js"></script>
+
 </head>
+
 <body>
 
-    <div class="header_luxe">
-        <img src="~/Images/luxe.JPG" class="img-responsive" alt="" />
-    </div>
+    <div class="login-container">
 
-    <div class="container">
-        @*@{Html.RenderPartial("_ServerMessage");}*@
-        <div class="card"></div>
-        <div class="card">
-            <div class="logo">
-                <h2>Login</h2>
+        <div class="login-box animated fadeInDown">
+            <div class="login-logo"></div>
+            <div class="login-body">
+                <form id="frmLogin" method="post" class="form-horizontal">
+
+                    <div class="col-md-7">
+                        <div class="login-title"><strong>Welcome</strong>, Please login</div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="text" id="txtUser_Name" name="Cookies.User_Name" placeholder="Username" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="password" id="txtPassword" name="Cookies.Password" placeholder="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <a class="btn btn-link btn-block" href="#">Forgot your password?</a>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-info btn-block" type="button" id="btnLogin">Log In</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="login-title">Select Branch</div>
+
+                        <div class="form-group scroll-bar">
+                            @*<div class="col-md-12">
+                                    <div class="col-md-8">
+                                        <label style="color:white;">Select All</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="switch">
+                                            <input checked value="All" name="Cookies.Branch_Id" type="checkbox">
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>*@
+                                @*@foreach (var item in Model.branch_List)
+                                {
+                                    <div class="col-md-12">
+                                        <div class="col-md-8">
+                                            <label style="color:white;">@item.Branch_Name</label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="switch">
+                                                <input checked value="@item.Branch_ID" name="Cookies.Branch_Id" type="checkbox">
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                }*@
+                        </div>
+
+                        <input type="hidden" id="hdnBranch_Ids" name="Cookies.Branch_Ids" value="" />
+                    </div>
+
+                </form>
             </div>
-            <form id="frmLogin" action="@Url.Action("Authenticate", "Login")" method="post">
-                @*<input type="hidden" name="Cookies.Brand_Name" id="txtUserName" class="form-control input-sm" required="required" value="Mercedes" />*@
-                <div class="input-container">
-                    <input type="text" name="Cookies.Username" id="txtUserName" class="form-control input-sm" required="required" />
-                    <label for="Username">Username</label>
-                    <div class="bar"></div>
+            <div class="login-footer">
+                <div class="pull-left">
+                    &copy; 2014 AppName
                 </div>
-                <div class="input-container">
-                    <input type="password" name="Cookies.Password" id="txtPassword" class="form-control input-sm" required="required" />
-                    <label for="Password">Password</label>
-                    <div class="bar"></div>
+                <div class="pull-right">
+                    <a href="#">About</a> |
+                    <a href="#">Privacy</a> |
+                    <a href="#">Contact Us</a>
                 </div>
-
-                <div class="sign"><button type="submit" id="btnLogin" class="btn ripple">Sign In</button></div>
-                <div class="footer"><a href="@Url.Action("ForgotPassword", "Login")">Forgot Password</a></div>
-            </form>
+            </div>
         </div>
+
     </div>
-
-    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="js/index.js"></script>
-    <script src="~/Scripts/ripple.js"></script>
-
-
-    <script>
-        $(function () {
-
-            // Emptying the cookie on user login
-            $("#btnLogin").click(function () {
-
-                $.removeCookie('cart', { path: '/' });
-
-            });
-
-            $("#frmLogin").validate({
-                rules: {
-
-                    "Cookies.UserName": { required: true },
-
-                    "Cookies.Password": { required: true },
-                },
-                messages: {
-
-                    "Cookies.UserName": { required: "User Name is required field." },
-
-                    "Cookies.Password": { required: "Password is required field." },
-
-                }
-            });
-
-        });
-
-
-    </script>
 
 </body>
+
 </html>
+
+<script src="~/Scripts/Modules/Login/login-event.js"></script>
+
+<script>
+        
+    </script>

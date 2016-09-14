@@ -1002,6 +1002,7 @@
     <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_events.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_method.js" />
+    <Content Include="Scripts\Modules\Login\login-event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />

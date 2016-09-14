@@ -11,13 +11,14 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using MyLeoRetailer.Models.PreLogin;
+using MyLeoRetailerInfo.Branch;
+using Newtonsoft.Json;
 
 namespace MyLeoRetailer.Controllers.PreLogin
 {
     public class LoginController : Controller
     {
-        //
-        // GET: /Login/
+        
         public LoginRepo _loginRepo;
 
         public LoginController()
@@ -29,27 +30,12 @@ namespace MyLeoRetailer.Controllers.PreLogin
         {
             try
             {
-                //if (Request.Cookies["UserInfo"] != null)
-                //{
-                //    lViewModel.Cookies = Utility.Get_Login_User("UserInfo", "Token");
-
-                //    if (lViewModel.Cookies == null)
-                //    {
-                //        lViewModel.Friendly_Message.Add(MessageStore.Get("SYS02"));
-                //    }
-                //}
-                //else
-                //{
-                //    if (TempData["FriendlyMessage"] != null)
-                //    {
-                //        lViewModel.Friendly_Message.Add((FriendlyMessage)TempData["FriendlyMessage"]);
-                //    }
-                //}
+              
             }
             catch (Exception ex)
             {
-                //Logger.Error("Error at Index : " + ex.Message);
                 lViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+
                 return View("Index", lViewModel);
             }
 
@@ -57,53 +43,74 @@ namespace MyLeoRetailer.Controllers.PreLogin
 
         }
 
+        public JsonResult Get_Employee_Branches(string user_Name)
+        {
+            List<BranchInfo> branch_List = new List<BranchInfo>();
+
+            try
+            {
+                branch_List = _loginRepo.Get_Branches(user_Name);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(JsonConvert.SerializeObject(branch_List));
+        }
+
+
         public ActionResult Authenticate(LoginViewModel lViewModel)
         {
             try
             {
-                //LoginUserInfo cookies = _loginRepo.AuthenticateUser(lViewModel.Cookies.Username, Utility.Encrypt(lViewModel.Cookies.Password));
+                string Branches = lViewModel.Cookies.Branch_Ids;
 
-                //if (cookies.User_Id != 0 && cookies.Is_Active == true)
-                //{
-                //    if (cookies.Username == lViewModel.Cookies.Username)
-                //    {
-                //        SetUsersCookies(lViewModel.Cookies.Username, lViewModel.Cookies.Password);
+                LoginInfo cookies = _loginRepo.AuthenticateUser(lViewModel.Cookies.User_Name, lViewModel.Cookies.Password);
+                cookies.Branch_Ids = Branches;
 
-                //        return RedirectToAction("Index", "Dashboard");
-                //    }
-                //    else
-                //    {
-                //        lViewModel.Friendly_Message.Add(MessageStore.Get("SYS02"));
 
-                //        return View("Index", lViewModel);
-                //    }
-                //}
-                //else
-                //{
-                //    if (cookies.User_Id != 0 && cookies.Is_Active == false)
-                //    {
-                //        TempData["FriendlyMessage"] = MessageStore.Get("SYS06");
-                //    }
-                //    else
-                //    {
-                //        TempData["FriendlyMessage"] = MessageStore.Get("SYS03");
-                //    }
-                //    return RedirectToAction("Index", "Login");
-                //}
+                if (cookies.User_Id != 0 && cookies.Is_Online)
+                {
+                    if (cookies.User_Name == lViewModel.Cookies.User_Name)
+                    {
+                        SetUsersCookies(cookies.User_Id);
+
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                    else
+                    {
+                        lViewModel.Friendly_Message.Add(MessageStore.Get("SYS02"));
+
+                        return View("Index", lViewModel);
+                    }
+                }
+                else
+                {
+                    if (cookies.User_Id != 0 && !cookies.Is_Online)
+                    {
+                        TempData["FriendlyMessage"] = MessageStore.Get("SYS06");
+                    }
+                    else
+                    {
+                        TempData["FriendlyMessage"] = MessageStore.Get("SYS03");
+                    }
+                    return RedirectToAction("Index", "Login");
+                }
             }
             catch (Exception ex)
             { 
-                //HttpContext.Request.Cookies.Clear();
-
+              
                 lViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+
+                HttpContext.Request.Cookies.Clear();
 
                 return RedirectToAction("Index", "Login", lViewModel);
             }
 
-            return RedirectToAction("Index", "Size");
+            //return RedirectToAction("Index", "Size");
         }
 
-        private void SetUsersCookies(string userName, string password)
+        private void SetUsersCookies(int User_Id)
         {
             LoginViewModel loginViewModel = new LoginViewModel();
 
@@ -113,7 +120,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
                 {
                     HttpCookie cookies = new HttpCookie("UserInfo");
 
-                    string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(userName, password);
+                    string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
                     cookies.Values.Add("Token", cookie_Token);
 
@@ -123,7 +130,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
                 }
                 else
                 {
-                    string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(userName, password);
+                    string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
                     Response.Cookies["UserInfo"]["Token"] = cookie_Token;
                 }
@@ -136,9 +143,11 @@ namespace MyLeoRetailer.Controllers.PreLogin
             }
         }
 
+        //work from here
+        //redirect to dashboard page after login
         public ActionResult Logout(string timeOut)
         {
-            LoginUserInfo Cookies = Utility.Get_Login_User("UserInfo", "Token");
+            LoginInfo Cookies = Utility.Get_Login_User("UserInfo", "Token");
 
             try
             {

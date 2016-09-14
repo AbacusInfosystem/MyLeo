@@ -13,7 +13,7 @@ namespace MyLeoRetailer.Common
     public static class Utility
     {
 
-        public static LoginUserInfo Get_Login_User(string cookieName, string key)
+        public static LoginInfo Get_Login_User(string cookieName, string key)
         {
             string token = System.Web.HttpContext.Current.Request.Cookies[cookieName][key];
 

@@ -7,6 +7,7 @@ using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Product;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Interface;
+using MyLeoRetailerInfo.Branch;
 
 namespace MyLeoRetailer.Models.PreLogin
 {
@@ -14,10 +15,17 @@ namespace MyLeoRetailer.Models.PreLogin
     {
         public LoginViewModel()
         {
-            Cookies = new LoginUserInfo();
+            Cookies = new LoginInfo();
+
             Friendly_Message = new List<FriendlyMessage>();
+
+
         }
-        public LoginUserInfo Cookies { get; set; }
+
+        public LoginInfo Cookies { get; set; }
+
         public List<FriendlyMessage> Friendly_Message { get; set; }
+
+
     }
 }

@@ -108,13 +108,17 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Branch_Location,
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
+            sp_Get_Employee_Branches,
 
             #endregion
 
-            //Login
+            #region Logion
+
             Get_User_Data_By_Token_sp,
             Authenticate_User_sp,
-            Insert_Token_In_User_Table_Sp,
+            Sp_Insert_Token_In_User_Table,
+
+            #endregion
 
             //Alteration
             sp_Insert_Alteration,
