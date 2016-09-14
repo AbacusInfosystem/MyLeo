@@ -45,6 +45,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", eViewModel);
         }
 
+        public ActionResult Employee_Branch_Mapping()
+        {
+            return View("Employee_Branch_Mapping");
+        }
+
         public ActionResult Search(EmployeeViewModel eViewModel)
         {
             try
