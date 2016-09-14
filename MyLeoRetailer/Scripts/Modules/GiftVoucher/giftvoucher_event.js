@@ -23,6 +23,7 @@
 
     if ($('#hdn_GiftVoucherId').val() != "") {        
         if ($('#mode').val() == 2) {
+           
             $("#divBankName").show();
             $("#divCreditCardNo").show();
         } else {

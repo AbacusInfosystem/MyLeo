@@ -30,7 +30,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
         {
             try
             {
-              
+
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
             }
             catch (Exception ex)
             { 
-              
+
                 lViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
 
                 HttpContext.Request.Cookies.Clear();
@@ -107,7 +107,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
                 return RedirectToAction("Index", "Login", lViewModel);
             }
 
-            //return RedirectToAction("Index", "Size");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         private void SetUsersCookies(int User_Id)

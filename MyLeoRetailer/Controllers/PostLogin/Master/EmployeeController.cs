@@ -45,6 +45,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", eViewModel);
         }
 
+        public ActionResult Employee_Branch_Mapping()
+        {
+            return View("Employee_Branch_Mapping");
+        }
+
         public ActionResult Search(EmployeeViewModel eViewModel)
         {
             try
@@ -164,7 +169,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             bool check = false;
             try
             {
-                check = eRepo.Check_Existing_User_Name(user_Name);
+                //check = eRepo.Check_Existing_User_Name(user_Name);
             }
             catch (Exception ex)
             {
