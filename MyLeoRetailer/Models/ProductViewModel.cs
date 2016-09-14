@@ -28,6 +28,8 @@ namespace MyLeoRetailer.Models
 
             ProductImages = new List<ProductImagesInfo>();
 
+            //ProductColors = new List<ProductColorInfo>(); 
+
             ProductMRP = new ProductMRPInfo();
 
             ProductMRPs = new List<ProductMRPInfo>();
@@ -37,6 +39,8 @@ namespace MyLeoRetailer.Models
             Categories = new List<CategoryInfo>();
             SubCategories = new List<SubCategoryInfo>();
             Brands = new List<BrandInfo>();
+
+            Color = new ColorInfo();
             Colors = new List<ColorInfo>();
 
             Filter = new Filter_Product(); 
@@ -54,6 +58,7 @@ namespace MyLeoRetailer.Models
         public List<SubCategoryInfo> SubCategories { get; set; }
         public List<BrandInfo> Brands { get; set; }
         public List<ColorInfo> Colors { get; set; }
+        public ColorInfo Color { get; set; }
 
         public GridInfo Grid_Detail
         {
@@ -112,7 +117,13 @@ namespace MyLeoRetailer.Models
 
     public class Filter_Product
     {
-        public string SKU_Code
+        public string Article_No
+        {
+            get;
+            set;
+        }
+
+        public string Product_Id
         {
             get;
             set;

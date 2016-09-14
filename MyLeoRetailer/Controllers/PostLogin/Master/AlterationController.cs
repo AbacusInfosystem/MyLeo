@@ -33,7 +33,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     aViewModel = (AlterationViewModel)TempData["aViewModel"];
                 }
 
-                aViewModel.Employees = eRepo.Get_Employees();
+                //aViewModel.Employees = eRepo.Get_Employees();
 
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }
@@ -141,7 +141,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Alteration.Alteration_ID);
 
-                aViewModel.Employees = eRepo.Get_Employees();
+                //aViewModel.Employees = eRepo.Get_Employees();
 
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }

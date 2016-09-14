@@ -1,4 +1,5 @@
-﻿using MyLeoRetailerInfo.Common;
+﻿using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Role;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,17 @@ namespace MyLeoRetailer.Models
 
             role = new RoleInfo();
 
+            Filter = new Filter_Role();
+
+            Query_Detail = new QueryInfo();
+
+            Grid_Detail = new GridInfo();
+
+            accessFunctions = new List<AccessFunctionInfo>();
+
+            Grid_Detail.Pager.DivObject = "divRolePager";
+
+            Grid_Detail.Pager.CallBackMethod = "Get_Roles";
 
         }
 
@@ -22,6 +34,21 @@ namespace MyLeoRetailer.Models
 
         public RoleInfo role { get; set; }
 
+        public Filter_Role Filter { get; set; }
+
+        public QueryInfo Query_Detail { get; set; }
+
+        public GridInfo Grid_Detail { get; set; }
+
+        public List<AccessFunctionInfo> accessFunctions { get; set; }
 
     }
+
+
+    public class Filter_Role
+    {
+        public string Role { get; set; }
+
+    }
+
 }
