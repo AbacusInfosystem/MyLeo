@@ -54,42 +54,25 @@ namespace MyLeoRetailerRepo
             sqlParam.Add(new SqlParameter("@User_Name", userName));
             sqlParam.Add(new SqlParameter("@Password", password));
 
-            try
-            {
-                DataTable dt = _sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.Authenticate_User_sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = _sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.Authenticate_User_sp.ToString(), CommandType.StoredProcedure);
 
-                if (dt != null && dt.Rows.Count > 0)
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                DataRow dr = dt.AsEnumerable().FirstOrDefault();
+
+                if (dr != null)
                 {
-                    DataRow dr = dt.AsEnumerable().FirstOrDefault();
+                    user.User_Id = Convert.ToInt32(dr["Employee_Id"]);
 
-                    if (dr != null)
-                    {
-                        user.User_Id = Convert.ToInt32(dr["Employee_Id"]);
+                    user.Employee_Name = Convert.ToString(dr["Employee_Name"]);
 
-                        user.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+                    user.Is_Online = Convert.ToBoolean(dr["Is_Online"]);
 
-                        user.Is_Online = Convert.ToBoolean(dr["Is_Online"]);
+                    user.User_Name = Convert.ToString(dr["User_Name"]);
 
-                        user.User_Name = Convert.ToString(dr["User_Name"]);
+                    user.Password = Convert.ToString(dr["Password"]);
 
-                        user.Password = Convert.ToString(dr["Password"]);
-
-                        user.Role_Id = Convert.ToInt32(dr["Role_Id"]);
-
-                        user.Role_Name = Convert.ToString(dr["Role_Name"]);
-
-                        //user.Branch_Ids = Convert.ToString(dr["Branch_Ids"]);
-
-                        //user.Branch_Names = Convert.ToString(dr["Branch_Ids"]);
-
-                        user.Access_Functions = Get_Access_Functions_By_Role(user.Role_Id);
-                       
-                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                //Logger.Error("UserRepo - AuthenticateLoginCredentials: " + ex.ToString());
             }
 
             return user;
@@ -141,7 +124,7 @@ namespace MyLeoRetailerRepo
             return accessFunList;
         }
 
-
+        //update token in emp tbl
         public string Set_User_Token_For_Cookies(int User_Id)
         {
             string user_Token = "Token" + DateTime.Now.ToString("yyMMddHHmmssff");
@@ -154,6 +137,45 @@ namespace MyLeoRetailerRepo
             _sqlHelper.ExecuteNonQuery(sqlParam, Storeprocedures.Sp_Insert_Token_In_User_Table.ToString(), CommandType.StoredProcedure);
 
             return user_Token;
+        }
+
+
+        public LoginInfo Get_User_Data_By_User_Token(string token)
+        {
+            LoginInfo user = new LoginInfo();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+            sqlParam.Add(new SqlParameter("@Token", token));
+
+            DataTable dt = _sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.Get_User_Data_By_Token_sp.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                DataRow dr = dt.AsEnumerable().FirstOrDefault();
+
+                if (dr != null)
+                {
+                    
+                    user.User_Id = Convert.ToInt32(dr["Employee_Id"]);
+
+                    user.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+
+                    user.Is_Online = Convert.ToBoolean(dr["Is_Online"]);
+
+                    user.User_Name = Convert.ToString(dr["User_Name"]);
+
+                    user.Password = Convert.ToString(dr["Password"]);
+
+                    user.Role_Id = Convert.ToInt32(dr["Role_Id"]);
+
+                    user.Role_Name = Convert.ToString(dr["Role_Name"]);
+
+                    user.Access_Functions = Get_Access_Functions_By_Role(user.Role_Id);
+
+                }
+            }
+
+            return user;
         }
 
 

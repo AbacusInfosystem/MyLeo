@@ -186,7 +186,7 @@
     <Compile Include="Controllers\PostLogin\AutocompleteLookup\AutocompleteLookupController.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\PostLogin\DashboardController.cs" />
+    <Compile Include="Controllers\PostLogin\Dashboard\DashboardController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\AlterationController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
