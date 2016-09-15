@@ -993,6 +993,7 @@
     <Content Include="Scripts\Modules\Customer\customer_validation.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_events.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_methods.js" />
+    <Content Include="Scripts\Modules\Employee\Employee_Branch_Mapping_Event.js" />
     <Content Include="Scripts\Modules\Employee\employee_events.js" />
     <Content Include="Scripts\Modules\Employee\employee_methods.js" />
     <Content Include="Scripts\Modules\Employee\employee_validation.js" />

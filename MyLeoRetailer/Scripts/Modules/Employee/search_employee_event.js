@@ -13,10 +13,18 @@ $(function () {
         $("#frmEmployee").submit();
     });
 
+    $("#btnMapBranchEmployee").click(function () {
+        $("#frmEmployee").attr("action", "/Employee/Employee_Branch_Mapping");
+        $("#frmEmployee").attr("method", "post");
+        $("#frmEmployee").submit();
+    });
+
     $(document).on('change', '[name="Employee_List"]', function (event) {
         if ($(this).prop('checked')) {
             $("#hdf_EmployeeId").val(this.value);
             $("#btnEdit").show();
+            $("#btnMapBranchEmployee").show();
+
         }
     });
 

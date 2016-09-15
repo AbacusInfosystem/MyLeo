@@ -146,6 +146,13 @@ namespace MyLeoRetailer.Common
             hash.Add("EMP02", EMP02);
             #endregion
 
+            #region Employee mapping
+
+            FriendlyMessage EMPM01 = new FriendlyMessage("EMPM01", MessageType.Success, "Employee has been mapped successfully.");
+            hash.Add("EMPM01", EMPM01);
+
+            #endregion
+
             #region Customer
 
             FriendlyMessage CUST01 = new FriendlyMessage("CUST01", MessageType.Success, "Customer added successfully.");
