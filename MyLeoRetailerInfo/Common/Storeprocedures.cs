@@ -187,6 +187,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Branch,
         Insert_Employee_Mapping,
         sp_Get_Employee_MapBranch_ById,
+        sp_Get_Branch_For_Employee_mapping,
     }
 	
 }

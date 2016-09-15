@@ -198,7 +198,7 @@ namespace MyLeoRetailerRepo
         public List<BranchInfo> Get_Branches()
         {
             List<BranchInfo> branch = new List<BranchInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Branch.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Branch_For_Employee_mapping.ToString(), CommandType.StoredProcedure);
 
             foreach (DataRow dr in dt.Rows)
             {
