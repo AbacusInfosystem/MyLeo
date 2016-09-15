@@ -198,7 +198,7 @@ namespace MyLeoRetailerRepo
         public List<BranchInfo> Get_Branches()
         {
             List<BranchInfo> branch = new List<BranchInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Brands_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Branch.ToString(), CommandType.StoredProcedure);
 
             foreach (DataRow dr in dt.Rows)
             {
@@ -211,8 +211,8 @@ namespace MyLeoRetailerRepo
         {
             BranchInfo branch = new BranchInfo();
 
-            branch.Branch_ID = Convert.ToInt32(dr["Brand_Id"]);
-            branch.Branch_Name = Convert.ToString(dr["Brand_Name"]);
+            branch.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
+            branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
 
             return branch;
         }
@@ -235,7 +235,7 @@ namespace MyLeoRetailerRepo
 
                 if (map_Branch != null && map_Branch.Branch_ID == list_Branch[i].Branch_ID)
                 {
-                    query += "update Employee_Branch_Mapping set Is_Active=" + list_Branch[i].IsActive + ", Updated_By=" + employee.Updated_By + ",Updated_Date=getdate() where Employee_Id=" + employee.Employee_Id + " And  Branch_Id=" + list_Branch[i].Branch_ID + ";";
+                    query += "update Employee_Branch_Mapping set Is_Active=" + list_Branch[i].IsActive + ", Updated_By=" + employee.Updated_By + ",Updated_Date=getdate() where Employee_Id=" + employee.Employee_Id + " And  Branch_ID=" + list_Branch[i].Branch_ID + ";";
                 }
                 else
                 {
