@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MyLeoRetailer.Controllers.PostLogin
+namespace MyLeoRetailer.Controllers.PostLogin.Dashboard
 {
     public class DashboardController : Controller
     {
@@ -13,16 +13,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult Index()
         {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-               
-            }
-
-            return View("Index");
+            return View();
         }
 
     }

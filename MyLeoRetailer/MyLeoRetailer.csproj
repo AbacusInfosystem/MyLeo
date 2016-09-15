@@ -186,7 +186,7 @@
     <Compile Include="Controllers\PostLogin\AutocompleteLookup\AutocompleteLookupController.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\PostLogin\DashboardController.cs" />
+    <Compile Include="Controllers\PostLogin\Dashboard\DashboardController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\AlterationController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
@@ -1004,6 +1004,7 @@
     <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_events.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_method.js" />
+    <Content Include="Scripts\Modules\Login\login-event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
