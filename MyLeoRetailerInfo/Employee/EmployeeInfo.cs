@@ -55,5 +55,19 @@ namespace MyLeoRetailerInfo.Employee
 
         public int Updated_By { get; set; }
 
+        public bool Is_Online { get; set; }
+
+        public string User_Name { get; set; }
+
+        public string Password { get; set; }
+
+        public int Role_Id { get; set; }
+        //Addition by swapnali | Date:15/09/2016
+        public string Branch_Name { get; set; }
+
+        public bool Is_Selected { get; set; }
+
+        //End
+
     }
 }

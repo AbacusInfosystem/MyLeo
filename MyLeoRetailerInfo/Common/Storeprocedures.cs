@@ -8,16 +8,16 @@ namespace MyLeoRetailerInfo.Common
 {
 		public enum Storeprocedures
 		{
-            #region Category
-
-            Get_Category_Sp,
             //Category
-            sp_Get_Category,
+            sp_Get_Categorys,
 			sp_Insert_Category,
 			sp_Update_Category,
             sp_Get_Category_By_Id,
 
-            #endregion
+            sp_Get_Category,
+            sp_drp_Get_Brands,
+
+            //#endregion
 
             #region SubCategory
 
@@ -32,7 +32,7 @@ namespace MyLeoRetailerInfo.Common
             #region brand
 
             //brand
-            sp_drp_Get_Brands,
+            sp_Get_Brands,
             sp_Insert_Brand,
             sp_Update_Brand,
             sp_Get_Brand_By_Id,
@@ -55,18 +55,17 @@ namespace MyLeoRetailerInfo.Common
             Get_Vendor_Sp,
             Get_Vendor_By_Id_Sp,
 
-            #region Color
-
-            Get_Colors_Sp,
+            //Color
+            sp_Get_Colors,
             sp_Insert_Color,
             sp_Update_Color,
             sp_Get_Colors_By_Id,
             Get_Colors_By_Name_Autocomplete_Sp,
 
-            #endregion
+            //#endregion
 
             //SizeGroup
-            Get_SizeGroup_Sp,
+            sp_Get_SizeGroup,
             sp_Insert_SizeGroup,
             sp_Update_Size_Group,
 
@@ -77,10 +76,18 @@ namespace MyLeoRetailerInfo.Common
             Sp_Delete_Size_By_Id,
             sp_Get_SizeGroup_By_Id,
 
-            //Employee
+            #region Employee
+
             sp_Insert_Employee,
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
+            sp_Check_Existing_User_Name,
+            //Addition by swapnali | Date:15/09/2016
+            sp_Get_Branch_By_EmployeeId,
+            //End
+
+
+            #endregion
 
             //Customer
             sp_Insert_Customer,
@@ -105,13 +112,18 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Branch_Location,
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
+            sp_Get_Employee_Branches,
+            sp_Get_Branch,
 
             #endregion
 
-            //Login
+            #region Logion
+
             Get_User_Data_By_Token_sp,
             Authenticate_User_sp,
-            Insert_Token_In_User_Table_Sp,
+            Sp_Insert_Token_In_User_Table,
+
+            #endregion
 
             //Alteration
             sp_Insert_Alteration,
@@ -143,7 +155,75 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_SubCategory_Mapping,
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
+            sp_Get_Agent,
+            sp_Get_Transporter,
+            sp_Get_Vendor,
+                  
+                  
+            #region Role
 
+            sp_Insert_Role,
+            sp_Update_Role,
+            sp_Get_Role_By_Id,
+            sp_Get_Role_Access_Functions,
+            sp_Insert_Role_Access_Function,
+            sp_Update_Role_Access_Function,
+            sp_Check_Existing_Role_Name,
+            sp_Get_Roles,
+
+            #endregion
+
+
+            #endregion
+
+            #region Purchase Order
+
+            sp_Insert_Purchase_Order,
+            sp_Insert_Purchase_Order_Item,
+            sp_Update_Purchase_Order,
+            sp_Update_Purchase_Order_Item,
+            sp_Get_Purchase_Order_By_Id,
+            sp_Insert_Purchase_Order_Item_Sizes,
+
+            #endregion
+
+            #region Purchase Invoice
+
+            sp_Insert_Purchase_Invoice,
+            sp_Insert_Purchase_Invoice_Item,
+
+            sp_Update_Purchase_Invoice,
+            sp_Update_Purchase_Invoice_Item,
+
+            sp_Get_Purchase_Invoice_By_Id,
+            sp_Get_Purchase_Invoice_Item_By_Id,
+           
+            sp_Get_Purchase_Invoice_Items_By_SKU_Code,
+            sp_Get_Purchase_Orders,
+
+            //Product
+            sp_Insert_Product_MRP,
+            sp_Update_Product_MRP,
+            sp_Insert_Product,
+            sp_Update_Product,
+            sp_Get_Sizes_On_SizeGroupId,
+            sp_Insert_Vendor_Article_Mapping,
+            sp_Get_Product_On_ProductId,
+            sp_Get_Colours_On_ColourId,
+        Get_Credit_Note_Details_By_Id_Sp,
+        Get_Payable_Balance_Amount_By_Id_Sp,
+        Get_Payable_Data_By_Id_Sp,
+        Get_Payable_Data_Item_By_Id_Sp,
+        Get_Payable_Details_By_Id_Sp,
+        Insert_Payable_Data_Sp,
+        sp_Insert_Payable_Item_Data,
+        sp_Temp_Get_Payable_Detail_By_Id1,
+
+        //Employee Branch mapping
+        sp_Get_Branch,
+        Insert_Employee_Mapping,
+        sp_Get_Employee_MapBranch_ById,
+        sp_Get_Branch_For_Employee_mapping,
 
             //Sales Order
 

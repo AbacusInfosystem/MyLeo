@@ -47,9 +47,11 @@ namespace MyLeoRetailerRepo
                sqlParam.Add(new SqlParameter("@Created_By", VendorContact.Created_By));
            }
 
+           VendorContact.Vendor_Contact_Name = VendorContact.First_Name + " " + VendorContact.Last_Name;
+
            sqlParam.Add(new SqlParameter("@Vendor_Contact_Name", VendorContact.Vendor_Contact_Name));
 
-           sqlParam.Add(new SqlParameter("@Vendor_ID", VendorContact.Vendor_ID));
+           sqlParam.Add(new SqlParameter("@Vendor_Id", VendorContact.Vendor_Id));
 
            //sqlParam.Add(new SqlParameter("@First_Name", VendorContact.First_Name));
 
@@ -122,7 +124,7 @@ namespace MyLeoRetailerRepo
            if (!dr.IsNull("Vendor_Contact_Name"))
            {
                VendorContact.Vendor_Contact_Name = Convert.ToString(dr["Vendor_Contact_Name"]);
-               VendorContact.Vendor_ID = Convert.ToInt32(dr["Vendor_ID"]);
+               VendorContact.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
                VendorContact.Address = Convert.ToString(dr["Address"]);
                VendorContact.City = Convert.ToString(dr["City"]);
                VendorContact.State = Convert.ToString(dr["State"]);
@@ -159,43 +161,10 @@ namespace MyLeoRetailerRepo
            return VendorContact;
        }
 
-       private VendorInfo Get_Vendor_Values(DataRow dr)
-       {
-           VendorInfo vendor = new VendorInfo();
 
-           vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
 
-           //if (!dr.IsNull("StateName"))
-           vendor.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
 
-           return vendor;
-       }
 
-       public List<VendorInfo> Get_Vendors()
-       {
-           List<VendorInfo> Vendors = new List<VendorInfo>();
-           DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
-           foreach (DataRow dr in dt.Rows)
-           {
-               Vendors.Add(Get_Vendor_Values(dr));
-           }
-           return Vendors;
-       }
-
-       public VendorInfo Get_Vendor_By_Id(int Vendor_ID)
-       {
-           VendorInfo Vendor = new VendorInfo();
-           List<SqlParameter> sqlParam = new List<SqlParameter>();
-
-           sqlParam.Add(new SqlParameter("@Vendor_ID", Vendor_ID));
-
-           DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.Get_Vendor_By_Id_Sp.ToString(), CommandType.StoredProcedure);
-           foreach (DataRow dr in dt.Rows)
-           {
-               Vendor = Get_Vendor_Values(dr);
-           }
-           return Vendor;
-       }
 
     }
 }

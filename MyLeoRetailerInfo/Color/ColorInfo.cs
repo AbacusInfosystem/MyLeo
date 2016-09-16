@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyLeoRetailerInfo.Product;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace MyLeoRetailerInfo.Color
 
         public ColorInfo()
 		{
-
+            ProductMRP_N_WSR = new List<ProductMRPInfo>();
 		}
 
 		public int Colour_Id
@@ -56,6 +57,8 @@ namespace MyLeoRetailerInfo.Color
 			get;
 			set;
 		}
+
+        public List<ProductMRPInfo> ProductMRP_N_WSR { get; set; }
 
 	}
 }

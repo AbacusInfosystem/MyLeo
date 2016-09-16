@@ -19,7 +19,7 @@ namespace MyLeoRetailerInfo.VendorContact
            set;
        }
 
-       public int Vendor_ID
+       public int Vendor_Id
        {
            get;
            set;

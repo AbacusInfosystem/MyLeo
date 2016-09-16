@@ -5,13 +5,18 @@
                 required: true
             },
 
-            //"Branch.Near_Branch_Location_Pincode": {
-            //    required: true
-            //},
+            "Branch.Branch_Landline1": {
+                digits: true
+            },
 
-            //"Branch.Far_Branch_Location_Pincode": {
-            //    required: true
-            //}
+            "Branch.Branch_Landline2": {
+                digits: true
+            },
+
+            "Branch.Branch_Pincode": {
+                digits: true
+            },
+
         },
         messages: {
 
@@ -19,13 +24,19 @@
                 required: "Branch Name is required."
             },
 
-            //"Branch.Near_Branch_Location_Pincode": {
-            //    required: "Near Branch Pincode is required."
-            //},
+            "Branch.Branch_Landline1": {
+                digits: "Enter only digits"
+            },
 
-            //"Branch.Far_Branch_Location_Pincode": {
-            //    required: "Far Branch Pincode is required."
-            //}
+            "Branch.Branch_Landline2": {
+                digits: "Enter only digits"
+            },
+            
+            "Branch.Branch_Pincode": {
+                digits: "Enter only digits"
+            },
+
+          
         }
     });
 });

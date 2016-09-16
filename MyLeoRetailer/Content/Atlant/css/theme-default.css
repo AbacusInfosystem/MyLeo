@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,500,600,700&subset=latin,latin-ext);
 @import "jquery/jquery-ui.min.css";
@@ -3879,7 +3879,8 @@ td.dataTables_empty {
   background: url("../img/bg.png") left top repeat #33414e;
 }
 .login-container .login-box {
-  width: 400px;
+  /*width: 400px;*/     /*changed by sanchita*/
+  width: 700px;
   margin: 0px auto;
   padding-top: 100px;
 }
@@ -3904,6 +3905,8 @@ td.dataTables_empty {
   font-size: 19px;
   font-weight: 300;
   margin-bottom: 20px;
+
+  text-align: center; /*Nishant 14/09/2016*/
 }
 .login-container .login-box .login-body .form-control {
   border: 0px;

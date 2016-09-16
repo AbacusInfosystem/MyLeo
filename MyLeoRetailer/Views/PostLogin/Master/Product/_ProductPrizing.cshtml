@@ -1,0 +1,147 @@
+﻿@model MyLeoRetailer.Models.ProductViewModel
+@using MyLeoRetailerInfo.Common
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    ViewBag.Title = "_ProductPrizing";
+}
+<script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_events.js"></script>
+<script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_methods.js"></script>
+<script src="~/Scripts/Modules/Product/_ProductPricing/product_price_validation.js"></script>
+<style type="text/css">
+    .color-expand {
+        background: url("../images/greybox-center-bg1.jpg") repeat-x scroll center top transparent;
+        float: left;
+        min-height: 100px;
+        overflow: auto;
+        width: 260px;
+    }
+</style>
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Product Price</li>
+</ul>
+
+<div class="content-frame">
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Product Price Management</h2>
+        </div>
+    </div>
+</div>
+
+<div class="page-content-wrap">
+    <form role="form" id="frmProductColor">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="block">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="form-group input-group color" data-color="rgb(255, 146, 180)" data-color-format="rgb" id="colorpicker">
+                                <input class="form-control" type="text" id="txtColourCode" name="Product.Colour_Code">
+                                <span class="input-group-addon"><i id="iRGBColor" style="background-color: rgb(154, 42, 77);"></i></span>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-success active" type="button" id="btnAddColour">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form role="form" id="frmProductMRP">
+
+        <div class="row">
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 362px;">
+                <div class="block">
+                    <div class="row">
+                        <div class="list-group border-bottom push-down-20 color-expand" id="Color_Grid">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9 divMRP" style="padding: 10px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD; display:none">
+                <div class="block" style="margin-bottom:0px;">
+                    <h4 style="margin-top: 0px;">Size details:</h4>
+
+                    <table class="table table-bordered table-hover" id="tbl_ProductMRP">
+
+                        <tbody>
+                            @{
+                                int c = 0;
+                                if (Model.Color.ProductMRP_N_WSR != null && Model.Color.ProductMRP_N_WSR.Count() > 0)
+                                {
+                                    int i = 0, j = 0, k = 0, l = 0,m = 0;
+                                    <tr>
+                                        <td>Size.</td>
+                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
+                                        {
+                                            <td><span class="label label-primary label-form" style="margin-bottom: 1px;">@itm.Size_Name</span></td>
+                                            i++;
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td>WSR.</td>
+                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
+                                        {
+                                            <td><input type="text" id="txtProductWSR_@j" class="form-control" placeholder="WSR." name="Color.ProductMRP_N_WSR[@j].Purchase_Price" value="@itm.Purchase_Price" /></td>
+                                            j++;
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td>MRP.</td>
+                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
+                                        {
+                                            <td><input type="text" id="txtProductMRP_@k" class="form-control" placeholder="MRP." name="Color.ProductMRP_N_WSR[@k].MRP_Price" value="@itm.MRP_Price" /></td>
+                                            k++;
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td>SKU Code.</td>
+                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
+                                        {
+                                            <td><span class="label label-primary label-form" style="margin-bottom: 1px;">@itm.SKU_Code</span></td>
+                                            l++;
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td>Barcode.</td>
+                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
+                                        {
+                                            @*<td><span class="label label-primary label-form" style="margin-bottom: 1px;">@itm.ba</span></td>*@
+                                            <td><i class="fa fa-barcode fa-3x"></i></td>
+
+                                            m++;
+                                        }
+                                    </tr>
+                                }
+                                c++;
+                            }
+                        </tbody>
+                    </table> 
+
+                    <div class="block" style="margin-bottom:0px;">
+                        <button type="button" class="btn btn-success">Print all barcodes.</button>
+                        <button type="button" class="btn btn-success" id="btnAddMRP">Add.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+                <div class="btn-group">
+                    <button class="btn btn-success active" id="btnProductSave">Save</button>
+                    <button class="btn btn-danger active">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

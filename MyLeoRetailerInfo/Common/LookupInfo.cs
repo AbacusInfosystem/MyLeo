@@ -64,5 +64,22 @@ namespace MyLeoRetailerInfo.Common
 
         }
 
+        public static Dictionary<int, string> Get_Actions()
+        {
+            Dictionary<int, string> get_Actions = new Dictionary<int, string>();
+
+            get_Actions.Add(1, Actions.Access.ToString().ToString());
+
+            get_Actions.Add(2, Actions.Create.ToString().ToString());
+
+            get_Actions.Add(3, Actions.Edit.ToString().ToString());
+
+            get_Actions.Add(4, Actions.View.ToString().ToString());
+
+            return get_Actions;
+
+        }
+
+
     }
 }

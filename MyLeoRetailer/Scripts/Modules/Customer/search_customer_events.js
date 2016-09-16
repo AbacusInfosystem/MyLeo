@@ -1,13 +1,13 @@
 ﻿$(function () {
+    document.getElementById("btnEditCustomer").disabled = true;
+
     Get_Customers();
-
-    $(document).on("click", "[name='Customer_List']", function () {
-        Get_Customer_By_Id(this);       
-    });
-
+    
     $(document).on('change', '[name="Customer_List"]', function (event) {        
         if ($(this).prop('checked')) {
             $("#hdnCustomer_Id").val(this.value);
+            document.getElementById('btnEditCustomer').disabled = false;
+            
         }
     });
 
@@ -28,4 +28,5 @@
         $("#frmCustomer").attr("action", "/Customer/Get_Customer_By_Id");
         $("#frmCustomer").submit();
     });
+
 });

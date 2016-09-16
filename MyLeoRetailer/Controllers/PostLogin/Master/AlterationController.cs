@@ -33,7 +33,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     aViewModel = (AlterationViewModel)TempData["aViewModel"];
                 }
 
-                aViewModel.Employees = eRepo.Get_Employees();
+                //aViewModel.Employees = eRepo.Get_Employees();
 
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }
@@ -60,7 +60,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Search", aViewModel);
         }
 
-        public JsonResult Insert_Alteration(AlterationViewModel aViewModel)
+        public ActionResult Insert_Alteration(AlterationViewModel aViewModel)
         {
             try
             {
@@ -75,10 +75,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(aViewModel));
+            TempData["aViewModel"] = (AlterationViewModel)aViewModel;
+
+            return RedirectToAction("Search");
         }
 
-        public JsonResult Update_Alteration(AlterationViewModel aViewModel)
+        public ActionResult Update_Alteration(AlterationViewModel aViewModel)
         {
             try
             {
@@ -93,7 +95,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(aViewModel));
+ 
+            TempData["aViewModel"] = (AlterationViewModel)aViewModel;
+
+            return RedirectToAction("Search");
         }
 
         public JsonResult Get_Alterations(AlterationViewModel aViewModel)
@@ -136,7 +141,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Alteration.Alteration_ID);
 
-                aViewModel.Employees = eRepo.Get_Employees();
+                //aViewModel.Employees = eRepo.Get_Employees();
 
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }
@@ -163,7 +168,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         //    return Json(JsonConvert.SerializeObject(aViewModel));
         //}
 
-     
+       
 
     }
 }

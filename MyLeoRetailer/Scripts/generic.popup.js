@@ -21,10 +21,10 @@ $(document).ready(function () {
         Get_Autocomplete_Lookup(true,$(this), false);
     });
 
-    //$(document).on("focusout", ".lookup-text", function (event) {
-
-    //    Get_Autocomplete_Lookup(false, $(this), false);
-    //});
+    $(document).on("focusout", ".lookup-text", function (event) {
+ 
+        Get_Autocomplete_Lookup(false, $(this), false);
+    });
 
     $('#div_Parent_Modal_Fade').on('hidden.bs.modal', function (e) {
 
@@ -50,6 +50,7 @@ $(document).ready(function () {
 
 
 function Get_Autocomplete_Lookup(openModal,elementObj, modalExist) {
+   
    
     $("#hdnLookupLabelId").val(elementObj.parents(".auto-complete").find(".autocomplete-text").prop("id"));
 
@@ -98,36 +99,37 @@ function Get_Autocomplete_Lookup(openModal,elementObj, modalExist) {
     else
     {
 
-        //var fieldValue = $("#" + $("#hdnLookupLabelId").val()).val();
+        var fieldValue = $("#" + $("#hdnLookupLabelId").val()).val();
 
 
-        //if ($("#" + $("#hdnLookupLabelId").val()).val() != "") {
+        if ($("#" + $("#hdnLookupLabelId").val()).val() != "") {
 
-        //    $.ajax({
+            $.ajax({
 
-        //        url: '/autocompleteLookup/get-lookup-data-by-id',
+                url: '/autocompleteLookup/get-lookup-data-by-id',
 
-        //        data: { field_Value: fieldValue, table_Name: tableName, columns: column },
+                data: { field_Value: fieldValue, table_Name: tableName, columns: column },
 
-        //        method: 'GET',
+                method: 'GET',
 
-        //        async: false,
+                async: false,
 
-        //        success: function (data) {
+                success: function (data) {
 
-        //            if (data != null) {
+                    if (data != null) {
 
-        //                Bind_Selected_Item(data);
-        //            }
-        //        }
-        //    });
-        //}
-        //else {
+                        Bind_Selected_Item(data);
+                    }
+                }
+            });
+        }
+        else {
 
-        //    $("#" + $("#hdnLookupHiddenId").val()).val("");
+            $("#" + $("#hdnLookupHiddenId").val()).val("");
 
-        //    $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find('.todo-list').remove();
-        //}
+            $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find('.todo-list').remove();  
+            
+        }
     }
    
 }
@@ -142,13 +144,15 @@ function Bind_Selected_Item(data) {
 
         $("#" + $("#hdnLookupHiddenId").val()).val($("#" + $("#hdnLookupLabelId").val()).val());
 
-        htmltext = "<ul id='lookupUlLookup' class='todo-list ui-sortable'><li ><span class='text'>" + data + "</span><div class='tools'><i class='fa fa-remove'></i></div></li></ul>";
+        //htmltext = "<ul id='lookupUlLookup' class='todo-list ui-sortable'><li ><span class='text'>" + data + "</span><div class='tools'><i class='fa fa-remove'></i></div></li></ul>";
+        htmltext = "<ul id='lookupUlLookup' class='list-group border-bottom'><li class='list-group-item'><span class='text'>"+ data +"</span><div class='pull-right'><i class='glyphicon glyphicon-remove'></i></div></li></ul>"
     }
     else {
 
         $("#" + $("#hdnLookupHiddenId").val()).val("");
 
-        htmltext = "<ul id='lookupUlLookup' class='todo-list ui-sortable'><li ><span class='text'>" + $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find(".lookup-title").text() + " does not exist</span><div class='tools'><i class='fa fa-remove'></i>";
+        //htmltext = "<ul id='lookupUlLookup' class='todo-list ui-sortable'><li ><span class='text'>" + $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find(".lookup-title").text() + " does not exist</span><div class='tools'><i class='fa fa-remove'></i>";
+        htmltext = "<ul id='lookupUlLookup' class='list-group border-bottom'><li ><span class='text'>" + $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find(".lookup-title").text() + " does not exist</span><div class='pull-right'><i class='glyphicon glyphicon-remove'></i>";
     }
 
     $("#" + $("#hdnLookupLabelId").val()).val("");
@@ -194,6 +198,6 @@ function Close_Pop_Up(cloneObj,elementObj) {
 
 //    $('#div_Parent_Modal_Fade').modal('show');
 
-//    $("#div_Parent_Modal_Fade").find(".modal-title").text("Products");
+//    $("#div_Parent_Modal_Fade").find(".modal-title").text("Employees");
 
 //}

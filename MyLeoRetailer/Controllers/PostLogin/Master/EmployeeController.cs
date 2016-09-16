@@ -16,27 +16,36 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class EmployeeController : BaseController
     {
-        //
-        // GET: /Employee/
+        EmployeeRepo eRepo;
+
+        public EmployeeController()
+        {
+            eRepo = new EmployeeRepo();
+        }
 
         public ActionResult Index(EmployeeViewModel eViewModel)
         {
-            //PaginationInfo Pager = new PaginationInfo();
             try
             {
                 if (TempData["eViewModel"] != null)
                 {
                     eViewModel = (EmployeeViewModel)TempData["eViewModel"];
                 }
+                RoleRepo _rRepo = new RoleRepo();
+
+                eViewModel.Role_List = _rRepo.Get_Role_List();
+
             }
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                //Logger.Error("VendorController - Index " + ex.Message);
+
             }
 
             return View("Index", eViewModel);
         }
+
+     
 
         public ActionResult Search(EmployeeViewModel eViewModel)
         {
@@ -56,7 +65,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Insert_Employee(EmployeeViewModel eViewModel)
         {
-            EmployeeRepo eRepo = new EmployeeRepo();
+            //EmployeeRepo eRepo = new EmployeeRepo();
 
             try
             {
@@ -76,7 +85,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Update_Employee(EmployeeViewModel eViewModel)
         {
-            EmployeeRepo eRepo = new EmployeeRepo();
+            //EmployeeRepo eRepo = new EmployeeRepo();
 
             try
             {
@@ -97,7 +106,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Employees(EmployeeViewModel eViewModel)
         {
-            EmployeeRepo eRepo = new EmployeeRepo();
+            //EmployeeRepo eRepo = new EmployeeRepo();
 
             CommonManager cMan = new CommonManager();
 
@@ -138,10 +147,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Employee_By_Id(EmployeeViewModel eViewModel)
         { 
-            EmployeeRepo cRepo = new EmployeeRepo();
+            //EmployeeRepo cRepo = new EmployeeRepo();
             try
             {
-                eViewModel.Employee = cRepo.Get_Employee_By_Id(eViewModel.Employee.Employee_Id);
+                eViewModel.Employee = eRepo.Get_Employee_By_Id(eViewModel.Employee.Employee_Id);
             }
             catch (Exception ex)
             {
@@ -151,5 +160,111 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
             return RedirectToAction("Index",eViewModel);
         }
+
+        public JsonResult Check_Existing_User_Name(string user_Name)
+        {
+            bool check = false;
+            try
+            {
+                //check = eRepo.Check_Existing_User_Name(user_Name);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
+        #region Employee Branch mapping
+
+        public ActionResult Employee_Branch_Mapping(EmployeeViewModel eViewModel)
+        {
+            try
+            {
+                eViewModel.Employee = eRepo.Get_Employee_By_Id(eViewModel.Employee.Employee_Id);
+                eViewModel.Map_Branches = eRepo.Get_Employee_MapBranch_ById(eViewModel.Employee.Employee_Id); 
+                eViewModel.List_Branch = eRepo.Get_Branches();
+               
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+            return View("Employee_Branch_Mapping", eViewModel);
+        }
+
+        public ActionResult Insert_Employee_Mapping(EmployeeViewModel eViewModel)
+        {
+            try
+            {
+                Set_Date_Session(eViewModel.Employee);
+
+               eRepo.Insert_Employee_Mapping(eViewModel.Employee,eViewModel.List_Branch);
+
+               eViewModel.FriendlyMessages.Add(MessageStore.Get("EMPM01"));
+               
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+            TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
+            return RedirectToAction("Search");
+        }
+
+        //Addition by swapnali | Date:14/09/2016
+        public ActionResult ChangeBranch()
+        {
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
+            eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(1);
+            return View("ChangeBranch", eViewModel);
+        }
+
+        //public ActionResult Get_Branch_By_Employee(EmployeeViewModel eViewModel)
+        //{
+        //    eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(1);
+
+        //    return View("ChangeBranch", eViewModel);
+        //}
+
+
+        //public JsonResult Get_Branch_By_Employee(EmployeeViewModel eViewModel)
+        //{
+        //    string filter = "";
+
+        //    string dataOperator = "";
+
+        //    Pagination_Info pager = new Pagination_Info();
+
+        //    try
+        //    {
+
+        //        int EmployeeId = eViewModel.Employee.Employee_Id;// Set filter comma seprated
+
+        //        dataOperator = DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
+
+        //        eViewModel.Query_Detail = Set_Query_Details(false, "a.Branch_Name,b.Branch_ID", "a,b", "Branch a left join Employee_Branch_Mapping b on a.Branch_ID = b.Branch_Id ", "b.Employee_Id,b.Is_Active", "1,true", "Equal,Equal"); // Set query for grid
+
+        //        pager = eViewModel.Grid_Detail.Pager;
+
+        //        eViewModel.Grid_Detail = Set_Grid_Details(false, "Branch_Name", "Branch_ID"); // Set grid info for front end listing
+
+        //        eViewModel.Grid_Detail.Records = eRepo.Get_Branches(eViewModel.Query_Detail); // Call repo method 
+
+        //        Set_Pagination(pager, eViewModel.Grid_Detail); // set pagination for grid
+
+        //        eViewModel.Grid_Detail.Pager = pager;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(eViewModel));
+        //}
+
+        //end
+
+
     }
 }
