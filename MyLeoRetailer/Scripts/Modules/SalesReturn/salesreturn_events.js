@@ -8,19 +8,14 @@
 $(function () {
 
 
-    $("[name='SalesReturn.Mobile']").focusout(function () {
+    $("[name='SalesReturn.Mobile']").focusout(function ()
+    {
         Get_Customer_Name_By_Mobile_No();
     });
 
-    //$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
-    //{
-    //    Get_Sales_Order_Items_By_SKU_Code();
-    //});
 
-    $("#btnSaveSalesReturn").click(function () {
-
-
-        //if ($("#frmSalesOrder").valid()) {
+    $("#btnSaveSalesReturn").click(function ()
+    {
 
         $("#frmSalesReturn").attr("action", "/SalesReturn/Insert_SalesReturn/");
 
@@ -28,17 +23,12 @@ $(function () {
 
         $('#frmSalesReturn').submit();
 
-        //}
     });
-
-
-
 
 });
 
-function CalculateTotal() {
-
-    debugger;
+function CalculateTotal()
+{
 
     var sumQuantity = 0;
     var sumGrossAmount = 0;
@@ -70,9 +60,8 @@ function CalculateTotal() {
 }
 
 
-function CalculateCreditNoteAmt() {
-
-    debugger;
+function CalculateCreditNoteAmt()
+{
 
     var creditNoteAmt = 0;
 
@@ -85,4 +74,12 @@ function CalculateCreditNoteAmt() {
 
 
 }
+
+
+
+
+//$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
+//{
+//    Get_Sales_Order_Items_By_SKU_Code();
+//});
 

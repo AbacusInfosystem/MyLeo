@@ -33,9 +33,8 @@ function Get_Sales_Order_Items_By_SKU_Code(i) {
 
         async: false,
 
-        success: function (data) {
-
-            alert();
+        success: function (data)
+        {
 
             $('#textArticle_No_'+i).val(data.Article_No);
 
@@ -65,6 +64,7 @@ function AddSalesOrderDetails(i)
     var myTable = $("#tblSalesOrderItems");
     
     //var temptablecount = $("#tblSalesOrderItems tr").length;
+
     var temptablecount = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]').size();
 
     i = temptablecount;//-1;
@@ -128,7 +128,6 @@ function AddSalesOrderDetails(i)
     tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Amt' name='SaleOrderItemList[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
-   
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
@@ -144,7 +143,6 @@ function AddSalesOrderDetails(i)
     tblHtml += "<button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(" + i + ")'>Delete</button>";
     tblHtml += "</td>";
 
-   
     tblHtml += "</tr>";
 
     var newRow = $(tblHtml);
@@ -155,9 +153,8 @@ function AddSalesOrderDetails(i)
 
 
 
-function DeleteSalesOrderDetailsData(i) {
-
-    debugger;
+function DeleteSalesOrderDetailsData(i)
+{
 
     $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
 
@@ -166,11 +163,11 @@ function DeleteSalesOrderDetailsData(i) {
     CalculateTotal();
 
     CalculateTax()
+
 }
 
-function ReArrangeSalesOrderDetailsData() {
-
-    debugger;
+function ReArrangeSalesOrderDetailsData()
+{
 
     $("#tblSalesOrderItems").find("[id^='SalesOrderItemRow_']").each(function (i, row) {
 
@@ -276,5 +273,7 @@ function ReArrangeSalesOrderDetailsData() {
                 $(newTR).find("[id='delete-salesorder-details']").attr("onclick", "DeleteSalesOrderDetailsData(" + i + ")");
             }
         }
+
     });
+
 }

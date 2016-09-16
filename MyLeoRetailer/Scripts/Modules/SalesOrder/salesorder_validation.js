@@ -16,7 +16,8 @@
                         },
                     "SalesInvoice.Mobile":
                         {
-                            required: true,                          
+                            required: true,
+                            number: true
                         },
                     "SalesInvoice.Customer_Name":
                         {
@@ -25,6 +26,7 @@
                     "SalesInvoice.Tax_Percentage":
                         {
                             required: true,
+                            number: true
                         },
                     "SaleOrderItemList[0].SKU_Code":
                         {
@@ -32,11 +34,13 @@
                         },
                     "SaleOrderItemList[0].Quantity":
                         {
-                            required : true,
+                            required: true,
+                            number: true
                         },
                     "SaleOrderItemList[0].Discount_Percentage":
                         {
-                            required : true,
+                            required: true,
+                            number: true
                         }
                 },
 
@@ -52,7 +56,8 @@
                     },
                 "SalesInvoice.Mobile":
                     {
-                        required: "Mobile No is required"                       
+                        required: "Mobile No is required",
+                        number: "Only numbers"
                     },
                 "SalesInvoice.Customer_Name":
                     {
@@ -65,6 +70,7 @@
                 "SalesInvoice.Tax_Percentage":
                     {
                         required: "Tax Percentage is required",
+                        number: "Only numbers"
                     },
                 "SaleOrderItemList[0].SKU_Code":
                         {
@@ -73,10 +79,12 @@
                 "SaleOrderItemList[0].Quantity":
                     {
                         required: "Quantity Required",
+                        number: "Only numbers"
                     },
                 "SaleOrderItemList[0].Discount_Percentage":
                     {
                         required: "Discount % Required",
+                        number: "Only numbers"
                     },
                
             }

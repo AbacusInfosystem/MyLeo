@@ -37,7 +37,8 @@
     });
 }
 
-function Reset_SalesReturn() {
+function Reset_SalesReturn()
+{
 
     $("[name='Filter.Sales_Return_No']").val("");
 

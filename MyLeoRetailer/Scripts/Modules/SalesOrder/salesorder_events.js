@@ -5,7 +5,8 @@
 });
 
 
-$(function () {
+$(function ()
+{
 
 
     $("[name='SalesInvoice.Mobile']").focusout(function ()
@@ -13,33 +14,22 @@ $(function () {
         Get_Customer_Name_By_Mobile_No();
     });
 
-    //$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
-    //{
-    //    Get_Sales_Order_Items_By_SKU_Code();
-    //});
 
-    $("#btnSaveSalesOrder").click(function () {
-
-
-        //if ($("#frmSalesOrder").valid()) {
-          
+    $("#btnSaveSalesOrder").click(function ()
+    {
+   
         $("#frmSalesOrder").attr("action", "/SalesOrder/Insert_SalesOrder/");
 
         $('#frmSalesOrder').attr("method", "POST");
 
         $('#frmSalesOrder').submit();
 
-        //}
     });
-
-
-    
 
 });
 
-function CalculateTotal() {
-
-    debugger;
+function CalculateTotal()
+{
 
     var sumQuantity = 0;
     var sumMRPAmount = 0;
@@ -79,8 +69,6 @@ function CalculateTotal() {
 
 function CalculateTax() {
    
-    debugger;
-
     var netAmt = 0;
 
     var tax = parseFloat($("#textTaxPercentage_0").val());
@@ -95,10 +83,9 @@ function CalculateTax() {
     var roundedDecimal = netAmt_temp.toFixed(2);
 
     var intPart = Math.floor(roundedDecimal);
-    alert(intPart);
+   
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
-    alert(fracPart);
-
+    
     var roundOff = parseFloat(netAmt_temp.toString().split(".")[1]);
 
     var netAmt = netAmt_temp - fracPart;
@@ -109,6 +96,11 @@ function CalculateTax() {
     $("#textRoundOff_0").val(fracPart.toFixed(2));
     $("#textNETAmount_0").val(Math.round(netAmt));
 
-
-
 }
+
+
+
+//$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
+//{
+//    Get_Sales_Order_Items_By_SKU_Code();
+//});

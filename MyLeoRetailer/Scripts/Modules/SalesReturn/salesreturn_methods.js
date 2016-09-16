@@ -31,9 +31,8 @@ function Get_Sales_Return_Items_By_SKU_Code(i) {
 
         async: false,
 
-        success: function (data) {
-
-            alert();
+        success: function (data)
+        {
 
             $('#textArticle_No_' + i).val(data.Article_No);
 
@@ -53,7 +52,8 @@ function Get_Sales_Return_Items_By_SKU_Code(i) {
     });
 }
 
-function AddSalesReturnDetails(i) {
+function AddSalesReturnDetails(i)
+{
 
     var html = '';
 
@@ -68,10 +68,6 @@ function AddSalesReturnDetails(i) {
     i = temptablecount;//-1;
 
     tblHtml += "<tr id='SalesReturnItemRow_" + i + "' class='item-data-row'>";
-
-    //tblHtml += "<td>";
-    //tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='Invoice No' name='SaleReturnItemList[" + i + "].Sales_Invoice_No' value='' id=textInvoice_No_" + i + "'>";
-    //tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
@@ -154,9 +150,8 @@ function AddSalesReturnDetails(i) {
 
 }
 
-function DeleteSalesReturnDetailsData(i) {
-
-    debugger;
+function DeleteSalesReturnDetailsData(i)
+{
 
     $("#tblSalesReturnItems").find("[id='SalesReturnItemRow_" + i + "']").remove();
 
@@ -165,11 +160,11 @@ function DeleteSalesReturnDetailsData(i) {
     CalculateTotal();
 
     CalculateCreditNoteAmt();
+
 }
 
-function ReArrangeSalesReturnDetailsData() {
-
-    debugger;
+function ReArrangeSalesReturnDetailsData()
+{
 
     $("#tblSalesReturnItems").find("[id^='SalesReturnItemRow_']").each(function (i, row) {
 

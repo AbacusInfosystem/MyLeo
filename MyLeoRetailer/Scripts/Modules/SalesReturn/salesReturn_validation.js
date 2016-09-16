@@ -17,6 +17,7 @@
                     "SalesReturn.Mobile":
                         {
                             required: true,
+                            number: true
                         },
                     "SalesReturn.Customer_Name":
                         {
@@ -25,6 +26,7 @@
                     "SalesReturn.Total_Amount_Return_By_Cash":
                         {
                             required: true,
+                            number: true
                         },
                     "SaleReturnItemList[0].SKU_Code":
                         {
@@ -33,10 +35,12 @@
                     "SaleReturnItemList[0].Quantity":
                         {
                             required: true,
+                            number: true
                         },
                     "SaleReturnItemList[0].Discount_Percentage":
                         {
                             required: true,
+                            number: true
                         }
                    
                 },
@@ -53,7 +57,8 @@
                     },
                 "SalesReturn.Mobile":
                     {
-                        required: "Mobile No is required"
+                        required: "Mobile No is required",
+                        number: "Only numbers"
                     },
                 "SalesReturn.Customer_Name":
                     {
@@ -62,6 +67,7 @@
                 "SalesReturn.Total_Amount_Return_By_Cash":
                     {
                         required: "Cash Amount is required",
+                        number: "Only numbers"
                     },
                 "SaleReturnItemList[0].SKU_Code":
                       {
@@ -70,10 +76,12 @@
                 "SaleReturnItemList[0].Quantity":
                     {
                         required: "Quantity Required",
+                        number: "Only numbers"
                     },
                 "SaleReturnItemList[0].Discount_Percentage":
                     {
                         required: "Discount % Required",
+                        number: "Only numbers"
                     },
 
             }

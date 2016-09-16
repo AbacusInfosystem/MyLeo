@@ -37,7 +37,8 @@
     });
 }
 
-function Reset_SalesOrder() {
+function Reset_SalesOrder()
+{
 
     $("[name='Filter.Sales_Invoice_No']").val("");
 
