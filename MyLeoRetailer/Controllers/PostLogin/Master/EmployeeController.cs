@@ -212,59 +212,84 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        #endregion
+
+        #region Change Branch
         //Addition by swapnali | Date:14/09/2016
         public ActionResult ChangeBranch()
         {
             EmployeeViewModel eViewModel = new EmployeeViewModel();
-            eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(1);
+            if (Request.Cookies["LoginInfo"] != null)
+            {
+                //var barchid = Request.Cookies["LoginInfo"].Value;
+                MyLeoRetailer.Models.PreLogin.LoginViewModel lViewModel=new Models.PreLogin.LoginViewModel ();
+                lViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+
+                eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(lViewModel.Cookies.User_Id,lViewModel.Cookies.Branch_Ids);
+
+                eViewModel.Employee.Employee_Id=lViewModel.Cookies.User_Id;
+
+            }
             return View("ChangeBranch", eViewModel);
         }
 
-        //public ActionResult Get_Branch_By_Employee(EmployeeViewModel eViewModel)
-        //{
-        //    eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(1);
+        public ActionResult Save_Employee_Branch_Id(EmployeeViewModel eViewModel)
+        {
+            //Response.Cookies["LoginInfo"]["Branch_Ids"] = Branch_Ids;
 
-        //    return View("ChangeBranch", eViewModel);
-        //}
+           var Branch_Ids= eRepo.Save_Change_BranchId(eViewModel.Employee_Branch_List);
 
+           Set_Branch_Cookies(eViewModel.Employee.Employee_Id, Branch_Ids);
 
-        //public JsonResult Get_Branch_By_Employee(EmployeeViewModel eViewModel)
-        //{
-        //    string filter = "";
+           eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
+        
+           eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
 
-        //    string dataOperator = "";
+           return View("ChangeBranch", eViewModel);
+        }
 
-        //    Pagination_Info pager = new Pagination_Info();
+        public void Set_Branch_Cookies(int User_Id, string Branch_Ids)
+        {
+            MyLeoRetailer.Models.PreLogin.LoginViewModel loginViewModel = new Models.PreLogin.LoginViewModel();
+            LoginRepo _loginRepo = new LoginRepo();
+            try
+            {
+                if (Request.Cookies["LoginInfo"] == null)
+                {
+                    HttpCookie cookies = new HttpCookie("LoginInfo");
 
-        //    try
-        //    {
+                    string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-        //        int EmployeeId = eViewModel.Employee.Employee_Id;// Set filter comma seprated
+                    cookies.Values.Add("Token", cookie_Token);
 
-        //        dataOperator = DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
+                    cookies.Values.Add("Branch_Ids", Branch_Ids);
 
-        //        eViewModel.Query_Detail = Set_Query_Details(false, "a.Branch_Name,b.Branch_ID", "a,b", "Branch a left join Employee_Branch_Mapping b on a.Branch_ID = b.Branch_Id ", "b.Employee_Id,b.Is_Active", "1,true", "Equal,Equal"); // Set query for grid
+                    cookies.Expires = DateTime.Now.AddDays(2);
 
-        //        pager = eViewModel.Grid_Detail.Pager;
+                    Response.Cookies.Add(cookies);
+                }
+                else
+                {
+                    string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-        //        eViewModel.Grid_Detail = Set_Grid_Details(false, "Branch_Name", "Branch_ID"); // Set grid info for front end listing
+                    Response.Cookies["LoginInfo"]["Token"] = cookie_Token;
 
-        //        eViewModel.Grid_Detail.Records = eRepo.Get_Branches(eViewModel.Query_Detail); // Call repo method 
+                    Response.Cookies["LoginInfo"]["Branch_Ids"] = Branch_Ids;
 
-        //        Set_Pagination(pager, eViewModel.Grid_Detail); // set pagination for grid
+                }
+            }
+            catch (Exception ex)
+            {
+                HttpContext.Request.Cookies.Clear();
 
-        //        eViewModel.Grid_Detail.Pager = pager;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-        //    }
+                //Logger.Error("Error at Login Controller - SetUsersCookies : " + ex.Message);
+            }
+        }
 
-        //    return Json(JsonConvert.SerializeObject(eViewModel));
-        //}
 
         //end
 
+        #endregion 
 
     }
 }

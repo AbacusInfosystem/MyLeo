@@ -148,6 +148,12 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
             hash.Add("EMP02", EMP02);
+
+            //Addition by swapnali | Date:16/09/2016
+            FriendlyMessage EMP03 = new FriendlyMessage("EMP03", MessageType.Success, "Change Branch successfully.");
+            hash.Add("EMP03", EMP03);
+            //End
+
             #endregion
 
             #region Employee mapping
