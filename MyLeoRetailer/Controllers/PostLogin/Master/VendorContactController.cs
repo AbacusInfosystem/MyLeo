@@ -143,8 +143,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             VendorContactRepo vcRepo = new VendorContactRepo();
 
-            //VendorRepo vRepo = new VendorRepo();
-
             vcViewModel.Vendors = vRepo.Get_Vendors();
 
             vcViewModel.VendorContact = vcRepo.Get_Vendor_Contact_By_Id(vcViewModel.VendorContact.VendorContact_Id);

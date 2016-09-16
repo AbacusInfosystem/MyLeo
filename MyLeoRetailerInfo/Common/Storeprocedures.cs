@@ -133,7 +133,7 @@ namespace MyLeoRetailerInfo.Common
             //SalesInvoice
             Get_SalesInvoice_Sp,
 
-
+           
             #region Vendor
 
             sp_Insert_Vendor,
@@ -158,7 +158,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Agent,
             sp_Get_Transporter,
             sp_Get_Vendor,
-              
+                  
             #endregion
                   
             #region Role
@@ -174,6 +174,8 @@ namespace MyLeoRetailerInfo.Common
 
             #endregion
 
+
+            //#endregion
 
             #region Purchase Order
 
