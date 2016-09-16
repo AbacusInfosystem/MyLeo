@@ -196,6 +196,7 @@
     <Compile Include="Controllers\PostLogin\Master\EmployeeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\GiftVoucherController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ReplacementController.cs" />
     <Compile Include="Controllers\PostLogin\Master\RoleController.cs" />
     <Compile Include="Controllers\PostLogin\Master\SizeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TagController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
+    <Compile Include="Models\ReplacementViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
@@ -1013,6 +1015,9 @@
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
+    <Content Include="Scripts\Modules\Replacement\Replacement_event.js" />
+    <Content Include="Scripts\Modules\Replacement\Replacement_method.js" />
+    <Content Include="Scripts\Modules\Replacement\Replacement_validation.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
@@ -1092,6 +1097,7 @@
     <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
     <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
+    <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
