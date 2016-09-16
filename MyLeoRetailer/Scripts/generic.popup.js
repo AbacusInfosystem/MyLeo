@@ -67,7 +67,8 @@ function Get_Autocomplete_Lookup(openModal,elementObj, modalExist) {
 
     var editValue = $("#hdnEditLookupValue").val();
 
-    //for Purchase order
+    //Employee
+
     var filterField = $("#" + $("#hdnLookupLabelId").val()).data("param");
      
     var fieldValue = $('#' + filterField).val();

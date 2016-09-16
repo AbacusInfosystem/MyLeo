@@ -143,6 +143,22 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_SubCategory_Mapping,
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
+
+
+            //Sales Order
+
+            sp_Get_Customer_Name_By_Mobile_No,
+            sp_Get_Sales_Order_Items_By_SKU_Code,
+            sp_Insert_Sales_Invoice,
+            sp_Insert_Sales_Invoice_Item,
+            Sp_Delete_Sales_Order_Items_By_Sales_Invoice_Id,
+
+            //Sales Return
+
+            sp_Insert_Sales_Return,
+            sp_Insert_Sales_Return_Item,
+            sp_Insert_Sales_Credit_Notes,
+            Sp_Delete_Sales_Return_Items_By_Sales_Return_Id,
            
 		}
 	
