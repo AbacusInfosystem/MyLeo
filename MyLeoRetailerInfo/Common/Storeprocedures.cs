@@ -133,8 +133,8 @@ namespace MyLeoRetailerInfo.Common
             //SalesInvoice
             Get_SalesInvoice_Sp,
 
-           
-            //Vendor
+
+            #region Vendor
 
             sp_Insert_Vendor,
             sp_Update_Vendor,
@@ -158,7 +158,8 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Agent,
             sp_Get_Transporter,
             sp_Get_Vendor,
-                  
+              
+            #endregion
                   
             #region Role
 
@@ -173,8 +174,6 @@ namespace MyLeoRetailerInfo.Common
 
             #endregion
 
-
-            #endregion
 
             #region Purchase Order
 
@@ -201,6 +200,8 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Purchase_Invoice_Items_By_SKU_Code,
             sp_Get_Purchase_Orders,
 
+            #endregion
+
             //Product
             sp_Insert_Product_MRP,
             sp_Update_Product_MRP,
@@ -220,7 +221,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Temp_Get_Payable_Detail_By_Id1,
 
         //Employee Branch mapping
-        sp_Get_Branch,
+        
         Insert_Employee_Mapping,
         sp_Get_Employee_MapBranch_ById,
         sp_Get_Branch_For_Employee_mapping,

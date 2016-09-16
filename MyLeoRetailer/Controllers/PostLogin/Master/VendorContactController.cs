@@ -143,7 +143,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             VendorContactRepo vcRepo = new VendorContactRepo();
 
-            VendorRepo vRepo = new VendorRepo();
+            //VendorRepo vRepo = new VendorRepo();
 
             vcViewModel.Vendors = vRepo.Get_Vendors();
 
