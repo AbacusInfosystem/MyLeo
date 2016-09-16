@@ -1,9 +1,10 @@
 ﻿@model MyLeoRetailer.Models.EmployeeViewModel
 @using MyLeoRetailerInfo.Common
 
+<script src="~/Scripts/Modules/Employee/employee_validation.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_events.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_methods.js"></script>
-<script src="~/Scripts/Modules/Employee/employee_validation.js"></script>
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -82,25 +83,6 @@
                                 <span></span>
                             </label>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select class="form-control select" name="Employee.Branch_Id">
-                            <option value="0">Select Branch</option>
-                            <option value="1">Andheri</option>
-                            <option value="2">Versova</option>
-                            @*@foreach (var item in Model.Branches)
-                                {
-                                    if (Model.Employee.Branch_Id == item.Key)
-                                    {
-                                        <option value="@item.Key" selected="selected">@item.Value</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.Key">@item.Value</option>
-                                    }
-                                }*@
-                        </select>
                     </div>
 
                     <div class="form-group">
@@ -196,47 +178,62 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @if (Model.Employee.Is_Online == true)
-                        {
-                            <input type="text" class="form-control online-field" id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" />
-                        }
-                        else
-                        {
-                            <input type="text" class="form-control online-field" id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" style="display:none" />
-                        }
-                        <input type="hidden" id="hdnUser_Name" value="@Model.Employee.User_Name" />
-                    </div>
+                    @if (Model.Employee.Is_Online == true)
+                    {
+                        <div class="form-group online-field">
+                            <input type="text" class="form-control" id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group online-field" style="display:none">
+                            <input type="text" class="form-control " id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" />
+                        </div>
+                    }
+                    <input type="hidden" id="hdnUser_Name" value="@Model.Employee.User_Name" />
 
-                    <div class="form-group">
-                        @if (Model.Employee.Is_Online == true)
-                        {
-                            <input type="password" class="form-control online-field" id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" />
-                        }
-                        else
-                        {
-                            <input type="password" class="form-control online-field" id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" style="display:none" />
-                        }
-                    </div>
+                    @if (Model.Employee.Is_Online == true)
+                    {
+                        <div class="form-group online-field">
+                            <input type="password" class="form-control " id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group online-field" style="display:none">
+                            <input type="password" class="form-control " id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" />
+                        </div>
+                    }
 
-                    <div class="form-group">
-                        @if (Model.Employee.Is_Online == true)
-                        {
-                            <input type="password" class="form-control online-field" id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" />
-                        }
-                        else
-                        {
-                            <input type="password" class="form-control online-field" id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" style="display:none" />
-                        }
-                    </div>
+                    @if (Model.Employee.Is_Online == true)
+                    {
+                        <div class="form-group online-field">
+                            <input type="password" class="form-control " id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group online-field" style="display:none">
+                            <input type="password" class="form-control " id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" />
+                        </div>
+                    }
 
                     @if (Model.Employee.Is_Online == true)
                     {
                         <div class="form-group online-field">
                             <select class="form-control select" name="Employee.Role_Id" id="drpRole">
                                 <option value="">Select Role</option>
-                                <option value="1">Admin</option>
-                                <option value="2">User</option>
+                                @foreach (var item in Model.Role_List)
+                                {
+                                    if (item.Role_Id == Model.Employee.Role_Id)
+                                    {
+                                        <option selected value="@item.Role_Id">@item.Role_Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Role_Id">@item.Role_Name</option>
+                                    }
+                                }
                             </select>
                         </div>
                     }
@@ -245,8 +242,17 @@
                         <div class="form-group online-field" style="display:none;">
                             <select class="form-control select" name="Employee.Role_Id" id="drpRole">
                                 <option value="">Select Role</option>
-                                <option value="1">Admin</option>
-                                <option value="2">User</option>
+                                @foreach (var item in Model.Role_List)
+                                {
+                                    if (item.Role_Id == Model.Employee.Role_Id)
+                                    {
+                                        <option selected value="@item.Role_Id">@item.Role_Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Role_Id">@item.Role_Name</option>
+                                    }
+                                }
                             </select>
                         </div>
                     }

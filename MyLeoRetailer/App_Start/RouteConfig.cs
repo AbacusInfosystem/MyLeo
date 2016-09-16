@@ -73,6 +73,14 @@ namespace MyLeoRetailer
             defaults: new { controller = "Employee", action = "Check_Existing_User_Name", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Addition by swapnali | Date:14/09/2016
+            //routes.MapRoute(
+            //name: "employee-2",
+            //url: "employee/change_branch/{user_Name}",
+            //defaults: new { controller = "Employee", action = "ChangeBranch", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            //namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
 
             #region Role
@@ -83,13 +91,97 @@ namespace MyLeoRetailer
             defaults: new { controller = "Role", action = "Save_Role", id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            routes.MapRoute(
+            name: "Role-2",
+            url: "role/get-roles",
+            defaults: new { controller = "Role", action = "Get_Roles", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Role-3",
+            url: "role/get-role-by-id",
+            defaults: new { controller = "Role", action = "Get_Role_By_Id", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Role-4",
+            url: "role/get-role-access-functions/",
+            defaults: new { controller = "Role", action = "Get_Role_Access_Functions", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Role-5",
+            url: "role/check-role-name/{role_Name}",
+            defaults: new { controller = "Role", action = "Check_Existing_Role_Name", role_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
+
+            #region Product
+
+            routes.MapRoute(
+            name: "Product-1",
+            url: "Product/Insert_Product",
+            defaults: new { controller = "Product", action = "Insert_Product", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Product-2",
+            url: "Product/Update_Product",
+            defaults: new { controller = "Product", action = "Update_Product", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Product-3",
+            url: "Product/Get_Product_By_Id",
+            defaults: new { controller = "Product", action = "Get_Product_By_Id", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Product-4",
+            url: "Product/Get_Products",
+            defaults: new { controller = "Product", action = "Get_Products", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Product-5",
+            url: "Product/Get_Sizes_By_SizeGroupId",
+            defaults: new { controller = "Product", action = "Get_Sizes_By_SizeGroupId", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" }); 
+
+            routes.MapRoute(
+            name: "Product-6",
+            url: "Product/Get_Colours_By_ColourId",
+            defaults: new { controller = "Product", action = "Get_Colours_By_ColourId", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "Product-7",
+            url: "Product/serch-ProductPrizing",
+            defaults: new { controller = "Product", action = "ProductPrizing", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" }); 
+            
+
+            #endregion
+
+            #region Login
+
+            routes.MapRoute(
+            name: "login-1",
+            url: "login/get-employee-branches",
+            defaults: new { controller = "Login", action = "Get_Employee_Branches", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+
+
             #endregion
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Branch", action = "Search", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

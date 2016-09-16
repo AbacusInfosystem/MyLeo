@@ -21,15 +21,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             gvRepo = new GiftVoucherRepo();
         }
 
-        public ActionResult Search()
+        public ActionResult Search(GiftVoucherViewModel gvViewModel)
         {
-            GiftVoucherViewModel gvViewModel = new GiftVoucherViewModel();
-
+            
             try
             {
                 if (TempData["gvViewModel"] != null)
                 {
-                    gvViewModel = (GiftVoucherViewModel)TempData["vcViewModel"];
+                    gvViewModel = (GiftVoucherViewModel)TempData["gvViewModel"];
                 }
             }
             catch (Exception ex)
@@ -41,16 +40,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Search", gvViewModel);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(GiftVoucherViewModel gvViewModel)
         {
-           
-            GiftVoucherViewModel gvViewModel = new GiftVoucherViewModel();
-
+          
             try
             {
-                if (TempData["vcViewModel"] != null)
+                if (TempData["gvViewModel"] != null)
                 {
-                    gvViewModel = (GiftVoucherViewModel)TempData["vcViewModel"];
+                    gvViewModel = (GiftVoucherViewModel)TempData["gvViewModel"];
                 }
             }
             catch (Exception ex)
@@ -78,7 +75,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         }
 
-        public JsonResult Insert_Gift_Voucher(GiftVoucherViewModel gvViewModel)
+        public ActionResult Insert_Gift_Voucher(GiftVoucherViewModel gvViewModel)
         {
 
             try
@@ -96,10 +93,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(gvViewModel));
+            TempData["gvViewModel"] = (GiftVoucherViewModel)gvViewModel;
+            return RedirectToAction("Search");
         }
 
-        public JsonResult Update_Gift_Voucher(GiftVoucherViewModel gvViewModel)
+        public ActionResult Update_Gift_Voucher(GiftVoucherViewModel gvViewModel)
         {
 
             try
@@ -115,7 +113,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            return Json(JsonConvert.SerializeObject(gvViewModel));
+            TempData["gvViewModel"] = (GiftVoucherViewModel)gvViewModel;
+
+            return RedirectToAction("Search");
         }
 
         public JsonResult Get_Gift_Vouchers(GiftVoucherViewModel gvViewModel)

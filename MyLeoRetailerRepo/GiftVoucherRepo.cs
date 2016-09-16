@@ -104,7 +104,7 @@ namespace MyLeoRetailerRepo
                GiftVoucher.Person_Name = Convert.ToString(dr["Person_Name"]);
                GiftVoucher.Gift_Voucher_Date = Convert.ToDateTime(dr["Gift_Voucher_Date"]);
                GiftVoucher.Gift_Voucher_Expiry_Date = Convert.ToDateTime(dr["Gift_Voucher_Expiry_Date"]);
-               GiftVoucher.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+               GiftVoucher.Gift_Voucher_Amount = Convert.ToInt32(dr["Gift_Voucher_Amount"]);
                GiftVoucher.Payment_Mode = Convert.ToInt32(dr["Payment_Mode"]);
                GiftVoucher.Bank_Name = Convert.ToString(dr["Bank_Name"]);
                GiftVoucher.Credit_Card_No = Convert.ToString(dr["Credit_Card_No"]);

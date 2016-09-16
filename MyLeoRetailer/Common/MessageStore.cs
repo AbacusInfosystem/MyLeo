@@ -39,6 +39,10 @@ namespace MyLeoRetailer.Common
 			FriendlyMessage SYS08 = new FriendlyMessage("SYS08", MessageType.Error, "Entered User is not an Valid Active directory Member");
 			hash.Add("SYS08", SYS08);
 
+
+            FriendlyMessage SYS010 = new FriendlyMessage("SYS010", MessageType.Information, "You have successfully logged out!");
+            hash.Add("SYS010", SYS010);
+
 			#endregion
 
 			#region Category
@@ -142,8 +146,15 @@ namespace MyLeoRetailer.Common
             FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
             hash.Add("EMP01", EMP01);
 
-            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
+            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
             hash.Add("EMP02", EMP02);
+            #endregion
+
+            #region Employee mapping
+
+            FriendlyMessage EMPM01 = new FriendlyMessage("EMPM01", MessageType.Success, "Employee has been mapped successfully.");
+            hash.Add("EMPM01", EMPM01);
+
             #endregion
 
             #region Customer
@@ -224,6 +235,24 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+            #region Product
+            FriendlyMessage PROD01 = new FriendlyMessage("PROD01", MessageType.Success, "Product added successfully.");
+            hash.Add("PROD01", PROD01);
+
+            FriendlyMessage PROD02 = new FriendlyMessage("PROD02", MessageType.Success, "Product updated successfully.");
+            hash.Add("PROD02", PROD02);
+            #endregion
+
+            #region Role
+
+            FriendlyMessage RL01 = new FriendlyMessage("RL01", MessageType.Success, "Role added successfully.");
+            hash.Add("RL01", RL01);
+
+            FriendlyMessage RL02 = new FriendlyMessage("RL02", MessageType.Success, "Role updated successfully.");
+            hash.Add("RL02", RL02);
+
+
+            #endregion
             #region Purchase Order
 
             FriendlyMessage PO01 = new FriendlyMessage("PO01", MessageType.Success, "Purchase Order added successfully.");

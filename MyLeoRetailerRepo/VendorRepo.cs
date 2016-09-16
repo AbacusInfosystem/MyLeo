@@ -300,8 +300,8 @@ namespace MyLeoRetailerRepo
             Vendor.Vendor_CST_Effective_Date = Convert.ToDateTime(dr["CST_Effective_Date"]);
             Vendor.Vendor_Type = Convert.ToInt32(dr["Vendor_Type"]);
 
-            Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]);
-            Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+            //Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]);
+            //Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
 
             Vendor.Created_By = Convert.ToInt32(dr["Created_By"]);
             Vendor.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
@@ -432,6 +432,17 @@ namespace MyLeoRetailerRepo
             }
 
             return subcategorydetailslist;
+        }
+
+        public List<VendorInfo> Get_Vendors()
+        {
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                Vendors.Add(Get_Vendor_Values(dr));
+            }
+            return Vendors;
         }
 
         //Gauravi 7-9-2016

@@ -186,6 +186,7 @@
     <Compile Include="Controllers\PostLogin\AutocompleteLookup\AutocompleteLookupController.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\PostLogin\Dashboard\DashboardController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BranchController.cs" />
     <Compile Include="Controllers\PostLogin\Master\AlterationController.cs" />
     <Compile Include="Controllers\PostLogin\Master\BrandController.cs" />
@@ -997,6 +998,7 @@
     <Content Include="Scripts\Modules\Customer\customer_validation.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_events.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_methods.js" />
+    <Content Include="Scripts\Modules\Employee\Employee_Branch_Mapping_Event.js" />
     <Content Include="Scripts\Modules\Employee\employee_events.js" />
     <Content Include="Scripts\Modules\Employee\employee_methods.js" />
     <Content Include="Scripts\Modules\Employee\employee_validation.js" />
@@ -1007,9 +1009,12 @@
     <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_events.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_method.js" />
+    <Content Include="Scripts\Modules\Login\login-event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
+    <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_events.js" />
+    <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_methods.js" />
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
@@ -1030,9 +1035,11 @@
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_methods.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
+    <Content Include="Scripts\Modules\Role\role-validation.js" />
     <Content Include="Scripts\Modules\Size\size_group_events.js" />
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />
+    <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_validation.js" />
     <Content Include="Scripts\Modules\Tax\tax_events.js" />
     <Content Include="Scripts\Modules\Tax\tax_methods.js" />
     <Content Include="Scripts\Modules\Tax\Tax_validation.js" />
@@ -1102,6 +1109,9 @@
     <Content Include="Views\PostLogin\Master\Alteration\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Vendor\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
+    <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Employee\ChangeBranch.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseOrder\Print.cshtml" />
@@ -1123,6 +1133,7 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Filters\" />
+    <Folder Include="Scripts\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

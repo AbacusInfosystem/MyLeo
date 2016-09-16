@@ -203,7 +203,7 @@ namespace MyLeoRetailerRepo
         public List<SizeGroupInfo> Get_All_SizeGroups()
         {
             List<SizeGroupInfo> SizeGroups = new List<SizeGroupInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_SizeGroup_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_SizeGroup.ToString(), CommandType.StoredProcedure);
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)

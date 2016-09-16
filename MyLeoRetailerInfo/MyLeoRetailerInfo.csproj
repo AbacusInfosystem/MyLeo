@@ -61,12 +61,14 @@
     <Compile Include="Interface\IQueryInfo.cs" />
     <Compile Include="LookupInfo.cs" />
     <Compile Include="Pagination_Info.cs" />
+    <Compile Include="Payable\PayableInfo.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseInvoice\PurchaseInvoiceInfo.cs" />
     <Compile Include="PurchaseOrder\PurchaseOrderInfo.cs" />
     <Compile Include="PurchaseReturn\PurchaseReturnInfo.cs" />
     <Compile Include="QueryInfo.cs" />
+    <Compile Include="Role\AccessFunctionInfo.cs" />
     <Compile Include="Role\RoleInfo.cs" />
     <Compile Include="SalesInvoice\SalesInvoiceInfo.cs" />
     <Compile Include="State\StateInfo.cs" />
