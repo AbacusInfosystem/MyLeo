@@ -1089,6 +1089,7 @@
     <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
     <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Employee\ChangeBranch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

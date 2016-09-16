@@ -173,5 +173,59 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(check, JsonRequestBehavior.AllowGet);
         }
 
+        //Addition by swapnali | Date:14/09/2016
+        public ActionResult ChangeBranch()
+        {
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
+            eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(1);
+            return View("ChangeBranch", eViewModel);
+        }
+
+        //public ActionResult Get_Branch_By_Employee(EmployeeViewModel eViewModel)
+        //{
+        //    eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(1);
+
+        //    return View("ChangeBranch", eViewModel);
+        //}
+
+
+        //public JsonResult Get_Branch_By_Employee(EmployeeViewModel eViewModel)
+        //{
+        //    string filter = "";
+
+        //    string dataOperator = "";
+
+        //    Pagination_Info pager = new Pagination_Info();
+
+        //    try
+        //    {
+
+        //        int EmployeeId = eViewModel.Employee.Employee_Id;// Set filter comma seprated
+
+        //        dataOperator = DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
+
+        //        eViewModel.Query_Detail = Set_Query_Details(false, "a.Branch_Name,b.Branch_ID", "a,b", "Branch a left join Employee_Branch_Mapping b on a.Branch_ID = b.Branch_Id ", "b.Employee_Id,b.Is_Active", "1,true", "Equal,Equal"); // Set query for grid
+
+        //        pager = eViewModel.Grid_Detail.Pager;
+
+        //        eViewModel.Grid_Detail = Set_Grid_Details(false, "Branch_Name", "Branch_ID"); // Set grid info for front end listing
+
+        //        eViewModel.Grid_Detail.Records = eRepo.Get_Branches(eViewModel.Query_Detail); // Call repo method 
+
+        //        Set_Pagination(pager, eViewModel.Grid_Detail); // set pagination for grid
+
+        //        eViewModel.Grid_Detail.Pager = pager;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(eViewModel));
+        //}
+
+        //end
+
+
     }
 }

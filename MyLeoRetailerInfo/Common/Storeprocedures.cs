@@ -82,6 +82,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
             sp_Check_Existing_User_Name,
+            //Addition by swapnali | Date:15/09/2016
+            sp_Get_Branch_By_EmployeeId,
+            //End
+
 
             #endregion
 

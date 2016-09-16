@@ -192,6 +192,59 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
+        //Addition by swapnali | Date:15/09/2016
+      
+        public List<EmployeeInfo> Get_Branch_By_Id(int Employee_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Employee_ID", Employee_Id));
+
+            List<EmployeeInfo> Emp_Branch_List = new List<EmployeeInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Branch_By_EmployeeId.ToString(), CommandType.StoredProcedure);
+            //List<DataRow> drList = new List<DataRow>();
+            //drList = dt.AsEnumerable().ToList();
+            //foreach (DataRow dr in drList)
+            //{
+            //    Branch = Get_Branch_Values(dr);
+            //}
+            //return Branch;
+            foreach (DataRow dr in dt.Rows)
+            {
+                EmployeeInfo Employee_Branch = new EmployeeInfo();
+                Employee_Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+                Employee_Branch.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+                Emp_Branch_List.Add(Employee_Branch);
+            }
+            return Emp_Branch_List;
+
+        }
+
+
+        //private List<EmployeeInfo> Get_Branch_Values(DataRow dr)
+        //{
+        //    List<EmployeeInfo> Employee_Branches = new List<EmployeeInfo>();
+        //    EmployeeInfo Employee_Branch = new EmployeeInfo();
+
+        //    Employee_Branch.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+        //     foreach (DataRow dr in dr.Rows)
+        //    {
+
+            
+        //        Employee_Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+
+        //        Employee_Branch.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+
+        //    }
+
+        //    return Employee_Branch;
+        //}
+
+        public DataTable Get_Branches(QueryInfo query_Details)
+        {
+            return sqlHelper.Get_Table_With_Where(query_Details);
+        }
+
+        //End
 
     }
 }
