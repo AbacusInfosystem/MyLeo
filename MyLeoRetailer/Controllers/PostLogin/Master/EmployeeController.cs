@@ -11,6 +11,7 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
+using MyLeoRetailer.Filters;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
@@ -23,6 +24,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             eRepo = new EmployeeRepo();
         }
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Create)]
         public ActionResult Index(EmployeeViewModel eViewModel)
         {
             try
@@ -50,6 +52,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Employee_Branch_Mapping");
         }
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Access)]
         public ActionResult Search(EmployeeViewModel eViewModel)
         {
             try
@@ -148,6 +151,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(eViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Edit)]
         public ActionResult Get_Employee_By_Id(EmployeeViewModel eViewModel)
         { 
             //EmployeeRepo cRepo = new EmployeeRepo();
