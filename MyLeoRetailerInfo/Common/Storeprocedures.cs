@@ -109,6 +109,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Branch_Location,
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
+            sp_Get_Branch,
 
             #endregion
 
@@ -147,6 +148,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_SubCategory_Mapping,
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
+            sp_Get_Agent,
+            sp_Get_Transporter,
+            sp_Get_Vendor,
+
                   
             #region Role
 
@@ -156,6 +161,33 @@ namespace MyLeoRetailerInfo.Common
 
             #endregion
 
-		}
+            #region Purchase Order
+
+            sp_Insert_Purchase_Order,
+            sp_Insert_Purchase_Order_Item,
+            sp_Update_Purchase_Order,
+            sp_Update_Purchase_Order_Item,
+            sp_Get_Purchase_Order_By_Id,
+            sp_Insert_Purchase_Order_Item_Sizes,
+
+            #endregion
+
+            #region Purchase Invoice
+
+            sp_Insert_Purchase_Invoice,
+            sp_Insert_Purchase_Invoice_Item,
+
+            sp_Update_Purchase_Invoice,
+            sp_Update_Purchase_Invoice_Item,
+
+            sp_Get_Purchase_Invoice_By_Id,
+            sp_Get_Purchase_Invoice_Item_By_Id,
+
+            sp_Get_Purchase_Invoice_Items_By_SKU_Code,
+            sp_Get_Purchase_Orders,
+
+            #endregion
+
+        }
 	
 }

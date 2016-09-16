@@ -398,7 +398,23 @@ namespace MyLeoRetailerRepo
             return sqlparam;
         }
 
+        public List<BranchInfo> Get_Branches()
+        {
+            List<BranchInfo> Branches = new List<BranchInfo>();
 
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Branch.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                BranchInfo Branch = new BranchInfo();
+
+                Branch.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
+
+                Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+
+                Branches.Add(Branch);
+            }
+            return Branches;
+        }
 
 	}
 }
