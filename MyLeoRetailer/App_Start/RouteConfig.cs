@@ -73,6 +73,14 @@ namespace MyLeoRetailer
             defaults: new { controller = "Employee", action = "Check_Existing_User_Name", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Addition by swapnali | Date:16/09/2016
+            //routes.MapRoute(
+            //name: "employee-2",
+            //url: "employee/save-branch",
+            //defaults: new { controller = "Employee", action = "Save_Employee_Branch_Id", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            //namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
 
             #region Role
@@ -156,12 +164,24 @@ namespace MyLeoRetailer
 
             #endregion
 
+            #region Login
+
+            routes.MapRoute(
+            name: "login-1",
+            url: "login/get-employee-branches",
+            defaults: new { controller = "Login", action = "Get_Employee_Branches", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+
+
+            #endregion
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

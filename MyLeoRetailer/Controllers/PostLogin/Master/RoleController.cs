@@ -1,6 +1,9 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -11,6 +14,7 @@ using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
+    [SessionExpireAttribute]
     public class RoleController : BaseController
     {
         RoleRepo _rRepo = null;
@@ -20,15 +24,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             _rRepo = new RoleRepo();
         }
 
+        [AuthorizeUserAttribute(AppFunction.Role_Management_Access)]
         public ActionResult Index(RoleViewModel rViewModel)
         {
             try
             {
-
+                
             }
             catch(Exception ex)
             {
+                rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
+                Logger.Error("Role Controller - Index : " + ex.ToString());
             }
             return View("Index", rViewModel);
         }
@@ -67,6 +74,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Role Controller - Save_Role : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(rViewModel));
@@ -102,6 +111,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Role Controller - Get_Roles : " + ex.ToString());
+
             }
 
             return Json(JsonConvert.SerializeObject(rViewModel));
@@ -119,6 +131,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Role Controller - Get_Role_By_Id : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(rViewModel));
@@ -137,6 +151,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Role Controller - Get_Role_Access_Functions : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(rViewModel));
@@ -152,7 +168,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             catch (Exception ex)
             {
-
+                Logger.Error("Role Controller - Check_Existing_Role_Name : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }

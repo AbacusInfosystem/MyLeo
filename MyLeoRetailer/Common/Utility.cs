@@ -13,13 +13,26 @@ namespace MyLeoRetailer.Common
     public static class Utility
     {
 
-        public static LoginUserInfo Get_Login_User(string cookieName, string key)
+        public static LoginInfo Get_Login_User(string cookieName, string key, string key2)
         {
-            string token = System.Web.HttpContext.Current.Request.Cookies[cookieName][key];
+            LoginInfo loginInfo = null;
 
-            CookiesRepo _cookiesRepo = new CookiesRepo();
+            if (System.Web.HttpContext.Current.Request.Cookies["LoginInfo"] != null)
+            {
+                string token = System.Web.HttpContext.Current.Request.Cookies[cookieName][key];
 
-            return _cookiesRepo.Get_User_Data_By_User_Token(token);
+                string branches = System.Web.HttpContext.Current.Request.Cookies[cookieName][key2];
+
+                LoginRepo _lRepo = new LoginRepo();
+
+                loginInfo = new LoginInfo();
+
+                loginInfo = _lRepo.Get_User_Data_By_User_Token(token);
+
+                loginInfo.Branch_Ids = branches;
+            }
+            
+            return loginInfo;
         }
 
         public static string Encrypt(string clearText)

@@ -1,14 +1,13 @@
 ﻿$(function () {
-    Get_Branchs();
+   
+    document.getElementById("btnEditBranch").disabled = true;
 
-    $(document).on("click", "[name='Branch_List']", function () {
-        Get_Branch_By_Id(this);
-    });
+    Get_Branchs();
 
     $(document).on('change', '[name="Branch_List"]', function (event) {        
         if ($(this).prop('checked')) {
             $("#hdnBranch_ID").val(this.value);
-            $("#btnEditBranch").show();
+            document.getElementById("btnEditBranch").disabled = false;
         }
     });
 

@@ -434,16 +434,70 @@ namespace MyLeoRetailerRepo
             return subcategorydetailslist;
         }
 
+        //public List<VendorInfo> Get_Vendors()
+        //{
+        //    List<VendorInfo> Vendors = new List<VendorInfo>();
+        //    DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        Vendors.Add(Get_Vendor_Values(dr));
+        //    }
+        //    return Vendors;
+        //}
+
+        //Gauravi 7-9-2016
         public List<VendorInfo> Get_Vendors()
         {
             List<VendorInfo> Vendors = new List<VendorInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Vendor.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
-                Vendors.Add(Get_Vendor_Values(dr));
+                VendorInfo Vendor = new VendorInfo();
+
+                Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                Vendor.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                Vendors.Add(Vendor);
             }
             return Vendors;
         }
+
+        public List<VendorInfo> Get_Agents()
+        {
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Agent.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                VendorInfo Agent = new VendorInfo();
+
+                Agent.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                Agent.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                Vendors.Add(Agent);
+            }
+            return Vendors;
+        }
+
+        public List<VendorInfo> Get_Transporters()
+        {
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Transporter.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                VendorInfo Transpoter = new VendorInfo();
+
+                Transpoter.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                Transpoter.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                Vendors.Add(Transpoter);
+            }
+            return Vendors;
+        }
+
+        //End
 
 
     }

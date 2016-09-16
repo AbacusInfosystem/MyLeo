@@ -79,20 +79,7 @@
                     "Vendor.Vendor_CST_Effective_Date":
                       {
                           required: true,
-                      }
-                    //"Vendor.Brand_Id":
-                    //  {
-                    //      required: true,
-                    //  },
-                    //"Vendor.Category_Id":
-                    //  {
-                    //      required: true,
-                    //  },
-                    //"Vendor.SubCategory_Id":
-                    //  {
-                    //      required: true,
-                    //  }
-                   
+                      }                
                 },
             messages: {
 
