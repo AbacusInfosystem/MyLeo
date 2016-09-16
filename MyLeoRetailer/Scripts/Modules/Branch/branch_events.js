@@ -1,23 +1,23 @@
 ﻿$(function () {
 
-    //$("#btnSaveBranch").click(function () {
-    //    if ($("#frmBranchPrimaryInfo").valid()) {
-    //        //Save_Branch();
-    //    }
-    //});
-
+    if ($("[name='Branch.Branch_ID']").val() == "" || $("[name='Branch.Branch_ID']").val() == 0) {
+        document.getElementById("btnCancleBranch").disabled = false;
+    }
+    else {
+        document.getElementById('btnCancleBranch').disabled = true;
+    }
 
     $("#btnSaveBranch").click(function () {
         if ($("#frmBranch").valid())
         {
             if ($("[name='Branch.Branch_ID']").val() == "" || $("[name='Branch.Branch_ID']").val() == 0) {
-                $("#frmBranch").attr("action", "/Branch/Insert_Branch");
-                $("#frmBranch").submit();
+                $("#frmBranch").attr("action", "/Branch/Insert_Branch");                
             }
             else {
-                $("#frmBranch").attr("action", "/Branch/Update_Branch");
-                $("#frmBranch").submit();
-            }            
+                $("#frmBranch").attr("action", "/Branch/Update_Branch");                
+            }
+            $('#frmBranch').attr("method", "POST");
+            $("#frmBranch").submit();
         }        
     });
 

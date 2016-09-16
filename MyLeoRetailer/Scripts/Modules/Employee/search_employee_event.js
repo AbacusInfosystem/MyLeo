@@ -3,6 +3,8 @@ $(function () {
 
     Get_Employees();
 
+    
+
     $("[name='Filter.Employee']").focusout(function () {
         Get_Employees();
     });

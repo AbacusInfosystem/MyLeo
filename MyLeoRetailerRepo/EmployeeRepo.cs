@@ -193,12 +193,65 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
+        //Addition by swapnali | Date:15/09/2016
+      
+        public List<EmployeeInfo> Get_Branch_By_Id(int Employee_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Employee_ID", Employee_Id));
+
+            List<EmployeeInfo> Emp_Branch_List = new List<EmployeeInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Branch_By_EmployeeId.ToString(), CommandType.StoredProcedure);
+            //List<DataRow> drList = new List<DataRow>();
+            //drList = dt.AsEnumerable().ToList();
+            //foreach (DataRow dr in drList)
+            //{
+            //    Branch = Get_Branch_Values(dr);
+            //}
+            //return Branch;
+            foreach (DataRow dr in dt.Rows)
+            {
+                EmployeeInfo Employee_Branch = new EmployeeInfo();
+                Employee_Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+                Employee_Branch.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+                Emp_Branch_List.Add(Employee_Branch);
+            }
+            return Emp_Branch_List;
+
+        }
+
+
+        //private List<EmployeeInfo> Get_Branch_Values(DataRow dr)
+        //{
+        //    List<EmployeeInfo> Employee_Branches = new List<EmployeeInfo>();
+        //    EmployeeInfo Employee_Branch = new EmployeeInfo();
+
+        //    Employee_Branch.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+        //     foreach (DataRow dr in dr.Rows)
+        //    {
+
+            
+        //        Employee_Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+
+        //        Employee_Branch.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+
+        //    }
+
+        //    return Employee_Branch;
+        //}
+
+        public DataTable Get_Branches(QueryInfo query_Details)
+        {
+            return sqlHelper.Get_Table_With_Where(query_Details);
+        }
+
+        //End
 
 
         public List<BranchInfo> Get_Branches()
         {
             List<BranchInfo> branch = new List<BranchInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Brands_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Branch_For_Employee_mapping.ToString(), CommandType.StoredProcedure);
 
             foreach (DataRow dr in dt.Rows)
             {
@@ -211,8 +264,8 @@ namespace MyLeoRetailerRepo
         {
             BranchInfo branch = new BranchInfo();
 
-            branch.Branch_ID = Convert.ToInt32(dr["Brand_Id"]);
-            branch.Branch_Name = Convert.ToString(dr["Brand_Name"]);
+            branch.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
+            branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
 
             return branch;
         }
@@ -235,7 +288,7 @@ namespace MyLeoRetailerRepo
 
                 if (map_Branch != null && map_Branch.Branch_ID == list_Branch[i].Branch_ID)
                 {
-                    query += "update Employee_Branch_Mapping set Is_Active=" + list_Branch[i].IsActive + ", Updated_By=" + employee.Updated_By + ",Updated_Date=getdate() where Employee_Id=" + employee.Employee_Id + " And  Branch_Id=" + list_Branch[i].Branch_ID + ";";
+                    query += "update Employee_Branch_Mapping set Is_Active=" + list_Branch[i].IsActive + ", Updated_By=" + employee.Updated_By + ",Updated_Date=getdate() where Employee_Id=" + employee.Employee_Id + " And  Branch_ID=" + list_Branch[i].Branch_ID + ";";
                 }
                 else
                 {

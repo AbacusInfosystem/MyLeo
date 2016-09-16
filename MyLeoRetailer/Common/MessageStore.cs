@@ -253,8 +253,46 @@ namespace MyLeoRetailer.Common
 
 
             #endregion
+            #region Purchase Order
 
-        }
+            FriendlyMessage PO01 = new FriendlyMessage("PO01", MessageType.Success, "Purchase Order added successfully.");
+            hash.Add("PO01", PO01);
+
+            FriendlyMessage PO02 = new FriendlyMessage("PO02", MessageType.Success, "Purchase Order updated successfully.");
+            hash.Add("PO02", PO02);
+
+            FriendlyMessage PO03 = new FriendlyMessage("PO03", MessageType.Information, "No records found.");
+            hash.Add("PO03", PO03);
+
+            #endregion
+
+            #region Purchase Invoice
+
+            FriendlyMessage POI01 = new FriendlyMessage("POI01", MessageType.Success, "Purchase Invoice added successfully.");
+            hash.Add("POI01", POI01);
+
+            FriendlyMessage POI02 = new FriendlyMessage("POI02", MessageType.Success, "Purchase Invoice updated successfully.");
+            hash.Add("POI02", POI02);
+
+            FriendlyMessage POI03 = new FriendlyMessage("POI03", MessageType.Information, "No records found.");
+            hash.Add("POI03", POI03);
+
+            #endregion
+
+            #region Purchase Return
+
+            FriendlyMessage POR01 = new FriendlyMessage("POR01", MessageType.Success, "Purchase Return added successfully.");
+            hash.Add("POR01", POR01);
+
+            FriendlyMessage POR02 = new FriendlyMessage("POR02", MessageType.Success, "Purchase Return updated successfully.");
+            hash.Add("POR02", POR02);
+
+            FriendlyMessage POR03 = new FriendlyMessage("POR03", MessageType.Information, "No records found.");
+            hash.Add("POR03", POR03);
+
+            #endregion
+
+		}
 
 		public static FriendlyMessage Get(string code)
 		{
