@@ -8,6 +8,7 @@ using MyLeoRetailerInfo.Employee;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Interface;
 using MyLeoRetailerInfo.Role;
+using MyLeoRetailerInfo.Branch;
 
 
 namespace MyLeoRetailer.Models
@@ -24,7 +25,11 @@ namespace MyLeoRetailer.Models
 
             Filter = new Filter_Employee();
 
-            //Branches = new List<BranchInfo>();
+            Branch = new BranchInfo();
+
+            List_Branch = new List<BranchInfo>();
+
+            Map_Branches = new List<BranchInfo>();
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
@@ -61,6 +66,24 @@ namespace MyLeoRetailer.Models
         }
 
         public Filter_Employee Filter
+        {
+            get;
+            set;
+        }
+
+        public BranchInfo Branch
+        {
+            get;
+            set;
+        }
+
+        public List<BranchInfo> List_Branch
+        {
+            get;
+            set;
+        }
+
+        public List<BranchInfo> Map_Branches
         {
             get;
             set;

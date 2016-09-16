@@ -45,6 +45,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", eViewModel);
         }
 
+     
+
         public ActionResult Search(EmployeeViewModel eViewModel)
         {
             try
@@ -171,6 +173,43 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 
             }
             return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
+        #region Employee Branch mapping
+
+        public ActionResult Employee_Branch_Mapping(EmployeeViewModel eViewModel)
+        {
+            try
+            {
+                eViewModel.Employee = eRepo.Get_Employee_By_Id(eViewModel.Employee.Employee_Id);
+                eViewModel.Map_Branches = eRepo.Get_Employee_MapBranch_ById(eViewModel.Employee.Employee_Id); 
+                eViewModel.List_Branch = eRepo.Get_Branches();
+               
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+            return View("Employee_Branch_Mapping", eViewModel);
+        }
+
+        public ActionResult Insert_Employee_Mapping(EmployeeViewModel eViewModel)
+        {
+            try
+            {
+                Set_Date_Session(eViewModel.Employee);
+
+               eRepo.Insert_Employee_Mapping(eViewModel.Employee,eViewModel.List_Branch);
+
+               eViewModel.FriendlyMessages.Add(MessageStore.Get("EMPM01"));
+               
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+            TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
+            return RedirectToAction("Search");
         }
 
         //Addition by swapnali | Date:14/09/2016
