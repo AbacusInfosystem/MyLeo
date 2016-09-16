@@ -86,25 +86,6 @@
                     </div>
 
                     <div class="form-group">
-                        <select class="form-control select" name="Employee.Branch_Id">
-                            <option value="0">Select Branch</option>
-                            <option value="1">Andheri</option>
-                            <option value="2">Versova</option>
-                            @*@foreach (var item in Model.Branches)
-                                {
-                                    if (Model.Employee.Branch_Id == item.Key)
-                                    {
-                                        <option value="@item.Key" selected="selected">@item.Value</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.Key">@item.Value</option>
-                                    }
-                                }*@
-                        </select>
-                    </div>
-
-                    <div class="form-group">
                         <select class="form-control select" name="Employee.Designation_Id">
                             <option value="0">Select Designation</option>
                             @foreach (var item in LookupInfo.Get_Employee_Designation())

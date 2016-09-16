@@ -76,7 +76,7 @@ namespace MyLeoRetailerInfo
         {
             PageSize = 5;
 
-            PageLimit = 10;
+            PageLimit = 3;
 
             CurrentPage = 1;
 

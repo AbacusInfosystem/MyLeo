@@ -82,6 +82,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
             sp_Check_Existing_User_Name,
+            //Addition by swapnali | Date:15/09/2016
+            sp_Get_Branch_By_EmployeeId,
+            //End
+
 
             #endregion
 
@@ -109,6 +113,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
             sp_Get_Employee_Branches,
+            sp_Get_Branch,
 
             #endregion
 
@@ -150,6 +155,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_SubCategory_Mapping,
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
+            sp_Get_Agent,
+            sp_Get_Transporter,
+            sp_Get_Vendor,
+                  
                   
             #region Role
 
@@ -164,6 +173,33 @@ namespace MyLeoRetailerInfo.Common
 
             #endregion
 
+
+            #endregion
+
+            #region Purchase Order
+
+            sp_Insert_Purchase_Order,
+            sp_Insert_Purchase_Order_Item,
+            sp_Update_Purchase_Order,
+            sp_Update_Purchase_Order_Item,
+            sp_Get_Purchase_Order_By_Id,
+            sp_Insert_Purchase_Order_Item_Sizes,
+
+            #endregion
+
+            #region Purchase Invoice
+
+            sp_Insert_Purchase_Invoice,
+            sp_Insert_Purchase_Invoice_Item,
+
+            sp_Update_Purchase_Invoice,
+            sp_Update_Purchase_Invoice_Item,
+
+            sp_Get_Purchase_Invoice_By_Id,
+            sp_Get_Purchase_Invoice_Item_By_Id,
+           
+            sp_Get_Purchase_Invoice_Items_By_SKU_Code,
+            sp_Get_Purchase_Orders,
 
             //Product
             sp_Insert_Product_MRP,
@@ -182,6 +218,28 @@ namespace MyLeoRetailerInfo.Common
         Insert_Payable_Data_Sp,
         sp_Insert_Payable_Item_Data,
         sp_Temp_Get_Payable_Detail_By_Id1,
+
+        //Employee Branch mapping
+        sp_Get_Branch,
+        Insert_Employee_Mapping,
+        sp_Get_Employee_MapBranch_ById,
+        sp_Get_Branch_For_Employee_mapping,
+
+            //Sales Order
+
+            sp_Get_Customer_Name_By_Mobile_No,
+            sp_Get_Sales_Order_Items_By_SKU_Code,
+            sp_Insert_Sales_Invoice,
+            sp_Insert_Sales_Invoice_Item,
+            Sp_Delete_Sales_Order_Items_By_Sales_Invoice_Id,
+
+            //Sales Return
+
+            sp_Insert_Sales_Return,
+            sp_Insert_Sales_Return_Item,
+            sp_Insert_Sales_Credit_Notes,
+            Sp_Delete_Sales_Return_Items_By_Sales_Return_Id,
+           
 		}
 	
 }

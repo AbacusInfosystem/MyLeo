@@ -8,6 +8,7 @@ using MyLeoRetailerInfo.Employee;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Interface;
 using MyLeoRetailerInfo.Role;
+using MyLeoRetailerInfo.Branch;
 
 
 namespace MyLeoRetailer.Models
@@ -24,7 +25,11 @@ namespace MyLeoRetailer.Models
 
             Filter = new Filter_Employee();
 
-            //Branches = new List<BranchInfo>();
+            Branch = new BranchInfo();
+
+            List_Branch = new List<BranchInfo>();
+
+            Map_Branches = new List<BranchInfo>();
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
@@ -33,6 +38,13 @@ namespace MyLeoRetailer.Models
 			Grid_Detail.Pager.CallBackMethod = "Get_Employees";
 
             Role_List = new List<RoleInfo>();
+
+            //Addition by swapnali | Date:15/09/2016
+            //Branches = new List<MyLeoRetailerInfo.Branch.BranchInfo>();
+            Employee_Branch_List = new List<EmployeeInfo>();
+            //End
+
+
 		}
 
         public GridInfo Grid_Detail
@@ -59,6 +71,24 @@ namespace MyLeoRetailer.Models
             set;
         }
 
+        public BranchInfo Branch
+        {
+            get;
+            set;
+        }
+
+        public List<BranchInfo> List_Branch
+        {
+            get;
+            set;
+        }
+
+        public List<BranchInfo> Map_Branches
+        {
+            get;
+            set;
+        }
+
         public List<FriendlyMessage> FriendlyMessages
         {
             get;
@@ -66,6 +96,11 @@ namespace MyLeoRetailer.Models
         }
 
         public List<RoleInfo> Role_List { get; set; }
+
+        //Addition by swapnali | Date:15/09/2016
+        //public List<MyLeoRetailerInfo.Branch.BranchInfo> Branches { get; set; }
+        public List<EmployeeInfo> Employee_Branch_List { get; set; }
+        //End
 
     }
 

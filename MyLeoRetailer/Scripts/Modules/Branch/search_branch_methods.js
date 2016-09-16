@@ -35,31 +35,3 @@ function Get_Branchs() {
     });
 }
 
-
-function Get_Branch_By_Id(obj) {
-    $("[name='Branch_List']").removeClass("active");
-
-    $(obj).addClass("active");
-
-    $("[name='Branch.Branch_Name']").val($(obj).text());
-
-    $("[name='Branch.Branch_Address']").val($(obj).text());
-
-    $("[name='Branch.Branch_City']").val($(obj).text());
-
-    $("[name='Branch.Branch_State']").val($(obj).text());
-
-    $("[name='Branch.Branch_Country']").val($(obj).text());
-
-    $("[name='Branch.Branch_Pincode']").val($(obj).text());
-
-    $("[name='Branch.Branch_Landline1']").val($(obj).text());
-
-    $("[name='Branch.Branch_Landline2']").val($(obj).text());
-
-    $("[name='Branch.Is_Active']").val($(obj).text());
-
-    $("[name='Branch.Branch_ID']").val($(obj).attr("data-identity"));
-
-    $("#hdnBranch_ID").val($(obj).attr("data-identity"));
-}

@@ -38,11 +38,20 @@ namespace MyLeoRetailerRepo
 
 
             List<SqlParameter> paramList = new List<SqlParameter>();
+
             if (fieldValue != "0" && fieldValue != "")
             {
 
-
-
+                if (table_Name == "Employee")
+                {
+                    if (fieldName == "Role_Id")
+                    {
+                        strquery = " Select Employee.Employee_Id , Employee.Employee_Name  ";
+                        strquery += "from Employee inner join Role on Employee.Role_Id=Role.Role_Id ";
+                        strquery += "where Role.Role_Id= @Role_Id";
+                        paramList.Add(new SqlParameter("@Role_Id", fieldValue));
+                    }                   
+                }
             }
 
             DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);

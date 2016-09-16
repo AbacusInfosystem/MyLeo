@@ -115,6 +115,7 @@ namespace MyLeoRetailerInfo.Vendor
 
             SubCategoryDetailsList = new List<SubCategory_Details>();
         }
+                  
 
     }
 
