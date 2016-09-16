@@ -174,7 +174,7 @@ namespace MyLeoRetailerInfo.Common
             #endregion
 
 
-            #endregion
+            //#endregion
 
             #region Purchase Order
 
@@ -201,6 +201,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Purchase_Invoice_Items_By_SKU_Code,
             sp_Get_Purchase_Orders,
 
+            #endregion
             //Product
             sp_Insert_Product_MRP,
             sp_Update_Product_MRP,
@@ -220,7 +221,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Temp_Get_Payable_Detail_By_Id1,
 
         //Employee Branch mapping
-        sp_Get_Branch,
+        //sp_Get_Branch,
         Insert_Employee_Mapping,
         sp_Get_Employee_MapBranch_ById,
         sp_Get_Branch_For_Employee_mapping,
