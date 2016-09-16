@@ -21,7 +21,7 @@ $(document).ready(function () {
         $("#" + $("#hdnLookupHiddenId").val()).val(id);
         $("#" + $("#hdnLookupHiddenValue").val()).val(hiddenTextValue);
 
-        //$("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").val(hiddenTextValue);
+        $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").val(hiddenTextValue);
 
         $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
         //$(".glyphicon-remove").trigger("click")

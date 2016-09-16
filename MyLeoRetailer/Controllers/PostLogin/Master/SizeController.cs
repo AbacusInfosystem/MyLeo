@@ -17,6 +17,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class SizeController:BaseController
     {
+
+        public SizeGroupRepo sgRepo;
+
+        public SizeController()
+        {
+            sgRepo = new SizeGroupRepo();
+        }
+
         public ActionResult Index(SizeGroupViewModel sgViewModel)
         {
             return View("Index", sgViewModel);
@@ -24,7 +32,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Size_Group(SizeGroupViewModel sgViewModel)
         {
-            SizeGroupRepo sgRepo = new SizeGroupRepo();
 
             try
             {
@@ -43,8 +50,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public JsonResult Update_Size_Group(SizeGroupViewModel sgViewModel)
-        {
-            SizeGroupRepo sgRepo = new SizeGroupRepo();
+        {          
 
             try
             {
@@ -63,8 +69,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public JsonResult Get_SizeGroups(SizeGroupViewModel sgViewModel)
-        {
-            SizeGroupRepo sgRepo = new SizeGroupRepo();
+        {        
 
             CommonManager cMan = new CommonManager();
 
@@ -119,12 +124,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         //    return Json(JsonConvert.SerializeObject(sgViewModel));
         //}
 
-
         public JsonResult Get_SizeGroup_By_Id(int size_group_Id)
         {
-            SizeGroupViewModel sgViewModel = new SizeGroupViewModel();
-
-            SizeGroupRepo sgRepo = new SizeGroupRepo();
+            SizeGroupViewModel sgViewModel = new SizeGroupViewModel();           
 
             try
             {
@@ -138,13 +140,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(sgViewModel));
         }
 
-
-
         public JsonResult Get_Sizes(int size_group_Id)
         {
-            SizeGroupViewModel sgViewModel = new SizeGroupViewModel();
 
-            SizeGroupRepo sgRepo = new SizeGroupRepo();
+            SizeGroupViewModel sgViewModel = new SizeGroupViewModel();      
 
             sgViewModel.SizeList = sgRepo.Get_Sizes(size_group_Id);
 
@@ -152,15 +151,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public JsonResult Insert_Size(SizeGroupViewModel sgViewModel)
-        {
-            SizeGroupRepo sgRepo = new SizeGroupRepo();
+        {         
 
             try
             {
                 Set_Date_Session(sgViewModel.SizeGroup);
-
-                //sgViewModel.SizeGroup.Size_Id = sgRepo.Insert_Size(sgViewModel.SizeGroup);
-                //sgViewModel.SizeGroup.Size_Id = 
+                
                 sgRepo.Insert_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
 
                 sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZE1"));
@@ -174,8 +170,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public JsonResult Update_Size(SizeGroupViewModel sgViewModel)
-        {
-            SizeGroupRepo sgRepo = new SizeGroupRepo();
+        {         
 
             try
             {
