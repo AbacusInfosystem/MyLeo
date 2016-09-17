@@ -115,9 +115,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 pViewModel.Payable.Payable_Id = pRepo.Insert_Payable(pViewModel.Payable);
 
-                pRepo.Insert_Payable_Item_Data(pViewModel.Payable);
+                pViewModel.Payable.Payable_Item_Id = pRepo.Insert_Payable_Item_Data(pViewModel.Payable);
 
-                pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id);
+                pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id, pViewModel.Payable.Payable_Item_Id);
 
                 pViewModel.Payable = pRepo.Get_Payable_Data_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 

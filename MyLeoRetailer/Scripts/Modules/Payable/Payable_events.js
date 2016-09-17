@@ -1,10 +1,4 @@
 ﻿
-//$(document).ready(function () {
-
-//    $('#dp-2').datepicker({});
-
-//});
-
 
 $(function () {
 
@@ -62,73 +56,94 @@ $(function () {
         if ($(this).val() == 0) {
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
-           // $("#divChequedate").hide();
+            $("#divChequedate").hide();
+            $("#divPaidAmount").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
+            //$("#divCreditnoteno").hide();
+           // $("#divGiftvoucherno").hide();
            
+        }
+
+        else if ($(this).val() == 1) {
+
+            $("#divPaidAmount").show();
+            $("#divCreditcardno").hide();
+            $("#divPaidAmount").hide();
+            $("#divDebitcardno").hide();
+            $("#divChequedate").hide();
+            $("#divChequeno").hide();
+            $("#divBankName").hide();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
+
         }
 
         else if ($(this).val() == 2) {
             
             $("#divCreditcardno").show();
+            $("#divPaidAmount").show();
             $("#divDebitcardno").hide();
-            //$("#divChequedate").hide();
+            $("#divChequedate").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
            
         }
 
         else if ($(this).val() == 3) {
             $("#divDebitcardno").show();
+            $("#divPaidAmount").show();
             $("#divCreditcardno").hide();
-           // $("#divChequedate").hide();
+             $("#divChequedate").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
         }
 
         else if ($(this).val() == 4) {
-           // $("#divChequedate").show();
+            $("#divChequedate").show();
             $("#divChequeno").show();
             $("#divBankName").show();
+            $("#divPaidAmount").show();
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
         }
 
-        else if ($(this).val() == 5) {
-            $("#divCreditnoteno").show();
-            $("#divCreditcardno").hide();
-            $("#divDebitcardno").hide();
-            //$("#divChequedate").hide();
-            $("#divChequeno").hide();
-            $("#divBankName").hide();
-            $("#divGiftvoucherno").hide();
-        }
-        else if ($(this).val() == 6) {
-            $("#divCreditnoteno").hide();
-            $("#divCreditcardno").hide();
-            $("#divDebitcardno").hide();
-            //$("#divChequedate").hide();
-            $("#divChequeno").hide();
-            $("#divBankName").hide();
-            $("#divGiftvoucherno").show();
-        }
+        //else if ($(this).val() == 5) {
+        //    //$("#divCreditnoteno").show();
+        //    $("#divPaidAmount").show();
+        //    $("#divCreditcardno").hide();
+        //    $("#divDebitcardno").hide();
+        //    $("#divChequedate").hide();
+        //    $("#divChequeno").hide();
+        //    $("#divBankName").hide();
+        //    //$("#divGiftvoucherno").hide();
+        //}
+        //else if ($(this).val() == 6) {
+        //    $("#divCreditnoteno").hide();
+        //    $("#divCreditcardno").hide();
+        //    $("#divDebitcardno").hide();
+        //    $("#divChequedate").hide();
+        //    $("#divChequeno").hide();
+        //    $("#divBankName").hide();
+        //    $("#divGiftvoucherno").show();
+        //    $("#divPaidAmount").show();
+        //}
 
         else {
-            $("#divGiftvoucherno").hide();
+            //$("#divGiftvoucherno").hide();
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
-           // $("#divChequedate").hide();
+            $("#divPaidAmount").hide();
+            $("#divChequedate").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
+           // $("#divCreditnoteno").hide();
         }
     });
 
@@ -138,7 +153,6 @@ $(function () {
         Get_Credit_Note_Amount_By_Id($(this).val());
 
     });
-
 
 
     $("#btnSavePay").click(function () {

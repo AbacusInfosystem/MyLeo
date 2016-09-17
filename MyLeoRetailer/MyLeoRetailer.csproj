@@ -181,8 +181,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Filters\AuthorizeUserAttribute.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
     <Compile Include="Common\MessageStore.cs" />
+    <Compile Include="Filters\SessionExpireAttribute.cs" />
     <Compile Include="Controllers\PostLogin\AutocompleteLookup\AutocompleteLookupController.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -200,12 +202,15 @@
     <Compile Include="Controllers\PostLogin\Master\PurchaseInvoiceController.cs" />
     <Compile Include="Controllers\PostLogin\Master\PurchaseOrderController.cs" />
     <Compile Include="Controllers\PostLogin\Master\PurchaseReturnController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ReceivableController.cs" />
     <Compile Include="Controllers\PostLogin\Master\RoleController.cs" />
     <Compile Include="Controllers\PostLogin\Master\SizeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TagController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TaxController.cs" />
     <Compile Include="Controllers\PostLogin\Master\VendorContactController.cs" />
     <Compile Include="Controllers\PostLogin\Master\VendorController.cs" />
+    <Compile Include="Controllers\PostLogin\SalesOrderController.cs" />
+    <Compile Include="Controllers\PostLogin\SalesReturnController.cs" />
     <Compile Include="Controllers\PreLogin\HomeController.cs" />
     <Compile Include="Controllers\PreLogin\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -225,8 +230,11 @@
     <Compile Include="Models\GiftVoucherViewModel.cs" />
     <Compile Include="Models\PurchaseInvoiceViewModel.cs" />
     <Compile Include="Models\PurchaseOrderViewModel.cs" />
+    <Compile Include="Models\ReceivableViewModel.cs" />
     <Compile Include="Models\PurchaseReturnViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\SalesInvoiceViewModel.cs" />
+    <Compile Include="Models\SalesReturnViewModel.cs" />
     <Compile Include="Models\SizeGroupViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
@@ -1039,6 +1047,8 @@
     <Content Include="Scripts\Modules\PurchaseReturn\purchasereturn_validation.js" />
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_events.js" />
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_methods.js" />
+    <Content Include="Scripts\Modules\Receivable\Receivable_events.js" />
+    <Content Include="Scripts\Modules\Receivable\Receivable_methods.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
@@ -1046,6 +1056,16 @@
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />
     <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_validation.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesorder_events.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesorder_methods.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesorder_search_events.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesorder_search_methods.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesorder_validation.js" />
+    <Content Include="Scripts\Modules\SalesReturn\salesreturn_events.js" />
+    <Content Include="Scripts\Modules\SalesReturn\salesreturn_methods.js" />
+    <Content Include="Scripts\Modules\SalesReturn\salesreturn_search_methods.js" />
+    <Content Include="Scripts\Modules\SalesReturn\salesreturn_search_events.js" />
+    <Content Include="Scripts\Modules\SalesReturn\salesReturn_validation.js" />
     <Content Include="Scripts\Modules\Tax\tax_events.js" />
     <Content Include="Scripts\Modules\Tax\tax_methods.js" />
     <Content Include="Scripts\Modules\Tax\Tax_validation.js" />
@@ -1059,6 +1079,7 @@
     <Content Include="Scripts\Modules\Vendor\vendor_search_events.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_search_methods.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
+    <Content Include="Log4Net.config" />
     <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1125,6 +1146,17 @@
     <Content Include="Views\PostLogin\Master\PurchaseInvoice\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseReturn\Search.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\Index.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
+    <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
+    <Content Include="Views\PostLogin\SalesReturn\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
+    <Content Include="Views\PreLogin\Home\AuthorizationError.cshtml" />
+    <Content Include="Views\PreLogin\Home\Error.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
+    <Content Include="Views\PostLogin\Master\Receivable\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Receivable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
   </ItemGroup>
@@ -1140,7 +1172,6 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 4\" />
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
-    <Folder Include="Filters\" />
     <Folder Include="Scripts\Login\" />
   </ItemGroup>
   <ItemGroup>

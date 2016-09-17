@@ -57,7 +57,10 @@
     <Compile Include="PurchaseInvoiceRepo.cs" />
     <Compile Include="PurchaseOrderRepo.cs" />
     <Compile Include="PurchaseReturnRepo.cs" />
+    <Compile Include="ReceivableRepo.cs" />
     <Compile Include="RoleRepo.cs" />
+    <Compile Include="SalesOrderRepo.cs" />
+    <Compile Include="SalesReturnRepo.cs" />
     <Compile Include="StateRepo.cs" />
     <Compile Include="SubCategoryRepo.cs" />
     <Compile Include="TaxRepo.cs" />

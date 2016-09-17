@@ -148,6 +148,12 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
             hash.Add("EMP02", EMP02);
+
+            //Addition by swapnali | Date:16/09/2016
+            FriendlyMessage EMP03 = new FriendlyMessage("EMP03", MessageType.Success, "Change Branch successfully.");
+            hash.Add("EMP03", EMP03);
+            //End
+
             #endregion
 
             #region Employee mapping
@@ -289,6 +295,20 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage POR03 = new FriendlyMessage("POR03", MessageType.Information, "No records found.");
             hash.Add("POR03", POR03);
+
+            #endregion
+            #region Sales Invoice
+
+            FriendlyMessage SI01 = new FriendlyMessage("SI01", MessageType.Success, "Sales Invoice Added successfully.");
+            hash.Add("SI01", SI01);    
+
+            #endregion
+
+
+            #region Sales Return
+
+            FriendlyMessage SR01 = new FriendlyMessage("SR01", MessageType.Success, "Sales Return Added successfully.");
+            hash.Add("SR01", SR01);
 
             #endregion
 

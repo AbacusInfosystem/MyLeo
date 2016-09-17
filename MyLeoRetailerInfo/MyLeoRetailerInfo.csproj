@@ -68,9 +68,11 @@
     <Compile Include="PurchaseOrder\PurchaseOrderInfo.cs" />
     <Compile Include="PurchaseReturn\PurchaseReturnInfo.cs" />
     <Compile Include="QueryInfo.cs" />
+    <Compile Include="Receivable\ReceivableInfo.cs" />
     <Compile Include="Role\AccessFunctionInfo.cs" />
     <Compile Include="Role\RoleInfo.cs" />
     <Compile Include="SalesInvoice\SalesInvoiceInfo.cs" />
+    <Compile Include="SalesReturn\SalesReturnInfo.cs" />
     <Compile Include="State\StateInfo.cs" />
     <Compile Include="Tax\TaxInfo.cs" />
     <Compile Include="VendorContact\VendorContactInfo.cs" />

@@ -59,8 +59,6 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
 
-      
-
        public decimal Balance_Amount
        {
            get;
@@ -79,7 +77,7 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
 
-       public string Payament_Status
+       public int Payament_Status
        {
            get;
            set;
@@ -208,6 +206,8 @@ namespace MyLeoRetailerInfo.Payable
        public List<PurchaseInvoice_Details> PurchaseInvoice_Details { get; set; }
 
        public PurchaseInvoice_Details PurchaseInvoice_Detail { get; set; }
+
+      
     }
 
     public class PurchaseInvoice_Details

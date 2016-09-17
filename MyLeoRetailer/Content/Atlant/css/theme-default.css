@@ -3879,8 +3879,7 @@ td.dataTables_empty {
   background: url("../img/bg.png") left top repeat #33414e;
 }
 .login-container .login-box {
-  /*width: 400px;*/     /*changed by sanchita*/
-  width: 700px;
+  width: 400px;    
   margin: 0px auto;
   padding-top: 100px;
 }
@@ -3905,8 +3904,6 @@ td.dataTables_empty {
   font-size: 19px;
   font-weight: 300;
   margin-bottom: 20px;
-
-  text-align: center; /*Nishant 14/09/2016*/
 }
 .login-container .login-box .login-body .form-control {
   border: 0px;
