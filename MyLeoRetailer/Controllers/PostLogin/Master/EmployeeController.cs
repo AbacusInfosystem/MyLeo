@@ -246,7 +246,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
            Set_Branch_Cookies(eViewModel.Employee.Employee_Id, Branch_Ids);
 
            eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
-        
+
            eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
 
            return View("ChangeBranch", eViewModel);

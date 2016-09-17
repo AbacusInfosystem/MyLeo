@@ -231,6 +231,7 @@
     <Compile Include="Models\PurchaseInvoiceViewModel.cs" />
     <Compile Include="Models\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\ReceivableViewModel.cs" />
+    <Compile Include="Models\PurchaseReturnViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesInvoiceViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
@@ -1156,6 +1157,8 @@
     <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Pay.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

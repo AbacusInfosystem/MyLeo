@@ -27,6 +27,12 @@ namespace MyLeoRetailerInfo.Common
         sp_Update_Sub_Category,
         sp_Get_Sub_Category_By_Id,
 
+        //Gauravi  12-9-2016
+
+        sp_Get_SubCategory_Category_By_Id,
+
+        //End
+
         #endregion
 
         #region brand
@@ -158,6 +164,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Agent,
             sp_Get_Transporter,
             sp_Get_Vendor,
+        sp_Get_Vendor_Details_By_Id,
 
             #endregion
                   
@@ -186,6 +193,8 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Purchase_Order_By_Id,
             sp_Insert_Purchase_Order_Item_Sizes,
 
+        sp_Get_PurchaseOrderId_By_SKU_POI,
+
         #endregion
 
             #region Purchase Invoice
@@ -201,6 +210,8 @@ namespace MyLeoRetailerInfo.Common
            
             sp_Get_Purchase_Invoice_Items_By_SKU_Code,
             sp_Get_Purchase_Orders,
+
+        sp_Get_Purchase_Invoice,
 
             #endregion
 
@@ -227,7 +238,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Temp_Get_Payable_Detail_By_Id1,
 
         //Employee Branch mapping
-        
+        //sp_Get_Branch,
         Insert_Employee_Mapping,
         sp_Get_Employee_MapBranch_ById,
         sp_Get_Branch_For_Employee_mapping,
@@ -258,4 +269,4 @@ namespace MyLeoRetailerInfo.Common
         Giftvoucher_Data_sp,
     }
 	
-}
+
