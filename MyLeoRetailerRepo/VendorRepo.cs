@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.PurchaseReturn;
+using MyLeoRetailerInfo.PurchaseInvoice;
 
 namespace MyLeoRetailerRepo
 {
@@ -434,17 +436,7 @@ namespace MyLeoRetailerRepo
             return subcategorydetailslist;
         }
 
-        public List<VendorInfo> Get_Vendors()
-        {
-            List<VendorInfo> Vendors = new List<VendorInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
-            foreach (DataRow dr in dt.Rows)
-            {
-                Vendors.Add(Get_Vendor_Values(dr));
-            }
-            return Vendors;
-        }
-
+       
         //Gauravi 7-9-2016
         public List<VendorInfo> Get_Vendors()
         {
@@ -495,6 +487,58 @@ namespace MyLeoRetailerRepo
                 Vendors.Add(Transpoter);
             }
             return Vendors;
+        }
+
+        //End
+
+        //Gauravi 17-9-2016
+
+        public PurchaseInvoiceInfo Get_Vendor_Detalis_By_Id(int vendor_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Vendor_ID", vendor_Id));
+
+            PurchaseInvoiceInfo Vendor = new PurchaseInvoiceInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Vendor_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Vendor.Vendor_Address = Convert.ToString(dr["Vendor_Address"]);
+                   
+                    Vendor.Vendor_Vat_No = Convert.ToString(dr["Vendor_Vat_No"]);
+
+                    Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
+                }
+            }
+
+            return Vendor;
+        }
+
+        public PurchaseReturnInfo Get_Vendor_Details_By_Id(int vendor_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Vendor_ID", vendor_Id));
+
+            PurchaseReturnInfo Vendor = new PurchaseReturnInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Vendor_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {                    
+                    Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
+                }
+            }
+
+            return Vendor;
         }
 
         //End

@@ -43,6 +43,9 @@
 
                                 <input type="hidden" class="form-control input-sm" name="PurchaseInvoice.Purchase_Invoice_Id" id="hdf_PurchaseInvoiceId" value="@Model.PurchaseInvoice.Purchase_Invoice_Id">
 
+                                <input type="hidden" class="form-control input-sm" name="PurchaseInvoice.hdn_Tax_Percentage" id="hdf_hdn_Tax_Percentage" value="@Model.PurchaseInvoice.hdn_Tax_Percentage">
+
+
                                 <h4 style="margin-top: 0px;">Primary information.</h4>
 
                                 <div class="form-group">
@@ -80,7 +83,7 @@
                                 <h4 style="margin-top: 0px;">Vendor Details.</h4>
 
                                 <div class="form-group">
-                                    <select class="form-control select" name="PurchaseInvoice.Vendor_Id">
+                                    <select class="form-control select" id="drpVendor_Id" name="PurchaseInvoice.Vendor_Id" onchange="Get_Vendor_Details_By_Id(this.value)">
                                         <option value="">Select Vendor</option>
                                         @foreach (var item in Model.PurchaseInvoice.Vendors)
                                         {
@@ -98,12 +101,12 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Address.</span>
-                                    <input type="text" class="form-control input-sm" id="txtVendor_Address" readonly />
+                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Vendor_Address" id="txtVendor_Address" readonly />
                                 </div>
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat No.</span>
-                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" readonly />
+                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Vendor_Vat_No" id="txtVendor_VAT_No" readonly />
                                 </div>
 
                             </div>
@@ -161,7 +164,7 @@
 
                     </div>
 
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
                             <div class="block">
                                 <div class="block" style="margin-top:0px; ">
@@ -174,7 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
 
 
                     <div class="row">
@@ -183,19 +186,20 @@
                             <table class="table table-bordered table-hover" id="tblPurchaseInvoiceItems">
                                 <thead>
                                     <tr>
-                                        <th width="150px">Barcode No.</th>
-                                        <th width="150px">SKU No.</th>
-                                        <th width="70px">Article No.</th>
-                                        <th width="100px">Brand</th>
-                                        <th width="100px">Category</th>
-                                        <th width="100px">Sub Category</th>
-                                        <th width="100px">Size Group</th>
-                                        <th width="60px">Size</th>
-                                        <th width="60px">Quantity</th>
-                                        <th width="60px">WSR</th>
-                                        <th width="60px">Total Amount</th>
-                                        <th width="150px">PO No.</th>
-                                        <th width="100px">Delete</th>
+                                        <th Style="width:150px">Barcode No.</th>
+                                        <th Style="width:150px">SKU No.</th>
+                                        <th Style="width:70px">Article No.</th>
+                                        <th style="width:100px">Color</th>
+                                        <th Style="width:100px">Brand</th>
+                                        <th Style="width:100px">Category</th>
+                                        <th Style="width:100px">Sub Category</th>
+                                        <th Style="width:100px">Size Group</th>
+                                        <th Style="width:60px">Size</th>
+                                        <th Style="width:60px">Quantity</th>
+                                        <th Style="width:60px">WSR</th>
+                                        <th Style="width:60px">Total Amount</th>
+                                        <th Style="width:150px">PO No.</th>
+                                        <th Style="width:160px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -208,6 +212,10 @@
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Article_No" id="textArticle_No_0" readonly />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Color" id="textColor_0" readonly />
+                                            <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Color_Id" id="hdnColor_Id_0" />
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Brand" id="textBrand_0" readonly />
@@ -241,7 +249,7 @@
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" id="textPurchase_Order_No_0" placeholder="Enter PO no. to search" value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" id="textPurchase_Order_No_0" placeholder="Enter PO no. to search" value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order" />
                                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                     <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_Id" class="auto-complete-value" />
                                                     <input type="hidden" id="hdnPurchase_Order_No_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" class="auto-complete-label" />
@@ -249,7 +257,10 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>Delete</button>
+                                            <div class="btn-group">
+                                                <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>Add Row</button>
+                                                <button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>Delete</button>
+                                            </div>                                            
                                         </td>
                                     </tr>
                                 </tbody>
@@ -266,126 +277,132 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="80px"></td>
-                                        <td width="110px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="60px">
+                                        <td Style="width:150px"></td>
+                                        <td Style="width:150px"></td>
+                                        <td Style="width:70px"></td>
+                                        <td style="width:110px"></td>
+                                        <td Style="width:110px"></td>
+                                        <td Style="width:100px"></td>
+                                        <td Style="width:100px"></td>
+                                        <td Style="width:100px"></td>
+                                        <td Style="width:60px">
                                             <label>Total Qty</label>
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Total_Quantity" readonly id="textTotalQuantity_0">
+                                        <td Style="width:60px">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Total_Quantity" readonly id="textTotalQuantity_0">
                                         </td>
-                                        <td width="40px">
+                                        <td Style="width:60px">
                                             <label>WSR Amount</label>
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Total_Amount" readonly id="textTotalAmount_0">
+                                        <td Style="width:60px">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Total_Amount" readonly id="textTotalAmount_0">
                                         </td>
-                                        <td width="150px"></td>
-                                        <td width="90px"></td>
+                                        <td Style="width:150px"></td>
+                                        <td Style="width:160px"></td>
                                     </tr>
                                     <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="80px"></td>
-                                        <td width="110px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="70px"></td>
-                                        <td width="40px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
                                             <label>Discount</label>
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Discount_Percentage" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0">
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Percentage" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0">
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Discount_Amount" readonly id="textDiscountAmount_0">
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Amount" readonly id="textDiscountAmount_0">
                                         </td>
-                                        <td width="150px"></td>
-                                        <td width="90px"></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="80px"></td>
-                                        <td width="110px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="70px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
                                             <label>Gross Amount</label>
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Gross_Amount" readonly id="textGrossAmount_0">
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Gross_Amount" readonly id="textGrossAmount_0">
                                         </td>
-                                        <td width="150px"></td>
-                                        <td width="90px"></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="80px"></td>
-                                        <td width="110px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="70px"></td>
-                                        <td width="40px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
                                             <label>Tax</label>
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" />
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" />
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Tax_Amount" readonly id="textTaxAmount_0">
+                                        <td>
+                                            <input class="form-control input-sm" type="text"  name="PurchaseInvoice.Tax_Amount" readonly id="textTaxAmount_0">
                                         </td>
-                                        <td width="150px"></td>
-                                        <td width="90px"></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="80px"></td>
-                                        <td width="110px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="70px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
                                             <label>Round Off</label>
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" readonly value="0.00" name="PurchaseInvoice.Round_Off_Amount" id="textRoundOff_0">
+                                        <td>
+                                            <input class="form-control input-sm" type="text" readonly value="0.00" name="PurchaseInvoice.Round_Off_Amount" id="textRoundOff_0">
                                         </td>
-                                        <td width="150px"></td>
-                                        <td width="90px"></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="80px"></td>
-                                        <td width="110px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="70px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
                                             <label>NET Amount</label>
                                         </td>
-                                        <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Net_Amount" readonly id="textNETAmount_0">
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Net_Amount" readonly id="textNETAmount_0">
                                         </td>
-                                        <td width="150px"></td>
-                                        <td width="90px"></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
