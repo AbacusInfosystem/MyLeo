@@ -253,6 +253,9 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Receivable_Search_Data,
         Get_Receivable_Details_By_Id_Sp,
+        Get_Credit_Note_Details_By_Id_Sp1,
+        sp_Update_Payable_Item,
+        Giftvoucher_Data_sp,
     }
 	
 }

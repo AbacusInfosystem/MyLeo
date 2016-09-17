@@ -116,11 +116,22 @@ function Save_Payable_Data() {
 		    }
 		}
 
+    var url = "";
+
+
+          if ($("[name='Payable.Payable_Item_Id']").val() == "" || $("[name='Payable.Payable_Item_Id']").val() == 0) {
+
+              url = "/Payable/Insert_Payable";
+            }
+            else {
+              url = "/Payable/Update_Payable";
+            }
+
     //alert(Payable_Item_Id);
 
     $.ajax({
 
-        url: "/Payable/Insert_Payable",
+        url: url,
 
         data: JSON.stringify(pViewModel),
 

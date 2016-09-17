@@ -25,6 +25,12 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
+       public int Gift_Voucher_Id
+       {
+           get;
+           set;
+       }
+
        public string Sales_Invoice_No
        {
            get;
@@ -61,7 +67,25 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
+       public decimal Cash_Amount
+       {
+           get;
+           set;
+       }
+
+       public decimal Cheque_Amount
+       {
+           get;
+           set;
+       }
+
        public decimal Paid_Amount
+       {
+           get;
+           set;
+       }
+
+       public decimal Card_Amount
        {
            get;
            set;
@@ -80,6 +104,12 @@ namespace MyLeoRetailerInfo.Receivable
        }
 
        public DateTime Payament_Date
+       {
+           get;
+           set;
+       }
+
+       public DateTime Credit_Note_Date
        {
            get;
            set;
@@ -139,7 +169,13 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
-       public int Gift_Voucher_No
+       public string Gift_Voucher_No
+       {
+           get;
+           set;
+       }
+
+       public decimal Gift_Voucher_Amount
        {
            get;
            set;

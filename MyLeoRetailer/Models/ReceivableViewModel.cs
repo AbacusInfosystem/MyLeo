@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.GiftVoucher;
 using MyLeoRetailerInfo.Interface;
 using MyLeoRetailerInfo.Receivable;
 using System;
@@ -25,10 +26,28 @@ namespace MyLeoRetailer.Models
 
             Receivables = new List<ReceivableInfo>();
 
+            GiftVoucher = new GiftVoucherInfo();
+
+            GiftVouchers = new List<GiftVoucherInfo>();
+
             //Grid_Detail.Pager.DivObject = "divGiftVoucherPager";
 
             //Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
         }
+
+        public GiftVoucherInfo GiftVoucher
+        {
+            get;
+            set;
+        }
+
+
+        public List<GiftVoucherInfo> GiftVouchers
+        {
+            get;
+            set;
+        }
+
 
         public GridInfo Grid_Detail
         {
