@@ -1,4 +1,5 @@
-﻿@model MyLeoRetailer.Models.PayableViewModel
+﻿
+@model MyLeoRetailer.Models.PayableViewModel
 @using MyLeoRetailer.Common;
 @using MyLeoRetailerInfo.Common;
 
@@ -38,9 +39,10 @@
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
                             <input type="text" class="form-control input-sm" name="Payable.Total_Amount" id="txtTotal_Amount" value="@Model.Payable.Total_Amount" placeholder="Total_Amount" />
-                            <input type="text" id="hdnPurchase_Invoice_Id" name="Payable.Purchase_Invoice_Id" value="@Model.Payable.Purchase_Invoice_Id">
+                            <input type="hidden" id="hdnPurchase_Invoice_Id" name="Payable.Purchase_Invoice_Id" value="@Model.Payable.Purchase_Invoice_Id">
+                            <input type="text" id="hdnPayable_Item_Id" name="Payable.Payable_Item_Id" value="@Model.Payable.Payable_Item_Id">
                             <input type="hidden" id="hdnPayable_Id" name="Payable.Payable_Id" value="@Model.Payable.Payable_Id">
-                            <input type="hidden" id="hdnPurchase_Credit_Note_Id" name="Payable.Purchase_Credit_Note_Id" value="@Model.Payable.Purchase_Credit_Note_Id">
+                            @*<input type="hidden" id="hdnPurchase_Credit_Note_Id" name="Payable.Purchase_Credit_Note_Id" value="@Model.Payable.Purchase_Credit_Note_Id">*@
 
                         </div>
                     </div>
@@ -48,7 +50,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Amount due</span>
-                            <input type="text" class="form-control input-sm" name="" id="txtAmount_due" value="@Model.Payable.Balance_Amount" placeholder="Due Amount" />
+                            <input type="text" class="form-control input-sm" name="Payable.Balance_Amount" id="txtAmount_due" value="@Model.Payable.Balance_Amount" placeholder="Due Amount" />
                             @*<input type="hidden" id="hdnPurchase_Invoice_Id" name="Payable.Purchase_Invoice_Id" value="@Model.Payable.Purchase_Invoice_Id">
                             <input type="hidden" id="hdnPayable_Id" name="Payable.Payable_Id" value="@Model.Payable.Payable_Id">*@
 
@@ -145,49 +147,57 @@
 
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
 
-                    <div class="block">
+                <div class="block">
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                                <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control datepicker" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
-                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount</span>
-                                <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@Model.Payable.Paid_Amount" placeholder=" Enter Paid amount" />
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
+                            <select class="form-control input-sm" id="drpPayment_Mode" name="Payable.Payment_Mode" value="@Model.Payable.Payment_Mode">
+                                <option value="0">Select Payment mode</option>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
-                                <select class="form-control input-sm" id="drpPayment_Mode" name="Payable.Payment_Mode" value="@Model.Payable.Payment_Mode">
-                                    <option value="0">Select Payment mode</option>
+                                @foreach (var item in LookupInfo.Get_Payable_Payment_Mode())
+                                {
 
-                                    @foreach (var item in LookupInfo.Get_Payable_Payment_Mode())
+                                    if (Model.Payable.Payment_Mode == item.Key)
                                     {
-
-                                        if (Model.Payable.Payment_Mode == item.Key)
-                                        {
-                                            <option value="@item.Key" selected="selected">@item.Value</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Key">@item.Value</option>
-                                        }
-
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
                                     }
 
-                                </select>
+                                }
 
-                            </div>
+                            </select>
+
                         </div>
+                    </div>
+
+                    <div id="divPaidAmount" style="display:none" class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount</span>
+                            <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@Model.Payable.Paid_Amount" placeholder=" Enter Paid amount" />
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+
+                <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+
+                    <div class="block">
 
                         <div id="divCreditcardno" style="display:none" class="col-md-4  ">
                             <div class="form-group">
@@ -204,15 +214,15 @@
                         </div>
 
 
-                        @*<div id="divChequedate" style="display:none" class="col-md-4">
+                        <div id="divChequedate" style="display:none" class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque date</span>
                                 <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                    <input type="text" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("dd-MM-yyyy")))" />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>
-                        </div>*@
+                        </div>
 
                         <div id="divChequeno" style="display:none" class="col-md-4">
                             <div class="form-group">
@@ -228,19 +238,7 @@
                             </div>
                         </div>
 
-                        <div id="divCreditnoteno" style="display:none" class="col-md-4">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit note no</span>
-                                <input type="text" class="form-control input-sm" name="Payable.Credit_Note_No" id="txtCredit_note_no" value="@Model.Payable.Credit_Note_No" placeholder="Enter Credit note no" />
-                            </div>
-                        </div>
 
-                        <div id="divGiftvoucherno" style="display:none" class="col-md-4">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift voucher no</span>
-                                <input type="text" class="form-control input-sm" name="Payable.Gift_Voucher_No" id="txtGift_voucher_no" value="@Model.Payable.Gift_Voucher_No" placeholder="Enter Gift voucher no" />
-                            </div>
-                        </div>
 
                     </div>
 
@@ -263,13 +261,14 @@
                                     <tr id="subhead">
 
                                         <th>Payment mode</th>
+                                        <th>Paid Amount</th>
                                         <th>Credit Card no</th>
                                         <th>Debit Card no</th>
                                         <th>Cheque No</th>
-                                        @*<th>Cheque Date</th>*@
+                                        <th>Cheque Date</th>
                                         <th>Bank Name</th>
-                                        <th>Credit note no</th>
-                                        <th>Gift Voucher no</th>
+                                        @*<th>Credit note no</th>
+                                        <th>Gift Voucher no</th>*@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -286,6 +285,10 @@
                                                 <input type="hidden" id="hdnPayable_Id@(itm.Payable_Item_Id)" name="Payable.Payable_Id" value="@itm.Payable_Id">
                                             </td>
                                             <td>
+                                                <span> @itm.Paid_Amount</span>
+                                                <input type="hidden" id="hdnPaid_Amount@(itm.Payable_Item_Id)" name="Payable.Paid_Amount[@(i-1)]" value="@itm.Paid_Amount">
+                                            </td>
+                                            <td>
                                                 <span> @itm.Credit_Card_No</span>
                                                 <input type="hidden" id="hdnCredit_Card_No@(itm.Payable_Item_Id)" name="Payable.Credit_Card_No[@(i-1)]" value="@itm.Credit_Card_No">
                                             </td>
@@ -298,7 +301,7 @@
                                                 <input type="hidden" id="hdnCheque_No@(itm.Payable_Item_Id)" name="Payable.Cheque_No[@(i-1)]" value="@itm.Cheque_No">
                                             </td>
                                             
-                                            @*<td>
+                                            <td>
 
                                                 @if (itm.Cheque_Date.ToString() == "1/1/1999 12:00:00 AM")
                                                 {
@@ -308,22 +311,22 @@
                                                 {
                                                     <span> @itm.Cheque_Date.ToString("MM/dd/yyyy")</span>
                                                 }
-                                                <span> @itm.Cheque_Date.ToString("MM/dd/yyyy")</span>*@
-                                                @*<input type="hidden" id="hdnCheque_Date@(itm.Payable_Item_Id)" name="Payable.Cheque_Date[@(i-1)" value="@itm.Cheque_Date.ToString("MM/dd/yyyy")">
-                                            </td>*@
+                                                <span> @itm.Cheque_Date.ToString("MM/dd/yyyy")</span>
+                                                <input type="hidden" id="hdnCheque_Date@(itm.Payable_Item_Id)" name="Payable.Cheque_Date[@(i-1)" value="@itm.Cheque_Date.ToString("MM/dd/yyyy")">
+                                            </td>
 
                                             <td>
                                                 <span> @itm.Bank_Name</span>
                                                 <input type="hidden" id="hdnBank_Name@(itm.Payable_Item_Id)" name="Payable.Bank_Name[@(i-1)]" value="@itm.Bank_Name">
                                             </td>
-                                            <td>
+                                            @*<td>
                                                 <span> @itm.Credit_Note_No</span>
                                                 <input type="hidden" id="hdnCredit_Note_No@(itm.Payable_Item_Id)" name="Payable.Credit_Note_No[@(i-1)]" value="@itm.Credit_Note_No">
                                             </td>
                                             <td>
                                                 <span> @itm.Gift_Voucher_No</span>
                                                 <input type="hidden" id="hdnGift_Voucher_No@(itm.Payable_Item_Id)" name="Payable.Gift_Voucher_No[@(i-1)]" value="@itm.Gift_Voucher_No">
-                                            </td>
+                                            </td>*@
                                            
                                             <td>
                                                 @*@if (Model.Payable.Status != "Payment Done")

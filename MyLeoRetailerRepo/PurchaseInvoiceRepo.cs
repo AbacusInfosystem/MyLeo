@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.PurchaseReturn;
 
 
 namespace MyLeoRetailerRepo
@@ -155,6 +156,16 @@ namespace MyLeoRetailerRepo
                 PurchaseInvoice.Brand = Convert.ToString(dr["Brand_Name"]);
             }
 
+            if (!dr.IsNull("Colour_Id"))
+            {
+                PurchaseInvoice.Color_Id = Convert.ToInt32(dr["Colour_Id"]);
+            }
+
+            if (!dr.IsNull("Colour_Name"))
+            {
+                PurchaseInvoice.Color = Convert.ToString(dr["Colour_Name"]);
+            }
+
             if (!dr.IsNull("Category_Id"))
             {
                 PurchaseInvoice.Category_Id = Convert.ToInt32(dr["Category_Id"]);
@@ -225,6 +236,115 @@ namespace MyLeoRetailerRepo
             return PurchaseInvoice;
         }
 
+        public int Insert_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
+        {
+
+            PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
+
+            foreach (var item in PurchaseInvoice.PurchaseInvoices)
+            {
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+
+                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
+
+                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+
+                sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
+
+                sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
+
+                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+
+                sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
+               
+                sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
+
+                sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
+
+                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
+
+                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
+
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
+            }
+
+            return PurchaseInvoice.Purchase_Invoice_Id;
+
+        }
+
+        public DataTable Get_Purchase_Invoices(QueryInfo query_Details)
+        {
+            return sqlHelper.Get_Table_With_Where(query_Details);
+        }
+
+        public List<PurchaseInvoiceInfo> Get_Purchase_Invoice_No_By_Id(int Vendor_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            List<PurchaseInvoiceInfo> PurchaseInvoices = new List<PurchaseInvoiceInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Invoice_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                PurchaseInvoiceInfo PurchaseInvoice = new PurchaseInvoiceInfo();
+
+                PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+
+                PurchaseInvoice.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+
+                PurchaseInvoices.Add(PurchaseInvoice);
+            }
+            return PurchaseInvoices;
+        }
+
+
+        //
+        public void Update_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
+        {
+            sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Update_Purchase_Invoice.ToString(), CommandType.StoredProcedure);
+
+            foreach (var item in PurchaseInvoice.PurchaseInvoices)
+            {
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                if (item.Purchase_Invoice_Item_Id != 0)
+                {
+                    sqlParams.Add(new SqlParameter("@Purchase_Invoice_Item_Id", item.Purchase_Invoice_Item_Id));
+                }
+                else
+                {
+                    sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
+
+                    sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
+                }
+
+                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+
+                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
+
+                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+
+                sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
+
+                sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
+
+                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+
+                sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
+
+                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
+
+                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
+
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Update_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
+            }
+
+
+        }
+
         private PurchaseInvoiceInfo Get_Purchase_Invoice_Values(DataRow dr)
         {
             PurchaseInvoiceInfo PurchaseInvoice = new PurchaseInvoiceInfo();
@@ -282,7 +402,7 @@ namespace MyLeoRetailerRepo
             else
             {
                 PurchaseInvoice.Challan_Date = Convert.ToDateTime(dr["Challan_Date"]);
-            }            
+            }
 
             PurchaseInvoice.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
 
@@ -305,7 +425,7 @@ namespace MyLeoRetailerRepo
             else
             {
                 PurchaseInvoice.Payment_Due_Date = Convert.ToDateTime(dr["Payment_Due_Date"]);
-            }   
+            }
 
             PurchaseInvoice.Discount_Percentage_Before_Due_Date = Convert.ToDecimal(dr["Discount_Percentage_Before_Due_Date"]);
 
@@ -321,7 +441,7 @@ namespace MyLeoRetailerRepo
             {
                 PurchaseInvoice.Lr_Date = Convert.ToDateTime(dr["Lr_Date"]);
             }
-            
+
             PurchaseInvoice.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
 
             PurchaseInvoice.Created_By = Convert.ToInt32(dr["Created_By"]);
@@ -332,93 +452,7 @@ namespace MyLeoRetailerRepo
 
 
             return PurchaseInvoice;
-        }
-       
-        public int Insert_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
-        {
-
-            PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
-
-            foreach (var item in PurchaseInvoice.PurchaseInvoices)
-            {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
-
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
-
-                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
-
-                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
-
-                sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
-
-                sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
-
-                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
-
-                sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
-               
-                sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
-
-                sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
-
-                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
-
-                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
-
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
-            }
-
-            return PurchaseInvoice.Purchase_Invoice_Id;
-
-        }
-
-        public void Update_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
-        {
-            sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Update_Purchase_Invoice.ToString(), CommandType.StoredProcedure);
-
-            foreach (var item in PurchaseInvoice.PurchaseInvoices)
-            {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
-
-                if (item.Purchase_Invoice_Item_Id != 0)
-                {
-                    sqlParams.Add(new SqlParameter("@Purchase_Invoice_Item_Id", item.Purchase_Invoice_Item_Id));
-                }
-                else
-                {
-                    sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
-
-                    sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
-                }
-
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
-
-                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
-
-                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
-
-                sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
-
-                sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
-
-                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
-
-                sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));                
-
-                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
-
-                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
-
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Update_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
-            }
-
-            
-        }
-
-        public DataTable Get_Purchase_Invoices(QueryInfo query_Details)
-        {
-            return sqlHelper.Get_Table_With_Where(query_Details);
-        }
+        }       
 
         public PurchaseInvoiceInfo Get_Purchase_Invoice_By_Id(int Purchase_Invoice_Id)
         {
@@ -430,57 +464,29 @@ namespace MyLeoRetailerRepo
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)
-            {
+            {               
                 PurchaseInvoice = Get_Purchase_Invoice_Values(dr);
             }
             return PurchaseInvoice;
-        }
+        }       
 
-        public List<PurchaseInvoiceInfo> Get_Purchase_Invoice_Item_By_Id(int Purchase_Invoice_Item_Id)
+        public List<PurchaseInvoiceInfo> Get_Purchase_Invoices()
         {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Purchase_Invoice_Item_Id", Purchase_Invoice_Item_Id));
-
             List<PurchaseInvoiceInfo> PurchaseInvoices = new List<PurchaseInvoiceInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Invoice_Item_By_Id.ToString(), CommandType.StoredProcedure);
-
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Purchase_Invoice.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
                 PurchaseInvoiceInfo PurchaseInvoice = new PurchaseInvoiceInfo();
 
-                PurchaseInvoice.Purchase_Invoice_Item_Id = Convert.ToInt32(dr["Purchase_Invoice_Item_Id"]);
-
                 PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
 
-                PurchaseInvoice.Purchase_Order_Id = Convert.ToInt32(dr["Purchase_Order_Id"]);
+                PurchaseInvoice.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
 
-                PurchaseInvoice.SKU_Code = Convert.ToString(dr["SKU_Code"]);
-
-                PurchaseInvoice.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
-
-                PurchaseInvoice.Size_Id = Convert.ToInt32(dr["Size_Id"]);
-
-                PurchaseInvoice.Quantity = Convert.ToInt32(dr["Quantity"]);
-
-                PurchaseInvoice.Amount = Convert.ToInt32(dr["Total_Amount"]);
-
-                PurchaseInvoice.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
-
-                PurchaseInvoice.Created_By = Convert.ToInt32(dr["Created_By"]);
-
-                PurchaseInvoice.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
-
-                PurchaseInvoice.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-
-                PurchaseInvoice.Size_Name = Convert.ToString(dr["Size_Name"]);
-
-                PurchaseInvoice.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
-                                
                 PurchaseInvoices.Add(PurchaseInvoice);
             }
             return PurchaseInvoices;
         }
-
+        //
     }
 }
 

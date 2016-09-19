@@ -41,4 +41,13 @@ $(function () {
         $("#frmEmployee").attr("action", "/Employee/Get_Employee_By_Id");
         $("#frmEmployee").submit();
     });
+
+    //Addition by swapnali | Date:16/09/2016
+    $("#btnSaveBranch").click(function () {
+        $("#frmChangeBranch").attr("action", "/Employee/Save_Employee_Branch_Id");
+        $("#frmChangeBranch").submit();
+    });
+    //End
+
+
 });

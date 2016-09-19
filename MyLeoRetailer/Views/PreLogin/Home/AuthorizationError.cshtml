@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <title>Atlant - Responsive Bootstrap Admin Template</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link type="image/x-icon" href="favicon.ico" rel="icon">
+    <link rel="stylesheet" type="text/css" id="theme" href="../Content/Atlant/css/theme-default.css" />
+
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-code">500</div>
+        <div class="error-text">Authorization error</div>
+        <div class="error-subtext">You dont have access to this functionality.</div>
+
+        <div class="error-actions">
+            <div class="row">
+                <div class="col-md-12" style="text-align:center;">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                        <a href="@Url.Action("Index", "Dashboard")" class="btn btn-info btn-block btn-lg">Back to dashboard</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</body>
+
+
+</html>
