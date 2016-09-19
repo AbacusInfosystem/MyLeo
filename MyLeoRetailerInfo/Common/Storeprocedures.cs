@@ -267,6 +267,13 @@ namespace MyLeoRetailerInfo.Common
         Get_Credit_Note_Details_By_Id_Sp1,
         sp_Update_Payable_Item,
         Giftvoucher_Data_sp,
+
+        //purchase Return
+
+
+        sp_Insert_Purchase_Return_Item,
+        sp_Insert_Purchase_Credit_Note,
+        sp_Insert_Purchase_Return,
     }
 }
 	
