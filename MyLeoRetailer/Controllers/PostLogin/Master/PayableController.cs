@@ -47,6 +47,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public ActionResult Get_Payable(PayableViewModel pViewModel)
+        
         {
             PayableRepo pRepo = new PayableRepo();
 
@@ -115,12 +116,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 pViewModel.Payable.Payable_Id = pRepo.Insert_Payable(pViewModel.Payable);
 
-                pRepo.Insert_Payable_Item_Data(pViewModel.Payable);
+                pViewModel.Payable.Payable_Item_Id = pRepo.Insert_Payable_Item_Data(pViewModel.Payable);
 
-                pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id);
+                pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id, pViewModel.Payable.Payable_Item_Id);
 
                 pViewModel.Payable = pRepo.Get_Payable_Data_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 
+                //pViewModel.Payable.Payable_Item_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
 
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("PA001"));
 
@@ -131,6 +133,32 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 
+            }
+
+            //TempData["pViewModel"] = pViewModel;
+
+            return Json(JsonConvert.SerializeObject(pViewModel));
+        }
+
+        public JsonResult Update_Payable(PayableViewModel pViewModel)
+        {
+            PayableRepo pRepo = new PayableRepo();
+
+
+            try
+            {
+
+                pViewModel.Payable.Payable_Item_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
+
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("PA001"));
+
+            }
+
+            catch (Exception ex)
+            {
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+
             }
 
             //TempData["pViewModel"] = pViewModel;

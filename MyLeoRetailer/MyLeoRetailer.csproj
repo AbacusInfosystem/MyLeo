@@ -197,10 +197,12 @@
     <Compile Include="Controllers\PostLogin\Master\CustomerController.cs" />
     <Compile Include="Controllers\PostLogin\Master\EmployeeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\GiftVoucherController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\PayableController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductController.cs" />
     <Compile Include="Controllers\PostLogin\Master\PurchaseInvoiceController.cs" />
     <Compile Include="Controllers\PostLogin\Master\PurchaseOrderController.cs" />
     <Compile Include="Controllers\PostLogin\Master\PurchaseReturnController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ReceivableController.cs" />
     <Compile Include="Controllers\PostLogin\Master\RoleController.cs" />
     <Compile Include="Controllers\PostLogin\Master\SizeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TagController.cs" />
@@ -221,12 +223,15 @@
     <Compile Include="Models\ColorViewModel.cs" />
     <Compile Include="Models\Common\CommonViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\PayableViewModel.cs" />
     <Compile Include="Models\PreLogin\LoginViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
     <Compile Include="Models\PurchaseInvoiceViewModel.cs" />
     <Compile Include="Models\PurchaseOrderViewModel.cs" />
+    <Compile Include="Models\ReceivableViewModel.cs" />
+    <Compile Include="Models\PurchaseReturnViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesInvoiceViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
@@ -1016,6 +1021,9 @@
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_events.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_method.js" />
     <Content Include="Scripts\Modules\Login\login-event.js" />
+    <Content Include="Scripts\Modules\Payable\Payable_events.js" />
+    <Content Include="Scripts\Modules\Payable\Payable_method.js" />
+    <Content Include="Scripts\Modules\Payable\Pay_event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
@@ -1039,6 +1047,8 @@
     <Content Include="Scripts\Modules\PurchaseReturn\purchasereturn_validation.js" />
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_events.js" />
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_methods.js" />
+    <Content Include="Scripts\Modules\Receivable\Receivable_events.js" />
+    <Content Include="Scripts\Modules\Receivable\Receivable_methods.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
@@ -1143,6 +1153,12 @@
     <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
     <Content Include="Views\PreLogin\Home\AuthorizationError.cshtml" />
     <Content Include="Views\PreLogin\Home\Error.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
+    <Content Include="Views\PostLogin\Master\Receivable\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Receivable\Pay.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

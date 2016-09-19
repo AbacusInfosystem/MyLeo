@@ -1,4 +1,32 @@
-﻿function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
+﻿function Get_Vendor_Details_By_Id(value) {
+
+    debugger;
+
+    $.ajax({
+
+        url: "/PurchaseInvoice/Get_Vendor_Details_By_Id",
+
+        data: { Vendor_Id: value },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#txtVendor_Address').val(data.Vendor_Address);
+
+            $('#txtVendor_VAT_No').val(data.Vendor_Vat_No);
+
+            $('#hdf_hdn_Tax_Percentage').val(data.Tax_Percentage);
+
+            $('#textTaxPercentage_0').val(data.Tax_Percentage);
+
+        }
+    });
+}
+
+function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
 
     $.ajax({
 
@@ -12,9 +40,11 @@
 
         success: function (data) {
 
-            alert();
-
             $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
 
             $('#textBrand_' + i).val(data.Brand);
 
@@ -57,52 +87,57 @@ function AddPurchaseInvoiceDetails(i) {
     tblHtml += "<tr id='PurchaseInvoiceItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Color' readonly value='' id='textColor_" + i + "'>";
+    tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Color_Id' id='hdnColor_Id_" + i + "' />";
+    tblHtml += "</td>";
+
+    tblHtml += "<td>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Category_Id' id='hdnCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SubCategory_Id' id='hdnSubCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Group_Name' readonly value='' id='textSize_Group_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Group_Name' readonly value='' id='textSize_Group_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Id' id='hdnSize_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].WSR_Price' readonly value='' id='textWSR_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].WSR_Price' readonly value='' id='textWSR_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -116,7 +151,10 @@ function AddPurchaseInvoiceDetails(i) {
     tblHtml += "</div>";
 
     tblHtml += "<td>";
+    tblHtml += "<div class='btn-group'>";
+    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>Add Row</button>";
     tblHtml += "<button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "</div>";
     tblHtml += "</td>";
     
     tblHtml += "</tr>";
@@ -126,8 +164,6 @@ function AddPurchaseInvoiceDetails(i) {
     myTable.append(newRow);
 
 }
-
-
 
 function CalculateTax() {
 
@@ -146,9 +182,7 @@ function CalculateTax() {
     var intPart = Math.floor(roundedDecimal);
 
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
-
-    alert(fracPart);
-
+       
     if (fracPart == "" || fracPart == null)
     {
         fracPart=0.00
@@ -181,7 +215,7 @@ function CalculateDiscount() {
 
     $("#textGrossAmount_0").val(grossAmt.toFixed(2));
     
-
+    CalculateTax();
 }
 
 function CalculateTotal() {
@@ -211,8 +245,6 @@ function CalculateTotal() {
     $("#textTotalAmount_0").val(sumWSRAmount.toFixed(2));
 
 }
-
-
 
 function DeletePurchaseInvoiceDetailsData(i) {
 
@@ -254,6 +286,13 @@ function ReArrangePurchaseInvoiceDetailsData() {
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
                 $(newTR).find("[id^='textArticle_No_']")[0].id = "textArticle_No_" + i;
                 $(newTR).find("[id^='textArticle_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Article_No");
+            }
+
+            if ($(newTR).find("[id^='hdnColor_Id_']").length > 0) {
+                $(newTR).find("[id^='hdnColor_Id_']")[0].id = "hdnColor_Id_" + i;
+                $(newTR).find("[id^='hdnColor_Id_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Color_Id");
+                $(newTR).find("[id^='textColor_']")[0].id = "textColor_" + i;
+                $(newTR).find("[id^='textColor_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Color");
             }
 
             if ($(newTR).find("[id^='hdnBrand_Id_']").length > 0) {

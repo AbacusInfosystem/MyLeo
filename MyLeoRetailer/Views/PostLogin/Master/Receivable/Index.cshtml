@@ -1,0 +1,283 @@
+﻿@model MyLeoRetailer.Models.ReceivableViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
+
+
+<script src="~/Scripts/Modules/Receivable/Receivable_methods.js"></script>
+<script src="~/Scripts/Modules/Receivable/Receivable_events.js"></script>
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Receivable</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Receivable</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <form role="form" id="frmReceivable">
+
+            <div class="box box-default">
+
+                <div class="box-body">
+
+                    <input type="hidden" class="form-control input-sm" name="Receivable.Receivable_Id" id="hdf_Receivable_Id" value="Receivable.Receivable_Id">
+
+                    <input type="hidden" class="form-control input-sm" name="Receivable.Sales_Credit_Note_Id" id="hdf_Sales_Credit_Note_Id">
+
+                    <input type="hidden" class="form-control input-sm" name="Receivable.Sales_Invoice_Id" id="hdf_Sales_Invoice_Id">
+
+                    <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="btn-group">
+                                <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>
+                                @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
+                                <button type="button" id="btnResetReceivable" class="btn btn-success active">Reset</button>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice no</span>
+                                        <input type="text" class="form-control input-sm" name="Receivable.Sales_Invoice_No" id="txtInvoice_no" value="@Model.Receivable.Sales_Invoice_No" placeholder="Enter Invoice no" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Customer name</span>
+                                        <input type="text" class="form-control input-sm" name="Receivable.Customer_Name" id="txtCustomer_name" value="@Model.Receivable.Customer_Name" placeholder="Enter Customer name " />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment status</span>
+                                        <select class="form-control input-sm" id="drpPayble_Status" name="Receivable.Receivable_Status">
+                                            <option value="0">Select Payment Status</option>
+
+                                            @foreach (var item in LookupInfo.Get_Receivable_Status())
+                                            {
+
+                                                if (Model.Receivable.Receivable_Status == item.Key)
+                                                {
+                                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Key">@item.Value</option>
+                                                }
+
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                               
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Receivable.From_Date" value="@((Model.Receivable.From_Date == DateTime.MinValue ? "" : Model.Receivable.From_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Receivable.To_Date" value="@((Model.Receivable.To_Date == DateTime.MinValue ? "" : Model.Receivable.To_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
+
+                            @if (Model.Receivables.Count() == 0)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive" style="margin: 50px 0;">
+                                            <input type="hidden" id="hdnIsEditSalesInvoiceDetails" value="false" />
+                                            <input type="hidden" id="hdnRowIdspecific" value="0"/>
+                                            <table class="table table-bordered" id="tblBSalesInvoiceDetails">
+                                                <thead>
+                                                    <tr id="subhead">
+
+                                                        <th>Sales Invoice No</th>
+                                                        <th>Sales Invoice Date</th>
+                                                        <th>Customer Name</th>
+                                                        <th>Customer Mobile</th>
+                                                        <th>Total Amount</th>
+                                                        <th>Amount Paid</th>
+                                                        <th>Amount Balance</th>
+                                                        <th>Payment Date</th>                                                      
+                                                        <th>Payment Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+
+
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive" style="margin: 50px 0;">
+                                            <input type="hidden" id="hdnIsEditSalesInvoiceDetails" value="false" />
+                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                            <table class="table table-bordered" id="tblBSalesInvoiceDetails">
+                                                <thead>
+                                                    <tr id="subhead">
+
+                                                        <th>Sales Invoice No</th>
+                                                        <th>Sales Invoice Date</th>
+                                                        <th>Customer Name</th>
+                                                        <th>Customer Mobile</th>
+                                                        <th>Total Amount</th>
+                                                        <th>Amount Paid</th>
+                                                        <th>Amount Balance</th>
+                                                        <th>Payment Date</th>
+                                                        <th>Payment Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+
+                                                    @if (Model.Receivables != null && Model.Receivables.Count() > 0)
+                                                    {
+                                                        int i = 1;
+                                                        foreach (var itm in Model.Receivables)
+                                                        {
+                                                            <tr id="tr@(i)">
+
+
+                                                                <td>
+                                                                    <span id="trVendor@(i)"> @itm.Sales_Invoice_No</span>
+                                                                    <input type="hidden" id="hdnSales_Invoice_No@(i)" name="Receivables[@(i-1)].Sales_Invoice_No" value="@itm.Sales_Invoice_No">
+                                                                    <input type="hidden" id="hdnSales_Invoice_Id@(i)" name="Receivables[@(i-1)].Sales_Invoice_Id" value="@itm.Sales_Invoice_Id">
+                                                                    <input type="hidden" id="hdnReceivable_Id@(i)" name="Receivables[@(i-1)].Receivable_Id" value="@itm.Receivable_Id">
+
+
+                                                                </td>
+                                                                <td>
+                                                                    <span id="trSales_Invoice_Date@(i)"> @itm.Sales_Invoice_Date</span>
+                                                                    <input type="hidden" id="hdnSales_Invoice_Date@(i)" name="Receivables[@(i-1)].Sales_Invoice_Date" value="@itm.Sales_Invoice_Date">
+                                                                </td>
+
+                                                                <td>
+                                                                    <span id="trCustomer_Name@(i)"> @itm.Customer_Name</span>
+                                                                    <input type="hidden" id="hdnCustomer_Name@(i)" name="Receivables[@(i-1)].Customer_Name" value="@itm.Customer_Name">
+                                                                </td>
+
+                                                                <td>
+                                                                    <span id="trCustomer_Name@(i)"> @itm.Customer_Mobile1</span>
+                                                                    <input type="hidden" id="hdnCustomer_Mobile1@(i)" name="Receivables[@(i-1)].Customer_Mobile1" value="@itm.Customer_Mobile1">
+                                                                </td>
+
+                                                                <td>
+                                                                    <span id="trTotal_MRP_Amountt@(i)"> @itm.Total_MRP_Amount</span>
+                                                                    <input type="hidden" id="hdnTotal_MRP_Amount@(i)" name="Receivables[@(i-1)].Total_MRP_Amount" value="@itm.Total_MRP_Amount">
+                                                                </td>
+
+                                                                <td>
+                                                                    <span id="trPaid_Amount@(i)"> @itm.Paid_Amount</span>
+                                                                    <input type="hidden" id="hdnPaid_Amount@(i)" name="Receivables[@(i-1)].Paid_Amount" value="@itm.Paid_Amount">
+                                                                </td>
+                                                                <td>
+                                                                    <span id="trBalance_Amount@(i)"> @itm.Balance_Amount</span>
+                                                                    <input type="hidden" id="hdnBalance_Amount@(i)" name="Receivables[@(i-1)].Balance_Amount" value="@itm.Balance_Amount">
+                                                                </td>
+
+                                                                <td>
+                                                                    <span id="trPayament_Date@(i)"> @itm.Payament_Date</span>
+                                                                    <input type="hidden" id="hdnPayament_Datet@(i)" name="Receivables[@(i-1)].Payament_Date" value="@itm.Payament_Date">
+                                                                </td>
+                                                                <td>
+                                                                    <span id="trReceivable_Status@(i)"> @itm.Receivable_Status</span>
+                                                                    <input type="hidden" id="hdnReceivable_Status@(i)" name="Receivables[@(i-1)].Receivable_Status" value="@itm.Receivable_Status">
+                                                                </td>
+
+                                                                
+
+                                                                <td class='edit'>
+                                                                    <button class="btn btn-success active" type="button" id="btnReceivablesPay" onclick="Get_Receivables(@itm.Sales_Invoice_Id,@itm.Sales_Credit_Note_Id)">Pay</button>
+                                                                </td>
+                                                            </tr>
+                                                            i = i + 1;
+                                                        }
+                                                    }
+
+                                                   
+                                                </thead>
+                                                <tbody></tbody>
+
+
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                        </div>
+
+
+                        @*<div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
+                            </div>*@
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

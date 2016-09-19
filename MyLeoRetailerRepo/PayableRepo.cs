@@ -23,9 +23,7 @@ namespace MyLeoRetailerRepo
         public int Insert_Payable_Item_Data(PayableInfo Payable)
         {
 
-            Payable.Payable_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Payable_Item(Payable), Storeprocedures.sp_Insert_Payable_Item_Data.ToString(), CommandType.StoredProcedure));
-
-            return Payable.Payable_Item_Id;
+            return Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Payable_Item(Payable), Storeprocedures.sp_Insert_Payable_Item_Data.ToString(), CommandType.StoredProcedure));
 
         }
 
@@ -33,33 +31,77 @@ namespace MyLeoRetailerRepo
         {
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
-            if (Payable.Payable_Item_Id != 0)
-            {
-                sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
-            }
+            //if (Payable.Payable_Item_Id != 0)
+            //{
+            //sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
+            //}
             sqlParams.Add(new SqlParameter("@Payable_Id", Payable.Payable_Id));
             sqlParams.Add(new SqlParameter("@Purchase_Credit_Note_Id", Payable.Purchase_Credit_Note_Id));
+            sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
             sqlParams.Add(new SqlParameter("@Payment_Mode", Payable.Payment_Mode));
             sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Amount", Payable.Discount_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
-            sqlParams.Add(new SqlParameter("@Payament_Date", DateTime.Now));
-            sqlParams.Add(new SqlParameter("@Cheque_Date", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
+            sqlParams.Add(new SqlParameter("@Cheque_Date", Payable.Cheque_Date));
             sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
             sqlParams.Add(new SqlParameter("@Bank_Name", Payable.Bank_Name));
             sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
-            sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
+            //sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
             sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
             sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
-            sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Payable.Gift_Voucher_No));
-            
+            //sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Payable.Gift_Voucher_No));
 
-            if (Payable.Payable_Item_Id == 0)
+
+            //if (Payable.Payable_Item_Id == 0)
+
+            sqlParams.Add(new SqlParameter("@Created_By", Payable.Created_By));
+            sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Updated_By", Payable.Updated_By));
+            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
+
+            return sqlParams;
+        }
+
+        public int Update_Payable_Items_Data(PayableInfo Payable)
+        {
+            Payable.Payable_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Update_Payable_Item_Data(Payable), Storeprocedures.sp_Update_Payable_Item.ToString(), CommandType.StoredProcedure));
+
+            return Payable.Payable_Item_Id;
+        }
+
+        private List<SqlParameter> Update_Payable_Item_Data(PayableInfo Payable)
+        {
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            if (Payable.Payable_Item_Id != 0)
             {
-                sqlParams.Add(new SqlParameter("@Created_By", Payable.Created_By));
-                sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
+                sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
             }
+            //sqlParams.Add(new SqlParameter("@Payable_Id", Payable.Payable_Id));
+            //sqlParams.Add(new SqlParameter("@Purchase_Credit_Note_Id", Payable.Purchase_Credit_Note_Id));
+            //sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
+            sqlParams.Add(new SqlParameter("@Payment_Mode", Payable.Payment_Mode));
+            sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+            sqlParams.Add(new SqlParameter("@Discount_Amount", Payable.Discount_Amount));
+            sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
+            sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
+            sqlParams.Add(new SqlParameter("@Cheque_Date", Payable.Cheque_Date));
+            sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
+            sqlParams.Add(new SqlParameter("@Bank_Name", Payable.Bank_Name));
+            sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
+            sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
+            //sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
+            sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
+            sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
+            //sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Payable.Gift_Voucher_No));
+
+
+            //if (Payable.Payable_Item_Id == 0)
+
+            //sqlParams.Add(new SqlParameter("@Created_By", Payable.Created_By));
+            //sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
             sqlParams.Add(new SqlParameter("@Updated_By", Payable.Updated_By));
             sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
 
@@ -112,7 +154,7 @@ namespace MyLeoRetailerRepo
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            sqlParams.Add(new SqlParameter("@Payable_Id", Payable.Payable_Id));
+            sqlParams.Add(new SqlParameter("@Payable_Id", Payable.Payable_Id));           
 
             sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", Payable.Purchase_Invoice_Id));
 
@@ -185,6 +227,7 @@ namespace MyLeoRetailerRepo
 
                         payable.Payable_Id = Convert.ToInt32(dr["Payable_Id"]);
 
+
                     if (!dr.IsNull("Purchase_Invoice_Id"))
 
                         payable.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
@@ -201,7 +244,7 @@ namespace MyLeoRetailerRepo
 
                         payable.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
 
-                    if (!dr.IsNull("Purchase_Order_Id"))
+                    if (!dr.IsNull("Payament_Date"))
 
                         payable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
 
@@ -241,7 +284,7 @@ namespace MyLeoRetailerRepo
             return payable;
         }
 
-        public List<PayableInfo> Get_Payable_Items_By_Id(int payable_Id)
+        public List<PayableInfo> Get_Payable_Items_By_Id(int payable_Id, int Payable_Item_Id)
         {
 
             List<PayableInfo> Payables = new List<PayableInfo>();
@@ -249,6 +292,8 @@ namespace MyLeoRetailerRepo
             List<SqlParameter> sqlParamList = new List<SqlParameter>();
 
             sqlParamList.Add(new SqlParameter("@Payable_Id", payable_Id));
+
+            sqlParamList.Add(new SqlParameter("@Payable_Item_Id", Payable_Item_Id));
 
             DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.Get_Payable_Data_Item_By_Id_Sp.ToString(), CommandType.StoredProcedure);
 
@@ -289,22 +334,6 @@ namespace MyLeoRetailerRepo
 
                 payable.Paid_Amount = Convert.ToInt32(dr["Paid_Amount"]);
 
-
-            //if (payable.Transaction_Type == 1)
-            //{
-            //    payable.Transaction_Type_Name = "Cheque";
-            //}
-
-            //else if (payable.Transaction_Type == 2)
-            //{
-            //    payable.Transaction_Type_Name = "NEFT";
-            //}
-
-            //else
-            //{
-            //    payable.Transaction_Type_Name = "Credit/Debit Card";
-            //}
-
             if (!dr.IsNull("Discount_Amount"))
 
                 payable.Discount_Amount = Convert.ToDecimal(dr["Discount_Amount"]);
@@ -333,10 +362,6 @@ namespace MyLeoRetailerRepo
 
                 payable.Remark = Convert.ToString(dr["Remark"]);
 
-            if (!dr.IsNull("Credit_Note_No"))
-
-                payable.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
-
             if (!dr.IsNull("Credit_Card_No"))
 
                 payable.Credit_Card_No = Convert.ToString(dr["Credit_Card_No"]);
@@ -345,9 +370,19 @@ namespace MyLeoRetailerRepo
 
                 payable.Debit_Card_No = Convert.ToString(dr["Debit_Card_No"]);
 
-            if (!dr.IsNull("Gift_Voucher_No"))
+            if (!dr.IsNull("Payament_Date"))
 
-                payable.Gift_Voucher_No = Convert.ToInt32(dr["Gift_Voucher_No"]);
+                payable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
+
+            if (!dr.IsNull("Created_On"))
+
+                payable.Created_On = Convert.ToDateTime(dr["Created_On"]);
+
+            if (!dr.IsNull("Created_By"))
+
+                payable.Created_By = Convert.ToInt32(dr["Created_By"]);
+
+          
 
             return payable;
         }
