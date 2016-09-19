@@ -10,7 +10,7 @@ namespace MyLeoRetailerInfo.Vendor
     {
         public int Vendor_Id { get; set; }
 
-        public int Article_No { get; set; }
+        public string Article_No { get; set; }
 
         public string Vendor_Name { get; set; }
 
