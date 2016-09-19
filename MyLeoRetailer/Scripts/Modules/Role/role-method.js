@@ -178,16 +178,16 @@ function Get_RoleAccess_Functions(Role_Id)
                     htmlText += "<input type='hidden' id='hdnId_" + i + "' value='" + response.accessFunctions[i].Id + "' />";
 
                     htmlText += "</td>";
-                    //
+                    
                     htmlText += "<td>";
                     
                     htmlText += "<label class='switch'>";
 
                     if (response.accessFunctions[i].Is_Access == true){
-                        htmlText += "<input type='checkbox' checked id='chkIs_Access_" + i + "' value='1' />";
+                        htmlText += "<input type='checkbox' checked id='chkIs_Access_" + i + "' value='1' class='screen-access' />";
                     }
                     else {
-                        htmlText += "<input type='checkbox' id='chkIs_Access_" + i + "' value='0' />";
+                        htmlText += "<input type='checkbox' id='chkIs_Access_" + i + "' value='0' class='screen-access' />";
                     }
 
                     htmlText += "<span></span>";
@@ -195,18 +195,16 @@ function Get_RoleAccess_Functions(Role_Id)
                     htmlText += "</label>";
 
                     htmlText += "</td>";
-                    //
+                    
                     htmlText += "<td>";
 
                     htmlText += "<label class='switch'>";
 
                     if (response.accessFunctions[i].Is_Create == true) {
-                        //htmlText += "<input type='checkbox' checked id='chkIs_Create_" + i + "' value='" + response.accessFunctions[i].Is_Create + "' />";
-                        htmlText += "<input type='checkbox' checked id='chkIs_Create_" + i + "' value='1' />";
+                        htmlText += "<input type='checkbox' checked id='chkIs_Create_" + i + "' value='1' class='screen-create' />";
                     }
                     else {
-                        //htmlText += "<input type='checkbox' id='chkIs_Create_" + i + "' value='" + response.accessFunctions[i].Is_Create + "' />";
-                        htmlText += "<input type='checkbox' id='chkIs_Create_" + i + "' value='0' />";
+                        htmlText += "<input type='checkbox' id='chkIs_Create_" + i + "' value='0' class='screen-create' />";
                     }
                    
                     htmlText += "<span></span>";
@@ -214,34 +212,33 @@ function Get_RoleAccess_Functions(Role_Id)
                     htmlText += "</label>";
 
                     htmlText += "</td>";
-                    //
+                  
                     htmlText += "<td>";
 
                     htmlText += "<label class='switch'>";
 
                     if (response.accessFunctions[i].Is_Edit == true) {
-                        htmlText += "<input type='checkbox' checked id='chkIs_Edit_" + i + "' value='1' />";
+                        htmlText += "<input type='checkbox' checked id='chkIs_Edit_" + i + "' value='1' class='screen-edit' />";
                     }
                     else {
-                        htmlText += "<input type='checkbox' id='chkIs_Edit_" + i + "' value='0' />";
+                        htmlText += "<input type='checkbox' id='chkIs_Edit_" + i + "' value='0' class='screen-edit' />";
                     }
                     
-
                     htmlText += "<span></span>";
 
                     htmlText += "</label>";
 
                     htmlText += "</td>";
-                    //
+                    
                     htmlText += "<td>";
 
                     htmlText += "<label class='switch'>";
 
                     if (response.accessFunctions[i].Is_View == true) {
-                        htmlText += "<input type='checkbox' checked id='chkIs_View_" + i + "' value='1' />";
+                        htmlText += "<input type='checkbox' checked id='chkIs_View_" + i + "' value='1' class='screen-view' />";
                     }
                     else {
-                        htmlText += "<input type='checkbox' id='chkIs_View_" + i + "' value='0' />";
+                        htmlText += "<input type='checkbox' id='chkIs_View_" + i + "' value='0' class='screen-view' />";
                     }
                     
                     htmlText += "<span></span>";
@@ -249,17 +246,57 @@ function Get_RoleAccess_Functions(Role_Id)
                     htmlText += "</label>";
 
                     htmlText += "</td>";
-                    //
+                   
                     htmlText += "</tr>";
                 }
             }
 
             $('#tblAccessFunction tbody').append(htmlText);
 
+            $('.screen-edit').each(function () {
+                if ($(this).val() == 1) {
+                    $(this).parents(".access-function").find(".screen-view").attr("disabled", "disabled");
+                }
+            });
+
+            $('.screen-edit').change(function () {
+                
+                if ($(this).val() == 1) {
+                //if ($(this).parent().prop("class").indexOf("checked") == -1) {
+
+                    $(this).parents(".access-function").find(".screen-view").removeAttr('checked');
+                    $(this).parents(".access-function").find(".screen-view").val(0);
+                    $(this).parents(".access-function").find(".screen-view").removeAttr("disabled");
+                }
+                else {
+
+                    $(this).parents(".access-function").find(".screen-view").propAttr('checked', 'checked');
+                    $(this).parents(".access-function").find(".screen-view").val(1);
+                    $(this).parents(".access-function").find(".screen-view").attr("disabled", "disabled");
+                   
+                }
+
+            });
+
+
         }
     });
 
 }
+
+
+//$(".screen-edit").on("ifChanged", function () {
+
+//    if ($(this).prop('checked')) {
+
+//        $(this).parents(".access-function").find(".screen-view").removeAttr("disabled");
+//    }
+//    else {
+       
+//        $(this).parents(".tr-screen-group").find(".screen-view").attr("disabled", "disabled");
+//    }
+
+//});
 
 
 function Get_Value_Of_Access_Functions() {

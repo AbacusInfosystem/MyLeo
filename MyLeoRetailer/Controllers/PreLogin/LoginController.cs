@@ -39,6 +39,10 @@ namespace MyLeoRetailer.Controllers.PreLogin
                     {
                         lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS02"));
                     }
+                    else
+                    {
+                        return RedirectToAction("Index", "Dashboard");
+                    }
                 }
                 else
                 {

@@ -161,10 +161,5 @@ namespace MyLeoRetailerRepo
            return VendorContact;
        }
 
-
-
-
-
-
     }
 }

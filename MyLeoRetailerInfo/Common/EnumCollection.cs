@@ -29,6 +29,21 @@ namespace MyLeoRetailerInfo.Common
 
     }
 
+    public enum AppFunction
+    {
+        //AppFunction is AccessFunctionName_Action
 
+        Role_Management_Access,
+        Role_Management_Create,
+        Role_Management_Edit,
+        Role_Management_View,
+
+        Employee_Management_Access,
+        Employee_Management_Create,
+        Employee_Management_Edit,
+        Employee_Management_View,
+
+
+    }
 
 }

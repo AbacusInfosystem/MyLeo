@@ -15,19 +15,23 @@ namespace MyLeoRetailer.Common
 
         public static LoginInfo Get_Login_User(string cookieName, string key, string key2)
         {
+            LoginInfo loginInfo = null;
 
-            string token = System.Web.HttpContext.Current.Request.Cookies[cookieName][key];
+            if (System.Web.HttpContext.Current.Request.Cookies["LoginInfo"] != null)
+            {
+                string token = System.Web.HttpContext.Current.Request.Cookies[cookieName][key];
 
-            string branches = System.Web.HttpContext.Current.Request.Cookies[cookieName][key2];
+                string branches = System.Web.HttpContext.Current.Request.Cookies[cookieName][key2];
 
-            LoginRepo _lRepo = new LoginRepo();
+                LoginRepo _lRepo = new LoginRepo();
 
-            LoginInfo loginInfo = new LoginInfo();
+                loginInfo = new LoginInfo();
 
-            loginInfo = _lRepo.Get_User_Data_By_User_Token(token);
+                loginInfo = _lRepo.Get_User_Data_By_User_Token(token);
 
-            loginInfo.Branch_Ids = branches;
-
+                loginInfo.Branch_Ids = branches;
+            }
+            
             return loginInfo;
         }
 

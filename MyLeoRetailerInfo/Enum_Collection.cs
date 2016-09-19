@@ -56,7 +56,7 @@ namespace MyLeoRetailerInfo
         Card=2,
     }
 
-    public enum PaymentStatus
+    public enum PaymentStatus 
     {
         Paid = 1,
         UnPaid = 2,
@@ -72,4 +72,12 @@ namespace MyLeoRetailerInfo
         Credit_Note=5,
         Gift_Voucher=6,
     }
+
+ public enum ReceivableStatus 
+    {
+        Paid = 1,
+        UnPaid = 2,
+        Partially_Paid=3,
+    }
+
 }

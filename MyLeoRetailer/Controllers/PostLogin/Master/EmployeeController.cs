@@ -11,6 +11,7 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
+using MyLeoRetailer.Filters;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
@@ -23,6 +24,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             eRepo = new EmployeeRepo();
         }
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Create)]
         public ActionResult Index(EmployeeViewModel eViewModel)
         {
             try
@@ -47,6 +49,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
      
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Access)]
         public ActionResult Search(EmployeeViewModel eViewModel)
         {
             try
@@ -145,6 +148,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(eViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Edit)]
         public ActionResult Get_Employee_By_Id(EmployeeViewModel eViewModel)
         { 
             //EmployeeRepo cRepo = new EmployeeRepo();
@@ -242,7 +246,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
            Set_Branch_Cookies(eViewModel.Employee.Employee_Id, Branch_Ids);
 
            eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
-        
+
            eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
 
            return View("ChangeBranch", eViewModel);

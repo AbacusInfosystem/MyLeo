@@ -33,15 +33,14 @@
 <body>
     <div class="login-container">
         @{Html.RenderPartial("_Message");}
-        <div class="login-box animated fadeInDown">
+        <div class="login-box animated fadeInDown" style="width: 700px;">
             
-
             <div class="login-logo"></div>
             <div class="login-body">
                 <form id="frmLogin" method="post" class="form-horizontal">
 
                     <div class="col-md-7">
-                        <div class="login-title"><strong>Welcome</strong>, Please login</div>
+                        <div class="login-title" style="text-align: center;"><strong>Welcome</strong>, Please login</div>
                         <div class="form-group">
                             <div class="col-md-12">
                                 <input type="text" id="txtUser_Name" name="Cookies.User_Name" placeholder="Username" class="form-control">

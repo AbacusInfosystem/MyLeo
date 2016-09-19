@@ -30,12 +30,15 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
         public List<VendorInfo> Transporters { get; set; }
 
 
-
         public int Purchase_Invoice_Id { get; set; }
 
         public string Purchase_Invoice_No { get; set; }
 
         public int Vendor_Id { get; set; }
+
+        public string Vendor_Address { get; set; }
+
+        public string Vendor_Vat_No { get; set; }
 
         public int Payament_Status { get; set; }
 
@@ -66,6 +69,8 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
         public decimal Gross_Amount { get; set; }
 
         public decimal Tax_Percentage { get; set; }
+
+        public decimal hdn_Tax_Percentage { get; set; }
 
         public decimal Round_Off_Amount { get; set; }
 

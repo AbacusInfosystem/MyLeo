@@ -94,7 +94,7 @@
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
                                         <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" name="Payable.From_Date" value="@((Model.Payable.From_Date == DateTime.MinValue ? "" : Model.Payable.From_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                            <input type="text" class="form-control datepicker" name="Payable.From_Date" value="@((Model.Payable.From_Date == DateTime.MinValue ? "" : Model.Payable.From_Date.ToString("dd-MM-yyyy")))"  />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
                                         <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                            <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("dd-MM-yyyy")))"  />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -168,7 +168,7 @@
                                                         <th>Total Amount</th>
                                                         <th>Amount Paid</th>
                                                         <th>Amount Balance</th>
-                                                        <th>Credit Note</th>
+                                                        <th>Credit Note No</th>
                                                         @*<th>Credit Note Date</th>*@
                                                         <th>Discount Amount</th>
                                                         <th>Payment Date</th>
@@ -187,9 +187,8 @@
                                                                
                                                                 <td>
                                                                     <span id="trVendor@(i)"> @itm.Vendor_Name</span>
-                                                                    <input type="hidden" id="hdnVendor@(i)" name="Payable.PurchaseInvoice_Details[@(i-1)].Vendor" value="@itm.Vendor_Name">
+                                                                    <input type="hidden" id="hdnVendor@(i)" name="Payable.PurchaseInvoice_Details[@(i-1)].Vendor_Name" value="@itm.Vendor_Name">
                                                                     <input type="hidden" id="hdnPurchase_Invoice_Id@(i)" name="Payable.Purchase_Invoice_Id[@(i-1)].Purchase_Invoice_Id" value="@itm.Purchase_Invoice_Id">
-                                                                    
                                                                     <input type="hidden" id="hdnPayable_Id@(i)" name="Payable.Payable_Id[@(i-1)].Payable_Id" value="@itm.Payable_Id">
                                                                     
 
