@@ -26,6 +26,8 @@ namespace MyLeoRetailer.Models
 
             SaleReturnItemList = new List<SaleReturnItems>();
 
+            Cookies = new LoginInfo();
+
             Filter = new SalesReturnFilter();
 
             Grid_Detail = new GridInfo();
@@ -45,6 +47,8 @@ namespace MyLeoRetailer.Models
         public List<SalesReturnInfo> SalesReturns { get; set; }
 
         public List<SaleReturnItems> SaleReturnItemList { get; set; }
+
+        public LoginInfo Cookies { get; set; }
 
         public SalesReturnFilter Filter { get; set; }
 

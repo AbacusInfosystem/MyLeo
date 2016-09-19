@@ -23,6 +23,8 @@ namespace MyLeoRetailer.Models
 
             SalesInvoice = new SalesInvoiceInfo();
 
+            Cookies = new LoginInfo();
+
             SalesInvoices = new List<SalesInvoiceInfo>();
 
             SaleOrderItemList = new List<SaleOrderItems>();
@@ -44,6 +46,8 @@ namespace MyLeoRetailer.Models
         public SalesInvoiceInfo SalesInvoice { get; set; }
 
         public List<SalesInvoiceInfo> SalesInvoices { get; set; }
+
+        public LoginInfo Cookies { get; set; }
 
         public List<SaleOrderItems> SaleOrderItemList { get; set; }
 

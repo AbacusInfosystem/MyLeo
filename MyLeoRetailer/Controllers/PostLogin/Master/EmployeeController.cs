@@ -220,6 +220,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("ChangeBranch", eViewModel);
         }
 
+
+        #endregion
+
         //public ActionResult Get_Branch_By_Employee(EmployeeViewModel eViewModel)
         //{
         //    eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(1);
