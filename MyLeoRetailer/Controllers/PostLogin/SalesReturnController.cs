@@ -72,6 +72,8 @@ namespace MyLeoRetailer.Controllers.PostLogin
         public JsonResult Get_SalesReturn(SalesReturnViewModel srViewModel)
         {
 
+            srViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+
             CommonManager cMan = new CommonManager();
 
             string filter = "";
@@ -82,13 +84,15 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             try
             {
-                filter = srViewModel.Filter.Sales_Return_No; // Set filter comma seprated
+                filter = srViewModel.Cookies.Branch_Ids; // Set filter comma seprated
 
-                dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+                dataOperator = DataOperator.In.ToString(); // set operator for where clause as comma seprated
 
-                srViewModel.Query_Detail = Set_Query_Details(false, "Sales_Return_No,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note,Sales_Return_Id", "", "Sales_Return", "Sales_Return_No", filter, dataOperator); // Set query for grid
+                srViewModel.Query_Detail = Set_Query_Details(false, "Sales_Return_No,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note,Sales_Return_Id", "", "Sales_Return", "Branch_ID", filter, dataOperator); // Set query for grid
 
                 pager = srViewModel.Grid_Detail.Pager;
+
+                srViewModel.Query_Detail.Input_Params.Add(new WhereInfo() { Key = "Branch_ID", Value = filter, DataOperator = DataOperator.In.ToString() });
 
                 srViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Return_No,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note", "Sales_Return_Id"); // Set grid info for front end listing
 
@@ -113,7 +117,19 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 Set_Date_Session(srViewModel.SalesReturn);
 
-                srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList);
+                srViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+
+                //string[] arr = srViewModel.Cookies.Branch_Ids.Split(',');
+
+                string Branch_Id = srViewModel.Cookies.Branch_Ids.TrimEnd();
+
+                //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
+
+                //for (int i = 0; i < arr.Length; i++)
+                //{
+
+                srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList, Branch_Id);
+                //}
 
                 srViewModel.FriendlyMessages.Add(MessageStore.Get("SR01"));
             }
