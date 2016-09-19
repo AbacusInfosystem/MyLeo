@@ -75,26 +75,32 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
-        public int Get_SizeGroup_By_Id(int size_group_Id)
+        public SizeGroupInfo Get_SizeGroup_By_Id(int size_group_Id)
         {
-            int isactive = 0;
-
-            DataTable dt = null;
+            SizeGroupInfo size = new SizeGroupInfo();
 
             List<SqlParameter> sqlParamList = new List<SqlParameter>();
-
             sqlParamList.Add(new SqlParameter("@Size_Group_Id", size_group_Id));
 
-            dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_SizeGroup_By_Id.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_SizeGroup_By_Id.ToString(), CommandType.StoredProcedure);
 
             foreach (DataRow dr in dt.Rows)
             {
+                if (!dr.IsNull("Size_Group_Id"))
+                {
+                    size.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+                }
+                if (!dr.IsNull("Size_Group_Name"))
+                {
+                    size.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+                }
                 if (!dr.IsNull("Is_Active"))
                 {
-                    isactive = Convert.ToInt32(dr["Is_Active"]);
+                    size.IsActive = Convert.ToInt32(dr["Is_Active"]);
                 }
+
             }
-            return isactive;
+            return size;
 
         }
 

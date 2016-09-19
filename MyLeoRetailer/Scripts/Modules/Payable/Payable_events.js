@@ -11,45 +11,6 @@ $(function () {
     });
 
 
-
-
-    //$("#btnPayablePay").click(function () {
-
-    //    $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");
-    //    $("#frmPayable").submit();
-
-    //    //Get_Payable(this);
-
-    //    //var data = $(this).parents(tr).find("td.hdnBalance_Amount").html();
-
-    //    //alert(data);
-
-    //    //$("#id").text(data);
-
-    //});
-
-    //if ($('#hdn_GiftVoucherId').val() != "") {
-    //    if ($('#mode').val() == 2) {
-    //        $("#divBankName").show();
-    //        $("#divCreditCardNo").show();
-    //    } else {
-    //        $("#divBankName").hide();
-    //        $("#divCreditCardNo").hide();
-    //    }
-    //}
-
-    //$("#mode").change(function () {
-    //    if ($(this).val() == 2) {
-    //        $("#divBankName").show();
-    //        $("#divCreditCardNo").show();
-    //    } else {
-    //        $("#divBankName").hide();
-    //        $("#divCreditCardNo").hide();
-    //    }
-    //});
-
-
-
     $('[name = "Payable.Payment_Mode"]').change(function () {
 
        
@@ -113,27 +74,6 @@ $(function () {
             //$("#divCreditnoteno").hide();
             //$("#divGiftvoucherno").hide();
         }
-
-        //else if ($(this).val() == 5) {
-        //    //$("#divCreditnoteno").show();
-        //    $("#divPaidAmount").show();
-        //    $("#divCreditcardno").hide();
-        //    $("#divDebitcardno").hide();
-        //    $("#divChequedate").hide();
-        //    $("#divChequeno").hide();
-        //    $("#divBankName").hide();
-        //    //$("#divGiftvoucherno").hide();
-        //}
-        //else if ($(this).val() == 6) {
-        //    $("#divCreditnoteno").hide();
-        //    $("#divCreditcardno").hide();
-        //    $("#divDebitcardno").hide();
-        //    $("#divChequedate").hide();
-        //    $("#divChequeno").hide();
-        //    $("#divBankName").hide();
-        //    $("#divGiftvoucherno").show();
-        //    $("#divPaidAmount").show();
-        //}
 
         else {
             //$("#divGiftvoucherno").hide();

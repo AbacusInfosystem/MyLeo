@@ -137,6 +137,9 @@ namespace MyLeoRetailerRepo
                     categoryInfo.Category = Convert.ToString(dr["Category"]);
 
                 categoryInfo.IsActive = Convert.ToBoolean(dr["IsActive"]);
+
+                categoryInfo.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
             }
             return categoryInfo;
 

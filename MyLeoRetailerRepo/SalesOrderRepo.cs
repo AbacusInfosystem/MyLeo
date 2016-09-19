@@ -152,18 +152,18 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
-        public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems)
+        public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems,string Branch_Id)
         {
 
-            salesInvoice.Sales_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesOrder(salesInvoice), Storeprocedures.sp_Insert_Sales_Invoice.ToString(), CommandType.StoredProcedure));
+            salesInvoice.Sales_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesOrder(salesInvoice, Branch_Id), Storeprocedures.sp_Insert_Sales_Invoice.ToString(), CommandType.StoredProcedure));
 
             Insert_SalesOrder_Items(salesOrderItems, salesInvoice, salesInvoice.Sales_Invoice_Id);
 
             return salesInvoice.Sales_Invoice_Id;
 
         }
-       
-        private List<SqlParameter> Set_Values_In_SalesOrder(SalesInvoiceInfo salesInvoice)
+
+        private List<SqlParameter> Set_Values_In_SalesOrder(SalesInvoiceInfo salesInvoice, string Branch_Id)
         {
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
@@ -181,13 +181,13 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Sales_Invoice_No", DBNull.Value));
             }
-            if (salesInvoice.Company_Branch_Id != 0)
+            if (Convert.ToInt32(Branch_Id) != 0)
             {
-                sqlParams.Add(new SqlParameter("@Company_Branch_Id", salesInvoice.Company_Branch_Id));
+                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Company_Branch_Id", 0));
+                sqlParams.Add(new SqlParameter("@Branch_ID", 0));
             }
             if (salesInvoice.Customer_Id != 0)
             {
@@ -254,13 +254,11 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Net_Amount", 0));
             }
 
-            if (salesInvoice.Sales_Invoice_Id == 0)
-            {
+            
                 sqlParams.Add(new SqlParameter("@Created_By", salesInvoice.Created_By));
 
                 sqlParams.Add(new SqlParameter("@Created_Date", salesInvoice.Created_Date));
-            }
-
+            
                 sqlParams.Add(new SqlParameter("@Updated_By", salesInvoice.Updated_By));
 
                 sqlParams.Add(new SqlParameter("@Updated_Date", salesInvoice.Updated_Date));
@@ -289,7 +287,6 @@ namespace MyLeoRetailerRepo
 
                 sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Sales_Invoice_Item.ToString(), CommandType.StoredProcedure);
             }
-        }
-
+        } 
     }
 }

@@ -116,12 +116,13 @@ function Get_Category_By_Id(obj)
 
 	$(obj).addClass("active");
 
-	$("[name='Category.Category']").val($(obj).text());
+	//$("[name='Category.Category']").val($(obj).text());
 
-	$("[name='Category.Category_Id']").val($(obj).attr("data-identity"));
+	//$("[name='Category.Category_Id']").val($(obj).attr("data-identity"));
 
-    //
-	var Category_Id = $("[name='Category.Category_Id']").val();
+    //var Category_Id = $("[name='Category.Category_Id']").val();
+
+	var Category_Id = $(obj).attr("data-identity");
 	
 	$.ajax({
 
@@ -144,17 +145,28 @@ function Get_Category_By_Id(obj)
 	            document.getElementById('Flag').checked = false; 
 	        }
 
+	        $("[name='Category.Category']").val(obj.Category.Category);
+
+	        $("[name='Category.Category_Id']").val(obj.Category.Category_Id);
+
+	        Get_SubCategories(obj.Category.Category_Id, obj.Category.Category)
+
+	        Friendly_Messages(obj);
+
 	    }
 	});
     //
 
 }
 
-function Get_SubCategories(obj)
-{
-	$("#dvSubCategory").load("/Category/Get_Sub_Category_By_Category_Id", { catgeory_Id: $(obj).attr("data-identity"), category: $(obj).text() });
-}
+//function Get_SubCategories(obj)
+//{
+//	$("#dvSubCategory").load("/Category/Get_Sub_Category_By_Category_Id", { catgeory_Id: $(obj).attr("data-identity"), category: $(obj).text() });
+//}
 
+function Get_SubCategories(id, name) {
+    $("#dvSubCategory").load("/Category/Get_Sub_Category_By_Category_Id", { catgeory_Id: id, category: name });
+}
 
 
 

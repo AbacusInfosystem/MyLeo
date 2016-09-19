@@ -402,6 +402,11 @@ namespace MyLeoRetailerRepo.Utility
 						{
 							query.Append("" + item.Key + " > '" + item.Value + "' AND ");
 						}
+                        else if (item.DataOperator == DataOperator.In.ToString())
+                        {
+                            query.Append("" + item.Key + " IN (" + item.Value + ") AND ");
+                        }
+
 					}
 				}
 

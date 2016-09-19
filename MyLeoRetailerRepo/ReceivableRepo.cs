@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.GiftVoucher;
 using MyLeoRetailerInfo.Payable;
 using MyLeoRetailerInfo.Receivable;
 using MyLeoRetailerRepo.Utility;
@@ -67,6 +68,8 @@ namespace MyLeoRetailerRepo
                        list.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
                    if (!dr.IsNull("Credit_Note_Amount"))
                        list.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+                   if (!dr.IsNull("Created_Date"))
+                       list.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
                    if (!dr.IsNull("Created_On"))
                        list.Payament_Date = Convert.ToDateTime(dr["Created_On"]);
                    
@@ -105,7 +108,7 @@ namespace MyLeoRetailerRepo
 
                    if (!dr.IsNull("Balance_Amount"))
 
-                       rInfo.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount  "]);
+                       rInfo.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
 
                    if (!dr.IsNull("Total_MRP_Amount"))
 
@@ -116,6 +119,102 @@ namespace MyLeoRetailerRepo
 
            return rInfo;
        }
+
+       public List<ReceivableInfo> Get_Credit_Note_Details_By_Id(int Sales_Credit_Note_Id) //......
+       {
+
+           List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
+
+           List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+           sqlparam.Add(new SqlParameter("@Sales_Credit_Note_Id", Sales_Credit_Note_Id));
+
+           DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Get_Credit_Note_Details_By_Id_Sp1.ToString(), CommandType.StoredProcedure);
+
+           foreach (DataRow dr in dt.Rows)
+           {
+               Receivables.Add(Get_Credit_Note_Values(dr));
+           }
+           return Receivables;
+       }
+
+       private ReceivableInfo Get_Credit_Note_Values(DataRow dr) //........
+       {
+           ReceivableInfo Receivable = new ReceivableInfo();
+
+           Receivable.Sales_Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
+           Receivable.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+           Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+           Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+
+           return Receivable;
+       }
+
+       public ReceivableInfo Get_Credit_Note_Amount_By_Id(int Sales_Credit_Note_Id)
+       {
+
+           ReceivableInfo Receivable = new ReceivableInfo();
+
+           List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+           sqlparam.Add(new SqlParameter("@Sales_Credit_Note_Id", Sales_Credit_Note_Id));
+
+           DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Get_Credit_Note_Details_By_Id_Sp1.ToString(), CommandType.StoredProcedure);
+
+           foreach (DataRow dr in dt.Rows)
+           {
+               Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+           }
+           return Receivable;
+       }
+
+       public List<ReceivableInfo> Get_Gift_Voucher_Details_By_Id() //......
+       {
+
+           List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
+
+           List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+           DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Giftvoucher_Data_sp.ToString(), CommandType.StoredProcedure);
+
+               foreach (DataRow dr in dt.Rows)
+               {
+                   ReceivableInfo Receivable = new ReceivableInfo();
+
+                   Receivable.Gift_Voucher_Id = Convert.ToInt32(dr["Gift_Voucher_Id"]);
+
+                   Receivable.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+
+                   Receivable.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+
+                   Receivables.Add(Receivable);
+
+           }
+           return Receivables;
+       }
+
+       public ReceivableInfo Get_Gift_Voucher_Amount_By_Id(string Gift_Voucher_No)
+       {
+
+           ReceivableInfo Receivable = new ReceivableInfo();
+
+           List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+           sqlparam.Add(new SqlParameter("@Gift_Voucher_No", Gift_Voucher_No));
+
+           DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.sp_Get_Gift_Voucher_By_Id.ToString(), CommandType.StoredProcedure);
+
+           foreach (DataRow dr in dt.Rows)
+           {
+
+               Receivable.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+           }
+           return Receivable;
+       }
+    
+
+   
+
 
        
     }
