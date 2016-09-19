@@ -14,7 +14,7 @@ namespace MyLeoRetailer.Filters
 		{
 			HttpContext ctx = HttpContext.Current;
 
-            if (filterContext.HttpContext.Request.Cookies["LoginInfo"] == null)
+            if (filterContext.HttpContext.Request.Cookies["MyLeoLoginInfo"] == null)
 			{
                 filterContext.Result = new RedirectResult("~/Home/System_Error");
 
