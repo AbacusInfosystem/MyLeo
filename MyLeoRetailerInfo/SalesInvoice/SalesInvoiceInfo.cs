@@ -29,7 +29,7 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        public string Sales_Invoice_No { get; set; }
 
-       public int Company_Branch_Id { get; set; }
+       public int Branch_Id { get; set; }
 
        public int Total_Quantity { get; set; }
 

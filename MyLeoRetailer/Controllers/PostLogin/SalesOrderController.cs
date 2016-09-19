@@ -73,6 +73,8 @@ namespace MyLeoRetailer.Controllers.PostLogin
         public JsonResult Get_SalesOrder(SalesInvoiceViewModel siViewModel)
         {
 
+            siViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+
             CommonManager cMan = new CommonManager();
 
             string filter = "";
@@ -83,11 +85,14 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             try
             {
-                filter = siViewModel.Filter.Sales_Invoice_No; // Set filter comma seprated
 
-                dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+                filter = siViewModel.Cookies.Branch_Ids; // Set filter comma seprated
 
-                siViewModel.Query_Detail = Set_Query_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount,Sales_Invoice_Id", "", "Sales_Invoice", "Sales_Invoice_No", filter, dataOperator); // Set query for grid
+                dataOperator = DataOperator.In.ToString(); // set operator for where clause as comma seprated
+
+                siViewModel.Query_Detail = Set_Query_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount,Sales_Invoice_Id", "", "Sales_Invoice", "Branch_ID", filter, dataOperator); // Set query for grid             
+
+                siViewModel.Query_Detail.Input_Params.Add(new WhereInfo() { Key = "Branch_ID", Value = filter, DataOperator= DataOperator.In.ToString() });
 
                 pager = siViewModel.Grid_Detail.Pager;
 
@@ -109,12 +114,29 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult Insert_SalesOrder(SalesInvoiceViewModel siViewModel)
         {
+            //string arr [] ;
+
+
 
             try
             {
                 Set_Date_Session(siViewModel.SalesInvoice);
 
-                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList);
+                siViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+
+                //string[] arr  = siViewModel.Cookies.Branch_Ids.Split(',');
+
+                string Branch_Id = siViewModel.Cookies.Branch_Ids.TrimEnd();
+
+                //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
+
+                //for (int i = 0; i < arr.Length; i++)
+                //{
+                    //Set_Date_Session(siViewModel.SalesInvoice);
+
+                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, Branch_Id);
+   
+                //}
 
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SI01"));
             }
