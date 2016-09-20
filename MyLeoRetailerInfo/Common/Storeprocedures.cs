@@ -248,6 +248,7 @@ namespace MyLeoRetailerInfo.Common
         Insert_Payable_Data_Sp,
         sp_Insert_Payable_Item_Data,
         sp_Temp_Get_Payable_Detail_By_Id1,
+        sp_Temp_Get_Payable_Detail,
 
         //Employee Branch mapping
         //sp_Get_Branch,
@@ -285,7 +286,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Update_Receivable_Item,
         Get_Receivable_Data_Item_By_Id_Sp,
         Get_Receivable_Data_By_Id_Sp,
-
+        sp_Get_Receivables,
 
   
     }

@@ -22,6 +22,59 @@ namespace MyLeoRetailerRepo
 			sqlHelper = new SQL_Repo();
 		}
 
+
+       public List<ReceivableInfo> Get_Receivables(ReceivableInfo Receivable) //.... 
+       {
+           List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
+
+           DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Receivables.ToString(), CommandType.StoredProcedure);
+
+           if (dt != null && dt.Rows.Count > 0)
+           {
+               foreach (DataRow dr in dt.Rows)
+               {
+                   ReceivableInfo list = new ReceivableInfo();
+
+                   if (!dr.IsNull("Sales_Invoice_Id"))
+                       list.Sales_Invoice_Id = Convert.ToInt32(dr["Sales_Invoice_Id"]);
+                   if (!dr.IsNull("Receivable_Id"))
+                       list.Receivable_Id = Convert.ToInt32(dr["Receivable_Id"]);
+                   if (!dr.IsNull("Sales_Credit_Note_Id"))
+                       list.Sales_Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
+                   if (!dr.IsNull("Customer_Name"))
+                       list.Customer_Name = Convert.ToString(dr["Customer_Name"]);
+                   if (!dr.IsNull("Customer_Mobile1"))
+                       list.Customer_Mobile1 = Convert.ToString(dr["Customer_Mobile1"]);
+                   if (!dr.IsNull("Sales_Invoice_No"))
+                       list.Sales_Invoice_No = Convert.ToString(dr["Sales_Invoice_No"]);
+                   if (!dr.IsNull("Created_Date"))
+                       list.Sales_Invoice_Date = Convert.ToDateTime(dr["Created_Date"]);
+                   if (!dr.IsNull("Payment_Status"))
+                       list.Payment_Status = Convert.ToInt32(dr["Payment_Status"]);
+                   if (!dr.IsNull("Total_MRP_Amount"))
+                       list.Total_MRP_Amount = Convert.ToDecimal(dr["Total_MRP_Amount"]);
+                   if (!dr.IsNull("Paid_Amount"))
+                       list.Paid_Amount = Convert.ToDecimal(dr["Paid_Amount"]);
+                   if (!dr.IsNull("Balance_Amount"))
+                       list.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+                   if (!dr.IsNull("Credit_Note_No"))
+                       list.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+                   if (!dr.IsNull("Credit_Note_Amount"))
+                       list.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+                   if (!dr.IsNull("Created_Date"))
+                       list.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+                   if (!dr.IsNull("Created_On"))
+                       list.Payament_Date = Convert.ToDateTime(dr["Created_On"]);
+
+
+
+                   Receivables.Add(list);
+               }
+           }
+
+           return Receivables;
+       }
+
        public List<ReceivableInfo> Get_Receivable_Search_Details(ReceivableInfo Receivable) //.... 
        {
            List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
@@ -328,13 +381,13 @@ namespace MyLeoRetailerRepo
            //}
            sqlParams.Add(new SqlParameter("@Receivable_Id", Receivable.Receivable_Id));
            sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", Receivable.Sales_Credit_Note_Id));
-           sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Receivable.Gift_Voucher_No));
+           sqlParams.Add(new SqlParameter("@Gift_Voucher_Id", Receivable.Gift_Voucher_Id));
            sqlParams.Add(new SqlParameter("@Receivable_Item_Id", Receivable.Receivable_Item_Id));
            sqlParams.Add(new SqlParameter("@Paid_Amount", Receivable.Paid_Amount));
            sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
            sqlParams.Add(new SqlParameter("@Card_Amount", Receivable.Card_Amount));
-           sqlParams.Add(new SqlParameter("@Gift_Voucher_Amount", Receivable.Gift_Voucher_Amount));
+           
            sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));
@@ -365,7 +418,7 @@ namespace MyLeoRetailerRepo
            }
 
            sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", Receivable.Sales_Credit_Note_Id));
-           sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Receivable.Gift_Voucher_No));
+           sqlParams.Add(new SqlParameter("@Gift_Voucher_Id", Receivable.Gift_Voucher_Id));
            sqlParams.Add(new SqlParameter("@Paid_Amount", Receivable.Paid_Amount));
            sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
@@ -373,7 +426,7 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));
-           sqlParams.Add(new SqlParameter("@Gift_Voucher_Amount", Receivable.Gift_Voucher_Amount));
+           
            sqlParams.Add(new SqlParameter("@Credit_Card_No", Receivable.Credit_Card_No));
            sqlParams.Add(new SqlParameter("@Updated_By", Receivable.Updated_By));
            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
@@ -421,13 +474,15 @@ namespace MyLeoRetailerRepo
 
                Receivable.Sales_Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
 
-           if (!dr.IsNull("Gift_Voucher_No"))
-
-               Receivable.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+          
 
            if (!dr.IsNull("Paid_Amount"))
 
                Receivable.Paid_Amount = Convert.ToInt32(dr["Paid_Amount"]);
+
+           if (!dr.IsNull("Gift_Voucher_Id"))
+
+               Receivable.Gift_Voucher_Id = Convert.ToInt32(dr["Gift_Voucher_Id"]);
 
            if (!dr.IsNull("Cash_Amount"))
 
@@ -469,6 +524,19 @@ namespace MyLeoRetailerRepo
 
                Receivable.Created_By = Convert.ToInt32(dr["Created_By"]);
 
+           if (!dr.IsNull("Credit_Note_Amount"))
+
+               Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+
+           if (!dr.IsNull("Credit_Note_No"))
+
+               Receivable.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+
+           if (!dr.IsNull("Gift_Voucher_No"))
+
+               Receivable.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+
+           
 
 
            return Receivable;
