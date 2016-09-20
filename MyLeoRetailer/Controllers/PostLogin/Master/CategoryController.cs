@@ -1,6 +1,8 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -15,6 +17,7 @@ using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
+    [SessionExpireAttribute]
     public class CategoryController:BaseController
     {
         CategoryRepo cRepo;
@@ -26,6 +29,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             sRepo = new SubCategoryRepo();
         }
 
+        [AuthorizeUserAttribute(AppFunction.Category_Management_Access)]
 		public ActionResult Index()
         {
 			return View();
@@ -33,19 +37,27 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Insert_Category(CategoryViewModel cViewModel)
 		{
-            //CategoryRepo cRepo = new CategoryRepo();
-
 			try
 			{
-				Set_Date_Session(cViewModel.Category);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Category_Management_Create))
+                {
+                    Set_Date_Session(cViewModel.Category);
 
-				cViewModel.Category.Category_Id = cRepo.Insert_Category(cViewModel.Category);
+                    cViewModel.Category.Category_Id = cRepo.Insert_Category(cViewModel.Category);
 
-				cViewModel.FriendlyMessages.Add(MessageStore.Get("CAT01"));
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("CAT01"));
+                }
+                else
+                {
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+				
 			}
 			catch(Exception ex)
 			{
 				cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Insert_Category" + ex.Message);
 			}
 
 			return Json(JsonConvert.SerializeObject(cViewModel));
@@ -53,19 +65,28 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
 		public JsonResult Update_Category(CategoryViewModel cViewModel)
 		{
-            //CategoryRepo cRepo = new CategoryRepo();
-
 			try
 			{
-				Set_Date_Session(cViewModel.Category);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Category_Management_Edit))
+                {
+                    Set_Date_Session(cViewModel.Category);
 
-				cRepo.Update_Category(cViewModel.Category);
+                    cRepo.Update_Category(cViewModel.Category);
 
-				cViewModel.FriendlyMessages.Add(MessageStore.Get("CAT02"));
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("CAT02"));
+                }
+                else
+                {
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+
+                }
+				
 			}
 			catch(Exception ex)
 			{
 				cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Update_Category" + ex.Message);
 			}
 
 			return Json(JsonConvert.SerializeObject(cViewModel));
@@ -104,6 +125,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Get_Catgories" + ex.Message);
 			}
 
 			return Json(JsonConvert.SerializeObject(cViewModel));
@@ -122,6 +145,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Get_Sub_Category_By_Category_Id" + ex.Message);
 			}
 
 			return PartialView("_SubCategory", sViewModel);
@@ -142,6 +167,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Insert_Sub_Category" + ex.Message);
 			}
 
 			return Json(JsonConvert.SerializeObject(sViewModel));
@@ -162,6 +189,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Update_Sub_Category" + ex.Message);
 			}
 
 			return Json(JsonConvert.SerializeObject(sViewModel));
@@ -200,6 +229,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Get_Sub_Catgories" + ex.Message);
 			}
 
 			return Json(JsonConvert.SerializeObject(sViewModel));
@@ -210,11 +241,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             CategoryViewModel cViewModel = new CategoryViewModel();
             try
             {
-                cViewModel.Category = cRepo.Get_Category_By_Id(Category_Id);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Category_Management_View))
+                {
+                    cViewModel.Category = cRepo.Get_Category_By_Id(Category_Id);
+                }
+                else
+                {
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Get_Category_By_Id" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
@@ -230,6 +271,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Category Controller - Get_Sub_Category_By_Id" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(sViewModel));

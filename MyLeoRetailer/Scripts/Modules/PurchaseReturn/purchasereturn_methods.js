@@ -79,7 +79,7 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
        
     });
 
-    Get_Purchase_Return_PO_By_POI(i);
+    //Get_Purchase_Return_PO_By_POI(i);
 }
 
 function Get_Purchase_Return_PO_By_POI(i) {
@@ -106,6 +106,12 @@ function Get_Purchase_Return_PO_By_POI(i) {
     });
 }
 
+function Set_Purchase_Invoice_Id(value) {
+
+    $('#hdf_Purchase_Invoice_Id').val(value);
+}
+
+
 function AddPurchaseReturnDetails(i) {
 
     var html = '';
@@ -124,10 +130,20 @@ function AddPurchaseReturnDetails(i) {
     tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
+    //tblHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id' id='hdnPurchase_Order_Id_" + i + "' />"
+    //tblHtml += "</td>";
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
-    tblHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id' id='hdnPurchase_Order_Id_" + i + "' />"
-    tblHtml += "</td>";
+    tblHtml += "<div class='form-group auto-complete'>";
+    tblHtml += "<div class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
+    tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+    tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "</div>";
+    tblHtml += "</div>";
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
@@ -191,7 +207,6 @@ function AddPurchaseReturnDetails(i) {
 }
 
 
-
 function CalculateTax() {
 
     var netAmt = 0;
@@ -209,9 +224,7 @@ function CalculateTax() {
     var intPart = Math.floor(roundedDecimal);
 
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
-
-    alert(fracPart);
-
+    
     if (fracPart == "" || fracPart == null) {
         fracPart = 0.00
     }
@@ -243,6 +256,7 @@ function CalculateDiscount() {
 
     $("#textGrossAmount_0").val(grossAmt.toFixed(2));
 
+    CalculateTax();
 
 }
 
@@ -272,6 +286,7 @@ function CalculateTotal() {
     $("#textTotalQuantity_0").val(sumQuantity);
     $("#textTotalAmount_0").val(sumWSRAmount.toFixed(2));
 
+    CalculateDiscount();
 }
 
 
@@ -307,12 +322,21 @@ function ReArrangePurchaseReturnDetailsData() {
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Barcode");
             }
 
+            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+            //    $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code");
+            //    $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
+            //    $(newTR).find("[id^='hdnPurchase_Order_Id_']")[0].id = "hdnPurchase_Order_Id_" + i;
+            //    $(newTR).find("[id^='hdnPurchase_Order_Id_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id");
+            //}
+
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code");
-                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']")[0].id = "hdnPurchase_Order_Id_" + i;
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id");
+                $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code");
             }
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {

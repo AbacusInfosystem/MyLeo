@@ -12,9 +12,11 @@ using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using MyLeoRetailer.Filters;
+using MyLeoRetailerHelper.Logging;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
+    [SessionExpireAttribute]
     public class EmployeeController : BaseController
     {
         EmployeeRepo eRepo;
@@ -24,7 +26,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             eRepo = new EmployeeRepo();
         }
 
-        [AuthorizeUserAttribute(AppFunction.Employee_Management_Create)]
         public ActionResult Index(EmployeeViewModel eViewModel)
         {
             try
@@ -42,12 +43,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
+                Logger.Error("Employee Controller - Index" + ex.Message);
             }
 
             return View("Index", eViewModel);
         }
-
-     
 
         [AuthorizeUserAttribute(AppFunction.Employee_Management_Access)]
         public ActionResult Search(EmployeeViewModel eViewModel)
@@ -62,45 +62,64 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Employee Controller - Search" + ex.Message);
             }
             return View("Search", eViewModel);
         }
 
         public ActionResult Insert_Employee(EmployeeViewModel eViewModel)
         {
-            //EmployeeRepo eRepo = new EmployeeRepo();
-
             try
             {
-                Set_Date_Session(eViewModel.Employee);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Employee_Management_Create))
+                {
+                    Set_Date_Session(eViewModel.Employee);
 
-                eViewModel.Employee.Employee_Id = eRepo.Insert_Employee(eViewModel.Employee);
+                    eViewModel.Employee.Employee_Id = eRepo.Insert_Employee(eViewModel.Employee);
 
-                eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP01"));
+                    eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP01"));
+                }
+                else
+                {
+                    eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Employee Controller - Insert_Employee" + ex.Message);
             }
+
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
             return RedirectToAction("Search");
         }
 
         public ActionResult Update_Employee(EmployeeViewModel eViewModel)
         {
-            //EmployeeRepo eRepo = new EmployeeRepo();
-
             try
             {
-                Set_Date_Session(eViewModel.Employee);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Employee_Management_Edit))
+                {
+                    Set_Date_Session(eViewModel.Employee);
 
-                eRepo.Update_Employee(eViewModel.Employee);
+                    eRepo.Update_Employee(eViewModel.Employee);
 
-                eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP02"));
+                    eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP02"));
+                }
+                else
+                {
+                    eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Employee Controller - Update_Employee" + ex.Message);
             }
 
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
@@ -143,12 +162,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Employee Controller - Get_Employees" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(eViewModel));
         }
 
-        [AuthorizeUserAttribute(AppFunction.Employee_Management_Edit)]
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_View)]
         public ActionResult Get_Employee_By_Id(EmployeeViewModel eViewModel)
         { 
             //EmployeeRepo cRepo = new EmployeeRepo();
@@ -159,6 +180,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Employee Controller - Get_Employee_By_Id" + ex.Message);
             }
 
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
@@ -170,11 +193,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             bool check = false;
             try
             {
-                //check = eRepo.Check_Existing_User_Name(user_Name);
+                check = eRepo.Check_Existing_User_Name(user_Name);
             }
             catch (Exception ex)
             {
-                
+                Logger.Error("Employee Controller - Check_Existing_User_Name" + ex.Message);
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
@@ -193,6 +216,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Employee Controller - Employee_Branch_Mapping" + ex.Message);
             }
             return View("Employee_Branch_Mapping", eViewModel);
         }
@@ -211,6 +236,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Employee Controller - Insert_Employee_Mapping" + ex.Message);
             }
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
             return RedirectToAction("Search");
@@ -286,7 +313,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 HttpContext.Request.Cookies.Clear();
 
-                //Logger.Error("Error at Login Controller - SetUsersCookies : " + ex.Message);
+                Logger.Error("Employee Controller - Set_Branch_Cookies" + ex.Message);
             }
         }
 

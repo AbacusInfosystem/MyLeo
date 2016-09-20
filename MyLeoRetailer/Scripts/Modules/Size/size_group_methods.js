@@ -223,11 +223,11 @@ function Get_SizeGroup_By_Id(obj) {
 
     $(obj).addClass("active");
 
-    var Size_Group_Name = $(obj).text();
-    $("[name='SizeGroup.Size_Group_Name']").val($(obj).text());
+    //var Size_Group_Name = $(obj).text();
+    //$("[name='SizeGroup.Size_Group_Name']").val($(obj).text());
 
     var Size_Group_Id = $(obj).attr("data-identity");
-    $("[name='SizeGroup.Size_Group_Id']").val($(obj).attr("data-identity"));
+    //$("[name='SizeGroup.Size_Group_Id']").val($(obj).attr("data-identity"));
 
     $('input[id*="txtSize"]').each(function () {
         $(this).val('');
@@ -257,10 +257,18 @@ function Get_SizeGroup_By_Id(obj) {
             else {
                 document.getElementById('Flag').checked = true;
             }
-
             //End
 
-            $("#divSize").show();
+            $("[name='SizeGroup.Size_Group_Name']").val(obj.SizeGroup.Size_Group_Name);
+
+            $("[name='SizeGroup.Size_Group_Id']").val(obj.SizeGroup.Size_Group_Id);
+
+            if (obj.SizeGroup.Size_Group_Id != 0)
+            {
+                $("#divSize").show();
+            }
+            
+            Friendly_Messages(obj);
           
         }
     });

@@ -23,6 +23,8 @@ $(document).ready(function () {
 
         $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").val(hiddenTextValue);
 
+        $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").focus();
+
         $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
         //$(".glyphicon-remove").trigger("click")
 
@@ -38,7 +40,7 @@ $(document).ready(function () {
 
         $(Textboxname).parents('.form-group').find('.glyphicon-remove').click(function (event) {
             event.preventDefault();
-            $(this).parents('.form-group').find('input[type=text]').val("");
+            $(this).parents('.form-group').find('input[type=text]').val("");         
             $(this).parents('.form-group').find('.auto-complete-value').val("");
             $(this).parents('.form-group').find('.auto-complete-label').val("");
             $(this).parents('.form-group').find('.auto-complete-value').trigger('change');

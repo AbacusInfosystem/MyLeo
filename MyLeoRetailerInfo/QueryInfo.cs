@@ -55,7 +55,8 @@ namespace MyLeoRetailerInfo
 		Equal,
 		Like,
 		Greaterthan,
-		Lessthan
+		Lessthan,
+        In
 	}
 
     public enum DataTypeCollection

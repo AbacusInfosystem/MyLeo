@@ -1,4 +1,143 @@
-﻿function Get_Sizes() {
+﻿function Set_Vendor_Id(value) {
+    debugger;
+
+    $('#hdf_Vendor_Id').val(value);
+
+    $.ajax({
+
+        url: "/PurchaseOrder/Get_Details_By_Vendor_Id",
+
+        data: { Vendor_Id: value },
+
+        type: 'POST',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            if (obj.PurchaseOrder.Vendors.length > 0) {
+
+                $("#drpArticle_No").empty();
+
+                var article_no1 = document.getElementById("drpArticle_No");
+                var option = document.createElement("option");
+
+                option.value = 0;
+                option.text = "Select Article No.";
+
+                article_no1.add(option);
+
+                for (var j = 0; j < obj.PurchaseOrder.Vendors.length; j++) {
+                    debugger;
+                                       
+                    var article_no = document.getElementById("drpArticle_No");
+                    var option = document.createElement("option");
+                   
+                    option.value = obj.PurchaseOrder.Vendors[j].Article_No;
+                    option.text = obj.PurchaseOrder.Vendors[j].Article_No;
+                    article_no.add(option);
+                }
+            }
+
+            if (obj.PurchaseOrder.Brands.length > 0) {
+
+                $("#drpBrand").empty();
+
+                var Brand1 = document.getElementById("drpBrand");
+                var option = document.createElement("option");
+
+                option.value = 0;
+                option.text = "Select Brand";
+                Brand1.add(option);
+
+                for (var j = 0; j < obj.PurchaseOrder.Brands.length; j++) {
+                    debugger;
+
+                    var Brands = document.getElementById("drpBrand");
+                    var option = document.createElement("option");
+                    
+                    option.value = obj.PurchaseOrder.Brands[j].Brand_Id;
+                    option.text = obj.PurchaseOrder.Brands[j].Brand_Name;
+                    Brands.add(option);
+                }
+            }
+
+            if (obj.PurchaseOrder.Categories.length > 0) {
+
+                $("#drpCategory").empty();
+
+                var Category1 = document.getElementById("drpCategory");
+                var option = document.createElement("option");
+
+                option.value = 0;
+                option.text = "Select Category";
+                Category1.add(option);
+               
+                for (var j = 0; j < obj.PurchaseOrder.Categories.length; j++) {
+                    debugger;
+
+                    var Category = document.getElementById("drpCategory");
+                    var option = document.createElement("option");
+
+                    option.value = obj.PurchaseOrder.Categories[j].Category_Id;
+                    option.text = obj.PurchaseOrder.Categories[j].Category;
+                    Category.add(option);
+                }
+            }
+        }
+    });
+
+
+}
+
+function Set_Sub_Category_Drp_Id(value) {
+    debugger;
+
+    var Vendor_Id = $("#hdf_Vendor_Id").val();
+
+    $.ajax({
+
+        url: "/PurchaseOrder/Get_Details_By_Category_Vendor_Id",
+
+        data: { Vendor_Id: Vendor_Id, Category_Id: value },
+
+        type: 'POST',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            if (obj.PurchaseOrder.SubCategories.length > 0) {
+
+                $("#drpSubCategory").empty();
+
+                var SubCategory1 = document.getElementById("drpSubCategory");
+                var option = document.createElement("option");
+
+                option.value = 0;
+                option.text = "Select SubCategory.";
+                SubCategory1.add(option);
+              
+                for (var j = 0; j < obj.PurchaseOrder.SubCategories.length; j++) {
+                    debugger;
+
+                    var SubCategory = document.getElementById("drpSubCategory");
+                    var option = document.createElement("option");
+                    
+                    option.value = obj.PurchaseOrder.SubCategories[j].Sub_Category_Id;
+                    option.text = obj.PurchaseOrder.SubCategories[j].Sub_Category;
+                    SubCategory.add(option);
+                }
+            }
+
+          
+        }
+    });
+
+
+}
+
+function Get_Sizes() {
 
     var Size_Group_Id = $("#drpSize_Group").val();
 
@@ -37,24 +176,41 @@
                 tblHtml += "<td></td>";
                 tblHtml += "<td></td>";
 
-                for (var j = 0; j < obj.PurchaseOrder.SizeGroups.length; j++) {
-                                       
-                    tblHtml += "<td>";
-                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + i + "-" + (j + 1) + "'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span>";
-                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.SizeGroups[j].Size_Id + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + i + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
-                    tblHtml += "</td>";
+                for (var j = 0; j < 15; j++) {
 
-                    debugger;
-                                     
-                    
-                    var center_size = document.getElementById("drpCenter_Size");
-                    var option = document.createElement("option");
+                    if (j < obj.PurchaseOrder.SizeGroups.length)
+                    {
+                        tblHtml += "<td>";
+                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + i + "-" + (j + 1) + "'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span>";
+                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.SizeGroups[j].Size_Id + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + i + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
+                        tblHtml += "</td>";
 
-                    option.value = obj.PurchaseOrder.SizeGroups[j].Size_Id;
-                    option.text = obj.PurchaseOrder.SizeGroups[j].Size_Name;
-                    center_size.add(option);
-                                       
+                        debugger;
+
+
+                        var center_size = document.getElementById("drpCenter_Size");
+                        var option = document.createElement("option");
+
+                        option.value = obj.PurchaseOrder.SizeGroups[j].Size_Id;
+                        option.text = obj.PurchaseOrder.SizeGroups[j].Size_Name;
+                        center_size.add(option);
+                    }
+                    else
+                    {
+                        tblHtml += "<td>";
+                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + i + "-" + (j + 1) + "'></span>";
+                        tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + i + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
+                        tblHtml += "</td>";
+                    }
                 }
+                   
+                tblHtml += "<td></td>";
+                tblHtml += "<td></td>";
+                tblHtml += "<td></td>";
+                tblHtml += "<td></td>";
+                tblHtml += "<td></td>";
+                tblHtml += "<td></td>";
+                tblHtml += "<td></td>";
 
                 tblHtml += "</tr>";
 
@@ -777,7 +933,7 @@ function ReArrangePurchaseOrderDetailsData() {
             }
 
             if ($(newTR).find("[id^='textSize_Quantity_5-']").length > 0) {
-                $(newTR).find("[id^='textSize_Quantity_5-']")[0].id = "textSize_Quantity_5" + i;
+                $(newTR).find("[id^='textSize_Quantity_5-']")[0].id = "textSize_Quantity_5-" + i;
                 $(newTR).find("[id^='textSize_Quantity_5-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Quantity5");
                 $(newTR).find("[id^='textSize_Quantity_5-']").attr("onfocusout", "CalculateRowQuantity(" + i + ")");
 
@@ -811,8 +967,8 @@ function ReArrangePurchaseOrderDetailsData() {
                 $(newTR).find("[id^='hdnSize_Id_7-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id7");
                 $(newTR).find("[id^='hdnSize_Id_7-']").attr("value", $("#hdnSize_Id_7-" + (i - 1)).val());
 
-                $(newTR).find("[id='hdnAmount_7-" + i + "']")[0].id = "hdnAmount_7-" + i;
-                $(newTR).find("[id='hdnAmount_7-" + i + "']").attr("name", "PurchaseOrder.Sizes[" + i + "].Amount7");
+                $(newTR).find("[id^='hdnAmount_7-']")[0].id = "hdnAmount_7-" + i;
+                $(newTR).find("[id^='hdnAmount_7-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Amount7");
             }
 
             if ($(newTR).find("[id^='textSize_Quantity_8-']").length > 0) {
