@@ -159,7 +159,7 @@ function Save_Payable_Data() {
 
 }
 
-function Bind_Payable_Grid_Items(data) {
+function Bind_Payable_Grid_Items(obj) {
 
     $("#tblPayableItems").html("");
 
