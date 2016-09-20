@@ -363,17 +363,17 @@ namespace MyLeoRetailerRepo
            {
                sqlParams.Add(new SqlParameter("@Receivable_Item_Id", Receivable.Receivable_Item_Id));
            }
-          
-           sqlParams.Add(new SqlParameter("@Purchase_Credit_Note_Id", Receivable.Sales_Credit_Note_Id));
-           sqlParams.Add(new SqlParameter("@Payment_Mode", Receivable.Gift_Voucher_No));
+
+           sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", Receivable.Sales_Credit_Note_Id));
+           sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Receivable.Gift_Voucher_No));
            sqlParams.Add(new SqlParameter("@Paid_Amount", Receivable.Paid_Amount));
-           sqlParams.Add(new SqlParameter("@Discount_Amount", Receivable.Cash_Amount));
-           sqlParams.Add(new SqlParameter("@Discount_Percentage", Receivable.Cheque_Amount));
-           sqlParams.Add(new SqlParameter("@Payament_Date", Receivable.Card_Amount));
+           sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
+           sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
+           sqlParams.Add(new SqlParameter("@Card_Amount", Receivable.Card_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));
-           sqlParams.Add(new SqlParameter("@Person_Name", Receivable.Gift_Voucher_Amount));
+           sqlParams.Add(new SqlParameter("@Gift_Voucher_Amount", Receivable.Gift_Voucher_Amount));
            sqlParams.Add(new SqlParameter("@Credit_Card_No", Receivable.Credit_Card_No));
            sqlParams.Add(new SqlParameter("@Updated_By", Receivable.Updated_By));
            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
@@ -381,7 +381,7 @@ namespace MyLeoRetailerRepo
            return sqlParams;
        }
 
-       public List<ReceivableInfo> Get_Receivable_Items_By_Id(int Receivable_Id, int Receivable_Item_Id)
+       public List<ReceivableInfo> Get_Receivable_Items_By_Id(int Receivable_Id)
        {
 
            List<ReceivableInfo> Receivables = new List<ReceivableInfo>();

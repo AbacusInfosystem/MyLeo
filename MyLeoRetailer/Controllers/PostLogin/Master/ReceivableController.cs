@@ -134,7 +134,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 rViewModel.Receivable = rRepo.Get_Receivable_Data_By_Id(rViewModel.Receivable.Sales_Invoice_Id);
 
-                rViewModel.Receivables = rRepo.Get_Receivable_Items_By_Id(rViewModel.Receivable.Receivable_Id, rViewModel.Receivable.Receivable_Item_Id);
+                rViewModel.Receivables = rRepo.Get_Receivable_Items_By_Id(rViewModel.Receivable.Receivable_Id);
 
                
 
