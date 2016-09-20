@@ -284,7 +284,7 @@ namespace MyLeoRetailerRepo
             return payable;
         }
 
-        public List<PayableInfo> Get_Payable_Items_By_Id(int payable_Id, int Payable_Item_Id)
+        public List<PayableInfo> Get_Payable_Items_By_Id(int payable_Id)
         {
 
             List<PayableInfo> Payables = new List<PayableInfo>();
@@ -293,7 +293,7 @@ namespace MyLeoRetailerRepo
 
             sqlParamList.Add(new SqlParameter("@Payable_Id", payable_Id));
 
-            sqlParamList.Add(new SqlParameter("@Payable_Item_Id", Payable_Item_Id));
+           
 
             DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.Get_Payable_Data_Item_By_Id_Sp.ToString(), CommandType.StoredProcedure);
 
@@ -385,6 +385,60 @@ namespace MyLeoRetailerRepo
           
 
             return payable;
+        }
+
+        public List<PurchaseInvoice_Details> Get_PurchaseInvoice(PayableInfo Payable) //.... 
+        {
+            List<PurchaseInvoice_Details> PurchaseInvoice_Details = new List<PurchaseInvoice_Details>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Temp_Get_Payable_Detail.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    PurchaseInvoice_Details list = new PurchaseInvoice_Details();
+
+                    if (!dr.IsNull("Purchase_Invoice_Id"))
+                        list.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+                    if (!dr.IsNull("Payable_Id"))
+                        list.Payable_Id = Convert.ToInt32(dr["Payable_Id"]);
+                    if (!dr.IsNull("Purchase_Credit_Note_Id"))
+                        list.Purchase_Credit_Note_Id = Convert.ToInt32(dr["Purchase_Credit_Note_Id"]);
+                    if (!dr.IsNull("Vendor_Id"))
+                        list.Vendor_Name = Convert.ToString(dr["Vendor_Id"]);
+                    if (!dr.IsNull("Purchase_Invoice_No"))
+                        list.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+                    if (!dr.IsNull("Purchase_Invoice_Date"))
+                        list.Purchase_Invoice_Date = Convert.ToDateTime(dr["Purchase_Invoice_Date"]);
+                    if (!dr.IsNull("Total_Amount"))
+                        list.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
+                    if (!dr.IsNull("Paid_Amount"))
+                        list.Paid_Amount = Convert.ToDecimal(dr["Paid_Amount"]);
+                    if (!dr.IsNull("Balance_Amount"))
+                        list.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+                    if (!dr.IsNull("Credit_Note_No"))
+                        list.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+                    if (!dr.IsNull("Credit_Note_Amount"))
+                        list.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+                    //if (!dr.IsNull("Credit_Note_Date"))
+                    //    list.Credit_Note_Date = Convert.ToDateTime(dr["Credit_Note_Date"]);
+                    if (!dr.IsNull("Discount_Amount"))
+                        list.Discount_Amount = Convert.ToDecimal(dr["Discount_Amount"]);
+                    if (!dr.IsNull("Payament_Date"))
+                        list.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
+                    if (!dr.IsNull("Payament_Status"))
+                        list.Payament_Status = Convert.ToInt32(dr["Payament_Status"]);
+
+
+                    PurchaseInvoice_Details.Add(list);
+                }
+            }
+
+            return PurchaseInvoice_Details;
         }
 
         public List<PurchaseInvoice_Details> Get_PurchaseInvoice_Details(PayableInfo Payable) //.... 

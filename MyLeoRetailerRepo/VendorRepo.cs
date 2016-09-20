@@ -518,6 +518,8 @@ namespace MyLeoRetailerRepo
 
                 foreach (DataRow dr in dt.Rows)
                 {
+                    Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_ID"]);
+
                     Vendor.Vendor_Address = Convert.ToString(dr["Vendor_Address"]);
                    
                     Vendor.Vendor_Vat_No = Convert.ToString(dr["Vendor_Vat_No"]);
@@ -543,7 +545,9 @@ namespace MyLeoRetailerRepo
             {
 
                 foreach (DataRow dr in dt.Rows)
-                {                    
+                {
+                    Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_ID"]);
+
                     Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
                 }
             }

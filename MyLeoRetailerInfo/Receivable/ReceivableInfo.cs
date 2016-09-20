@@ -49,6 +49,13 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
+       public int Payment_Status
+       {
+           get;
+           set;
+       }
+
+
        public decimal Balance_Amount
        {
            get;

@@ -67,6 +67,7 @@
                                 <h4 style="margin-top: 0px;">Vendor Details.</h4>
 
                                 <div class="form-group">
+
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
                                     <select class="form-control select" name="PurchaseReturn.Vendor_Id" onchange="Get_Vendor_Tax_Details_By_Id(this.value)">
                                         <option value="">Select Vendor</option>
@@ -97,9 +98,11 @@
                             <div class="block">
                                 <h4 style="margin-top: 0px;">Purchase Invoice details.</h4>
 
+                                <input type="hidden" class="form-control input-sm" id="hdf_Purchase_Invoice_Id">
+
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
-                                    <select class="form-control" id="drpPurchase_Invoice_Id" name="PurchaseReturn.Purchase_Invoice_Id">
+                                    <select class="form-control" id="drpPurchase_Invoice_Id" name="PurchaseReturn.Purchase_Invoice_Id" onchange="Set_Purchase_Invoice_Id(this.value)">
                                         <option value="0">Select Invoice No.</option>
                                     </select>
                                 </div>
@@ -151,9 +154,18 @@
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0">
                                         </td>
-                                        <td>
+                                        @*<td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
-                                            <input type="hidden" name="PurchaseReturn.PurchaseReturns[0].Purchase_Order_Id" id="hdnPurchase_Order_Id_0" />
+                                        </td>*@
+                                        <td>                                            
+                                            <div class="form-group auto-complete">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);" placeholder="Enter SKU to search" value="" data-table="Purchase_Invoice_Item" data-col="Purchase_Order_Id,SKU_Code" data-headernames="SKU Code" data-param="hdf_Purchase_Invoice_Id" data-field="Purchase_Invoice_Id" />
+                                                    <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                                    <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseReturn.PurchaseReturns[0].Purchase_Order_Id" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnSKU_No_0" value="" name="PurchaseReturn.PurchaseReturns[0].SKU_Code" class="auto-complete-label" />
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Article_No" id="textArticle_No_0" readonly />
@@ -248,7 +260,7 @@
                                             <label>Discount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Percentage" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0">
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Amount" readonly id="textDiscountAmount_0">
@@ -288,7 +300,7 @@
                                             <label>Tax</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" />
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Tax_Percentage" readonly id="textTaxPercentage_0" />
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.Tax_Amount" readonly id="textTaxAmount_0">

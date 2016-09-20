@@ -183,6 +183,13 @@ namespace MyLeoRetailerInfo.Common
 
 
 
+        #region Purchase Return
+
+        sp_Insert_Purchase_Return_Item,
+        sp_Insert_Purchase_Credit_Note,
+        sp_Insert_Purchase_Return,
+
+        #endregion
 
         #region Purchase Order
 
@@ -194,6 +201,11 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Order_Item_Sizes,
 
         sp_Get_PurchaseOrderId_By_SKU_POI,
+
+        sp_Get_Article_No_By_Vendor_Id,
+        sp_Get_Brand_By_Vendor_Id,
+        sp_Get_Category_By_Vendor_Id,
+        sp_Get_Sub_Category_By_Vendor_Id,
 
         #endregion
 
@@ -236,6 +248,7 @@ namespace MyLeoRetailerInfo.Common
         Insert_Payable_Data_Sp,
         sp_Insert_Payable_Item_Data,
         sp_Temp_Get_Payable_Detail_By_Id1,
+        sp_Temp_Get_Payable_Detail,
 
         //Employee Branch mapping
         //sp_Get_Branch,
@@ -267,8 +280,14 @@ namespace MyLeoRetailerInfo.Common
         Get_Credit_Note_Details_By_Id_Sp1,
         sp_Update_Payable_Item,
         Giftvoucher_Data_sp,
+        Get_Receivable_Balance_Amount_By_Id_Sp,
+        Insert_Receivable_Data_Sp,
+        sp_Insert_Receivable_Item_Data,
+        sp_Update_Receivable_Item,
+        Get_Receivable_Data_Item_By_Id_Sp,
+        Get_Receivable_Data_By_Id_Sp,
+        sp_Get_Receivables,
 
-        //purchase Return
 
 
         sp_Insert_Purchase_Return_Item,

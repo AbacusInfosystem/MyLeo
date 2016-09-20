@@ -197,14 +197,6 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<th>Bank Name</th>";
 
-        //htmlText += "<th>Credit note no</th>";
-
-        //htmlText += "<th>Gift Voucher no</th>";
-
-        //htmlText += "<th>Action</th>";
-        //if (data.Payable.Status != "Payment Done") {
-
-        //    htmlText += "<th>Action</th>";
 
     }
 
@@ -339,12 +331,6 @@ function EditPayableData(id) {
 
     $("#txtPaid_Amount").val($("#hdnPaid_Amount" + id).val());
 
-    //$('#drpPayment_Mode').trigger('change');
-
-   // $("#txtPayable_Item_Amount").val($("#hdnPayable_Item_Amount" + id).val());
-
-    //$("#txtPayDate").val($("#hdnPayable_Date" + id).val());
-
     $("#txtCredit_card_no").val($("#hdnCredit_Card_No" + id).val());
 
     $("#txtDebit_card_no").val($("#hdnDebit_Card_No" + id).val());
@@ -357,11 +343,8 @@ function EditPayableData(id) {
 
     $("#hdnPayable_Id").val($("#hdnPayable_Id" + id).val());
 
-    //$("#txtCredit_note_no").val($("#hdnCredit_Note_No" + id).val());
-
-    //$("#txtGift_voucher_no").val($("#hdnGift_Voucher_No" + id).val());
-
     Balance_amount = $("#txtAmount_due").val();
+
     Item_amount = $("#hdnPaid_Amount" + id).val();
 
     Total_Bal = parseFloat(Balance_amount) + parseFloat(Item_amount);
@@ -390,12 +373,7 @@ function ClearPayableData() {
 
     $("#dp-2").val('');
 
-    //$("#txtPayable_Item_Amount").val('');
-
-    //$("#txt").val('');
-
-    //$("#txtGift_voucher_no").val('');
-
+   
   
 
 }
