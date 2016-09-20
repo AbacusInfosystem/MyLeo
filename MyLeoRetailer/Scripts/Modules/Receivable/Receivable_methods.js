@@ -41,6 +41,8 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
             $("[name='Receivable.Credit_Note_Amount']").val(obj.Receivable.Credit_Note_Amount);
 
+            $("[name='Receivable.Credit_Note_Date']").val(obj.Receivable.Credit_Note_Date);
+
         }
     });
 }
@@ -73,6 +75,8 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
             var obj = $.parseJSON(response);
 
             $("[name='Receivable.Gift_Voucher_Amount']").val(obj.Receivable.Gift_Voucher_Amount);
+
+            $("[name='Receivable.Gift_Voucher_No']").val(obj.Receivable.Gift_Voucher_No);
 
         }
     });
@@ -119,6 +123,8 @@ function Save_Receivable_Data() {
 		        Receivable_Id: $("[name='Receivable.Receivable_Id']").val(),
 
 		        Sales_Credit_Note_Id: $("[name='Receivable.Sales_Credit_Note_Id']").val(),
+
+		        Gift_Voucher_Id: $("[name='Receivable.Gift_Voucher_Id']").val(),
 
 		        Sales_Invoice_Id: $("[name='Receivable.Sales_Invoice_Id']").val(),
 
@@ -445,6 +451,8 @@ function EditReceivableData(id) {
 
     $("#drpCredit_Note_No").val($("#hdnCredit_Note_No" + id).val());
 
+    $("#drpCredit_Note_No").text($("#hdnCredit_Note_No" + id).val());
+
     $("#txtCredit_Note_Amount").val($("#hdnCredit_Note_Amount" + id).val());
 
     $("#txtCredit_Card_No").val($("#hdnCredit_Card_No" + id).val());
@@ -452,6 +460,8 @@ function EditReceivableData(id) {
     $("#txtCard_Amount").val($("#hdnCard_Amount" + id).val());
 
     $("#drpGift_Voucher_No").val($("#hdnGift_Voucher_No" + id).val());
+
+    $("#drpGift_Voucher_No").text($("#hdnGift_Voucher_No" + id).val());
 
     $("#txtGift_Voucher_Amount").val($("#hdnGift_Voucher_Amount" + id).val());
 
