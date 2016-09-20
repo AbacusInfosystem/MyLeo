@@ -274,6 +274,19 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Return_Item,
         sp_Insert_Purchase_Credit_Note,
         sp_Insert_Purchase_Return,
+
+        #region Purchase Return Request
+
+        sp_Insert_Purchase_Return_Request,
+        sp_Update_Purchase_Return_Request,
+        sp_Get_Purchase_Return_Request_By_Id,
+        sp_Insert_Purchase_Return_Request_Item,
+        sp_Get_Purchase_Return_Request,
+
+
+        #endregion
+
+
     }
 }
 	

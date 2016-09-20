@@ -312,7 +312,17 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-		}
+            #region Purchase Return Request
+
+            FriendlyMessage PRR01 = new FriendlyMessage("PRR01", MessageType.Success, "Purchase Return Request added successfully.");
+            hash.Add("PRR01", PRR01);
+
+            FriendlyMessage PRR02 = new FriendlyMessage("PRR02", MessageType.Success, "Purchase Return Request updated successfully.");
+            hash.Add("PRR02", PRR02);
+
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{
