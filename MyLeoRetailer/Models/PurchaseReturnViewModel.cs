@@ -24,6 +24,8 @@ namespace MyLeoRetailer.Models
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
+            Cookies = new LoginInfo();
+
 			Grid_Detail.Pager.DivObject = "divPurchaseReturnPager";
 
             Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Returns";
@@ -58,6 +60,12 @@ namespace MyLeoRetailer.Models
 			get;
 			set;
 		}
+
+        public LoginInfo Cookies
+        {
+            get;
+            set;
+        }
 	}
 
 	public class Filter_Purchase_Return

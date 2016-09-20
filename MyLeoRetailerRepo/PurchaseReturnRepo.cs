@@ -257,6 +257,30 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
         
+        public PurchaseReturnInfo Get_Vendor_Details_By_Id(int vendor_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Vendor_ID", vendor_Id));
+
+            PurchaseReturnInfo Vendor = new PurchaseReturnInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Vendor_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_ID"]);
+
+                    Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
+                }
+            }
+
+            return Vendor;
+        }
+        
     }
 }
 

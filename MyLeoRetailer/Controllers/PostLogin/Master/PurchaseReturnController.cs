@@ -97,7 +97,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
 
-            prViewModel.PurchaseReturn = _vendorRepo.Get_Vendor_Details_By_Id(Vendor_Id);
+            prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Vendor_Details_By_Id(Vendor_Id);
 
             prViewModel.PurchaseReturn.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_No_By_Id(Vendor_Id);
 
@@ -110,7 +110,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 Set_Date_Session(prViewModel.PurchaseReturn);
 
-                //prViewModel.PurchaseReturn. = Convert.ToInt32(_purchaseinvoiceRepo.Get_Purchase_Invoice_No_By_Id(prViewModel.PurchaseReturn.Vendor_Id));
+                prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                prViewModel.PurchaseReturn.Created_By = prViewModel.Cookies.User_Id;
+
+                prViewModel.PurchaseReturn.Created_Date = DateTime.Now;
+
+                prViewModel.PurchaseReturn.Updated_By = prViewModel.Cookies.User_Id;
+
+                prViewModel.PurchaseReturn.Updated_Date = DateTime.Now;
 
                 prViewModel.PurchaseReturn.Purchase_Return_Id = _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
 

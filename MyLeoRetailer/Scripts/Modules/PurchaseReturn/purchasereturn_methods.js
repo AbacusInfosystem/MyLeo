@@ -20,6 +20,15 @@
 
             if (data.PurchaseInvoices.length > 0) {
 
+                $("#drpPurchase_Invoice_Id").empty();
+
+                var poi = document.getElementById("drpPurchase_Invoice_Id");
+                var option = document.createElement("option");
+
+                option.value = 0;
+                option.text = "Select Invoice No.";
+                poi.add(option);
+
                 for (var j = 0; j < data.PurchaseInvoices.length; j++) {
 
                     $("#drpPurchase_Invoice_Id").append("<option value='" + data.PurchaseInvoices[j].Purchase_Invoice_Id + "'>" + data.PurchaseInvoices[j].Purchase_Invoice_No + "</option>");

@@ -11,24 +11,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyLeoRetailerInfo.PurchaseOrder
+namespace MyLeoRetailerInfo.PurchaseOrderRequest
 {
-    public class PurchaseOrderInfo
+    public class PurchaseOrderRequestInfo
     {
-        public PurchaseOrderInfo()
+        public PurchaseOrderRequestInfo()
 		{
-            PurchaseOrders = new List<PurchaseOrderInfo>();
+            PurchaseOrderRequests = new List<PurchaseOrderRequestInfo>();
 
             Sizes = new List<Sizes>();
 
 
-            Branches = new List<BranchInfo>();
-
             Vendors = new List<VendorInfo>();
 
-            Agents = new List<VendorInfo>();
+            //Branches = new List<BranchInfo>();            
 
-            Transporters = new List<VendorInfo>();
+            //Agents = new List<VendorInfo>();
+
+            //Transporters = new List<VendorInfo>();
 
 
             Colors = new List<ColorInfo>();
@@ -45,17 +45,17 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
 		}
 
-        public List<PurchaseOrderInfo> PurchaseOrders { get; set; }
+        public List<PurchaseOrderRequestInfo> PurchaseOrderRequests { get; set; }
 
         public List<Sizes> Sizes { get; set; }
-
-        public List<BranchInfo> Branches { get; set; }
-
+                
         public List<VendorInfo> Vendors { get; set; }
 
-        public List<VendorInfo> Agents { get; set; }
+        //public List<BranchInfo> Branches { get; set; }
 
-        public List<VendorInfo> Transporters { get; set; }
+        //public List<VendorInfo> Agents { get; set; }
+
+        //public List<VendorInfo> Transporters { get; set; }
 
 
         public List<ColorInfo> Colors { get; set; }
@@ -71,25 +71,13 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public SizeGroupInfo SizeGroup { get; set; }
 
               
-		public int Purchase_Order_Id { get; set; }
-
-        public DateTime Purchase_Order_Date { get; set; }
-
-        public string Purchase_Order_No { get; set; }
-
-        public int Branch_Id { get; set; }
+		public int Purchase_Order_Request_Id { get; set; }
 
         public int Vendor_Id { get; set; }
 
-        public int Agent_Id { get; set; }
+        public int Branch_Id { get; set; }
 
-        public string Shipping_Address { get; set; }
-
-        public int Transporter_Id { get; set; }
-
-        public DateTime Start_Supply_Date { get; set; }
-
-        public DateTime Stop_Supply_Date { get; set; }
+        public int Status { get; set; }
 
         public int Total_Quantity { get; set; }
 
@@ -105,7 +93,7 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public int Updated_By { get; set; }
 
 
-        public int Purchase_Order_Item_Id { get; set; }
+        public int Purchase_Order_Request_Item_Id { get; set; }
 
         public string Article_No { get; set; }
 
