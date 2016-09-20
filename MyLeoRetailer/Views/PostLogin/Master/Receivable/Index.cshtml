@@ -41,6 +41,8 @@
 
                     <input type="hidden" class="form-control input-sm" name="Receivable.Sales_Invoice_Id" id="hdf_Sales_Invoice_Id">
 
+                    <input type="hidden" class="form-control input-sm" name="Receivable.Gift_Voucher_Id" id="hdf_Gift_Voucher_Id">
+
                     <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
                         <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
@@ -75,13 +77,13 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment status</span>
-                                        <select class="form-control input-sm" id="drpPayble_Status" name="Receivable.Receivable_Status">
+                                        <select class="form-control input-sm" id="drpPayble_Status" name="Receivable.Payment_Status">
                                             <option value="0">Select Payment Status</option>
 
                                             @foreach (var item in LookupInfo.Get_Receivable_Status())
                                             {
 
-                                                if (Model.Receivable.Receivable_Status == item.Key)
+                                                if (Model.Receivable.Payment_Status == item.Key)
                                                 {
                                                     <option value="@item.Key" selected="selected">@item.Value</option>
                                                 }
@@ -238,8 +240,8 @@
                                                                     <input type="hidden" id="hdnPayament_Datet@(i)" name="Receivables[@(i-1)].Payament_Date" value="@itm.Payament_Date">
                                                                 </td>
                                                                 <td>
-                                                                    <span id="trReceivable_Status@(i)"> @itm.Receivable_Status</span>
-                                                                    <input type="hidden" id="hdnReceivable_Status@(i)" name="Receivables[@(i-1)].Receivable_Status" value="@itm.Receivable_Status">
+                                                                    <span id="trPayment_Status@(i)"> @itm.Payment_Status</span>
+                                                                    <input type="hidden" id="hdnPayment_Status@(i)" name="Receivables[@(i-1)].Payment_Status" value="@itm.Payment_Status">
                                                                 </td>
 
                                                                 
