@@ -285,9 +285,10 @@ namespace MyLeoRetailerInfo.Common
         sp_Update_Receivable_Item,
         Get_Receivable_Data_Item_By_Id_Sp,
         Get_Receivable_Data_By_Id_Sp,
+        sp_Get_Receivables,
 
 
-  
+
     }
 }
 	

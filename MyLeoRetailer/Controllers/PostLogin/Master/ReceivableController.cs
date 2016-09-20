@@ -49,7 +49,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
+                if(rViewModel.Receivable.Receivable_Status==0)
+                {
+                    rViewModel.Receivables = rRepo.Get_Receivables(rViewModel.Receivable);
+                }
+                else
+                {
+                    rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
+                }
 
 
             }

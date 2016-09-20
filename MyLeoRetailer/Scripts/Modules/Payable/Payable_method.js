@@ -362,6 +362,7 @@ function EditPayableData(id) {
     //$("#txtGift_voucher_no").val($("#hdnGift_Voucher_No" + id).val());
 
     Balance_amount = $("#txtAmount_due").val();
+
     Item_amount = $("#hdnPaid_Amount" + id).val();
 
     Total_Bal = parseFloat(Balance_amount) + parseFloat(Item_amount);

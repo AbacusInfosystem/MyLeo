@@ -82,6 +82,58 @@ namespace MyLeoRetailerRepo
            return Receivables;
        }
 
+       public List<ReceivableInfo> Get_Receivables(ReceivableInfo Receivable) //.... 
+       {
+           List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
+
+           DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Receivables.ToString(), CommandType.StoredProcedure);
+
+           if (dt != null && dt.Rows.Count > 0)
+           {
+               foreach (DataRow dr in dt.Rows)
+               {
+                   ReceivableInfo list = new ReceivableInfo();
+
+                   if (!dr.IsNull("Sales_Invoice_Id"))
+                       list.Sales_Invoice_Id = Convert.ToInt32(dr["Sales_Invoice_Id"]);
+                   if (!dr.IsNull("Receivable_Id"))
+                       list.Receivable_Id = Convert.ToInt32(dr["Receivable_Id"]);
+                   if (!dr.IsNull("Sales_Credit_Note_Id"))
+                       list.Sales_Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
+                   if (!dr.IsNull("Customer_Name"))
+                       list.Customer_Name = Convert.ToString(dr["Customer_Name"]);
+                   if (!dr.IsNull("Customer_Mobile1"))
+                       list.Customer_Mobile1 = Convert.ToString(dr["Customer_Mobile1"]);
+                   if (!dr.IsNull("Sales_Invoice_No"))
+                       list.Sales_Invoice_No = Convert.ToString(dr["Sales_Invoice_No"]);
+                   if (!dr.IsNull("Created_Date"))
+                       list.Sales_Invoice_Date = Convert.ToDateTime(dr["Created_Date"]);
+                   if (!dr.IsNull("Payment_Status"))
+                       list.Payment_Status = Convert.ToInt32(dr["Payment_Status"]);
+                   if (!dr.IsNull("Total_MRP_Amount"))
+                       list.Total_MRP_Amount = Convert.ToDecimal(dr["Total_MRP_Amount"]);
+                   if (!dr.IsNull("Paid_Amount"))
+                       list.Paid_Amount = Convert.ToDecimal(dr["Paid_Amount"]);
+                   if (!dr.IsNull("Balance_Amount"))
+                       list.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+                   if (!dr.IsNull("Credit_Note_No"))
+                       list.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+                   if (!dr.IsNull("Credit_Note_Amount"))
+                       list.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+                   if (!dr.IsNull("Created_Date"))
+                       list.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+                   if (!dr.IsNull("Created_On"))
+                       list.Payament_Date = Convert.ToDateTime(dr["Created_On"]);
+
+
+
+                   Receivables.Add(list);
+               }
+           }
+
+           return Receivables;
+       }
+
        public ReceivableInfo Get_Receivable_Details_By_Id(int Sales_Invoice_Id) //.......
        {
 
