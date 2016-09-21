@@ -19,4 +19,11 @@ $(function () {
         }
     });
 
+    
+    $("[name='PurchaseReturn.Purchase_Invoice_Id']").change(function () {
+
+        Get_Purchase_Return_Items();
+
+    });
+
 });

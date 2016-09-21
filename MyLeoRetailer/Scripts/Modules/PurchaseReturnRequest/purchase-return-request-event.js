@@ -13,9 +13,14 @@
             
             if ($('#tblPurchaseReturnRequestItems tbody tr').length > 0)
             {
-                $("#frmPurchaseReturnRequest").attr("action", "/purchase-return-request/save-purchase-return-request");
-                $('#frmPurchaseReturnRequest').attr("method", "POST");
-                $('#frmPurchaseReturnRequest').submit();
+                if ($("#lblSKUMappingError").text() == "")
+                {
+                    $("#frmPurchaseReturnRequest").attr("action", "/purchase-return-request/save-purchase-return-request");
+                    $('#frmPurchaseReturnRequest').attr("method", "POST");
+                    $('#frmPurchaseReturnRequest').submit();
+
+                }
+               
             }
             
         }
@@ -37,6 +42,7 @@
         CalculateDiscount();
     });
 
+    
 
 
 });

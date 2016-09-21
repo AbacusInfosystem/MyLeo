@@ -418,3 +418,119 @@ function ReArrangePurchaseReturnDetailsData() {
         }
     });
 }
+
+
+function Get_Purchase_Return_Items()
+{
+    var vendor = $("[name='PurchaseReturn.Vendor_Id']").val();
+
+    var pInvoice = $("[name='PurchaseReturn.Purchase_Invoice_Id']").val();
+
+    $.ajax({
+
+        url: "/PurchaseReturn/Get_Purchase_Return_Items_By_Vendor_And_PO",
+
+        data: { Vendor_Id: vendor, Purchase_Invoice_Id: pInvoice },
+
+        method: 'POST',
+
+        async: false,
+
+        success: function (data) {
+
+            Bind_Purchase_Return_Items_Data(data);
+
+        }
+    });
+
+}
+
+function Bind_Purchase_Return_Items_Data(data)
+{
+    var trHtml = "";
+
+    if (data.PurchaseReturns.length > 0)
+    {
+        //$("#tblPurchaseReturnItems").find("[id='PurchaseReturnItemRow_" + i + "']").remove();
+        $('#tblPurchaseReturnItems tbody tr').remove();
+        alert(data.PurchaseReturns.length);
+
+        for (i = 0; i < data.PurchaseReturns.length; i++) {
+
+            trHtml += "<tr id='PurchaseReturnItemRow_" + i + "' class='item-data-row'>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<div class='form-group auto-complete'>";
+            trHtml += "<div class='input-group'>";
+            trHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU to search' value='" + data.PurchaseReturns[i].SKU_Code + "' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
+            trHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+            trHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='" + data.PurchaseReturns[i].Purchase_Order_Id + "' name='PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
+            trHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='" + data.PurchaseReturns[i].SKU_Code + "' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' class='auto-complete-label' />";
+            trHtml += "</div>";
+            trHtml += "</div>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Article_No' readonly value='" + data.PurchaseReturns[i].Article_No + "' id='textArticle_No_" + i + "'>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Color' readonly value='" + data.PurchaseReturns[i].Color + "' id='textColor_" + i + "'>";
+            trHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Color_Id' id='hdnColor_Id_" + i + "' value='" + data.PurchaseReturns[i].Color_Id + "'/>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Brand' readonly value='" + data.PurchaseReturns[i].Brand + "' id='textBrand_" + i + "'>";
+            trHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' value='" + data.PurchaseReturns[i].Brand_Id + "' />";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Category' readonly value='" + data.PurchaseReturns[i].Category + "' id='textCategory_" + i + "'>";
+            trHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Category_Id' id='hdnCategory_Id_" + i + "' value='" + data.PurchaseReturns[i].Category_Id + "'/>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].SubCategory' readonly value='" + data.PurchaseReturns[i].SubCategory + "' id='textSub_Category_" + i + "'>";
+            trHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].SubCategory_Id' id='hdnSubCategory_Id_" + i + "' value='" + data.PurchaseReturns[i].SubCategory_Id + "'/>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Size_Group_Name' readonly value='" + data.PurchaseReturns[i].Size_Group_Name + "' id='textSize_Group_Name_" + i + "'>";
+            trHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' value='" + data.PurchaseReturns[i].Size_Group_Id + "'/>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Size_Name' readonly value='" + data.PurchaseReturns[i].Size_Name + "' id='textSize_Name_" + i + "'>";
+            trHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Size_Id' id='hdnSize_Id_" + i + "' value='" + data.PurchaseReturns[i].Size_Id + "'/>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='" + data.PurchaseReturns[i].Quantity + "' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].WSR_Price' readonly value='" + data.PurchaseReturns[i].WSR_Price + "' id='textWSR_Price_" + i + "'>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Amount' readonly value='" + data.PurchaseReturns[i].Amount + "' id='textAmount_" + i + "'>";
+            trHtml += "</td>";
+
+            trHtml += "<td>";
+            trHtml += "<div class='btn-group'>";
+            trHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>Add Row</button>";
+            trHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>Delete</button>";
+            trHtml += "</div>";
+            trHtml += "</td>";
+
+            trHtml += "</tr>";
+
+        }
+
+        $('#tblPurchaseReturnItems tbody').append(trHtml);
+
+    }
+}
