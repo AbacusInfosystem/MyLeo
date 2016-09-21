@@ -109,7 +109,7 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public string Article_No { get; set; }
 
-        public int Colour_Id { get; set; }
+        public string Colour_Name { get; set; }
 
         public int Brand_Id { get; set; }
 

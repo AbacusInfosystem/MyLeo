@@ -52,6 +52,39 @@ namespace MyLeoRetailerRepo
                         paramList.Add(new SqlParameter("@Role_Id", fieldValue));
                     }                   
                 }
+
+                if (table_Name == "Purchase_Order")
+                {
+                    if (fieldName == "Vendor_Id")
+                    {
+                        strquery = " Select Purchase_Order.Purchase_Order_Id, Purchase_Order.Purchase_Order_No ";
+                        strquery += "from Purchase_Order ";
+                        strquery += "where Purchase_Order.Vendor_Id = @Vendor_Id";
+                        paramList.Add(new SqlParameter("@Vendor_Id", fieldValue));
+                    }
+                }
+
+                if (table_Name == "Product_MRP")
+                {
+                    if (fieldName == "Vendor_Id")
+                    {
+                        strquery = " Select Product_MRP.Product_Id, Product_MRP.SKU_Code ";
+                        strquery += "from Product_MRP inner join Product on Product_MRP.Product_Id=Product.Product_Id ";
+                        strquery += "where Product.Vendor_Id = @Vendor_Id";
+                        paramList.Add(new SqlParameter("@Vendor_Id", fieldValue));
+                    }
+                }
+
+                if (table_Name == "Purchase_Invoice_Item")
+                {
+                    if (fieldName == "Purchase_Invoice_Id")
+                    {
+                        strquery = " Select Purchase_Invoice_Item.Purchase_Order_Id, Purchase_Invoice_Item.SKU_Code ";
+                        strquery += "from Purchase_Invoice_Item ";
+                        strquery += "where Purchase_Invoice_Item.Purchase_Invoice_Id = @Purchase_Invoice_Id";
+                        paramList.Add(new SqlParameter("@Purchase_Invoice_Id", fieldValue));
+                    }
+                }
             }
 
             DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);

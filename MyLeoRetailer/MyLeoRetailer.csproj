@@ -181,6 +181,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostLogin\Master\PurchaseOrderRequestController.cs" />
+    <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnRequestController.cs" />
     <Compile Include="Filters\AuthorizeUserAttribute.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
     <Compile Include="Common\MessageStore.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
     <Compile Include="Models\PurchaseInvoiceViewModel.cs" />
+    <Compile Include="Models\PurchaseOrderRequestViewModel.cs" />
     <Compile Include="Models\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\ReceivableViewModel.cs" />
     <Compile Include="Models\PurchaseReturnViewModel.cs" />
@@ -239,6 +242,7 @@
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\SubCategoryViewModel.cs" />
     <Compile Include="Models\TaxViewModel.cs" />
+    <Compile Include="Models\Transaction\PurchaseReturnRequestViewModel.cs" />
     <Compile Include="Models\VendorContactViewModel.cs" />
     <Compile Include="Models\VendorViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1037,11 +1041,21 @@
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_validation.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\search_purchaseinvoice_events.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\search_purchaseinvoice_methods.js" />
+    <Content Include="Scripts\Modules\PurchaseOrderRequest\purchaseorderrequest_events.js" />
+    <Content Include="Scripts\Modules\PurchaseOrderRequest\purchaseorderrequest_methods.js" />
+    <Content Include="Scripts\Modules\PurchaseOrderRequest\purchaseorderrequest_validation.js" />
+    <Content Include="Scripts\Modules\PurchaseOrderRequest\search_purchaseorderrequest_events.js" />
+    <Content Include="Scripts\Modules\PurchaseOrderRequest\search_purchaseorderrequest_methods.js" />
     <Content Include="Scripts\Modules\PurchaseOrder\purchaseorder_events.js" />
     <Content Include="Scripts\Modules\PurchaseOrder\purchaseorder_methods.js" />
     <Content Include="Scripts\Modules\PurchaseOrder\purchaseorder_validation.js" />
     <Content Include="Scripts\Modules\PurchaseOrder\search_purchaseorder_events.js" />
     <Content Include="Scripts\Modules\PurchaseOrder\search_purchaseorder_methods.js" />
+    <Content Include="Scripts\Modules\PurchaseReturnRequest\purchase-return-request-event.js" />
+    <Content Include="Scripts\Modules\PurchaseReturnRequest\purchase-return-request-method.js" />
+    <Content Include="Scripts\Modules\PurchaseReturnRequest\purchase-return-request-search-event.js" />
+    <Content Include="Scripts\Modules\PurchaseReturnRequest\purchase-return-request-search-method.js" />
+    <Content Include="Scripts\Modules\PurchaseReturnRequest\purchase-return-request-validation.js" />
     <Content Include="Scripts\Modules\PurchaseReturn\purchasereturn_events.js" />
     <Content Include="Scripts\Modules\PurchaseReturn\purchasereturn_methods.js" />
     <Content Include="Scripts\Modules\PurchaseReturn\purchasereturn_validation.js" />
@@ -1159,6 +1173,10 @@
     <Content Include="Views\PostLogin\Master\Receivable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
+    <Content Include="Views\PostLogin\Master\PurchaseOrderRequest\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\PurchaseOrderRequest\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\Index.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Invoice.cshtml" />
   </ItemGroup>
   <ItemGroup>

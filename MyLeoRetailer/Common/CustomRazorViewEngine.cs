@@ -32,6 +32,8 @@ namespace AtlantWeb.Common
                 //Views/PostLogin/CRM/<calling controllers name>/<view name>.cshtml
                 "~/Views/PostLogin/Master/{1}/{0}.cshtml", 
 
+                "~/Views/PostLogin/Transaction/{1}/{0}.cshtml",
+
                 //This would search for view in
                 //Views/PreLogin/<calling controllers name>/<view name>.cshtml
                 "~/Views/PreLogin/{1}/{0}.cshtml",

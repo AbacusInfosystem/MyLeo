@@ -30,7 +30,6 @@ $(function () {
 
             $("#divPaidAmount").show();
             $("#divCreditcardno").hide();
-            $("#divPaidAmount").hide();
             $("#divDebitcardno").hide();
             $("#divChequedate").hide();
             $("#divChequeno").hide();
@@ -104,9 +103,6 @@ $(function () {
 
     });
     
-
-
-
 });
 
 function Get_Payable(id) {

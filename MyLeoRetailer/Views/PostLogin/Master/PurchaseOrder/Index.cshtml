@@ -10,7 +10,7 @@
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
     <li><a href="#">Function Module</a></li>
-    <li class="active">Purchase order Management</li>
+    <li class="active">Purchase Order Management</li>
 </ul>
 <!-- END BREADCRUMB -->
 <!-- START CONTENT FRAME -->
@@ -117,9 +117,11 @@
                 <div class="block">
                     <h4 style="margin-top: 0px;">Vendor / Transporter details.</h4>
 
+                    <input type="hidden" id="hdf_Vendor_Id" />
+
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
-                        <select class="form-control select" name="PurchaseOrder.Vendor_Id">
+                        <select class="form-control select" name="PurchaseOrder.Vendor_Id" onchange="Set_Vendor_Id(this.value)">
                             <option value="">Select Vendor</option>
                             @foreach (var item in Model.PurchaseOrder.Vendors)
                             {
@@ -260,27 +262,16 @@
                 <div class="block">
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
-                        <select class="form-control select" id="drpCategory" name="PurchaseOrder.Category_Id">
-                            <option value="0">Select Category</option>
-                            @foreach (var item in Model.PurchaseOrder.Categories)
-                            {
-                                if (Model.PurchaseOrder.Category_Id == item.Category_Id)
-                                {
-                                    <option value="@item.Category_Id" selected="selected">@item.Category</option>
-                                }
-                                else
-                                {
-                                    <option value="@item.Category_Id">@item.Category</option>
-                                }
-                            }
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No">
+                            <option value="0">Select Article No.</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
                         <select class="form-control" id="drpCenter_Size" name="PurchaseOrder.Center_Size">
-                            <option value="">Select Center size</option>
+                            <option value="">Select Center Size</option>
                         </select>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Center_Size" id="textCenter_Size" placeholder="Enter center size." />*@
                     </div> 
@@ -293,19 +284,8 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
-                        <select class="form-control select" id="drpBrand" name="PurchaseOrder.Brand_Id">
-                            <option value="0">Select Brand</option>
-                            @foreach (var item in Model.PurchaseOrder.Brands)
-                            {
-                                if (Model.PurchaseOrder.Brand_Id == item.Brand_Id)
-                                {
-                                    <option value="@item.Brand_Id" selected="selected">@item.Brand_Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@item.Brand_Id">@item.Brand_Name</option>
-                                }
-                            }
+                        <select class="form-control" id="drpBrand" name="PurchaseOrder.Brand_Id">
+                            <option value="0">Select Brand</option>                            
                         </select>
                     </div>
 
@@ -322,22 +302,11 @@
                    
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Subcategory.</span>
-                        <select class="form-control select" id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
-                            <option value="0">Select Sub Category</option>
-                            @foreach (var item in Model.PurchaseOrder.SubCategories)
-                            {
-                                if (Model.PurchaseOrder.Sub_Category_Id == item.Sub_Category_Id)
-                                {
-                                    <option value="@item.Sub_Category_Id" selected="selected">@item.Sub_Category</option>
-                                }
-                                else
-                                {
-                                    <option value="@item.Sub_Category_Id">@item.Sub_Category</option>
-                                }
-                            }
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
+                        <select class="form-control" id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
+                            <option value="0">Select Category</option>
                         </select>
-                    </div>
+                    </div>                    
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size difference.</span>
@@ -349,6 +318,12 @@
             <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 150px;">
 
                 <div class="block">
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Subcategory.</span>
+                        <select class="form-control" id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
+                            <option value="0">Select Sub Category</option>                            
+                        </select>
+                    </div>
                     
                     <div class="block" style="margin-top:20px;">
                         <div class="btn-group">
@@ -431,13 +406,15 @@
                             <td style="width:60px;"></td>                  
                             <td style="text-align:right; width:100px;">Total quantity.</td>
                             <td style="width:100px;">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;" name="PurchaseOrder.Total_Quantity" id="tdTotalQuantity"></span>
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;" id="tdTotalQuantity">0</span>
+                                <input type="hidden" id="hdnTotalQuantity" name="PurchaseOrder.Total_Quantity" />
                             </td>
                             <td style="width:100px;"></td>
                             <td style="width:100px;"></td>
                             <td style="text-align:right; width:100px;">Net Amount.</td>
                             <td id="" style="width:100px;">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;" name="PurchaseOrder.Net_Amount" id="tdNetAmount"></span>
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;" id="tdNetAmount">0</span>
+                                <input type="hidden" id="hdnTotalQuantity" name="PurchaseOrder.Net_Amount" />
                             </td>
                             <td style="width:auto;"></td>
                             <td style="width:180px;"></td>

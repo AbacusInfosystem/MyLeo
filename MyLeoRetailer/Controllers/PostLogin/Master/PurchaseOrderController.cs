@@ -19,14 +19,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
     {
         public PurchaseOrderRepo _purchaseorderRepo;
 
-        public CategoryRepo _categoryRepo;
-
-        public BrandRepo _brandRepo;
-
-        public SubCategoryRepo _subcategoryRepo;
-
-        public ColorRepo _colorRepo;
-
         public SizeGroupRepo _sizeGroupRepo;
 
         public VendorRepo _vendorRepo;
@@ -37,14 +29,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public PurchaseOrderController()
         {
             _purchaseorderRepo = new PurchaseOrderRepo();
-
-            _categoryRepo = new CategoryRepo();
-
-            _brandRepo = new BrandRepo();
-
-            _subcategoryRepo = new SubCategoryRepo();
-
-            _colorRepo = new ColorRepo();
 
             _sizeGroupRepo = new SizeGroupRepo();
 
@@ -62,15 +46,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 {
                     poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
                 }
-
-                poViewModel.PurchaseOrder.Categories = _categoryRepo.drp_Get_Categories();
-
-                poViewModel.PurchaseOrder.Brands = _brandRepo.drp_Get_Brands();
-
-                poViewModel.PurchaseOrder.SubCategories = _subcategoryRepo.drp_Get_Sub_Categories();
-
-                poViewModel.PurchaseOrder.Colors = _colorRepo.Get_Colours();
-
+                
                 poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
                 poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
@@ -109,15 +85,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
         {  
             poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
-
-            poViewModel.PurchaseOrder.Categories = _categoryRepo.drp_Get_Categories();
-
-            poViewModel.PurchaseOrder.Brands = _brandRepo.drp_Get_Brands();
-
-            poViewModel.PurchaseOrder.SubCategories = _subcategoryRepo.drp_Get_Sub_Categories();
-
-            poViewModel.PurchaseOrder.Colors = _colorRepo.Get_Colours();
-
+            
             poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
             poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
@@ -137,6 +105,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             try
             {                
                 Set_Date_Session(poViewModel.PurchaseOrder);
+
+                poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                poViewModel.PurchaseOrder.Created_By = poViewModel.Cookies.User_Id;
+
+                poViewModel.PurchaseOrder.Created_Date = DateTime.Now;
+
+                poViewModel.PurchaseOrder.Updated_By = poViewModel.Cookies.User_Id;
+
+                poViewModel.PurchaseOrder.Updated_Date = DateTime.Now;
 
                 poViewModel.PurchaseOrder.Purchase_Order_Id = _purchaseorderRepo.Insert_Purchase_Order(poViewModel.PurchaseOrder);
 
@@ -217,5 +195,26 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
 
+        public JsonResult Get_Details_By_Vendor_Id(int Vendor_Id)
+        {
+            PurchaseOrderViewModel poViewModel = new PurchaseOrderViewModel();
+
+            poViewModel.PurchaseOrder.Vendors = _purchaseorderRepo.Get_Article_No_By_Vendor_Id(Vendor_Id);
+
+            poViewModel.PurchaseOrder.Brands = _purchaseorderRepo.Get_Brand_By_Vendor_Id(Vendor_Id);
+
+            poViewModel.PurchaseOrder.Categories = _purchaseorderRepo.Get_Category_By_Vendor_Id(Vendor_Id);
+
+            return Json(JsonConvert.SerializeObject(poViewModel));
+        }
+
+        public JsonResult Get_Details_By_Category_Vendor_Id(int Vendor_Id, int Category_Id)
+        {
+            PurchaseOrderViewModel poViewModel = new PurchaseOrderViewModel();
+
+            poViewModel.PurchaseOrder.SubCategories = _purchaseorderRepo.Get_Sub_Category_By_Vendor_Id(Vendor_Id, Category_Id);
+
+            return Json(JsonConvert.SerializeObject(poViewModel));
+        }
     }
 }

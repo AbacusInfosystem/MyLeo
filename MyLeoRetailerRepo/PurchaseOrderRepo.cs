@@ -9,6 +9,9 @@ using System.Data.SqlClient;
 using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.Vendor;
+using MyLeoRetailerInfo.Brand;
+using MyLeoRetailerInfo.Category;
 
 namespace MyLeoRetailerRepo
 {
@@ -61,7 +64,7 @@ namespace MyLeoRetailerRepo
 
             if (PurchaseOrder.Purchase_Order_Date == DateTime.MinValue)
             {
-                sqlParam.Add(new SqlParameter("@Purchase_Order_Date", null));
+                sqlParam.Add(new SqlParameter("@Purchase_Order_Date", DateTime.MinValue));
             }
             else
             {
@@ -70,7 +73,7 @@ namespace MyLeoRetailerRepo
 
             if (PurchaseOrder.Start_Supply_Date == DateTime.MinValue)
             {
-                sqlParam.Add(new SqlParameter("@Start_Supply_Date", null));
+                sqlParam.Add(new SqlParameter("@Start_Supply_Date", DateTime.MinValue));
             }
             else
             {
@@ -79,7 +82,7 @@ namespace MyLeoRetailerRepo
 
             if (PurchaseOrder.Stop_Supply_Date == DateTime.MinValue)
             {
-                sqlParam.Add(new SqlParameter("@Stop_Supply_Date", null));
+                sqlParam.Add(new SqlParameter("@Stop_Supply_Date", DateTime.MinValue));
             }
             else
             {
@@ -92,46 +95,7 @@ namespace MyLeoRetailerRepo
             sqlParam.Add(new SqlParameter("@Updated_By", PurchaseOrder.Updated_By));
 
             return sqlParam;
-        }
-
-        public List<SqlParameter> Set_Values_In_Purchase_Order_Item(PurchaseOrderInfo PurchaseOrder)
-        {
-            List<SqlParameter> sqlParam = new List<SqlParameter>();
-
-            if (PurchaseOrder.Purchase_Order_Item_Id != 0)
-            {
-                sqlParam.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.Purchase_Order_Item_Id));
-            }
-
-            sqlParam.Add(new SqlParameter("@Purchase_Order_Id", PurchaseOrder.Purchase_Order_Id));
-
-            sqlParam.Add(new SqlParameter("@Article_No", PurchaseOrder.Article_No));
-
-            sqlParam.Add(new SqlParameter("@Colour_Id", PurchaseOrder.Colour_Id));
-
-            sqlParam.Add(new SqlParameter("@Brand_Id", PurchaseOrder.Brand_Id));
-
-            sqlParam.Add(new SqlParameter("@Category_Id", PurchaseOrder.Category_Id));
-
-            sqlParam.Add(new SqlParameter("@Sub_Category_Id", PurchaseOrder.Sub_Category_Id));
-
-            sqlParam.Add(new SqlParameter("@Size_Group_Id", PurchaseOrder.Size_Group_Id));
-
-            sqlParam.Add(new SqlParameter("@Start_Size", PurchaseOrder.Start_Size));
-
-            sqlParam.Add(new SqlParameter("@End_Size", PurchaseOrder.End_Size));
-
-            sqlParam.Add(new SqlParameter("@Center_Size", PurchaseOrder.Center_Size));
-
-            sqlParam.Add(new SqlParameter("@Purchase_Price", PurchaseOrder.Purchase_Price));
-
-            sqlParam.Add(new SqlParameter("@Size_Difference", PurchaseOrder.Size_Difference));
-
-            sqlParam.Add(new SqlParameter("@Total_Amount", PurchaseOrder.Total_Amount));
-
-
-            return sqlParam;
-        }
+        }       
 
         private PurchaseOrderInfo Get_Purchase_Order_Values(DataRow dr)
         {
@@ -202,7 +166,7 @@ namespace MyLeoRetailerRepo
 
             PurchaseOrder.Article_No = Convert.ToString(dr["Article_No"]);
 
-            PurchaseOrder.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+            PurchaseOrder.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
             PurchaseOrder.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
 
@@ -227,7 +191,6 @@ namespace MyLeoRetailerRepo
             return PurchaseOrder;
         }
 
-
         public int Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
             PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
@@ -236,16 +199,11 @@ namespace MyLeoRetailerRepo
             {
                 List<SqlParameter> sqlParam = new List<SqlParameter>();
 
-                if (PurchaseOrder.Purchase_Order_Item_Id != 0)
-                {
-                    sqlParam.Add(new SqlParameter("@Purchase_Order_Item_Id", item.Purchase_Order_Item_Id));
-                }
-
                 sqlParam.Add(new SqlParameter("@Purchase_Order_Id", PurchaseOrder.Purchase_Order_Id));
 
                 sqlParam.Add(new SqlParameter("@Article_No", item.Article_No));
 
-                sqlParam.Add(new SqlParameter("@Colour_Id", item.Colour_Id));
+                sqlParam.Add(new SqlParameter("@Colour_Name", item.Colour_Name));
 
                 sqlParam.Add(new SqlParameter("@Brand_Id", item.Brand_Id));
 
@@ -261,11 +219,11 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Center_Size", item.Center_Size));
 
-                sqlParam.Add(new SqlParameter("@Purchase_Price", PurchaseOrder.Purchase_Price));
+                sqlParam.Add(new SqlParameter("@Purchase_Price", item.Purchase_Price));
 
                 sqlParam.Add(new SqlParameter("@Size_Difference", item.Size_Difference));
 
-                sqlParam.Add(new SqlParameter("@Total_Amount", PurchaseOrder.Total_Amount));
+                sqlParam.Add(new SqlParameter("@Total_Amount", item.Total_Amount));
 
                 PurchaseOrder.Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
 
@@ -365,14 +323,7 @@ namespace MyLeoRetailerRepo
             return PurchaseOrder.Purchase_Order_Id;
         }
 
-        public void Update_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
-        {
-            sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Update_Purchase_Order.ToString(), CommandType.StoredProcedure);
-
-            sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Order_Item(PurchaseOrder), Storeprocedures.sp_Update_Purchase_Order_Item.ToString(), CommandType.StoredProcedure);
-        }
-
-
+      
         public DataTable Get_Purchase_Orders(QueryInfo query_Details)
         {
             return sqlHelper.Get_Table_With_Where(query_Details);
@@ -430,5 +381,137 @@ namespace MyLeoRetailerRepo
             }
             return PurchaseOrders;
         }
+
+
+        public List<VendorInfo> Get_Article_No_By_Vendor_Id(int Vendor_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Article_No_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                VendorInfo Vendor = new VendorInfo();
+
+                Vendor.Article_No = Convert.ToString(dr["Article_No"]);
+
+                Vendors.Add(Vendor);
+            }
+            return Vendors;
+        }
+
+        public List<BrandInfo> Get_Brand_By_Vendor_Id(int Vendor_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            List<BrandInfo> Brands = new List<BrandInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Brand_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                BrandInfo Brand = new BrandInfo();
+
+                Brand.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+                Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+
+                Brands.Add(Brand);
+            }
+            return Brands;
+        }
+
+        public List<CategoryInfo> Get_Category_By_Vendor_Id(int Vendor_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            List<CategoryInfo> Categories = new List<CategoryInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Category_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                CategoryInfo Category = new CategoryInfo();
+
+                Category.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
+                Category.Category = Convert.ToString(dr["Category"]);
+
+                Categories.Add(Category);
+            }
+            return Categories;
+        }
+         
+        public List<SubCategoryInfo> Get_Sub_Category_By_Vendor_Id(int Vendor_Id, int Category_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            parameters.Add(new SqlParameter("@Category_Id", Category_Id));
+
+            List<SubCategoryInfo> SubCategories = new List<SubCategoryInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Sub_Category_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                SubCategoryInfo SubCategory = new SubCategoryInfo();
+
+                SubCategory.Sub_Category_Id = Convert.ToInt32(dr["SubCategory_Id"]);
+
+                SubCategory.Sub_Category = Convert.ToString(dr["Sub_Category"]);
+
+                SubCategories.Add(SubCategory);
+            }
+            return SubCategories;
+        }
+
+
+        ///////////////////
+
+        public void Update_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
+        {
+            sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Update_Purchase_Order.ToString(), CommandType.StoredProcedure);
+
+            sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Order_Item(PurchaseOrder), Storeprocedures.sp_Update_Purchase_Order_Item.ToString(), CommandType.StoredProcedure);
+        }
+
+        public List<SqlParameter> Set_Values_In_Purchase_Order_Item(PurchaseOrderInfo PurchaseOrder)
+        {
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            if (PurchaseOrder.Purchase_Order_Item_Id != 0)
+            {
+                sqlParam.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.Purchase_Order_Item_Id));
+            }
+
+            sqlParam.Add(new SqlParameter("@Purchase_Order_Id", PurchaseOrder.Purchase_Order_Id));
+
+            sqlParam.Add(new SqlParameter("@Article_No", PurchaseOrder.Article_No));
+
+            sqlParam.Add(new SqlParameter("@Colour_Name", PurchaseOrder.Colour_Name));
+
+            sqlParam.Add(new SqlParameter("@Brand_Id", PurchaseOrder.Brand_Id));
+
+            sqlParam.Add(new SqlParameter("@Category_Id", PurchaseOrder.Category_Id));
+
+            sqlParam.Add(new SqlParameter("@Sub_Category_Id", PurchaseOrder.Sub_Category_Id));
+
+            sqlParam.Add(new SqlParameter("@Size_Group_Id", PurchaseOrder.Size_Group_Id));
+
+            sqlParam.Add(new SqlParameter("@Start_Size", PurchaseOrder.Start_Size));
+
+            sqlParam.Add(new SqlParameter("@End_Size", PurchaseOrder.End_Size));
+
+            sqlParam.Add(new SqlParameter("@Center_Size", PurchaseOrder.Center_Size));
+
+            sqlParam.Add(new SqlParameter("@Purchase_Price", PurchaseOrder.Purchase_Price));
+
+            sqlParam.Add(new SqlParameter("@Size_Difference", PurchaseOrder.Size_Difference));
+
+            sqlParam.Add(new SqlParameter("@Total_Amount", PurchaseOrder.Total_Amount));
+
+
+            return sqlParam;
+        }
+
+        //////////////////
     }
 }

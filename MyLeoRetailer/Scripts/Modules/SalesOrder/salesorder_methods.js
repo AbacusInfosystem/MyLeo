@@ -56,7 +56,7 @@ function Get_Sales_Order_Items_By_SKU_Code(i) {
 
 function AddSalesOrderDetails(i) 
 {
-
+    alert(i);
     var html = '';
     
     var tblHtml = '';

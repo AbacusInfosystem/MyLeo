@@ -41,7 +41,7 @@ namespace MyLeoRetailer.Filters
                 throw new ArgumentNullException("filterContext");
             }
 
-            _cookies = Utility.Get_Login_User("LoginInfo", "Token", "Brand_Ids");
+            _cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Brand_Ids");
             
          
             if (_cookies != null && _cookies.Access_Functions.Count() != 0 &&

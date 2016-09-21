@@ -16,9 +16,18 @@ $(function () {
 
     });
 
-    $('[name = "Receivable.Gift_Voucher_No"]').change(function () {
+    $('[name = "Receivable.Gift_Voucher_Id"]').change(function () {
 
         Get_Gift_Voucher_Amount_By_Id($(this).val());
+
+    });
+
+    $("#btnSavePay").click(function () {
+
+        alert();
+        if ($("#frmPay").valid()) {
+            Save_Receivable_Data();
+        }
 
     });
 
