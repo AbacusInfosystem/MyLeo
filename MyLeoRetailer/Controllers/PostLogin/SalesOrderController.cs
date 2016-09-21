@@ -18,7 +18,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
     public class SalesOrderController : BaseController
     {
 
-        public SalesOrderRepo siRepo; 
+        public SalesOrderRepo siRepo;
 
         public SalesOrderController()
         {
@@ -27,6 +27,12 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult Index(SalesInvoiceViewModel siViewModel)
         {
+
+            if (TempData["siViewModel"] != null)
+            {
+                siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
+            }
+
             return View("Index", siViewModel);
         }
 
@@ -92,7 +98,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
                 siViewModel.Query_Detail = Set_Query_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount,Sales_Invoice_Id", "", "Sales_Invoice", "Branch_ID", filter, dataOperator); // Set query for grid             
 
-                siViewModel.Query_Detail.Input_Params.Add(new WhereInfo() { Key = "Branch_ID", Value = filter, DataOperator= DataOperator.In.ToString() });
+                siViewModel.Query_Detail.Input_Params.Add(new WhereInfo() { Key = "Branch_ID", Value = filter, DataOperator = DataOperator.In.ToString() });
 
                 pager = siViewModel.Grid_Detail.Pager;
 
@@ -116,15 +122,13 @@ namespace MyLeoRetailer.Controllers.PostLogin
         {
             //string arr [] ;
 
-
-
             try
             {
                 Set_Date_Session(siViewModel.SalesInvoice);
 
                 siViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
 
-                //string[] arr  = siViewModel.Cookies.Branch_Ids.Split(',');
+                //string[] arr  = siViewModel.Cookies.Branch_Ids.Split(',');  Multiple Branches Refer to the Commented Code
 
                 string Branch_Id = siViewModel.Cookies.Branch_Ids.TrimEnd();
 
@@ -132,10 +136,10 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
                 //for (int i = 0; i < arr.Length; i++)
                 //{
-                    //Set_Date_Session(siViewModel.SalesInvoice);
+                //Set_Date_Session(siViewModel.SalesInvoice);
 
-                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, Branch_Id);
-   
+                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, Branch_Id);   //arr[i] instead of Branch_Id
+
                 //}
 
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SI01"));
@@ -150,6 +154,42 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return RedirectToAction("Search");
         }
 
+        public ActionResult Invoice(SalesInvoiceViewModel siViewModel)
+        {
+            return View("Invoice", siViewModel);
+        }
+
+        public ActionResult Get_SalesOrder_By_Id(SalesInvoiceViewModel siViewModel)
+        {
+            bool CheckFlag = false;
+
+            try
+            {
+                CheckFlag = siViewModel.SalesInvoice.Flag;
+
+                siViewModel.SalesInvoice = siRepo.Get_SalesOrder_By_Id(siViewModel.Filter.Sales_Invoice_Id);
+
+                siViewModel.SaleOrderItemList = siRepo.Get_SalesOrder_Items_By_Id(siViewModel.Filter.Sales_Invoice_Id);
+
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+
+            if (CheckFlag == true)
+            {
+                return Invoice(siViewModel);
+            }
+            else
+            {
+
+                TempData["siViewModel"] = siViewModel;
+
+                return RedirectToAction("Index", "SalesOrder");
+            }
+
+        }
 
 
     }
