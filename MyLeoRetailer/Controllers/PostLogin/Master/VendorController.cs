@@ -114,8 +114,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(vViewModel));
         }
 
-
-
         public ActionResult Insert_Vendor(VendorViewModel vViewModel)
         {           
 

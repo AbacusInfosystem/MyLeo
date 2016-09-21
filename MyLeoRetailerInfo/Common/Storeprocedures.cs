@@ -251,6 +251,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Sales_Invoice_Item,
         Sp_Delete_Sales_Order_Items_By_Sales_Invoice_Id,
 
+        sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id,
+       sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
+
         //Sales Return
 
         sp_Insert_Sales_Return,

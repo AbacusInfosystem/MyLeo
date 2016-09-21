@@ -33,11 +33,15 @@
 
     <div class="row">
 
+        
+
         <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
 
             <div class="block">
 
                 <form role="form" id="frmSearchSalesOrder">
+
+                    <input type="hidden" id="hdnFlag" name="SalesInvoice.Flag" @*value="@Model.SalesInvoice.Flag"*@>
 
                     <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
 
@@ -58,7 +62,8 @@
                                 <div class="btn-group">
                                     @*<button type="button" id="btnCreate" class="btn btn-success active">Create</button>*@
                                     <a class="btn btn-success active" role="button" href="@Url.Action("Index", "SalesOrder")">Create </a>
-                                    
+                                    <button role="button" href="@Url.Action("Invoice", "SalesOrder")" class="btn btn-info active" id="btnPrint">Print</button>
+                                    <button role="button" href="@Url.Action("Invoice", "SalesOrder")" class="btn btn-info active" id="btnView">View Details</button>
                                 </div>
 
                             </div>

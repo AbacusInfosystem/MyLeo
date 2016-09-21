@@ -2,6 +2,34 @@
 
     $('#dtpInvoice_Date').datepicker({});
 
+    //CalculateTotal();
+
+    debugger
+
+    if ($('#hdnSalesInvoiceID').val() != 0) {
+
+        alert($('#hdnSalesInvoiceID').val());
+
+        debugger;
+
+        //$('#delete-salesorder-details').attr("disabled", "disabled");
+
+        $('#btnAddInputRow').attr("disabled", "disabled");
+
+        $('#btnSaveSalesOrder').attr("disabled", "disabled");
+
+        $('#btnCustomer').attr("disabled", "disabled");
+
+    }
+
+
+
+    debugger;
+
+    CalculateDiscountAmount();
+
+    CalculateTax();
+
 });
 
 
@@ -25,6 +53,8 @@ $(function ()
         $('#frmSalesOrder').submit();
 
     });
+
+  
 
 });
 
@@ -52,7 +82,7 @@ function CalculateTotal()
             $("#tblSalesOrderItems").find('[id="textAmount_' + i + '"]').val(Amount);
           
             sumQuantity = sumQuantity + Qty;
-            sumMRPAmount = sumMRPAmount + MRP;
+            sumMRPAmount = MRP * Qty + sumMRPAmount;
             sumDiscountAmount = sumDiscountAmount + DiscountAmt;
             sumGrossAmount = sumGrossAmount + Amount;
 
@@ -96,6 +126,25 @@ function CalculateTax() {
     $("#textRoundOff_0").val(fracPart.toFixed(2));
     $("#textNETAmount_0").val(Math.round(netAmt));
 
+}
+
+
+function CalculateDiscountAmount()
+{
+    var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
+
+    if (tr.size() > 0) {
+        for (var i = 0; i < tr.size() ; i++) {
+
+            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+
+            var Discount = parseFloat($("#tblSalesOrderItems").find('[id="textDiscount_Percentage_' + i + '"]').val());
+            var DiscountAmt = (Discount == "" || Discount == undefined) ? 0 : parseFloat((Qty * MRP * Discount) / 100);
+            $("#tblSalesOrderItems").find('[id="textSalesOrder_Discount_Amount_' + i + '"]').val(DiscountAmt);
+
+        }
+    }
 }
 
 
