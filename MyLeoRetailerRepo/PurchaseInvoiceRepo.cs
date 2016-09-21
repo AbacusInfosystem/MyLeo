@@ -301,6 +301,35 @@ namespace MyLeoRetailerRepo
         }
 
 
+        public PurchaseInvoiceInfo Get_Vendor_Detalis_By_Id(int vendor_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Vendor_ID", vendor_Id));
+
+            PurchaseInvoiceInfo Vendor = new PurchaseInvoiceInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Vendor_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_ID"]);
+
+                    Vendor.Vendor_Address = Convert.ToString(dr["Vendor_Address"]);
+
+                    Vendor.Vendor_Vat_No = Convert.ToString(dr["Vendor_Vat_No"]);
+
+                    Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
+                }
+            }
+
+            return Vendor;
+        }
+
+
         //
         public void Update_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
         {

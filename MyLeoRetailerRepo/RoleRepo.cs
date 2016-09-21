@@ -68,7 +68,13 @@ namespace MyLeoRetailerRepo
 
             foreach (DataRow dr in dt.Rows)
             {
+                roleInfo.Role_Id = Convert.ToInt32(dr["Role_Id"]);
+
+                roleInfo.Role_Name = Convert.ToString(dr["Role_Name"]);
+
                 roleInfo.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+
+
             }
             return roleInfo;
 

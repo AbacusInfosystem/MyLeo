@@ -227,6 +227,14 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
+        #region Purchase Order Request
+
+        sp_Insert_Purchase_Order_Request,
+        sp_Insert_Purchase_Order_Request_Item,
+        sp_Insert_Purchase_Order_Request_Item_Sizes,
+
+        #endregion
+
         //Product
         sp_Insert_Product_MRP,
         sp_Update_Product_MRP,
@@ -300,6 +308,7 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
+  
 
     }
 }

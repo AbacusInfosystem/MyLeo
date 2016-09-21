@@ -57,8 +57,14 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Employee_Name", Employee.Employee_Name));
 
-            sqlParam.Add(new SqlParameter("@Employee_DOB", Employee.Employee_DOB));
-
+            if (Employee.Employee_DOB != DateTime.MinValue)
+            {
+                sqlParam.Add(new SqlParameter("@Employee_DOB", Employee.Employee_DOB));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@Employee_DOB", null));
+            }
             sqlParam.Add(new SqlParameter("@Employee_Gender", Employee.Employee_Gender));
 
             sqlParam.Add(new SqlParameter("@Employee_Address", Employee.Employee_Address));
@@ -112,7 +118,12 @@ namespace MyLeoRetailerRepo
                 //Employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
                 Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
                 Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
-                Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+                //Modification
+                if ((dr["Employee_DOB"]!=DBNull.Value))
+                {
+                    Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+                }
+                //end
                 Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
                 Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
                 Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
