@@ -32,6 +32,8 @@
 
             Reset_SalesOrder();
 
+            $('btnPrint').hide();
+
             $("#divSalesOrderPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
     });
@@ -45,3 +47,4 @@ function Reset_SalesOrder()
     $("[name='Filter.Sales_Invoice_Id']").val("");
 
 }
+

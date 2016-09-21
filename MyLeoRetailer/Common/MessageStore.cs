@@ -39,9 +39,11 @@ namespace MyLeoRetailer.Common
 			FriendlyMessage SYS08 = new FriendlyMessage("SYS08", MessageType.Error, "Entered User is not an Valid Active directory Member");
 			hash.Add("SYS08", SYS08);
 
-
             FriendlyMessage SYS010 = new FriendlyMessage("SYS010", MessageType.Information, "You have successfully logged out!");
             hash.Add("SYS010", SYS010);
+
+            FriendlyMessage SYS011 = new FriendlyMessage("SYS011", MessageType.Information, "You dont have access to this functionality.");
+            hash.Add("SYS011", SYS011);
 
 			#endregion
 
@@ -150,7 +152,7 @@ namespace MyLeoRetailer.Common
             hash.Add("EMP02", EMP02);
 
             //Addition by swapnali | Date:16/09/2016
-            FriendlyMessage EMP03 = new FriendlyMessage("EMP03", MessageType.Success, "Change Branch successfully.");
+            FriendlyMessage EMP03 = new FriendlyMessage("EMP03", MessageType.Success, "Branch Change successfully.");
             hash.Add("EMP03", EMP03);
             //End
 
@@ -327,7 +329,17 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-		}
+            #region Purchase Return Request
+
+            FriendlyMessage PRR01 = new FriendlyMessage("PRR01", MessageType.Success, "Purchase Return Request added successfully.");
+            hash.Add("PRR01", PRR01);
+
+            FriendlyMessage PRR02 = new FriendlyMessage("PRR02", MessageType.Success, "Purchase Return Request updated successfully.");
+            hash.Add("PRR02", PRR02);
+
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{

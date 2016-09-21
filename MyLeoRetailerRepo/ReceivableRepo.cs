@@ -134,7 +134,7 @@ namespace MyLeoRetailerRepo
 
            return Receivables;
        }
-      
+
        public ReceivableInfo Get_Receivable_Details_By_Id(int Sales_Invoice_Id) //.......
        {
 

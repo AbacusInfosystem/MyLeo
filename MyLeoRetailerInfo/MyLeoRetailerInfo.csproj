@@ -67,6 +67,7 @@
     <Compile Include="PurchaseInvoice\PurchaseInvoiceInfo.cs" />
     <Compile Include="PurchaseOrderRequest\PurchaseOrderRequestInfo.cs" />
     <Compile Include="PurchaseOrder\PurchaseOrderInfo.cs" />
+    <Compile Include="PurchaseReturnRequest\PurchaseReturnRequestInfo.cs" />
     <Compile Include="PurchaseReturn\PurchaseReturnInfo.cs" />
     <Compile Include="QueryInfo.cs" />
     <Compile Include="Receivable\ReceivableInfo.cs" />

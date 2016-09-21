@@ -29,9 +29,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
@@ -55,19 +55,34 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 if (rViewModel.role.Role_Id == 0)
                 {
-                    rViewModel.role.Role_Id = _rRepo.Insert_Role(rViewModel.role);
+                    if (Utility.Check_Access_Function_Authorization(AppFunction.Role_Management_Create))
+                    {
+                        rViewModel.role.Role_Id = _rRepo.Insert_Role(rViewModel.role);
 
-                    _rRepo.Save_Role_Access_Function(rViewModel.accessFunctions, rViewModel.role.Role_Id);
+                        _rRepo.Save_Role_Access_Function(rViewModel.accessFunctions, rViewModel.role.Role_Id);
 
-                    rViewModel.FriendlyMessages.Add(MessageStore.Get("RL01"));
+                        rViewModel.FriendlyMessages.Add(MessageStore.Get("RL01"));
+                    }
+                    else
+                    {
+                        rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                    }
                 }
                 else
                 {
-                    _rRepo.Update_Role(rViewModel.role);
+                    if (Utility.Check_Access_Function_Authorization(AppFunction.Role_Management_Edit))
+                    {
+                        _rRepo.Update_Role(rViewModel.role);
 
-                    _rRepo.Save_Role_Access_Function(rViewModel.accessFunctions, rViewModel.role.Role_Id);
+                        _rRepo.Save_Role_Access_Function(rViewModel.accessFunctions, rViewModel.role.Role_Id);
 
-                    rViewModel.FriendlyMessages.Add(MessageStore.Get("RL02"));
+                        rViewModel.FriendlyMessages.Add(MessageStore.Get("RL02"));
+                    }
+                    else
+                    {
+                        rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                    }
+                    
                 }
 
             }
@@ -126,7 +141,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                rViewModel.role = _rRepo.Get_Role_By_Id(Convert.ToInt32(role_Id));
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Role_Management_View))
+                {
+                    rViewModel.role = _rRepo.Get_Role_By_Id(Convert.ToInt32(role_Id));
+                }
+                else
+                {
+                    rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
             }
             catch (Exception ex)
             {
@@ -134,6 +156,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 Logger.Error("Role Controller - Get_Role_By_Id : " + ex.ToString());
             }
+
 
             return Json(JsonConvert.SerializeObject(rViewModel));
         }
