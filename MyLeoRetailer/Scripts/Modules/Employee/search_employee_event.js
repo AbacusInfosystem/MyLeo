@@ -24,7 +24,10 @@ $(function () {
     $(document).on('change', '[name="Employee_List"]', function (event) {
         if ($(this).prop('checked')) {
             $("#hdf_EmployeeId").val(this.value);
-            $("#btnEdit").show();
+            //Modification
+            //$("#btnEdit").show();   
+            $("#btnEditEmployee").show();
+            //End
             $("#btnMapBranchEmployee").show();
 
         }

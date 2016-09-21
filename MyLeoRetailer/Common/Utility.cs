@@ -56,5 +56,34 @@ namespace MyLeoRetailer.Common
             }
             return clearText;
         }
+
+
+        public static bool Check_Access_Function_Authorization(AppFunction appFunction)
+        {
+            string _appFunction = appFunction.ToString();
+
+            int idx = _appFunction.LastIndexOf('_');
+
+            string _accessFun = _appFunction.Substring(0, idx).Replace("_", " ");
+
+            string _access = _appFunction.Substring(idx + 1);
+
+            LoginInfo _cookies;
+
+            _cookies = Utility.Get_Login_User("LoginInfo", "Token", "Brand_Ids");
+
+            if (_cookies != null && _cookies.Access_Functions.Count() != 0 &&
+                _cookies.Access_Functions.Any(x => x.Access_Function_Name == _accessFun && ((x.Is_Access && _access == Actions.Access.ToString()) || (x.Is_Create && _access == Actions.Create.ToString()) || (x.Is_Edit && _access == Actions.Edit.ToString()) || (x.Is_View && _access == Actions.View.ToString()))))
+            {
+                return true;
+            }
+            else
+            {
+               return false;
+            }
+
+           
+        }
+
     }
 }

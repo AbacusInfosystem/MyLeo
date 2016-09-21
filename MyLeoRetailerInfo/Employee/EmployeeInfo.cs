@@ -10,7 +10,7 @@ namespace MyLeoRetailerInfo.Employee
     {
         public EmployeeInfo()
 		{
-
+          //  IsActive = true;
 		}
 
         public int Employee_Id { get; set; }
