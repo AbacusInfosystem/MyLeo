@@ -19,12 +19,18 @@
             $("#drpPurchase_Invoice_Id").html("");
             $("#drpPurchase_Invoice_Id").append("<option value=''>Select Invoice No.</option>");
 
+            $("#drpPurchase_Invoice_Id").parents('.form-group').find('ul').html("");
+            $("#drpPurchase_Invoice_Id").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Invoice No.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
             if (data.PurchaseInvoices.length > 0) {
 
                 for (var j = 0; j < data.PurchaseInvoices.length; j++) {
 
+                    var i = j + 1;
+
                     $("#drpPurchase_Invoice_Id").append("<option value='" + data.PurchaseInvoices[j].Purchase_Invoice_Id + "'>" + data.PurchaseInvoices[j].Purchase_Invoice_No + "</option>");
 
+                    $("#drpPurchase_Invoice_Id").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + data.PurchaseInvoices[j].Purchase_Invoice_No + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>")
                 }
             }
             $("#textTaxPercentage_0").trigger('change');
@@ -51,10 +57,22 @@ function AddPurchaseReturnRequestDetails(i) {
     tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
+    //tblHtml += "<input type='hidden' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Purchase_Order_Id' id='hdnPurchase_Order_Id_" + i + "' />"
+    //tblHtml += "</td>";
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
-    tblHtml += "<input type='hidden' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Purchase_Order_Id' id='hdnPurchase_Order_Id_" + i + "' />"
-    tblHtml += "</td>";
+    tblHtml += "<div class='form-group auto-complete'>";
+    tblHtml += "<div class='input-group'>";
+    //tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
+    tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+    tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
+    //tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code' class='auto-complete-label' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");'/>";
+    tblHtml += "</div>";
+    tblHtml += "</div>";
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
@@ -115,19 +133,31 @@ function AddPurchaseReturnRequestDetails(i) {
 
     myTable.append(newRow);
 
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+
 }
 
 function DeletePurchaseReturnRequestDetailsData(i) {
+    
+    if ($('#tblPurchaseReturnRequestItems tbody tr').length == 1)
+    {
+        $("#lblError").text("Atleast one required.");
+    }
+    else
+    {
+        $("#lblError").text("");
 
-    $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
+        $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
-    ReArrangePurchaseReturnRequestDetailsData();
+        ReArrangePurchaseReturnRequestDetailsData();
 
-    CalculateTotal();
+        CalculateTotal();
 
-    CalculateDiscount();
+        CalculateDiscount();
 
-    CalculateTax();
+        CalculateTax();
+    }
+
 }
 
 function ReArrangePurchaseReturnRequestDetailsData() {
@@ -147,7 +177,8 @@ function ReArrangePurchaseReturnRequestDetailsData() {
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
                 $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code");
-                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
+                //$(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnSKU_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']")[0].id = "hdnPurchase_Order_Id_" + i;
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Purchase_Order_Id");
             }
@@ -311,6 +342,19 @@ function CalculateTax() {
 
 function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
+    var new_SKU = $("#hdnSKU_No_" + i).val();
+    
+    $("#tblPurchaseReturnRequestItems").find("[id^='PurchaseReturnRequestItemRow_']").each(function (j, row) {
+
+        var tr_SKU = $(this).find("#hdnSKU_No_" + j).val();
+
+        if(i != j && tr_SKU == new_SKU)
+        {
+            alert("Alredy used");
+        }
+        
+    });
+
     $.ajax({
 
         url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
@@ -357,5 +401,10 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
     });
 
-    //Get_Purchase_Return_PO_By_POI(i);
+    
+}
+
+function Set_Purchase_Invoice_Id(value) {
+
+    $('#hdf_Purchase_Invoice_Id').val(value);
 }

@@ -289,11 +289,6 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Receivables,
 
 
-
-        sp_Insert_Purchase_Return_Item,
-        sp_Insert_Purchase_Credit_Note,
-        sp_Insert_Purchase_Return,
-
         #region Purchase Return Request
 
         sp_Insert_Purchase_Return_Request,

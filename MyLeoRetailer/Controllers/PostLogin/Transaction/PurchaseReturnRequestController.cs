@@ -78,8 +78,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             {
                 LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                //prViewModel.PurchaseReturnRequest.Branch_Id = Convert.ToInt32(Cookies.Branch_Ids);
-                prViewModel.PurchaseReturnRequest.Branch_Id = 1;
+                prViewModel.PurchaseReturnRequest.Branch_Id = Convert.ToInt32(Cookies.Branch_Ids);
+                //prViewModel.PurchaseReturnRequest.Branch_Id = 1;
 
                 Set_Date_Session(prViewModel.PurchaseReturnRequest);
 
