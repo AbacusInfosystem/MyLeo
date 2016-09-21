@@ -261,6 +261,7 @@ namespace MyLeoRetailer.Common
 
 
             #endregion
+
             #region Purchase Order
 
             FriendlyMessage PO01 = new FriendlyMessage("PO01", MessageType.Success, "Purchase Order added successfully.");
@@ -299,6 +300,20 @@ namespace MyLeoRetailer.Common
             hash.Add("POR03", POR03);
 
             #endregion
+
+            #region Purchase Order Request
+
+            FriendlyMessage POREQ01 = new FriendlyMessage("POREQ01", MessageType.Success, "Purchase Order Request added successfully.");
+            hash.Add("POREQ01", POREQ01);
+
+            FriendlyMessage POREQ02 = new FriendlyMessage("POREQ02", MessageType.Success, "Purchase Order Request updated successfully.");
+            hash.Add("POREQ02", POREQ02);
+
+            FriendlyMessage POREQ03 = new FriendlyMessage("POREQ03", MessageType.Information, "No records found.");
+            hash.Add("POREQ03", POREQ03);
+
+            #endregion
+
             #region Sales Invoice
 
             FriendlyMessage SI01 = new FriendlyMessage("SI01", MessageType.Success, "Sales Invoice Added successfully.");

@@ -1,6 +1,8 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -15,6 +17,7 @@ using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
+    [SessionExpireAttribute]
     public class SizeController:BaseController
     {
 
@@ -25,6 +28,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             sgRepo = new SizeGroupRepo();
         }
 
+        [AuthorizeUserAttribute(AppFunction.Size_Management_Access)]
         public ActionResult Index(SizeGroupViewModel sgViewModel)
         {
             return View("Index", sgViewModel);
@@ -35,15 +39,26 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(sgViewModel.SizeGroup);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Size_Management_Create))
+                {
+                    Set_Date_Session(sgViewModel.SizeGroup);
 
-                sgViewModel.SizeGroup.Size_Group_Id = sgRepo.Insert_Size_Group(sgViewModel.SizeGroup);
+                    sgViewModel.SizeGroup.Size_Group_Id = sgRepo.Insert_Size_Group(sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZEG1"));
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZEG1"));
+                }
+                else
+                {
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+
+                }
+                
             }
             catch (Exception ex)
             {
                 sgViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+
+                Logger.Error("Size Controller - Insert_Size_Group" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
@@ -54,15 +69,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(sgViewModel.SizeGroup);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Size_Management_Edit))
+                {
+                    Set_Date_Session(sgViewModel.SizeGroup);
 
-                sgRepo.Update_Size_Group(sgViewModel.SizeGroup);
+                    sgRepo.Update_Size_Group(sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZEG2"));
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZEG2"));
+                }
+                else
+                {
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Size Controller - Update_Size_Group" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
@@ -100,6 +125,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Size Controller - Get_SizeGroups" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
@@ -130,11 +157,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                sgViewModel.SizeGroup.IsActive = sgRepo.Get_SizeGroup_By_Id(Convert.ToInt32(size_group_Id));
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Size_Management_View))
+                {
+                    sgViewModel.SizeGroup = sgRepo.Get_SizeGroup_By_Id(Convert.ToInt32(size_group_Id));
+                }
+                else
+                {
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Size Controller - Get_SizeGroup_By_Id" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
@@ -155,15 +192,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(sgViewModel.SizeGroup);
-                
-                sgRepo.Insert_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Size_Management_Create))
+                {
+                    Set_Date_Session(sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZE1"));
+                    sgRepo.Insert_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
+
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZE1"));
+                }
+                else
+                {
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Size Controller - Insert_Size" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(sgViewModel));
@@ -174,15 +221,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(sgViewModel.SizeGroup);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Size_Management_Edit))
+                {
+                    Set_Date_Session(sgViewModel.SizeGroup);
 
-                sgRepo.Update_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
+                    sgRepo.Update_Size(sgViewModel.SizeList, sgViewModel.SizeGroup);
 
-                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZE2"));
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SIZE2"));
+                }
+                else
+                {
+                    sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Size Controller - Update_Size" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(sgViewModel));

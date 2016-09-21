@@ -79,15 +79,19 @@ namespace MyLeoRetailerRepo
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Tax_Id", Tax_Id));
-            DataTable dt = null;
-            dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Tax_By_Id.ToString(), CommandType.StoredProcedure);
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Tax_By_Id.ToString(), CommandType.StoredProcedure);
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)
             {
                 tax.Tax_Value = Convert.ToDecimal(dr["Tax_Value"]);
-                //tax.Is_Active = Convert.ToBoolean(dr["Tax_Value"]);
+                
                 tax.IsActive = Convert.ToInt32(dr["Is_Active"]);
+
+                tax.Tax_Id = Convert.ToInt32(dr["Tax_ID"]);
+
+                tax.Tax_Name = Convert.ToString(dr["Tax_Name"]);
             }
             return tax;
         }

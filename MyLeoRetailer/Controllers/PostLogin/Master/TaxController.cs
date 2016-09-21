@@ -1,6 +1,9 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -12,9 +15,11 @@ using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
+    [SessionExpireAttribute]
     public class TaxController : BaseController
     {
 
+        [AuthorizeUserAttribute(AppFunction.Tax_Management_Access)]
         public ActionResult Index(TaxViewModel tViewModel)
         {
             return View("Index", tViewModel);
@@ -26,15 +31,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(tViewModel.Tax);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Tax_Management_Create))
+                {
+                    Set_Date_Session(tViewModel.Tax);
 
-                tViewModel.Tax.Tax_Id = tRepo.Insert_Tax(tViewModel.Tax);
+                    tViewModel.Tax.Tax_Id = tRepo.Insert_Tax(tViewModel.Tax);
 
-                tViewModel.FriendlyMessages.Add(MessageStore.Get("TCAT01"));
+                    tViewModel.FriendlyMessages.Add(MessageStore.Get("TCAT01"));
+                }
+                else
+                {
+                    tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Tax Controller - Insert_Tax" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(tViewModel));
@@ -46,15 +61,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(tViewModel.Tax);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Tax_Management_Edit))
+                {
+                    Set_Date_Session(tViewModel.Tax);
 
-                tRepo.Update_Tax(tViewModel.Tax);
+                    tRepo.Update_Tax(tViewModel.Tax);
 
-                tViewModel.FriendlyMessages.Add(MessageStore.Get("TCAT02"));
+                    tViewModel.FriendlyMessages.Add(MessageStore.Get("TCAT02"));
+                }
+                else
+                {
+                    tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Tax Controller - Update_Tax" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(tViewModel));
@@ -95,6 +120,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Tax Controller - Get_Taxes" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(tViewModel));
@@ -122,11 +149,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             TaxRepo tRepo = new TaxRepo();
             try
             {
-                tViewModel.Tax = tRepo.Get_Tax_By_Id(Convert.ToInt32(Tax_Id));
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Tax_Management_View))
+                {
+                    tViewModel.Tax = tRepo.Get_Tax_By_Id(Convert.ToInt32(Tax_Id));
+                }
+                else
+                {
+                    tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Tax Controller - Get_Tax_By_Id" + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(tViewModel));

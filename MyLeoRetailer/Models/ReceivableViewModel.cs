@@ -26,6 +26,8 @@ namespace MyLeoRetailer.Models
 
             Receivables = new List<ReceivableInfo>();
 
+            Receivables1 = new List<ReceivableInfo>();
+
             GiftVoucher = new GiftVoucherInfo();
 
             GiftVouchers = new List<GiftVoucherInfo>();
@@ -68,6 +70,12 @@ namespace MyLeoRetailer.Models
         }
 
         public List<ReceivableInfo> Receivables
+        {
+            get;
+            set;
+        }
+
+        public List<ReceivableInfo> Receivables1
         {
             get;
             set;
