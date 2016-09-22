@@ -18,10 +18,12 @@ $(document).ready(function () {
             $('#lookupUlAuto').remove()
         });
 
-        $('.border-bottom').each(function () {
-            $('#lookupUlLookup').remove()
+        //$('.border-bottom').each(function () {
+        //    $('#lookupUlLookup').remove()
             
-        });
+        //});
+
+        $(Textboxname).parents('.form-group').find('#lookupUlLookup').remove();
 
         $("#" + $("#hdnLookupHiddenId").val()).val(id);
         $("#" + $("#hdnLookupHiddenValue").val()).val(hiddenTextValue);
