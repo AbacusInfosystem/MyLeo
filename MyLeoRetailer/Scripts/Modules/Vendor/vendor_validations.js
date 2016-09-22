@@ -6,6 +6,10 @@
 
             rules:
                 {
+                    //"tblBrandDetails":
+                    //  {
+                    //      validateTblBrand: true,
+                    //  },
                     "Vendor.Vendor_Name":
                        {
                            required: true,                          
@@ -17,7 +21,7 @@
                         },
                     "Vendor.Vendor_Email2":
                         {
-                            required: true,
+                            //  required: true, Change by vinod mane on 20/09/2016
                             email: true
                         },
                     "Vendor.Vendor_Address":
@@ -50,7 +54,7 @@
                        },
                     "Vendor.Vendor_Phone2":
                        {
-                           required: true,
+                           //required: true, Change by vinod mane on 20/09/2016
                            number: true,
                            maxlength: 12,
                        },
@@ -102,12 +106,12 @@
                 },
                 "Vendor.Vendor_Email1":
                     {
-                        required: "Email is required",
+                        required: "Email is required", 
                         email: "Invalid e-mail"
                     },
                 "Vendor.Vendor_Email2":
                     {
-                        required: "Email is required",
+                        // required: "Email is required", Change by vinod mane on 20/09/2016
                         email: "Invalid e-mail"
                     },
                 "Vendor.Vendor_Address":
@@ -138,7 +142,7 @@
                       },
                 "Vendor.Vendor_Phone2":
                    {
-                       required: "Phone No is required",
+                       //required: "Phone No is required", Change by vinod mane on 20/09/2016
                        required: "Enter Digits"
                    },
                 "Vendor.Vendor_Vat_No":
@@ -190,3 +194,37 @@ jQuery.validator.addMethod("VendorCstRate", function (value, element) {
 
 }, "Vendor Cst Rate is Required.");
 
+//jQuery.validator.addMethod("validateTblBrand", function (value, element) {
+//    var result = true;
+
+//    //var data_Brand = document.getElementById("tblBrandDetails").rows.length;
+//    //if (data_Brand == 1) {
+//    //    $("#lblmsg").html("Miminum One Brand is Required");
+//    //    alert("Brand is Required");
+//    //}
+//   
+//    var temptablecount = $("#tblBrandDetails").find('tr').size();
+   
+
+//    //i = temptablecount;//-1;
+
+//    if ($("#tblBrandDetails").val() == "0") {
+//        result = false;
+//    }
+
+//    return result;
+
+//}, "Vendor Vat Rate is Required.");
+
+//jQuery.validator.addMethod("validateTblBrand", function (value, element) {
+//    var result = true;
+   
+//    var rowCount = $('#tblBrandDetails').rowCount();
+
+//    if (rowCount == "0") {
+//        result = false;
+//    }
+
+//    return result;
+
+//}, "Brand is Required.");

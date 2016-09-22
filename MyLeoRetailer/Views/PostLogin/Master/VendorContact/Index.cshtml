@@ -44,8 +44,8 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor</span>
                         <select class="form-control select" name="VendorContact.Vendor_Id" id="drpVendor"  placeholder="Select Vendor.">
-                            <option value=0>Select Vendor</option>
-                            @foreach (var item in Model.Vendors)
+                            <option value="">Select Vendor</option>
+                            @foreach (var item in Model.Vendor_Contact)//Vendors Change by vinod Mane on 20/09/2016
                             {
                                 if (Model.VendorContact.Vendor_Id == item.Vendor_Id)
                                 {
@@ -64,7 +64,9 @@
                 <div class="block">
 
                     <h4 style="margin-top: 15px;">Primary information.</h4>
-
+                    <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>@* Added by Vinod mane on 19/09/2016*@
+                    </div>
                     <div class="form-group" style="margin-bottom: 5px; float: right;">
                         <label class="switch">
                             @if (Model.VendorContact.IsActive == 0)
@@ -85,7 +87,7 @@
                         <input type="text" class="form-control" placeholder="Enter first name." name="VendorContact.First_Name" value="@Model.VendorContact.First_Name" />
                         <input type="hidden" name="VendorContact.VendorContact_Id" id="hdnVendorContact_Id" value="@Model.VendorContact.VendorContact_Id">
                         <input type="hidden" name="VendorContact.Vendor_Contact_Name" value="@Model.VendorContact.Vendor_Contact_Name">
-                        <input type="hidden" name="VendorContact.IsActive" value="@Model.VendorContact.IsActive">
+                        <input type="hidden" value="@Model.VendorContact.IsActive"> @*name="VendorContact.IsActive"*@ @*Change by Vinod Mane on 21/09/2016*@
 
                     </div>
 

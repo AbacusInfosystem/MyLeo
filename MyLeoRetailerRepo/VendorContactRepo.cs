@@ -73,6 +73,17 @@ namespace MyLeoRetailerRepo
 
            sqlParam.Add(new SqlParameter("@Email_Id", VendorContact.Email_Id));
 
+
+           //if (VendorContact.Is_Active == false)
+           //{
+           //    VendorContact.IsActive = 0;
+           //}
+           //else
+           //{
+           //    VendorContact.IsActive = 1;
+           //}
+
+           //Added by Vinod Mane on 21/09/2016
            //Set Is_Active Flag
            if (VendorContact.IsActive == 0)
            {
@@ -83,7 +94,7 @@ namespace MyLeoRetailerRepo
                VendorContact.Is_Active = true;
            }
            //End
-
+                      
            sqlParam.Add(new SqlParameter("@Is_Active", VendorContact.Is_Active));
 
            sqlParam.Add(new SqlParameter("@Updated_Date", VendorContact.Updated_Date));
@@ -138,16 +149,21 @@ namespace MyLeoRetailerRepo
                VendorContact.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
                VendorContact.Updated_By = Convert.ToInt32(dr["Updated_By"]);
                VendorContact.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
-
-               //Set IsActive Flag
-               if (VendorContact.Is_Active == false)
-               {
-                   VendorContact.IsActive = 0;
-               }
-               else
-               {
-                   VendorContact.IsActive = 1;
-               }
+               //Comment by Vinod Mane on 21/09/2016
+               ////Set IsActive Flag
+               //if (VendorContact.Is_Active == false)
+               //{
+               //    VendorContact.IsActive = 0;
+               //}
+               //else
+               //{
+               //    VendorContact.IsActive = 1;
+               //}
+               ////End
+               
+               //Added By Vinod Mane on 21/09/2016
+               VendorContact.IsActive = Convert.ToInt32(dr["Is_Active"]); 
+               VendorContact.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
                //End
 
                //Split Customer_Name
@@ -162,8 +178,29 @@ namespace MyLeoRetailerRepo
        }
 
 
+      //Added by Vinod Mane on 21/09/2016
+       public List<VendorContactInfo> Get_Vendors()// To Get Vendors Details- Vendor_ID,Vendor_Name
+       {
+           List<VendorContactInfo> Vendors = new List<VendorContactInfo>();
+           DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+           foreach (DataRow dr in dt.Rows)
+           {
+               Vendors.Add(Get_Vendor_Values(dr));
+           }
+           return Vendors;
+       }
 
+       private VendorContactInfo Get_Vendor_Values(DataRow dr)
+       {
+           VendorContactInfo Vendor = new VendorContactInfo();
 
+           Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+           Vendor.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);                   
+
+           return Vendor;
+       }
+
+      //End
 
 
     }

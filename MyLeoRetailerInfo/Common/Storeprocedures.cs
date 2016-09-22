@@ -9,7 +9,7 @@ namespace MyLeoRetailerInfo.Common
 		public enum Storeprocedures
 		{
             //Category
-            sp_Get_Categorys,
+            sp_Get_Categorys,            
 			sp_Insert_Category,
 			sp_Update_Category,
             sp_Get_Category_By_Id,
@@ -26,6 +26,7 @@ namespace MyLeoRetailerInfo.Common
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
             sp_Get_Sub_Category_By_Id,
+            sp_Get_Sub_Category_By_Category_Id,//Added by Vinod on 21/09/2016
 
             #endregion
 
@@ -174,8 +175,7 @@ namespace MyLeoRetailerInfo.Common
             #endregion
 
 
-            #endregion
-
+     
             #region Purchase Order
 
             sp_Insert_Purchase_Order,
@@ -220,10 +220,12 @@ namespace MyLeoRetailerInfo.Common
         sp_Temp_Get_Payable_Detail_By_Id1,
 
         //Employee Branch mapping
-        sp_Get_Branch,
+
         Insert_Employee_Mapping,
         sp_Get_Employee_MapBranch_ById,
         sp_Get_Branch_For_Employee_mapping,
-		}
+            #endregion
+
+        }
 	
 }

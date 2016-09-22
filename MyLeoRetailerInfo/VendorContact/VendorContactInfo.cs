@@ -24,6 +24,11 @@ namespace MyLeoRetailerInfo.VendorContact
            get;
            set;
        }
+       public string Vendor_Name //Added by vinod mane on 21/09/2016
+       {
+           get;
+           set;
+       }
 
        public string First_Name
        {

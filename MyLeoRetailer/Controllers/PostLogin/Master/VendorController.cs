@@ -46,7 +46,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             vViewModel.Brands = _brandRepo.drp_Get_Brands();
 
-            vViewModel.SubCategorys = _subcategoryRepo.drp_Get_Sub_Categories();
+           // vViewModel.SubCategorys = _subcategoryRepo.drp_Get_Sub_Categories();//commented by Vinod on 21/09/2016
 
             vViewModel.VATS = _taxRepo.drp_Get_VAT();
 
@@ -91,7 +91,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
 
-                vViewModel.Query_Detail = Set_Query_Details(false, "Vendor_Name,Vendor_Vat_No,Vendor_Vat_Rate,CST_No,CST_Rate,Vendor_Id", "", "Vendor", "Vendor_Name", filter, dataOperator); // Set query for grid
+                vViewModel.Query_Detail = Set_Query_Details(false, "Vendor_Name,Vendor_Vat_No,Vendor_Vat_Rate,CST_No,CST_Rate,Vendor_Id", "", "Vendor", "Vendor_Name", filter, dataOperator); // Set query for grid (added by vinod mane on 20/09/2016 order by Vendor_Id desc)
 
                 pager = vViewModel.Grid_Detail.Pager;
 
@@ -184,5 +184,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        //Added By Vinod Mane on 21/09/2016
+        public JsonResult Get_SubCategorylist(int Caterory_id)
+        {
+            VendorRepo vRepo = new VendorRepo();
+            var result = vRepo.Get_SubCategorylist(Caterory_id);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        //End
     }
 }
