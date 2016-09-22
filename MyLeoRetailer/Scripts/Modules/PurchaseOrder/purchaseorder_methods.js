@@ -87,6 +87,139 @@
         }
     });
 
+    Get_Consolidate_Purchase_Orders(value);
+   
+}
+
+function Get_Consolidate_Purchase_Orders(value) {
+
+    $.ajax({
+
+        url: "/PurchaseOrder/Get_Consolidate_Purchase_Orders",
+
+        data: { Vendor_Id: value },
+
+        type: 'POST',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            if (obj.PurchaseOrder.PurchaseOrders.length > 0) {               
+
+                for (var i = 0; i < obj.PurchaseOrder.PurchaseOrders.length; i++) {
+
+                    debugger;
+                    var html = '';
+
+                    var tblHtml = '';
+
+                    var myTable = $("#tblPurchaseOrderItems");
+
+                    tblHtml += "<tr id='PurchaseOrderConsolidateItemRow_" + i + "' class='item-data-row'>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='textArticle_No_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Name' value='" + obj.PurchaseOrder.PurchaseOrders[i].Colour_Name + "' id='textColour_Name_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textBrand_Name_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Brand_Name + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Brand_Id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textCategory_Name_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Category_Name + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Category_Id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Category_Id' id='hdnCategory_Id_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textSub_Category_Name_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sub_Category_Name + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sub_Category_Id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Sub_Category_Id' id='hdnSub_Category_Id_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;'  id='textSize_Group_Name" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Size_Group_Name + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Size_Group_Id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Start_Size' value='" + obj.PurchaseOrder.PurchaseOrders[i].Start_Size + "' id='textStart_Size_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].End_Size' value='" + obj.PurchaseOrder.PurchaseOrders[i].End_Size + "' id='textEnd_Size_" + i + "' />";
+                    tblHtml += "</td>";
+
+
+                    ////***************************************************************************////                                       
+                   
+                    for (var j = 0; j < obj.PurchaseOrder.Sizes.length; j++) {
+
+                        tblHtml += "<td>";
+                        tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + j + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.Sizes[j].Quantity + "' id='textSize_Quantity_" + (j + 1) + "-" + j + "'' />";
+                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.Sizes[j].Size_Id + "' name='PurchaseOrder.Sizes[" + j + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + j + "' />";
+                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.Sizes[j].Amount + "' name='PurchaseOrder.Sizes[" + j + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + j + "' />";
+                        tblHtml += "</td>";
+                    }
+                   
+                    ////***************************************************************************////
+
+                   
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textTotal_Quantity_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Item_Quantity + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Item_Quantity + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Quantity' id='hdnTotal_Quantity_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textCenter_Size_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Center_Size + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Center_Size + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Center_Size' id='hdnCenter_Size_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textPurchase_Price_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Purchase_Price + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Purchase_Price + "'  name='PurchaseOrder.PurchaseOrders[" + i + "].Purchase_Price' id='hdnPurchase_Price_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textSize_Difference_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Size_Difference + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Size_Difference + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Size_Difference' id='hdnSize_Difference_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textTotal_Amount_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Total_Amount + "</span>";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Total_Amount + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Total_Amount' id='hdnTotal_Amount_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Comment' value='" + obj.PurchaseOrder.PurchaseOrders[i].Comment + "' id='textComment_" + i + "' />";
+                    tblHtml += "</td>";
+
+                    tblHtml += "<td>";
+                    tblHtml += "<div class='btn-group'>";
+                    tblHtml += "<button type='button' id='continue-order-details' class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
+                    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
+                    tblHtml += "</div>";
+                    tblHtml += "</td>";
+
+                    tblHtml += "</tr>";
+
+                    var newRow = $(tblHtml);
+
+                    myTable.append(newRow);
+                    
+                }
+
+               
+            }
+
+
+        }
+    });
 
 }
 
