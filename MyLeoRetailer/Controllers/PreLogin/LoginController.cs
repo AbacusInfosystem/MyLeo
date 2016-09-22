@@ -31,13 +31,17 @@ namespace MyLeoRetailer.Controllers.PreLogin
             try
             {
 
-                if (Request.Cookies["LoginInfo"] != null)
+                if (Request.Cookies["MyLeoLoginInfo"] != null)
                 {
-                    lViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+                    lViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                     if (lViewModel.Cookies == null)
                     {
                         lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS02"));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Dashboard");
                     }
                 }
                 else
@@ -128,13 +132,13 @@ namespace MyLeoRetailer.Controllers.PreLogin
 
             try
             {
-                if (Request.Cookies["LoginInfo"] == null)
+                if (Request.Cookies["MyLeoLoginInfo"] == null)
                 {
-                    HttpCookie cookies = new HttpCookie("LoginInfo");
+                    HttpCookie cookies = new HttpCookie("MyLeoLoginInfo");
 
                     string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-                    cookies.Values.Add("Token", cookie_Token);
+                    cookies.Values.Add("MyLeoToken", cookie_Token);
 
                     cookies.Values.Add("Branch_Ids", Branch_Ids);
 
@@ -146,9 +150,9 @@ namespace MyLeoRetailer.Controllers.PreLogin
                 {
                     string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-                    Response.Cookies["LoginInfo"]["Token"] = cookie_Token;
+                    Response.Cookies["MyLeoLoginInfo"]["MyLeoToken"] = cookie_Token;
 
-                    Response.Cookies["LoginInfo"]["Branch_Ids"] = Branch_Ids;
+                    Response.Cookies["MyLeoLoginInfo"]["Branch_Ids"] = Branch_Ids;
 
                 }
             }
@@ -162,7 +166,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
 
         public ActionResult Logout()
         {
-            //LoginInfo Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+            //LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             try
             {
@@ -181,7 +185,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
 
         private void LogoutUser()
         {
-            Response.Cookies["LoginInfo"].Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies["MyLeoLoginInfo"].Expires = DateTime.Now.AddYears(-1);
 
             Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
 

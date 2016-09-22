@@ -1,12 +1,45 @@
 ﻿
 $(function ()
 {
- 
+ //addition by swapnali | Date:19/09/2016
+   // $("#Employee_Home_Lindline").mask("(999) 999-9999");
+    $("input.mask_phone_no").mask('(999) 9999-9999');
+    //alert($('[name="Employee.IsActive"]').val());
+
+    if ($('[name = "Employee.Employee_Id"]').val() == 0)
+    {
+        $('[name="Employee.IsActive"]').val(1);
+    }
+
+
+    $('[name = "Employee.IsActive"]').change(function () {
+        if ($('[name="Employee.IsActive"]').val() == "True") {
+            $('[name="Employee.IsActive"]').val(1);
+        }
+        //else {
+        //    $('[name="Employee.IsActive"]').val(0);
+        //}
+    });
+    //$('[name="Employee.IsActive"]').val('True');
+    //End
+
     $("#btnEmployeeSave").click(function ()
 	{
         if ($('[name="Employee.Is_Online"]').val() == 1){
             $('[name="Employee.Is_Online"]').val('True');
         }
+
+        //Modifiction
+        if ($('[name="Employee.IsActive"]').val() == 1) {
+            $('[name="Employee.IsActive"]').val(true);
+        }
+        else {
+            $('[name="Employee.IsActive"]').val(false);
+        }
+       // alert($('[name="Employee.IsActive"]').val());
+        //End
+
+
 	    if ($("#frmEmployee").valid())
 		{ 
 	            if ($("#hdn_EmployeeId").val() == 0) {
@@ -67,6 +100,8 @@ $(function ()
         $('#txtConfirmPassword').rules("add", { match_password: true });
         $('#drpRole').rules("add", { required: true, messages: { required: "Role is required." } });
     }
+
+    
     
 
 });

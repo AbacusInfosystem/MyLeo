@@ -23,6 +23,9 @@
                             <li><a href="/Payable/Index"><span class="fa fa-users"></span>Payable</a></li>
                             <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order Management</a></li>
                             <li><a href="/PurchaseInvoice/Search"><span class="fa fa-users"></span> Purchase Invoice Management</a></li>
+                            <li><a href="/Receivable/Index"><span class="fa fa-users"></span>Receivable</a></li>
+                            <li><a href="/PurchaseReturn/Search"><span class="fa fa-users"></span> Purchase Return Management</a></li>
+                            <li><a href="/PurchaseOrderRequest/Search"><span class="fa fa-users"></span> Purchase Order Request Management</a></li>
 
                             <li><a href="/Vendor/Search"><span class="fa fa-users"></span> Vendor Management</a></li>
                             <li class="xn-openable">
@@ -126,9 +129,19 @@
 
                     @*Addition by swapnali | Date:14/09/2016*@
                      <li class="xn-openable">
-                         <a href="/Employee/ChangeBranch"><span class="fa fa-pencil"></span> <span class="xn-text">Change Branch</span></a>
+                         <a href="/Employee/ChangeBranch"><span class="fa fa-map-marker"></span> <span class="xn-text">Change Branch</span></a>
                     </li>
                     @*End*@
+
+    <li class="xn-openable">
+        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Transactions</span></a>
+        <ul class="animated zoomIn">
+            <li><a href="/SalesOrder/Search"><span class="fa fa-image"></span> Sales Invoice</a></li>
+            <li><a href="/SalesReturn/Search"><span class="fa fa-users"></span> Sales Return </a></li>
+            <li><a href="/purchase-return-request/get-purchase-return-request"><span class="fa fa-image"></span> Purchase Return Request</a></li>
+
+        </ul>
+    </li>
 
                     <!-- SIGN OUT -->
                     <li class="xn-icon-button pull-right">
@@ -137,4 +150,3 @@
                     <!-- END SIGN OUT -->                                        
                 </ul>
                 <!-- END X-NAVIGATION VERTICAL -->                     
-                

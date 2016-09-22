@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using System;
@@ -50,7 +51,7 @@ namespace MyLeoRetailer.Controllers
             }
             catch (Exception ex)
             {
-                //Logger.Error("LookupController - Load_Modal_Data" + ex.Message);
+                Logger.Error("LookupController - Load_Modal_Data" + ex.Message);
             }
 
             return PartialView("_Lookup", LookupVM);

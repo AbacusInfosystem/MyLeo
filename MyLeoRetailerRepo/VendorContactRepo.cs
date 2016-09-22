@@ -94,7 +94,7 @@ namespace MyLeoRetailerRepo
                VendorContact.Is_Active = true;
            }
            //End
-                      
+
            sqlParam.Add(new SqlParameter("@Is_Active", VendorContact.Is_Active));
 
            sqlParam.Add(new SqlParameter("@Updated_Date", VendorContact.Updated_Date));
@@ -160,7 +160,7 @@ namespace MyLeoRetailerRepo
                //    VendorContact.IsActive = 1;
                //}
                ////End
-               
+
                //Added By Vinod Mane on 21/09/2016
                VendorContact.IsActive = Convert.ToInt32(dr["Is_Active"]); 
                VendorContact.Is_Active = Convert.ToBoolean(dr["Is_Active"]);

@@ -18,6 +18,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
     public class VendorController : BaseController
     {
 
+        public VendorRepo vRepo;
+
         CategoryRepo _categoryRepo;
 
         BrandRepo _brandRepo;
@@ -28,6 +30,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public VendorController()
         {
+
+            vRepo = new VendorRepo();
 
             _categoryRepo = new CategoryRepo();
 
@@ -75,7 +79,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Vendors(VendorViewModel vViewModel)
         {
-            VendorRepo vRepo = new VendorRepo();
 
             CommonManager cMan = new CommonManager();
 
@@ -112,8 +115,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public ActionResult Insert_Vendor(VendorViewModel vViewModel)
-        {
-            VendorRepo vRepo = new VendorRepo();
+        {           
 
             try
             {
@@ -137,8 +139,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Vendor_By_Id(VendorViewModel vViewModel)
         {
-            VendorRepo vRepo = new VendorRepo();
-
+          
             try
             {
                 vViewModel.Vendor = vRepo.Get_Vendor_By_Id(vViewModel.Filter.Vendor_Id);
@@ -162,8 +163,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public ActionResult Update_Vendor(VendorViewModel vViewModel)
-        {
-            VendorRepo vRepo = new VendorRepo();
+        {            
 
             try
             {

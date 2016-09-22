@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.PurchaseReturn;
+using MyLeoRetailerInfo.PurchaseInvoice;
 
 namespace MyLeoRetailerRepo
 {
@@ -434,16 +436,16 @@ namespace MyLeoRetailerRepo
             return subcategorydetailslist;
         }
 
-        public List<VendorInfo> Get_Vendors()
-        {
-            List<VendorInfo> Vendors = new List<VendorInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
-            foreach (DataRow dr in dt.Rows)
-            {
-                Vendors.Add(Get_Vendor_Values(dr));
-            }
-            return Vendors;
-        }
+        //public List<VendorInfo> Get_Vendors()
+        //{
+        //    List<VendorInfo> Vendors = new List<VendorInfo>();
+        //    DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        Vendors.Add(Get_Vendor_Values(dr));
+        //    }
+        //    return Vendors;
+        //}
 
         //Gauravi 7-9-2016
         //public List<VendorInfo> Get_Vendors()
@@ -530,6 +532,9 @@ namespace MyLeoRetailerRepo
             return Vendors;
         }
         //End
+
+       
+
 
 
     }

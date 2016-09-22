@@ -16,5 +16,15 @@ namespace MyLeoRetailer.Controllers.PreLogin
             return View();
         }
 
+        public ActionResult AuthorizationError()
+        {
+            return View();
+        }
+
+        public ActionResult System_Error()
+        {
+            return View("Error");
+        }
+
     }
 }

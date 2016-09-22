@@ -1,4 +1,36 @@
-﻿function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
+﻿function Get_Vendor_Details_By_Id(value) {
+
+    debugger;
+
+    $.ajax({
+
+        url: "/PurchaseInvoice/Get_Vendor_Details_By_Id",
+
+        data: { Vendor_Id: value },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#hdf_Vendor_Id').val(data.Vendor_Id);
+
+            $('#txtVendor_Address').val(data.Vendor_Address);
+
+            $('#txtVendor_VAT_No').val(data.Vendor_Vat_No);
+
+            $('#hdf_hdn_Tax_Percentage').val(data.Tax_Percentage);
+
+            $('#textTaxPercentage_0').val(data.Tax_Percentage);
+
+        }
+    });
+}
+
+function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
+
+    debugger;
 
     $.ajax({
 
@@ -12,9 +44,11 @@
 
         success: function (data) {
 
-            alert();
-
             $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
 
             $('#textBrand_' + i).val(data.Brand);
 
@@ -42,7 +76,7 @@
     });
 }
 
-function AddPurchaseInvoiceDetails(i) {
+function AddPurchaseInvoiceDetails() {
 
     var html = '';
 
@@ -57,58 +91,73 @@ function AddPurchaseInvoiceDetails(i) {
     tblHtml += "<tr id='PurchaseInvoiceItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "</td>";
+
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
+    //tblHtml += "</td>";
+
+    tblHtml += "<td>";
+    tblHtml += "<div class='form-group auto-complete'>";
+    tblHtml += "<div class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU Code to search' value=''  data-table='Product_MRP' data-col='Product_Id,SKU Code' data-headernames='SKU_Code' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
+    tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "</div>";
+    tblHtml += "</div>";
+
+    tblHtml += "<td>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Color' readonly value='' id='textColor_" + i + "'>";
+    tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Color_Id' id='hdnColor_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
-    tblHtml += "</td>";
-
-    tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Category_Id' id='hdnCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SubCategory_Id' id='hdnSubCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Group_Name' readonly value='' id='textSize_Group_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Group_Name' readonly value='' id='textSize_Group_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Size_Id' id='hdnSize_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].WSR_Price' readonly value='' id='textWSR_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].WSR_Price' readonly value='' id='textWSR_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id' id='textInvoice_No_" + i + "' placeholder='Enter PO no. to search' value=''  data-table='Purchase_Order' data-col='Purchase_Order_Id,Purchase_Order_No' data-headernames='Purchase Order'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No' id='textInvoice_No_" + i + "' placeholder='Enter PO no. to search' value=''  data-table='Purchase_Order' data-col='Purchase_Order_Id,Purchase_Order_No' data-headernames='Purchase Order' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
     tblHtml += "<span class='input-group-addon'> <a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No' class='auto-complete-label' />";
@@ -116,7 +165,10 @@ function AddPurchaseInvoiceDetails(i) {
     tblHtml += "</div>";
 
     tblHtml += "<td>";
+    tblHtml += "<div class='btn-group'>";
+    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>Add Row</button>";
     tblHtml += "<button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "</div>";
     tblHtml += "</td>";
     
     tblHtml += "</tr>";
@@ -126,8 +178,6 @@ function AddPurchaseInvoiceDetails(i) {
     myTable.append(newRow);
 
 }
-
-
 
 function CalculateTax() {
 
@@ -146,9 +196,7 @@ function CalculateTax() {
     var intPart = Math.floor(roundedDecimal);
 
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
-
-    alert(fracPart);
-
+       
     if (fracPart == "" || fracPart == null)
     {
         fracPart=0.00
@@ -181,7 +229,7 @@ function CalculateDiscount() {
 
     $("#textGrossAmount_0").val(grossAmt.toFixed(2));
     
-
+    CalculateTax();
 }
 
 function CalculateTotal() {
@@ -210,9 +258,9 @@ function CalculateTotal() {
     $("#textTotalQuantity_0").val(sumQuantity);
     $("#textTotalAmount_0").val(sumWSRAmount.toFixed(2));
 
+    CalculateDiscount();
+
 }
-
-
 
 function DeletePurchaseInvoiceDetailsData(i) {
 
@@ -245,15 +293,30 @@ function ReArrangePurchaseInvoiceDetailsData() {
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
             }
 
+            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+            //    $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
+            //    $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+            //}
+
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
-                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
             }
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
                 $(newTR).find("[id^='textArticle_No_']")[0].id = "textArticle_No_" + i;
                 $(newTR).find("[id^='textArticle_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Article_No");
+            }
+
+            if ($(newTR).find("[id^='hdnColor_Id_']").length > 0) {
+                $(newTR).find("[id^='hdnColor_Id_']")[0].id = "hdnColor_Id_" + i;
+                $(newTR).find("[id^='hdnColor_Id_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Color_Id");
+                $(newTR).find("[id^='textColor_']")[0].id = "textColor_" + i;
+                $(newTR).find("[id^='textColor_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Color");
             }
 
             if ($(newTR).find("[id^='hdnBrand_Id_']").length > 0) {
@@ -316,7 +379,7 @@ function ReArrangePurchaseInvoiceDetailsData() {
 
             if ($(newTR).find("[id^='textInvoice_No_']").length > 0) {
                 $(newTR).find("[id^='textInvoice_No_']")[0].id = "textInvoice_No_" + i;
-                $(newTR).find("[id^='textInvoice_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id");
+                $(newTR).find("[id^='textInvoice_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No");
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']")[0].id = "hdnPurchase_Order_Id_" + i;
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id");
                 $(newTR).find("[id^='hdnPurchase_Order_No_']")[0].id = "hdnPurchase_Order_No_" + i;
