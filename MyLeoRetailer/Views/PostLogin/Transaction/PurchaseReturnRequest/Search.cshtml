@@ -36,10 +36,23 @@
 
                         <div class="col-md-5">
 
-                            @*<div class="form-group">
-                                <input type="text" class="form-control" name="" placeholder="filter" />
-
-                            </div>*@
+                            <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
+                                <select class="form-control select" name="Filter.Vendor_Id" id="drpVendor_Id">
+                                    <option value="">Select Vendor</option>
+                                    @foreach (var item in Model.PurchaseReturnRequest.Vendors)
+                                    {
+                                        if (Model.PurchaseReturnRequest.Vendor_Id == item.Vendor_Id)
+                                        {
+                                            <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
 
                         </div>
 
@@ -75,7 +88,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if (Model.PurchaseReturnRequests.Count > 0)
+                            @*@if (Model.PurchaseReturnRequests.Count > 0)
                             {
                                 foreach (var item in Model.PurchaseReturnRequests)
                                 {
@@ -88,16 +101,20 @@
                                         <td>@(item.Status == true ? "Pending Request" : "Done")</td>
                                     </tr>
                                 }
-                            }
+                            }*@
                         </tbody>
                     </table>
                 </div><!-- /.col -->
             </div>
         </div>
 
-        @*<div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseReturnRequestPager">
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnRequestPager">
 
 
+        </div>
+
+        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value=""/>
+        @*<div class="pagination pagination-sm no-margin pull-right">
         </div>*@
 
     </div>

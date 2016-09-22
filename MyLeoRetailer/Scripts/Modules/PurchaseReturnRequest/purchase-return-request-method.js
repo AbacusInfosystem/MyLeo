@@ -371,33 +371,6 @@ function CalculateTax() {
 
 function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
-    //var new_SKU = $("#hdnSKU_No_" + i).val();
-    
-    //$("#tblPurchaseReturnRequestItems").find("[id^='PurchaseReturnRequestItemRow_']").each(function (j, row) {
-
-    //    var tr_SKU = $(this).find("#hdnSKU_No_" + j).val();
-
-    //    if(i != j && tr_SKU == new_SKU)
-    //    {
-    //        alert("Alredy used");
-    //        $("#lblSKUMappingError").text("SKU code alredy used, please select another.");
-    //    }
-        
-    //});
-
-    //var IsExists = false;
-
-    //IsExists = Is_SKU_Exits();
-    //alert(IsExists);
-    //if (IsExists == true) {
-
-    //    $("#lblSKUMappingError").text("SKU code alredy used, please select another.");
-
-    //    //return true;
-    //}
-    //else {
-
-    //}
     $.ajax({
 
         url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
@@ -452,24 +425,4 @@ function Set_Purchase_Invoice_Id(value) {
     $('#hdf_Purchase_Invoice_Id').val(value);
 }
 
-function Is_SKU_Exits()
-{
-    var values = [];
-
-    $("#tblPurchaseReturnRequestItems").find("[id^='PurchaseReturnRequestItemRow_']").each(function (j, row) {
-
-        values.push($(this).find("#hdnSKU_No_" + j).val());
-        
-    });
-
-    values.sort();
-
-    for (var k = 1; k < values.length; ++k) {
-
-        if (values[k] == values[k - 1])
-            return true;
-    }
-    return false;
-
-}
 

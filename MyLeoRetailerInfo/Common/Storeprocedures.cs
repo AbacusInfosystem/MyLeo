@@ -307,7 +307,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Update_Purchase_Return_Request,
         sp_Get_Purchase_Return_Request_By_Id,
         sp_Insert_Purchase_Return_Request_Item,
-        sp_Get_Purchase_Return_Request,
+        sp_Get_Purchase_Return_Requests,
 
 
         #endregion
