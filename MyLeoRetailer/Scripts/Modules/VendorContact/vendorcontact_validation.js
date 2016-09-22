@@ -4,7 +4,7 @@ $(function () {
     $("#frmVendorContact").validate({
         rules: { 
             "VendorContact.Vendor_Id": { //Added by vinod mane on 21/09/2016
-                required: true
+                VenderName: true
             },
 
             "VendorContact.First_Name": {
@@ -34,9 +34,9 @@ $(function () {
         },
         messages: {
 
-            "VendorContact.Vendor_Id":{//Added by vinod mane on 21/09/2016
-                required: "Select Vendor."
-            },
+            //"VendorContact.Vendor_Id":{//Added by vinod mane on 21/09/2016
+            //    required: "Select Vendor."
+            //},
             "VendorContact.First_Name": {
                 required: "First Name is required."
             },
@@ -64,4 +64,13 @@ $(function () {
     });
 });
 
+jQuery.validator.addMethod("VenderName", function (value, element) {
+    var result = true;
 
+    if ($("#drpVendor").val() == "0") {
+        result = false;
+    }
+
+    return result;
+
+}, "Vendor is Required.");

@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor</span>
                         <select class="form-control select" name="VendorContact.Vendor_Id" id="drpVendor"  placeholder="Select Vendor.">
-                            <option value="">Select Vendor</option>
+                            <option value="0">Select Vendor</option>
                             @foreach (var item in Model.Vendor_Contact)//Vendors Change by vinod Mane on 20/09/2016
                             {
                                 if (Model.VendorContact.Vendor_Id == item.Vendor_Id)
