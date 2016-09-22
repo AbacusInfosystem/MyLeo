@@ -10,7 +10,7 @@
         }
     });
 
-    $("[name='Filter.Role']").focusout(function () {
+    $("[name='Filter.Role']").keyup(function () {
         Get_Roles();
     });
 

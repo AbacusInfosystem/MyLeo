@@ -40,6 +40,8 @@ function Save_Role() {
 
             Reset_Role();
 
+            $("[name='Filter.Role']").val("");
+
             Get_Roles();
 
             Get_RoleAccess_Functions(0);
@@ -98,7 +100,7 @@ function Reset_Role() {
     $("[name='role.Is_Active']")[0].checked = true;
     $("[name='role.Is_Active']").val(true);
 
-    $("[name='Filter.Role']").val("");
+    //$("[name='Filter.Role']").val("");
 
     $("#spnRoleName").text("");
     Get_RoleAccess_Functions(0);
