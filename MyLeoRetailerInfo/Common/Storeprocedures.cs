@@ -208,6 +208,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Category_By_Vendor_Id,
         sp_Get_Sub_Category_By_Vendor_Id,
 
+        sp_Get_Consolidate_Purchase_Order_Item,
+        sp_Get_Consolidate_Purchase_Order_Item_Sizes,
+
         #endregion
 
         #region Purchase Invoice

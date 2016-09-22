@@ -135,6 +135,8 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Comment", item.Comment));
 
+                sqlParam.Add(new SqlParameter("@Item_Ids", item.Item_Ids));
+
                 PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
 
 
@@ -453,168 +455,177 @@ namespace MyLeoRetailerRepo
 
             parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
 
-            //DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Consolidate_Purchase_Order_Item.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Consolidate_Purchase_Order_Item.ToString(), CommandType.StoredProcedure);
 
-            //foreach (DataRow dr in dt.Rows)
-            //{
-            //    PurchaseOrderInfo PurchaseOrder = new PurchaseOrderInfo();
+            foreach (DataRow dr in dt.Rows)
+            {
+                PurchaseOrderInfo PurchaseOrder = new PurchaseOrderInfo();
 
-            //    PurchaseOrder.Purchase_Order_Request_Id = Convert.ToInt32(dr["Purchase_Order_Request_Id"]);
+                PurchaseOrder.Article_No = Convert.ToString(dr["Article_No"]);
 
-            //    PurchaseOrder.Article_No = Convert.ToString(dr["Article_No"]);
+                PurchaseOrder.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
-            //    PurchaseOrder.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+                PurchaseOrder.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
 
-            //    PurchaseOrder.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+                PurchaseOrder.Brand_Name = Convert.ToString(dr["Brand_Name"]);
 
-            //    PurchaseOrder.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+                PurchaseOrder.Category_Id = Convert.ToInt32(dr["Category_Id"]);
 
-            //    PurchaseOrder.Sub_Category_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+                PurchaseOrder.Category_Name = Convert.ToString(dr["Category"]);
 
-            //    PurchaseOrder.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+                PurchaseOrder.Sub_Category_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
 
-            //    PurchaseOrder.Start_Size = Convert.ToString(dr["Start_Size"]);
+                PurchaseOrder.Sub_Category_Name = Convert.ToString(dr["Sub_Category"]);
 
-            //    PurchaseOrder.End_Size = Convert.ToString(dr["End_Size"]);
+                PurchaseOrder.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
 
-            //    PurchaseOrder.Center_Size = Convert.ToString(dr["Center_Size"]);
+                PurchaseOrder.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
 
-            //    PurchaseOrder.Purchase_Price = Convert.ToDecimal(dr["Purchase_Price"]);
+                PurchaseOrder.Start_Size = Convert.ToString(dr["Start_Size"]);
 
-            //    PurchaseOrder.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
+                PurchaseOrder.End_Size = Convert.ToString(dr["End_Size"]);
 
-            //    PurchaseOrder.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
+                PurchaseOrder.Center_Size = Convert.ToString(dr["Center_Size"]);
 
-            //    PurchaseOrder.Item_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+                PurchaseOrder.Purchase_Price = Convert.ToDecimal(dr["Purchase_Price"]);
 
-            //    PurchaseOrder.Comment = Convert.ToString(dr["Comment"]);
+                PurchaseOrder.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
 
-            //    PurchaseOrders.Add(PurchaseOrder);
+                PurchaseOrder.Total_Amount = Convert.ToDecimal(dr["Amount"]);
 
-            //}
+                PurchaseOrder.Item_Quantity = Convert.ToInt32(dr["Quantity"]);
+
+                PurchaseOrder.Comment = Convert.ToString(dr["Comment"]);
+
+                PurchaseOrder.Item_Ids = Convert.ToString(dr["Item_Ids"]);
+
+                PurchaseOrder.Sizes = Get_Consolidate_Purchase_Order_Item_Sizes(PurchaseOrder.Item_Ids);
+
+                PurchaseOrders.Add(PurchaseOrder);
+
+            }
 
             return PurchaseOrders;
         }
 
-        public List<Sizes> Get_Consolidate_Purchase_Order_Item_Sizes(List<PurchaseOrderInfo> PurchaseOrders)
+        public List<Sizes> Get_Consolidate_Purchase_Order_Item_Sizes(string Item_Ids)
         {
             List<Sizes> Size = new List<Sizes>();
 
-            //var k = 0;
+            var k = 0;
 
-            //foreach (var id in PurchaseOrders)
-            //{
+            
 
-            //    List<SqlParameter> parameters = new List<SqlParameter>();
+                List<SqlParameter> parameters = new List<SqlParameter>();
 
-            //    parameters.Add(new SqlParameter("@Purchase_Order_Request_Id", PurchaseOrders[k].Purchase_Order_Request_Id));
+                parameters.Add(new SqlParameter("@Item_Ids", Item_Ids));
 
-            //    k++;
+                k++;
 
-            //    //DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Consolidate_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
+                DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Consolidate_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
 
-            //    //int i = 0;
+                int i = 1;
 
-            //    //foreach (DataRow item in dt.Rows)
-            //    //{
-            //       Sizes Sizes = new Sizes();
+                foreach (DataRow item in dt.Rows)
+                {
+                    Sizes Sizes = new Sizes();                   
 
-            //    //    i++;
+                    if (i == 1 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id1 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity1 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount1 = Convert.ToInt32(item["Amount"]);
+                    }                   
+                    else if (i == 2 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id2 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity2 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount2 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 3 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id3 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity3 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount3 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 4 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id4 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity4 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount4 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 5 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {                       
+                        Sizes.Size_Id5 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity5 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount5 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 6 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id6 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity6 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount6 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 7 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id7 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity7 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount7 = Convert.ToInt32(item["Amount"]);                        
+                    }
+                    else if (i == 8 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id8 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity8 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount8 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 9 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id9 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity9 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount9 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 10 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id10 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity10 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount10 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 11 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id11 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity11 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount11 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 12 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id12 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity12 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount12 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 13 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id13 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity13 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount13 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 14 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id14 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity14 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount14 = Convert.ToInt32(item["Amount"]);
+                    }
+                    else if (i == 15 && Convert.ToInt32(item["Size_Id"]) != 0)
+                    {
+                        Sizes.Size_Id15 = Convert.ToInt32(item["Size_Id"]);
+                        Sizes.Quantity15 = Convert.ToInt32(item["Quantity"]);
+                        Sizes.Amount15 = Convert.ToInt32(item["Amount"]);
+                    }
 
-            //    //    if (i == 1)
-            //    //    {
-            //    //        Sizes.Size_Id1 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity1 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount1 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 2)
-            //    //    {
-            //    //        Sizes.Size_Id2 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity2 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount2 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 3)
-            //    //    {
-            //    //        Sizes.Size_Id3 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity3 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount3 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 4)
-            //    //    {
-            //    //        Sizes.Size_Id4 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity4 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount4 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 5)
-            //    //    {
-            //    //        Sizes.Size_Id5 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity5 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount5 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 6)
-            //    //    {
-            //    //        Sizes.Size_Id6 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity6 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount6 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 7)
-            //    //    {
-            //    //        Sizes.Size_Id7 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity7 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount7 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 8)
-            //    //    {
-            //    //        Sizes.Size_Id8 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity8 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount8 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 9)
-            //    //    {
-            //    //        Sizes.Size_Id9 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity9 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount9 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 10)
-            //    //    {
-            //    //        Sizes.Size_Id10 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity10 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount10 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 11)
-            //    //    {
-            //    //        Sizes.Size_Id11 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity11 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount11 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 12)
-            //    //    {
-            //    //        Sizes.Size_Id12 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity12 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount12 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 13)
-            //    //    {
-            //    //        Sizes.Size_Id13 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity13 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount13 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 14)
-            //    //    {
-            //    //        Sizes.Size_Id14 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity14 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount14 = Convert.ToInt32(item["Amount"]);
-            //    //    }
-            //    //    else if (i == 15)
-            //    //    {
-            //    //        Sizes.Size_Id15 = Convert.ToInt32(item["Size_Id"]);
-            //    //        Sizes.Quantity15 = Convert.ToInt32(item["Quantity"]);
-            //    //        Sizes.Amount15 = Convert.ToInt32(item["Amount"]);
-            //       }
+                    Size.Add(Sizes);
 
-            //        Size.Add(Sizes);
-            //    }
-            //}
+                    i++;
+                
+            }
 
             return Size;
         }

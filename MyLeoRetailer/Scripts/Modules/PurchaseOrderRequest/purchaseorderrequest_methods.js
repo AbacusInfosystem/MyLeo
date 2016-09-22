@@ -107,26 +107,26 @@ function Set_Sub_Category_Drp_Id(value) {
 
             var obj = $.parseJSON(response);
 
+            $("#drpSubCategory").html("");
+
+            $("#drpSubCategory").append("<option value='0'>Select SubCategory.</option>");
+
+            $("#drpSubCategory").parents('.form-group').find('ul').html("");
+
+            $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select SubCategory.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+
             if (obj.PurchaseOrderRequest.SubCategories.length > 0) {
-
-                $("#drpSubCategory").empty();
-
-                var SubCategory1 = document.getElementById("drpSubCategory");
-                var option = document.createElement("option");
-
-                option.value = 0;
-                option.text = "Select SubCategory.";
-                SubCategory1.add(option);
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.SubCategories.length; j++) {
                     debugger;
 
-                    var SubCategory = document.getElementById("drpSubCategory");
-                    var option = document.createElement("option");
+                    var i = j + 1;
 
-                    option.value = obj.PurchaseOrderRequest.SubCategories[j].Sub_Category_Id;
-                    option.text = obj.PurchaseOrderRequest.SubCategories[j].Sub_Category;
-                    SubCategory.add(option);
+                    $("#drpSubCategory").append("<option value='" + obj.PurchaseOrderRequest.SubCategories[j].Sub_Category_Id + "'>" + obj.PurchaseOrderRequest.SubCategories[j].Sub_Category + "</option>");
+
+                    $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.SubCategories[j].Sub_Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
                 }
             }
 

@@ -105,22 +105,24 @@ function Get_Consolidate_Purchase_Orders(value) {
 
             var obj = $.parseJSON(response);
 
+            debugger;
+
             if (obj.PurchaseOrder.PurchaseOrders.length > 0) {               
 
                 for (var i = 0; i < obj.PurchaseOrder.PurchaseOrders.length; i++) {
 
-                    debugger;
                     var html = '';
 
                     var tblHtml = '';
 
                     var myTable = $("#tblPurchaseOrderItems");
 
-                    tblHtml += "<tr id='PurchaseOrderConsolidateItemRow_" + i + "' class='item-data-row'>";
+                    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
 
                     tblHtml += "<td>";
                     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='textArticle_No_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "</span>";
                     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Item_Ids + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
                     tblHtml += "</td>";
 
                     tblHtml += "<td>";
@@ -158,15 +160,138 @@ function Get_Consolidate_Purchase_Orders(value) {
 
                     ////***************************************************************************////                                       
                    
-                    for (var j = 0; j < obj.PurchaseOrder.Sizes.length; j++) {
+                    debugger;
 
-                        tblHtml += "<td>";
-                        tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + j + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.Sizes[j].Quantity + "' id='textSize_Quantity_" + (j + 1) + "-" + j + "'' />";
-                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.Sizes[j].Size_Id + "' name='PurchaseOrder.Sizes[" + j + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + j + "' />";
-                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.Sizes[j].Amount + "' name='PurchaseOrder.Sizes[" + j + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + j + "' />";
-                        tblHtml += "</td>";
+                    for (var j = 0; j < 15; j++) {
+
+                        if (j < obj.PurchaseOrder.PurchaseOrders[i].Sizes.length) {
+
+                            if ((j + 1) == 1 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id1 != 0)
+                            {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity1 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id1 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount1 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 2 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id2 != 0)
+                            {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity2 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id2 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount2 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 3 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id3 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity3 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id3 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount3 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 4 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id4 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity4 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id4 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount4 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 5 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id5 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity5 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "''  onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id5 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount5 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 6 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id6 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity6 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id6 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount6 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 7 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id7 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity7 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id7 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount7 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 8 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id8 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity8 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id8 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount8 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 9 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id9 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity9 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id9 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount9 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 10 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id10 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity10 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id10 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount10 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 11 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id11 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity11 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id11 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount11 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 12 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id12 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity12 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id12 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount12 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 13 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id13 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity13 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id13 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount13 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 14 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id14 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity14 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id14 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount14 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+                            else if ((j + 1) == 15 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id15 != 0) {
+                                tblHtml += "<td>";
+                                tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity15 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' onfocusout='CalculateRowQuantity(" + i + ")' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id15 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount15 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                                tblHtml += "</td>";
+                            }
+
+
+                            //tblHtml += "<td>";
+                            //tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Quantity1 + "' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' />";
+                            //tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id1 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                            //tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Amount1 + "' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                            //tblHtml += "</td>";
+                        }
+
+                        else
+                        {
+                            tblHtml += "<td>";
+                            tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.Sizes[" + i + "].Quantity" + (j + 1) + "' value='0' id='textSize_Quantity_" + (j + 1) + "-" + i + "'' />";
+                            tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize_Id_" + (j + 1) + "-" + i + "' />";
+                            tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrder.Sizes[" + i + "].Amount" + (j + 1) + "' id='hdnAmount_" + (j + 1) + "-" + i + "' />";
+                            tblHtml += "</td>";
+                        }
+
                     }
-                   
                     ////***************************************************************************////
 
                    
@@ -414,6 +539,7 @@ function AddPurchaseOrderDetails() {
     tblHtml += "<td>";
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='textArticle_No_" + i + "'>" + artical_no + "</span>";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -658,6 +784,7 @@ function ContinuePurchaseOrderDetailsData(j) {
     tblHtml += "<td>";
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='textArticle_No_" + i + "'>" + artical_no + "</span>";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -990,8 +1117,10 @@ function ReArrangePurchaseOrderDetailsData() {
                 $(newTR).find("[id^='textArticle_No_']")[0].id = "textArticle_No_" + i;
                 $(newTR).find("[id^='hdnArticle_No_']")[0].id = "hdnArticle_No_" + i;
                 $(newTR).find("[id^='hdnArticle_No_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Article_No");
+                $(newTR).find("[id^='hdnItem_Ids_']")[0].id = "hdnItem_Ids_" + i;
+                $(newTR).find("[id^='hdnItem_Ids_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids");
             }
-
+            
             if ($(newTR).find("[id^='textColour_Name_']").length > 0) {
                 $(newTR).find("[id^='textColour_Name_']")[0].id = "textColour_Name_" + i;
                 $(newTR).find("[id^='textColour_Name_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Colour_Name");

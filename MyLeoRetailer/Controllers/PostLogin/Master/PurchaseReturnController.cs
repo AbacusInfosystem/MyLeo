@@ -121,9 +121,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 prViewModel.PurchaseReturn.Updated_Date = DateTime.Now;
 
-                prViewModel.PurchaseReturn.Purchase_Return_Id = _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+               _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
 
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
             }
             catch (Exception ex)
             {

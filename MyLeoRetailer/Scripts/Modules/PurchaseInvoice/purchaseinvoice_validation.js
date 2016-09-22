@@ -25,6 +25,12 @@
             },
 
             "PurchaseInvoice.Discount_Percentage": {
+                required: true,
+                number: true
+            },
+
+            "PurchaseInvoice.PurchaseInvoices[0].Quantity": {
+                required: true,
                 digits: true
             }
 
@@ -53,9 +59,19 @@
             },
 
             "PurchaseInvoice.Discount_Percentage": {
+                required: "Discount % is required.",
+                number: "Enter only numbers"
+            },
+
+            "PurchaseInvoice.PurchaseInvoices[0].Quantity": {
+                required: "Quantity is required.",
                 digits: "Enter only digits"
             }
         }
-    });    
+    });
+
+    $("#textSKU_No_0").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+
+    $("#textInvoice_No_0").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 
 });
