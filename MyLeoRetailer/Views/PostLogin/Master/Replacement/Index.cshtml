@@ -1,13 +1,10 @@
 ﻿@model MyLeoRetailer.Models.ReplacementViewModel
 
-@*<script src="~/Scripts/Modules/PurchaseInvoice/purchaseinvoice_events.js"></script>
-<script src="~/Scripts/Modules/PurchaseInvoice/purchaseinvoice_methods.js"></script>
-<script src="~/Scripts/Modules/PurchaseInvoice/purchaseinvoice_validation.js"></script>
-<script src="~/Scripts/Modules/common_methods.js"></script>*@
 
 <script src="~/Scripts/Modules/Replacement/Replacement_event.js"></script>
 <script src="~/Scripts/Modules/Replacement/Replacement_method.js"></script>
-
+<script src="~/Scripts/Modules/Replacement/Replacement_validation.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -47,37 +44,37 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
-                                    <select class="form-control select" name="PurchaseInvoice.Vendor_Id">
+                                    <select class="form-control select" name="Replacement.Vendor_Id" id="drpVendor_Id">
                                         <option value="">Select Vendor</option>
-                                        @*@foreach (var item in Model.PurchaseInvoice.Vendors)
-                        {
-                            if (Model.PurchaseInvoice.Vendor_Id == item.Vendor_Id)
-                            {
-                                <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
-                            }
-                            else
-                            {
-                                <option value="@item.Vendor_Id">@item.Vendor_Name</option>
-                            }
-                        }*@
+                                        @foreach (var item in Model.Vendors)
+                                        {
+                                            if (Model.Replacement.Vendor_Id == item.Vendor_Id)
+                                            {
+                                                <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                            }
+                                        }
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice No.</span>
-                                    <select class="form-control select" name="PurchaseInvoice.Vendor_Id">
-                                        <option value="">Select Vendor</option>
-                                        @*@foreach (var item in Model.PurchaseInvoice.Vendors)
-                        {
-                            if (Model.PurchaseInvoice.Vendor_Id == item.Vendor_Id)
-                            {
-                                <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
-                            }
-                            else
-                            {
-                                <option value="@item.Vendor_Id">@item.Vendor_Name</option>
-                            }
-                        }*@
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
+                                    <select class="form-control select" name="Replacement.Purchase_Invoice_Id">
+                                        <option value="">Select Invoice No.</option>
+                                        @foreach (var item in Model.PurchaseInvoices)
+                                            {
+                                                if (Model.Replacement.Purchase_Invoice_Id == item.Purchase_Invoice_Id)
+                                                {
+                                                    <option value="@item.Purchase_Invoice_Id" selected="selected">@item.Purchase_Invoice_No</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Purchase_Invoice_Id">@item.Purchase_Invoice_No</option>
+                                                }
+                                            }
                                     </select>
                                 </div>
 
@@ -90,19 +87,19 @@
 
                             <div class="block">
 
-                                <input type="hidden" class="form-control input-sm" name="PurchaseInvoice.Purchase_Invoice_Id" id="hdf_PurchaseInvoiceId" >
+                                <input type="hidden" class="form-control input-sm" name="Replacement.Replacement_Id" id="hdn_Replacement_Id">
 
 
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Replacement No.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Challan_No" id="txtPurchase_Order_No" @*value="@Model.PurchaseInvoice.Challan_No"*@ placeholder="Enter challan no." />
+                                    <input type="text" class="form-control input-sm" name="Replacement.Replacement_No" id="txtReplacement_No" value="@Model.Replacement.Replacement_No" placeholder="Enter Replacement No." required />
                                 </div>
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Replacement Date.</span>
                                     <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                        <input type="text" class="form-control datepicker" name="PurchaseInvoice.Challan_Date" id="txtChallan_Date" @*value="@((Model.PurchaseInvoice.Challan_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.PurchaseInvoice.Challan_Date.ToString("dd-MM-yyyy")))"*@ />
+                                        <input type="text" class="form-control datepicker" name="Replacement.Replacement_Date" id="txtReplacement_Date" value="@((Model.Replacement.Replacement_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.Replacement.Replacement_Date.ToString("dd-MM-yyyy")))" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
@@ -110,7 +107,7 @@
 
                         </div>
 
-                        
+
                     </div>
 
                     <div class="row">
@@ -137,6 +134,7 @@
                                         <th width="150px">Barcode No.</th>
                                         <th width="150px">SKU No.</th>
                                         <th width="70px">Article No.</th>
+                                        <th width="70px">Color</th>
                                         <th width="100px">Brand</th>
                                         <th width="100px">Category</th>
                                         <th width="100px">Sub Category</th>
@@ -145,59 +143,54 @@
                                         <th width="60px">Quantity</th>
                                         <th width="60px">WSR</th>
                                         <th width="60px">Total Amount</th>
-                                        <th width="150px">PO No.</th>
                                         <th width="100px">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr id="PurchaseInvoiceItemRow_0">
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Barcode" id="textBarcode_No_0">
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Barcode_No" id="textBarcode_No_0">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);">
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Article_No" id="textArticle_No_0" readonly />
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Article_No" id="textArticle_No_0" readonly />
+                                        </td>
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Color" id="textColor_0" readonly />
+                                            <input type="hidden" name="Replacements[0].Color_Id" id="hdnColor_Id_0" />
+                                        </td>
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Brand" id="textBrand_0" readonly />
+                                            <input type="hidden" name="Replacements[0].Brand_Id" id="hdnBrand_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Brand" id="textBrand_0" readonly />
-                                            <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Brand_Id" id="hdnBrand_Id_0" />
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Category" id="textCategory_0" readonly />
+                                            <input type="hidden" name="Replacements[0].Category_Id" id="hdnCategory_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Category" id="textCategory_0" readonly />
-                                            <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Category_Id" id="hdnCategory_Id_0" />
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].SubCategory" id="textSub_Category_0" readonly />
+                                            <input type="hidden" name="Replacements[0].SubCategory_Id" id="hdnSubCategory_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].SubCategory" id="textSub_Category_0" readonly />
-                                            <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].SubCategory_Id" id="hdnSubCategory_Id_0" />
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Size_Group_Name" id="textSize_Group_Name_0" readonly />
+                                            <input type="hidden" name="Replacements[0].Size_Group_Id" id="hdnSize_Group_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Size_Group_Name" id="textSize_Group_Name_0" readonly />
-                                            <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Size_Group_Id" id="hdnSize_Group_Id_0" />
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Size_Name" id="textSize_Name_0" readonly />
+                                            <input type="hidden" name="Replacements[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Size_Name" id="textSize_Name_0" readonly />
-                                            <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Size_Id" id="hdnSize_Id_0" />
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" />
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].WSR_Price" id="textWSR_Price_0" readonly />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].WSR_Price" id="textWSR_Price_0" readonly />
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Amount" id="textAmount_0" readonly />
-                                        </td>
-                                        <td>
-                                            <div class="form-group auto-complete">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" id="textPurchase_Order_No_0" placeholder="Enter PO no. to search" value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order">
-                                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                                    <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_Id" class="auto-complete-value" />
-                                                    <input type="hidden" id="hdnPurchase_Order_No_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" class="auto-complete-label" />
-                                                </div>
-                                            </div>
+                                            <input class="form-control input-sm" type="text" name="Replacements[0].Amount" id="textAmount_0" readonly />
                                         </td>
                                         <td>
                                             <button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>Delete</button>
@@ -228,13 +221,13 @@
                                             <label>Total Qty</label>
                                         </td>
                                         <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Total_Quantity" readonly id="textTotalQuantity_0">
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="Replacement.Total_Quantity" readonly id="textTotalQuantity_0">
                                         </td>
                                         <td width="40px">
                                             <label>Total Amount</label>
                                         </td>
                                         <td width="40px">
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="PurchaseInvoice.Total_Amount" readonly id="textTotalAmount_0">
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="Replacement.Total_Amount" readonly id="textTotalAmount_0">
                                         </td>
                                         <td width="150px"></td>
                                         <td width="90px"></td>
@@ -247,45 +240,45 @@
                     <div class="row">
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-top: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 100px;">
                             <div class="block">
-                              
+
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Person Name</span>
-                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="PurchaseInvoice.Discount_Percentage_Before_Due_Date" />
+                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="Replacement.Persone_Name" />
                                 </div>
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Transport Name</span>
-                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="PurchaseInvoice.Discount_Percentage_Before_Due_Date" />
+                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="Replacement.Transpoter_Name" />
                                 </div>
 
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Lr Number</span>
-                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="PurchaseInvoice.Discount_Percentage_Before_Due_Date" />
+                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="Replacement.Lr_No" />
                                 </div>
 
-                               
+
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment Due Date.</span>
                                     <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                        <input type="text" class="form-control datepicker" name="PurchaseInvoice.Payment_Due_Date" id="txtPayment_Due_Date" @*value="@((Model.PurchaseInvoice.Payment_Due_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.PurchaseInvoice.Payment_Due_Date.ToString("dd-MM-yyyy")))"*@ />
+                                        <input type="text" class="form-control datepicker" name="Replacement.Payment_Due_Date" id="txtPayment_Due_Date" value="@((Model.Replacement.Payment_Due_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.Replacement.Payment_Due_Date.ToString("dd-MM-yyyy")))" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
 
-                              
+
 
                             </div>
                         </div>
                     </div>
 
-                
+
                     <div class="row">
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
-                                <button type="button" id="btnSavePurchaseInvoice" class="btn btn-success active">Save</button>
-                                <button type="reset" id="btnCancelPurchaseInvoice" class="btn btn-danger active">Cancel</button>
+                                <button type="button" id="btnSaveReplacement" class="btn btn-success active">Save</button>
+                                <button type="reset" id="btnCancelReplacement" class="btn btn-danger active">Cancel</button>
                             </div>
                         </div>
                         <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">

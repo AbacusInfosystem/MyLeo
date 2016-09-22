@@ -212,6 +212,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        #endregion
         //Addition by swapnali | Date:14/09/2016
         public ActionResult ChangeBranch()
         {
