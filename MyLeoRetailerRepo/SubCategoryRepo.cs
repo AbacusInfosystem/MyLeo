@@ -113,5 +113,32 @@ namespace MyLeoRetailerRepo
 
         } 
 
+        //Gauravi 17-9-2016
+
+        public List<SubCategoryInfo> Get_SubCategory_Category_By_Id(int category_Id)
+        {
+            List<SubCategoryInfo> subcategoryInfos = new List<SubCategoryInfo>();
+
+            List<SqlParameter> sqlParamList = new List<SqlParameter>();
+            sqlParamList.Add(new SqlParameter("@Category_Id", category_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_SubCategory_Category_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                SubCategoryInfo subcategoryInfo = new SubCategoryInfo();
+
+                if (!dr.IsNull("Sub_Category"))
+                    subcategoryInfo.Category = Convert.ToString(dr["Sub_Category"]);
+
+                subcategoryInfo.IsActive = Convert.ToBoolean(dr["IsActive"]);
+
+                subcategoryInfos.Add(subcategoryInfo);
+            }
+            return subcategoryInfos;
+        } 
+
+        //End
+
 	}
 }

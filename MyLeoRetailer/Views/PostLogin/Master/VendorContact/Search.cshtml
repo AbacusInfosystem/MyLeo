@@ -41,13 +41,23 @@
 
                         <div class="col-md-5">
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor contact name</span>
                                 <input type="text" class="form-control" placeholder="Enter Vendor Contact name to search." name="Filter.Vendor_Contact_Name" />
                                 <input type="hidden" id="hdnVendorContact_Id" name="VendorContact.VendorContact_Id" value="@Model.VendorContact.VendorContact_Id">
 
+                            </div>*@
+                            @*Added by vinod mane on 20/09/2016*@
+                            <div class="form-group auto-complete">
+                                <div class="input-group">
+                                    <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Vendor_Contact_Name" id="txtVendor_Contact_Name" placeholder="Enter Vendor Contact name to search." data-table="VendorContact" data-col="VendorContact_Id,Vendor_Contact_Name" data-headernames="Vendor Contact">
+                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                    <input type="hidden" name="VendorContact.VendorContact_Id" id="hdnVendorContact_Id">
+                                    @*<input type="hidden" id="hdnColourId" value="" name="Filter.Color" class="auto-complete-value" />
+                                     <input type="hidden" id="hdnColourName" value="" name="Filter.Color" class="auto-complete-label" />*@
+                                </div>
                             </div>
-
+                            @*End*@
                         </div>
 
                         <div class="col-md-7" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">

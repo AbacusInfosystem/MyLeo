@@ -57,8 +57,14 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Employee_Name", Employee.Employee_Name));
 
-            sqlParam.Add(new SqlParameter("@Employee_DOB", Employee.Employee_DOB));
-
+            if (Employee.Employee_DOB != DateTime.MinValue)
+            {
+                sqlParam.Add(new SqlParameter("@Employee_DOB", Employee.Employee_DOB));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@Employee_DOB", null));
+            }
             sqlParam.Add(new SqlParameter("@Employee_Gender", Employee.Employee_Gender));
 
             sqlParam.Add(new SqlParameter("@Employee_Address", Employee.Employee_Address));
@@ -112,7 +118,12 @@ namespace MyLeoRetailerRepo
                 //Employee.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
                 Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
                 Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
-                Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+                //Modification
+                if ((dr["Employee_DOB"]!=DBNull.Value))
+                {
+                    Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
+                }
+                //end
                 Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
                 Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
                 Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
@@ -195,50 +206,68 @@ namespace MyLeoRetailerRepo
 
         //Addition by swapnali | Date:15/09/2016
       
-        public List<EmployeeInfo> Get_Branch_By_Id(int Employee_Id)
+        public List<EmployeeInfo> Get_Branch_By_Id(int Employee_Id,string Branch_Id)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
             parameters.Add(new SqlParameter("@Employee_ID", Employee_Id));
 
+            var array = Branch_Id.Trim().Split(',');
+
             List<EmployeeInfo> Emp_Branch_List = new List<EmployeeInfo>();
             DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Branch_By_EmployeeId.ToString(), CommandType.StoredProcedure);
-            //List<DataRow> drList = new List<DataRow>();
-            //drList = dt.AsEnumerable().ToList();
-            //foreach (DataRow dr in drList)
-            //{
-            //    Branch = Get_Branch_Values(dr);
-            //}
-            //return Branch;
             foreach (DataRow dr in dt.Rows)
             {
                 EmployeeInfo Employee_Branch = new EmployeeInfo();
                 Employee_Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
                 Employee_Branch.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+                Employee_Branch.Employee_Id = Employee_Id;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    //if (Branch_Id.Contains((Employee_Branch.Branch_Id).ToString()))
+
+                    if (array[i] == Employee_Branch.Branch_Id.ToString())
+                    {
+                        Employee_Branch.Is_Selected = 1;
+                    }
+                    //else 
+                    //{
+                    //    Employee_Branch.Is_Selected = 0;
+                    //}
+
+                    //if (Employee_Branch.Branch_Id.Equals(Branch_Id))
+                    //{
+                    //    Employee_Branch.Is_Selected = (int)1;
+                    //}
+                    //else
+                    //{
+                    //    Employee_Branch.Is_Selected = 0;
+                    //}
+                }
+
                 Emp_Branch_List.Add(Employee_Branch);
+               
             }
             return Emp_Branch_List;
 
         }
 
+        public string Save_Change_BranchId(List<EmployeeInfo> Employee)
+        {
+            string Branch_Ids = "";
 
-        //private List<EmployeeInfo> Get_Branch_Values(DataRow dr)
-        //{
-        //    List<EmployeeInfo> Employee_Branches = new List<EmployeeInfo>();
-        //    EmployeeInfo Employee_Branch = new EmployeeInfo();
+            foreach (var ids in Employee)
+            {
+                if (ids.Is_Selected == 1)
+                {
+                    Branch_Ids += ids.Branch_Id + ",";
+                }
 
-        //    Employee_Branch.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
-        //     foreach (DataRow dr in dr.Rows)
-        //    {
+            }
 
-            
-        //        Employee_Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+            return Branch_Ids;
+        }
 
-        //        Employee_Branch.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
-
-        //    }
-
-        //    return Employee_Branch;
-        //}
+       
 
         public DataTable Get_Branches(QueryInfo query_Details)
         {

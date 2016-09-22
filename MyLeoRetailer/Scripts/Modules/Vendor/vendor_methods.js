@@ -15,7 +15,7 @@
 
 
     //if ($("#frmBankDetails").valid()) {
-
+    if (bank_Name != "" && account_No != "" && branch_Name != "" && ifsc_Code != "") {//Code Added by Vinod Mane on 20/09/2016
         if (isEdit == "false" || isEdit == false) {
             var trrow = $("#tblBankDetails").find('tr').size() - 1;
 
@@ -60,6 +60,7 @@
             $("#hdnifsc_Code" + rowID).val(ifsc_Code)
 
         }
+    }//End
     //}
     ResetBankDetailsData();
 }
@@ -77,7 +78,6 @@ function ResetBankDetailsData() {
     $("#txtIFSC_Code").val('');
 
     $("#hdnIsEditBankDetails").val(false);
-
 }
 
 function EditBankDetailsData(rowId) {
@@ -163,6 +163,9 @@ function AddBrandDetails() {
     var brand_Id = $("#drpBrand").val();
     var statustring = "";
 
+
+    if (brand_Name != "Select Brand")// Code Added by Vinod Mane on 20/09/2016
+    {
     if (isEdit == "false" || isEdit == false) {
         var trrow = $("#tblBrandDetails").find('tr').size() - 1;
 
@@ -186,7 +189,7 @@ function AddBrandDetails() {
         $("#trBrandName" + rowID).text(brand_Name);
         $("#hdnbrand_Name" + rowID).val(brand_Name);
     }
-
+}//End
     ResetBrandDetailsData();
 }
 
@@ -255,30 +258,31 @@ function AddCategoryDetails() {
     var category_Id = $("#drpCategory").val();
     var statustring = "";
 
-    if (isEdit == "false" || isEdit == false) {
-        var trrow = $("#tblCategoryDetails").find('tr').size() - 1;
+    if (category_Name != "Select Category") {//Code Added by Vinod Mane on 20/09/2016
+        if (isEdit == "false" || isEdit == false) {
+            var trrow = $("#tblCategoryDetails").find('tr').size() - 1;
 
-        var tr = "<tr id='tr" + trrow + "'>";
+            var tr = "<tr id='tr" + trrow + "'>";
 
-        tr += "<td>";
-        tr += "<span id='trCategoryName" + trrow + "'>" + category_Name + "</span>";
-        tr += "<input type='hidden' id='hdncategory_Name" + trrow + "' name='Vendor.CategoryDetailsList[" + trrow + "].Category_Detail_Id' value='" + category_Id + "'>";
-        //tr += "<input type='hidden' id='hdnVendor_Category_Detail_Id" + trrow + "' name='Vendor.CategoryDetailsList[" + trrow + "].Category_Detail_Id' value=''>";
-        tr += "</td>";
+            tr += "<td>";
+            tr += "<span id='trCategoryName" + trrow + "'>" + category_Name + "</span>";
+            tr += "<input type='hidden' id='hdncategory_Name" + trrow + "' name='Vendor.CategoryDetailsList[" + trrow + "].Category_Detail_Id' value='" + category_Id + "'>";
+            //tr += "<input type='hidden' id='hdnVendor_Category_Detail_Id" + trrow + "' name='Vendor.CategoryDetailsList[" + trrow + "].Category_Detail_Id' value=''>";
+            tr += "</td>";
 
-        tr += "<td class='edit'>";
-        tr += "<button type='button' id='edit-category-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditCategoryDetailsData(" + trrow + ")'><i class='fa fa-pencil' ></i></button>";
-        tr += "<button type='button' id='delete-category-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteCategoryDetailsData(" + trrow + ")'><i class='fa fa-times' ></i></button>";
-        tr += "</td>";
-        tr += "</tr>";
+            tr += "<td class='edit'>";
+            tr += "<button type='button' id='edit-category-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditCategoryDetailsData(" + trrow + ")'><i class='fa fa-pencil' ></i></button>";
+            tr += "<button type='button' id='delete-category-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteCategoryDetailsData(" + trrow + ")'><i class='fa fa-times' ></i></button>";
+            tr += "</td>";
+            tr += "</tr>";
 
-        $('#tblCategoryDetails tr:last').after(tr)
-    }
-    else {
-        $("#trCategoryName" + rowID).text(category_Name);
-        $("#hdncategory_Name" + rowID).val(category_Name);
-    }
-
+            $('#tblCategoryDetails tr:last').after(tr)
+        }
+        else {
+            $("#trCategoryName" + rowID).text(category_Name);
+            $("#hdncategory_Name" + rowID).val(category_Name);
+        }
+    }//End
     ResetCategoryDetailsData();
 }
 
@@ -350,29 +354,30 @@ function AddSubCategoryDetails() {
 
     var statustring = "";
 
-    if (isEdit == "false" || isEdit == false) {
-        var trrow = $("#tblSubCategoryDetails").find('tr').size() - 1;
+    if (subcategory_Name != "Select Sub Category") {//Code Added by Vinod Mane on 20/09/2016
+        if (isEdit == "false" || isEdit == false) {
+            var trrow = $("#tblSubCategoryDetails").find('tr').size() - 1;
 
-        var tr = "<tr id='tr" + trrow + "'>";
+            var tr = "<tr id='tr" + trrow + "'>";
 
-        tr += "<td>";
-        tr += "<span id='trSubCategoryName" + trrow + "'>" + subcategory_Name + "</span>";
-        tr += "<input type='hidden' id='hdnsubcategory_Name" + trrow + "' name='Vendor.SubCategoryDetailsList[" + trrow + "].SubCategory_Id' value='" + subcategory_Id + "'>";
-        tr += "</td>";
+            tr += "<td>";
+            tr += "<span id='trSubCategoryName" + trrow + "'>" + subcategory_Name + "</span>";
+            tr += "<input type='hidden' id='hdnsubcategory_Name" + trrow + "' name='Vendor.SubCategoryDetailsList[" + trrow + "].SubCategory_Id' value='" + subcategory_Id + "'>";
+            tr += "</td>";
 
-        tr += "<td class='edit'>";
-        tr += "<button type='button' id='edit-subcategory-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditSubCategoryDetailsData(" + trrow + ")'><i class='fa fa-pencil' ></i></button>";
-        tr += "<button type='button' id='delete-subcategory-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteSubCategoryDetailsData(" + trrow + ")'><i class='fa fa-times' ></i></button>";
-        tr += "</td>";
-        tr += "</tr>";
+            tr += "<td class='edit'>";
+            tr += "<button type='button' id='edit-subcategory-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditSubCategoryDetailsData(" + trrow + ")'><i class='fa fa-pencil' ></i></button>";
+            tr += "<button type='button' id='delete-subcategory-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteSubCategoryDetailsData(" + trrow + ")'><i class='fa fa-times' ></i></button>";
+            tr += "</td>";
+            tr += "</tr>";
 
-        $('#tblSubCategoryDetails tr:last').after(tr)
-    }
-    else {
-        $("#trSubCategoryName" + rowID).text(subcategory_Name);
-        $("#hdnsubcategory_Name" + rowID).val(subcategory_Name);
-    }
-
+            $('#tblSubCategoryDetails tr:last').after(tr)
+        }
+        else {
+            $("#trSubCategoryName" + rowID).text(subcategory_Name);
+            $("#hdnsubcategory_Name" + rowID).val(subcategory_Name);
+        }
+    }//End
     ResetSubCategoryDetailsData();
 }
 
@@ -531,3 +536,25 @@ function Save_Vendor() {
 
 
 }
+
+//Added By Vinod Mane on 21/09/2016
+function Get_SubCategorylist(Caterory_id)
+{
+
+    cache: false,
+         $.post('/Vendor/Get_SubCategorylist', { 'Caterory_id': Caterory_id },
+              function (result) {
+                  var options = '';
+                  var arr = new Array();
+                  for (var i = 0; i < result.length; i++) {
+                      arr.push(result[i]);
+                  }
+                  options += '<option value="' + "" + '">' + "Select Sub Category" + '</option>';
+                  for (var i = 0; i < arr.length; i++) {
+                      options += '<option  value="' + arr[i].SubCategory_Id + '">' + arr[i].SubCategory_Name + '</option>';
+                  }
+                  $('#drpSubCategory').empty().append(options);
+              });
+
+}
+//end

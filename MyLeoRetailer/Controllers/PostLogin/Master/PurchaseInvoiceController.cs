@@ -81,13 +81,32 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(piViewModel.PurchaseInvoice, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult Get_Vendor_Details_By_Id(int Vendor_Id)
+        {
+            PurchaseInvoiceViewModel piViewModel = new PurchaseInvoiceViewModel();
+
+            piViewModel.PurchaseInvoice = _purchaseinvoiceRepo.Get_Vendor_Detalis_By_Id(Vendor_Id);
+
+            return Json(piViewModel.PurchaseInvoice, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Insert_Purchase_Invoice(PurchaseInvoiceViewModel piViewModel)
         {
             try
             {
                 Set_Date_Session(piViewModel.PurchaseInvoice);
+                
+                piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                //piViewModel.PurchaseInvoice.Purchase_Invoice_Id = _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+                piViewModel.PurchaseInvoice.Created_By = piViewModel.Cookies.User_Id;
+
+                piViewModel.PurchaseInvoice.Created_Date = DateTime.Now;
+
+                piViewModel.PurchaseInvoice.Updated_By = piViewModel.Cookies.User_Id;
+
+                piViewModel.PurchaseInvoice.Updated_Date = DateTime.Now;
+
+                piViewModel.PurchaseInvoice.Purchase_Invoice_Id = _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
 
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
             }
@@ -129,7 +148,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 piViewModel.PurchaseInvoice = _purchaseinvoiceRepo.Get_Purchase_Invoice_By_Id(piViewModel.PurchaseInvoice.Purchase_Invoice_Id);
 
-                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_Item_By_Id(piViewModel.PurchaseInvoice.Purchase_Invoice_Item_Id);
+                //piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_Item_By_Id(piViewModel.PurchaseInvoice.Purchase_Invoice_Item_Id);
 
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
             }
@@ -177,6 +196,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(piViewModel));
         }
+
+
 
     }
 }

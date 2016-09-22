@@ -24,10 +24,11 @@ namespace MyLeoRetailer.Models
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
+
             vendorinfo = new VendorInfo();
 
             this.Vendors = new List<VendorInfo>();
-
+           
             Grid_Detail.Pager.DivObject = "divVendorContactPager";
 
             Grid_Detail.Pager.CallBackMethod = "Get_Vendor_Contacts";
@@ -50,6 +51,11 @@ namespace MyLeoRetailer.Models
 			get;
 			set;
 		}
+        public List<VendorContactInfo> Vendor_Contact// Added by vinod mane on 21/09/2016
+        {
+            get;
+            set;
+        }
 
         public Filter_Vendor_Contact Filter
 		{
@@ -63,6 +69,7 @@ namespace MyLeoRetailer.Models
 			set;
 		}
 
+
         public VendorInfo vendorinfo
         {
             get;
@@ -74,7 +81,7 @@ namespace MyLeoRetailer.Models
             get;
             set;
         }
-
+       
 	}
         public class Filter_Vendor_Contact
 	{

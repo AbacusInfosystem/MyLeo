@@ -39,9 +39,11 @@ namespace MyLeoRetailer.Common
 			FriendlyMessage SYS08 = new FriendlyMessage("SYS08", MessageType.Error, "Entered User is not an Valid Active directory Member");
 			hash.Add("SYS08", SYS08);
 
-
             FriendlyMessage SYS010 = new FriendlyMessage("SYS010", MessageType.Information, "You have successfully logged out!");
             hash.Add("SYS010", SYS010);
+
+            FriendlyMessage SYS011 = new FriendlyMessage("SYS011", MessageType.Information, "You dont have access to this functionality.");
+            hash.Add("SYS011", SYS011);
 
 			#endregion
 
@@ -148,6 +150,12 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
             hash.Add("EMP02", EMP02);
+
+            //Addition by swapnali | Date:16/09/2016
+            FriendlyMessage EMP03 = new FriendlyMessage("EMP03", MessageType.Success, "Branch Change successfully.");
+            hash.Add("EMP03", EMP03);
+            //End
+
             #endregion
 
             #region Employee mapping
@@ -253,6 +261,7 @@ namespace MyLeoRetailer.Common
 
 
             #endregion
+
             #region Purchase Order
 
             FriendlyMessage PO01 = new FriendlyMessage("PO01", MessageType.Success, "Purchase Order added successfully.");
@@ -292,7 +301,45 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
-		}
+            #region Purchase Order Request
+
+            FriendlyMessage POREQ01 = new FriendlyMessage("POREQ01", MessageType.Success, "Purchase Order Request added successfully.");
+            hash.Add("POREQ01", POREQ01);
+
+            FriendlyMessage POREQ02 = new FriendlyMessage("POREQ02", MessageType.Success, "Purchase Order Request updated successfully.");
+            hash.Add("POREQ02", POREQ02);
+
+            FriendlyMessage POREQ03 = new FriendlyMessage("POREQ03", MessageType.Information, "No records found.");
+            hash.Add("POREQ03", POREQ03);
+
+            #endregion
+
+            #region Sales Invoice
+
+            FriendlyMessage SI01 = new FriendlyMessage("SI01", MessageType.Success, "Sales Invoice Added successfully.");
+            hash.Add("SI01", SI01);    
+
+            #endregion
+
+
+            #region Sales Return
+
+            FriendlyMessage SR01 = new FriendlyMessage("SR01", MessageType.Success, "Sales Return Added successfully.");
+            hash.Add("SR01", SR01);
+
+            #endregion
+
+            #region Purchase Return Request
+
+            FriendlyMessage PRR01 = new FriendlyMessage("PRR01", MessageType.Success, "Purchase Return Request added successfully.");
+            hash.Add("PRR01", PRR01);
+
+            FriendlyMessage PRR02 = new FriendlyMessage("PRR02", MessageType.Success, "Purchase Return Request updated successfully.");
+            hash.Add("PRR02", PRR02);
+
+            #endregion
+
+        }
 
 		public static FriendlyMessage Get(string code)
 		{

@@ -1,0 +1,99 @@
+﻿@model MyLeoRetailer.Models.PurchaseOrderRequestViewModel
+
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/PurchaseOrderRequest/search_purchaseorderRequest_events.js"></script>
+<script src="~/Scripts/Modules/PurchaseOrderRequest/search_purchaseorderRequest_methods.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Function Module</a></li>
+    <li class="active">Purchase Order Request Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Order Request Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmPurchaseOrderRequest">
+
+                    <div class="row">
+
+                        <div class="col-md-5">
+
+                            <input type="hidden" id="hdnPurchaseOrderRequestId" name="PurchaseOrderRequest.Purchase_Order_Request_Id" value="@Model.PurchaseOrderRequest.Purchase_Order_Request_Id" />
+
+                            @*<div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
+                                <input type="text" class="form-control" name="Filter.Vendor_Id" placeholder="Select vendor name to search." />
+                                
+                            </div>*@
+
+                            <input type="hidden" class="form-control" name="Filter.Vendor_Id" />
+
+                            <div class="form-group">
+                                <select class="form-control select" name="PurchaseOrderRequest.Vendor_Id" onchange="Set_Vendor_Id(this.value)">
+                                    <option value="">Select Vendor</option>
+                                    @foreach (var item in Model.PurchaseOrderRequest.Vendors)
+                                    {
+                                        if (Model.Filter.Vendor_Id == item.Vendor_Id)
+                                        {
+                                            <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-7" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                            <div class="btn-group">
+                                <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseOrderRequest">Create</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseOrderRequestPager">
+
+
+        </div>
+
+    </div>
+
+</div>

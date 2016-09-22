@@ -107,11 +107,13 @@ function Get_Color_By_Id(obj)
 
 	$(obj).addClass("active");
 
-	$("[name='Color.Colour']").val($(obj).text()); 
+	//$("[name='Color.Colour']").val($(obj).text()); 
 
-	$("[name='Color.Colour_Id']").val($(obj).attr("data-identity"));
+	//$("[name='Color.Colour_Id']").val($(obj).attr("data-identity"));
 
-	var Color_Id = $("[name='Color.Colour_Id']").val();
+    //var Color_Id = $("[name='Color.Colour_Id']").val();
+
+	var Color_Id = $(obj).attr("data-identity");
 
 	$.ajax({  
         
@@ -137,6 +139,13 @@ function Get_Color_By_Id(obj)
 	            $("[name='Color.IsActive']")[0].checked = false;
 	            $("[name='Color.IsActive']").val(false);
 	        }
+	        
+	        $("[name='Color.Colour']").val(obj.Color.Colour);
+
+	        $("[name='Color.Colour_Id']").val(obj.Color.Colour_Id);
+
+	        Friendly_Messages(obj);
+
 	    }
 	});
 

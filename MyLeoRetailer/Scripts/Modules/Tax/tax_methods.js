@@ -110,26 +110,21 @@ function Get_Tax_By_Id(obj) {
 
     $(obj).addClass("active");
 
-    $("[name='Tax.Tax_Name']").val($(obj).text());
+    //$("[name='Tax.Tax_Name']").val($(obj).text());
 
-    //$("[name='Color.Colour_Code']").val($(obj).text());
+    //$("[name='Tax.Tax_Id']").val($(obj).attr("data-identity"));
 
-    $("[name='Tax.Tax_Id']").val($(obj).attr("data-identity"));
+    //var Tax_Id = $("[name='Tax.Tax_Id']").val();
 
-    var Tax_Id = $("[name='Tax.Tax_Id']").val();
+    var Tax_Id = $(obj).attr("data-identity");
 
     $.ajax({
 
         url: "/Tax/Get_Tax_By_Id",
 
-        data: { Tax_Id: Tax_Id },//JSON.stringify({ Color_Id: $("[name='Color.Colour_Id']").val() }),
-
-        //dataType: 'json',
+        data: { Tax_Id: Tax_Id },
 
         type: 'POST',
-
-        //contentType: 'application/json',
-        //contentType: 'application/json; charset=utf-8',
 
         success: function (response) {
 
@@ -149,6 +144,13 @@ function Get_Tax_By_Id(obj) {
                 document.getElementById('Flag').checked = true;
             }
             //End
+
+            $("[name='Tax.Tax_Name']").val(obj.Tax.Tax_Name);
+
+            $("[name='Tax.Tax_Id']").val(obj.Tax.Tax_Id);
+
+            Friendly_Messages(obj);
+
         }
     });
 
