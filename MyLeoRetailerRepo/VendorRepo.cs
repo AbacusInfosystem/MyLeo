@@ -448,22 +448,22 @@ namespace MyLeoRetailerRepo
         //}
 
         //Gauravi 7-9-2016
-        //public List<VendorInfo> Get_Vendors()
-        //{
-        //    List<VendorInfo> Vendors = new List<VendorInfo>();
-        //    DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Vendor.ToString(), CommandType.StoredProcedure);
-        //    foreach (DataRow dr in dt.Rows)
-        //    {
-        //        VendorInfo Vendor = new VendorInfo();
+        public List<VendorInfo> Get_Vendors()
+        {
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Vendor.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                VendorInfo Vendor = new VendorInfo();
 
-        //        Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+                Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
 
-        //        Vendor.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+                Vendor.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
 
-        //        Vendors.Add(Vendor);
-        //    }
-        //    return Vendors;
-        //}
+                Vendors.Add(Vendor);
+            }
+            return Vendors;
+        }
 
         public List<VendorInfo> Get_Agents()
         {
