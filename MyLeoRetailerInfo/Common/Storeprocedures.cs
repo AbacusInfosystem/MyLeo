@@ -26,6 +26,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Sub_Category,
         sp_Update_Sub_Category,
         sp_Get_Sub_Category_By_Id,
+            sp_Get_Sub_Category_By_Category_Id,//Added by Vinod on 21/09/2016
 
         //Gauravi  12-9-2016
 
@@ -310,7 +311,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Update_Purchase_Return_Request,
         sp_Get_Purchase_Return_Request_By_Id,
         sp_Insert_Purchase_Return_Request_Item,
-        sp_Get_Purchase_Return_Request,
+        sp_Get_Purchase_Return_Requests,
 
 
         #endregion

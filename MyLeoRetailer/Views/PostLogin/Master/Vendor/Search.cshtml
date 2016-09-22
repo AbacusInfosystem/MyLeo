@@ -46,12 +46,23 @@
 
                             <div class="col-md-10">
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="Filter.Vendor_Name" placeholder="Enter Vendor to search." />
-                                    <input type="hidden" name="Filter.Vendor_Id" id="hdnVendorID">
-                                    @*<input type="hidden" id="hdnVendorId" value="@Model.Vendor.Vendor_Id" name="VendorFilter.Vendor_Id" class="auto-complete-value" />*@
-                                </div>
+                                @*<div class="form-group">
+                                        <input type="text" class="form-control" name="Filter.Vendor_Name" placeholder="Enter Vendor to search." />
+                                        <input type="hidden" name="Filter.Vendor_Id" id="hdnVendorID">
+                                        @*<input type="hidden" id="hdnVendorId" value="@Model.Vendor.Vendor_Id" name="VendorFilter.Vendor_Id" class="auto-complete-value" />
+                                    </div>*@
 
+                                @* LookUp Code Added by Vinod Mane on 09/09/2016*@
+                                <div class="form-group auto-complete">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Vendor_Name" id="txtVendor_Name" placeholder="Enter Vendor to search." data-table="Vendor" data-col="Vendor_ID,Vendor_Name" data-headernames="Vendor">
+                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                        <input type="hidden" name="Filter.Vendor_Id" id="hdnVendorID">                                        
+                                        @*<input type="hidden" id="hdnColourId" value="" name="Filter.Color" class="auto-complete-value" />
+                                        <input type="hidden" id="hdnColourName" value="" name="Filter.Color" class="auto-complete-label" />*@
+                                    </div>
+                                </div>
+                                @*End*@
                             </div>
 
                             <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
@@ -59,7 +70,8 @@
                                 <div class="btn-group">
                                     @*<button type="button" id="btnCreate" class="btn btn-success active">Create</button>*@
                                     <a class="btn btn-success active" role="button" href="@Url.Action("Index", "Vendor")">Create </a>
-                                    <button type="button" class="btn btn-danger active" id="btnEdit">Edit</button>
+                                    <button class="btn btn-danger active" style="display:none;" id="btnedit">Edit</button>@* Code Added by Vinod Mane on 20/09/2016 Set display-none*@
+                                    
                                 </div>
 
                             </div>
@@ -75,47 +87,47 @@
         </div>
 
 
-                <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
 
-                    @*<h4 style="margin-top: 1px; padding-left: 15px;">Vendor Listing</h4>
+            @*<h4 style="margin-top: 1px; padding-left: 15px;">Vendor Listing</h4>
 
-                    <div class="row">
+                <div class="row">
 
-                        <div class="col-md-5">
+                    <div class="col-md-5">
 
-                            <div class="form-group">
+                        <div class="form-group">
 
-                                <input type="text" class="form-control" name="Filter.Vendor_Name" placeholder="Enter Vendor to search" />
-
-                            </div>
+                            <input type="text" class="form-control" name="Filter.Vendor_Name" placeholder="Enter Vendor to search" />
 
                         </div>
 
-                    </div>*@
+                    </div>
 
-                    @*<div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+                </div>*@
 
-                        <div class="list-group border-bottom push-down-20" id="Vendor_Grid">
+            @*<div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                    <div class="list-group border-bottom push-down-20" id="Vendor_Grid">
 
 
-                        </div>
+                    </div>
 
-                    </div>*@
+                </div>*@
 
-                
+
 
         </div>
 
 
-      
-            <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-            </div> 
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-            <div class="col-md-12" style="padding: 0px;text-align:center;" id="divVendorPager">
+        </div>
 
-            </div>
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divVendorPager">
 
-     </div>
+        </div>
+
+    </div>
 
 </div>

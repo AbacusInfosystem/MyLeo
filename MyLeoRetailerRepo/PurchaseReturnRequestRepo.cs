@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.PurchaseReturnRequest;
+using MyLeoRetailerRepo.Common;
 using MyLeoRetailerRepo.Utility;
 using System;
 using System.Collections.Generic;
@@ -97,11 +98,7 @@ namespace MyLeoRetailerRepo
 
             return sqlParams;
         }
-
-        
-        
-
-
+    
         private PurchaseReturnRequestItemInfo Get_Purchase_Return_Items_By_SKU_Values(DataRow dr)
         {
             PurchaseReturnRequestItemInfo PurchaseReturnRequestItem = new PurchaseReturnRequestItemInfo();
@@ -201,14 +198,19 @@ namespace MyLeoRetailerRepo
             return PurchaseReturnRequestItem;
         }
 
-        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests(ref Pagination_Info Pager)
+
+        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests(ref Pagination_Info Pager, int Branch_Id, int Vendor_Id)
         {
             List<PurchaseReturnRequestInfo> PurchaseReturnRequests = new List<PurchaseReturnRequestInfo>();
 
-            DataTable dt = _sqlRepo.ExecuteDataTable(null, Storeprocedures.sp_Get_Purchase_Return_Request.ToString(), CommandType.StoredProcedure);
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            sqlParams.Add(new SqlParameter("@Branch_Id", Branch_Id));
+            sqlParams.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            DataTable dt = _sqlRepo.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Return_Requests.ToString(), CommandType.StoredProcedure);
             
-            //foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
-            foreach (DataRow dr in dt.Rows)
+            //foreach (DataRow dr in dt.Rows)
+            foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
             {
                 PurchaseReturnRequests.Add(Get_Purchase_Return_Request_Values(dr));
             }

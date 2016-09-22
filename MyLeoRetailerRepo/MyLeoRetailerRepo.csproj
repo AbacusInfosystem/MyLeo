@@ -46,6 +46,7 @@
     <Compile Include="BrandRepo.cs" />
     <Compile Include="CategoryRepo.cs" />
     <Compile Include="ColorRepo.cs" />
+    <Compile Include="Common\CommonMethods.cs" />
     <Compile Include="CookiesRepo.cs" />
     <Compile Include="EmployeeRepo.cs" />
     <Compile Include="GiftVoucherRepo.cs" />

@@ -475,8 +475,7 @@ function Bind_Purchase_Return_Items_Data(data)
     {
         //$("#tblPurchaseReturnItems").find("[id='PurchaseReturnItemRow_" + i + "']").remove();
         $('#tblPurchaseReturnItems tbody tr').remove();
-        alert(data.PurchaseReturns.length);
-
+       
         for (i = 0; i < data.PurchaseReturns.length; i++) {
 
             trHtml += "<tr id='PurchaseReturnItemRow_" + i + "' class='item-data-row'>";

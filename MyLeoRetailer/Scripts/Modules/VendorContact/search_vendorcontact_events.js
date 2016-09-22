@@ -18,7 +18,7 @@ $(function () {
 
 
     $(document).on('change', '[name="Vendor_Contact_List"]', function (event) {
-        alert();
+        //alert(); Commented by Vinod Mane on 19/09/2016
         if ($(this).prop('checked')) {
             $("#hdnVendorContact_Id").val(this.value);
             $("#btnVendorContact").show();
