@@ -32,7 +32,7 @@
 
         <div class="row">
 
-            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 185px;">
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
 
                 <div class="block">
 
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 185px;">
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
 
                 <div class="block">
                     <h4 style="margin-top: 0px;">Supply time period.</h4>
@@ -112,7 +112,7 @@
 
             </div>
 
-            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 185px;">
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
 
                 <div class="block">
                     <h4 style="margin-top: 0px;">Vendor / Transporter details.</h4>
@@ -121,6 +121,7 @@
 
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor name.</span>
                         <select class="form-control select" name="PurchaseOrder.Vendor_Id" onchange="Set_Vendor_Id(this.value)">
                             <option value="">Select Vendor</option>
                             @foreach (var item in Model.PurchaseOrder.Vendors)
@@ -139,6 +140,7 @@
 
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Agent name.</span>
                         <select class="form-control select" name="PurchaseOrder.Agent_Id">
                             <option value="">Select Agent</option>
                             @foreach (var item in Model.PurchaseOrder.Agents)
@@ -157,6 +159,7 @@
 
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Transporter name.</span>
                         <select class="form-control select" name="PurchaseOrder.Transporter_Id">
                             <option value="">Select Transporter</option>
                             @foreach (var item in Model.PurchaseOrder.Transporters)
@@ -177,7 +180,7 @@
 
             </div>
 
-            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 185px;">
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
 
                 <div class="block">
                     <h4 style="margin-top: 0px;">Shipping details.</h4>
@@ -187,7 +190,7 @@
                         @*<textarea class="form-control" rows="5" placeholder="Shipping address."></textarea>*@
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping address.</span>
                         <select class="form-control select" name="PurchaseOrder.Shipping_Address">
-                            <option value="0">Select Location</option>
+                            <option value="">Select Location</option>
                             @foreach (var item in Model.PurchaseOrder.Branches)
                             {
                                 if (Model.PurchaseOrder.Shipping_Address == item.Branch_Name)
@@ -208,7 +211,7 @@
 
         </div>
 
-        <div class="row">
+        <div class="row ">
             <div class="col-md-12">
                 <div class="block" style="margin-bottom: 0px; margin-top: 15px;">
 
@@ -218,15 +221,15 @@
         </div>
               
         <div class="row">
-            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 80px;">
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
 
                 <div class="block">
 
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size group.</span>
-                        <select class="form-control select" id="drpSize_Group" name="PurchaseOrder.Size_Group_Id">
-                            <option value="0">Select Size Group</option>
+                        <select class="form-control select" id="drpSize_Group" name="PurchaseOrder.Size_Group_Id" onchange="Show_Button()">
+                            <option value="">Select Size Group</option>
                             @foreach (var item in Model.PurchaseOrder.SizeGroups)
                             {
                                 if (Model.PurchaseOrder.Size_Group_Id == item.Size_Group_Id)
@@ -245,47 +248,47 @@
 
             </div>
 
-            <div class="col-md-9" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 80px;">
+            <div class="col-md-9" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
 
                 <div class="block" style="margin-top:26px;">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success active" id="btnAddSizesPurchaseOrder">Add Sizes</button>
+                        <button type="button" class="btn btn-success active" id="btnAddSizesPurchaseOrder" disabled>Add Sizes</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-           
-            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 150px;">
+        <div class="row Details">
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
 
                 <div class="block">
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No">
-                            <option value="0">Select Article No.</option>
+                        <select class="form-control select" id="drpArticle_No" name="PurchaseOrder.Article_No">
+                            <option value="">Select Article No.</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
-                        <select class="form-control" id="drpCenter_Size" name="PurchaseOrder.Center_Size">
+                        <select class="form-control select" id="drpCenter_Size" name="PurchaseOrder.Center_Size">
                             <option value="">Select Center Size</option>
                         </select>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Center_Size" id="textCenter_Size" placeholder="Enter center size." />*@
-                    </div> 
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 150px;">
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
 
                 <div class="block">
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
-                        <select class="form-control" id="drpBrand" name="PurchaseOrder.Brand_Id">
-                            <option value="0">Select Brand</option>                            
+                        <select class="form-control select" id="drpBrand" name="PurchaseOrder.Brand_Id">
+                            <option value="">Select Brand</option>
                         </select>
                     </div>
 
@@ -296,17 +299,17 @@
                 </div>
             </div>
 
-            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 150px;">
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
 
                 <div class="block">
-                   
+
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
-                        <select class="form-control" id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
-                            <option value="0">Select Category</option>
+                        <select class="form-control select" id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
+                            <option value="">Select Category</option>
                         </select>
-                    </div>                    
+                    </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size difference.</span>
@@ -315,16 +318,16 @@
                 </div>
             </div>
 
-            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 150px;">
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
 
                 <div class="block">
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Subcategory.</span>
-                        <select class="form-control" id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
-                            <option value="0">Select Sub Category</option>                            
+                        <select class="form-control select" id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
+                            <option value="">Select Sub Category</option>
                         </select>
                     </div>
-                    
+
                     <div class="block" style="margin-top:20px;">
                         <div class="btn-group">
                             <button type="button" class="btn btn-success active" id="btnAddDetailsPurchaseOrder">Add Details</button>

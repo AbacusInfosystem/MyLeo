@@ -5,6 +5,14 @@
                 required: true
             },
 
+            "PurchaseReturn.Vendor_Id": {
+                required: true
+            },
+
+            "PurchaseReturn.Transporter_Id": {
+                required: true
+            },
+
             "PurchaseReturn.Lr_No": {
                 required: true
             },
@@ -28,6 +36,14 @@
 
             "PurchaseReturn.Debit_Note_No": {
                 required: "Debit note no is required."
+            },
+
+            "PurchaseReturn.Vendor_Id": {
+                required: "Vendor name is required."
+            },
+
+            "PurchaseReturn.Transporter_Id": {
+                required: "Transporter name is required."
             },
 
             "PurchaseReturn.Lr_No": {
