@@ -111,10 +111,11 @@ namespace MyLeoRetailerInfo.Product
     {
         public ProductImagesInfo()
         {
+            Product_Image_Id = new int[4];
             Product_Image = new string[4];
             Is_Default = new string[4]; 
         }
-        public int Product_Image_Id { get; set; }
+        public int[] Product_Image_Id { get; set; }
 
         public int Product_Id { get; set; } 
 

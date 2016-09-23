@@ -208,50 +208,55 @@
                 <div class="gallery" id="links">
                     <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
                         <div class="image" id="image_preview">
-                            @if (Model.Product.ProductImage.Product_Image[0] != null)
+                            @if (Model.Product.ProductImage.Product_Image[0] != null && Model.Product.ProductImage.Product_Image[0] != "")
                             {
-                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[0]" width="70" height="90" id="img_0" alt="Product image 1" />
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[0]" class="ImgSrc" width="70" height="140" id="img_0" alt="Product image 1" />
                             }
-
                             else
                             {
-                                <img src="/UploadedFiles/" id="img_0" alt="Product image 1" width="70" height="90" />
+                                <img src="/UploadedFiles/" id="img_0" alt="Product image 1" width="70" height="140" />
                             }
                             <input type="hidden" id="hdn_ImgSrc_0" name="Product.ProductImage.Image_Src[0]">
-                            <input type="hidden" id="hdn_Img_0" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[0]">
+                            <input type="hidden" id="hdn_Img_0" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[0]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_0" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[0]" class="prod_img_id">
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[0] == "false" || Model.Product.ProductImage.Is_Default[0] == null)
+                                @if (Model.Product.ProductImage.Is_Default[0] == "False" || Model.Product.ProductImage.Is_Default[0] == null || Model.Product.ProductImage.Is_Default[0] == "")
                                 {
                                     <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
                                 }
                                 else
                                 {
                                     <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
-                                } 
-                                <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                }
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
                             </ul>
-                            <input type="text" id="hdnDefault" value="false" name="Product.ProductImage.Is_Default" class="Is_Default" />
+                            <input type="hidden" id="hdnDefault" name="Product.ProductImage.Is_Default" value="@Model.Product.ProductImage.Is_Default[0]" class="Is_Default" />
                         </div>
-                        <div class="meta">
-                            <strong>Music picture 1</strong>
-                            <span>Other description</span>
-                        </div>
+                        @*<div class="meta">
+                                <strong>Music picture 1</strong>
+                                <span>Other description</span>
+                            </div>*@
                     </a>
 
                     <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
-                        <div class="image">
-                            @if (Model.Product.ProductImage.Product_Image[1] != null)
+                        <div class="image" id="image_preview">
+                            @if (Model.Product.ProductImage.Product_Image[1] != null && Model.Product.ProductImage.Product_Image[1] != "")
                             {
-                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[1]" width="70" height="90" id="img_1" alt="Product image 2" />
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[1]" class="ImgSrc" width="70" height="140" id="img_1" alt="Product image 2" />
                             }
                             else
                             {
-                                <img src="/UploadedFiles/" id="img_1" alt="Product image 2" width="70" height="90" />
+                                <img src="/UploadedFiles/" id="img_1" alt="Product image 2" width="70" height="140" />
                             }
                             <input type="hidden" id="hdn_ImgSrc_1" name="Product.ProductImage.Image_Src[1]">
-                            <input type="hidden" id="hdn_Img_1" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[1]">
+                            <input type="hidden" id="hdn_Img_1" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[1]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_1" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[1]" class="prod_img_id">
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[1] == "false" || Model.Product.ProductImage.Is_Default[0] == null)
+                                @if (Model.Product.ProductImage.Is_Default[1] == "False" || Model.Product.ProductImage.Is_Default[1] == null || Model.Product.ProductImage.Is_Default[1] == "")
                                 {
                                     <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
                                 }
@@ -259,31 +264,36 @@
                                 {
                                     <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
                                 }
-                                <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
                             </ul>
-                            <input type="text" id="hdnDefault" value="false" name="Product.ProductImage.Is_Default" class="Is_Default" />
+                            <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[1]" name="Product.ProductImage.Is_Default" class="Is_Default" />
                         </div>
-                        <div class="meta">
-                            <strong>Music picture 1</strong>
-                            <span>Other description</span>
-                        </div>
+                        @*<div class="meta">
+                                <strong>Music picture 1</strong>
+                                <span>Other description</span>
+                            </div>*@
                     </a>
 
                     <a class="gallery-item" href="assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
-                        <div class="image">
-                            @if (Model.Product.ProductImage.Product_Image[2] != null)
+                        <div class="image" id="image_preview">
+                            @if (Model.Product.ProductImage.Product_Image[2] != null && Model.Product.ProductImage.Product_Image[2] != "")
                             {
-                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[2]" id="img_2" width="70" height="90" alt="Product image 3" />
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[2]" class="ImgSrc" id="img_2" width="70" height="140" alt="Product image 3" />
                             }
                             else
                             {
-                                <img src="/UploadedFiles/" width="70" height="90" id="img_2" alt="Product image 3" />
+                                <img src="/UploadedFiles/" width="70" height="140" id="img_2" alt="Product image 3" />
                             }
-                            <input type="hidden" id="hdn_Img_2" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[2]">
+                            <input type="hidden" id="hdn_Img_2" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[2]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_2" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[2]" class="prod_img_id">
                             <input type="hidden" id="hdn_ImgSrc_2" name="Product.ProductImage.Image_Src[2]">
 
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[2] == "false" || Model.Product.ProductImage.Is_Default[2] == null)
+                                @if (Model.Product.ProductImage.Is_Default[2] == "False" || Model.Product.ProductImage.Is_Default[2] == null || Model.Product.ProductImage.Is_Default[2] == "")
                                 {
                                     <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
                                 }
@@ -291,30 +301,35 @@
                                 {
                                     <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
                                 }
-                                <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
                             </ul>
-                            <input type="text" id="hdnDefault" value="false" name="Product.ProductImage.Is_Default" class="Is_Default" />
+                            <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[2]" name="Product.ProductImage.Is_Default" class="Is_Default" />
                         </div>
-                        <div class="meta">
-                            <strong>Girls image 1</strong>
-                            <span>Description</span>
-                        </div>
+                        @*<div class="meta">
+                                <strong>Girls image 1</strong>
+                                <span>Description</span>
+                            </div>*@
                     </a>
 
                     <a class="gallery-item" href="assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
-                        <div class="image">
-                            @if (Model.Product.ProductImage.Product_Image[3] != null)
+                        <div class="image" id="image_preview">
+                            @if (Model.Product.ProductImage.Product_Image[3] != null && Model.Product.ProductImage.Product_Image[3] != "")
                             {
-                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[3]" width="70" height="90" id="img_3" alt="Product image 4" />
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[3]" class="ImgSrc" width="70" height="140" id="img_3" alt="Product image 4" />
                             }
                             else
                             {
-                                <img src="/UploadedFiles/" id="img_3" width="70" height="90" alt="Product image 4" />
+                                <img src="/UploadedFiles/" id="img_3" width="70" height="140" alt="Product image 4" />
                             }
-                            <input type="hidden" id="hdn_Img_3" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[3]">
+                            <input type="hidden" id="hdn_Img_3" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[3]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_3" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[3]" class="prod_img_id">
                             <input type="hidden" id="hdn_ImgSrc_3" name="Product.ProductImage.Image_Src[3]">
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[3] == "false" || Model.Product.ProductImage.Is_Default[3] == null)
+                                @if (Model.Product.ProductImage.Is_Default[3] == "False" || Model.Product.ProductImage.Is_Default[3] == null || Model.Product.ProductImage.Is_Default[3] == "")
                                 {
                                     <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
                                 }
@@ -322,14 +337,18 @@
                                 {
                                     <li><label class="check"><input type="radio" name="" value="false" checked="checked" class="icheckbox dd" /></label></li>
                                 }
-                                <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
                             </ul>
-                            <input type="text" id="hdnDefault" value="false" name="Product.ProductImage.Is_Default" class="Is_Default" />
+                            <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[3]" name="product.productimage.Is_default" class="Is_Default" />
                         </div>
-                        <div class="meta">
-                            <strong>Nature image 2</strong>
-                            <span>Description</span>
-                        </div>
+                        @*<div class="meta">
+                                <strong>Nature image 2</strong>
+                                <span>Description</span>
+                            </div>*@
                     </a>
                 </div>
 
@@ -352,6 +371,5 @@
             </div>
 
         </div>
-
     </form>
 </div>

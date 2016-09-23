@@ -85,7 +85,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                //pViewModel.Color.ProductMRP_N_WSR = _ProductRepo.Get_Sizes_By_SizeGroupId(pViewModel.Product.Product_Id);
+                pViewModel.ProductMRPs = _ProductRepo.Get_ProductMRP_By_ProductId(pViewModel.Product.Product_Id);
                 //List<Int32> copy = pViewModel.Color.ProductMRP_N_WSR.ToList();
             }
             catch (Exception ex)
@@ -106,8 +106,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 throw;
             }
-            TempData["pViewModel"] = (ProductViewModel)pViewModel;
-            //return RedirectToAction("_ProductPrizing", pViewModel);
+            TempData["pViewModel"] = (ProductViewModel)pViewModel; 
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
@@ -155,27 +154,31 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 for (var i = 0; i < pViewModel.Product.ProductImage.Product_Image.Length; i++)
                 {
-                    string replace = "";
-
-                    int l = pViewModel.Product.ProductImage.Image_Src[i].IndexOf("base64,");
-                    if (l > 0)
+                    if (pViewModel.Product.ProductImage.Product_Image[i] != null && pViewModel.Product.ProductImage.Product_Image[i] != "")
                     {
-                        replace = pViewModel.Product.ProductImage.Image_Src[i].Substring(0, l) + "base64,";
+                        string replace = "";
+
+                        int l = pViewModel.Product.ProductImage.Image_Src[i].IndexOf("base64,");
+                        if (l > 0)
+                        {
+                            replace = pViewModel.Product.ProductImage.Image_Src[i].Substring(0, l) + "base64,";
+                        }
+
+                        string convert = pViewModel.Product.ProductImage.Image_Src[i].Replace(replace, " ");
+
+                        string folder_Name = System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString());
+
+                        var actual_FileName = "";
+
+                        var path = "";
+
+                        actual_FileName = pViewModel.Product.Article_No + "_" + pViewModel.Product.ProductImage.Product_Image[i];
+                        pViewModel.Product.ProductImage.Product_Image[i] = actual_FileName;
+
+                        path = Path.Combine(folder_Name, actual_FileName);
+
+                        System.IO.File.WriteAllBytes(path, Convert.FromBase64String(convert));
                     }
-
-                    string convert = pViewModel.Product.ProductImage.Image_Src[i].Replace(replace, " ");
-
-                    string folder_Name = System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString());
-
-                    var actual_FileName = "";
-
-                    var path = "";
-
-                    actual_FileName = pViewModel.Product.ProductImage.Product_Image[i];
-
-                    path = Path.Combine(folder_Name, actual_FileName);
-
-                    System.IO.File.WriteAllBytes(path, Convert.FromBase64String(convert));
                 }
 
                 Set_Date_Session(pViewModel.Product);
@@ -197,6 +200,36 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
+                for (var i = 0; i < pViewModel.Product.ProductImage.Product_Image.Length; i++)
+                {
+                    if (pViewModel.Product.ProductImage.Product_Image[i] != null && pViewModel.Product.ProductImage.Product_Image[i] != "")
+                    {
+                        string replace = "";
+                        string convert = "";
+                        int l = pViewModel.Product.ProductImage.Image_Src[i].IndexOf("base64,");
+                        if (l > 0 && l != -1)
+                        {
+                            replace = pViewModel.Product.ProductImage.Image_Src[i].Substring(0, l) + "base64,"; 
+                            convert = pViewModel.Product.ProductImage.Image_Src[i].Replace(replace, " ");
+                        }
+                        string folder_Name = System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString());
+
+                        var actual_FileName = "";
+
+                        var path = "";
+                        if(pViewModel.Product.ProductImage.Product_Image[i].IndexOf(pViewModel.Product.Article_No)>-1  )
+                            actual_FileName = pViewModel.Product.ProductImage.Product_Image[i];
+                        else
+                            actual_FileName = pViewModel.Product.Article_No + "_" + pViewModel.Product.ProductImage.Product_Image[i];
+                            
+                        pViewModel.Product.ProductImage.Product_Image[i] = actual_FileName;
+
+                        path = Path.Combine(folder_Name, actual_FileName);
+
+                        System.IO.File.WriteAllBytes(path, Convert.FromBase64String(convert));
+                    }
+                }
+
                 Set_Date_Session(pViewModel.Product);
 
                 _ProductRepo.Update_Product(pViewModel.Product);
@@ -346,5 +379,29 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         //    return RedirectToAction("Index", pViewModel);
         //}
 
+        public JsonResult Delete_Product_Image(int Product_Image_Id, int Product_Id, string Product_Image_Name)
+        {
+            string path = "";
+            ProductViewModel pViewModel = new ProductViewModel();
+            try
+            {
+                _ProductRepo.Delete_Product_Image(Product_Image_Id);
+
+                path = Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), Product_Image_Name);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                }
+                pViewModel.Product = _ProductRepo.Get_Product_Images(Product_Id);
+                pViewModel.Product.Product_Id = Product_Id;
+            }
+            catch (Exception ex)
+            {
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                //Logger.Error("Error Deleting Product Image  " + ex.Message);
+            }
+            TempData["pViewModel"] = (ProductViewModel)pViewModel; 
+            return Json(JsonConvert.SerializeObject(pViewModel));
+        }
     }
 }

@@ -2,6 +2,7 @@
  
 
 function Bind_Colour_Grid(ColourId, Colour_Name) {
+
     var name = "Color_List";
     var div = $("#Color_Grid");
     var html = "";
@@ -51,7 +52,30 @@ function saveProductMRP(Product_Id,obj) {
 
             var data = $.parseJSON(response);
 
-            Bind_Product_MRP_Div(data,obj);
+            var Id = $(obj).text().replace(/ /g,'');
+
+            if ($("#" + Id).length == 0) {
+
+                Bind_Product_MRP_Div(data, obj);
+            }
+            else
+            {
+                $('.Product').hide();
+
+                $("#" + Id).show();
+                //var x = [];
+                //$('.Product').each(function () {
+                //    var Id = this.id;
+                //    if ($(obj).text() != this.id && $.inArray(this.id, x) == -1) {
+                //        $("#" + Id).hide();
+                //    }
+                //    else {
+                //        $("#" + Id).show();
+                //    }
+
+                    //x.push(Id);
+                //});
+            }
         }
     });
 }
@@ -61,11 +85,11 @@ function Bind_Product_MRP_Div(data,obj)
     var htmlText = "";
     var Vendor_Color_Code = $("#txtVendorCode_" + $(obj).attr("data-identity")).val();
     var c = $(obj).attr("id");
-    //data.Colours[c].ProductMRP_N_WSR = data.Color.ProductMRP_N_WSR;
+     
     if (data.ProductMRPs.length > 0)
         {
          
-        htmlText += "<div id='"+$(obj).text()+"' style='padding: 10px;'>";
+        htmlText += "<div id='" + $(obj).text().replace(/ /g, '') + "' class='Product' style='padding: 10px;'>";
        
             htmlText += "<div class='block' style='margin-bottom:0px;'>";
 
@@ -179,6 +203,14 @@ function Bind_Product_MRP_Div(data,obj)
     //$("#common_Product_MRP").find("tr:gt(0)").remove();
 
     $('#common_Product_MRP').append(htmlText);
+
+     
+    var Id = $(obj).text().replace(/ /g,'');
+    
+    $('.Product').hide();
+
+    $("#" + Id).show();
+
 }
 
 

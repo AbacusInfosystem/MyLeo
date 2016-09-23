@@ -48,5 +48,6 @@ function UploadImage() {
 
     } else {
         preview1.src = "";
-    } 
+    }
+    $("#productImage").val("");
 }  
