@@ -93,7 +93,7 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Total_Amount", item.Total_Amount));
 
-                sqlParam.Add(new SqlParameter("@Total_Quantity", item.Total_Quantity));
+                sqlParam.Add(new SqlParameter("@Total_Quantity", item.Item_Quantity));
 
                 sqlParam.Add(new SqlParameter("@Comment", item.Comment));
 

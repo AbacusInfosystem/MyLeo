@@ -11,6 +11,9 @@
             "PurchaseReturnRequest.Discount_Percentage": {
                 number: true
             },
+            "PurchaseReturnRequest.Branch_Id": {
+                required: true
+            },
             
         },
         messages: {
@@ -24,9 +27,27 @@
             "PurchaseReturnRequest.Discount_Percentage": {
                 number: "Invalid discount."
             },
-            
+            "PurchaseReturnRequest.Branch_Id": {
+                required: "Branch is required."
+            },
 
         }
     });
+
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+        var result = true;
+        var id = $(element).attr('id');
+        id = id.replace("textSKU_No_", "");
+     
+        $("#tblPurchaseReturnRequestItems").find("[id^='PurchaseReturnRequestItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+                result = false;
+            }
+        });
+
+        return result;
+    }, "Already mapped.");
+
 
 });

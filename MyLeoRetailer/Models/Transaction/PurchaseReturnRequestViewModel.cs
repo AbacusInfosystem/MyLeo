@@ -23,6 +23,10 @@ namespace MyLeoRetailer.Models.Transaction
 
             Grid_Detail = new GridInfo();
 
+            Filter = new Request_Filter();
+
+            Pager = new Pagination_Info();
+
 
         }
 
@@ -36,6 +40,15 @@ namespace MyLeoRetailer.Models.Transaction
 
         public GridInfo Grid_Detail { get; set; }
 
+        public Request_Filter Filter { get; set; }
+
+        public Pagination_Info Pager { get; set; }
 
     }
+
+    public class Request_Filter
+    {
+        public int Vendor_Id { get; set; }
+    }
+
 }

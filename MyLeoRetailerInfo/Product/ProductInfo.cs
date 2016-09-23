@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace MyLeoRetailerInfo.Product
 {
@@ -10,7 +11,7 @@ namespace MyLeoRetailerInfo.Product
     {
         public ProductInfo()
 		{
-
+            ProductImage = new ProductImagesInfo();
 		}
 
         public int Product_Id { get; set; }
@@ -70,6 +71,8 @@ namespace MyLeoRetailerInfo.Product
         public int Updated_By { get; set; }
 
         public List<ProductMRPInfo> ProductMRP_N_WSR { get; set; }
+
+        public ProductImagesInfo ProductImage { get; set; }
     }
 
     public class ProductMRPInfo
@@ -80,8 +83,10 @@ namespace MyLeoRetailerInfo.Product
 
         public int Size_Id { get; set; }
 
-        public string Size_Name { get; set; }
+        public string Size_Name { get; set; } 
 
+        public string Vendor_Color_Code { get; set; }
+         
         public int Colour_Id { get; set; }
 
         public string Colour { get; set; }
@@ -104,13 +109,19 @@ namespace MyLeoRetailerInfo.Product
 
     public class ProductImagesInfo
     {
-        public int Product_Image_Id { get; set; }
+        public ProductImagesInfo()
+        {
+            Product_Image_Id = new int[4];
+            Product_Image = new string[4];
+            Is_Default = new string[4]; 
+        }
+        public int[] Product_Image_Id { get; set; }
 
-        public int Product_Id { get; set; }
+        public int Product_Id { get; set; } 
 
-        public string Image_Code { get; set; }
+        public string[] Product_Image { get; set; } 
 
-        public bool Is_Default { get; set; }
+        public string[] Is_Default { get; set; }
 
         public DateTime Created_Date { get; set; }
 
@@ -119,6 +130,10 @@ namespace MyLeoRetailerInfo.Product
         public DateTime Updated_Date { get; set; }
 
         public int Updated_By { get; set; }
+
+        public HttpPostedFileBase[] File { get; set; }
+
+        public string[] Image_Src { get; set; } 
 
     }
 

@@ -158,10 +158,27 @@ namespace MyLeoRetailer
             routes.MapRoute(
             name: "Product-7",
             url: "Product/serch-ProductPrizing",
-            defaults: new { controller = "Product", action = "ProductPrizing", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            defaults: new { controller = "Product", action = "Search_ProductPrizing", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" }); 
             
+                routes.MapRoute(
+            name: "Product-8",
+            url: "Product/MRP-ProductPrizing",
+            defaults: new { controller = "Product", action = "ProductPrizing", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+                routes.MapRoute(
+               name: "Product-9",
+               url: "Product/Insert_ProductMRP",
+               defaults: new { controller = "Product", action = "Insert_ProductMRP", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+               namespaces: new string[] { "MyLeoRetailer.Controllers" }); 
+
+              routes.MapRoute(
+               name: "Product-10",
+               url: "Product/Product_Image_Upload",
+               defaults: new { controller = "Product", action = "Product_Image_Upload", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+               namespaces: new string[] { "MyLeoRetailer.Controllers" }); 
+            
             #endregion
 
             #region Login
@@ -215,13 +232,15 @@ namespace MyLeoRetailer
             defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Requests", id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            
+
 
             #endregion
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Brand", action = "Index", id = UrlParameter.Optional }
             );
 
         }

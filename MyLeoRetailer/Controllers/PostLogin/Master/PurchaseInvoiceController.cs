@@ -106,7 +106,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 piViewModel.PurchaseInvoice.Updated_Date = DateTime.Now;
 
-                piViewModel.PurchaseInvoice.Purchase_Invoice_Id = _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+                _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
 
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
             }

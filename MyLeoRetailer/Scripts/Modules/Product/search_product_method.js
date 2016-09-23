@@ -35,5 +35,6 @@ function Get_Products() {
             $("#divProductPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
     });
-}
+} 
+
 

@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +47,7 @@
     <Compile Include="BrandRepo.cs" />
     <Compile Include="CategoryRepo.cs" />
     <Compile Include="ColorRepo.cs" />
+    <Compile Include="Common\CommonMethods.cs" />
     <Compile Include="CookiesRepo.cs" />
     <Compile Include="EmployeeRepo.cs" />
     <Compile Include="GiftVoucherRepo.cs" />
