@@ -225,6 +225,11 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Total_Amount", item.Total_Amount));
 
+                //Addition
+                sqlParam.Add(new SqlParameter("@Comment", item.Comment));
+                //End
+
+
                 PurchaseOrder.Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
 
             }
