@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerInfo.PurchaseReturn;
+using MyLeoRetailerInfo.PurchaseInvoice;
 
 namespace MyLeoRetailerRepo
 {
@@ -300,8 +302,8 @@ namespace MyLeoRetailerRepo
             Vendor.Vendor_CST_Effective_Date = Convert.ToDateTime(dr["CST_Effective_Date"]);
             Vendor.Vendor_Type = Convert.ToInt32(dr["Vendor_Type"]);
 
-            //Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]);
-            //Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+            Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]); //Uncommented code by Vinod Mane on 20/09/2016
+            Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);//Uncommented code by Vinod Mane on 20/09/2016
 
             Vendor.Created_By = Convert.ToInt32(dr["Created_By"]);
             Vendor.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
@@ -434,16 +436,105 @@ namespace MyLeoRetailerRepo
             return subcategorydetailslist;
         }
 
+        //public List<VendorInfo> Get_Vendors()
+        //{
+        //    List<VendorInfo> Vendors = new List<VendorInfo>();
+        //    DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        Vendors.Add(Get_Vendor_Values(dr));
+        //    }
+        //    return Vendors;
+        //}
+
+        //Gauravi 7-9-2016
         public List<VendorInfo> Get_Vendors()
         {
             List<VendorInfo> Vendors = new List<VendorInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Vendor_Sp.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Vendor.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
-                Vendors.Add(Get_Vendor_Values(dr));
+                VendorInfo Vendor = new VendorInfo();
+
+                Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                Vendor.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                Vendors.Add(Vendor);
             }
             return Vendors;
         }
+
+        public List<VendorInfo> Get_Agents()
+        {
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Agent.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                VendorInfo Agent = new VendorInfo();
+
+                Agent.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                Agent.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                Vendors.Add(Agent);
+            }
+            return Vendors;
+        }
+
+        public List<VendorInfo> Get_Transporters()
+        {
+            List<VendorInfo> Vendors = new List<VendorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Transporter.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                VendorInfo Transpoter = new VendorInfo();
+
+                Transpoter.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                Transpoter.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                Vendors.Add(Transpoter);
+            }
+            return Vendors;
+        }
+
+        //Added By Vinod Mane on 21/09/2016
+        public List<VendorInfo> Get_SubCategorylist(int Caterory_id)
+        {
+            List<VendorInfo> subcategories = new List<VendorInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Category_Id", Caterory_id));
+           // sqlParams.Add(new SqlParameter("@IsActive", true));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sub_Category_By_Category_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    subcategories.Add(Get_SubCategory_Values(dr));
+                }
+            }
+            return subcategories;
+        }
+
+        public VendorInfo Get_SubCategory_Values(DataRow dr)
+        {
+            VendorInfo Vendors = new VendorInfo();
+
+            Vendors.SubCategory_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+
+            Vendors.SubCategory_Name = Convert.ToString(dr["Sub_Category"]);
+
+            return Vendors;
+        }
+        //End
+
+       
+
 
 
     }

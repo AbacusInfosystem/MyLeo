@@ -11,9 +11,12 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
+using MyLeoRetailer.Filters;
+using MyLeoRetailerHelper.Logging;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
+    [SessionExpireAttribute]
     public class ColorController :BaseController
     {
         ColorRepo cRepo;
@@ -23,6 +26,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             cRepo = new ColorRepo();
         }
 
+        [AuthorizeUserAttribute(AppFunction.Color_Management_Access)]
         public ActionResult Index(ColorViewModel cViewModel)
         {
             try
@@ -35,7 +39,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                //Logger.Error("VendorController - Index " + ex.Message);
+
+                Logger.Error("Color Controller - Index " + ex.Message);
             }
 
             return View("Index",cViewModel);
@@ -47,15 +52,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(cViewModel.Color);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Color_Management_Create))
+                {
+                    Set_Date_Session(cViewModel.Color);
 
-                cViewModel.Color.Colour_Id = cRepo.Insert_Color(cViewModel.Color);
+                    cViewModel.Color.Colour_Id = cRepo.Insert_Color(cViewModel.Color);
 
-                cViewModel.FriendlyMessages.Add(MessageStore.Get("COL"));
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("COL"));
+                }
+                else
+                {
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Color Controller - Insert_Color " + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
@@ -67,15 +82,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                Set_Date_Session(cViewModel.Color);
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Color_Management_Edit))
+                {
+                    Set_Date_Session(cViewModel.Color);
 
-                cRepo.Update_Color(cViewModel.Color);
+                    cRepo.Update_Color(cViewModel.Color);
 
-                cViewModel.FriendlyMessages.Add(MessageStore.Get("COL2"));
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("COL2"));
+                }
+                else
+                {
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Color Controller - Update_Color " + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
@@ -114,6 +139,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Color Controller - Get_Colors " + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
@@ -122,14 +149,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Get_Colors_By_Id(int color_Id)
         {
             ColorViewModel cViewModel = new ColorViewModel();
-            //ColorRepo cRepo = new ColorRepo();   
+            
             try
             {
-                cViewModel.Color = cRepo.Get_Colors_By_Id(Convert.ToInt32(color_Id));
+                if (Utility.Check_Access_Function_Authorization(AppFunction.Color_Management_View))
+                {
+                    cViewModel.Color = cRepo.Get_Colors_By_Id(Convert.ToInt32(color_Id));
+                }
+                else
+                {
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+                }
+                
             }
             catch (Exception ex)
             { 
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Color Controller - Get_Colors_By_Id " + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
@@ -151,7 +188,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                //Logger.Error("Brand Controller - Get_Brands_By_Name_Autocomplete: " + ex.ToString());
+                Logger.Error("Color Controller - Get_Colors_By_Name_Autocomplete " + ex.Message);
             }
 
             return Json(brandList, JsonRequestBehavior.AllowGet);

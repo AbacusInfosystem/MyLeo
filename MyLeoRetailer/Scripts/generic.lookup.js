@@ -9,21 +9,31 @@ $(document).ready(function () {
         var id = $("#hdnId").val();
 
         var Textboxname = "#" + $("#hdnLookupLabelId").val();
+        
+        //$(Textboxname).parents('.input-group').each(function () {
+        //    $('#lookupUlLookup').remove()
+        //});
 
         $('.border-bottom').each(function () {
             $('#lookupUlAuto').remove()
         });
 
-        $('.border-bottom').each(function () {
-            $('#lookupUlLookup').remove()
-        });
+        //$('.border-bottom').each(function () {
+        //    $('#lookupUlLookup').remove()
+            
+        //});
+
+        $(Textboxname).parents('.form-group').find('#lookupUlLookup').remove();
 
         $("#" + $("#hdnLookupHiddenId").val()).val(id);
         $("#" + $("#hdnLookupHiddenValue").val()).val(hiddenTextValue);
 
-        //$("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").val(hiddenTextValue);
+        $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").val(hiddenTextValue);
+
+        $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").focus();
 
         $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
+        $("#" + $("#hdnLookupHiddenValue").val()).trigger("change");
         //$(".glyphicon-remove").trigger("click")
 
         var htmlText = "<ul id='lookupUlLookup' class='list-group border-bottom'><li class='list-group-item'><span class='text'>" + hiddenTextValue + "<div class='pull-right'><i class='glyphicon glyphicon-remove'></i></div></li></ul>";
@@ -38,7 +48,7 @@ $(document).ready(function () {
 
         $(Textboxname).parents('.form-group').find('.glyphicon-remove').click(function (event) {
             event.preventDefault();
-            $(this).parents('.form-group').find('input[type=text]').val("");
+            $(this).parents('.form-group').find('input[type=text]').val("");         
             $(this).parents('.form-group').find('.auto-complete-value').val("");
             $(this).parents('.form-group').find('.auto-complete-label').val("");
             $(this).parents('.form-group').find('.auto-complete-value').trigger('change');

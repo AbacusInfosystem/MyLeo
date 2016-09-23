@@ -31,10 +31,31 @@ namespace MyLeoRetailer.Controllers.PreLogin
             try
             {
 
+                if (Request.Cookies["MyLeoLoginInfo"] != null)
+                {
+                    lViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                    if (lViewModel.Cookies == null)
+                    {
+                        lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS02"));
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Dashboard");
+                    }
+                }
+                else
+                {
+                    if (TempData["FriendlyMessages"] != null)
+                    {
+                        lViewModel.FriendlyMessages.Add((FriendlyMessage)TempData["FriendlyMessages"]);
+                    }
+                }
+
             }
             catch (Exception ex)
             {
-                lViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+                lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 return View("Index", lViewModel);
             }
@@ -58,28 +79,24 @@ namespace MyLeoRetailer.Controllers.PreLogin
             return Json(JsonConvert.SerializeObject(branch_List));
         }
 
-
         public ActionResult Authenticate(LoginViewModel lViewModel)
         {
             try
             {
-                string Branches = lViewModel.Cookies.Branch_Ids;
-
+               
                 LoginInfo cookies = _loginRepo.AuthenticateUser(lViewModel.Cookies.User_Name, lViewModel.Cookies.Password);
-                cookies.Branch_Ids = Branches;
-
-
+                
                 if (cookies.User_Id != 0 && cookies.Is_Online)
                 {
                     if (cookies.User_Name == lViewModel.Cookies.User_Name)
                     {
-                        SetUsersCookies(cookies.User_Id);
+                        SetUsersCookies(cookies.User_Id, lViewModel.Cookies.Branch_Ids);
 
                         return RedirectToAction("Index", "Dashboard");
                     }
                     else
                     {
-                        lViewModel.Friendly_Message.Add(MessageStore.Get("SYS02"));
+                        lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS02"));
 
                         return View("Index", lViewModel);
                     }
@@ -88,41 +105,42 @@ namespace MyLeoRetailer.Controllers.PreLogin
                 {
                     if (cookies.User_Id != 0 && !cookies.Is_Online)
                     {
-                        TempData["FriendlyMessage"] = MessageStore.Get("SYS06");
+                        TempData["FriendlyMessages"] = MessageStore.Get("SYS06");
                     }
                     else
                     {
-                        TempData["FriendlyMessage"] = MessageStore.Get("SYS03");
+                        TempData["FriendlyMessages"] = MessageStore.Get("SYS03");
                     }
                     return RedirectToAction("Index", "Login");
                 }
             }
             catch (Exception ex)
-            { 
+            {
 
-                lViewModel.Friendly_Message.Add(MessageStore.Get("SYS01"));
+                lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 HttpContext.Request.Cookies.Clear();
 
                 return RedirectToAction("Index", "Login", lViewModel);
             }
 
-            return RedirectToAction("Index", "Dashboard");
         }
 
-        private void SetUsersCookies(int User_Id)
+        private void SetUsersCookies(int User_Id, string Branch_Ids)
         {
             LoginViewModel loginViewModel = new LoginViewModel();
 
             try
             {
-                if (Request.Cookies["UserInfo"] == null)
+                if (Request.Cookies["MyLeoLoginInfo"] == null)
                 {
-                    HttpCookie cookies = new HttpCookie("UserInfo");
+                    HttpCookie cookies = new HttpCookie("MyLeoLoginInfo");
 
                     string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-                    cookies.Values.Add("Token", cookie_Token);
+                    cookies.Values.Add("MyLeoToken", cookie_Token);
+
+                    cookies.Values.Add("Branch_Ids", Branch_Ids);
 
                     cookies.Expires = DateTime.Now.AddDays(2);
 
@@ -132,7 +150,10 @@ namespace MyLeoRetailer.Controllers.PreLogin
                 {
                     string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-                    Response.Cookies["UserInfo"]["Token"] = cookie_Token;
+                    Response.Cookies["MyLeoLoginInfo"]["MyLeoToken"] = cookie_Token;
+
+                    Response.Cookies["MyLeoLoginInfo"]["Branch_Ids"] = Branch_Ids;
+
                 }
             }
             catch (Exception ex)
@@ -143,19 +164,16 @@ namespace MyLeoRetailer.Controllers.PreLogin
             }
         }
 
-        //work from here
-        //redirect to dashboard page after login
-        public ActionResult Logout(string timeOut)
+        public ActionResult Logout()
         {
-            LoginInfo Cookies = Utility.Get_Login_User("UserInfo", "Token");
+            //LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             try
             {
                 LogoutUser();
 
-                TempData["FriendlyMessage"] = MessageStore.Get("SYS010");
+                TempData["FriendlyMessages"] = MessageStore.Get("SYS010");
 
-                //TempData["BrandName"] = Cookies.Brand_Name;
             }
             catch (Exception ex)
             {
@@ -167,7 +185,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
 
         private void LogoutUser()
         {
-            Response.Cookies["UserInfo"].Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies["MyLeoLoginInfo"].Expires = DateTime.Now.AddYears(-1);
 
             Response.ExpiresAbsolute = DateTime.Now.AddDays(-1d);
 

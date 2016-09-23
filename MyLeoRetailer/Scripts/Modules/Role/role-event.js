@@ -10,7 +10,11 @@
         }
     });
 
-    $("[name='Filter.Role']").focusout(function () {
+    $("[name='Filter.Role']").change(function () {
+        Get_Roles();
+    });
+
+    $("[name='Filter.Role']").keyup(function () {
         Get_Roles();
     });
 
@@ -25,6 +29,7 @@
         Reset_Role();
 
     });
+
 
     
 

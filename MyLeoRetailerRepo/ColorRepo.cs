@@ -17,9 +17,9 @@ namespace MyLeoRetailerRepo
         SQL_Repo sqlHelper = null;
 
         public ColorRepo()
-		{
-			sqlHelper = new SQL_Repo();
-		}
+        {
+            sqlHelper = new SQL_Repo();
+        }
 
         public int Insert_Color(ColorInfo Color)
         {
@@ -67,22 +67,28 @@ namespace MyLeoRetailerRepo
         public ColorInfo Get_Colors_By_Id(int Color_Id)
         {
             ColorInfo colorInfo = new ColorInfo();
-            DataTable dt = null;
+
             List<SqlParameter> sqlParamList = new List<SqlParameter>();
             sqlParamList.Add(new SqlParameter("@Color_Id", Color_Id));
 
-            dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Colors_By_Id.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Colors_By_Id.ToString(), CommandType.StoredProcedure);
 
             foreach (DataRow dr in dt.Rows)
             {
                 if (!dr.IsNull("Colour_Code"))
                     colorInfo.Colour_Code = Convert.ToString(dr["Colour_Code"]);
-                    colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]); 
+
+                colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]);
+
+                colorInfo.Colour_Id = Convert.ToInt32(dr["Colour_ID"]);
+
+                if (!dr.IsNull("Colour_Name"))
+                    colorInfo.Colour = Convert.ToString(dr["Colour_Name"]);
             }
             return colorInfo;
 
-        } 
-        
+        }
+
         public List<AutocompleteInfo> Get_Colors_By_Name_Autocomplete(string color_Name)
         {
             List<AutocompleteInfo> autoList = new List<AutocompleteInfo>();

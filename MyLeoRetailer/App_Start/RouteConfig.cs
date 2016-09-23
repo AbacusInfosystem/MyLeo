@@ -73,6 +73,14 @@ namespace MyLeoRetailer
             defaults: new { controller = "Employee", action = "Check_Existing_User_Name", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Addition by swapnali | Date:16/09/2016
+            //routes.MapRoute(
+            //name: "employee-2",
+            //url: "employee/save-branch",
+            //defaults: new { controller = "Employee", action = "Save_Employee_Branch_Id", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+            //namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
 
             #region Role
@@ -181,6 +189,50 @@ namespace MyLeoRetailer
             defaults: new { controller = "Login", action = "Get_Employee_Branches", id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+
+
+            #endregion
+
+
+            #region Purchase Return Request
+
+            routes.MapRoute(
+            name: "purchase-return-request-1",
+            url: "purchase-return-request/get-purchase-return-request",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Search", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "purchase-return-request-2",
+            url: "purchase-return-request/create-purchase-return-request",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "purchase-return-request-3",
+            url: "purchase-return-request/get-purchase-return-request-item-by-sku-code",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Item_By_SKU_Code", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "purchase-return-request-4",
+            url: "purchase-return-request/save-purchase-return-request",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Save_Purchase_Return_Request", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "purchase-return-request-5",
+            url: "purchase-return-request/get-vendor-and-purchase-invoices",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Get_Vendor_Details_By_Id", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "purchase-return-request-6",
+            url: "purchase-return-request/seatch-purchase-return-request",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Requests", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            
 
 
             #endregion

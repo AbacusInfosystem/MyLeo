@@ -1,0 +1,93 @@
+﻿@model MyLeoRetailer.Models.SalesReturnViewModel
+
+
+@{
+    ViewBag.Title = "Search";
+}
+
+
+<script src="/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/SalesReturn/salesreturn_search_events.js"></script>
+<script src="~/Scripts/Modules/SalesReturn/salesreturn_search_methods.js"></script>
+
+
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Sales Return</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Return</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmSearchSalesReturn">
+
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                        <div class="row">
+
+                            <div class="col-md-10">
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="Filter.Sales_Return_No" placeholder="Enter SalesReturn Number to search." />
+                                    <input type="hidden" name="Filter.Sales_Return_Id" id="hdnSalesReturnID">                               
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                                <div class="btn-group">                                   
+                                    <a class="btn btn-success active" role="button" href="@Url.Action("Index", "SalesReturn")">Create </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+        </div>
+
+
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divSalesReturnPager">
+
+        </div>
+
+    </div>
+
+</div>

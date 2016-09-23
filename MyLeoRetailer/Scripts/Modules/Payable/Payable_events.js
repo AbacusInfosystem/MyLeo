@@ -1,10 +1,4 @@
 ﻿
-//$(document).ready(function () {
-
-//    $('#dp-2').datepicker({});
-
-//});
-
 
 $(function () {
 
@@ -17,118 +11,78 @@ $(function () {
     });
 
 
-
-
-    //$("#btnPayablePay").click(function () {
-
-    //    $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");
-    //    $("#frmPayable").submit();
-
-    //    //Get_Payable(this);
-
-    //    //var data = $(this).parents(tr).find("td.hdnBalance_Amount").html();
-
-    //    //alert(data);
-
-    //    //$("#id").text(data);
-
-    //});
-
-    //if ($('#hdn_GiftVoucherId').val() != "") {
-    //    if ($('#mode').val() == 2) {
-    //        $("#divBankName").show();
-    //        $("#divCreditCardNo").show();
-    //    } else {
-    //        $("#divBankName").hide();
-    //        $("#divCreditCardNo").hide();
-    //    }
-    //}
-
-    //$("#mode").change(function () {
-    //    if ($(this).val() == 2) {
-    //        $("#divBankName").show();
-    //        $("#divCreditCardNo").show();
-    //    } else {
-    //        $("#divBankName").hide();
-    //        $("#divCreditCardNo").hide();
-    //    }
-    //});
-
-
-
     $('[name = "Payable.Payment_Mode"]').change(function () {
 
        
         if ($(this).val() == 0) {
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
-           // $("#divChequedate").hide();
+            $("#divChequedate").hide();
+            $("#divPaidAmount").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
+            //$("#divCreditnoteno").hide();
+           // $("#divGiftvoucherno").hide();
            
+        }
+
+        else if ($(this).val() == 1) {
+
+            $("#divPaidAmount").show();
+            $("#divCreditcardno").hide();
+            $("#divDebitcardno").hide();
+            $("#divChequedate").hide();
+            $("#divChequeno").hide();
+            $("#divBankName").hide();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
+
         }
 
         else if ($(this).val() == 2) {
             
             $("#divCreditcardno").show();
+            $("#divPaidAmount").show();
             $("#divDebitcardno").hide();
-            //$("#divChequedate").hide();
+            $("#divChequedate").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
            
         }
 
         else if ($(this).val() == 3) {
             $("#divDebitcardno").show();
+            $("#divPaidAmount").show();
             $("#divCreditcardno").hide();
-           // $("#divChequedate").hide();
+             $("#divChequedate").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
         }
 
         else if ($(this).val() == 4) {
-           // $("#divChequedate").show();
+            $("#divChequedate").show();
             $("#divChequeno").show();
             $("#divBankName").show();
+            $("#divPaidAmount").show();
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
-            $("#divCreditnoteno").hide();
-            $("#divGiftvoucherno").hide();
-        }
-
-        else if ($(this).val() == 5) {
-            $("#divCreditnoteno").show();
-            $("#divCreditcardno").hide();
-            $("#divDebitcardno").hide();
-            //$("#divChequedate").hide();
-            $("#divChequeno").hide();
-            $("#divBankName").hide();
-            $("#divGiftvoucherno").hide();
-        }
-        else if ($(this).val() == 6) {
-            $("#divCreditnoteno").hide();
-            $("#divCreditcardno").hide();
-            $("#divDebitcardno").hide();
-            //$("#divChequedate").hide();
-            $("#divChequeno").hide();
-            $("#divBankName").hide();
-            $("#divGiftvoucherno").show();
+            //$("#divCreditnoteno").hide();
+            //$("#divGiftvoucherno").hide();
         }
 
         else {
-            $("#divGiftvoucherno").hide();
+            //$("#divGiftvoucherno").hide();
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
-           // $("#divChequedate").hide();
+            $("#divPaidAmount").hide();
+            $("#divChequedate").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-            $("#divCreditnoteno").hide();
+           // $("#divCreditnoteno").hide();
         }
     });
 
@@ -140,7 +94,6 @@ $(function () {
     });
 
 
-
     $("#btnSavePay").click(function () {
 
         alert();
@@ -150,9 +103,6 @@ $(function () {
 
     });
     
-
-
-
 });
 
 function Get_Payable(id) {

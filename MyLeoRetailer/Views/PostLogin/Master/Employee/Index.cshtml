@@ -1,6 +1,8 @@
 ﻿@model MyLeoRetailer.Models.EmployeeViewModel
 @using MyLeoRetailerInfo.Common
 
+
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_validation.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_events.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_methods.js"></script>
@@ -74,34 +76,16 @@
                             <label class="switch">
                                 @if (Model.Employee.IsActive == false)
                                 {
-                                    <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" type="checkbox">
+                                    <input value="0" name="Employee.IsActive" type="checkbox">
                                 }
                                 else
                                 {
-                                    <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" checked="checked" type="checkbox">
+                                    
+                                <input value="1" name="Employee.IsActive" checked="checked" type="checkbox">
                                 }
                                 <span></span>
                             </label>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select class="form-control select" name="Employee.Branch_Id">
-                            <option value="0">Select Branch</option>
-                            <option value="1">Andheri</option>
-                            <option value="2">Versova</option>
-                            @*@foreach (var item in Model.Branches)
-                                {
-                                    if (Model.Employee.Branch_Id == item.Key)
-                                    {
-                                        <option value="@item.Key" selected="selected">@item.Value</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.Key">@item.Value</option>
-                                    }
-                                }*@
-                        </select>
                     </div>
 
                     <div class="form-group">
@@ -135,7 +119,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter pincode." name="Employee.Employee_Pincode" value="@(Model.Employee.Employee_Pincode == 0 ? "" : Model.Employee.Employee_Pincode.ToString())" />
+                        <input type="text" class="form-control" placeholder="Enter pincode." maxlength="6" name="Employee.Employee_Pincode" value="@(Model.Employee.Employee_Pincode == 0 ? "" : Model.Employee.Employee_Pincode.ToString())" />
                     </div>
 
                     <div class="form-group">
@@ -171,8 +155,9 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter landline number." name="Employee.Employee_Home_Lindline" value="@Model.Employee.Employee_Home_Lindline" maxlength="12" />
+                        <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number." name="Employee.Employee_Home_Lindline"  value="@Model.Employee.Employee_Home_Lindline" />
                     </div>
+
 
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter email address." name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" />
@@ -293,3 +278,4 @@
     </form>
 
 </div>
+

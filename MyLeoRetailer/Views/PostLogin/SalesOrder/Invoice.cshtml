@@ -1,0 +1,236 @@
+﻿@model MyLeoRetailer.Models.SalesInvoiceViewModel
+
+@{
+    ViewBag.Title = "Sales Invoice";
+}
+
+<h2>Invoice</h2>
+
+<script src="~/Scripts/Modules/PrintThis.js"></script>
+
+<script type="text/javascript">
+
+    //$(document).ready(function ()
+    //{
+    //        $('#Div_Print').printThis();     
+    //});
+
+    $(function ()
+    {
+
+        $('#btnPrint').click(function ()
+        {
+            $('#Div_Print').printThis();
+        });
+
+    });
+
+</script>
+
+<div class="content-wrapper">
+
+    <div class="container-fluid">
+
+        <form id="frmSalesInvoice">
+            <section class="content">
+                <div class="row">
+                    <div id="divScrollContainer" class="col-md-12">
+                        @*@{Html.RenderPartial("_ServerMessage");}*@
+
+                        <h3 class="view_invoice_body_header">
+                            Sales Invoice
+                        </h3>
+
+                        <div class="box box-default" id="Div_Print">
+                            <div class="box-body">
+                                <input type="hidden" id="hdnSalesInvoiceID" @*value="@Model.Invoice.Invoice_Id"*@ name="Filter.Sales_Invoice_Id" />
+
+                                <!-- title row -->
+                                <div class="row">
+
+                                    <div class="col-md-4 invoice-col">
+                                        <div class="form-group">
+                                            <label for="txtStore_Name" style="color: #333" @Model.SalesInvoice.Branch_Name class="">Store Name : @Model.SalesInvoice.Branch_Name</label>
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-3 invoice-col">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-5 invoice-col" style="text-align:right">
+                                        <div class="form-group">
+                                            <label for="txtTel" style="color: #333"  class="">Tel : @Model.SalesInvoice.Branch_Landline1, @Model.SalesInvoice.Branch_Landline2</label>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-md-12 invoice-col" style="text-align:center; width:1200px;">
+                                        <div class="form-group">
+                                            <label for="txtStore_Address1" style="color: #333" class="">Store Address : @Model.SalesInvoice.Branch_Address, @Model.SalesInvoice.Branch_Pincode,@Model.SalesInvoice.Branch_City,@Model.SalesInvoice.Branch_State,@Model.SalesInvoice.Branch_Country</label>
+
+                                            @*<br />
+
+                                            <label for="txtStore_Address2" style="color: #333" class="">Store Address2</label>
+                                            <br />*@
+
+
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                </div>
+
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-md-10 invoice-col" style="text-align:center; width:1200px;">
+                                        <label for="txtCash_Memo" style="color: #333;text-decoration:underline" class="">CASH MEMO</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-md-4 invoice-col">
+                                        <div class="form-group">
+                                            <label for="txtBill_No" style="color: #333" class="">Bill No : @Model.SalesInvoice.Sales_Invoice_No</label>
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-6 invoice-col">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-sm-2 invoice-col" style="text-align:right">
+                                        <div class="form-group">
+                                            <label for="txtDate" style="color: #333" class="">Date : @Model.SalesInvoice.Created_Date.ToString("dd MMM yyyy")</label>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-4 invoice-col">
+                                        <div class="form-group">
+                                            <label for="txtCustomer_Name" style="color: #333" class="">Customer Name : @Model.SalesInvoice.Customer_Name</label>
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-6 invoice-col">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-2 invoice-col" style="text-align:right;">
+                                        <div class="form-group">
+                                            <label for="txtTime" style="color: #333" class="">Time : @Model.SalesInvoice.Created_Date.ToString("hh:mm tt")    </label>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div>
+
+                                <h2 class="page-header div-border-bottom"></h2>
+
+                                <!-- Table row -->
+                                <div class="row">
+                                    <div class="col-xs-12 table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>                                                  
+                                                    <th width="10%">SKU Code</th>
+                                                    <th width="10%">Article No</th>
+                                                    <th width="10%">Quantity</th>
+                                                    <th width="10%">Brand</th>
+                                                    <th width="10%">Category</th>
+                                                    <th width="10%">Sub Category</th>
+                                                    <th width="10%">Size_Name</th>
+                                                    <th width="10%">Colour_Name</th>
+                                                    <th width="10%">MRP Amount</th>
+                                                    <th width="10%">Amount</th>
+                                                    <th width="10%">SalesMan</th>
+                                                </tr>
+                                            </thead>
+
+                                            @foreach (var item in Model.SaleOrderItemList)
+                                            {
+                                                <tr id=@("SItem"+item.Sales_Invoice_Id.ToString())>                                                    
+
+                                                    <td>@item.SKU_Code</td>
+
+                                                    <td>@item.Article_No</td>
+
+                                                    <td>@item.Quantity</td>
+
+                                                    <td>@item.Brand</td>
+
+                                                    <td>@item.Category</td>
+
+                                                    <td>@item.SubCategory</td>    
+                                                    
+                                                    <td>@item.Size_Name</td>    
+                                                    
+                                                    <td>@item.Colour_Name</td>    
+
+                                                    <td>@item.MRP_Price</td>
+                                                    
+                                                    <td>@item.Amount</td>    
+                                                    
+                                                    <td>@item.SalesMan</td>                                                                                                                                             
+                                                    
+                                                </tr>
+                                            }
+
+                                            <tbody>
+                                                @{
+                                                    <tr>
+                                                        <th colspan="9" style="text-align: right;"> Gross Amount : </th>
+                                                        <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Gross_Amount</th>
+                                                        
+                                                    </tr>
+                                                    
+                                                     <tr>
+                                                        <th colspan="9" style="text-align: right;"> Total Discount Amount : </th>
+                                                         <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Total_Discount_Amount</th>
+                                                    </tr>
+                                                    
+                                                     <tr>
+                                                        <th colspan="9" style="text-align: right;"> Net Amount : </th>
+                                                         <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Net_Amount</th>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div><!-- /.col -->
+                                </div><!-- /.row -->
+                                <!-- this row will not appear when printing -->
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="col-md-2">
+                                    <button type="button" id="btnPrint" class="btn btn-default bg-orange">Print</button>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a class="btn btn-default bg-blue" role="button" id="btnBack" href="@Url.Action("Index", "SalesOrder")">Back</a>
+                                    @*<button type="button" id="btnPrint" class="btn btn-default bg-orange">Print</button>*@
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+

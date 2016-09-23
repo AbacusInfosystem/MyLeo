@@ -17,14 +17,14 @@ namespace MyLeoRetailer.Models.PreLogin
         {
             Cookies = new LoginInfo();
 
-            Friendly_Message = new List<FriendlyMessage>();
+            FriendlyMessages = new List<FriendlyMessage>();
 
 
         }
 
         public LoginInfo Cookies { get; set; }
 
-        public List<FriendlyMessage> Friendly_Message { get; set; }
+        public List<FriendlyMessage> FriendlyMessages { get; set; }
 
 
     }

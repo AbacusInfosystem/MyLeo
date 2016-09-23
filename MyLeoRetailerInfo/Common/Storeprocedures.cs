@@ -26,6 +26,13 @@ namespace MyLeoRetailerInfo.Common
 			sp_Insert_Sub_Category,
 			sp_Update_Sub_Category,
             sp_Get_Sub_Category_By_Id,
+            sp_Get_Sub_Category_By_Category_Id,//Added by Vinod on 21/09/2016
+
+        //Gauravi  12-9-2016
+
+        sp_Get_SubCategory_Category_By_Id,
+
+        //End
 
             #endregion
 
@@ -82,6 +89,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
             sp_Check_Existing_User_Name,
+        //Addition by swapnali | Date:15/09/2016
+        sp_Get_Branch_By_EmployeeId,
+        //End
+
 
             #endregion
 
@@ -109,6 +120,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
             sp_Get_Employee_Branches,
+        sp_Get_Branch,
 
             #endregion
 
@@ -129,7 +141,7 @@ namespace MyLeoRetailerInfo.Common
             Get_SalesInvoice_Sp,
 
            
-            //Vendor
+        #region Vendor
 
             sp_Insert_Vendor,
             sp_Update_Vendor,
@@ -150,7 +162,13 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_SubCategory_Mapping,
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
+        sp_Get_Agent,
+        sp_Get_Transporter,
+        sp_Get_Vendor,
+        sp_Get_Vendor_Details_By_Id,
                   
+        #endregion
+
             #region Role
 
             sp_Insert_Role,
@@ -164,6 +182,63 @@ namespace MyLeoRetailerInfo.Common
 
             #endregion
 
+
+
+        #region Purchase Return
+
+        sp_Insert_Purchase_Return_Item,
+        sp_Insert_Purchase_Credit_Note,
+        sp_Insert_Purchase_Return,
+        sp_Get_Purchase_Return_Items_By_Vendor_And_PI,
+
+        #endregion
+
+        #region Purchase Order
+
+        sp_Insert_Purchase_Order,
+        sp_Insert_Purchase_Order_Item,
+        sp_Update_Purchase_Order,
+        sp_Update_Purchase_Order_Item,
+        sp_Get_Purchase_Order_By_Id,
+        sp_Insert_Purchase_Order_Item_Sizes,
+
+        sp_Get_PurchaseOrderId_By_SKU_POI,
+
+        sp_Get_Article_No_By_Vendor_Id,
+        sp_Get_Brand_By_Vendor_Id,
+        sp_Get_Category_By_Vendor_Id,
+        sp_Get_Sub_Category_By_Vendor_Id,
+
+        sp_Get_Consolidate_Purchase_Order_Item,
+        sp_Get_Consolidate_Purchase_Order_Item_Sizes,
+
+        #endregion
+
+        #region Purchase Invoice
+
+        sp_Insert_Purchase_Invoice,
+        sp_Insert_Purchase_Invoice_Item,
+
+        sp_Update_Purchase_Invoice,
+        sp_Update_Purchase_Invoice_Item,
+
+        sp_Get_Purchase_Invoice_By_Id,
+        sp_Get_Purchase_Invoice_Item_By_Id,
+
+        sp_Get_Purchase_Invoice_Items_By_SKU_Code,
+        sp_Get_Purchase_Orders,
+
+        sp_Get_Purchase_Invoice,
+
+        #endregion
+
+        #region Purchase Order Request
+
+        sp_Insert_Purchase_Order_Request,
+        sp_Insert_Purchase_Order_Request_Item,
+        sp_Insert_Purchase_Order_Request_Item_Sizes,
+
+        #endregion
 
             //Product
             sp_Insert_Product_MRP,
@@ -189,7 +264,64 @@ namespace MyLeoRetailerInfo.Common
         Insert_Payable_Data_Sp,
         sp_Insert_Payable_Item_Data,
         sp_Temp_Get_Payable_Detail_By_Id1,
+        sp_Temp_Get_Payable_Detail,
 
+        //Employee Branch mapping
+        //sp_Get_Branch,
+        Insert_Employee_Mapping,
+        sp_Get_Employee_MapBranch_ById,
+        sp_Get_Branch_For_Employee_mapping,
+
+        //Sales Order
+
+        sp_Get_Customer_Name_By_Mobile_No,
+        sp_Get_Sales_Order_Items_By_SKU_Code,
+        sp_Insert_Sales_Invoice,
+        sp_Insert_Sales_Invoice_Item,
+        Sp_Delete_Sales_Order_Items_By_Sales_Invoice_Id,
+
+        sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id,
+       sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
+
+        //Sales Return
+
+        sp_Insert_Sales_Return,
+        sp_Insert_Sales_Return_Item,
+        sp_Insert_Sales_Credit_Notes,
+        Sp_Delete_Sales_Return_Items_By_Sales_Return_Id,
+
+
+
+        //receivable
+
+        sp_Get_Receivable_Search_Data,
+        Get_Receivable_Details_By_Id_Sp,
+        Get_Credit_Note_Details_By_Id_Sp1,
+        sp_Update_Payable_Item,
+        Giftvoucher_Data_sp,
+        Get_Receivable_Balance_Amount_By_Id_Sp,
+        Insert_Receivable_Data_Sp,
+        sp_Insert_Receivable_Item_Data,
+        sp_Update_Receivable_Item,
+        Get_Receivable_Data_Item_By_Id_Sp,
+        Get_Receivable_Data_By_Id_Sp,
+        sp_Get_Receivables,
+
+
+        #region Purchase Return Request
+
+        sp_Insert_Purchase_Return_Request,
+        sp_Update_Purchase_Return_Request,
+        sp_Get_Purchase_Return_Request_By_Id,
+        sp_Insert_Purchase_Return_Request_Item,
+        sp_Get_Purchase_Return_Requests,
+
+
+        #endregion
+
+  
+
+    }
 		}
 	
-}
+

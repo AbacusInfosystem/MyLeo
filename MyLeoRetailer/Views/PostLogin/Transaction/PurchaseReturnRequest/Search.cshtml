@@ -1,0 +1,122 @@
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnRequestViewModel
+
+<script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-search-event.js"></script>
+<script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-search-method.js"></script>
+
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Function Module</a></li>
+    <li class="active">Purchase Return Request</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return Request</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmPurchaseReturnRequest">
+
+                    <div class="row">
+
+                        <div class="col-md-5">
+
+                            <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
+                                <select class="form-control select" name="Filter.Vendor_Id" id="drpVendor_Id">
+                                    <option value="">Select Vendor</option>
+                                    @foreach (var item in Model.PurchaseReturnRequest.Vendors)
+                                    {
+                                        if (Model.PurchaseReturnRequest.Vendor_Id == item.Vendor_Id)
+                                        {
+                                            <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-7" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                            <div class="btn-group">
+                                @*<button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>*@
+                                <a role="button" class="btn btn-success active" href="/purchase-return-request/create-purchase-return-request" id="btnCreate">Create</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;" id="divTable">
+            <div class="row">
+                <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                    <table class="table table-bordered table-hover" id="tblPurchaseReturnRequest">
+                        <thead>
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Purchase Invoice No.</th>
+                                <th>Branch</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@if (Model.PurchaseReturnRequests.Count > 0)
+                            {
+                                foreach (var item in Model.PurchaseReturnRequests)
+                                {
+                                    <tr>
+                                        <td>@item.Vendor_Name</td>
+                                        <td>@item.Purchase_Invoice_No</td>
+                                        <td>@item.Branch_Name</td>
+                                        <td>@item.Total_Quantity</td>
+                                        <td>@item.Total_Amount</td>
+                                        <td>@(item.Status == true ? "Pending Request" : "Done")</td>
+                                    </tr>
+                                }
+                            }*@
+                        </tbody>
+                    </table>
+                </div><!-- /.col -->
+            </div>
+        </div>
+
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnRequestPager">
+
+
+        </div>
+
+        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value=""/>
+        @*<div class="pagination pagination-sm no-margin pull-right">
+        </div>*@
+
+    </div>
+
+</div>

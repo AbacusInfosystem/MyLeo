@@ -10,7 +10,7 @@ namespace MyLeoRetailerInfo.Employee
     {
         public EmployeeInfo()
 		{
-
+          //  IsActive = true;
 		}
 
         public int Employee_Id { get; set; }
@@ -62,6 +62,12 @@ namespace MyLeoRetailerInfo.Employee
         public string Password { get; set; }
 
         public int Role_Id { get; set; }
+        //Addition by swapnali | Date:15/09/2016
+        public string Branch_Name { get; set; }
+
+        public int Is_Selected { get; set; }
+
+        //End
 
     }
 }
