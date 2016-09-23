@@ -33,17 +33,20 @@ namespace MyLeoRetailerRepo
         {
             foreach (var item in Colors)
             {
-                foreach (var itm in item.ProductMRP_N_WSR)
+                if (item.ProductMRP_N_WSR != null)
                 {
-                    Set_Date_Session(itm);
-                    if (itm.SKU_Code == null)
+                    foreach (var itm in item.ProductMRP_N_WSR)
                     {
-                        itm.SKU_Code = Generate_SKU_Code(itm);
-                        sqlHelper.ExecuteNonQuery(Set_Values_In_Product_MRP(itm), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
-                    }
-                    else
-                    {
-                        sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm), Storeprocedures.sp_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
+                        Set_Date_Session(itm);
+                        if (itm.SKU_Code == null)
+                        {
+                            itm.SKU_Code = Generate_SKU_Code(itm);
+                            sqlHelper.ExecuteNonQuery(Set_Values_In_Product_MRP(itm), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm), Storeprocedures.sp_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
+                        }
                     }
                 }
             }

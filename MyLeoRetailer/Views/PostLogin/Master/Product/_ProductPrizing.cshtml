@@ -68,18 +68,18 @@
                     <div class="row">
                         <div class="list-group border-bottom push-down-20 color-expand" id="Color_Grid">
                             @{
-                                int i = 0;
+                                int i = 0,c=0;
                                 if (Model.ProductMRPs.Count != 0)
-                                {
+                                {   
                                     foreach (var item in Model.ProductMRPs)
                                     {
                                         <a name="Color_List" class="list-group-item" href="#" id="@i" data-identity="@item.Colour_Id">@item.Colour</a>
-                                        <input type='text' id='txtVendorCode_" + @item.Colour_Id + "' name='Vendor_Code' value="@item.Vendor_Color_Code" placeholder='Enter vendor code.' class='form-control'>
-                                        <input type='hidden' id='hdn_Vendor_Color_Code' class='form-control' name='ProductMRPs[@i].Vendor_Color_Code' />
+                                        <input type='text' id='txtVendorCode_" + @item.Colour_Id + "' name='Colors[@i].ProductMRP_N_WSR[@i].Vendor_Color_Code' value="@item.Vendor_Color_Code" placeholder='Enter vendor code.' class='form-control'>
                                         i++;
                                     }
+                                    c++; 
                                 }
-}
+                            }
                         </div>
                     </div>
                 </div>
