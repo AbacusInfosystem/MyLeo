@@ -111,7 +111,7 @@ function Bind_Product_MRP_Div(data,obj)
                 htmlText += "<input type='hidden' id='hdn_ProductId' class='form-control' name='Colors[" + c + "].ProductMRP_N_WSR[" + i + "].Product_Id' value='" + (data.ProductMRPs[i].Product_Id == 0 ? '' : data.ProductMRPs[i].Product_Id) + "'/>";
                 htmlText += "<input type='hidden' id='hdn_ColourId' class='form-control' name='Colors[" + c + "].ProductMRP_N_WSR[" + i + "].Colour_Id' value='" + $(obj).attr("data-identity") + "'/>";
                 htmlText += "<input type='hidden' id='hdn_SizeId' class='form-control' name='Colors[" + c + "].ProductMRP_N_WSR[" + i + "].Size_Id' value='" + (data.ProductMRPs[i].Size_Id == 0 ? '' : data.ProductMRPs[i].Size_Id) + "'/>";
-                htmlText += "<input type='hidden' id='hdn_Vendor_Color_Code' class='form-control' name='Colors[" + c + "].ProductMRP_N_WSR[" + i + "].Vendor_Color_Code' value='" + $("#txtVendorCode_" + $(obj).attr("data-identity")).val() + "'/>";
+                htmlText += "<input type='hidden' id='hdn_Vendor_Color_Code' class='form-control' name='Colors[" + c + "].ProductMRP_N_WSR[" + i + "].Vendor_Color_Code' value='" + Vendor_Color_Code + "'/>";
 
                 htmlText += "</td>";
             }

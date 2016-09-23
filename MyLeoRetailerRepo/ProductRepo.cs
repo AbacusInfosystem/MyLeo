@@ -307,6 +307,11 @@ namespace MyLeoRetailerRepo
             ProductMRP.Size_Id = Convert.ToInt32(dr["Size_Id"]);
             ProductMRP.Size_Name = Convert.ToString(dr["Size_Name"]);
 
+            if (dr["Colour_Id"] != DBNull.Value)
+                ProductMRP.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+            else
+                ProductMRP.Colour_Id = 0;
+
             if (dr["Purchase_Price"] != DBNull.Value)
                 ProductMRP.Purchase_Price = Convert.ToDecimal(dr["Purchase_Price"]);
             else
