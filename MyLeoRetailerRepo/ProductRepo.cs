@@ -33,17 +33,20 @@ namespace MyLeoRetailerRepo
         {
             foreach (var item in Colors)
             {
-                foreach (var itm in item.ProductMRP_N_WSR)
+                if (item.ProductMRP_N_WSR != null)
                 {
-                    Set_Date_Session(itm);
-                    if (itm.SKU_Code == null)
+                    foreach (var itm in item.ProductMRP_N_WSR)
                     {
-                        itm.SKU_Code = Generate_SKU_Code(itm);
-                        sqlHelper.ExecuteNonQuery(Set_Values_In_Product_MRP(itm), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
-                    }
-                    else
-                    {
-                        sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm), Storeprocedures.sp_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
+                        Set_Date_Session(itm);
+                        if (itm.SKU_Code == null)
+                        {
+                            itm.SKU_Code = Generate_SKU_Code(itm);
+                            sqlHelper.ExecuteNonQuery(Set_Values_In_Product_MRP(itm), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
+                        }
+                        else
+                        {
+                            sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm), Storeprocedures.sp_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
+                        }
                     }
                 }
             }
@@ -303,6 +306,11 @@ namespace MyLeoRetailerRepo
             ProductMRP.Product_Id = Convert.ToInt32(dr["Product_Id"]);
             ProductMRP.Size_Id = Convert.ToInt32(dr["Size_Id"]);
             ProductMRP.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+            if (dr["Colour_Id"] != DBNull.Value)
+                ProductMRP.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+            else
+                ProductMRP.Colour_Id = 0;
 
             if (dr["Purchase_Price"] != DBNull.Value)
                 ProductMRP.Purchase_Price = Convert.ToDecimal(dr["Purchase_Price"]);
