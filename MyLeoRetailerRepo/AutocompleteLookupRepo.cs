@@ -39,7 +39,7 @@ namespace MyLeoRetailerRepo
 
             List<SqlParameter> paramList = new List<SqlParameter>();
 
-            if (fieldValue != "0" && fieldValue != "")
+            if (fieldValue != "0" && !string.IsNullOrEmpty(fieldValue))
             {
 
                 if (table_Name == "Employee")
@@ -85,6 +85,16 @@ namespace MyLeoRetailerRepo
                         paramList.Add(new SqlParameter("@Purchase_Invoice_Id", fieldValue));
                     }
                 }
+
+                if (table_Name == "Branch")
+                {
+                    if (fieldName == "Branch_ID")
+                    {
+                        strquery += " where Branch_ID in (" + fieldValue + ")";
+                        //paramList.Add(new SqlParameter("@Branch_Ids", fieldValue));
+                    }
+                }
+
             }
 
             DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
