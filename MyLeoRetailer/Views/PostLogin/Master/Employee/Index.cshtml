@@ -73,16 +73,17 @@
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
-                            <label class="switch">
-                                @if (Model.Employee.IsActive == false)
+                           <label class="switch">
+                                @* @if (Model.Employee.IsActive == false)
                                 {
                                     <input value="0" name="Employee.IsActive" type="checkbox">
                                 }
                                 else
                                 {
                                     
+                                *@
                                 <input value="1" name="Employee.IsActive" checked="checked" type="checkbox">
-                                }
+                              @*  }*@
                                 <span></span>
                             </label>
                         </div>
