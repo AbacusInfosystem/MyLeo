@@ -216,7 +216,7 @@ namespace MyLeoRetailerRepo
                 }
                 else
                 {
-                    Customer.Customer_DOB = Convert.ToDateTime(dr["Customer_DOB"]);
+                    Customer.Customer_DOB = Convert.ToDateTime(dr["Customer_DOB"]);                  
                 }
                
                 Customer.Customer_Child1_Name = Convert.ToString(dr["Customer_Child1_Name"]);

@@ -53,7 +53,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 
                 poreqViewModel.PurchaseOrderRequest.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
-                poreqViewModel.PurchaseOrderRequest.Vendors = _vendorRepo.Get_Vendors();
+                //poreqViewModel.PurchaseOrderRequest.Vendors = _vendorRepo.Get_Vendors();
 
             }
             catch (Exception ex)
@@ -72,7 +72,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     poreqViewModel = (PurchaseOrderRequestViewModel)TempData["poreqViewModel"];
                 }
 
-                poreqViewModel.PurchaseOrderRequest.Vendors = _vendorRepo.Get_Vendors();
+                //poreqViewModel.PurchaseOrderRequest.Vendors = _vendorRepo.Get_Vendors();
             }
             catch (Exception ex)
             {

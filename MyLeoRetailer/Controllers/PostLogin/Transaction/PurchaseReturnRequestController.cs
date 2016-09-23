@@ -61,7 +61,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
+               // prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
             }
             catch (Exception ex)
             {
