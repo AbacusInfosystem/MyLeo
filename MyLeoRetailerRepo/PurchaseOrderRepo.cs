@@ -96,7 +96,7 @@ namespace MyLeoRetailerRepo
 
             return sqlParam;
         }       
-        
+
         public void Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
             PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
@@ -183,11 +183,11 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity3));
 
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-                }
+        }
 
                 i++;
                 if (i == 4 && PurchaseOrder.Sizes[j].Quantity4 != 0)
-                {
+        {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -238,8 +238,14 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id7));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity7));
 
-                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-                }
+                //Addition
+                sqlParam.Add(new SqlParameter("@Comment", item.Comment));
+                //End
+
+
+                PurchaseOrder.Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
+
+            }
 
                 i++;
                 if (i == 8 && PurchaseOrder.Sizes[j].Quantity8 != 0)
@@ -258,10 +264,10 @@ namespace MyLeoRetailerRepo
                 i++;
                 if (i == 9 && PurchaseOrder.Sizes[j].Quantity9 != 0)
                 {
-                    List<SqlParameter> sqlParams = new List<SqlParameter>();
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
-                    sqlParams.Add(new SqlParameter("@Purchase_Order_Id", PurchaseOrder.Purchase_Order_Id));
+                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", PurchaseOrder.Purchase_Order_Id));
 
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id9));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity9));
@@ -280,8 +286,8 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id10));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity10));
 
-                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-                }
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
+            }
 
                 i++;
                 if (i == 11 && PurchaseOrder.Sizes[j].Quantity11 != 0)
@@ -293,13 +299,13 @@ namespace MyLeoRetailerRepo
 
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id11));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity11));
-
+      
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-                }
+        }
 
                 i++;
                 if (i == 12 && PurchaseOrder.Sizes[j].Quantity12 != 0)
-                {
+        {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -309,11 +315,11 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity12));
 
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-                }
+            }
 
                 i++;
                 if (i == 13 && PurchaseOrder.Sizes[j].Quantity13 != 0)
-                {
+        {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -327,7 +333,7 @@ namespace MyLeoRetailerRepo
 
                 i++;
                 if (i == 14 && PurchaseOrder.Sizes[j].Quantity14 != 0)
-                {
+            {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -337,11 +343,11 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity14));
 
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-                }
+            }
 
                 i++;
                 if (i == 15 && PurchaseOrder.Sizes[j].Quantity15 != 0)
-                {
+        {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));

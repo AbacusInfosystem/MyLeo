@@ -116,7 +116,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 if (prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id == 0)
                 {
-                    prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id = _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
+                    //prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id = _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
+                    _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
 
                     prViewModel.FriendlyMessages.Add(MessageStore.Get("PRR01"));
                 }
@@ -130,7 +131,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseReturnRequest Controller - Save_Purchase_Return_Request : " + ex.ToString());
             }
