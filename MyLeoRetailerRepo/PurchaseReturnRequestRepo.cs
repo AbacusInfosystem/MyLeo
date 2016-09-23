@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace MyLeoRetailerRepo
 {
@@ -23,25 +24,28 @@ namespace MyLeoRetailerRepo
             _sqlRepo = new SQL_Repo();
         }
 
-        public int Insert_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
+        public void Insert_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
         {
-            int ID = 0;
-
-            ID = Convert.ToInt32(_sqlRepo.ExecuteScalerObj(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Insert_Purchase_Return_Request.ToString(), CommandType.StoredProcedure));
-
-            foreach (var item in purchasereturnrequest.PurchaseReturnRequestItems)
+            using (TransactionScope scope = new TransactionScope())
             {
-                item.Purchase_Return_Request_Id = ID;
-                _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Request_Item.ToString(), CommandType.StoredProcedure);
+                int ID = Convert.ToInt32(_sqlRepo.ExecuteScalerObj(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Insert_Purchase_Return_Request.ToString(), CommandType.StoredProcedure));
+
+                foreach (var item in purchasereturnrequest.PurchaseReturnRequestItems)
+                {
+                    item.Purchase_Return_Request_Id = ID;
+                    _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Request_Item.ToString(), CommandType.StoredProcedure);
+                }
+
+                scope.Complete();
+
             }
             
-            return ID;
         }
 
-        public void Update_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
-        {
-            _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Update_Purchase_Return_Request.ToString(), CommandType.StoredProcedure);
-        }
+        //public void Update_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
+        //{
+        //    _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Update_Purchase_Return_Request.ToString(), CommandType.StoredProcedure);
+        //}
 
         private List<SqlParameter> Set_Values_In_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
         {
