@@ -1,6 +1,6 @@
 ﻿@model MyLeoRetailer.Models.ProductViewModel
 @using MyLeoRetailerInfo.Common
- 
+
 
 <script src="~/Scripts/Modules/Product/Product_events.js"></script>
 <script src="~/Scripts/Modules/Product/Product_methods.js"></script>
@@ -25,7 +25,7 @@
 </div>
 <!-- END CONTENT FRAME -->
 
-<div class="page-content-wrap" >
+<div class="page-content-wrap">
     <form role="form" id="frmProduct">
         <div class="row" style="background: rgba(0, 0, 0, 0.02); ">
 
@@ -41,7 +41,7 @@
 
                         <input type="text" id="txtArticle_No" class="form-control" placeholder="Enter article number." name="Product.Article_No" value="@Model.Product.Article_No" />
                         <input type="hidden" id="hdn_ProductId" class="form-control" name="Product.Product_Id" value="@Model.Product.Product_Id" />
-                    </div> 
+                    </div>
 
                     <div id="dvVendor" class="form-group auto-complete">
                         <div class="input-group">
@@ -68,7 +68,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group"> 
+                    <div class="form-group">
                         <textarea class="form-control" placeholder="Enter Comment." name="Product.Comment">@Model.Product.Comment</textarea>
                     </div>
                 </div>
@@ -80,16 +80,16 @@
                 <div class="block">
 
                     <h4 style="margin-top: 15px;">Association detail.</h4>
-                     
+
                     <div id="dvBrand" class="form-group auto-complete">
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" value="@(Model.Product.Brand_Id == 0 ? "" : Model.Product.Brand_Id.ToString())" id="txtBrand_Name" placeholder="Enter brand to search" data-table="Brand" data-col="Brand_Id,Brand_Name" data-headernames="Brand">
+                            <input type="text" class="form-control autocomplete-text lookup-text" value="@(Model.Product.Brand_Id == 0 ? "" : Model.Product.Brand_Id.ToString())" id="txtBrand_Name" placeholder="Enter brand" data-table="Brand" data-col="Brand_Id,Brand_Name" data-headernames="Brand">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnBrandId" value="@Model.Product.Brand_Id" name="Product.Brand_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnBrandName" value="@Model.Product.Brand_Name" name="Product.Brand_Name" class="auto-complete-label" />
                         </div>
                     </div>
-                     
+
                     <div id="dvCatergory" class="form-group auto-complete">
                         <div class="input-group">
                             <input type="text" class="form-control autocomplete-text lookup-text" value="@(Model.Product.Category_Id == 0 ? "" : Model.Product.Category_Id.ToString())" id="txtCategory_Name" placeholder="Enter category" data-table="Category" data-col="Category_Id,Category" data-headernames="Category">
@@ -108,18 +108,18 @@
                         </div>
                     </div>
                     @*</form>*@
-                </div> 
+                </div>
             </div>
 
             <div class="col-md-3" style="">
 
                 <div class="block">
 
-                    <h4 style="margin-top: 15px;">Attibutes.</h4> 
-                  
+                    <h4 style="margin-top: 15px;">Attibutes.</h4>
+
                     <div id="dvSizeG" class="form-group auto-complete">
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSize_Group_Name" value="@(Model.Product.Size_Group_Id == 0 ? "" : Model.Product.Size_Group_Id.ToString())" placeholder="Enter Size GroupName" data-table="Size_Group" data-col="Size_Group_Id,Size_Group_Name" data-headernames="Size_Group">
+                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSize_Group_Name" value="@(Model.Product.Size_Group_Id == 0 ? "" : Model.Product.Size_Group_Id.ToString())" placeholder="Enter Size Group" data-table="Size_Group" data-col="Size_Group_Id,Size_Group_Name" data-headernames="Size_Group">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnSizeGroupId" value="@Model.Product.Size_Group_Id" name="Product.Size_Group_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnSizeGroupName" value="@Model.Product.Size_Group_Name" name="Product.Size_Group_Name" class="auto-complete-label" />
@@ -129,7 +129,7 @@
                     <div class="form-group">
                         <label for="txtCenter_Size" style="color: #333" class="">Center Size</label>
                         <input type="text" class="form-control input-sm" name="Product.Center_Size" id="txtCenter_Size" value="@Model.Product.Center_Size" placeholder="Enter Center Size" />
-                        
+
                     </div>
 
                     @*</form>*@
@@ -154,9 +154,9 @@
 
                     @*<div class="form-group">
 
-                        <input type="text" class="form-control" placeholder="Enter purchase price." name="Product.Purchase_Price" value="@(Model.Product.Purchase_Price == 0 ? "" : Model.Product.Purchase_Price.ToString())" />
+                            <input type="text" class="form-control" placeholder="Enter purchase price." name="Product.Purchase_Price" value="@(Model.Product.Purchase_Price == 0 ? "" : Model.Product.Purchase_Price.ToString())" />
 
-                    </div>*@
+                        </div>*@
 
                     <div class="form-group">
 
@@ -172,9 +172,9 @@
 
                     @*<div class="form-group">
 
-                        <input type="text" class="form-control" placeholder="Enter MRP price." name="Product.MRP_Price" value="@(Model.Product.MRP_Price == 0 ? "" : Model.Product.MRP_Price.ToString())" />
+                            <input type="text" class="form-control" placeholder="Enter MRP price." name="Product.MRP_Price" value="@(Model.Product.MRP_Price == 0 ? "" : Model.Product.MRP_Price.ToString())" />
 
-                    </div>*@
+                        </div>*@
 
 
                     @*</form>*@
@@ -182,100 +182,194 @@
 
             </div>
         </div>
-            <div class="row">
+        <div class="row">
 
-                <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; border-top: 1px solid #DDD; height: 223px; ">
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; border-top: 1px solid #DDD; height: 223px; ">
 
-                    <div class="block">
+                <div class="block">
 
-                        <h4 style="margin-top: 15px;">Upload Product image.</h4>
- 
-                        <div class="form-group">
+                    <h4 style="margin-top: 15px;">Upload Product image.</h4>
 
-                            <input type="file" id="myFile" >
+                    <div class="form-group">
+                        @*<input type="file" id="myFile">*@
+                        <input type="file" id="productImage" name="ProductImage.File" style="margin-top:15px;margin-bottom:30px;" multiple="multiple" />
+                    </div>
 
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-success active" id="btnUploadImage">Upload</button> 
-                        </div>
-                     
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success active" id="btnUploadImage">Upload</button>
                     </div>
 
                 </div>
 
-                <div class="col-md-9" id="dvProductImg" style="background: rgba(0, 0, 0, 0.02); border-top: 1px solid #DDD;">
+            </div>
 
-                    <div class="gallery" id="links">
+            <div class="col-md-9" id="dvProductImg" style="background: rgba(0, 0, 0, 0.02); border-top: 1px solid #DDD;">
 
-                        <a class="gallery-item" href="assets/images/gallery/nature-1.jpg" title="Nature Image 1" data-gallery>
-                            <div class="image">
-                                <img src="/UploadedFiles/" id="img_0" alt="Product image 1" /> 
-                                <ul class="gallery-item-controls">
-                                    <li><label class="check"><input type="radio" class="iradio-list" /></label></li>
-                                    <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
-                                </ul>
-                            </div>
-                            <div class="meta">
-                                <strong>Nature image 1</strong>
-                                <span>Description</span>
-                            </div>
-                        </a>
-
-                        <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
-                            <div class="image">
-                                <img src="/UploadedFiles/" id="img_1" alt="Product image 2" />
-                                <ul class="gallery-item-controls">
-                                    <li><label class="check"><input type="checkbox" class="icheckbox" /></label></li>
-                                    <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
-                                </ul>
-                            </div>
-                            <div class="meta">
+                <div class="gallery" id="links">
+                    <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
+                        <div class="image" id="image_preview">
+                            @if (Model.Product.ProductImage.Product_Image[0] != null && Model.Product.ProductImage.Product_Image[0] != "")
+                            {
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[0]" class="ImgSrc" width="70" height="140" id="img_0" alt="Product image 1" />
+                            }
+                            else
+                            {
+                                <img src="/UploadedFiles/" id="img_0" alt="Product image 1" width="70" height="140" />
+                            }
+                            <input type="hidden" id="hdn_ImgSrc_0" name="Product.ProductImage.Image_Src[0]">
+                            <input type="hidden" id="hdn_Img_0" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[0]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_0" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[0]" class="prod_img_id">
+                            <ul class="gallery-item-controls">
+                                @if (Model.Product.ProductImage.Is_Default[0] == "False" || Model.Product.ProductImage.Is_Default[0] == null || Model.Product.ProductImage.Is_Default[0] == "")
+                                {
+                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                }
+                                else
+                                {
+                                    <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
+                                }
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
+                            </ul>
+                            <input type="hidden" id="hdnDefault" name="Product.ProductImage.Is_Default" value="@Model.Product.ProductImage.Is_Default[0]" class="Is_Default" />
+                        </div>
+                        @*<div class="meta">
                                 <strong>Music picture 1</strong>
                                 <span>Other description</span>
-                            </div>
-                        </a>
+                            </div>*@
+                    </a>
 
-                        <a class="gallery-item" href="assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
-                            <div class="image">
-                                <img src="/UploadedFiles/" id="img_2" alt="Product image 3" />
-                                <ul class="gallery-item-controls">
-                                    <li><label class="check"><input type="checkbox" class="icheckbox" /></label></li>
-                                    <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
-                                </ul>
-                            </div>
-                            <div class="meta">
+                    <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
+                        <div class="image" id="image_preview">
+                            @if (Model.Product.ProductImage.Product_Image[1] != null && Model.Product.ProductImage.Product_Image[1] != "")
+                            {
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[1]" class="ImgSrc" width="70" height="140" id="img_1" alt="Product image 2" />
+                            }
+                            else
+                            {
+                                <img src="/UploadedFiles/" id="img_1" alt="Product image 2" width="70" height="140" />
+                            }
+                            <input type="hidden" id="hdn_ImgSrc_1" name="Product.ProductImage.Image_Src[1]">
+                            <input type="hidden" id="hdn_Img_1" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[1]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_1" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[1]" class="prod_img_id">
+                            <ul class="gallery-item-controls">
+                                @if (Model.Product.ProductImage.Is_Default[1] == "False" || Model.Product.ProductImage.Is_Default[1] == null || Model.Product.ProductImage.Is_Default[1] == "")
+                                {
+                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                }
+                                else
+                                {
+                                    <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
+                                }
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
+                            </ul>
+                            <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[1]" name="Product.ProductImage.Is_Default" class="Is_Default" />
+                        </div>
+                        @*<div class="meta">
+                                <strong>Music picture 1</strong>
+                                <span>Other description</span>
+                            </div>*@
+                    </a>
+
+                    <a class="gallery-item" href="assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
+                        <div class="image" id="image_preview">
+                            @if (Model.Product.ProductImage.Product_Image[2] != null && Model.Product.ProductImage.Product_Image[2] != "")
+                            {
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[2]" class="ImgSrc" id="img_2" width="70" height="140" alt="Product image 3" />
+                            }
+                            else
+                            {
+                                <img src="/UploadedFiles/" width="70" height="140" id="img_2" alt="Product image 3" />
+                            }
+                            <input type="hidden" id="hdn_Img_2" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[2]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_2" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[2]" class="prod_img_id">
+                            <input type="hidden" id="hdn_ImgSrc_2" name="Product.ProductImage.Image_Src[2]">
+
+                            <ul class="gallery-item-controls">
+                                @if (Model.Product.ProductImage.Is_Default[2] == "False" || Model.Product.ProductImage.Is_Default[2] == null || Model.Product.ProductImage.Is_Default[2] == "")
+                                {
+                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                }
+                                else
+                                {
+                                    <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
+                                }
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
+                            </ul>
+                            <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[2]" name="Product.ProductImage.Is_Default" class="Is_Default" />
+                        </div>
+                        @*<div class="meta">
                                 <strong>Girls image 1</strong>
                                 <span>Description</span>
-                            </div>
-                        </a>
+                            </div>*@
+                    </a>
 
-                        <a class="gallery-item" href="assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
-                            <div class="image">
-                                <img src="/UploadedFiles/" id="img_3" alt="Product image 4" />
-                                <ul class="gallery-item-controls">
-                                    <li><label class="check"><input type="checkbox" class="icheckbox" /></label></li>
-                                    <li><span class="gallery-item-remove"><i class="fa fa-times"></i></span></li>
-                                </ul>
-                            </div>
-                            <div class="meta">
+                    <a class="gallery-item" href="assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
+                        <div class="image" id="image_preview">
+                            @if (Model.Product.ProductImage.Product_Image[3] != null && Model.Product.ProductImage.Product_Image[3] != "")
+                            {
+                                <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[3]" class="ImgSrc" width="70" height="140" id="img_3" alt="Product image 4" />
+                            }
+                            else
+                            {
+                                <img src="/UploadedFiles/" id="img_3" width="70" height="140" alt="Product image 4" />
+                            }
+                            <input type="hidden" id="hdn_Img_3" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[3]" class="prod_img_name">
+                            <input type="hidden" id="hdn_Img_Id_3" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[3]" class="prod_img_id">
+                            <input type="hidden" id="hdn_ImgSrc_3" name="Product.ProductImage.Image_Src[3]">
+                            <ul class="gallery-item-controls">
+                                @if (Model.Product.ProductImage.Is_Default[3] == "False" || Model.Product.ProductImage.Is_Default[3] == null || Model.Product.ProductImage.Is_Default[3] == "")
+                                {
+                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                }
+                                else
+                                {
+                                    <li><label class="check"><input type="radio" name="" value="false" checked="checked" class="icheckbox dd" /></label></li>
+                                }
+                                <li>
+                                    <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
+                                        @*<span class="gallery-item-remove">*@<i class="fa fa-times"></i>@*</span>*@
+                                    </button>
+                                </li>
+                            </ul>
+                            <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[3]" name="product.productimage.Is_default" class="Is_Default" />
+                        </div>
+                        @*<div class="meta">
                                 <strong>Nature image 2</strong>
                                 <span>Description</span>
-                            </div>
-                        </a> 
-                    </div> 
-                </div>
-            </div>
-
-            <div class="col-md-12" style="padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
-
-                <div class="btn-group">
-                    <button class="btn btn-success active" id="btnProductSave">Save</button>
-                    <button class="btn btn-danger active" id="btnCancel" >Cancel</button>
-                    <button type="button" class="btn btn-success active" id="btnProductMRP" style="display:none">Add Product MRP</button>
+                            </div>*@
+                    </a>
                 </div>
 
+
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-12" id="ImgPreview">
+
+                    </div>
+
+                </div>
             </div>
-       
-    </form> 
+        </div>
+
+        <div class="col-md-12" style="padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+            <div class="btn-group">
+                <button class="btn btn-success active" id="btnProductSave">Save</button>
+                <button class="btn btn-danger active" id="btnCancel">Cancel</button>
+                <button type="button" class="btn btn-success active" id="btnProductMRP" style="display:none">Add Product MRP</button>
+            </div>
+
+        </div>
+    </form>
 </div>

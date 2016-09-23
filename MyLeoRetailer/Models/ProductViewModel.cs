@@ -41,6 +41,7 @@ namespace MyLeoRetailer.Models
             Brands = new List<BrandInfo>();
 
             Color = new ColorInfo();
+            Colours = new List<int>();
             Colors = new List<ColorInfo>();
 
             Filter = new Filter_Product(); 
@@ -58,6 +59,7 @@ namespace MyLeoRetailer.Models
         public List<SubCategoryInfo> SubCategories { get; set; }
         public List<BrandInfo> Brands { get; set; }
         public List<ColorInfo> Colors { get; set; }
+        public List<int> Colours { get; set; }
         public ColorInfo Color { get; set; }
 
         public GridInfo Grid_Detail
@@ -124,6 +126,12 @@ namespace MyLeoRetailer.Models
         }
 
         public string Product_Id
+        {
+            get;
+            set;
+        }
+
+        public string Color
         {
             get;
             set;

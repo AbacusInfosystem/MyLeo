@@ -39,6 +39,9 @@
 
             "Customer.Customer_Email1": {
                 email: true,
+            },
+            "Customer.Customer_Email2": {
+                email: true,
             }
 
         },
@@ -80,9 +83,23 @@
                 digits: "Enter only digits"
             },
 
-            "Customer.Customer_Landline2": {
+            //Commented by Vinod Mane on 23/09/2016
+            //"Customer.Customer_Landline2": {
+            //    email: "Invalide e-mail"
+            //}
+            //End
+
+            //Added By Vinod Mane on 23/09/2016
+            "Customer.Customer_Email1": {
                 email: "Invalide e-mail"
-            }
+            },
+            //end
+            //Added By Vinod Mane on 23/09/2016
+            "Customer.Customer_Email2": {
+              email: "Invalide e-mail"
+             }
+            //end
+
         }
     });
     

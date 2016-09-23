@@ -66,7 +66,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                
                 pager = prViewModel.Pager;
 
-                prViewModel.PurchaseReturnRequests = _prRepo.Get_Purchase_Return_Requests(ref pager, Convert.ToInt32(Cookies.Branch_Ids), prViewModel.Filter.Vendor_Id);
+                prViewModel.PurchaseReturnRequests = _prRepo.Get_Purchase_Return_Requests(ref pager, Cookies.Branch_Ids, prViewModel.Filter.Vendor_Id);
 
                 prViewModel.Pager = pager;
 
@@ -87,7 +87,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
+               // prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
             }
             catch (Exception ex)
             {
@@ -102,11 +102,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                prViewModel.PurchaseReturnRequest.Branch_Id = Convert.ToInt32(Cookies.Branch_Ids);
-                //prViewModel.PurchaseReturnRequest.Branch_Id = 1;
-
                 Set_Date_Session(prViewModel.PurchaseReturnRequest);
 
                 foreach (var item in prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItems)
@@ -116,7 +111,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 if (prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id == 0)
                 {
-                    prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id = _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
+                    _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
 
                     prViewModel.FriendlyMessages.Add(MessageStore.Get("PRR01"));
                 }
@@ -130,7 +125,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseReturnRequest Controller - Save_Purchase_Return_Request : " + ex.ToString());
             }

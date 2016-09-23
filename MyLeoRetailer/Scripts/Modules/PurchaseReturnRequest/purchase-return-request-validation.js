@@ -11,6 +11,9 @@
             "PurchaseReturnRequest.Discount_Percentage": {
                 number: true
             },
+            "PurchaseReturnRequest.Branch_Id": {
+                required: true
+            },
             
         },
         messages: {
@@ -24,7 +27,9 @@
             "PurchaseReturnRequest.Discount_Percentage": {
                 number: "Invalid discount."
             },
-            
+            "PurchaseReturnRequest.Branch_Id": {
+                required: "Branch is required."
+            },
 
         }
     });

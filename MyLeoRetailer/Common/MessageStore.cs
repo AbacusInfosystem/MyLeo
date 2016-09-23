@@ -249,6 +249,9 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage PROD02 = new FriendlyMessage("PROD02", MessageType.Success, "Product updated successfully.");
             hash.Add("PROD02", PROD02);
+
+            FriendlyMessage PROD03 = new FriendlyMessage("PROD03", MessageType.Success, "Product Prices added successfully.");
+            hash.Add("PROD03", PROD03);
             #endregion
 
             #region Role

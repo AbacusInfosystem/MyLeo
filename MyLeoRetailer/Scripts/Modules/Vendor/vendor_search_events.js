@@ -36,6 +36,11 @@ $(function () {
 
     });
 
+    //Added By Vinod Mane on 22/09/2016
+    $(document).on("change", "#hdnVendor_ID", function () {
+        Get_Vendors();
+    });
+    //End
 
 });
 

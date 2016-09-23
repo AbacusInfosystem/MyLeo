@@ -43,7 +43,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 piViewModel.PurchaseInvoice.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Orders();
 
-                piViewModel.PurchaseInvoice.Vendors = _vendorRepo.Get_Vendors();
+               // piViewModel.PurchaseInvoice.Vendors = _vendorRepo.Get_Vendors();
 
                 piViewModel.PurchaseInvoice.Transporters = _vendorRepo.Get_Transporters();
 

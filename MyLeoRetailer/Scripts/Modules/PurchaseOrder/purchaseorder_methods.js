@@ -1,5 +1,5 @@
 ﻿function Set_Vendor_Id(value) {
-   
+
 
     $('#hdf_Vendor_Id').val(value);
 
@@ -29,9 +29,9 @@
 
                 for (var j = 0; j < obj.PurchaseOrder.Vendors.length; j++) {
                     debugger;
-
+                                       
                     var i = j + 1;
-
+                   
                     $("#drpArticle_No").append("<option value='" + obj.PurchaseOrder.Vendors[j].Article_No + "'>" + obj.PurchaseOrder.Vendors[j].Article_No + "</option>");
 
                     $("#drpArticle_No").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Vendors[j].Article_No + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
@@ -53,7 +53,7 @@
                     debugger;
 
                     var i = j + 1;
-
+                    
                     $("#drpBrand").append("<option value='" + obj.PurchaseOrder.Brands[j].Brand_Id + "'>" + obj.PurchaseOrder.Brands[j].Brand_Name + "</option>");
 
                     $("#drpBrand").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Brands[j].Brand_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
@@ -61,13 +61,14 @@
                 }
             }
 
+            if (obj.PurchaseOrder.Categories.length > 0) {
 
             $("#drpCategory").html("");
 
             $("#drpCategory").append("<option value=''>Select Category</option>");
 
             $("#drpCategory").parents('.form-group').find('ul').html("");
-
+               
             $("#drpCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Category</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
             if (obj.PurchaseOrder.Categories.length > 0) {
@@ -86,7 +87,7 @@
     });
 
     Get_Consolidate_Purchase_Orders(value);
-
+   
     debugger;
        
 }
@@ -372,7 +373,7 @@ function Set_Sub_Category_Drp_Id(value) {
             $("#drpSubCategory").parents('.form-group').find('ul').html("");
 
             $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select SubCategory.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
+              
 
             if (obj.PurchaseOrder.SubCategories.length > 0) {
           
@@ -381,7 +382,7 @@ function Set_Sub_Category_Drp_Id(value) {
                     var i = j + 1;
 
                     $("#drpSubCategory").append("<option value='" + obj.PurchaseOrder.SubCategories[j].Sub_Category_Id + "'>" + obj.PurchaseOrder.SubCategories[j].Sub_Category + "</option>");
-
+                    
                     $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SubCategories[j].Sub_Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                 }
@@ -739,7 +740,7 @@ function AddPurchaseOrderDetails() {
     var newRow = $(tblHtml);
 
     myTable.append(newRow);
-
+    
     var $options = $("#drpCenter_Size > option").clone();
 
     $("#textStart_Size_" + i).append($options);
@@ -868,7 +869,7 @@ function ContinuePurchaseOrderDetailsData(j) {
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_1-" + (i - 1)).val() + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id1' id='hdnSize_Id_1-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrder.Sizes[" + i + "].Amount1' id='hdnAmount_1-" + i + "' />";
     tblHtml += "</td>";
-     
+  
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrder.Sizes[" + i + "].Quantity2' value='0' id='textSize_Quantity_2-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_2-" + (i - 1)).val() + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id2' id='hdnSize_Id_2-" + i + "' />";
@@ -1008,7 +1009,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     $("#textEnd_Size_" + i).append($optionss);
 
-
+    
     $("#textColour_Name_" + i).rules("add", { required: true, messages: { required: "Color is required." } });
     $("#textStart_Size_" + i).rules("add", { required: true, messages: { required: "Start size is required.", } });
     $("#textEnd_Size_" + i).rules("add", { required: true, messages: { required: "End size is required.", } });    

@@ -56,7 +56,7 @@
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="05-07-2014" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -82,7 +82,7 @@
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="05-07-2014" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -101,7 +101,7 @@
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="05-07-2014" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -294,7 +294,8 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Base rate.</span>
-                        <input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." />
+                        @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price"  id="textPurchase_Price" placeholder="Enter base rate." />*@
+                        <input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price" maxlength="10" name="PurchaseOrder.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." />
                     </div>
                 </div>
             </div>
@@ -313,7 +314,8 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size difference.</span>
-                        <input type="text" class="form-control" value="@Model.PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />
+                        @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />*@
+                        <input type="text" class="form-control" maxlength="10" value="@Model.PurchaseOrder.Size_Difference" name="PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />
                     </div>
                 </div>
             </div>
