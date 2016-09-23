@@ -35,10 +35,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Index(VendorContactViewModel vcViewModel)
         {
-            VendorRepo vcRepo = new VendorRepo();
+            //Added by Vinod Mane on 21/09/2016
 
-            vcViewModel.Vendors = vcRepo.Get_Vendors();
+            //VendorRepo vcRepo = new VendorRepo(); 
 
+          //  vcViewModel.Vendors = vcRepo.Get_Vendors();
+            
+            VendorContactRepo vcRepo = new VendorContactRepo();
+            vcViewModel.Vendor_Contact = vcRepo.Get_Vendors();
+            //End
             try
             {
                 if (TempData["vcViewModel"] != null)
@@ -139,11 +144,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Vendor_Contact_By_Id(VendorContactViewModel vcViewModel)
         {
-            VendorRepo vRepo = new VendorRepo();
+         //   VendorRepo vRepo = new VendorRepo();
 
             VendorContactRepo vcRepo = new VendorContactRepo();
 
-            vcViewModel.Vendors = vRepo.Get_Vendors();
+            //Added by Vinod Mane on 21/09/2016
+          //  vcViewModel.Vendors = vRepo.Get_Vendors();
+
+            vcViewModel.Vendor_Contact = vcRepo.Get_Vendors();
+            //End
 
             vcViewModel.VendorContact = vcRepo.Get_Vendor_Contact_By_Id(vcViewModel.VendorContact.VendorContact_Id);
 

@@ -157,7 +157,7 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No' id='textInvoice_No_" + i + "' placeholder='Enter PO no. to search' value=''  data-table='Purchase_Order' data-col='Purchase_Order_Id,Purchase_Order_No' data-headernames='Purchase Order' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textInvoice_No_" + i + "' placeholder='Enter PO no. to search' value=''  data-table='Purchase_Order' data-col='Purchase_Order_Id,Purchase_Order_No' data-headernames='Purchase Order' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
     tblHtml += "<span class='input-group-addon'> <a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No' class='auto-complete-label' />";
@@ -176,6 +176,27 @@ function AddPurchaseInvoiceDetails() {
     var newRow = $(tblHtml);
 
     myTable.append(newRow);
+
+
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
+    $("#textInvoice_No_" + i).rules("add", { required: true, messages: { required: "PO No. is required.", } });
+
+
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+        var result = true;
+        var id = $(element).attr('id')
+        id = id.replace("textSKU_No_", "");
+
+        $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+                result = false;
+            }
+        });
+
+        return result;
+    }, "Already mapped.");
 
 }
 

@@ -46,6 +46,7 @@
     <Compile Include="BrandRepo.cs" />
     <Compile Include="CategoryRepo.cs" />
     <Compile Include="ColorRepo.cs" />
+    <Compile Include="Common\CommonMethods.cs" />
     <Compile Include="CookiesRepo.cs" />
     <Compile Include="EmployeeRepo.cs" />
     <Compile Include="GiftVoucherRepo.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="PurchaseOrderRepo.cs" />
     <Compile Include="PurchaseOrderRequestRepo.cs" />
     <Compile Include="PurchaseReturnRepo.cs" />
+    <Compile Include="PurchaseReturnRequestRepo.cs" />
     <Compile Include="ReceivableRepo.cs" />
     <Compile Include="RoleRepo.cs" />
     <Compile Include="SalesOrderRepo.cs" />
