@@ -27,6 +27,29 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        //END
 
+       //Branch Info
+
+        public string Branch_Name { get; set; }
+
+        public string Branch_Address { get; set; }
+
+        public string Branch_City { get; set; }
+
+        public string Branch_State { get; set; }
+
+        public string Branch_Country { get; set; }
+
+        public int Branch_Pincode { get; set; }
+
+        public string Branch_Landline1 { get; set; }
+
+        public string Branch_Landline2 { get; set; }
+
+        public string Employee_Name { get; set; }
+
+
+       //End
+
        public string Sales_Invoice_No { get; set; }
 
        public int Branch_Id { get; set; }
@@ -89,6 +112,8 @@ namespace MyLeoRetailerInfo.SalesInvoice
        public string SalesMan { get; set; }
 
        public int SalesMan_Id { get; set; }
+
+       public bool Flag { get; set; }
 
 
        //End

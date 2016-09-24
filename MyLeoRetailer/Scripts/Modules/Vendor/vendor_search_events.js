@@ -9,13 +9,16 @@ $(function () {
         if ($(this).prop('checked'))
         {
             $("#hdnVendorID").val(this.value);
+            $("#btnedit").show(); //Added by Vinod Mane on 19/09/2016
         }
     });
 
-    $("#btnEdit").click(function () {
+  
+
+    $("#btnedit").click(function () { //btnEdit to btnedit change by Vinod Mane on 20/09/2016
 
         $("#frmSearchVendor").attr("action", "/Vendor/Get_Vendor_By_Id");
-
+      
         $("#frmSearchVendor").submit();
     });
 
@@ -33,6 +36,11 @@ $(function () {
 
     });
 
+    //Added By Vinod Mane on 22/09/2016
+    $(document).on("change", "#hdnVendor_ID", function () {
+        Get_Vendors();
+    });
+    //End
 
 });
 

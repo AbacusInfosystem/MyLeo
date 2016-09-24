@@ -1,4 +1,5 @@
-﻿function Save_Role() {
+﻿//sdfsdfds
+function Save_Role() {
     var activeFlg = false;
   
     if ($("[name='role.Is_Active']").val() == 1 || $("[name='role.Is_Active']").val() == "true") {
@@ -38,6 +39,8 @@
             var obj = $.parseJSON(response);
 
             Reset_Role();
+
+            $("[name='Filter.Role']").val("");
 
             Get_Roles();
 
@@ -97,7 +100,7 @@ function Reset_Role() {
     $("[name='role.Is_Active']")[0].checked = true;
     $("[name='role.Is_Active']").val(true);
 
-    $("[name='Filter.Role']").val("");
+    //$("[name='Filter.Role']").val("");
 
     $("#spnRoleName").text("");
     Get_RoleAccess_Functions(0);
@@ -109,15 +112,17 @@ function Get_Role_By_Id(obj) {
 
     $(obj).addClass("active");
 
-    $("[name='role.Role_Name']").val($(obj).text());
-    $("#hdnRole_Name").val($(obj).text());
+    //$("[name='role.Role_Name']").val($(obj).text());
+    //$("#hdnRole_Name").val($(obj).text());
 
-    $("[name='role.Role_Id']").val($(obj).attr("data-identity"));
+    //$("[name='role.Role_Id']").val($(obj).attr("data-identity"));
 
-    $("#spnRoleName").text($(obj).text());
+    //$("#spnRoleName").text($(obj).text());
 
-    var Role_Id = $("[name='role.Role_Id']").val();
+    //var Role_Id = $("[name='role.Role_Id']").val();
 
+    var Role_Id = $(obj).attr("data-identity");
+    
     $.ajax({
 
         url: "/role/get-role-by-id",
@@ -138,10 +143,20 @@ function Get_Role_By_Id(obj) {
                 $("[name='role.Is_Active']")[0].checked = false;
                 $("[name='role.Is_Active']").val(0);
             }
+
+            $("[name='role.Role_Name']").val(obj.role.Role_Name);
+            $("#hdnRole_Name").val(obj.role.Role_Name);
+
+            $("[name='role.Role_Id']").val(obj.role.Role_Id);
+
+            $("#spnRoleName").text(obj.role.Role_Name);
+            
+            Get_RoleAccess_Functions(obj.role.Role_Id);
+            
+            Friendly_Messages(obj);
+
         }
     });
-
-    Get_RoleAccess_Functions(Role_Id);
 
 }
 

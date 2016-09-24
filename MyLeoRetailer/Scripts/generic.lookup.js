@@ -9,14 +9,21 @@ $(document).ready(function () {
         var id = $("#hdnId").val();
 
         var Textboxname = "#" + $("#hdnLookupLabelId").val();
+        
+        //$(Textboxname).parents('.input-group').each(function () {
+        //    $('#lookupUlLookup').remove()
+        //});
 
         $('.border-bottom').each(function () {
             $('#lookupUlAuto').remove()
         });
 
-        $('.border-bottom').each(function () {
-            $('#lookupUlLookup').remove()
-        });
+        //$('.border-bottom').each(function () {
+        //    $('#lookupUlLookup').remove()
+            
+        //});
+
+        $(Textboxname).parents('.form-group').find('#lookupUlLookup').remove();
 
         $("#" + $("#hdnLookupHiddenId").val()).val(id);
         $("#" + $("#hdnLookupHiddenValue").val()).val(hiddenTextValue);
@@ -26,6 +33,7 @@ $(document).ready(function () {
         $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find(".autocomplete-text").focus();
 
         $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
+        $("#" + $("#hdnLookupHiddenValue").val()).trigger("change");
         //$(".glyphicon-remove").trigger("click")
 
         var htmlText = "<ul id='lookupUlLookup' class='list-group border-bottom'><li class='list-group-item'><span class='text'>" + hiddenTextValue + "<div class='pull-right'><i class='glyphicon glyphicon-remove'></i></div></li></ul>";

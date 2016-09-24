@@ -152,6 +152,105 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
+        public SalesInvoiceInfo Get_SalesOrder_By_Id(int Sales_Invoice_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
+            SalesInvoiceInfo salesinvoice = new SalesInvoiceInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    salesinvoice = Get_SalesOrder_Values(dr);
+                }
+            }
+
+            return salesinvoice;
+        }
+
+        public List<SaleOrderItems> Get_SalesOrder_Items_By_Id(int Sales_Invoice_Id)
+        {
+            List<SaleOrderItems> SaleOrderItemList = new List<SaleOrderItems>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    SaleOrderItems list = new SaleOrderItems();
+
+                    if (!dr.IsNull("SKU_Code"))
+                        list.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+                    if (!dr.IsNull("Article_No"))
+                        list.Article_No = Convert.ToString(dr["Article_No"]);                  
+                    if (!dr.IsNull("Quantity"))
+                        list.Quantity = Convert.ToInt32(dr["Quantity"]);
+                    if (!dr.IsNull("Brand_Name"))
+                        list.Brand = Convert.ToString(dr["Brand_Name"]);
+                    if (!dr.IsNull("Category"))
+                        list.Category = Convert.ToString(dr["Category"]);
+                    if (!dr.IsNull("Sub_Category"))
+                        list.SubCategory = Convert.ToString(dr["Sub_Category"]);
+                    if (!dr.IsNull("Size_Name"))
+                        list.Size_Name = Convert.ToString(dr["Size_Name"]);
+                    if (!dr.IsNull("Colour_Name"))
+                        list.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+                    if (!dr.IsNull("MRP_Amount"))
+                        list.MRP_Price = Convert.ToInt32(dr["MRP_Amount"]);
+                    if (!dr.IsNull("Total_Amount"))
+                        list.Amount = Convert.ToInt32(dr["Total_Amount"]);
+                    if (!dr.IsNull("Discount_Percentage"))
+                        list.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
+                    if (!dr.IsNull("Employee_Name"))
+                        list.SalesMan = Convert.ToString(dr["Employee_Name"]);
+
+                    SaleOrderItemList.Add(list);
+                }
+            }
+
+            return SaleOrderItemList;
+        }
+
+        private SalesInvoiceInfo Get_SalesOrder_Values(DataRow dr)
+        {
+            SalesInvoiceInfo salesinvoice = new SalesInvoiceInfo();
+
+            salesinvoice.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+            salesinvoice.Branch_Address = Convert.ToString(dr["Branch_Address"]);
+            salesinvoice.Branch_City = Convert.ToString(dr["Branch_City"]);
+            salesinvoice.Branch_State = Convert.ToString(dr["Branch_State"]);
+            salesinvoice.Branch_Country = Convert.ToString(dr["Branch_Country"]);
+            salesinvoice.Branch_Pincode = Convert.ToInt32(dr["Branch_Pincode"]);
+            salesinvoice.Branch_Landline1 = Convert.ToString(dr["Branch_Landline1"]);
+            salesinvoice.Branch_Landline2 = Convert.ToString(dr["Branch_Landline2"]);
+            salesinvoice.Sales_Invoice_No = Convert.ToString(dr["Sales_Invoice_No"]);
+            salesinvoice.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
+            salesinvoice.Customer_Id = Convert.ToInt32(dr["Customer_Id"]);
+            salesinvoice.Customer_Name = Convert.ToString(dr["Customer_Name"]);
+            salesinvoice.Mobile = Convert.ToString(dr["Customer_Mobile1"]);
+            salesinvoice.Gross_Amount = Convert.ToInt32(dr["Gross_Amount"]);
+            salesinvoice.Total_MRP_Amount = Convert.ToInt32(dr["Total_MRP_Amount"]);
+            salesinvoice.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+            salesinvoice.Tax_Percentage = Convert.ToInt32(dr["Tax_Percentage"]);
+            salesinvoice.Round_Off_Amount = Convert.ToInt32(dr["Round_Off_Amount"]);     
+            salesinvoice.Total_Discount_Amount = Convert.ToInt32(dr["Total_Discount_Amount"]);
+            salesinvoice.Net_Amount = Convert.ToInt32(dr["Net_Amount"]);
+
+            return salesinvoice;
+        }
+
+
         public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems,string Branch_Id)
         {
 

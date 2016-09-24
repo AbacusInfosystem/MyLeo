@@ -74,12 +74,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 if (Utility.Check_Access_Function_Authorization(AppFunction.Employee_Management_Create))
                 {
-                    Set_Date_Session(eViewModel.Employee);
+                Set_Date_Session(eViewModel.Employee);
 
-                    eViewModel.Employee.Employee_Id = eRepo.Insert_Employee(eViewModel.Employee);
+                eViewModel.Employee.Employee_Id = eRepo.Insert_Employee(eViewModel.Employee);
 
-                    eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP01"));
-                }
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP01"));
+            }
                 else
                 {
                     eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
@@ -103,12 +103,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 if (Utility.Check_Access_Function_Authorization(AppFunction.Employee_Management_Edit))
                 {
-                    Set_Date_Session(eViewModel.Employee);
+                Set_Date_Session(eViewModel.Employee);
 
-                    eRepo.Update_Employee(eViewModel.Employee);
+                eRepo.Update_Employee(eViewModel.Employee);
 
-                    eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP02"));
-                }
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP02"));
+            }
                 else
                 {
                     eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));

@@ -69,7 +69,7 @@ namespace MyLeoRetailer.Common
 
             LoginInfo _cookies;
 
-            _cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Brand_Ids");
+            _cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             if (_cookies != null && _cookies.Access_Functions.Count() != 0 &&
                 _cookies.Access_Functions.Any(x => x.Access_Function_Name == _accessFun && ((x.Is_Access && _access == Actions.Access.ToString()) || (x.Is_Create && _access == Actions.Create.ToString()) || (x.Is_Edit && _access == Actions.Edit.ToString()) || (x.Is_View && _access == Actions.View.ToString()))))

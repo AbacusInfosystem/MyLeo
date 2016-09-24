@@ -18,6 +18,7 @@ $(function () {
 
         $("#btnProductMRP").click(function () {
 
+
             $("#frmSearchProduct").attr("action", "/Product/serch-ProductPrizing/");
 
             $("#frmSearchProduct").attr("method", "post");
@@ -33,5 +34,5 @@ $(function () {
                 $("#btnProductMRP").show();
                 $("#btnEdit").show();
             }
-        });
+        }); 
 });

@@ -47,7 +47,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             ReceivableRepo rRepo = new ReceivableRepo();
 
-            rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
+                rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
 
             return Index(rViewModel);
         }

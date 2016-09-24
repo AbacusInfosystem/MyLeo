@@ -302,8 +302,8 @@ namespace MyLeoRetailerRepo
             Vendor.Vendor_CST_Effective_Date = Convert.ToDateTime(dr["CST_Effective_Date"]);
             Vendor.Vendor_Type = Convert.ToInt32(dr["Vendor_Type"]);
 
-            //Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]);
-            //Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+            Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]); //Uncommented code by Vinod Mane on 20/09/2016
+            Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);//Uncommented code by Vinod Mane on 20/09/2016
 
             Vendor.Created_By = Convert.ToInt32(dr["Created_By"]);
             Vendor.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
@@ -499,63 +499,42 @@ namespace MyLeoRetailerRepo
             return Vendors;
         }
 
-        //End
-
-        //Gauravi 17-9-2016
-
-        public PurchaseInvoiceInfo Get_Vendor_Detalis_By_Id(int vendor_Id)
+        //Added By Vinod Mane on 21/09/2016
+        public List<VendorInfo> Get_SubCategorylist(int Caterory_id)
         {
+            List<VendorInfo> subcategories = new List<VendorInfo>();
+
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            sqlParams.Add(new SqlParameter("@Vendor_ID", vendor_Id));
+            sqlParams.Add(new SqlParameter("@Category_Id", Caterory_id));
+           // sqlParams.Add(new SqlParameter("@IsActive", true));
 
-            PurchaseInvoiceInfo Vendor = new PurchaseInvoiceInfo();
-
-            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Vendor_Details_By_Id.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sub_Category_By_Category_Id.ToString(), CommandType.StoredProcedure);
 
             if (dt != null && dt.Rows.Count > 0)
             {
-
                 foreach (DataRow dr in dt.Rows)
                 {
-                    Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_ID"]);
-
-                    Vendor.Vendor_Address = Convert.ToString(dr["Vendor_Address"]);
-                   
-                    Vendor.Vendor_Vat_No = Convert.ToString(dr["Vendor_Vat_No"]);
-
-                    Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
+                    subcategories.Add(Get_SubCategory_Values(dr));
                 }
             }
-
-            return Vendor;
+            return subcategories;
         }
 
-        public PurchaseReturnInfo Get_Vendor_Details_By_Id(int vendor_Id)
+        public VendorInfo Get_SubCategory_Values(DataRow dr)
         {
-            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            VendorInfo Vendors = new VendorInfo();
 
-            sqlParams.Add(new SqlParameter("@Vendor_ID", vendor_Id));
+            Vendors.SubCategory_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
 
-            PurchaseReturnInfo Vendor = new PurchaseReturnInfo();
+            Vendors.SubCategory_Name = Convert.ToString(dr["Sub_Category"]);
 
-            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Vendor_Details_By_Id.ToString(), CommandType.StoredProcedure);
-
-            if (dt != null && dt.Rows.Count > 0)
-            {
-
-                foreach (DataRow dr in dt.Rows)
-                {
-                    Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_ID"]);
-
-                    Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
-                }
-            }
-
-            return Vendor;
+            return Vendors;
         }
-
         //End
+
+       
+
 
 
     }

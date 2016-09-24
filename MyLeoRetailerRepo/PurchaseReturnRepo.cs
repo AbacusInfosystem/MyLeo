@@ -257,6 +257,120 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
         
+        public PurchaseReturnInfo Get_Vendor_Details_By_Id(int vendor_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Vendor_ID", vendor_Id));
+
+            PurchaseReturnInfo Vendor = new PurchaseReturnInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Vendor_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Vendor.Vendor_Id = Convert.ToInt32(dr["Vendor_ID"]);
+
+                    Vendor.Tax_Percentage = Convert.ToDecimal(dr["Vendor_Vat_Rate"]);
+                }
+            }
+
+            return Vendor;
+        }
+
+        public List<PurchaseReturnInfo> Get_Purchase_Return_Items_By_Vendor_And_PO(int vendor_Id, int Purchase_Invoice_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Vendor_Id", vendor_Id));
+            sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", Purchase_Invoice_Id));
+
+            List<PurchaseReturnInfo> purchaseReturnItems = new List<PurchaseReturnInfo>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Return_Items_By_Vendor_And_PI.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    purchaseReturnItems.Add(Get_Purchase_Return_Item_Values(dr));
+                }
+            }
+
+            return purchaseReturnItems;
+        }
+
+        private PurchaseReturnInfo Get_Purchase_Return_Item_Values(DataRow dr)
+        {
+            PurchaseReturnInfo purchaseReturnItem = new PurchaseReturnInfo();
+
+            if (!dr.IsNull("SKU_Code"))
+                purchaseReturnItem.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+
+            if (!dr.IsNull("Quantity"))
+                purchaseReturnItem.Quantity = Convert.ToInt32(dr["Quantity"]);
+
+            if (!dr.IsNull("Amount"))
+                purchaseReturnItem.Amount = Convert.ToDecimal(dr["Amount"]);
+
+            if (!dr.IsNull("Vendor_Id"))
+                purchaseReturnItem.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+            if (!dr.IsNull("Purchase_Invoice_Id"))
+                purchaseReturnItem.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+
+            if (!dr.IsNull("Colour_Id"))
+                purchaseReturnItem.Color_Id = Convert.ToInt32(dr["Colour_Id"]);
+
+            if (!dr.IsNull("Colour_Name"))
+                purchaseReturnItem.Color = Convert.ToString(dr["Colour_Name"]);
+
+            if (!dr.IsNull("Size_Id"))
+                purchaseReturnItem.Size_Id = Convert.ToInt32(dr["Size_Id"]);
+
+            if (!dr.IsNull("Size_Name"))
+                purchaseReturnItem.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+            //if (!dr.IsNull("Product_Id"))
+            //    purchaseReturnItem.Product_Id = Convert.ToInt32(dr["Product_Id"]);
+
+            if (!dr.IsNull("Article_No"))
+                purchaseReturnItem.Article_No = Convert.ToString(dr["Article_No"]);
+
+            if (!dr.IsNull("Category_Id"))
+                purchaseReturnItem.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
+            if (!dr.IsNull("Category"))
+                purchaseReturnItem.Category = Convert.ToString(dr["Category"]);
+
+            if (!dr.IsNull("Sub_Category_Id"))
+                purchaseReturnItem.SubCategory_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+
+            if (!dr.IsNull("Sub_Category"))
+                purchaseReturnItem.SubCategory = Convert.ToString(dr["Sub_Category"]);
+
+            if (!dr.IsNull("Size_Group_Id"))
+                purchaseReturnItem.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+
+            if (!dr.IsNull("Size_Group_Name"))
+                purchaseReturnItem.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+            if (!dr.IsNull("Purchase_Price"))
+                purchaseReturnItem.WSR_Price = Convert.ToDecimal(dr["Purchase_Price"]);
+
+            if (!dr.IsNull("Brand_Id"))
+                purchaseReturnItem.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+            if (!dr.IsNull("Brand_Name"))
+                purchaseReturnItem.Brand = Convert.ToString(dr["Brand_Name"]);
+
+            return purchaseReturnItem;
+        }
+
+
     }
 }
 

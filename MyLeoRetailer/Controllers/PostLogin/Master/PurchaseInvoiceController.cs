@@ -43,7 +43,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 piViewModel.PurchaseInvoice.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Orders();
 
-                piViewModel.PurchaseInvoice.Vendors = _vendorRepo.Get_Vendors();
+               // piViewModel.PurchaseInvoice.Vendors = _vendorRepo.Get_Vendors();
 
                 piViewModel.PurchaseInvoice.Transporters = _vendorRepo.Get_Transporters();
 
@@ -85,7 +85,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             PurchaseInvoiceViewModel piViewModel = new PurchaseInvoiceViewModel();
 
-            piViewModel.PurchaseInvoice = _vendorRepo.Get_Vendor_Detalis_By_Id(Vendor_Id);
+            piViewModel.PurchaseInvoice = _purchaseinvoiceRepo.Get_Vendor_Detalis_By_Id(Vendor_Id);
 
             return Json(piViewModel.PurchaseInvoice, JsonRequestBehavior.AllowGet);
         }
@@ -95,8 +95,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             try
             {
                 Set_Date_Session(piViewModel.PurchaseInvoice);
+                
+                piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                piViewModel.PurchaseInvoice.Purchase_Invoice_Id = _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+                piViewModel.PurchaseInvoice.Created_By = piViewModel.Cookies.User_Id;
+
+                piViewModel.PurchaseInvoice.Created_Date = DateTime.Now;
+
+                piViewModel.PurchaseInvoice.Updated_By = piViewModel.Cookies.User_Id;
+
+                piViewModel.PurchaseInvoice.Updated_Date = DateTime.Now;
+
+                _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
 
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
             }

@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -45,7 +46,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     prViewModel = (PurchaseReturnViewModel)TempData["prViewModel"];
                 }
 
-                prViewModel.PurchaseReturn.Vendors = _vendorRepo.Get_Vendors();
+              //  prViewModel.PurchaseReturn.Vendors = _vendorRepo.Get_Vendors();
 
                 prViewModel.PurchaseReturn.Transporters = _vendorRepo.Get_Transporters();
 
@@ -97,7 +98,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
 
-            prViewModel.PurchaseReturn = _vendorRepo.Get_Vendor_Details_By_Id(Vendor_Id);
+            prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Vendor_Details_By_Id(Vendor_Id);
 
             prViewModel.PurchaseReturn.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_No_By_Id(Vendor_Id);
 
@@ -110,11 +111,19 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 Set_Date_Session(prViewModel.PurchaseReturn);
 
-                //prViewModel.PurchaseReturn. = Convert.ToInt32(_purchaseinvoiceRepo.Get_Purchase_Invoice_No_By_Id(prViewModel.PurchaseReturn.Vendor_Id));
+                prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                prViewModel.PurchaseReturn.Purchase_Return_Id = _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+                prViewModel.PurchaseReturn.Created_By = prViewModel.Cookies.User_Id;
 
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
+                prViewModel.PurchaseReturn.Created_Date = DateTime.Now;
+
+                prViewModel.PurchaseReturn.Updated_By = prViewModel.Cookies.User_Id;
+
+                prViewModel.PurchaseReturn.Updated_Date = DateTime.Now;
+
+               _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
             }
             catch (Exception ex)
             {
@@ -159,6 +168,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
 
             return Json(JsonConvert.SerializeObject(prViewModel));
+        }
+
+
+        public JsonResult Get_Purchase_Return_Items_By_Vendor_And_PO(int Vendor_Id, int Purchase_Invoice_Id)
+        {
+            PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
+
+            try
+            {
+                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Items_By_Vendor_And_PO(Vendor_Id, Purchase_Invoice_Id);
+            }
+            catch(Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseReturn Controller - Get_Purchase_Return_Items_By_Vendor_And_PO :" + ex.ToString());
+            }
+            
+            return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 
     }

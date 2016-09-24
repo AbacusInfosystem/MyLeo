@@ -1,6 +1,8 @@
 ﻿@model MyLeoRetailer.Models.EmployeeViewModel
 @using MyLeoRetailerInfo.Common
 
+
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_validation.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_events.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_methods.js"></script>
@@ -71,15 +73,17 @@
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
-                            <label class="switch">
-                                @if (Model.Employee.IsActive == false)
+                           <label class="switch">
+                                @* @if (Model.Employee.IsActive == false)
                                 {
-                                    <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" type="checkbox">
+                                    <input value="0" name="Employee.IsActive" type="checkbox">
                                 }
                                 else
                                 {
-                                    <input value="@Model.Employee.IsActive.ToString()" name="Employee.IsActive" checked="checked" type="checkbox">
-                                }
+                                    
+                                *@
+                                <input value="1" name="Employee.IsActive" checked="checked" type="checkbox">
+                              @*  }*@
                                 <span></span>
                             </label>
                         </div>
@@ -116,7 +120,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter pincode." name="Employee.Employee_Pincode" value="@(Model.Employee.Employee_Pincode == 0 ? "" : Model.Employee.Employee_Pincode.ToString())" />
+                        <input type="text" class="form-control" placeholder="Enter pincode." maxlength="6" name="Employee.Employee_Pincode" value="@(Model.Employee.Employee_Pincode == 0 ? "" : Model.Employee.Employee_Pincode.ToString())" />
                     </div>
 
                     <div class="form-group">
@@ -152,8 +156,9 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter landline number." name="Employee.Employee_Home_Lindline" value="@Model.Employee.Employee_Home_Lindline" maxlength="12" />
+                        <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number." name="Employee.Employee_Home_Lindline"  value="@Model.Employee.Employee_Home_Lindline" />
                     </div>
+
 
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter email address." name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" />
@@ -274,3 +279,4 @@
     </form>
 
 </div>
+

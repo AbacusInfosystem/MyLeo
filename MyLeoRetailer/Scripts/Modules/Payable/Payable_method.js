@@ -2,7 +2,7 @@
 function Get_Payable(Purchase_Invoice_Id, Purchase_Credit_Note_Id) {
 
     alert(Purchase_Credit_Note_Id);
-
+  
     $("#hdf_Purchase_Invoice_Id").val(Purchase_Invoice_Id);
 
     $("#hdf_Purchase_Credit_Note_Id").val(Purchase_Credit_Note_Id);
@@ -52,7 +52,7 @@ function CalculateDiscount() {
     var Amountdue = parseFloat($("#txtAmount_due").val());
 
     var CNamount = parseFloat($("#txtCN_amount").val());
-
+    
     var paidamount = parseFloat($("#txtPaid_Amount").val());
     
     var abcamount = Amountdue - CNamount;
@@ -355,8 +355,8 @@ function Bind_Payable_Grid_Items(data) {
 
     //Friendly_Message(data);
 
-  
 
+    
     
 }
 
@@ -466,9 +466,9 @@ function ClearPayableData() {
     $("#txtCN_amount").val('');
 
     $("#txtDiscount").val('');
-
+   
     $("#txtDiscount_amount").val('');
-
+  
     $("#txtFinal_amount").val('');
 
     $("#dp-2").val('');
