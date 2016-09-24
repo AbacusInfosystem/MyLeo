@@ -30,7 +30,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             if (TempData["siViewModel"] != null)
             {
-                siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
+                siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];                
             }
 
             return View("Index", siViewModel);
@@ -79,7 +79,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
         public JsonResult Get_SalesOrder(SalesInvoiceViewModel siViewModel)
         {
 
-            siViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+            siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             CommonManager cMan = new CommonManager();
 
@@ -92,13 +92,13 @@ namespace MyLeoRetailer.Controllers.PostLogin
             try
             {
 
-                filter = siViewModel.Cookies.Branch_Ids; // Set filter comma seprated
+                filter = siViewModel.Cookies.Branch_Ids.TrimEnd() + "," + siViewModel.Filter.Sales_Invoice_No; // Set filter comma seprated
 
-                dataOperator = DataOperator.In.ToString(); // set operator for where clause as comma seprated
+                dataOperator = DataOperator.In.ToString() + "," + DataOperator.Like.ToString(); // set operator for where clause as comma seprated
 
-                siViewModel.Query_Detail = Set_Query_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount,Sales_Invoice_Id", "", "Sales_Invoice", "Branch_ID", filter, dataOperator); // Set query for grid             
+                siViewModel.Query_Detail = Set_Query_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount,Sales_Invoice_Id", "", "Sales_Invoice", "Branch_ID,Sales_Invoice_No", filter, dataOperator); // Set query for grid                           
 
-                siViewModel.Query_Detail.Input_Params.Add(new WhereInfo() { Key = "Branch_ID", Value = filter, DataOperator = DataOperator.In.ToString() });
+                //siViewModel.Query_Detail.Input_Params.Add(new WhereInfo() { Key = "Branch_ID", Value = filter, DataOperator = DataOperator.In.ToString() });
 
                 pager = siViewModel.Grid_Detail.Pager;
 
@@ -126,7 +126,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 Set_Date_Session(siViewModel.SalesInvoice);
 
-                siViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+                siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 //string[] arr  = siViewModel.Cookies.Branch_Ids.Split(',');  Multiple Branches Refer to the Commented Code
 
@@ -191,6 +191,23 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         }
 
+        public JsonResult Check_Mobile_No(string MobileNo)
+        {
+
+            bool check = false;
+
+            try
+            {
+                check = siRepo.Check_Mobile_No(MobileNo);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }

@@ -35,6 +35,14 @@
 
     <form role="form" id="frmCustomer">
 
+        <input type="text" id="hdnCreateCustomerFlag" name="Customer.CreateCustomerFlag" value="@Model.Customer.CreateCustomerFlag.ToString()">
+
+
+
+        <input type="hidden" id="hdnMobile" name="Customer.Mobile">
+
+        <input type="hidden" id="hdnInvoiceDate" name="Customer.Invoice_Date">
+
         <div class="row">
 
             <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
@@ -45,8 +53,9 @@
                     
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no.</span>
-                        <input class="form-control" placeholder="Enter mobile number." name="Customer.Mobile" value="@Model.Customer.Mobile" maxlength="12" />
-                    </div>
+                        <input class="form-control" placeholder="Enter mobile number." name="Customer.Mobile" id="txtMobileNo" value="@Model.Customer.Mobile" maxlength="12" data-toggle="modal" data-target="#myModalCustomer" />
+                        <input type="hidden" id="hdnMobileNo" value="@Model.Customer.Mobile">
+                     </div>
 
                 </div>
                 <div class="block">

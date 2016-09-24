@@ -80,9 +80,20 @@ function AddSalesReturnDetails(i)
     tblHtml += "</div>";
     tblHtml += "</td>";
                                             
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='SKU Code' onchange='javascript: Get_Sales_Return_Items_By_SKU_Code(" + i + ");' name='SaleReturnItemList[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
+    //tblHtml += "</td>";
+
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='SKU Code' onchange='javascript: Get_Sales_Return_Items_By_SKU_Code(" + i + ");' name='SaleReturnItemList[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
-    tblHtml += "</td>";
+    tblHtml += "<div class='form-group auto-complete'>";
+    tblHtml += "<div class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Product_MRP' data-col='Product_Id,SKU_Code' data-headernames='SKU_Code'/>";
+    tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='SaleReturnItemList[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "</div>";
+    tblHtml += "</div>";
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Article No' name='SaleReturnItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
@@ -187,10 +198,19 @@ function ReArrangeSalesReturnDetailsData()
                 
             }
 
+            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+            //    $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code");
+            //    $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ")");
+            //}
+
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code");
-                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code", "onblur", "javascript: Get_Sales_Return_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code");
+
             }
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
