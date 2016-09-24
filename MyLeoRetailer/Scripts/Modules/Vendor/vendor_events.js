@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
 
+  
+
     $('#dtpVendor_Vat_Effective_Date').datepicker({});
 
     $('#dtpVendor_CST_Effective_Date').datepicker({});
@@ -26,7 +28,7 @@
         AddSubCategoryDetails();
     });
 
-
+  
 });
 
 
@@ -39,6 +41,24 @@ $(function () {
         //{
             //Save_Vendor();
         // }
+
+        //var data_Brand = document.getElementById("tblBrandDetails").rows.length;
+        //if (data_Brand == 1) {
+        //    $("#lblmsg").html("Miminum One Brand is Required");
+        //    alert("Brand is Required");
+        //}
+
+        //var data_Category = document.getElementById("tblCategoryDetails").rows.length;
+        //if (data_Category == 1) {
+        //    $("#lblmsg").html("Miminum One Category is Required");
+        //    alert("Category is Required");
+        //}
+
+        //var data_SubCategory = document.getElementById("tblSubCategoryDetails").rows.length;
+        //if (data_SubCategory == 1) {
+        //    $("#lblmsg").html("Miminum One Sub Category is Required");
+        //    alert("Sub Category is Required");
+        //}
 
         if ($("#frmVendor").valid())
         {
@@ -62,7 +82,7 @@ $(function () {
 
         Get_Size_Group_Name_By_Id(this);
 
-        alert("Size");
+        //alert("Size");
 
         Get_Sizes();
 

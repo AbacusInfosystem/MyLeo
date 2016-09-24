@@ -56,6 +56,7 @@
                                         <label for="txtVendor_Name" style="color: #333" class="">Vendor Name</label>
                                         <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" />
                                     </div>
+
                                 </div>
 
                                 <div class="col-md-3">
@@ -261,7 +262,6 @@
                                         <label for="drpBrand" style="color: #333" class="">Brand</label>
                                         <select class="form-control input-sm" id="drpBrand" name="Vendor.Brand_Id">
                                             <option value="0">Select Brand</option>
-
                                             @foreach (var item in Model.Brands)
                                             {
                                                 if (Model.Vendor.Brand_Id == item.Brand_Id)
@@ -288,7 +288,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpCategory" style="color: #333" class="">Category</label>
-                                        <select class="form-control input-sm" id="drpCategory" name="Vendor.Category_Id">
+                                        <select class="form-control input-sm" id="drpCategory" name="Vendor.Category_Id" onchange="Get_SubCategorylist(this.value)"> @* //Added By Vinod Mane on 21/09/2016*@
                                             <option value="0">Select Category</option>
 
                                             @foreach (var item in Model.Categories)
@@ -378,7 +378,7 @@
                                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
                                         <input type="hidden" id="hdnIsEditBrandDetails" value="false" />
                                         <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                        <table class="table table-bordered" id="tblBrandDetails">
+                                        <table class="table table-bordered validateTblBrand" id="tblBrandDetails">
                                             <thead>
                                                 <tr id="subhead">
                                                     <th>Brand</th>
@@ -398,8 +398,8 @@
 
                                                             <td class='edit'>
                                                                 <button type='button' id='edit-brand-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBrandDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
-                                                                <button type='button' id='delete-brand-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBrandDetailsData(@(i))'><i class='fa fa-times'></i></button>
-                                                          
+                                                                <button type='button' id='delete-brand-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBrandDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
+
                                                         </tr>
                                                         i = i + 1;
                                                     }
@@ -460,7 +460,7 @@
 
                                                             <td class='edit'>
                                                                 <button type='button' id='edit-category-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
-                                                                <button type='button' id='delete-category-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>
+                                                                <button type='button' id='delete-category-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
                                                             
                                                         </tr>
                                                         i = i + 1;
@@ -522,7 +522,7 @@
 
                                                             <td class='edit'>
                                                                 <button type='button' id='edit-subcategory-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditSubCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
-                                                                <button type='button' id='delete-subcategory-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteSubCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>
+                                                                <button type='button' id='delete-subcategory-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteSubCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
                                                            
                                                         </tr>
                                                                 i = i + 1;
@@ -670,8 +670,8 @@
                                                         </td>*@
 
                                                         <td class='edit'>
-                                                            <button type='button' id='edit-bank-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBankDetailsData(" + trrow + ")'><i class='fa fa-pencil'></i></button>
-                                                            <button type='button' id='delete-bank-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBankDetailsData(" + trrow + ")'><i class='fa fa-times'></i></button>
+                                                            <button type='button' id='edit-bank-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBankDetailsData(@(i))'><i class='fa fa-pencil'></i></button> @*(" + trrow + ") Change by vinod mane on 19/09/2016*@
+                                                            <button type='button' id='delete-bank-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBankDetailsData(@(i))'><i class='fa fa-times'></i></button> @*(" + trrow + ")*@
 
                                                         </tr>
                                                             i = i + 1;
@@ -691,21 +691,26 @@
 
                         </div>
 
-
+                       
                         <div class="form-group" style="margin-bottom: 5px; padding-left: 10px; float: left;">
-                            <label class="switch">
-                                @if (Model.Vendor.IsActive == 0)
-                                {
-                                <input value="@Model.Vendor.IsActive" name="Vendor.IsActive" type="checkbox" id="Flag">
-                                }
-                                else
-                                {
-                                    <input value="@Model.Vendor.IsActive" name="Vendor.IsActive" checked="checked" type="checkbox" id="Flag">
-                                }
-                                @*<input checked="" id="Flag" value="0" type="checkbox">*@
-                                <span></span>
-                            </label>
-                        </div>
+                            <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>@* Added by Vinod mane on 19/09/2016*@
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
+                                <label class="switch">
+                                    @if (Model.Vendor.IsActive == 0)
+                                    {
+                                        <input value="@Model.Vendor.IsActive" name="Vendor.IsActive" type="checkbox" id="Flag">
+                                    }
+                                    else
+                                    {
+                                        <input value="@Model.Vendor.IsActive" name="Vendor.IsActive" checked="checked" type="checkbox" id="Flag">
+                                    }
+                                    @*<input checked="" id="Flag" value="0" type="checkbox">*@
+                                    <span></span>
+                                </label>
+                                </div>
+                            </div>
 
                      
 

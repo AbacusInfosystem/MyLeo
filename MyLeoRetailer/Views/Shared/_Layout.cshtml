@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using MyLeoRetailerInfo.Common;
+@using MyLeoRetailer.Common;
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
 
@@ -126,6 +129,12 @@
 
         <audio id="audio-fail" src="/Content/Atlant/audio/fail.mp3" preload="auto"></audio>
         <!-- END PRELOADS -->    
+        @{
+            LoginInfo cookies = new LoginInfo();
+            cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            <input type="hidden" id="hdnCookiesBranches" name="CookiesBranches" value="@cookies.Branch_Ids"/>
+        }
         
         <input type="hidden" id="hdnLookupLabelId" name="Label" />
         <input type="hidden" id="hdnLookupHiddenId" name="Hidden" />

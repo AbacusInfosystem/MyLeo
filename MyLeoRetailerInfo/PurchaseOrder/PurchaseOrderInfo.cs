@@ -70,6 +70,9 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public SizeGroupInfo SizeGroup { get; set; }
 
+
+        public string Item_Ids { get; set; }
+
               
 		public int Purchase_Order_Id { get; set; }
 
@@ -113,11 +116,19 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public int Brand_Id { get; set; }
 
+        public string Brand_Name { get; set; }
+
         public int Category_Id { get; set; }
+
+        public string Category_Name { get; set; }
 
         public int Sub_Category_Id { get; set; }
 
+        public string Sub_Category_Name { get; set; }
+
         public int Size_Group_Id { get; set; }
+
+        public string Size_Group_Name { get; set; }
 
         public string Start_Size { get; set; }
 

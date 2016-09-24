@@ -1151,7 +1151,7 @@
     <Content Include="Views\PostLogin\Master\Vendor\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Vendor\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
-    <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Challan\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Employee\ChangeBranch.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseOrder\Search.cshtml" />
@@ -1192,6 +1192,7 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
+    <Folder Include="Views\PostLogin\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

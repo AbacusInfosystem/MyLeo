@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models.Transaction;
+using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
@@ -43,9 +44,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     prViewModel = (PurchaseReturnRequestViewModel)TempData["prViewModel"];
                 }
 
-                Pagination_Info pager = new Pagination_Info();
-
-                prViewModel.PurchaseReturnRequests = _prRepo.Get_Purchase_Return_Requests(ref pager);
+                prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
                     
             }
             catch(Exception ex)
@@ -57,11 +56,38 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("Search", prViewModel);
         }
 
+        public JsonResult Get_Purchase_Return_Requests(PurchaseReturnRequestViewModel prViewModel)
+        {
+            try
+            {
+                LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                Pagination_Info pager = new Pagination_Info();
+               
+                pager = prViewModel.Pager;
+
+                prViewModel.PurchaseReturnRequests = _prRepo.Get_Purchase_Return_Requests(ref pager, Cookies.Branch_Ids, prViewModel.Filter.Vendor_Id);
+
+                prViewModel.Pager = pager;
+
+                prViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(prViewModel.Pager.TotalRecords, prViewModel.Pager.CurrentPage, prViewModel.Pager.PageSize, prViewModel.Pager.PageLimit, prViewModel.Pager.StartPage, prViewModel.Pager.EndPage, prViewModel.Pager.IsFirst, prViewModel.Pager.IsPrevious, prViewModel.Pager.IsNext, prViewModel.Pager.IsLast, prViewModel.Pager.IsPageAndRecordLabel, prViewModel.Pager.DivObject, prViewModel.Pager.CallBackMethod);
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseReturnRequest Controller - Get_Purchase_Return_Requests : " + ex.ToString());
+            }
+
+            return Json(JsonConvert.SerializeObject(prViewModel));
+        }
+
+
         public ActionResult Index(PurchaseReturnRequestViewModel prViewModel)
         {
             try
             {
-                prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
+               // prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
             }
             catch (Exception ex)
             {
@@ -76,11 +102,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                prViewModel.PurchaseReturnRequest.Branch_Id = Convert.ToInt32(Cookies.Branch_Ids);
-                //prViewModel.PurchaseReturnRequest.Branch_Id = 1;
-
                 Set_Date_Session(prViewModel.PurchaseReturnRequest);
 
                 foreach (var item in prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItems)
@@ -90,7 +111,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 if (prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id == 0)
                 {
-                    prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id = _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
+                    _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
 
                     prViewModel.FriendlyMessages.Add(MessageStore.Get("PRR01"));
                 }
@@ -104,7 +125,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseReturnRequest Controller - Save_Purchase_Return_Request : " + ex.ToString());
             }

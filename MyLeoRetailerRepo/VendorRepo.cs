@@ -302,8 +302,8 @@ namespace MyLeoRetailerRepo
             Vendor.Vendor_CST_Effective_Date = Convert.ToDateTime(dr["CST_Effective_Date"]);
             Vendor.Vendor_Type = Convert.ToInt32(dr["Vendor_Type"]);
 
-            //Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]);
-            //Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+            Vendor.IsActive = Convert.ToInt32(dr["Is_Active"]); //Uncommented code by Vinod Mane on 20/09/2016
+            Vendor.Is_Active = Convert.ToBoolean(dr["Is_Active"]);//Uncommented code by Vinod Mane on 20/09/2016
 
             Vendor.Created_By = Convert.ToInt32(dr["Created_By"]);
             Vendor.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
@@ -499,6 +499,38 @@ namespace MyLeoRetailerRepo
             return Vendors;
         }
 
+        //Added By Vinod Mane on 21/09/2016
+        public List<VendorInfo> Get_SubCategorylist(int Caterory_id)
+        {
+            List<VendorInfo> subcategories = new List<VendorInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Category_Id", Caterory_id));
+           // sqlParams.Add(new SqlParameter("@IsActive", true));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sub_Category_By_Category_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    subcategories.Add(Get_SubCategory_Values(dr));
+                }
+            }
+            return subcategories;
+        }
+
+        public VendorInfo Get_SubCategory_Values(DataRow dr)
+        {
+            VendorInfo Vendors = new VendorInfo();
+
+            Vendors.SubCategory_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+
+            Vendors.SubCategory_Name = Convert.ToString(dr["Sub_Category"]);
+
+            return Vendors;
+        }
         //End
 
        

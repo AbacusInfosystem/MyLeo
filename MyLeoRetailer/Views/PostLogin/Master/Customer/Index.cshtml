@@ -67,7 +67,7 @@
                         <input type="text" class="form-control" placeholder="Enter customer first name." name="Customer.First_Name" value="@Model.Customer.First_Name" />
                         <input type="hidden" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id" />
                         <input type="hidden" name="Customer.Customer_Name" value="@Model.Customer.Customer_Name" />
-                        <input type="hidden" name="Customer.IsActive" value="@Model.Customer.IsActive" />
+                        @*<input type="hidden" name="Customer.IsActive" value="@Model.Customer.IsActive" />*@ @*Commented By Vinod Mane on 23/09/2016*@
                     </div>
 
                     <div class="form-group">
@@ -79,6 +79,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Gender.</span>
                         <select class="form-control select" placeholder="Select gender." name="Customer.Customer_Gender" value="@Model.Customer.Customer_Gender">
+                            <option selected="0">Select Gender</option>
                             @foreach (var item in LookupInfo.Get_Gender_Types())
                             {
                                 if (Model.Customer.Customer_Gender == item.Key)
@@ -95,147 +96,147 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
-                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" name="Customer.Customer_DOB" value="@((Model.Customer.Customer_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_DOB.ToString("dd-MM-yyyy")))" readonly />
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy" >
+                            <input type="text" class="form-control datepicker" name="Customer.Customer_DOB" value="@((Model.Customer.Customer_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_DOB.ToString("dd-MM-yyyy")))" readonly placeholder="Enter Customer date of birth" />  
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </div>                    
-                </div>
+                    </div> 
+        </div>
+    </div>
+
+    <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height:550px;">
+
+        <div class="block">
+            <h4 style="margin-top: 0px;">Billing address.</h4>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address.</span>
+                <textarea class="form-control" rows="5" placeholder="Billing address." name="Customer.Customer_Billing_Address">@Model.Customer.Customer_Billing_Address</textarea>
             </div>
 
-            <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height:550px;">
-
-                <div class="block">
-                    <h4 style="margin-top: 0px;">Billing address.</h4>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address.</span>
-                        <textarea class="form-control" rows="5" placeholder="Billing address." name="Customer.Customer_Billing_Address">@Model.Customer.Customer_Billing_Address</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing city.</span>
-                        <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Billing_City" value="@Model.Customer.Customer_Billing_City" />
-                    </div>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing state.</span>
-                        <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Billing_State" value="@Model.Customer.Customer_Billing_State" />
-                    </div>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing country.</span>
-                        <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Billing_Country" value="@Model.Customer.Customer_Billing_Country" />
-                    </div>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing pincode.</span>
-                        <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
-                    </div>
-
-                </div>
-
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing city.</span>
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Billing_City" value="@Model.Customer.Customer_Billing_City" />
             </div>
 
-            <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing state.</span>
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Billing_State" value="@Model.Customer.Customer_Billing_State" />
+            </div>
 
-                <div class="block">
-                    <h4 style="margin-top: 0px;">Shipping address.</h4>
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing country.</span>
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Billing_Country" value="@Model.Customer.Customer_Billing_Country" />
+            </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping address.</span>
-                        <textarea class="form-control" rows="5" placeholder="Shipping address." name="Customer.Customer_Shipping_Address">@Model.Customer.Customer_Shipping_Address</textarea>
-                        
-                    </div>
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing pincode.</span>
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
+            </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping city.</span>
-                        <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Shipping_City" value="@Model.Customer.Customer_Shipping_City" />
-                    </div>
+        </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping state.</span>
-                        <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Shipping_State" value="@Model.Customer.Customer_Shipping_State" />
-                    </div>
+    </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping country.</span>
-                        <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Shipping_Country" value="@Model.Customer.Customer_Shipping_Country" />
-                    </div>
+    <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping pincode.</span>
-                        <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Shipping_Pincode" value="@(Model.Customer.Customer_Shipping_Pincode == 0 ? "" : Model.Customer.Customer_Shipping_Pincode.ToString())" maxlength="6" />
-                    </div>
+        <div class="block">
+            <h4 style="margin-top: 0px;">Shipping address.</h4>
 
-                </div>
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping address.</span>
+                <textarea class="form-control" rows="5" placeholder="Shipping address." name="Customer.Customer_Shipping_Address">@Model.Customer.Customer_Shipping_Address</textarea>
 
             </div>
 
-            <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping city.</span>
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Shipping_City" value="@Model.Customer.Customer_Shipping_City" />
+            </div>
 
-                <div class="block">
-                    <h4 style="margin-top: 0px;">Communication detail.</h4>
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping state.</span>
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Shipping_State" value="@Model.Customer.Customer_Shipping_State" />
+            </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no1.</span>
-                        <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1" maxlength="12" />
-                    </div>
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping country.</span>
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Shipping_Country" value="@Model.Customer.Customer_Shipping_Country" />
+            </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no2.</span>
-                        <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2" maxlength="12" />
-                    </div>
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping pincode.</span>
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Shipping_Pincode" value="@(Model.Customer.Customer_Shipping_Pincode == 0 ? "" : Model.Customer.Customer_Shipping_Pincode.ToString())" maxlength="6" />
+            </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
-                        <input type="text" class="form-control" placeholder="Enter landline number 1." name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1" maxlength="12" />
-                    </div>
+        </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
-                        <input type="text" class="form-control" placeholder="Enter landline number 2." name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2" maxlength="12" />
-                    </div>
+    </div>
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 1.</span>
-                        <input type="text" class="form-control" placeholder="Enter email address 1." name="Customer.Customer_Email1" value="@Model.Customer.Customer_Email1" />
-                    </div>
+    <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
 
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 2.</span>
-                        <input type="text" class="form-control" placeholder="Enter email address 2." name="Customer.Customer_Email2" value="@Model.Customer.Customer_Email2" />
-                    </div>
-                </div>
+        <div class="block">
+            <h4 style="margin-top: 0px;">Communication detail.</h4>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no1.</span>
+                <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1" maxlength="12" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no2.</span>
+                <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2" maxlength="12" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
+                <input type="text" class="form-control" placeholder="Enter landline number 1." name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1" maxlength="12" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
+                <input type="text" class="form-control" placeholder="Enter landline number 2." name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2" maxlength="12" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 1.</span>
+                <input type="text" class="form-control" placeholder="Enter email address 1." name="Customer.Customer_Email1" value="@Model.Customer.Customer_Email1" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 2.</span>
+                <input type="text" class="form-control" placeholder="Enter email address 2." name="Customer.Customer_Email2" value="@Model.Customer.Customer_Email2" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
+
+        <div class="block">
+
+            <h4 style="margin-top: 0px;">Secondary information.</h4>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Spouse name.</span>
+                <input type="text" class="form-control" placeholder="Enter spouse name." name="Customer.Customer_Spouse_Name" value="@Model.Customer.Customer_Spouse_Name" />
 
             </div>
 
-            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
-
-                <div class="block">
-
-                    <h4 style="margin-top: 0px;">Secondary information.</h4>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Spouse name.</span>
-                        <input type="text" class="form-control" placeholder="Enter spouse name." name="Customer.Customer_Spouse_Name" value="@Model.Customer.Customer_Spouse_Name" />
-
-                    </div>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Spouse date of birth.</span>
-                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" name="Customer.Customer_Spouse_DOB" value="@((Model.Customer.Customer_Spouse_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Spouse_DOB.ToString("dd-MM-yyyy")))" readonly />
-                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>                           
-                        </div>
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Spouse date of birth.</span>
+                <div class="input-group date" id="dp-2" data-date-format="dd-mm-yyyy">
+                <input type="text" class="form-control datepicker" name="Customer.Customer_Spouse_DOB" value="@((Model.Customer.Customer_Spouse_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Spouse_DOB.ToString("dd-MM-yyyy")))" readonly placeholder="Enter Spouse date of birth" />@*Change by Vinod Mane on 22/09/2016 "dd-MM-yyyy" -->"MM/dd/yyyy"*@
+                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Wedding annniversary date.</span>
-                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" name="Customer.Customer_Wedding_Anniversary" value="@((Model.Customer.Customer_Wedding_Anniversary == DateTime.MinValue ? "" : Model.Customer.Customer_Wedding_Anniversary.ToString("dd-MM-yyyy")))" readonly />
-                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>     
-                        </div>
+                        <div class="input-group date" id="dp-2" data-date-format="dd-mm-yyyy">
+                        <input type="text" class="form-control datepicker" name="Customer.Customer_Wedding_Anniversary" value="@((Model.Customer.Customer_Wedding_Anniversary == DateTime.MinValue ? "" : Model.Customer.Customer_Wedding_Anniversary.ToString("dd-MM-yyyy")))" readonly placeholder="Enter Wedding Anniversary date" />@*Change by Vinod Mane on 22/09/2016 "dd-MM-yyyy" -->"MM/dd/yyyy"*@
+                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                     </div>
 
                     <div class="form-group">
@@ -245,10 +246,10 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 1 date of birth.</span>
-                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" name="Customer.Customer_Child1_DOB" value="@((Model.Customer.Customer_Child1_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child1_DOB.ToString("dd-MM-yyyy")))" readonly />
-                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </div>
+                        <div class="input-group date" id="dp-2" data-date-format="dd-mm-yyyy">
+                        <input type="text" class="form-control datepicker" name="Customer.Customer_Child1_DOB" value="@((Model.Customer.Customer_Child1_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child1_DOB.ToString("dd-MM-yyyy")))" readonly placeholder="Enter Child 1 date of birth" />@*Change by Vinod Mane on 22/09/2016 "dd-MM-yyyy" -->"MM/dd/yyyy"*@
+                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
                     </div>
 
                     <div class="form-group">
@@ -258,9 +259,9 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 2 date of birth.</span>
-                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" name="Customer.Customer_Child2_DOB" value="@((Model.Customer.Customer_Child2_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child2_DOB.ToString("dd-MM-yyyy")))" readonly />
-                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>                           
+                        <div class="input-group date" id="dp-2" data-date-format="dd-mm-yyyy">
+                            <input type="text" class="form-control datepicker" name="Customer.Customer_Child2_DOB" value="@((Model.Customer.Customer_Child2_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child2_DOB.ToString("dd-MM-yyyy")))" readonly placeholder="Enter Child 2 date of birth" />@*Change by Vinod Mane on 22/09/2016 "dd-MM-yyyy" -->"MM/dd/yyyy"*@
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
 
@@ -272,10 +273,16 @@
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-success active" id="btnSaveCustomer">Save</button>
-                    <button type="reset" class="btn btn-danger active" id="btnCancleCustomer">Cancel</button>
-                </div>
-
+                    @*<button type="reset" class="btn btn-danger active" id="btnCancleCustomer">Cancel</button>*@
+                    <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "Customer")">Cancel </a>@*Added by vinod Mane on 22/09/2016*@
+                </div> 
+               
+                    
+               
                 <div class="form-group" style="margin-bottom: 5px; float: right; padding-right: 20px;">
+                    <div>
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>@* Added by Vinod mane on 19/09/2016*@
+                    </div>
                     <label class="switch">
                         @if (Model.Customer.IsActive == 0)
                         {

@@ -1,11 +1,13 @@
 ﻿$(function () {
 
-    if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0) {
-        document.getElementById("btnCancleCustomer").disabled = false;
-    }
-    else {
-        document.getElementById('btnCancleCustomer').disabled = true;
-    }
+    //Commented by Vinod Mane on 22/09/2016
+    //if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0) {
+    //    document.getElementById("btnCancleCustomer").disabled = false;
+    //}
+    //else {
+    //    document.getElementById('btnCancleCustomer').disabled = true;
+    //}
+    //end
 
     $("#btnSaveCustomer").click(function () {
 

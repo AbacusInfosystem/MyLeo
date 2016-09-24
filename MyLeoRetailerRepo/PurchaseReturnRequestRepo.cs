@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.PurchaseReturnRequest;
+using MyLeoRetailerRepo.Common;
 using MyLeoRetailerRepo.Utility;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace MyLeoRetailerRepo
 {
@@ -22,25 +24,28 @@ namespace MyLeoRetailerRepo
             _sqlRepo = new SQL_Repo();
         }
 
-        public int Insert_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
+        public void Insert_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
         {
-            int ID = 0;
-
-            ID = Convert.ToInt32(_sqlRepo.ExecuteScalerObj(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Insert_Purchase_Return_Request.ToString(), CommandType.StoredProcedure));
-
-            foreach (var item in purchasereturnrequest.PurchaseReturnRequestItems)
+            using (TransactionScope scope = new TransactionScope())
             {
-                item.Purchase_Return_Request_Id = ID;
-                _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Request_Item.ToString(), CommandType.StoredProcedure);
+                int ID = Convert.ToInt32(_sqlRepo.ExecuteScalerObj(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Insert_Purchase_Return_Request.ToString(), CommandType.StoredProcedure));
+
+                foreach (var item in purchasereturnrequest.PurchaseReturnRequestItems)
+                {
+                    item.Purchase_Return_Request_Id = ID;
+                    _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Request_Item.ToString(), CommandType.StoredProcedure);
+                }
+
+                scope.Complete();
+
             }
             
-            return ID;
         }
 
-        public void Update_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
-        {
-            _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Update_Purchase_Return_Request.ToString(), CommandType.StoredProcedure);
-        }
+        //public void Update_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
+        //{
+        //    _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Update_Purchase_Return_Request.ToString(), CommandType.StoredProcedure);
+        //}
 
         private List<SqlParameter> Set_Values_In_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
         {
@@ -97,11 +102,7 @@ namespace MyLeoRetailerRepo
 
             return sqlParams;
         }
-
-        
-        
-
-
+    
         private PurchaseReturnRequestItemInfo Get_Purchase_Return_Items_By_SKU_Values(DataRow dr)
         {
             PurchaseReturnRequestItemInfo PurchaseReturnRequestItem = new PurchaseReturnRequestItemInfo();
@@ -201,14 +202,19 @@ namespace MyLeoRetailerRepo
             return PurchaseReturnRequestItem;
         }
 
-        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests(ref Pagination_Info Pager)
+
+        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests(ref Pagination_Info Pager, string Branch_Ids, int Vendor_Id)
         {
             List<PurchaseReturnRequestInfo> PurchaseReturnRequests = new List<PurchaseReturnRequestInfo>();
 
-            DataTable dt = _sqlRepo.ExecuteDataTable(null, Storeprocedures.sp_Get_Purchase_Return_Request.ToString(), CommandType.StoredProcedure);
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            sqlParams.Add(new SqlParameter("@Branch_Ids", Branch_Ids));
+            sqlParams.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            DataTable dt = _sqlRepo.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Return_Requests.ToString(), CommandType.StoredProcedure);
             
-            //foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
-            foreach (DataRow dr in dt.Rows)
+            //foreach (DataRow dr in dt.Rows)
+            foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
             {
                 PurchaseReturnRequests.Add(Get_Purchase_Return_Request_Values(dr));
             }
