@@ -108,6 +108,10 @@ function Reset_Category()
 	$("[name='Category.Category_Id']").val("");
 
 	$("#dvSubCategory").html("");
+
+    //Added by Vinod Mane on 26/09/2016
+	$("#hdnCategory_Name").val("");
+    //End
 }
 
 function Get_Category_By_Id(obj)
@@ -146,6 +150,8 @@ function Get_Category_By_Id(obj)
 	        }
 
 	        $("[name='Category.Category']").val(obj.Category.Category);
+
+	        $("#hdnCategory_Name").val(obj.Category.Category);//Added by Vinod Mane on 26/09/2016
 
 	        $("[name='Category.Category_Id']").val(obj.Category.Category_Id);
 

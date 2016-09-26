@@ -98,7 +98,8 @@ function Reset_Color()
 
     $("[name='Color.Colour_Code']").val("");
 
-	$("[name='Color.Colour_Id']").val(""); 
+    $("[name='Color.Colour_Id']").val("");
+    $("#hdnColour_Name").val("");
 }
 
 function Get_Color_By_Id(obj)
@@ -141,6 +142,7 @@ function Get_Color_By_Id(obj)
 	        }
 	        
 	        $("[name='Color.Colour']").val(obj.Color.Colour);
+	        $("#hdnColour_Name").val(obj.Color.Colour);
 
 	        $("[name='Color.Colour_Id']").val(obj.Color.Colour_Id);
 

@@ -103,6 +103,7 @@ function Reset_Sub_Category()
 	$("[name='SubCategory.Sub_Category']").val("");
 
 	$("[name='SubCategory.Sub_Category_Id']").val("");
+	$("#hdnSub_Category").val("");//Added by vinod Mane on 26/09/2016
 }
 
 function Get_Sub_Category_By_Id(obj)
@@ -138,6 +139,10 @@ function Get_Sub_Category_By_Id(obj)
 	            $("[name='SubCategory.IsActive']").val(0);
 	            document.getElementById('SubCateFlag').checked = false;
 	        }
+
+	        $("[name='SubCategory.Sub_Category']").val(obj.SubCategory.Sub_Category);
+
+	        $("#hdnSub_Category").val(obj.SubCategory.Sub_Category);//Added by Vinod Mane on 26/09/2016
 
 	    }
 	});

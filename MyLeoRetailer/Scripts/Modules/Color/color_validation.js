@@ -35,7 +35,7 @@ $(document).ready(function () {
             $.ajax({
                 url: '/colour/check-colour-name',
                 data: { color_Name: $("#txtColour_Name").val() },
-                method: 'Post',
+                method: 'GET',
                 async: false,
                 success: function (data) {
                     if (data == true) {

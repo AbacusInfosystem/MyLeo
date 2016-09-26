@@ -113,15 +113,17 @@ function Get_Role_By_Id(obj) {
     $(obj).addClass("active");
 
     //$("[name='role.Role_Name']").val($(obj).text());
-    //$("#hdnRole_Name").val($(obj).text());
+   // $("#hdnRole_Name").val($(obj).text());
 
     //$("[name='role.Role_Id']").val($(obj).attr("data-identity"));
 
-    //$("#spnRoleName").text($(obj).text());
+   // $("#spnRoleName").text($(obj).text());
 
     //var Role_Id = $("[name='role.Role_Id']").val();
 
     var Role_Id = $(obj).attr("data-identity");
+
+
     
     $.ajax({
 

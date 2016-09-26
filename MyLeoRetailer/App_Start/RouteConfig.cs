@@ -37,6 +37,14 @@ namespace MyLeoRetailer
             defaults: new { controller = "Brand", action = "Get_Brands_By_Name_Autocomplete", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "brand-2",
+           url: "brand/check-brand-name/{brand_Name}",
+           defaults: new { controller = "Brand", action = "Check_Existing_Brand_Name", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
 
             #region Colour
@@ -70,7 +78,25 @@ namespace MyLeoRetailer
             defaults: new { controller = "Category", action = "Get_Sub_Category_By_Id", Sub_category_Id = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "category-3",
+           url: "category/check-category-name/{category_Name}",
+           defaults: new { controller = "Category", action = "Check_Existing_Category_Name", category_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "category-4",
+           url: "sub-category/check-sub-category-name/{sub_category_Name}",
+           defaults: new { controller = "Category", action = "Check_Existing_Sub_Category_Name", sub_category_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
+
+
 
             #region Employee
 
