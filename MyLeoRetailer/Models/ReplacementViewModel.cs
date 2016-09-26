@@ -1,4 +1,5 @@
-﻿using MyLeoRetailerInfo.Branch;
+﻿using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Branch;
 using MyLeoRetailerInfo.Brand;
 using MyLeoRetailerInfo.Category;
 using MyLeoRetailerInfo.Color;
@@ -52,6 +53,20 @@ namespace MyLeoRetailer.Models
 
             FriendlyMessages = new List<FriendlyMessage>();
 
+
+            Grid_Detail = new GridInfo();
+
+            Query_Detail = new QueryInfo();
+
+            Filter = new Filter_Replacemant();
+
+            Cookies = new LoginInfo();
+
+            Grid_Detail.Pager.DivObject = "divReplacementPager";
+
+            Grid_Detail.Pager.CallBackMethod = "Get_Replacement";
+
+
         }
 
         public List<FriendlyMessage> FriendlyMessages{ get;set;}
@@ -86,5 +101,39 @@ namespace MyLeoRetailer.Models
 
         public SizeGroupInfo SizeGroup { get; set; }
 
+
+        public GridInfo Grid_Detail
+        {
+            get;
+            set;
+        }
+
+        public QueryInfo Query_Detail
+        {
+            get;
+            set;
+        }
+
+        public Filter_Replacemant Filter
+        {
+            get;
+            set;
+        }
+
+        public LoginInfo Cookies
+        {
+            get;
+            set;
+        }
+
+    }
+
+    public class Filter_Replacemant
+    {
+        public string Replacement_No
+        {
+            get;
+            set;
+        }
     }
 }

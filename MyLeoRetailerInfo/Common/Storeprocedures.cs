@@ -226,8 +226,6 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Purchase_Invoice_Items_By_SKU_Code,
             sp_Get_Purchase_Orders,
 
-        sp_Get_Purchase_Invoice,
-
         #endregion
 
         #region Purchase Order Request
@@ -260,8 +258,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Payable_Item_Data,
         sp_Temp_Get_Payable_Detail_By_Id1,
         sp_Temp_Get_Payable_Detail,
-            #endregion
-
+           
         //Employee Branch mapping
         //sp_Get_Branch,
         Insert_Employee_Mapping,
@@ -315,14 +312,18 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
+
+        //Replacement
+        sp_Get_Purchase_Invoice,
+        sp_Insert_Replacement,
+        sp_Insert_Replacement_Item,
   
 
     }
 
-            //Replacement
-        sp_Get_Purchase_Invoice,
+           
           
-		}
+		
 	
 	
 }

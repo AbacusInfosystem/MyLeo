@@ -1067,7 +1067,8 @@
     <Content Include="Scripts\Modules\Receivable\Receivable_methods.js" />
     <Content Include="Scripts\Modules\Replacement\Replacement_event.js" />
     <Content Include="Scripts\Modules\Replacement\Replacement_method.js" />
-    <Content Include="Scripts\Modules\Replacement\Replacement_validation.js" />
+    <Content Include="Scripts\Modules\Replacement\search_Replacement_event.js" />
+    <Content Include="Scripts\Modules\Replacement\search_Replacement_method.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
@@ -1185,6 +1186,7 @@
     <Content Include="Views\PostLogin\SalesOrder\Invoice.cshtml" />
     <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

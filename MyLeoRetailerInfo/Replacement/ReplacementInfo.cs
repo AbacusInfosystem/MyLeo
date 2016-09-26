@@ -30,6 +30,8 @@ namespace MyLeoRetailerInfo.Replacement
 
         public int Purchase_Invoice_Id { get; set; }
 
+        public int Purchase_Order_Id { get; set; }
+
         public string Purchase_Invoice_No { get; set; }
 
         public string SKU_Code { get; set; }
@@ -68,14 +70,12 @@ namespace MyLeoRetailerInfo.Replacement
 
         public string Lr_No { get; set; }
 
-        public DateTime Lr_Date { get; set; }
-
         public string Transpoter_Name { get; set; }
 
         public DateTime Payment_Due_Date { get; set; }
 
         #region createdBy, UpdateBy
-        
+
         public DateTime Created_Date { get; set; }
 
         public int Created_By { get; set; }

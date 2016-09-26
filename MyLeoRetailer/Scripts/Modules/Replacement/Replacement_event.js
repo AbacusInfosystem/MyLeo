@@ -14,9 +14,4 @@
         }
     });
 
-    $("#drpVendor_Id").change(function () {
-        alert(this.value);
-
-    });
-
 });

@@ -1,4 +1,4 @@
-﻿function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
+﻿function Get_Replacement_Items_By_SKU_Code(i) {
 
     $.ajax({
 
@@ -14,6 +14,10 @@
 
 
             $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
 
             $('#textBrand_' + i).val(data.Brand);
 
@@ -43,27 +47,34 @@
     CalculateTotal();
 }
 
-function AddPurchaseInvoiceDetails(i) {
+function AddReplacementDetails(i) {
 
     var html = '';
 
     var tblHtml = '';
 
-    var myTable = $("#tblPurchaseInvoiceItems");
+    var myTable = $("#tblReplacementItems");
 
-    var temptablecount = $("#tblPurchaseInvoiceItems").find('[id^="PurchaseInvoiceItemRow_"]').size();
+    var temptablecount = $("#tblReplacementItems").find('[id^="ReplacementItemRow_"]').size();
 
     i = temptablecount;//-1;
 
-    tblHtml += "<tr id='PurchaseInvoiceItemRow_" + i + "' class='item-data-row'>";
+    tblHtml += "<tr id='ReplacementItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' name='Replacements[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' name='Replacements[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
-    tblHtml += "</td>";
+    tblHtml += "<div class='form-group auto-complete'>";
+    tblHtml += "<div class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Replacement_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
+    tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+    tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='Replacements[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='Replacements[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "</div>";
+    tblHtml += "</div>";
+     tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' name='Replacements[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
@@ -122,7 +133,7 @@ function AddPurchaseInvoiceDetails(i) {
     //tblHtml += "</div>";
 
     tblHtml += "<td>";
-    tblHtml += "<button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeleteReplacementDetailsData(" + i + ")'>Delete</button>";
     tblHtml += "</td>";
 
     tblHtml += "</tr>";
@@ -138,15 +149,15 @@ function CalculateTotal() {
     var sumQuantity = 0;
     var sumWSRAmount = 0;
 
-    var tr = $("#tblPurchaseInvoiceItems").find('[id^="PurchaseInvoiceItemRow_"]');
+    var tr = $("#tblReplacementItems").find('[id^="ReplacementItemRow_"]');
 
 
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++) {
-            var Qty = parseFloat($("#tblPurchaseInvoiceItems").find('[id="textQuantity_' + i + '"]').val());
-            var WSR = parseFloat($("#tblPurchaseInvoiceItems").find('[id="textWSR_Price_' + i + '"]').val());
+            var Qty = parseFloat($("#tblReplacementItems").find('[id="textQuantity_' + i + '"]').val());
+            var WSR = parseFloat($("#tblReplacementItems").find('[id="textWSR_Price_' + i + '"]').val());
             var Amount = parseFloat(WSR * Qty);
-            $("#tblPurchaseInvoiceItems").find('[id="textAmount_' + i + '"]').val(Amount);
+            $("#tblReplacementItems").find('[id="textAmount_' + i + '"]').val(Amount);
 
             sumQuantity = sumQuantity + Qty;
             sumWSRAmount = sumWSRAmount + Amount;
@@ -159,23 +170,21 @@ function CalculateTotal() {
 
 }
 
-function DeletePurchaseInvoiceDetailsData(i) {
+function DeleteReplacementDetailsData(i) {
 
-    debugger;
+    $("#tblReplacementItems").find("[id='ReplacementItemRow_" + i + "']").remove();
 
-    $("#tblPurchaseInvoiceItems").find("[id='PurchaseInvoiceItemRow_" + i + "']").remove();
-
-    ReArrangePurchaseInvoiceDetailsData();
+    ReArrangeReplacementDetailsData();
 
     CalculateTotal();
 
 }
 
-function ReArrangePurchaseInvoiceDetailsData() {
-    $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (i, row) {
+function ReArrangeReplacementDetailsData() {
+    $("#tblReplacementItems").find("[id^='ReplacementItemRow_']").each(function (i, row) {
         if ($(row)[0].id != 'tblHeading') {
 
-            $(row)[0].id = 'PurchaseInvoiceItemRow_' + i
+            $(row)[0].id = 'ReplacementItemRow_' + i
 
             var newTR = "#" + $(row)[0].id + " td";
 
@@ -184,11 +193,15 @@ function ReArrangePurchaseInvoiceDetailsData() {
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "Replacements[" + i + "].Barcode");
             }
 
+
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "Replacements[" + i + "].SKU_Code");
-                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Replacement_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']").attr("name", "Replacements[" + i + "].SKU_Code");
             }
+
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
                 $(newTR).find("[id^='textArticle_No_']")[0].id = "textArticle_No_" + i;
@@ -264,8 +277,13 @@ function ReArrangePurchaseInvoiceDetailsData() {
            
 
             if ($(newTR).find("[id='delete-invoice-details']").length > 0) {
-                $(newTR).find("[id='delete-invoice-details']").attr("onclick", "DeletePurchaseInvoiceDetailsData(" + i + ")");
+                $(newTR).find("[id='delete-invoice-details']").attr("onclick", "DeleteReplacementDetailsData(" + i + ")");
             }
         }
     });
+}
+
+function Set_Purchase_Invoice_Id(value) {
+
+    $('#hdf_Purchase_Invoice_Id').val(value);
 }
