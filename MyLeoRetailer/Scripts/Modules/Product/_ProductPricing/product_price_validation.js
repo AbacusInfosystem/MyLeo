@@ -64,32 +64,32 @@ $(function ()
 	//	}
     //});
 
-    $("#frmProductColor").validate({
-        rules: {
-            "Product.Colour_Code": { required: true , ColorCode : true },  
-        },
-        messages: {
+    //$("#frmProductColor").validate({
+    //    rules: {
+    //        "Filter.Color": { required: true, ColorCode: true },
+    //    },
+    //    messages: {
 
-            "Product.Colour_Code": { required: "Colour Code is required." },  
-        }
-    });
+    //        "Filter.Color": { required: "Colour Code is required." },
+    //    }
+    //});
 
-    jQuery.validator.addMethod("ColorCode", function (value, element) {
+    //jQuery.validator.addMethod("ColorCode", function (value, element) {
 
-        var result = true;
-        var Arr = [];
+    //    var result = true;
+    //    var Arr = [];
 
-        $(".block").find("a").each(function () { 
-            Arr.push($(this).text());
-        });
+    //    $(".block").find("a").each(function () { 
+    //        Arr.push($(this).text());
+    //    });
 
-        if ($.inArray(value, Arr) > -1)
-            result = false;
-        else
-            result = true;
+    //    if ($.inArray(value, Arr) > -1)
+    //        result = false;
+    //    else
+    //        result = true;
 
-        return result;
+    //    return result;
 
-    }, "Colour Already Exists in List.");
+    //}, "Colour Already Exists in List.");
 
 });

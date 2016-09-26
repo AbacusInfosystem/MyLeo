@@ -78,7 +78,8 @@ namespace MyLeoRetailerInfo
 
             PageLimit = 3;
 
-            CurrentPage = 1;
+            //CurrentPage = 1;
+            CurrentPage = 0;
 
             IsFirst = false;
 

@@ -1,21 +1,14 @@
 ﻿@model MyLeoRetailer.Models.ProductViewModel
 @using MyLeoRetailerInfo.Common
-@{
-    ViewBag.Title = "Index";
-}
-@{
-    ViewBag.Title = "_ProductPrizing";
-}
+
+
 <script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_events.js"></script>
 <script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_methods.js"></script>
 <script src="~/Scripts/Modules/Product/_ProductPricing/product_price_validation.js"></script>
 <style type="text/css">
-    .color-expand {
-        background: url("../images/greybox-center-bg1.jpg") repeat-x scroll center top transparent;
-        float: left;
-        min-height: 100px;
-        overflow: auto;
-        width: 260px;
+    .verticle {
+        /*max-height: 150px;*/
+        overflow-y: auto;
     }
 </style>
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -39,10 +32,18 @@
             <div class="col-md-3">
                 <div class="block">
                     <div class="row">
-                        <div class="form-group">
-                            <div class="form-group input-group color" data-color="rgb(255, 146, 180)" data-color-format="rgb" id="colorpicker">
-                                <input class="form-control" type="text" id="txtColourCode" name="Product.Colour_Code">
-                                <span class="input-group-addon"><i id="iRGBColor" style="background-color: rgb(154, 42, 77);"></i></span>
+                        @*<div class="form-group">
+                                <div class="form-group input-group color" data-color="rgb(255, 146, 180)" data-color-format="rgb" id="colorpicker">
+                                    <input class="form-control" type="text" id="txtColourCode" name="Product.Colour_Code">
+                                    <span class="input-group-addon"><i id="iRGBColor" style="background-color: rgb(154, 42, 77);"></i></span>
+                                </div>
+                            </div>*@
+                        <div class="form-group auto-complete">
+                            <div class="input-group">
+                                <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Color" id="txtColourName" placeholder="Enter color" data-table="Colour" data-col="Colour_ID,Colour_Name" data-headernames="Colour">
+                                <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                <input type="hidden" id="hdnColourId" value="" name="Filter.Color" class="auto-complete-value" />
+                                <input type="hidden" id="hdnColourName" value="" name="Filter.Color" class="auto-complete-label" />
                             </div>
                         </div>
                         <div class="btn-group">
@@ -54,83 +55,37 @@
         </div>
     </form>
     <form role="form" id="frmProductMRP">
+        <input type="hidden" id="hdn_ProductId" name="Product.Product_Id" class="auto-complete-value" value="@Model.Product.Product_Id" />
+
+        @*<input type="text" id="hdn_ProductMRPId" name="ProductMRPs[i].Product_MRP_Id" class="ProductMRPs" value="@Model.ProductMRPs[i].Product_MRP_Id" />
+            <input type="text" id="hdn_ColourId" name="ProductMRPs[i].Product_MRP_Id" class="ProductMRPs" value="@Model.ProductMRPs[i].Colour_Id" />
+            <input type="text" id="hdn_ColourName" name="ProductMRPs[i].Product_MRP_Id" class="ProductMRPs" value="@Model.ProductMRPs[i].Colour" />*@
+
 
         <div class="row">
-            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 362px;">
+            <div class="col-md-3 verticle" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 362px;">
                 <div class="block">
                     <div class="row">
                         <div class="list-group border-bottom push-down-20 color-expand" id="Color_Grid">
-
+                            @{
+                                int i = 0;
+                                if (Model.ProductMRPs.Count != 0)
+                                {
+                                    foreach (var item in Model.ProductMRPs)
+                                    { 
+                                        <a name="Color_List" class="list-group-item" href="#" id="@i" data-identity="@item.Colour_Id">@item.Colour</a>
+                                        <input type="text" id="txtVendorCode_@item.Colour_Id" name="Vendor_Color_Code" value="@item.Vendor_Color_Code" placeholder="Enter vendor code." class="form-control">//
+                                        i++;
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-9 divMRP" style="padding: 10px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD; display:none">
-                <div class="block" style="margin-bottom:0px;">
-                    <h4 style="margin-top: 0px;">Size details:</h4>
+            <div id="common_Product_MRP" class="col-md-9 commonProduct" style="padding: 10px; border-top: 1px solid #DDD;">
 
-                    <table class="table table-bordered table-hover" id="tbl_ProductMRP">
-
-                        <tbody>
-                            @{
-                                int c = 0;
-                                if (Model.Color.ProductMRP_N_WSR != null && Model.Color.ProductMRP_N_WSR.Count() > 0)
-                                {
-                                    int i = 0, j = 0, k = 0, l = 0,m = 0;
-                                    <tr>
-                                        <td>Size.</td>
-                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
-                                        {
-                                            <td><span class="label label-primary label-form" style="margin-bottom: 1px;">@itm.Size_Name</span></td>
-                                            i++;
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>WSR.</td>
-                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
-                                        {
-                                            <td><input type="text" id="txtProductWSR_@j" class="form-control" placeholder="WSR." name="Color.ProductMRP_N_WSR[@j].Purchase_Price" value="@itm.Purchase_Price" /></td>
-                                            j++;
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>MRP.</td>
-                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
-                                        {
-                                            <td><input type="text" id="txtProductMRP_@k" class="form-control" placeholder="MRP." name="Color.ProductMRP_N_WSR[@k].MRP_Price" value="@itm.MRP_Price" /></td>
-                                            k++;
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>SKU Code.</td>
-                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
-                                        {
-                                            <td><span class="label label-primary label-form" style="margin-bottom: 1px;">@itm.SKU_Code</span></td>
-                                            l++;
-                                        }
-                                    </tr>
-                                    <tr>
-                                        <td>Barcode.</td>
-                                        @foreach (var itm in Model.Color.ProductMRP_N_WSR)
-                                        {
-                                            @*<td><span class="label label-primary label-form" style="margin-bottom: 1px;">@itm.ba</span></td>*@
-                                            <td><i class="fa fa-barcode fa-3x"></i></td>
-
-                                            m++;
-                                        }
-                                    </tr>
-                                }
-                                c++;
-                            }
-                        </tbody>
-                    </table> 
-
-                    <div class="block" style="margin-bottom:0px;">
-                        <button type="button" class="btn btn-success">Print all barcodes.</button>
-                        <button type="button" class="btn btn-success" id="btnAddMRP">Add.</button>
-                    </div>
-                </div>
             </div>
         </div>
 

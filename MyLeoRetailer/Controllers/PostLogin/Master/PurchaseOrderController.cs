@@ -49,7 +49,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 
                 poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
-                poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
+                //poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
 
                 poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
 
@@ -185,6 +185,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             poViewModel.PurchaseOrder.Categories = _purchaseorderRepo.Get_Category_By_Vendor_Id(Vendor_Id);
 
+            //Addition by swapnali | Date:21/09/2016
+            //poViewModel.PurchaseOrder.SubCategories = _purchaseorderRepo.Get_Sub_Category_By_Vendor_Id(Vendor_Id);
+            //End
+
+
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
 
@@ -206,7 +211,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
-            poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
+           // poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
 
             poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
 

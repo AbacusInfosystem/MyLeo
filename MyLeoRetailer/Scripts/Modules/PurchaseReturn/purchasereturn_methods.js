@@ -16,26 +16,29 @@
 
             $('#textTaxPercentage_0').val(data.Tax_Percentage);
 
-            debugger;
+            $("#drpPurchase_Invoice_Id").html("");
 
+            $("#drpPurchase_Invoice_Id").append("<option value=''>Select Invoice No.</option>");
+
+            $("#drpPurchase_Invoice_Id").parents('.form-group').find('ul').html("");
+
+            $("#drpPurchase_Invoice_Id").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Invoice No.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+            
             if (data.PurchaseInvoices.length > 0) {
 
-                $("#drpPurchase_Invoice_Id").empty();
-
-                var poi = document.getElementById("drpPurchase_Invoice_Id");
-                var option = document.createElement("option");
-
-                option.value = 0;
-                option.text = "Select Invoice No.";
-                poi.add(option);
+                //$("#drpPurchase_Invoice_Id").empty();
 
                 for (var j = 0; j < data.PurchaseInvoices.length; j++) {
 
+
+                    var i = j + 1;
+
                     $("#drpPurchase_Invoice_Id").append("<option value='" + data.PurchaseInvoices[j].Purchase_Invoice_Id + "'>" + data.PurchaseInvoices[j].Purchase_Invoice_No + "</option>");
 
-                    //$('#drpPurchase_Invoice_Id').append(new Option(data.PurchaseInvoices[j].Purchase_Invoice_No, data.PurchaseInvoices[j].Purchase_Invoice_Id));
-                }                
+                    $("#drpPurchase_Invoice_Id").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + data.PurchaseInvoices[j].Purchase_Invoice_No + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+                }
             }
+
         }
     });
 }
@@ -212,6 +215,25 @@ function AddPurchaseReturnDetails(i) {
     var newRow = $(tblHtml);
 
     myTable.append(newRow);
+
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
+   
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+        var result = true;
+        var id = $(element).attr('id')
+        id = id.replace("textSKU_No_", "");
+
+        $("#tblPurchaseReturnItems").find("[id^='PurchaseReturnItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+                result = false;
+            }
+        });
+
+        return result;
+    }, "Already mapped.");
+
 
 }
 
@@ -453,8 +475,7 @@ function Bind_Purchase_Return_Items_Data(data)
     {
         //$("#tblPurchaseReturnItems").find("[id='PurchaseReturnItemRow_" + i + "']").remove();
         $('#tblPurchaseReturnItems tbody tr').remove();
-        alert(data.PurchaseReturns.length);
-
+       
         for (i = 0; i < data.PurchaseReturns.length; i++) {
 
             trHtml += "<tr id='PurchaseReturnItemRow_" + i + "' class='item-data-row'>";

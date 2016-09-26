@@ -39,6 +39,33 @@
 
         <form id="frmSalesReturn">
 
+
+            <input type="hidden" id="hdnCreateCustomerFlag" name="SalesReturn.CreateCustomerFlag">
+
+            <div class="modal fade" id="myModalAddCustomer" role="dialog" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="AddCustomerLabel">Add Customer Details</h4>
+                        </div>
+                        <div class="modal-body" id="div_Parent_Modal_Body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center ">
+                                    <h5 class="">Please Create Customer for Entered Mobile No.</h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center ">
+                                    <a class="btn btn-success active" role="button" id="btnCustomer" @*href="@Url.Action("Index", "Customer")"*@>Create Customer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="box box-default">
 
                 <div class="box-body">
@@ -58,17 +85,29 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                @*<div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">GR Date.</span>
-                                        <input type="text" class="form-control input-sm" name="SalesReturn.SalesReturn_Date" id="dtpReturn_Date" @*value="@(Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM/dd/yyyy"))"*@ placeholder="Enter GR Date" />
+                                        <input type="text" class="form-control input-sm" name="SalesReturn.SalesReturn_Date" id="dtpReturn_Date" placeholder="Enter GR Date" />
+                                    </div>
+                                </div>*@
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">GR date</span>
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpReturn_Date" name="SalesReturn.SalesReturn_Date" value="@((Model.SalesReturn.SalesReturn_Date == DateTime.MinValue ? "" : Model.SalesReturn.SalesReturn_Date.ToString("dd-MM-yyyy")))" readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile No.</span>
-                                        <input type="text" class="form-control input-sm" name="SalesReturn.Mobile" id="txtMobile" @*value="@Model.Vendor.Vendor_Email1"*@ placeholder="Enter Mobile No" />
+                                        <input type="text" class="form-control input-sm editor-field focus" name="SalesReturn.Mobile" id="txtMobileNo" value="@Model.SalesReturn.Mobile" placeholder="Enter Mobile No" @*data-toggle="modal" data-target="#myModalAddCustomer"*@ />
+                                        <input type="hidden" id="hdnMobileNo" value="@Model.SalesReturn.Mobile1" name="SalesReturn.Mobile1">
                                     </div>
                                 </div>
 
@@ -145,7 +184,17 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Return_Items_By_SKU_Code(0);">
+                                            @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Return_Items_By_SKU_Code(0);">*@
+
+                                            <div class="form-group auto-complete">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Sales_Return_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Product_MRP" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" />
+                                                    <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                                    <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnSKU_No_0" value="" name="SaleReturnItemList[0].SKU_Code" class="auto-complete-label" />
+                                                </div>
+                                            </div>
+
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" style="width:80px" name="SaleReturnItemList[0].Article_No" id="textArticle_No_0" readonly placeholder="Article No">
@@ -250,7 +299,7 @@
                                             <label>Cash Paid Amount  </label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0">
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0">
                                         </td>
                                         <td width="40px"></td>
                                         <td width="40px"></td>

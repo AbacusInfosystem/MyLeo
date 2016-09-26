@@ -32,6 +32,7 @@
         <div class="row">
 
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+                <input type="hidden" id="hdnPayament_Status1" value="@Model.Payable.Payament_Status">
 
                 <div class="block">
 
@@ -60,7 +61,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">CN no</span>
-                            <select class="form-control input-sm" id="drpPayment_Mode" name="Payable.Purchase_Credit_Note_Id">
+                            <select class="form-control input-sm" id="drpCredit_Note_No" name="Payable.Purchase_Credit_Note_Id">
                                 <option value="0">Select CN no</option>
 
                                 @foreach (var item in Model.Payables)
@@ -128,7 +129,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Final amount</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Final_Amount" id="txtFinal_amount" onclick="javascript: CalculateDiscount();" value="@Model.Payable.Final_Amount" placeholder="Final amount" />
+                            <input type="text" class="form-control input-sm" name="Payable.Final_Amount" id="txtFinal_amount" onclick="javascript: CalculateDiscount();" value="@Model.Payable.Balance_Amount" placeholder="Final amount" />
                         </div>
                     </div>
 
@@ -218,7 +219,7 @@
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque date</span>
                                 <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("dd-MM-yyyy")))" />
+                                    <input type="text" id="txtCheque_Date" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("dd-MM-yyyy")))" />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>
@@ -267,8 +268,10 @@
                                         <th>Cheque No</th>
                                         <th>Cheque Date</th>
                                         <th>Bank Name</th>
-                                        @*<th>Credit note no</th>
-                                        <th>Gift Voucher no</th>*@
+                                        <th>Credit note no</th>
+                                        <th>Credit note amount</th>
+                                        <th>Discount %</th>
+                                        <th>Discount amount</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -311,7 +314,6 @@
                                                 {
                                                     <span> @itm.Cheque_Date.ToString("MM/dd/yyyy")</span>
                                                 }
-                                                <span> @itm.Cheque_Date.ToString("MM/dd/yyyy")</span>
                                                 <input type="hidden" id="hdnCheque_Date@(itm.Payable_Item_Id)" name="Payable.Cheque_Date[@(i-1)" value="@itm.Cheque_Date.ToString("MM/dd/yyyy")">
                                             </td>
 
@@ -319,15 +321,23 @@
                                                 <span> @itm.Bank_Name</span>
                                                 <input type="hidden" id="hdnBank_Name@(itm.Payable_Item_Id)" name="Payable.Bank_Name[@(i-1)]" value="@itm.Bank_Name">
                                             </td>
-                                            @*<td>
+                                            <td>
                                                 <span> @itm.Credit_Note_No</span>
                                                 <input type="hidden" id="hdnCredit_Note_No@(itm.Payable_Item_Id)" name="Payable.Credit_Note_No[@(i-1)]" value="@itm.Credit_Note_No">
                                             </td>
                                             <td>
-                                                <span> @itm.Gift_Voucher_No</span>
-                                                <input type="hidden" id="hdnGift_Voucher_No@(itm.Payable_Item_Id)" name="Payable.Gift_Voucher_No[@(i-1)]" value="@itm.Gift_Voucher_No">
-                                            </td>*@
-                                           
+                                                <span> @itm.Credit_Note_Amount</span>
+                                                <input type="hidden" id="hdnCredit_Note_Amount@(itm.Payable_Item_Id)" name="Payable.Credit_Note_Amount[@(i-1)]" value="@itm.Credit_Note_Amount">
+                                            </td>
+                                            <td>
+                                                <span> @itm.Discount_Percentage</span>
+                                                <input type="hidden" id="hdnDiscount_Percentage@(itm.Payable_Item_Id)" name="Payable.Discount_Percentage[@(i-1)]" value="@itm.Discount_Percentage">
+                                            </td>
+                                            <td>
+                                                <span> @itm.Discount_Amount</span>
+                                                <input type="hidden" id="hdnDiscount_Amount@(itm.Payable_Item_Id)" name="Payable.Discount_Amount[@(i-1)]" value="@itm.Discount_Amount">
+                                            </td>
+
                                             <td>
                                                 @*@if (Model.Payable.Status != "Payment Done")
                                         {*@

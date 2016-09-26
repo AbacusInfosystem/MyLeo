@@ -17,7 +17,8 @@
                     "SalesReturn.Mobile":
                         {
                             required: true,
-                            number: true
+                            number: true,
+                            MobileNo: true
                         },
                     "SalesReturn.Customer_Name":
                         {
@@ -30,7 +31,7 @@
                         },
                     "SaleReturnItemList[0].SKU_Code":
                         {
-                            required: true,
+                            //required: true,
                         },
                     "SaleReturnItemList[0].Quantity":
                         {
@@ -87,3 +88,28 @@
             }
         });
 });
+
+jQuery.validator.addMethod("MobileNo", function (value, element) {
+
+    var result = true;
+
+    if ($("#txtMobileNo").val() != "" && $("#hdnMobileNo").val() != $("#txtMobileNo").val()) {
+        $.ajax({
+
+            url: '/SalesOrder/Check_Mobile_No',
+            data:
+                {
+                    MobileNo: value
+                },
+            method: 'GET',
+            async: false,
+            success: function (data) {
+                if (data == false) {
+                    result = false;
+                }
+            }
+        });
+    }
+    return result;
+
+}, "Mobile Number does not exists.");
