@@ -1,0 +1,265 @@
+﻿@model MyLeoRetailer.Models.PurchaseOrderViewModel
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" type="text/css" id="theme" href="../Content/Atlant/css/theme-default.css" />
+<script type="text/javascript" src="../Content/Atlant/js/plugins/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrint').click(function () {
+            
+            $("#div_Non_Printable").hide();
+
+            window.print();
+
+            $("#div_Non_Printable").show();
+
+        });
+    });
+</script>
+
+<div class="content-wrapper">
+
+    <div class="container-fluid">
+
+        <form id="frmPurchaseOrderInvoice">
+            <section class="content">
+                <div class="row">
+                    <div id="divScrollContainer" class="col-md-12">
+                        <h2>Purchase Order Invoice</h2>
+                     
+                        <div class="box box-default" id="Div_Print">
+                            <div class="box-body">
+
+                                <div class="row">
+
+                                    <div class="col-md-10 invoice-col" style="text-align:center; width:1200px;">
+                                        <div class="form-group">
+
+                                            <div class="form-group">
+                                                <label for="txtStore_Name" style="color: #333" class="">Company Name</label>
+
+                                                <br />
+                                                <label for="txtStore_Address1" style="color: #333" class="">Company Address1</label>
+
+                                                <br />
+
+                                                <label for="txtStore_Address2" style="color: #333" class="">Company Address2</label>
+                                                <br />
+
+                                                <h5> <b>PURCHASE ORDER</b></h5>
+
+                                            </div>
+                                        </div><!-- /.col -->
+
+                                    </div>
+                                </div>
+
+                                <h2 class="page-header div-border-bottom"></h2>
+
+                                <div class="row">
+                                    <div class="col-md-4 invoice-col">
+                                        <div class=" form-group">
+                                            <div class=" form-group">
+                                                <label for="Vendor_Name" style="color: #333" class="">@Model.PurchaseOrder.Vendor_Name</label>
+                                                <br />
+
+                                                <label for="Vendor_Address1" style="color: #333" class="">@Model.PurchaseOrder.Vendor_Address</label>
+                                                <br />
+
+                                                <label for="Vendor_Address2" style="color: #333" class="">@Model.PurchaseOrder.Vendor_Phone1</label>
+                                                <br />
+
+                                                <label for="Vendor_Address3" style="color: #333" class="">@Model.PurchaseOrder.Vendor_Phone2</label>
+                                                <br />
+
+                                                <label for="Vendor_Contact1" style="color: #333" class="">@Model.PurchaseOrder.Vendor_Email1</label>
+                                               
+                                            </div>
+
+                                        </div>
+
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-4 invoice-col">
+                                        <div class=" form-group">
+
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-4 invoice-col " style="text-align:left">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th width="35%">
+                                                        Po No.
+                                                    </th>
+
+                                                    <td>@Model.PurchaseOrder.Purchase_Order_No</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Date
+                                                    </th>
+                                                    <td>@(Model.PurchaseOrder.Purchase_Order_Date == DateTime.MinValue ? "" : Convert.ToDateTime(Model.PurchaseOrder.Purchase_Order_Date).ToString("dd/MM/yyyy"))</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Agent
+                                                    </th>
+                                                    <td>@Model.PurchaseOrder.Agent_Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Transport
+                                                    </th>
+                                                    <td>@Model.PurchaseOrder.Transporter_Name</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Delivery At.
+                                                    </th>
+                                                    <td>@(Model.PurchaseOrder.Stop_Supply_Date == DateTime.MinValue ? "" : Convert.ToDateTime(Model.PurchaseOrder.Stop_Supply_Date).ToString("dd/MM/yyyy"))</td>
+
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+
+                                    <!-- Table row -->
+                                    <div class="row">
+                                        <div class="col-xs-12 table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="">Article. No.</th>
+                                                        @*<th>Color</th>
+                                                        <th>Brand</th>
+                                                        <th>Category</th>
+                                                        <th>Subcategory</th>
+                                                        <th>Size group</th>
+                                                        <th>Start size</th>
+                                                        <th>End size</th>*@
+                                                        <th width="">1</th>
+                                                        <th width="">2</th>
+                                                        <th width="">3</th>
+                                                        <th width="">4</th>
+                                                        <th width="">5</th>
+                                                        <th width="">6</th>
+                                                        <th width="">7</th>
+                                                        <th width="">8</th>
+                                                        <th width="">9</th>
+                                                        <th width="">10</th>
+                                                        <th width="">11</th>
+                                                        <th width="">12</th>
+                                                        <th width="">13</th>
+                                                        <th width="">14</th>
+                                                        <th width="">15</th>
+                                                        <th width="">16</th>
+                                                        <th width="">17</th>
+                                                        <th width="">18</th>
+                                                        <th width="">19</th>
+                                                        <th width="">20</th>
+                                                        <th width="">QTY</th>
+                                                        <th width="">Center Size</th>
+                                                        <th width="">Size Diff</th>
+                                                        <th width="">Base Rate</th>
+                                                        <th width="">Total Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{
+                                                        
+                                                   if (Model.PurchaseOrder.PurchaseOrderItems.Count > 0)
+                                                    {
+                                                        
+                                                        foreach (var item in Model.PurchaseOrder.PurchaseOrderItems)
+                                                        {
+                                                            int colspan = 20;
+                                                            if (item.sizes.Count > 0)
+                                                                {
+                                                                    colspan = colspan - item.sizes.Count;
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        @foreach(var itm in item.sizes)
+                                                                        {
+                                                                            <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@itm.Size_Name</span></td>
+                                                                        }
+                                                                    </tr>
+                                                                }
+                                                            <tr>
+                                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Article_No</span></td>
+                                                                @*<td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Colour_Name</span></td>
+                                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Brand_Name</span></td>
+                                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Category</span></td>
+                                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Sub_Category</span></td>
+                                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Size_Group_Name</span></td>
+                                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Start_Size</span></td>
+                                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.End_Size</span></td>*@
+                                                                
+                                                                @if (item.sizes.Count > 0)
+                                                                {
+                                                                    foreach(var itm in item.sizes)
+                                                                    {
+                                                                        <td>@itm.Quantity1</td>
+                                                                    }
+                                                                }
+                                                                
+                                                                <td colspan="@colspan"></td>
+                                                                <td>@item.Total_Quantity</td>
+                                                                <td>@item.Center_Size</td>
+                                                                <td>@item.Size_Difference</td>
+                                                                <td>@item.Purchase_Price</td>
+                                                                <td>@item.Total_Amount</td>
+                                                            </tr>
+                                                        }
+                                                    }
+                                                    <tr></tr>
+                                                     }
+
+                                                    @{
+                                                        <tr>
+                                                            <th colspan="21" style="text-align: left;"> Remark : @Model.PurchaseOrder.Comment </th>
+                                                            @*<th colspan="8" style="text-align: left;"> Total : @Model.PurchaseOrder.Net_Amount </th>*@
+                                                            <th colspan="5" style="text-align: left;"> Total : @Model.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount) </th>
+                                                            
+                                                        </tr>
+
+                                                        <tr>
+                                                            <th colspan="26" style="text-align: left;">Amount(In words): @Model.PurchaseOrder.Total_Amount_In_Word </th>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
+                                    <!-- this row will not appear when printing -->
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="div_Non_Printable">
+                            <div class="col-md-5">
+                                <div class="col-md-2">
+                                    <button type="button" id="btnPrint" class="btn btn-default bg-orange">Print</button>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a class="btn btn-default bg-blue" role="button" id="btnBack" href="@Url.Action("Search", "PurchaseOrder")">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </section>
+        </form>
+
+    </div>
+</div>
+

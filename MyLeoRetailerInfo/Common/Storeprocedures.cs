@@ -212,6 +212,10 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Consolidate_Purchase_Order_Item,
         sp_Get_Consolidate_Purchase_Order_Item_Sizes,
 
+        sp_Get_Purchase_Order_Details_By_Id,
+        sp_Get_Purchase_Order_Items,
+        sp_Get_Purchase_Order_Item_Sizes,
+
         #endregion
 
         #region Purchase Invoice

@@ -95,7 +95,7 @@ namespace MyLeoRetailerRepo
             sqlParam.Add(new SqlParameter("@Updated_By", PurchaseOrder.Updated_By));
 
             return sqlParam;
-        }       
+        }
 
         public void Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
@@ -183,11 +183,11 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity3));
 
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-        }
+                }
 
                 i++;
                 if (i == 4 && PurchaseOrder.Sizes[j].Quantity4 != 0)
-        {
+                {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -238,14 +238,14 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id7));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity7));
 
-                //Addition
-                sqlParam.Add(new SqlParameter("@Comment", item.Comment));
-                //End
+                    //Addition
+                    sqlParam.Add(new SqlParameter("@Comment", item.Comment));
+                    //End
 
 
-                PurchaseOrder.Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
+                    PurchaseOrder.Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
 
-            }
+                }
 
                 i++;
                 if (i == 8 && PurchaseOrder.Sizes[j].Quantity8 != 0)
@@ -264,10 +264,10 @@ namespace MyLeoRetailerRepo
                 i++;
                 if (i == 9 && PurchaseOrder.Sizes[j].Quantity9 != 0)
                 {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
+                    List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
-                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", PurchaseOrder.Purchase_Order_Id));
+                    sqlParams.Add(new SqlParameter("@Purchase_Order_Id", PurchaseOrder.Purchase_Order_Id));
 
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id9));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity9));
@@ -286,8 +286,8 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id10));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity10));
 
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-            }
+                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
+                }
 
                 i++;
                 if (i == 11 && PurchaseOrder.Sizes[j].Quantity11 != 0)
@@ -299,13 +299,13 @@ namespace MyLeoRetailerRepo
 
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id11));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity11));
-      
+
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-        }
+                }
 
                 i++;
                 if (i == 12 && PurchaseOrder.Sizes[j].Quantity12 != 0)
-        {
+                {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -315,11 +315,11 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity12));
 
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-            }
+                }
 
                 i++;
                 if (i == 13 && PurchaseOrder.Sizes[j].Quantity13 != 0)
-        {
+                {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -333,7 +333,7 @@ namespace MyLeoRetailerRepo
 
                 i++;
                 if (i == 14 && PurchaseOrder.Sizes[j].Quantity14 != 0)
-            {
+                {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -343,11 +343,11 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity14));
 
                     sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
-            }
+                }
 
                 i++;
                 if (i == 15 && PurchaseOrder.Sizes[j].Quantity15 != 0)
-        {
+                {
                     List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     sqlParams.Add(new SqlParameter("@Purchase_Order_Item_Id", PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id));
@@ -365,11 +365,11 @@ namespace MyLeoRetailerRepo
 
         }
 
-      
+
         public DataTable Get_Purchase_Orders(QueryInfo query_Details)
         {
             return sqlHelper.Get_Table_With_Where(query_Details);
-        }      
+        }
 
         public List<VendorInfo> Get_Article_No_By_Vendor_Id(int Vendor_Id)
         {
@@ -428,7 +428,7 @@ namespace MyLeoRetailerRepo
             }
             return Categories;
         }
-         
+
         public List<SubCategoryInfo> Get_Sub_Category_By_Vendor_Id(int Vendor_Id, int Category_Id)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -520,117 +520,117 @@ namespace MyLeoRetailerRepo
 
             var k = 0;
 
-            
 
-                List<SqlParameter> parameters = new List<SqlParameter>();
 
-                parameters.Add(new SqlParameter("@Item_Ids", Item_Ids));
+            List<SqlParameter> parameters = new List<SqlParameter>();
 
-                k++;
+            parameters.Add(new SqlParameter("@Item_Ids", Item_Ids));
 
-                DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Consolidate_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
+            k++;
 
-                int i = 1;
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Consolidate_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
 
-                foreach (DataRow item in dt.Rows)
+            int i = 1;
+
+            foreach (DataRow item in dt.Rows)
+            {
+                Sizes Sizes = new Sizes();
+
+                if (i == 1 && Convert.ToInt32(item["Size_Id"]) != 0)
                 {
-                    Sizes Sizes = new Sizes();                   
+                    Sizes.Size_Id1 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity1 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount1 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 2 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id2 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity2 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount2 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 3 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id3 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity3 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount3 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 4 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id4 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity4 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount4 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 5 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id5 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity5 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount5 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 6 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id6 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity6 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount6 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 7 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id7 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity7 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount7 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 8 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id8 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity8 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount8 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 9 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id9 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity9 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount9 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 10 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id10 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity10 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount10 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 11 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id11 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity11 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount11 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 12 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id12 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity12 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount12 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 13 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id13 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity13 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount13 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 14 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id14 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity14 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount14 = Convert.ToInt32(item["Amount"]);
+                }
+                else if (i == 15 && Convert.ToInt32(item["Size_Id"]) != 0)
+                {
+                    Sizes.Size_Id15 = Convert.ToInt32(item["Size_Id"]);
+                    Sizes.Quantity15 = Convert.ToInt32(item["Quantity"]);
+                    Sizes.Amount15 = Convert.ToInt32(item["Amount"]);
+                }
 
-                    if (i == 1 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id1 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity1 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount1 = Convert.ToInt32(item["Amount"]);
-                    }                   
-                    else if (i == 2 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id2 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity2 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount2 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 3 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id3 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity3 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount3 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 4 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id4 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity4 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount4 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 5 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {                       
-                        Sizes.Size_Id5 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity5 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount5 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 6 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id6 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity6 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount6 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 7 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id7 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity7 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount7 = Convert.ToInt32(item["Amount"]);                        
-                    }
-                    else if (i == 8 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id8 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity8 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount8 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 9 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id9 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity9 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount9 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 10 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id10 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity10 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount10 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 11 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id11 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity11 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount11 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 12 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id12 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity12 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount12 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 13 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id13 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity13 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount13 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 14 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id14 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity14 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount14 = Convert.ToInt32(item["Amount"]);
-                    }
-                    else if (i == 15 && Convert.ToInt32(item["Size_Id"]) != 0)
-                    {
-                        Sizes.Size_Id15 = Convert.ToInt32(item["Size_Id"]);
-                        Sizes.Quantity15 = Convert.ToInt32(item["Quantity"]);
-                        Sizes.Amount15 = Convert.ToInt32(item["Amount"]);
-                    }
+                Size.Add(Sizes);
 
-                    Size.Add(Sizes);
+                i++;
 
-                    i++;
-                
             }
 
             return Size;
@@ -832,5 +832,178 @@ namespace MyLeoRetailerRepo
         }
 
         ////***************************************************************************////
+
+        public PurchaseOrderInfo Get_Purchase_Order_Details_By_Id(int Purchase_Order_Id)
+        {
+            PurchaseOrderInfo purchaseOrder = new PurchaseOrderInfo();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Purchase_Order_Id", Purchase_Order_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Order_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                purchaseOrder.Purchase_Order_Id = Convert.ToInt32(dr["Purchase_Order_Id"]);
+
+                if (!dr.IsNull("Purchase_Order_No"))
+                    purchaseOrder.Purchase_Order_No = Convert.ToString(dr["Purchase_Order_No"]);
+
+                if (!dr.IsNull("Purchase_Order_Date"))
+                    purchaseOrder.Purchase_Order_Date = Convert.ToDateTime(dr["Purchase_Order_Date"]);
+
+                if (!dr.IsNull("Vendor_Id"))
+                    purchaseOrder.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                if (!dr.IsNull("Agent_Id"))
+                    purchaseOrder.Agent_Id = Convert.ToInt32(dr["Agent_Id"]);
+
+                if (!dr.IsNull("Agent_Name"))
+                    purchaseOrder.Agent_Name = Convert.ToString(dr["Agent_Name"]);
+
+                if (!dr.IsNull("Shipping_Address"))
+                    purchaseOrder.Shipping_Address = Convert.ToString(dr["Shipping_Address"]);
+
+                if (!dr.IsNull("Transporter_Id"))
+                    purchaseOrder.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+                if (!dr.IsNull("Transporter_Name"))
+                    purchaseOrder.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+                if (!dr.IsNull("Start_Supply_Date"))
+                    purchaseOrder.Start_Supply_Date = Convert.ToDateTime(dr["Start_Supply_Date"]);
+
+                if (!dr.IsNull("Stop_Supply_Date"))
+                    purchaseOrder.Stop_Supply_Date = Convert.ToDateTime(dr["Stop_Supply_Date"]);
+
+                if (!dr.IsNull("Total_Quantity"))
+                    purchaseOrder.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+                if (!dr.IsNull("Net_Amount"))
+                    purchaseOrder.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+                if (!dr.IsNull("Vendor_Name"))
+                    purchaseOrder.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                if (!dr.IsNull("Vendor_Address"))
+                    purchaseOrder.Vendor_Address = Convert.ToString(dr["Vendor_Address"]);
+
+                if (!dr.IsNull("Vendor_Email1"))
+                    purchaseOrder.Vendor_Email1 = Convert.ToString(dr["Vendor_Email1"]);
+
+                if (!dr.IsNull("Vendor_Phone1"))
+                    purchaseOrder.Vendor_Phone1 = Convert.ToString(dr["Vendor_Phone1"]);
+
+                if (!dr.IsNull("Vendor_Phone2"))
+                    purchaseOrder.Vendor_Phone2 = Convert.ToString(dr["Vendor_Phone2"]);
+
+            }
+
+            return purchaseOrder;
+        }
+
+
+        public List<PurchaseOrderItemInfo> Get_Purchase_Order_Items(int Purchase_Order_Id)
+        {
+            List<PurchaseOrderItemInfo> purchaseOrderItems = new List<PurchaseOrderItemInfo>();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Purchase_Order_Id", Purchase_Order_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Order_Items.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                PurchaseOrderItemInfo purchaseOrderItem = new PurchaseOrderItemInfo();
+
+                purchaseOrderItem.Purchase_Order_Item_Id = Convert.ToInt32(dr["Purchase_Order_Item_Id"]);
+
+                purchaseOrderItem.Purchase_Order_Id = Convert.ToInt32(dr["Purchase_Order_Id"]);
+
+                if (!dr.IsNull("Article_No"))
+                    purchaseOrderItem.Article_No = Convert.ToString(dr["Article_No"]);
+
+                if (!dr.IsNull("Colour_Name"))
+                    purchaseOrderItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+
+                if (!dr.IsNull("Start_Size"))
+                    purchaseOrderItem.Start_Size = Convert.ToString(dr["Start_Size"]);
+
+                if (!dr.IsNull("End_Size"))
+                    purchaseOrderItem.End_Size = Convert.ToString(dr["End_Size"]);
+
+                if (!dr.IsNull("Center_Size"))
+                    purchaseOrderItem.Center_Size = Convert.ToString(dr["Center_Size"]);
+
+                if (!dr.IsNull("Purchase_Price"))
+                    purchaseOrderItem.Purchase_Price = Convert.ToDecimal(dr["Purchase_Price"]);
+
+                if (!dr.IsNull("Size_Difference"))
+                    purchaseOrderItem.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
+
+                if (!dr.IsNull("Total_Amount"))
+                    purchaseOrderItem.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
+
+                if (!dr.IsNull("Comment"))
+                    purchaseOrderItem.Comment = Convert.ToString(dr["Comment"]);
+
+                if (!dr.IsNull("Brand_Id"))
+                    purchaseOrderItem.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+                if (!dr.IsNull("Brand_Name"))
+                    purchaseOrderItem.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+
+                if (!dr.IsNull("Category_Id"))
+                    purchaseOrderItem.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
+                if (!dr.IsNull("Category"))
+                    purchaseOrderItem.Category = Convert.ToString(dr["Category"]);
+
+                if (!dr.IsNull("Sub_Category_Id"))
+                    purchaseOrderItem.Sub_Category_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+
+                if (!dr.IsNull("Sub_Category"))
+                    purchaseOrderItem.Sub_Category = Convert.ToString(dr["Sub_Category"]);
+
+                if (!dr.IsNull("Size_Group_Id"))
+                    purchaseOrderItem.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+
+                if (!dr.IsNull("Size_Group_Name"))
+                    purchaseOrderItem.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+                purchaseOrderItem.sizes = Get_Purchase_Order_Item_Sizes(purchaseOrderItem.Purchase_Order_Item_Id);
+
+                purchaseOrderItem.Total_Quantity = purchaseOrderItem.sizes.Sum(a => a.Quantity1);
+
+                purchaseOrderItems.Add(purchaseOrderItem);
+            }
+
+            return purchaseOrderItems;
+        }
+
+        private List<Sizes> Get_Purchase_Order_Item_Sizes(int Purchase_Order_Item_Id)
+        {
+            List<Sizes> sizes = new List<Sizes>();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Purchase_Order_Item_Id", Purchase_Order_Item_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Sizes size = new Sizes();
+
+                size.Size_Id1 = Convert.ToInt32(dr["Size_Id"]);
+                size.Quantity1 = Convert.ToInt32(dr["Quantity"]);
+                size.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+                sizes.Add(size);
+            }
+
+            return sizes;
+        }
+
+
     }
 }

@@ -49,6 +49,14 @@
 
     });
 
+    //$('#chkAllBrand').change(function () {
+
+    //    alert($(this).val());
+    //    if ($(this).val() == "True") {
+
+    //    }
+
+    //});
 
     $("#btnLogin").click(function () {
 
