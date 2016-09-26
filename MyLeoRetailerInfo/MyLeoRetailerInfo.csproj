@@ -52,6 +52,7 @@
     <Compile Include="Common\FriendlyMessage.cs" />
     <Compile Include="Common\LoginInfo.cs" />
     <Compile Include="Common\LookupInfo.cs" />
+    <Compile Include="Common\SendEmailInfo.cs" />
     <Compile Include="Common\Storeprocedures.cs" />
     <Compile Include="Customer\CustomerInfo.cs" />
     <Compile Include="Employee\EmployeeInfo.cs" />
