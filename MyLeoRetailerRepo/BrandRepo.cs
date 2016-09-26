@@ -48,6 +48,8 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Brand_Name", brand.Brand_Name));
 
+            sqlParam.Add(new SqlParameter("@Brand_Code", brand.Brand_Code));
+
             //Set Is_Active Flag
             if (brand.IsActive == 0)
             {
@@ -104,9 +106,10 @@ namespace MyLeoRetailerRepo
             return retVal;
         }
 		
-        public int Get_Brand_By_Id(int Brand_Id)
-        {            
-            int isactive = 0;
+        public BrandInfo Get_Brand_By_Id(int Brand_Id)
+        {
+            BrandInfo Brand = new BrandInfo();
+            //int isactive = 0;
 
             DataTable dt = null;
             List<SqlParameter> sqlParamList = new List<SqlParameter>();
@@ -118,11 +121,14 @@ namespace MyLeoRetailerRepo
             {
                 if (!dr.IsNull("Is_Active"))
                 {
-                    isactive = Convert.ToInt32(dr["Is_Active"]);                                     
+                    Brand.IsActive = Convert.ToInt32(dr["Is_Active"]);  
+                }
+                if (!dr.IsNull("Brand_Code"))
+                {
+                    Brand.Brand_Code = Convert.ToString(dr["Brand_Code"]);
                 }
             }
-            return isactive;            
-
+            return Brand;    
         }
 
         public List<BrandInfo> Get_All_Barnds()

@@ -47,7 +47,11 @@ function Save_Color()
 
 			    Colour: $("[name='Color.Colour']").val(),
 
+			    Color_Code: $("[name='Color.Color_Code']").val(),
+
 			    Colour_Code: $("[name='Color.Colour_Code']").val(),
+
+			    IsActive: $("[name='Color.IsActive']").val(),
 
 				Colour_Id: $("[name='Color.Colour_Id']").val()
 			}
@@ -96,6 +100,8 @@ function Reset_Color()
 {
     $("[name='Color.Colour']").val("");
 
+    $("[name='Color.Color_Code']").val("");
+
     $("[name='Color.Colour_Code']").val("");
 
     $("[name='Color.Colour_Id']").val("");
@@ -129,6 +135,8 @@ function Get_Color_By_Id(obj)
 	        var obj = $.parseJSON(response);
 
 	        $("[name='Color.Colour_Code']").val(obj.Color.Colour_Code);
+
+	        $("[name='Color.Color_Code']").val(obj.Color.Color_Code);
 
 	        document.getElementById('iRGBColor').style.backgroundColor = obj.Color.Colour_Code; //"rgb(" + randR + ", " + randG + ", " + randB + ")";
 

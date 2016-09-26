@@ -92,9 +92,9 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Employee,
             sp_Get_Employees_By_Id,
             sp_Check_Existing_User_Name,
-            //Addition by swapnali | Date:15/09/2016
-            sp_Get_Branch_By_EmployeeId,
-            //End
+        //Addition by swapnali | Date:15/09/2016
+        sp_Get_Branch_By_EmployeeId,
+        //End
 
 
             #endregion
@@ -123,7 +123,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
             sp_Get_Employee_Branches,
-            sp_Get_Branch,
+        sp_Get_Branch,
 
             #endregion
 
@@ -165,13 +165,13 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Vendor_SubCategory_Mapping,
             sp_Delete_Vendor_SubCategory_Mapping_By_Vendor_Id,
             sp_Get_Vendor_SubCategory_Mapping_By_Id,
-            sp_Get_Agent,
-            sp_Get_Transporter,
-            sp_Get_Vendor,
+        sp_Get_Agent,
+        sp_Get_Transporter,
+        sp_Get_Vendor,
         sp_Get_Vendor_Details_By_Id,
                   
         #endregion
-                  
+
             #region Role
 
             sp_Insert_Role,
@@ -197,14 +197,14 @@ namespace MyLeoRetailerInfo.Common
         #endregion
 
 
-            #region Purchase Order
+        #region Purchase Order
 
-            sp_Insert_Purchase_Order,
-            sp_Insert_Purchase_Order_Item,
-            sp_Update_Purchase_Order,
-            sp_Update_Purchase_Order_Item,
-            sp_Get_Purchase_Order_By_Id,
-            sp_Insert_Purchase_Order_Item_Sizes,
+        sp_Insert_Purchase_Order,
+        sp_Insert_Purchase_Order_Item,
+        sp_Update_Purchase_Order,
+        sp_Update_Purchase_Order_Item,
+        sp_Get_Purchase_Order_By_Id,
+        sp_Insert_Purchase_Order_Item_Sizes,
 
         sp_Get_PurchaseOrderId_By_SKU_POI,
 
@@ -216,21 +216,25 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Consolidate_Purchase_Order_Item,
         sp_Get_Consolidate_Purchase_Order_Item_Sizes,
 
-            #endregion
+        sp_Get_Purchase_Order_Details_By_Id,
+        sp_Get_Purchase_Order_Items,
+        sp_Get_Purchase_Order_Item_Sizes,
 
-            #region Purchase Invoice
+        #endregion
 
-            sp_Insert_Purchase_Invoice,
-            sp_Insert_Purchase_Invoice_Item,
+        #region Purchase Invoice
 
-            sp_Update_Purchase_Invoice,
-            sp_Update_Purchase_Invoice_Item,
+        sp_Insert_Purchase_Invoice,
+        sp_Insert_Purchase_Invoice_Item,
 
-            sp_Get_Purchase_Invoice_By_Id,
-            sp_Get_Purchase_Invoice_Item_By_Id,
+        sp_Update_Purchase_Invoice,
+        sp_Update_Purchase_Invoice_Item,
 
-            sp_Get_Purchase_Invoice_Items_By_SKU_Code,
-            sp_Get_Purchase_Orders,
+        sp_Get_Purchase_Invoice_By_Id,
+        sp_Get_Purchase_Invoice_Item_By_Id,
+
+        sp_Get_Purchase_Invoice_Items_By_SKU_Code,
+        sp_Get_Purchase_Orders,
 
         #endregion
 

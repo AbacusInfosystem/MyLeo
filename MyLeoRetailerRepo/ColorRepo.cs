@@ -50,9 +50,7 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Color_Code", Color.Colour_Code));
 
-          
-
-
+            sqlParam.Add(new SqlParameter("@Colour_Code", Color.Color_Code));
 
             sqlParam.Add(new SqlParameter("@IsActive", Color.IsActive));
 
@@ -81,6 +79,9 @@ namespace MyLeoRetailerRepo
             {
                 if (!dr.IsNull("Colour_Code"))
                     colorInfo.Colour_Code = Convert.ToString(dr["Colour_Code"]);
+
+                if (!dr.IsNull("Color_Code"))
+                    colorInfo.Color_Code = Convert.ToString(dr["Color_Code"]);
 
                 colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]);
 

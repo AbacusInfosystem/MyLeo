@@ -349,6 +349,11 @@ namespace MyLeoRetailerRepo
                 Product.Category_Id = Convert.ToInt32(dr["Category_Id"]);
                 Product.Sub_Category_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
                 Product.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+                Product.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+                Product.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+                Product.Category = Convert.ToString(dr["Category"]);
+                Product.Sub_Category = Convert.ToString(dr["Sub_Category"]);
+                Product.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
                 Product.Center_Size = Convert.ToString(dr["Center_Size"]);
                 //Product.Purchase_Price = Convert.ToDecimal(dr["Purchase_Price"]);
                 Product.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);

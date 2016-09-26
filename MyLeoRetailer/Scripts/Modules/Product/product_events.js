@@ -48,57 +48,7 @@ $(function () {
     $("#btnUploadImage").click(function () {
         //if ($('#frmProduct').valid()) {
         UploadImage();
-    });
-
-    $('#productImage').change(function () {
-
-        //if ($("#hdnFirst_Img").val() == "") {
-        //    $("#hdnFirst_Img").val(this.files[0].name);
-        //}
-        //else if ($("#hdnSecond_Img").val() == "") {
-        //    $("#hdnSecond_Img").val(this.files[0].name);
-
-        //}
-        //else if ($("#hdnThird_Img").val() == "") {
-        //    $("#hdnThird_Img").val(this.files[0].name);
-
-        //}
-        //else if ($("#hdnFour_Img").val() == "") {
-        //    $("#hdnFour_Img").val(this.files[0].name);
-
-        //}
-
-
-        //alert(this.files.length);
-        //var reader = new FileReader();
-
-        //var html_Text = "";
-
-        //for (i = 0; i < this.files.length; i++) {
-
-        //    var file = document.getElementById('productImage').files[i]; 
-
-        //    html_Text += "<div id='DivImages' class='col-md-3' style='margin-top: 20px;'>";
-
-        //    html_Text += "<div class='thumbnail panel'>";
-
-        //    html_Text += "<input type='text' name='ProductImage.ProductName[" + i + "]' value=" + this.files[i].name + " >"; 
-
-        //    html_Text += "<img style='width:150px; height: 125px;border: 1px solid;margin-left: auto;margin-right: auto;display: block;max-width: 100%;max-height: 100%;' src='" + reader.result + "'>";
-
-        //    html_Text += "</div>";
-
-        //    html_Text += "</div>";
-
-        //    $('#ImgPreview').append(html_Text);
-
-        //    if (file) {
-        //        reader.readAsDataURL(file);
-        //    }
-        //}
-
-
-    });
+    }); 
 
 
     $("input[type='radio']").on("ifChanged", function () {
@@ -134,9 +84,13 @@ $(function () {
                 for (var i = 0; i < data.Product.ProductImage.Product_Image.length; i++) {
                     if (data.Product.ProductImage.Product_Image[i] != null) {
                         $("#img_" + i).attr("src", "/UploadedFiles/" + data.Product.ProductImage.Product_Image[i]);
+                        if (data.Product.ProductImage.Is_Default[i] == 'True') 
+                            $('#rd_' + i).iCheck('check');
+                        else
+                            $('#rd_' + i).iCheck('uncheck');
                     } else {
-                        $("#img_" + i).attr("src", "/UploadedFiles/");
-                    }
+                        $("#img_" + i).attr("src", "/UploadedFiles/"); 
+                    } 
                 } 
             }
         });

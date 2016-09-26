@@ -15,15 +15,21 @@
 //Added by Vinod Mane on 26/09/2016
 $(document).ready(function () {
 
-    $("#frmCategory").validate({
-        rules: {
+	$("#frmCategory").validate({
+		rules: {
+			"Category.Category": { required: true }, 
+ 
+			"Category.Category_Code": { required: true },
             "Category.Category": { required: true, validate_Category: true },
-        },
-        messages: {
+		},
+	 
+		messages: {
 
-            "Category.Category": { required: "Category is required." }
-        }
-    });
+		    "Category.Category": { required: "Category is required." },
+
+            "Category.Category_Code": { required: "Category Code is required." }
+		}
+	});
 
     jQuery.validator.addMethod("validate_Category", function (value, element) {
         var result = true;

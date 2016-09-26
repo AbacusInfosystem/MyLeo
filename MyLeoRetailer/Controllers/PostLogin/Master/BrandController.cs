@@ -108,7 +108,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             BrandViewModel bViewModel = new BrandViewModel();
             try
             {
-                bViewModel.Brand.IsActive = bRepo.Get_Brand_By_Id(Convert.ToInt32(Brand_Id));
+                bViewModel.Brand = bRepo.Get_Brand_By_Id(Convert.ToInt32(Brand_Id));
             }
             catch (Exception ex)
             {

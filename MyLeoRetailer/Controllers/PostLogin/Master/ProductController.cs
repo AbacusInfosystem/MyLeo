@@ -226,7 +226,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                         path = Path.Combine(folder_Name, actual_FileName);
 
-                        System.IO.File.WriteAllBytes(path, Convert.FromBase64String(convert));
+                        if (convert != "")
+                            System.IO.File.WriteAllBytes(path, Convert.FromBase64String(convert));
                     }
                 }
 

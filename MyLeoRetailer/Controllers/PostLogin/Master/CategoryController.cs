@@ -30,9 +30,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         [AuthorizeUserAttribute(AppFunction.Category_Management_Access)]
-		public ActionResult Index()
+        public ActionResult Index(CategoryViewModel cViewModel)
         {
-			return View();
+			return View("Index",cViewModel);
         }
 
 		public JsonResult Insert_Category(CategoryViewModel cViewModel)

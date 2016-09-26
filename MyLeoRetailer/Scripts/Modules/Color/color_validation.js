@@ -18,11 +18,14 @@
 
 $(document).ready(function () {
 
-    $("#frmColor").validate({
-        rules: {
+	$("#frmColor").validate({
+		rules: {
+		    "Color.Colour": { required: true },
+
+            "Color.Color_Code":{required: true},
             "Color.Colour": { required: true, validate_Colour: true },
-        },
-        messages: {
+		},
+		messages: {
 
             "Color.Colour": { required: "Color is required." }
         }
@@ -41,8 +44,8 @@ $(document).ready(function () {
                     if (data == true) {
                         result = false;
                     }
-                }
-            });
+		}
+	});
         }
         return result;
 
