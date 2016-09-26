@@ -10,6 +10,7 @@ using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.PurchaseReturn;
+using System.Transactions;
 
 
 namespace MyLeoRetailerRepo
@@ -116,7 +117,7 @@ namespace MyLeoRetailerRepo
             }
 
             sqlParams.Add(new SqlParameter("@Discount_Percentage_Before_Due_Date", PurchaseInvoice.Discount_Percentage_Before_Due_Date));
-           
+
             sqlParams.Add(new SqlParameter("@Transporter_Id", PurchaseInvoice.Transporter_Id));
 
             sqlParams.Add(new SqlParameter("@Lr_No", PurchaseInvoice.Lr_No));
@@ -213,7 +214,7 @@ namespace MyLeoRetailerRepo
 
             return PurchaseInvoice;
         }
-       
+
         public PurchaseInvoiceInfo Get_Purchase_Invoice_Items_By_SKU_Code(string SKU_Code)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -238,40 +239,63 @@ namespace MyLeoRetailerRepo
 
         public int Insert_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
         {
-
-            PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
-
-            foreach (var item in PurchaseInvoice.PurchaseInvoices)
+            using (TransactionScope scope = new TransactionScope())
             {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
+                PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
 
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+                foreach (var item in PurchaseInvoice.PurchaseInvoices)
+                {
+                    List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
+                    sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
 
-                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+                    sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
 
-                sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
+                    sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
 
-                sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
+                    sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
 
-                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+                    sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
 
-                sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
-               
-                sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
+                    sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
 
-                sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
+                    sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
 
-                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
+                    sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
 
-                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
+                    sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
 
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
+                    sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
+
+                    sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
+
+                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
+
+                     sqlParams = new List<SqlParameter>();
+
+                    sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+
+                    sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+
+                    sqlParams.Add(new SqlParameter("@Article_Number", item.Article_No));
+                    
+                    sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+
+                    sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
+
+                    sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
+
+                    sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
+
+                    sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
+
+                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Product_Warehouse.ToString(), CommandType.StoredProcedure);
+                }
+                scope.Complete();
+
             }
 
             return PurchaseInvoice.Purchase_Invoice_Id;
-
         }
 
         public DataTable Get_Purchase_Invoices(QueryInfo query_Details)
@@ -481,7 +505,7 @@ namespace MyLeoRetailerRepo
 
 
             return PurchaseInvoice;
-        }       
+        }
 
         public PurchaseInvoiceInfo Get_Purchase_Invoice_By_Id(int Purchase_Invoice_Id)
         {
@@ -493,11 +517,11 @@ namespace MyLeoRetailerRepo
             List<DataRow> drList = new List<DataRow>();
             drList = dt.AsEnumerable().ToList();
             foreach (DataRow dr in drList)
-            {               
+            {
                 PurchaseInvoice = Get_Purchase_Invoice_Values(dr);
             }
             return PurchaseInvoice;
-        }       
+        }
 
         public List<PurchaseInvoiceInfo> Get_Purchase_Invoices()
         {
@@ -515,7 +539,17 @@ namespace MyLeoRetailerRepo
             }
             return PurchaseInvoices;
         }
+
+
         //
+
+        //Product warehouse
+        public DataTable Get_WarehouseProducts(QueryInfo query_Details)
+        {
+            return sqlHelper.Get_Table_With_Where(query_Details);
+        }
+        //
+
     }
 }
 

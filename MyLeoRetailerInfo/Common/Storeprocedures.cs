@@ -328,6 +328,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Replacement,
         sp_Insert_Replacement_Item,
   
+            //Product warehouse
+        sp_Insert_Product_Warehouse,
 
     }
 
