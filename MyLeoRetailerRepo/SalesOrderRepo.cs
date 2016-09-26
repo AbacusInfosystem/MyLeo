@@ -250,7 +250,6 @@ namespace MyLeoRetailerRepo
             return salesinvoice;
         }
 
-
         public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems,string Branch_Id)
         {
 
@@ -386,6 +385,47 @@ namespace MyLeoRetailerRepo
 
                 sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Sales_Invoice_Item.ToString(), CommandType.StoredProcedure);
             }
-        } 
+        }
+
+        public bool Check_Mobile_No(string MobileNo)
+        {
+            bool check = false;
+            
+            try
+
+            {
+                string ProcedureName = string.Empty;
+
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Customer_Mobile1", MobileNo));
+
+                DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Check_Mobile_No.ToString(), CommandType.StoredProcedure);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int count = dt.Rows.Count;
+
+                    List<DataRow> drList = new List<DataRow>();
+
+                    drList = dt.AsEnumerable().ToList();
+
+                    foreach (DataRow dr in drList)
+                    {
+
+                        check = Convert.ToBoolean(dr["MobileCount"]);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {            
+            }
+
+            return check;
+        }
+
     }
 }

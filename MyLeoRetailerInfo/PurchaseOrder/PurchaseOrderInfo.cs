@@ -2,6 +2,7 @@
 using MyLeoRetailerInfo.Brand;
 using MyLeoRetailerInfo.Category;
 using MyLeoRetailerInfo.Color;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Size;
 using MyLeoRetailerInfo.Vendor;
 using MyLeoRetailerInfo.VendorContact;
@@ -42,6 +43,8 @@ namespace MyLeoRetailerInfo.PurchaseOrder
             SizeGroups = new List<SizeGroupInfo>();
 
             SizeGroup = new SizeGroupInfo();
+
+            PurchaseOrderItems = new List<PurchaseOrderItemInfo>();
 
 		}
 
@@ -86,9 +89,13 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public int Agent_Id { get; set; }
 
+        public string Agent_Name { get; set; }
+        
         public string Shipping_Address { get; set; }
 
         public int Transporter_Id { get; set; }
+
+        public string Transporter_Name { get; set; }
 
         public DateTime Start_Supply_Date { get; set; }
 
@@ -150,7 +157,21 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public int Size_Id { get; set; }
 
         public int Quantity { get; set; }
-        
+
+        //vendor details for print
+        public string Vendor_Name { get; set; }
+
+        public string Vendor_Email1 { get; set; }
+
+        public string Vendor_Phone1 { get; set; }
+
+        public string Vendor_Phone2 { get; set; }
+
+        public string Vendor_Address { get; set; }
+
+        public string Total_Amount_In_Word { get; set; }
+
+        public List<PurchaseOrderItemInfo> PurchaseOrderItems { get; set; }
     }
 
     public class Sizes
@@ -245,6 +266,62 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public decimal Amount15 { get; set; }
 
+        //
+        public string Size_Name { get; set; }
+
     }
+
+    //added by sanchita
+    public class PurchaseOrderItemInfo
+    {
+        public PurchaseOrderItemInfo()
+        {
+            sizes = new List<Sizes>();
+        }
+        
+
+        public int Purchase_Order_Item_Id { get; set; }
+
+        public int Purchase_Order_Id { get; set; }
+
+        public string Article_No { get; set; }
+
+        public string Colour_Name { get; set; }
+
+        public string Start_Size { get; set; }
+
+        public string End_Size { get; set; }
+
+        public string Center_Size { get; set; }
+
+        public decimal Purchase_Price { get; set; }
+
+        public decimal Size_Difference { get; set; }
+
+        public decimal Total_Quantity { get; set; }
+
+        public decimal Total_Amount { get; set; }
+
+        public string Comment { get; set; }
+
+        public int Brand_Id { get; set; }
+
+        public string Brand_Name { get; set; }
+
+        public int Category_Id { get; set; }
+
+        public string Category { get; set; }
+
+        public int Sub_Category_Id { get; set; }
+
+        public string Sub_Category { get; set; }
+
+        public int Size_Group_Id { get; set; }
+
+        public string Size_Group_Name { get; set; }
+
+        public List<Sizes> sizes { get; set; }
+    }
+
 
 }

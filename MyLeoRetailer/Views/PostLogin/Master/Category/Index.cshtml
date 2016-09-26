@@ -40,13 +40,14 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter category." name="Category.Category" />
 						<input type="hidden" name="Category.Category_Id">
-                    </div>  
+                    </div>
 
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Enter category code." name="Category.Category_Code" /> 
                     </div> 
 
                     <div class="form-group" style="margin-bottom: 5px; float: right;">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>@* Added by Vinod mane on 19/09/2016*@
                         <label class="switch">
                             <input name="Category.IsActive" value="1" checked type="checkbox" id="Flag">
                             <span></span>
@@ -63,9 +64,21 @@
 
                 <h4 style="margin-top: 0px;">Category listing.</h4>
 
-                <div class="form-group">
+                @*Commented by Vinod Mane on 23/09/2016*@
+                @*<div class="form-group">
                     <input type="text" class="form-control category-filter" name="Filter.Category" placeholder="Enter category to search" />
+                </div>*@
+                @* LookUp Code Added by Vinod Mane on 22/09/2016*@
+                <div class="form-group auto-complete">                   
+                    <div class="input-group">
+                        <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Category" id="txtCategory" placeholder="Enter category to search." data-table="Category" data-col="Category_Id,Category" data-headernames="Category">
+                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                        <input type="hidden" id="hdnCategory" value="" name="Filter.Category" class="auto-complete-value" />
+
+                    </div>
                 </div>
+                @*End*@
+
 
                 <div class="list-group border-bottom push-down-20" id="Category_Grid">
                     

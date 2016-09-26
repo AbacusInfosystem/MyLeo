@@ -88,20 +88,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@if (Model.PurchaseReturnRequests.Count > 0)
-                            {
-                                foreach (var item in Model.PurchaseReturnRequests)
-                                {
-                                    <tr>
-                                        <td>@item.Vendor_Name</td>
-                                        <td>@item.Purchase_Invoice_No</td>
-                                        <td>@item.Branch_Name</td>
-                                        <td>@item.Total_Quantity</td>
-                                        <td>@item.Total_Amount</td>
-                                        <td>@(item.Status == true ? "Pending Request" : "Done")</td>
-                                    </tr>
-                                }
-                            }*@
+                 
                         </tbody>
                     </table>
                 </div><!-- /.col -->

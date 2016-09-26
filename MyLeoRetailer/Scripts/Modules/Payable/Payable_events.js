@@ -3,6 +3,12 @@
 $(function () {
 
 
+    if ($("#hdnPayament_Status1").val() == 1) {
+
+        $("#btnSavePay").hide();
+
+    }
+
     $("#btnSearchPayable").click(function () {
 
         $("#frmPayable").attr("action", "/Payable/Get_Payable");
@@ -102,6 +108,10 @@ $(function () {
         }
 
     });
+
+
+
+   
     
 });
 

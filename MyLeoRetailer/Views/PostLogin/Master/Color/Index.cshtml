@@ -40,13 +40,14 @@
                 @*<div class="form-group">
                     <input type="text" class="form-control color-filter" name="Filter.Color" placeholder="Enter color to search" />
                 </div>*@
-              
+                <input type="hidden" value="@Model.Color.IsActive" />
                 <div class="form-group auto-complete">
                     <div class="input-group">
                         <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Color" id="txtColor_Name" placeholder="Enter color to search" data-table="Colour" data-col="Colour_ID,Colour_Name" data-headernames="Colour">
                         <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                         <input type="hidden" id="hdnColourId" value="" name="Filter.Color" class="auto-complete-value" />
                         <input type="hidden" id="hdnColourName" value="" name="Filter.Color" class="auto-complete-label" />
+                        
                     </div>
                 </div>
 
@@ -72,7 +73,10 @@
                 <h4 style="margin-top: 0px;">Create - Update color.</h4>
 
                 <form role="form" id="frmColor">
-                    <div class="form-group"> 
+                    <div class="form-group">
+                        @*<label>Create / Update size group:</label>*@
+                        <input type="text" class="form-control" id="txtColour_Name" placeholder="Enter color name." name="Color.Colour" />
+                        <input type="hidden" id="hdnColour_Name">@*Added By Vinod Mane on 23/09/2016*@
                         <input type="text" class="form-control" placeholder="Enter color name." name="Color.Colour" />
                         <input type="hidden" name="Color.Colour_Id">
                     </div>

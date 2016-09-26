@@ -69,7 +69,7 @@ namespace MyLeoRetailer.Common
 
             LoginInfo _cookies;
 
-            _cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Brand_Ids");
+            _cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             if (_cookies != null && _cookies.Access_Functions.Count() != 0 &&
                 _cookies.Access_Functions.Any(x => x.Access_Function_Name == _accessFun && ((x.Is_Access && _access == Actions.Access.ToString()) || (x.Is_Create && _access == Actions.Create.ToString()) || (x.Is_Edit && _access == Actions.Edit.ToString()) || (x.Is_View && _access == Actions.View.ToString()))))
@@ -83,6 +83,70 @@ namespace MyLeoRetailer.Common
 
            
         }
+
+        public static string ConvertDecimalNumbertoWords(decimal number)
+        {
+            string Result = "";
+
+            string str = number.ToString();
+
+            if (str.Contains("."))
+            {
+                string value = str.Remove(str.IndexOf("."));
+                string decimals = str.Substring(str.IndexOf(".") + 1);
+
+                Result = ConvertNumbertoWords(Int32.Parse(value)) + " point " + ConvertNumbertoWords(Int32.Parse(decimals));
+            }
+            else
+            {
+                Result = ConvertNumbertoWords(Int32.Parse(str));
+            }
+
+            return Result;
+        }
+
+        public static string ConvertNumbertoWords(int number)
+        {
+            if (number == 0)
+                return "Zero";
+            if (number < 0)
+                return "minus " + ConvertNumbertoWords(Math.Abs(number));
+            string words = "";
+            if ((number / 1000000) > 0)
+            {
+                words += ConvertNumbertoWords(number / 1000000) + " Million ";
+                number %= 1000000;
+            }
+            if ((number / 1000) > 0)
+            {
+                words += ConvertNumbertoWords(number / 1000) + " Thousand ";
+                number %= 1000;
+            }
+            if ((number / 100) > 0)
+            {
+                words += ConvertNumbertoWords(number / 100) + " Hundred ";
+                number %= 100;
+            }
+            if (number > 0)
+            {
+                if (words != "")
+                    words += "And ";
+                var unitsMap = new[] { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Ninteen" };
+                var tensMap = new[] { "Zero", "Ten", "Twenty", "Thirty", "Fourty", "Fifty", "Sixty", "SEVENTY", "Eighty", "Ninety" };
+
+                if (number < 20)
+                    words += unitsMap[number];
+                else
+                {
+                    words += tensMap[number / 10];
+                    if ((number % 10) > 0)
+                        words += " " + unitsMap[number % 10];
+                }
+            }
+            return words;
+
+        }
+
 
     }
 }

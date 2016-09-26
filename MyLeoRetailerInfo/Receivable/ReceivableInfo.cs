@@ -223,5 +223,29 @@ namespace MyLeoRetailerInfo.Receivable
            get;
            set;
        }
+
+       public string Payment_Status_Value
+       {
+           get;
+           set;
+       }
+
+
+       
+    }
+
+    public class CreditNote
+    {
+        public int Credit_Note_Id { get; set; }
+
+        public string Credit_Note_No
+        {
+            get;
+            set;
+        }
+
+        public decimal Credit_Note_Amount { get; set; }
+
+        public DateTime Credit_Note_Date { get; set; }
     }
 }

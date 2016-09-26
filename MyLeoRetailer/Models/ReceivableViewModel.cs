@@ -32,10 +32,14 @@ namespace MyLeoRetailer.Models
 
             GiftVouchers = new List<GiftVoucherInfo>();
 
+            Credit_Notes = new List<CreditNote>();
+
             //Grid_Detail.Pager.DivObject = "divGiftVoucherPager";
 
             //Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
         }
+
+        public List<CreditNote> Credit_Notes { get; set; }
 
         public GiftVoucherInfo GiftVoucher
         {

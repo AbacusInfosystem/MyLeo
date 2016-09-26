@@ -29,5 +29,10 @@ $(function ()
 	    Reset_Category();
 	});
 
+    //Added By Vinod Mane on 23/09/2016
+	$(document).on("change", "#hdnCategory", function () {
+	    Get_Categories();
+	});
+    //End
 
 });

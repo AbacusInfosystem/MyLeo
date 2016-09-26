@@ -15,73 +15,71 @@
 
             var obj = $.parseJSON(response);
 
+           
             if (obj.PurchaseOrderRequest.Vendors.length > 0) {
 
-                $("#drpArticle_No").empty();
+                $("#drpArticle_No").html("");
 
-                var article_no1 = document.getElementById("drpArticle_No");
-                var option = document.createElement("option");
+                $("#drpArticle_No").append("<option value='0'>Select Article No.</option>");
 
-                option.value = 0;
-                option.text = "Select Article No.";
+                $("#drpArticle_No").parents('.form-group').find('ul').html("");
 
-                article_no1.add(option);
+                $("#drpArticle_No").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Article No.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.Vendors.length; j++) {
                     debugger;
 
-                    var article_no = document.getElementById("drpArticle_No");
-                    var option = document.createElement("option");
+                    var i = j + 1;
 
-                    option.value = obj.PurchaseOrderRequest.Vendors[j].Article_No;
-                    option.text = obj.PurchaseOrderRequest.Vendors[j].Article_No;
-                    article_no.add(option);
+                    $("#drpArticle_No").append("<option value='" + obj.PurchaseOrderRequest.Vendors[j].Article_No + "'>" + obj.PurchaseOrderRequest.Vendors[j].Article_No + "</option>");
+
+                    $("#drpArticle_No").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Vendors[j].Article_No + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
                 }
             }
 
+
             if (obj.PurchaseOrderRequest.Brands.length > 0) {
 
-                $("#drpBrand").empty();
+                $("#drpBrand").html("");
 
-                var Brand1 = document.getElementById("drpBrand");
-                var option = document.createElement("option");
+                $("#drpBrand").append("<option value='0'>Select Brand</option>");
 
-                option.value = 0;
-                option.text = "Select Brand";
-                Brand1.add(option);
+                $("#drpBrand").parents('.form-group').find('ul').html("");
+
+                $("#drpBrand").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Brand</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.Brands.length; j++) {
                     debugger;
 
-                    var Brands = document.getElementById("drpBrand");
-                    var option = document.createElement("option");
+                    var i = j + 1;
 
-                    option.value = obj.PurchaseOrderRequest.Brands[j].Brand_Id;
-                    option.text = obj.PurchaseOrderRequest.Brands[j].Brand_Name;
-                    Brands.add(option);
+                    $("#drpBrand").append("<option value='" + obj.PurchaseOrderRequest.Brands[j].Brand_Id + "'>" + obj.PurchaseOrderRequest.Brands[j].Brand_Name + "</option>");
+
+                    $("#drpBrand").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Brands[j].Brand_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
                 }
             }
 
             if (obj.PurchaseOrderRequest.Categories.length > 0) {
+                
+                $("#drpCategory").html("");
 
-                $("#drpCategory").empty();
+                $("#drpCategory").append("<option value='0'>Select Category</option>");
 
-                var Category1 = document.getElementById("drpCategory");
-                var option = document.createElement("option");
+                $("#drpCategory").parents('.form-group').find('ul').html("");
 
-                option.value = 0;
-                option.text = "Select Category";
-                Category1.add(option);
+                $("#drpCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Category</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.Categories.length; j++) {
                     debugger;
+                    var i = j + 1;
 
-                    var Category = document.getElementById("drpCategory");
-                    var option = document.createElement("option");
+                    $("#drpCategory").append("<option value='" + obj.PurchaseOrderRequest.Categories[j].Category_Id + "'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</option>");
 
-                    option.value = obj.PurchaseOrderRequest.Categories[j].Category_Id;
-                    option.text = obj.PurchaseOrderRequest.Categories[j].Category;
-                    Category.add(option);
+                    $("#drpCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
                 }
             }
         }
@@ -153,6 +151,7 @@ function Get_Sizes() {
 
             var obj = $.parseJSON(response);
 
+
             if (obj.PurchaseOrderRequest.SizeGroups.length > 0) {
 
                 $("#drpCenter_Size").empty();
@@ -176,12 +175,8 @@ function Get_Sizes() {
                 tblHtml += "<td></td>";
                 tblHtml += "<td></td>";
 
-                var center_size1 = document.getElementById("drpCenter_Size");
-                var option = document.createElement("option");
 
-                option.value = 0;
-                option.text = "Select Center Size";
-                center_size1.add(option);
+                $("#drpCenter_Size").html("");
 
                 for (var j = 0; j < 15; j++) {
 
@@ -194,13 +189,12 @@ function Get_Sizes() {
 
                         debugger;
 
+                        var i = j + 1;
 
-                        var center_size = document.getElementById("drpCenter_Size");
-                        var option = document.createElement("option");
+                        $("#drpCenter_Size").append("<option value='" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Id + "'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</option>");
 
-                        option.value = obj.PurchaseOrderRequest.SizeGroups[j].Size_Id;
-                        option.text = obj.PurchaseOrderRequest.SizeGroups[j].Size_Name;
-                        center_size.add(option);
+                        $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
                     }
                     else {
                         tblHtml += "<td>";
@@ -313,118 +307,132 @@ function AddPurchaseOrderRequestDetails() {
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size_group_id + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' value='' id='textStart_Size_" + i + "' />";
+    //tblHtml += "</td>";
+    
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' value='' id='textStart_Size_" + i + "' />";
+    tblHtml += "<div class='form-group'>";
+    tblHtml += "<select class='form-control select' id='textStart_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
+    tblHtml += " <option value='0'>Select</option>";
+    tblHtml += " </select>";
+    tblHtml += " </div>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' value='' id='textEnd_Size_" + i + "' />";
-    tblHtml += "</td>";
+    tblHtml += "<div class='form-group'>";
+    tblHtml += "<select class='form-control select' id='textEnd_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
+    tblHtml += " <option value='0'>Select</option>";
+    tblHtml += " </select>";
+    tblHtml += " </div>";
+    tblHtml += "</td>";                     
 
-    debugger;
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' value='' id='textEnd_Size_" + i + "' />";
+    //tblHtml += "</td>";
 
 
     var size1 = $("#hdnSize1-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity1' value='0' id='textSize_Quantity_1-" + i + "'  onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity1' value='0' id='textSize_Quantity_1-" + i + "'  onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size1 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id1' id='hdnSize_Id_1-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount1' id='hdnAmount_1-" + i + "' />";
     tblHtml += "</td>";
 
     var size2 = $("#hdnSize2-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity2' value='0' id='textSize_Quantity_2-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity2' value='0' id='textSize_Quantity_2-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size2 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id2' id='hdnSize_Id_2-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount2' id='hdnAmount_2-" + i + "' />";
     tblHtml += "</td>";
 
     var size3 = $("#hdnSize3-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity3' value='0' id='textSize_Quantity_3-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity3' value='0' id='textSize_Quantity_3-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size3 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id3' id='hdnSize_Id_3-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount3' id='hdnAmount_3-" + i + "' />";
     tblHtml += "</td>";
 
     var size4 = $("#hdnSize4-" + x).val();
-    tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity4' value='0' id='textSize_Quantity_4-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<td>"; 
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity4' value='0' id='textSize_Quantity_4-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size4 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id4' id='hdnSize_Id_4-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount4' id='hdnAmount_4-" + i + "' />";
     tblHtml += "</td>";
 
     var size5 = $("#hdnSize5-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity5' value='0' id='textSize_Quantity_5-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity5' value='0' id='textSize_Quantity_5-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size5 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id5' id='hdnSize_Id_5-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount5' id='hdnAmount_5-" + i + "' />";
     tblHtml += "</td>";
 
     var size6 = $("#hdnSize6-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity6' value='0' id='textSize_Quantity_6-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity6' value='0' id='textSize_Quantity_6-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size6 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id6' id='hdnSize_Id_6-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount6' id='hdnAmount_6-" + i + "' />";
     tblHtml += "</td>";
 
     var size7 = $("#hdnSize7-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity7' value='0' id='textSize_Quantity_7-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity7' value='0' id='textSize_Quantity_7-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size7 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id7' id='hdnSize_Id_7-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount7' id='hdnAmount_7-" + i + "' />";
     tblHtml += "</td>";
 
     var size8 = $("#hdnSize8-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity8' value='0' id='textSize_Quantity_8-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity8' value='0' id='textSize_Quantity_8-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size8 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id8' id='hdnSize_Id_8-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount8' id='hdnAmount_8-" + i + "' />";
     tblHtml += "</td>";
 
     var size9 = $("#hdnSize9-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity9' value='0' id='textSize_Quantity_9-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity9' value='0' id='textSize_Quantity_9-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size9 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id9' id='hdnSize_Id_9-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount9' id='hdnAmount_9-" + i + "' />";
     tblHtml += "</td>";
 
     var size10 = $("#hdnSize10-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity10' value='0' id='textSize_Quantity_10-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity10' value='0' id='textSize_Quantity_10-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size10 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id10' id='hdnSize_Id_10-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount10' id='hdnAmount_10-" + i + "' />";
     tblHtml += "</td>";
 
     var size11 = $("#hdnSize11-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity11' value='0' id='textSize_Quantity_11-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity11' value='0' id='textSize_Quantity_11-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size11 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id11' id='hdnSize_Id_11-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount11' id='hdnAmount_11-" + i + "' />";
     tblHtml += "</td>";
 
     var size12 = $("#hdnSize12-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity12' value='0' id='textSize_Quantity_12-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity12' value='0' id='textSize_Quantity_12-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size12 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id12' id='hdnSize_Id_12-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount12' id='hdnAmount_12-" + i + "' />";
     tblHtml += "</td>";
 
     var size13 = $("#hdnSize13-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity13' value='0' id='textSize_Quantity_13-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity13' value='0' id='textSize_Quantity_13-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size13 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id13' id='hdnSize_Id_13-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount13' id='hdnAmount_13-" + i + "' />";
     tblHtml += "</td>";
 
     var size14 = $("#hdnSize14-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity14' value='0' id='textSize_Quantity_14-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity14' value='0' id='textSize_Quantity_14-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size14 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id14' id='hdnSize_Id_14-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount14' id='hdnAmount_14-" + i + "' />";
     tblHtml += "</td>";
 
     var size15 = $("#hdnSize15-" + x).val();
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity15' value='0' id='textSize_Quantity_15-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity15' value='0' id='textSize_Quantity_15-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size15 + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id15' id='hdnSize_Id_15-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount15' id='hdnAmount_15-" + i + "' />";
     tblHtml += "</td>";
@@ -471,6 +479,27 @@ function AddPurchaseOrderRequestDetails() {
     var newRow = $(tblHtml);
 
     myTable.append(newRow);
+
+
+    debugger;
+
+
+    var $options = $("#drpCenter_Size > option").clone();
+
+    $("#textStart_Size_" + i).append($options);
+
+
+    var $optionss = $("#drpCenter_Size > option").clone();
+
+    $("#textEnd_Size_" + i).append($optionss);
+
+
+    $("#textColour_Name_" + i).rules("add", { required: true, messages: { required: "Color is required." } });
+    $("#textStart_Size_" + i).rules("add", { required: true, messages: { required: "Start size is required.", } });
+    $("#textEnd_Size_" + i).rules("add", { required: true, messages: { required: "End size is required.", } });
+
+
+    
 
 }
 
@@ -556,16 +585,32 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size_group_id + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' value='' id='textStart_Size_" + i + "' />";
+    //tblHtml += "</td>";
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' value='' id='textStart_Size_" + i + "' />";
+    tblHtml += "<div class='form-group'>";
+    tblHtml += "<select class='form-control select' id='textStart_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
+    tblHtml += " <option value='0'>Select</option>";
+    tblHtml += " </select>";
+    tblHtml += " </div>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' value='' id='textEnd_Size_" + i + "' />";
+    tblHtml += "<div class='form-group'>";
+    tblHtml += "<select class='form-control select' id='textEnd_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
+    tblHtml += " <option value='0'>Select</option>";
+    tblHtml += " </select>";
+    tblHtml += " </div>";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' value='' id='textEnd_Size_" + i + "' />";
+    //tblHtml += "</td>";
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity1' value='0' id='textSize_Quantity_1-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control  read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity1' value='0' id='textSize_Quantity_1-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_1-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id1' id='hdnSize_Id_1-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount1' id='hdnAmount_1-" + i + "' />";
     tblHtml += "</td>";
@@ -573,88 +618,88 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
 
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity2' value='0' id='textSize_Quantity_2-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity2' value='0' id='textSize_Quantity_2-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_2-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id2' id='hdnSize_Id_2-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount2' id='hdnAmount_2-" + i + "' />";
     tblHtml += "</td>";
 
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity3' value='0' id='textSize_Quantity_3-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity3' value='0' id='textSize_Quantity_3-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_3-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id3' id='hdnSize_Id_3-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount3' id='hdnAmount_3-" + i + "' />";
     tblHtml += "</td>";
 
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity4' value='0' id='textSize_Quantity_4-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity4' value='0' id='textSize_Quantity_4-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_4-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id4' id='hdnSize_Id_4-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount4' id='hdnAmount_4-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity5' value='0' id='textSize_Quantity_5-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity5' value='0' id='textSize_Quantity_5-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_5-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id5' id='hdnSize_Id_5-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount5' id='hdnAmount_5-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity6' value='0' id='textSize_Quantity_6-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity6' value='0' id='textSize_Quantity_6-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_6-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id6' id='hdnSize_Id_6-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount6' id='hdnAmount_6-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity7' value='0' id='textSize_Quantity_7-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity7' value='0' id='textSize_Quantity_7-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_7-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id7' id='hdnSize_Id_7-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount7' id='hdnAmount_7-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity8' value='0' id='textSize_Quantity_8-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity8' value='0' id='textSize_Quantity_8-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_8-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id8' id='hdnSize_Id_8-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount8' id='hdnAmount_8-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity9' value='0' id='textSize_Quantity_9-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity9' value='0' id='textSize_Quantity_9-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_9-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id9' id='hdnSize_Id_9-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount9' id='hdnAmount_9-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity10' value='0' id='textSize_Quantity_10-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity10' value='0' id='textSize_Quantity_10-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_10-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id10' id='hdnSize_Id_10-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount10' id='hdnAmount_10-" + i + "' />";
     tblHtml += "</td>";
 
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity11' value='0' id='textSize_Quantity_11-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity11' value='0' id='textSize_Quantity_11-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_11-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id11' id='hdnSize_Id_11-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount11' id='hdnAmount_11-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity12' value='0' id='textSize_Quantity_12-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity12' value='0' id='textSize_Quantity_12-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_12-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id12' id='hdnSize_Id_12-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount12' id='hdnAmount_12-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity13' value='0' id='textSize_Quantity_13-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity13' value='0' id='textSize_Quantity_13-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_13-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id13' id='hdnSize_Id_13-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount13' id='hdnAmount_13-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity14' value='0' id='textSize_Quantity_14-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity14' value='0' id='textSize_Quantity_14-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_14-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id14' id='hdnSize_Id_14-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount14' id='hdnAmount_14-" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity15' value='0' id='textSize_Quantity_15-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' />";
+    tblHtml += "<input type='text' class='form-control read-only' name='PurchaseOrderRequest.Sizes[" + i + "].Quantity15' value='0' id='textSize_Quantity_15-" + i + "' onfocusout='CalculateRowQuantity(" + i + ")' readonly />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + $("#hdnSize_Id_15-" + (i - 1)).val() + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id15' id='hdnSize_Id_15-" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Amount15' id='hdnAmount_15-" + i + "' />";
     tblHtml += "</td>";
@@ -703,8 +748,20 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
 
     myTable.append(newRow);
 
+    
+    var $options = $("#drpCenter_Size > option").clone();
+
+    $("#textStart_Size_" + i).append($options);
 
 
+    var $optionss = $("#drpCenter_Size > option").clone();
+
+    $("#textEnd_Size_" + i).append($optionss);
+
+
+    $("#textColour_Name_" + i).rules("add", { required: true, messages: { required: "Color is required." } });
+    $("#textStart_Size_" + i).rules("add", { required: true, messages: { required: "Start size is required.", } });
+    $("#textEnd_Size_" + i).rules("add", { required: true, messages: { required: "End size is required.", } });
 
 }
 
@@ -838,6 +895,44 @@ function CalculateRowQuantity(i) {
 
 }
 
+function Enable_Size_Quantity(i) {
+
+    debugger;
+
+    var start = document.getElementById("textStart_Size_" + i).selectedIndex;
+
+    var end = document.getElementById("textEnd_Size_" + i).selectedIndex;
+
+    $(".read-only").attr("readonly", true);
+    
+    $(".read-only").rules("remove");
+
+    if (start <= end) {
+
+        for (var j = start; j <= end; j++) {
+
+            $("#textSize_Quantity_" + j + "-" + i).attr("readonly", false);
+
+            $("#textSize_Quantity_" + j + "-" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+        }
+    }
+
+}
+
+function Show_Button() {
+    document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = false;
+}
+
+function Reset_Details() {
+
+    debugger;
+
+    $("#textPurchase_Price").val(0);
+   
+    $("#textSize_Difference").val(0);
+    //document.getElementById("drpCenter_Size").selectedIndex = 0;
+}
+
 function DeletePurchaseOrderRequestDetailsData(i) {
 
     debugger;
@@ -903,12 +998,15 @@ function ReArrangePurchaseOrderRequestDetailsData() {
             if ($(newTR).find("[id^='textStart_Size_']").length > 0) {
                 $(newTR).find("[id^='textStart_Size_']")[0].id = "textStart_Size_" + i;
                 $(newTR).find("[id^='textStart_Size_']").attr("name", "PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size");
+                $(newTR).find("[id^='textStart_Size_-']").attr("onchange", "Enable_Size_Quantity(" + i + ")");
             }
 
             if ($(newTR).find("[id^='textEnd_Size_']").length > 0) {
                 $(newTR).find("[id^='textEnd_Size_']")[0].id = "textEnd_Size_" + i;
                 $(newTR).find("[id^='textEnd_Size_']").attr("name", "PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size");
+                $(newTR).find("[id^='textEnd_Size_-']").attr("onchange", "Enable_Size_Quantity(" + i + ")");
             }
+
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////
 

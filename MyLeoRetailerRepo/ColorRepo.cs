@@ -140,5 +140,33 @@ namespace MyLeoRetailerRepo
                 Color.Colour = Convert.ToString(dr["Colour_Name"]);
             return Color;
         }
+
+        //Added By Vinod Mane on 23/09/2016
+        public bool Check_Existing_Colour_Name(string Colour_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Colour_Name", Colour_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Colour_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_colour"]);
+                }
+            }
+
+            return check;
+        }
+
+        //End
     }
 }

@@ -1,6 +1,14 @@
 ﻿$(document).ready(function () {
 
-    $('#dtpReturn_Date').datepicker({});
+    $('#dtpReturn_Date').datepicker({
+
+        dateFormat: "dd-mm-yy",
+        changeMonth: true,
+        changeYear: true,
+        minDate: 0,
+        autoclose: true,
+
+    });
 
 });
 
@@ -24,6 +32,44 @@ $(function () {
         $('#frmSalesReturn').submit();
 
     });
+
+
+    $("#btnCustomer").click(function () {
+
+        debugger;
+
+        $("#hdnCreateCustomerFlag").val(true);
+
+        alert($("#hdnCreateCustomerFlag").val());
+
+        //$("#hdnInvoiceDate").val();
+
+        //alert($("#hdnInvoiceDate").val());
+
+        //$("#hdnMobileNo").val();
+
+        //alert($("#hdnMobileNo").val());
+
+        $('#txtReturn_No').removeClass("login-error");
+        $('#txtReturn_No').rules("remove");
+
+        $('#dtpReturn_Date').removeClass("login-error");
+        $('#dtpReturn_Date').rules("remove");
+
+        $('#txtMobileNo').removeClass("MobileNo error");
+        $('#txtMobileNo').rules("remove");
+
+        $('#txtCustomer_Name').removeClass("login-error");
+        $('#txtCustomer_Name').rules("remove");
+
+        $("#frmSalesReturn").attr("action", "/Customer/Index/");
+
+        $('#frmSalesReturn').attr("method", "POST");
+
+        $('#frmSalesReturn').submit();
+
+    });
+
 
 });
 

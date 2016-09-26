@@ -52,14 +52,14 @@
                                         @*<input type="hidden" id="hdnVendorId" value="@Model.Vendor.Vendor_Id" name="VendorFilter.Vendor_Id" class="auto-complete-value" />
                                     </div>*@
 
-                                @* LookUp Code Added by Vinod Mane on 09/09/2016*@
+                                @* LookUp Code Added by Vinod Mane on 20/09/2016*@
                                 <div class="form-group auto-complete">
                                     <div class="input-group">
                                         <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Vendor_Name" id="txtVendor_Name" placeholder="Enter Vendor to search." data-table="Vendor" data-col="Vendor_ID,Vendor_Name" data-headernames="Vendor">
                                         <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                         <input type="hidden" name="Filter.Vendor_Id" id="hdnVendorID">                                        
-                                        @*<input type="hidden" id="hdnColourId" value="" name="Filter.Color" class="auto-complete-value" />
-                                        <input type="hidden" id="hdnColourName" value="" name="Filter.Color" class="auto-complete-label" />*@
+                                        <input type="hidden" id="hdnVendor_ID" value="" name="Filter.Vendor_Name" class="auto-complete-value" />
+                                        
                                     </div>
                                 </div>
                                 @*End*@
