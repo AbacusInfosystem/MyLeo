@@ -25,7 +25,14 @@ namespace MyLeoRetailerInfo.Color
 			get;
 			set;
 		}
+        
         public string Colour_Code
+        {
+            get;
+            set;
+        }
+
+        public string Color_Code
         {
             get;
             set;
@@ -57,6 +64,12 @@ namespace MyLeoRetailerInfo.Color
 			get;
 			set;
 		}
+
+        public string Description
+		{
+			get;
+			set;
+		} 
 
         public List<ProductMRPInfo> ProductMRP_N_WSR { get; set; }
 

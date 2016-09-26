@@ -5,6 +5,14 @@
 <script src="~/Scripts/Modules/Product/Product_events.js"></script>
 <script src="~/Scripts/Modules/Product/Product_methods.js"></script>
 <script src="~/Scripts/Modules/Product/product_validation.js"></script>
+
+<style>
+    .gallery-item-controls {
+        display: block !important;
+        right: 2px !important;
+    }
+</style>
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -38,14 +46,15 @@
                     @*<form role="form">*@
 
                     <div class="form-group">
-
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
                         <input type="text" id="txtArticle_No" class="form-control" placeholder="Enter article number." name="Product.Article_No" value="@Model.Product.Article_No" />
                         <input type="hidden" id="hdn_ProductId" class="form-control" name="Product.Product_Id" value="@Model.Product.Product_Id" />
                     </div>
 
                     <div id="dvVendor" class="form-group auto-complete">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtVendor_Name" value="@(Model.Product.Vendor_Id == 0 ? "" : Model.Product.Vendor_Id.ToString())" placeholder="Enter vendor" data-table="Vendor" data-col="Vendor_Id,Vendor_Name" data-headernames="Vendor">
+                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtVendor_Name" value="@Model.Product.Vendor_Name" placeholder="Enter vendor" data-table="Vendor" data-col="Vendor_Id,Vendor_Name" data-headernames="Vendor">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnVendorId" value="@Model.Product.Vendor_Id" name="Product.Vendor_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnVendorName" value="@Model.Product.Vendor_Name" name="Product.Vendor_Name" class="auto-complete-label" />
@@ -69,6 +78,7 @@
                     </div>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Comment.</span>
                         <textarea class="form-control" placeholder="Enter Comment." name="Product.Comment">@Model.Product.Comment</textarea>
                     </div>
                 </div>
@@ -82,8 +92,9 @@
                     <h4 style="margin-top: 15px;">Association detail.</h4>
 
                     <div id="dvBrand" class="form-group auto-complete">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" value="@(Model.Product.Brand_Id == 0 ? "" : Model.Product.Brand_Id.ToString())" id="txtBrand_Name" placeholder="Enter brand" data-table="Brand" data-col="Brand_Id,Brand_Name" data-headernames="Brand">
+                            <input type="text" class="form-control autocomplete-text lookup-text" value="@Model.Product.Brand_Name" id="txtBrand_Name" placeholder="Enter brand" data-table="Brand" data-col="Brand_Id,Brand_Name" data-headernames="Brand">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnBrandId" value="@Model.Product.Brand_Id" name="Product.Brand_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnBrandName" value="@Model.Product.Brand_Name" name="Product.Brand_Name" class="auto-complete-label" />
@@ -91,8 +102,9 @@
                     </div>
 
                     <div id="dvCatergory" class="form-group auto-complete">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" value="@(Model.Product.Category_Id == 0 ? "" : Model.Product.Category_Id.ToString())" id="txtCategory_Name" placeholder="Enter category" data-table="Category" data-col="Category_Id,Category" data-headernames="Category">
+                            <input type="text" class="form-control autocomplete-text lookup-text" value="@Model.Product.Category" id="txtCategory_Name" placeholder="Enter category" data-table="Category" data-col="Category_Id,Category" data-headernames="Category">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnCategoryId" value="@Model.Product.Category_Id" name="Product.Category_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnCategoryName" value="@Model.Product.Category" name="Product.Category" class="auto-complete-label" />
@@ -100,8 +112,9 @@
                     </div>
 
                     <div id="dvSubC" class="form-group auto-complete">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Sub Category.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSub_Category" value="@(Model.Product.Sub_Category_Id == 0 ? "" : Model.Product.Sub_Category_Id.ToString())" placeholder="Enter sub-category" data-table="Sub_Category" data-col="Sub_Category_Id,Sub_Category" data-headernames="Sub_Category">
+                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSub_Category" value="@Model.Product.Sub_Category" placeholder="Enter sub-category" data-table="Sub_Category" data-col="Sub_Category_Id,Sub_Category" data-headernames="Sub_Category">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnSubcategoryId" value="@Model.Product.Sub_Category_Id" name="Product.Sub_Category_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnSubcategoryName" value="@Model.Product.Sub_Category" name="Product.Sub_Category" class="auto-complete-label" />
@@ -118,8 +131,9 @@
                     <h4 style="margin-top: 15px;">Attibutes.</h4>
 
                     <div id="dvSizeG" class="form-group auto-complete">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Size Group.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSize_Group_Name" value="@(Model.Product.Size_Group_Id == 0 ? "" : Model.Product.Size_Group_Id.ToString())" placeholder="Enter Size Group" data-table="Size_Group" data-col="Size_Group_Id,Size_Group_Name" data-headernames="Size_Group">
+                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSize_Group_Name" value="@Model.Product.Size_Group_Name" placeholder="Enter Size Group" data-table="Size_Group" data-col="Size_Group_Id,Size_Group_Name" data-headernames="Size_Group">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnSizeGroupId" value="@Model.Product.Size_Group_Id" name="Product.Size_Group_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnSizeGroupName" value="@Model.Product.Size_Group_Name" name="Product.Size_Group_Name" class="auto-complete-label" />
@@ -127,6 +141,7 @@
                     </div>
 
                     <div class="form-group">
+                        @*<span class="label label-primary label-form" style="margin-bottom: 1px;">Launch date.</span>*@
                         <label for="txtCenter_Size" style="color: #333" class="">Center Size</label>
                         <input type="text" class="form-control input-sm" name="Product.Center_Size" id="txtCenter_Size" value="@Model.Product.Center_Size" placeholder="Enter Center Size" />
 
@@ -147,7 +162,7 @@
 
 
                     <div class="form-group">
-
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Size Difference.</span>
                         <input type="text" class="form-control" placeholder="Enter size difference." name="Product.Size_Difference" value="@(Model.Product.Size_Difference == 0 ? "" : Model.Product.Size_Difference.ToString())" />
 
                     </div>
@@ -159,13 +174,13 @@
                         </div>*@
 
                     <div class="form-group">
-
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Difference.</span>
                         <input type="text" class="form-control" placeholder="Enter MRP difference." name="Product.MRP_Difference" value="@(Model.Product.MRP_Difference == 0 ? "" : Model.Product.MRP_Difference.ToString())" />
 
                     </div>
 
                     <div class="form-group">
-
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Percentage.</span>
                         <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." name="Product.MRP_Percentage" value="@(Model.Product.MRP_Percentage == 0 ? "" : Model.Product.MRP_Percentage.ToString())" />
 
                     </div>
@@ -206,8 +221,8 @@
             <div class="col-md-9" id="dvProductImg" style="background: rgba(0, 0, 0, 0.02); border-top: 1px solid #DDD;">
 
                 <div class="gallery" id="links">
-                    <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
-                        <div class="image" id="image_preview">
+                    <a class="gallery-item" id="image_0" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
+                        <div class="image" >
                             @if (Model.Product.ProductImage.Product_Image[0] != null && Model.Product.ProductImage.Product_Image[0] != "")
                             {
                                 <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[0]" class="ImgSrc" width="70" height="140" id="img_0" alt="Product image 1" />
@@ -222,11 +237,11 @@
                             <ul class="gallery-item-controls">
                                 @if (Model.Product.ProductImage.Is_Default[0] == "False" || Model.Product.ProductImage.Is_Default[0] == null || Model.Product.ProductImage.Is_Default[0] == "")
                                 {
-                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" class="icheckbox" id="rd_0" name="iradio" value="false" /></label></li>
                                 }
                                 else
                                 {
-                                    <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" class="icheckbox" id="rd_0" name="iradio" checked="checked" value="false" /></label></li>
                                 }
                                 <li>
                                     <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
@@ -237,13 +252,13 @@
                             <input type="hidden" id="hdnDefault" name="Product.ProductImage.Is_Default" value="@Model.Product.ProductImage.Is_Default[0]" class="Is_Default" />
                         </div>
                         @*<div class="meta">
-                                <strong>Music picture 1</strong>
-                                <span>Other description</span>
-                            </div>*@
+                <strong>Music picture 1</strong>
+                <span>Other description</span>
+            </div>*@
                     </a>
 
-                    <a class="gallery-item" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
-                        <div class="image" id="image_preview">
+                    <a class="gallery-item" id="image_1" href="assets/images/gallery/music-1.jpg" title="Music picture 1" data-gallery>
+                        <div class="image">
                             @if (Model.Product.ProductImage.Product_Image[1] != null && Model.Product.ProductImage.Product_Image[1] != "")
                             {
                                 <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[1]" class="ImgSrc" width="70" height="140" id="img_1" alt="Product image 2" />
@@ -258,11 +273,11 @@
                             <ul class="gallery-item-controls">
                                 @if (Model.Product.ProductImage.Is_Default[1] == "False" || Model.Product.ProductImage.Is_Default[1] == null || Model.Product.ProductImage.Is_Default[1] == "")
                                 {
-                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" class="icheckbox" id="rd_1" name="iradio" value="false" /></label></li>
                                 }
                                 else
                                 {
-                                    <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" class="icheckbox" id="rd_1" name="iradio" checked="checked" value="false" /></label></li>
                                 }
                                 <li>
                                     <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
@@ -273,13 +288,14 @@
                             <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[1]" name="Product.ProductImage.Is_Default" class="Is_Default" />
                         </div>
                         @*<div class="meta">
-                                <strong>Music picture 1</strong>
-                                <span>Other description</span>
-                            </div>*@
+                <strong>Music picture 1</strong>
+                <span>Other description</span>
+            </div>*@
                     </a>
 
-                    <a class="gallery-item" href="assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
-                        <div class="image" id="image_preview">
+
+                    <a class="gallery-item" id="image_2" href="assets/images/gallery/girls-1.jpg" title="Girls Image 1" data-gallery>
+                        <div class="image">
                             @if (Model.Product.ProductImage.Product_Image[2] != null && Model.Product.ProductImage.Product_Image[2] != "")
                             {
                                 <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[2]" class="ImgSrc" id="img_2" width="70" height="140" alt="Product image 3" />
@@ -295,11 +311,11 @@
                             <ul class="gallery-item-controls">
                                 @if (Model.Product.ProductImage.Is_Default[2] == "False" || Model.Product.ProductImage.Is_Default[2] == null || Model.Product.ProductImage.Is_Default[2] == "")
                                 {
-                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" class="icheckbox" id="rd_2" name="iradio" value="false" /></label></li>
                                 }
                                 else
                                 {
-                                    <li><label class="check"><input type="radio" name="" checked="checked" value="false" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" class="icheckbox" id="rd_2" name="iradio" checked="checked" value="false" /></label></li>
                                 }
                                 <li>
                                     <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
@@ -310,13 +326,13 @@
                             <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[2]" name="Product.ProductImage.Is_Default" class="Is_Default" />
                         </div>
                         @*<div class="meta">
-                                <strong>Girls image 1</strong>
-                                <span>Description</span>
-                            </div>*@
+                <strong>Girls image 1</strong>
+                <span>Description</span>
+            </div>*@
                     </a>
 
-                    <a class="gallery-item" href="assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
-                        <div class="image" id="image_preview">
+                    <a class="gallery-item" id="image_3" href="assets/images/gallery/nature-2.jpg" title="Nature Image 2" data-gallery>
+                        <div class="image">
                             @if (Model.Product.ProductImage.Product_Image[3] != null && Model.Product.ProductImage.Product_Image[3] != "")
                             {
                                 <img src="/UploadedFiles/@Model.Product.ProductImage.Product_Image[3]" class="ImgSrc" width="70" height="140" id="img_3" alt="Product image 4" />
@@ -331,11 +347,11 @@
                             <ul class="gallery-item-controls">
                                 @if (Model.Product.ProductImage.Is_Default[3] == "False" || Model.Product.ProductImage.Is_Default[3] == null || Model.Product.ProductImage.Is_Default[3] == "")
                                 {
-                                    <li><label class="check"><input type="radio" name="" value="false" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" id="rd_3" name="iradio" value="false" class="icheckbox" /></label></li>
                                 }
                                 else
                                 {
-                                    <li><label class="check"><input type="radio" name="" value="false" checked="checked" class="icheckbox dd" /></label></li>
+                                    <li><label class="check"><input type="radio" id="rd_3" name="iradio" value="false" checked="checked" class="icheckbox" /></label></li>
                                 }
                                 <li>
                                     <button type="button" id="btnRemoveProductImage" class="btn remove-image-attachment" style="padding-top:0px">
@@ -346,9 +362,9 @@
                             <input type="hidden" id="hdnDefault" value="@Model.Product.ProductImage.Is_Default[3]" name="product.productimage.Is_default" class="Is_Default" />
                         </div>
                         @*<div class="meta">
-                                <strong>Nature image 2</strong>
-                                <span>Description</span>
-                            </div>*@
+                <strong>Nature image 2</strong>
+                <span>Description</span>
+            </div>*@
                     </a>
                 </div>
 
