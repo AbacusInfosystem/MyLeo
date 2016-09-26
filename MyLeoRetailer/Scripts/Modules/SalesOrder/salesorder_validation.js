@@ -17,7 +17,8 @@
                     "SalesInvoice.Mobile":
                         {
                             required: true,
-                            number: true
+                            number: true,
+                            MobileNo : true
                         },
                     "SalesInvoice.Customer_Name":
                         {
@@ -28,10 +29,10 @@
                             required: true,
                             number: true
                         },
-                    "SaleOrderItemList[0].SKU_Code":
-                        {
-                            required: true,
-                        },
+                    //"SaleOrderItemList[0].SKU_Code":
+                    //    {
+                    //        required: true,
+                    //    },
                     "SaleOrderItemList[0].Quantity":
                         {
                             required: true,
@@ -90,3 +91,31 @@
             }
         });
 });
+
+
+jQuery.validator.addMethod("MobileNo", function (value, element) {
+
+    var result = true;
+
+        if ($("#txtMobileNo").val() != "" && $("#hdnMobileNo").val() != $("#txtMobileNo").val()) {
+            $.ajax({
+
+                url: '/SalesOrder/Check_Mobile_No',
+                data:
+                    {
+                        MobileNo: value
+                    },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == false) {
+                        result = false;
+                    }
+                }
+            });
+        }
+    return result;
+
+}, "Mobile Number does not exists.");
+
+

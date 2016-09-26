@@ -1,5 +1,8 @@
 ﻿$(function () {
 
+
+    $(".Details").hide();
+
     if ($("[name='PurchaseOrder.Purchase_Order_Id']").val() == "" || $("[name='PurchaseOrder.Purchase_Order_Id']").val() == 0) {
         document.getElementById("btnCanclePurchaseOrder").disabled = false;
     }
@@ -25,11 +28,17 @@
 
     $("#btnAddSizesPurchaseOrder").click(function () {               
         Get_Sizes();
+
+        document.getElementById("btnAddSizesPurchaseOrder").disabled = true;
+
+        $(".Details").show();
     });
 
     $("#btnAddDetailsPurchaseOrder").click(function () {
-        AddPurchaseOrderDetails();
 
+        if ($("#frmPurchaseOrder").valid()) {
+            AddPurchaseOrderDetails();
+        }
         //CalculateRowAmount();
 
     });

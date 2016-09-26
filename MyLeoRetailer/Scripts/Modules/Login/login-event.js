@@ -2,7 +2,7 @@
 
 
     $("#txtUser_Name").focusout(function () {
-
+      
         $.ajax({
             url: '/login/get-employee-branches',
             data: { user_Name: $(this).val() },

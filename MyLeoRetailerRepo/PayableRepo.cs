@@ -39,22 +39,56 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Purchase_Credit_Note_Id", Payable.Purchase_Credit_Note_Id));
             sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
             sqlParams.Add(new SqlParameter("@Payment_Mode", Payable.Payment_Mode));
-            sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+            //sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Amount", Payable.Discount_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
             sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
-            sqlParams.Add(new SqlParameter("@Cheque_Date", Payable.Cheque_Date));
-            sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
-            sqlParams.Add(new SqlParameter("@Bank_Name", Payable.Bank_Name));
+            //sqlParams.Add(new SqlParameter("@Cheque_Date", Payable.Cheque_Date));
+            //sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
+            //sqlParams.Add(new SqlParameter("@Bank_Name", Payable.Bank_Name));
             sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
-            //sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
-            sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
-            sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
-            //sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Payable.Gift_Voucher_No));
+            sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
+            sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
+            //sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
+            //sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
 
-
-            //if (Payable.Payable_Item_Id == 0)
+            if (Payable.Payment_Mode == 1)
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+                sqlParams.Add(new SqlParameter("@Bank_Name", "NA"));
+            }
+            else if (Payable.Payment_Mode == 2)
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+                sqlParams.Add(new SqlParameter("@Bank_Name", "NA"));
+            }
+            else if (Payable.Payment_Mode == 3)
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
+                sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+                sqlParams.Add(new SqlParameter("@Bank_Name", "NA"));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", Payable.Cheque_Date));
+                sqlParams.Add(new SqlParameter("@Bank_Name", Payable.Bank_Name));
+            }
 
             sqlParams.Add(new SqlParameter("@Created_By", Payable.Created_By));
             sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
@@ -79,29 +113,54 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
             }
-            //sqlParams.Add(new SqlParameter("@Payable_Id", Payable.Payable_Id));
-            //sqlParams.Add(new SqlParameter("@Purchase_Credit_Note_Id", Payable.Purchase_Credit_Note_Id));
-            //sqlParams.Add(new SqlParameter("@Payable_Item_Id", Payable.Payable_Item_Id));
+
+            sqlParams.Add(new SqlParameter("@Purchase_Credit_Note_Id ", Payable.Purchase_Credit_Note_Id));
             sqlParams.Add(new SqlParameter("@Payment_Mode", Payable.Payment_Mode));
-            sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Amount", Payable.Discount_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
             sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
-            sqlParams.Add(new SqlParameter("@Cheque_Date", Payable.Cheque_Date));
-            sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
-            sqlParams.Add(new SqlParameter("@Bank_Name", Payable.Bank_Name));
             sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
-            //sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
-            sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
-            sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
-            //sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Payable.Gift_Voucher_No));
+            sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
+            sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
 
+            if (Payable.Payment_Mode == 1)
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+                sqlParams.Add(new SqlParameter("@Bank_Name", "NA"));
+            }
+            else if (Payable.Payment_Mode == 2)
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+                sqlParams.Add(new SqlParameter("@Bank_Name", "NA"));
+            }
+            else if (Payable.Payment_Mode == 3)
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
+                sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+                sqlParams.Add(new SqlParameter("@Bank_Name", "NA"));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
+                sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
+                sqlParams.Add(new SqlParameter("@Cheque_Date", Payable.Cheque_Date));
+                sqlParams.Add(new SqlParameter("@Bank_Name", Payable.Bank_Name));
+            }
 
-            //if (Payable.Payable_Item_Id == 0)
-
-            //sqlParams.Add(new SqlParameter("@Created_By", Payable.Created_By));
-            //sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
             sqlParams.Add(new SqlParameter("@Updated_By", Payable.Updated_By));
             sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
 
@@ -158,8 +217,6 @@ namespace MyLeoRetailerRepo
 
             sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", Payable.Purchase_Invoice_Id));
 
-            //sqlParams.Add(new SqlParameter("@Payble_Status ", Payable.Payble_Status));
-
             sqlParams.Add(new SqlParameter("@Payament_Date ", Payable.Payament_Date));
 
             sqlParams.Add(new SqlParameter("@Total_Amount ", Payable.Total_Amount));
@@ -167,10 +224,9 @@ namespace MyLeoRetailerRepo
             if (Balance_Amount > 0)
             {
 
-                Total_Balance_Amount = Payable.Final_Amount - Payable.Paid_Amount;
+                Total_Balance_Amount = Balance_Amount - Payable.Paid_Amount;
 
             }
-
             else
             {
 
@@ -183,12 +239,12 @@ namespace MyLeoRetailerRepo
 
             if (Payable.Balance_Amount != 0)
             {
-                sqlParams.Add(new SqlParameter("@Payble_Status", "Partially Paid"));
+                sqlParams.Add(new SqlParameter("@Payble_Status", "3"));
             }
 
             else
             {
-                sqlParams.Add(new SqlParameter("@Payble_Status", "Payment Done"));
+                sqlParams.Add(new SqlParameter("@Payble_Status", "1"));
             }
 
 
@@ -234,7 +290,7 @@ namespace MyLeoRetailerRepo
 
                     if (!dr.IsNull("Payble_Status"))
 
-                        payable.Payble_Status = Convert.ToString(dr["Payble_Status"]);
+                        payable.Payble_Status = Convert.ToInt32(dr["Payble_Status"]);
 
                     if (!dr.IsNull("Total_Amount"))
 
@@ -248,38 +304,11 @@ namespace MyLeoRetailerRepo
 
                         payable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
 
+                    payable.Payament_Date.ToShortDateString();
+
 
                 }
             }
-
-            //if (dt.Rows.Count == 0)
-            //{
-            //    List<SqlParameter> sqlparamnew = new List<SqlParameter>();
-
-            //    sqlparamnew.Add(new SqlParameter("@Purchase_Order_Id", purchase_order_id));
-
-            //    DataTable dt1 = _sqlHelper.ExecuteDataTable(sqlparamnew, StoreProcedures.Get_PO_Data_By_Id_Sp.ToString(), CommandType.StoredProcedure);
-
-            //    if (dt1 != null && dt1.Rows.Count > 0)
-            //    {
-            //        foreach (DataRow dr in dt1.Rows)
-            //        {
-
-            //            if (!dr.IsNull("Purchase_Order_No"))
-
-            //                payable.Purchase_Order_No = Convert.ToString(dr["Purchase_Order_No"]);
-
-            //            if (!dr.IsNull("Third_Party_Vendor_Name"))
-
-            //                payable.Vendor_Name = Convert.ToString(dr["Third_Party_Vendor_Name"]);
-
-            //            if (!dr.IsNull("Purchase_Order_Date"))
-
-            //                payable.Purchase_Order_Date = Convert.ToDateTime(dr["Purchase_Order_Date"]);
-
-            //        }
-            //    }
-            //}
 
             return payable;
         }
@@ -322,10 +351,6 @@ namespace MyLeoRetailerRepo
 
                 payable.Purchase_Credit_Note_Id = Convert.ToInt32(dr["Purchase_Credit_Note_Id"]);
 
-            if (!dr.IsNull("Payament_Date"))
-
-                payable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
-
             if (!dr.IsNull("Payment_Mode"))
 
                 payable.Payment_Mode = Convert.ToInt32(dr["Payment_Mode"]);
@@ -345,6 +370,8 @@ namespace MyLeoRetailerRepo
             if (!dr.IsNull("Cheque_Date"))
 
                 payable.Cheque_Date = Convert.ToDateTime(dr["Cheque_Date"]);
+
+                payable.Cheque_Date.ToShortDateString();
 
             if (!dr.IsNull("Cheque_No"))
 
@@ -373,6 +400,8 @@ namespace MyLeoRetailerRepo
             if (!dr.IsNull("Payament_Date"))
 
                 payable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
+
+            payable.Payament_Date.ToShortDateString();
 
             if (!dr.IsNull("Created_On"))
 
@@ -406,8 +435,8 @@ namespace MyLeoRetailerRepo
                         list.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
                     if (!dr.IsNull("Payable_Id"))
                         list.Payable_Id = Convert.ToInt32(dr["Payable_Id"]);
-                    if (!dr.IsNull("Purchase_Credit_Note_Id"))
-                        list.Purchase_Credit_Note_Id = Convert.ToInt32(dr["Purchase_Credit_Note_Id"]);
+                    //if (!dr.IsNull("Purchase_Credit_Note_Id"))
+                    //    list.Purchase_Credit_Note_Id = Convert.ToInt32(dr["Purchase_Credit_Note_Id"]);
                     if (!dr.IsNull("Vendor_Id"))
                         list.Vendor_Name = Convert.ToString(dr["Vendor_Id"]);
                     if (!dr.IsNull("Purchase_Invoice_No"))
@@ -416,23 +445,39 @@ namespace MyLeoRetailerRepo
                         list.Purchase_Invoice_Date = Convert.ToDateTime(dr["Purchase_Invoice_Date"]);
                     if (!dr.IsNull("Total_Amount"))
                         list.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
-                    if (!dr.IsNull("Paid_Amount"))
-                        list.Paid_Amount = Convert.ToDecimal(dr["Paid_Amount"]);
+                    //if (!dr.IsNull("Paid_Amount"))
+                    //    list.Paid_Amount = Convert.ToDecimal(dr["Paid_Amount"]);
                     if (!dr.IsNull("Balance_Amount"))
                         list.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
-                    if (!dr.IsNull("Credit_Note_No"))
-                        list.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
-                    if (!dr.IsNull("Credit_Note_Amount"))
-                        list.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
-                    //if (!dr.IsNull("Credit_Note_Date"))
-                    //    list.Credit_Note_Date = Convert.ToDateTime(dr["Credit_Note_Date"]);
-                    if (!dr.IsNull("Discount_Amount"))
-                        list.Discount_Amount = Convert.ToDecimal(dr["Discount_Amount"]);
+                    else
+                        list.Payment_Status_Value = "UnPaid";
+                    //if (!dr.IsNull("Credit_Note_No"))
+                    //    list.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+                    //if (!dr.IsNull("Credit_Note_Amount"))
+                    //    list.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+                    //if (!dr.IsNull("Discount_Amount"))
+                    //    list.Discount_Amount = Convert.ToDecimal(dr["Discount_Amount"]);
                     if (!dr.IsNull("Payament_Date"))
                         list.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
-                    if (!dr.IsNull("Payament_Status"))
-                        list.Payament_Status = Convert.ToInt32(dr["Payament_Status"]);
+                    if (!dr.IsNull("Payble_Status"))
+                        list.Payament_Status = Convert.ToInt32(dr["Payble_Status"]);
+                    else
+                        list.Payament_Status = 2;
+                    if (!dr.IsNull("Vendor_Name"))
+                        list.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
 
+                    if (list.Payament_Status == 1)
+                    {
+                        list.Payment_Status_Value = "Paid";
+                    }
+                    else if (list.Payament_Status == 2)
+                    {
+                        list.Payment_Status_Value = "UnPaid";
+                    }
+                    else
+                    {
+                        list.Payment_Status_Value = "PartiallyPaid";
+                    }
 
                     PurchaseInvoice_Details.Add(list);
                 }
@@ -447,12 +492,12 @@ namespace MyLeoRetailerRepo
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            sqlParams.Add(new SqlParameter("@From_Date", Payable.From_Date));
-            sqlParams.Add(new SqlParameter("@To_Date", Payable.To_Date));
+            sqlParams.Add(new SqlParameter("@From_Date", Payable.From_Date == DateTime.MinValue ? null : Payable.From_Date.ToString("mm-dd-yy")));
+            sqlParams.Add(new SqlParameter("@To_Date", Payable.To_Date == DateTime.MinValue ? null : Payable.To_Date.ToString("mm-dd-yy")));
             sqlParams.Add(new SqlParameter("@Vendor_Name", Payable.Vendor_Name));
             sqlParams.Add(new SqlParameter("@Payament_Status", Payable.Payament_Status));
 
-            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Temp_Get_Payable_Detail_By_Id1.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Payable_Search_Data12.ToString(), CommandType.StoredProcedure);
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -466,8 +511,8 @@ namespace MyLeoRetailerRepo
                         list.Payable_Id = Convert.ToInt32(dr["Payable_Id"]);
                     if (!dr.IsNull("Purchase_Credit_Note_Id"))
                         list.Purchase_Credit_Note_Id = Convert.ToInt32(dr["Purchase_Credit_Note_Id"]);
-                    if (!dr.IsNull("Vendor_Id"))
-                        list.Vendor_Name = Convert.ToString(dr["Vendor_Id"]);
+                    if (!dr.IsNull("Vendor_Name"))
+                        list.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
                     if (!dr.IsNull("Purchase_Invoice_No"))
                         list.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
                     if (!dr.IsNull("Purchase_Invoice_Date"))
@@ -488,8 +533,21 @@ namespace MyLeoRetailerRepo
                         list.Discount_Amount = Convert.ToDecimal(dr["Discount_Amount"]);
                     if (!dr.IsNull("Payament_Date"))
                         list.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
-                    if (!dr.IsNull("Payament_Status"))
-                        list.Payament_Status = Convert.ToInt32(dr["Payament_Status"]);
+                    if (!dr.IsNull("Payble_Status"))
+                        list.Payament_Status = Convert.ToInt32(dr["Payble_Status"]);
+
+                    if (list.Payament_Status == 1)
+                    {
+                        list.Payment_Status_Value = "Paid";
+                    }
+                    else if (list.Payament_Status == 2)
+                    {
+                        list.Payment_Status_Value = "UnPaid";
+                    }
+                    else
+                    {
+                        list.Payment_Status_Value = "PartiallyPaid";
+                    }
                     
 
                     PurchaseInvoice_Details.Add(list);
@@ -523,13 +581,22 @@ namespace MyLeoRetailerRepo
 
                         pInfo.Payable_Id = Convert.ToInt32(dr["Payable_Id"]);
 
-                    if (!dr.IsNull("Balance_Amount"))
-
-                        pInfo.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
-
                     if (!dr.IsNull("Total_Amount"))
 
                         pInfo.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
+
+                    if (!dr.IsNull("Balance_Amount"))
+                    {
+                        pInfo.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+                    }
+                    else
+                    {
+                        pInfo.Balance_Amount = Convert.ToDecimal(dr["Total_Amount"]);
+                    }
+
+                    if (!dr.IsNull("Payble_Status"))
+
+                        pInfo.Payament_Status = Convert.ToInt32(dr["Payble_Status"]);
 
                 }
             }
