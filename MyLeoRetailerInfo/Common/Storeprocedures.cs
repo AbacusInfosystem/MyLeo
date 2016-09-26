@@ -68,7 +68,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Color,
             sp_Get_Colors_By_Id,
             Get_Colors_By_Name_Autocomplete_Sp,
-
+            sp_Check_Existing_Colour_Name,//Added by Vinod Mane on 23/09/2016
             //#endregion
 
             //SizeGroup
@@ -193,6 +193,7 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
+
         #region Purchase Order
 
         sp_Insert_Purchase_Order,
@@ -232,8 +233,6 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Invoice_Items_By_SKU_Code,
         sp_Get_Purchase_Orders,
 
-        sp_Get_Purchase_Invoice,
-
         #endregion
 
         #region Purchase Order Request
@@ -269,6 +268,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Payable_Item_Data,
         sp_Temp_Get_Payable_Detail_By_Id1,
         sp_Temp_Get_Payable_Detail,
+        sp_Get_Payable_Search_Data12,
 
         //Employee Branch mapping
         //sp_Get_Branch,
@@ -286,6 +286,7 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id,
        sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
+        sp_Check_Mobile_No,
 
         //Sales Return
 
@@ -310,6 +311,8 @@ namespace MyLeoRetailerInfo.Common
         Get_Receivable_Data_Item_By_Id_Sp,
         Get_Receivable_Data_By_Id_Sp,
         sp_Get_Receivables,
+        sp_Get_Receivable_Search_Data_new,
+        sp_Get_Receivable_Search_Data12,
 
 
         #region Purchase Return Request
@@ -323,9 +326,18 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
+
+        //Replacement
+        sp_Get_Purchase_Invoice,
+        sp_Insert_Replacement,
+        sp_Insert_Replacement_Item,
   
 
     }
-		}
+
+           
+          
+		
 	
 
+}

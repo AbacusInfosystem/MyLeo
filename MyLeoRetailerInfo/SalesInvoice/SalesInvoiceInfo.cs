@@ -48,6 +48,16 @@ namespace MyLeoRetailerInfo.SalesInvoice
         public string Employee_Name { get; set; }
 
 
+       //hidden field
+
+
+        public string Mobile1 { get; set; }
+
+        public DateTime Invoice_Date1 { get; set; }
+
+       //end
+
+
        //End
 
        public string Sales_Invoice_No { get; set; }
@@ -114,6 +124,8 @@ namespace MyLeoRetailerInfo.SalesInvoice
        public int SalesMan_Id { get; set; }
 
        public bool Flag { get; set; }
+
+       public bool CreateCustomerFlag { get; set; }
 
 
        //End

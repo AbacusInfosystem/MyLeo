@@ -72,6 +72,7 @@
     <Compile Include="PurchaseReturn\PurchaseReturnInfo.cs" />
     <Compile Include="QueryInfo.cs" />
     <Compile Include="Receivable\ReceivableInfo.cs" />
+    <Compile Include="Replacement\ReplacementInfo.cs" />
     <Compile Include="Role\AccessFunctionInfo.cs" />
     <Compile Include="Role\RoleInfo.cs" />
     <Compile Include="SalesInvoice\SalesInvoiceInfo.cs" />

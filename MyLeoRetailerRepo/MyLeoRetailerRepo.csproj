@@ -62,6 +62,7 @@
     <Compile Include="PurchaseReturnRepo.cs" />
     <Compile Include="PurchaseReturnRequestRepo.cs" />
     <Compile Include="ReceivableRepo.cs" />
+    <Compile Include="ReplacementRepo.cs" />
     <Compile Include="RoleRepo.cs" />
     <Compile Include="SalesOrderRepo.cs" />
     <Compile Include="SalesReturnRepo.cs" />

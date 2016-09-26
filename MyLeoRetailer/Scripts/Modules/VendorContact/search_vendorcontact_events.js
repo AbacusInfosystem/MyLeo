@@ -39,6 +39,12 @@ $(function () {
         $("#frmVendorContact").submit();
     });
 
+    //Added By Vinod Mane on 22/09/2016
+    $(document).on("change", "#hdnVendorContactId", function () {
+        Get_Vendor_Contacts();
+    });
+    //End
+
     //$(document).on("click", "[name='Vendor_Contact_List']", function () {
 
     //    Get_Vendor_Contact_By_Id(this);

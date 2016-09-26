@@ -212,7 +212,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
-            poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
+           // poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
 
             poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
 

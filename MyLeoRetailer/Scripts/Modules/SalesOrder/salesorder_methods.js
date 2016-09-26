@@ -13,10 +13,15 @@
 
         success: function (data)
         {
-
             $('#txtCustomer_Name').val(data.Customer_Name);
             $('#hdnCustomer_ID').val(data.Customer_Id);
- 
+
+            if (data.Customer_Name == null)
+            {
+                $('#myModalAddCustomer').modal('show');
+            }
+
+             
         }
     });
 }
@@ -75,9 +80,19 @@ function AddSalesOrderDetails(i)
     tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='SKU No' onchange='javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ");' name='SaleOrderItemList[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
+    //tblHtml += "</td>";
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='SKU No' onchange='javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ");' name='SaleOrderItemList[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
-    tblHtml += "</td>";
+    tblHtml += "<div class='form-group auto-complete'>";
+    tblHtml += "<div class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Product_MRP' data-col='Product_Id,SKU_Code' data-headernames='SKU_Code'/>";
+    tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='SaleOrderItemList[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "</div>";
+    tblHtml += "</div>";
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Article No' name='SaleOrderItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
@@ -182,11 +197,31 @@ function ReArrangeSalesOrderDetailsData()
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleOrderItemList[" + i + "].Barcode");
             }
 
+          
+            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+            //    $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
+            //    $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
+            //    $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
+            //    $(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
+            //}
+
+
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
-                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code", "onblur", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;             
+                $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
+
             }
+
+
+            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+            //    $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
+            //    $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
+            //}
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
                 $(newTR).find("[id^='textArticle_No_']")[0].id = "textArticle_No_" + i;
