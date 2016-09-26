@@ -1,6 +1,8 @@
-﻿using MyLeoRetailerHelper;
+﻿using MyLeoRetailer.Common;
+using MyLeoRetailerHelper;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Category;
+using MyLeoRetailerInfo.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,6 +97,8 @@ namespace MyLeoRetailer.Controllers
 
 		public void Set_Date_Session(object obj)
 		{
+            LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
 			PropertyInfo prop = obj.GetType().GetProperty("Created_Date");
 
 			prop.SetValue(obj, DateTime.Now);
@@ -105,11 +109,11 @@ namespace MyLeoRetailer.Controllers
 
 			prop = obj.GetType().GetProperty("Created_By");
 
-			prop.SetValue(obj, 1);
+            prop.SetValue(obj, Cookies.User_Id);
 
 			prop = obj.GetType().GetProperty("Updated_By");
 
-			prop.SetValue(obj, 1);
+            prop.SetValue(obj, Cookies.User_Id);
 		}
 
 		public void Set_Pagination(Pagination_Info pager, GridInfo grid)

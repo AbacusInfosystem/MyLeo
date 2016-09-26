@@ -39,6 +39,14 @@ $(function () {
         Get_SizeGroups();
 
     });
+
+    //Added By Vinod Mane on 22/09/2016
+    $(document).on("change", "#hdnSize_Group_Name", function () {
+        Get_SizeGroups();
+    });
+
+
+
 });
 
 

@@ -194,5 +194,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(brandList, JsonRequestBehavior.AllowGet);
         }
 
+        //Added By Vinod Mane on 23/09/2016
+        public JsonResult Check_Existing_Colour_Name(string color_Name)
+        {
+            bool check = false;
+            try
+            {
+                check = cRepo.Check_Existing_Colour_Name(color_Name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Colour Controller - Check_Existing_Colour_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
     }
 }

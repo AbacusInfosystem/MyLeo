@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -49,7 +50,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 
                 poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
-                //poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
+                poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
 
                 poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
 
@@ -244,6 +245,43 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         ////***************************************************************************////
+
+        public ActionResult Get_Purchase_Order_Details(PurchaseOrderViewModel poViewModel)
+        {
+            try
+            {
+                poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
+                
+                poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
+
+                poViewModel.PurchaseOrder.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(poViewModel.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount));
+
+            }
+            catch(Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details : " + ex.ToString());
+            }
+            return View("PrintableView", poViewModel);
+        }
+
+        //demo
+        public ActionResult SendEmail(PurchaseOrderViewModel poViewModel)
+        {
+            try
+            {
+                _purchaseorderRepo.SendDemoEmail();
+            }
+            catch(Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details : " + ex.ToString());
+            }
+            return RedirectToAction("Get_Purchase_Order_Details");
+        }
+
     }
 
 }

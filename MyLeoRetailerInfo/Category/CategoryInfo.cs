@@ -24,6 +24,12 @@ namespace MyLeoRetailerInfo.Category
 			get;
 			set;
 		}
+        public string Category_Code
+		{
+			get;
+			set;
+		}
+        
 		public DateTime Created_Date
 		{
 			get;

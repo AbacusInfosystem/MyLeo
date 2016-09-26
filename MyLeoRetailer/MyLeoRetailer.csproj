@@ -1165,7 +1165,7 @@
     <Content Include="Views\PostLogin\Master\Employee\ChangeBranch.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseOrder\Search.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseOrder\Print.cshtml" />
+    <Content Include="Views\PostLogin\Master\PurchaseOrder\PrintableView.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseInvoice\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseInvoice\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\PurchaseReturn\Index.cshtml" />
