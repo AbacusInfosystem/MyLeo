@@ -2,7 +2,8 @@
 
 
     $("#txtUser_Name").focusout(function () {
-      
+
+        $(".scroll-bar").html("");
         $.ajax({
             url: '/login/get-employee-branches',
             data: { user_Name: $(this).val() },
@@ -21,7 +22,7 @@
                     htmlText += "</div>";
                     htmlText += "<div class='col-md-4'>";
                     htmlText += "<label class='switch'>";
-                    htmlText += "<input checked value='All' id='chkAllBrand' type='checkbox'>";
+                    htmlText += "<input checked='true' value='1' id='chkAllBrand' type='checkbox'>";
                     htmlText += "<span></span>";
                     htmlText += "</label>";
                     htmlText += "</div>";
@@ -49,14 +50,21 @@
 
     });
 
-    //$('#chkAllBrand').change(function () {
 
-    //    alert($(this).val());
-    //    if ($(this).val() == "True") {
+    $(document).on("change", "#chkAllBrand", function () {
 
-    //    }
+        if ($(this).prop('checked')) {
+            
+            $(".brands").propAttr('checked', 'checked');
 
-    //});
+        }
+        else {
+            $(".brands").removeAttr('checked');
+         
+        }
+
+    });
+
 
     $("#btnLogin").click(function () {
 
@@ -77,10 +85,21 @@
         
         if ($("#frmLogin").valid())
         {
-            $("#frmLogin").attr("action", "/Login/Authenticate");
-            $("#frmLogin").submit();
+            var divHTML = "";
+            divHTML = $('.scroll-bar').html();
+            
+            if (divHTML == "") {
+                $("#lblBranchError").show();
+                
+            }
+            else {
+                $("#lblBranchError").hide();
+               
+                $("#frmLogin").attr("action", "/Login/Authenticate");
+                $("#frmLogin").submit();
+            }
+            
         }
-
 
     });
 
