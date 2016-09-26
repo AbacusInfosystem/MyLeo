@@ -47,6 +47,13 @@ namespace MyLeoRetailer
             defaults: new { controller = "Color", action = "Get_Colors_By_Name_Autocomplete", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "color-2",
+           url: "colour/check-colour-name/{color_Name}",
+           defaults: new { controller = "Color", action = "Check_Existing_Colour_Name", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
             #endregion
 
             #region Category

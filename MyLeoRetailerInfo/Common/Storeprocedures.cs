@@ -68,7 +68,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Color,
             sp_Get_Colors_By_Id,
             Get_Colors_By_Name_Autocomplete_Sp,
-
+            sp_Check_Existing_Colour_Name,//Added by Vinod Mane on 23/09/2016
             //#endregion
 
             //SizeGroup

@@ -46,7 +46,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     prViewModel = (PurchaseReturnViewModel)TempData["prViewModel"];
                 }
 
-              //  prViewModel.PurchaseReturn.Vendors = _vendorRepo.Get_Vendors();
+                prViewModel.PurchaseReturn.Vendors = _vendorRepo.Get_Vendors();
 
                 prViewModel.PurchaseReturn.Transporters = _vendorRepo.Get_Transporters();
 
