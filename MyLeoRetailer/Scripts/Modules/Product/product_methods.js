@@ -47,7 +47,7 @@ function UploadImage() {
         reader.readAsDataURL(file); //reads the data as a URL
 
     } else {
-        preview1.src = "";
+        //preview1.src = "";
     }
     $("#productImage").val("");
 }  

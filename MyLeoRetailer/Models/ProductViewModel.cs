@@ -115,6 +115,8 @@ namespace MyLeoRetailer.Models
             get;
             set;
         }
+
+        public string Description { get; set; } 
     }
 
     public class Filter_Product
