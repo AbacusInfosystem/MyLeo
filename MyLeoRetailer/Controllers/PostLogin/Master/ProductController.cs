@@ -249,7 +249,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                Set_Date_Session(pViewModel.ProductMRP);
+                //string Product_Desc = pViewModel.ProductMRP.Description;
+                //Set_Date_Session(pViewModel.ProductMRP);
 
                 _ProductRepo.Insert_Product_MRP(pViewModel.Colors);//, pViewModel.ProductMRP);
 
