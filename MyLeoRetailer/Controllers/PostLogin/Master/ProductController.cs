@@ -128,11 +128,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 dataOperator = DataOperator.Like.ToString();// +"," + DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
 
-                pViewModel.Query_Detail = Set_Query_Details(false, "Center_Size,Size_Difference,Product_Id,Size_Group_Id", "", "Product", "Article_No", filter, dataOperator); // Set query for grid
+                pViewModel.Query_Detail = Set_Query_Details(false, "Article_No,Brand_Name,Category,Sub_Category,Product_Id,Size_Group_Id", "", "VProduct_Brand_Category_SubC_Color", "Article_No", filter, dataOperator); // Set query for grid
 
                 pager = pViewModel.Grid_Detail.Pager;
 
-                pViewModel.Grid_Detail = Set_Grid_Details(false, "Center_Size,Size_Difference", "Product_Id,Size_Group_Id"); // Set grid info for front end listing
+                pViewModel.Grid_Detail = Set_Grid_Details(false, "Article_No,Brand_Name,Category,Sub_Category", "Product_Id,Size_Group_Id"); // Set grid info for front end listing
 
                 pViewModel.Grid_Detail.Records = _ProductRepo.Get_Products(pViewModel.Query_Detail); // Call repo method 
 
