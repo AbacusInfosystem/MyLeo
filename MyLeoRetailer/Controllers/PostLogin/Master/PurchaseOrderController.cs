@@ -254,8 +254,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 
                 poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
 
-                //int amount = Convert.ToInt32(poViewModel.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount));
-
                 poViewModel.PurchaseOrder.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(poViewModel.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount));
 
             }
@@ -268,6 +266,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("PrintableView", poViewModel);
         }
 
+        //demo
+        public ActionResult SendEmail(PurchaseOrderViewModel poViewModel)
+        {
+            try
+            {
+                _purchaseorderRepo.SendDemoEmail();
+            }
+            catch(Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details : " + ex.ToString());
+            }
+            return RedirectToAction("Get_Purchase_Order_Details");
+        }
 
     }
 

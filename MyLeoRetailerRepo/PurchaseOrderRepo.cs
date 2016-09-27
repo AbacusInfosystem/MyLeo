@@ -1004,6 +1004,18 @@ namespace MyLeoRetailerRepo
             return sizes;
         }
 
+        //demo
+        public void SendDemoEmail()
+        {
+            SendEmailInfo emailData = new SendEmailInfo();
+
+            emailData.ID = 1;
+            emailData.To_Email_Id = "sanchitasawant1493@gmail.com";
+            emailData.Subject = "Myleo Demo Email";
+            emailData.Body = "Hi Sanchita, These demo email from MyLeo of Purchase Order.";
+
+            MyLeoRetailerRepo.Common.CommonMethods.SendMail(emailData);
+        }
 
     }
 }
