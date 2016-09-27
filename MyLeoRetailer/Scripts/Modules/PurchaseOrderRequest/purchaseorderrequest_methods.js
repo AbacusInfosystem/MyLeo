@@ -284,7 +284,7 @@ function AddPurchaseOrderRequestDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Colour_Name' value='' id='textColour_Name_" + i + "' />";
+    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Colour_Id' value='' id='textColour_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -494,11 +494,7 @@ function AddPurchaseOrderRequestDetails() {
     $("#textEnd_Size_" + i).append($optionss);
 
 
-    $("#textColour_Name_" + i).rules("add", { required: true, messages: { required: "Color is required." } });
-    $("#textStart_Size_" + i).rules("add", { required: true, messages: { required: "Start size is required.", } });
-    $("#textEnd_Size_" + i).rules("add", { required: true, messages: { required: "End size is required.", } });
-
-
+    Add_Validation(i);
     
 
 }
@@ -562,7 +558,7 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Colour_Name' value='' id='textColour_Name_" + i + "' />";
+    tblHtml += "<input type='text' class='form-control' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Colour_Id' value='' id='textColour_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -759,9 +755,7 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
     $("#textEnd_Size_" + i).append($optionss);
 
 
-    $("#textColour_Name_" + i).rules("add", { required: true, messages: { required: "Color is required." } });
-    $("#textStart_Size_" + i).rules("add", { required: true, messages: { required: "Start size is required.", } });
-    $("#textEnd_Size_" + i).rules("add", { required: true, messages: { required: "End size is required.", } });
+    Add_Validation(i);
 
 }
 
@@ -919,6 +913,14 @@ function Enable_Size_Quantity(i) {
 
 }
 
+function Add_Validation(i) {
+
+    $("#textColour_Id_" + i).rules("add", { required: true, messages: { required: "Color is required." } });
+    $("#textStart_Size_" + i).rules("add", { required: true, messages: { required: "Start size is required.", } });
+    $("#textEnd_Size_" + i).rules("add", { required: true, messages: { required: "End size is required.", } });
+
+}
+
 function Show_Button() {
     document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = false;
 }
@@ -960,9 +962,9 @@ function ReArrangePurchaseOrderRequestDetailsData() {
                 $(newTR).find("[id^='hdnArticle_No_']").attr("name", "PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Article_No");
             }
 
-            if ($(newTR).find("[id^='textColour_Name_']").length > 0) {
-                $(newTR).find("[id^='textColour_Name_']")[0].id = "textColour_Name_" + i;
-                $(newTR).find("[id^='textColour_Name_']").attr("name", "PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Colour_Name");
+            if ($(newTR).find("[id^='textColour_Id_']").length > 0) {
+                $(newTR).find("[id^='textColour_Id_']")[0].id = "textColour_Id_" + i;
+                $(newTR).find("[id^='textColour_Id_']").attr("name", "PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Colour_Id");
             }
 
             if ($(newTR).find("[id^='textBrand_Name_']").length > 0) {

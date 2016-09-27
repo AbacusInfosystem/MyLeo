@@ -8,6 +8,12 @@
             document.getElementById('btnEditPurchaseOrderRequest').disabled = false;
         }
     });
+
+    $("#drpVendor_Id").change(function () {
+
+        Get_Purchase_Order_Requests();
+
+    });
      
     $("#btnCreatePurchaseOrderRequest").click(function () {
         $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Index");

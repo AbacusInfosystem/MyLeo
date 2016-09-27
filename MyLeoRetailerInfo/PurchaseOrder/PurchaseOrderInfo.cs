@@ -73,6 +73,8 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public string Item_Ids { get; set; }
 
+        public string Branch_Ids { get; set; }
+
               
 		public int Purchase_Order_Id { get; set; }
 
@@ -84,11 +86,17 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public int Vendor_Id { get; set; }
 
+        public string Vendor_Name { get; set; }
+
         public int Agent_Id { get; set; }
+
+        public string Agent_Name { get; set; }
 
         public string Shipping_Address { get; set; }
 
         public int Transporter_Id { get; set; }
+
+        public string Transporter_Name { get; set; }
 
         public DateTime Start_Supply_Date { get; set; }
 
@@ -111,6 +119,8 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public int Purchase_Order_Item_Id { get; set; }
 
         public string Article_No { get; set; }
+
+        public int Colour_Id { get; set; }
 
         public string Colour_Name { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
-using MyLeoRetailer.Models;
+using MyLeoRetailer.Models.Transaction;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -13,7 +14,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MyLeoRetailer.Controllers.PostLogin.Master
+namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 {
     public class PurchaseOrderController : BaseController
     {
@@ -49,7 +50,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 
                 poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
-                //poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
+                poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
 
                 poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
 
@@ -88,19 +89,31 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {                
                 Set_Date_Session(poViewModel.PurchaseOrder);
 
-                poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                foreach (var item in poViewModel.PurchaseOrder.PurchaseOrders)
+                {
+                    Set_Date_Session(item);
+                }
 
-                poViewModel.PurchaseOrder.Created_By = poViewModel.Cookies.User_Id;
+                if (poViewModel.PurchaseOrder.Purchase_Order_Id == 0)
+                {
+                    //poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                poViewModel.PurchaseOrder.Created_Date = DateTime.Now;
+                    //poViewModel.PurchaseOrder.Created_By = poViewModel.Cookies.User_Id;
 
-                poViewModel.PurchaseOrder.Updated_By = poViewModel.Cookies.User_Id;
+                    //poViewModel.PurchaseOrder.Created_Date = DateTime.Now;
 
-                poViewModel.PurchaseOrder.Updated_Date = DateTime.Now;
+                    //poViewModel.PurchaseOrder.Updated_By = poViewModel.Cookies.User_Id;
 
-                _purchaseorderRepo.Insert_Purchase_Order(poViewModel.PurchaseOrder);
+                    //poViewModel.PurchaseOrder.Updated_Date = DateTime.Now;
 
-                poViewModel.FriendlyMessages.Add(MessageStore.Get("PO01"));
+                    _purchaseorderRepo.Insert_Purchase_Order(poViewModel.PurchaseOrder);
+
+                    poViewModel.FriendlyMessages.Add(MessageStore.Get("PO01"));
+                }
+                else
+                {
+
+                }
             }
             catch (Exception ex)
             {
@@ -111,41 +124,67 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return RedirectToAction("Search", poViewModel);
         }
-
+                
         public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
         {
-            string filter = "";
-
-            string dataOperator = "";
-
-            Pagination_Info pager = new Pagination_Info();
-
             try
             {
+                poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                filter = poViewModel.Filter.Purchase_Order_No;// Set filter comma seprated
+                Pagination_Info pager = new Pagination_Info();
 
-                dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+                pager = poViewModel.Pager;
 
-                poViewModel.Query_Detail = Set_Query_Details(true, "Purchase_Order_No,Purchase_Order_Id", "", "Purchase_Order", "Purchase_Order_No", filter, dataOperator); // Set query for grid
+                poViewModel.PurchaseOrder.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Order(ref pager, poViewModel.Filter.Purchase_Order_No);
 
-                pager = poViewModel.Grid_Detail.Pager;
+                poViewModel.Pager = pager;
 
-                poViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Order_No", "Purchase_Order_Id"); // Set grid info for front end listing
-
-                poViewModel.Grid_Detail.Records = _purchaseorderRepo.Get_Purchase_Orders(poViewModel.Query_Detail); // Call repo method 
-
-                Set_Pagination(pager, poViewModel.Grid_Detail); // set pagination for grid
-
-                poViewModel.Grid_Detail.Pager = pager;
+                poViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(poViewModel.Pager.TotalRecords, poViewModel.Pager.CurrentPage, poViewModel.Pager.PageSize, poViewModel.Pager.PageLimit, poViewModel.Pager.StartPage, poViewModel.Pager.EndPage, poViewModel.Pager.IsFirst, poViewModel.Pager.IsPrevious, poViewModel.Pager.IsNext, poViewModel.Pager.IsLast, poViewModel.Pager.IsPageAndRecordLabel, poViewModel.Pager.DivObject, poViewModel.Pager.CallBackMethod);
             }
             catch (Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Requests : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
+
+        //public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
+        //{
+        //    string filter = "";
+
+        //    string dataOperator = "";
+
+        //    Pagination_Info pager = new Pagination_Info();
+
+        //    try
+        //    {
+
+        //        filter = poViewModel.Filter.Purchase_Order_No;// Set filter comma seprated
+
+        //        dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+
+        //        poViewModel.Query_Detail = Set_Query_Details(true, "Purchase_Order_No,Purchase_Order_Id", "", "Purchase_Order", "Purchase_Order_No", filter, dataOperator); // Set query for grid
+
+        //        pager = poViewModel.Grid_Detail.Pager;
+
+        //        poViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Order_No", "Purchase_Order_Id"); // Set grid info for front end listing
+
+        //        poViewModel.Grid_Detail.Records = _purchaseorderRepo.Get_Purchase_Orders(poViewModel.Query_Detail); // Call repo method 
+
+        //        Set_Pagination(pager, poViewModel.Grid_Detail); // set pagination for grid
+
+        //        poViewModel.Grid_Detail.Pager = pager;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(poViewModel));
+        //}
 
         public JsonResult Get_Consolidate_Purchase_Orders(int Vendor_Id)
         {

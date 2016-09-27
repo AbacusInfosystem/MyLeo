@@ -10,7 +10,7 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
 {
     public class PurchaseInvoiceInfo
     {
-        public PurchaseInvoiceInfo()
+       public PurchaseInvoiceInfo()
         {
             PurchaseInvoices = new List<PurchaseInvoiceInfo>();
 
@@ -35,6 +35,8 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
         public string Purchase_Invoice_No { get; set; }
 
         public int Vendor_Id { get; set; }
+
+        public string Vendor_Name { get; set; }
 
         public string Vendor_Address { get; set; }
 
@@ -81,6 +83,8 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
         public decimal Discount_Percentage_Before_Due_Date { get; set; }
 
         public int Transporter_Id { get; set; }
+
+        public string Transporter_Name { get; set; }
 
         public string Lr_No { get; set; }
 

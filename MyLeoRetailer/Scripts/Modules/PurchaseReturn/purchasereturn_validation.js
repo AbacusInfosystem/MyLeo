@@ -29,6 +29,10 @@
             "PurchaseReturn.PurchaseReturns[0].Quantity": {
                 required: true,
                 digits: true
+            },
+
+            "PurchaseReturn.PurchaseReturns[0].SKU_Code": {
+                required: true
             }
 
         },
@@ -62,10 +66,30 @@
             "PurchaseReturn.PurchaseReturns[0].Quantity": {
                 required: "Quantity is required.",
                 digits: "Enter only digits"
-            }            
+            },
+
+            "PurchaseReturn.PurchaseReturns[0].SKU_Code": {
+                required: "SKU code is required.",
+            }
+
         }
     });
 
-    $("#textSKU_No_0").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+        var result = true;
+        var id = $(element).attr('id')
+        id = id.replace("textSKU_No_", "");
+
+        $("#tblPurchaseReturnItems").find("[id^='PurchaseReturnItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+                result = false;
+            }
+        });
+
+        return result;
+    }, "Already mapped.");
+
+    //$("#textSKU_No_0").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
 
 });

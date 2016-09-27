@@ -10,6 +10,8 @@ using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.PurchaseReturn;
+using System.Transactions;
+using MyLeoRetailerRepo.Common;
 
 
 namespace MyLeoRetailerRepo
@@ -137,6 +139,35 @@ namespace MyLeoRetailerRepo
             return sqlParams;
         }
 
+        private List<SqlParameter> Set_Values_In_Purchase_Invoice_Item(PurchaseInvoiceInfo item)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", item.Purchase_Invoice_Id));
+
+            sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
+
+            sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+
+            sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
+
+            sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
+
+            sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+
+            sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
+
+            sqlParams.Add(new SqlParameter("@Created_By", item.Created_By));
+
+            sqlParams.Add(new SqlParameter("@Created_Date", item.Created_Date));
+
+            sqlParams.Add(new SqlParameter("@Updated_By", item.Updated_By));
+
+            sqlParams.Add(new SqlParameter("@Updated_Date", item.Updated_Date));
+
+            return sqlParams;
+        }
+
         private PurchaseInvoiceInfo Get_Purchase_Invoice_Items_By_SKU_Values(DataRow dr)
         {
             PurchaseInvoiceInfo PurchaseInvoice = new PurchaseInvoiceInfo();
@@ -238,46 +269,77 @@ namespace MyLeoRetailerRepo
 
         public int Insert_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
         {
-
-            PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
-
-            foreach (var item in PurchaseInvoice.PurchaseInvoices)
+            using (TransactionScope scope = new TransactionScope())
             {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
+                PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
 
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+                foreach (var item in PurchaseInvoice.PurchaseInvoices)
+                {
+                    List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
+                    item.Purchase_Invoice_Id = PurchaseInvoice.Purchase_Invoice_Id;                    
 
-                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+                    sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice_Item(item), Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
+                }
+                scope.Complete();
 
-                sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
-
-                sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
-
-                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
-
-                sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
-               
-                sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
-
-                sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
-
-                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
-
-                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
-
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
             }
 
             return PurchaseInvoice.Purchase_Invoice_Id;
 
         }
 
-        public DataTable Get_Purchase_Invoices(QueryInfo query_Details)
+        private PurchaseInvoiceInfo Get_Purchase_Invoice_Value(DataRow dr)
         {
-            return sqlHelper.Get_Table_With_Where(query_Details);
+            PurchaseInvoiceInfo PurchaseInvoice = new PurchaseInvoiceInfo();
+
+            PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+
+            PurchaseInvoice.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+
+            PurchaseInvoice.Purchase_Invoice_Date = Convert.ToDateTime(dr["Purchase_Invoice_Date"]);
+
+            PurchaseInvoice.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+            PurchaseInvoice.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+            PurchaseInvoice.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+            PurchaseInvoice.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+            PurchaseInvoice.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+            PurchaseInvoice.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+            PurchaseInvoice.Challan_No = Convert.ToString(dr["Challan_No"]);
+
+            PurchaseInvoice.Lr_No = Convert.ToString(dr["Lr_No"]);
+
+            return PurchaseInvoice;
         }
+
+        public List<PurchaseInvoiceInfo> Get_Purchase_Invoices(ref Pagination_Info Pager, string Purchase_Invoice_No)
+        {
+            List<PurchaseInvoiceInfo> PurchaseInvoices = new List<PurchaseInvoiceInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Invoice_No", Purchase_Invoice_No));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Invoices.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
+            {
+                PurchaseInvoices.Add(Get_Purchase_Invoice_Value(dr));
+            }
+
+            return PurchaseInvoices;
+        }
+
+        //public DataTable Get_Purchase_Invoices(QueryInfo query_Details)
+        //{
+        //    return sqlHelper.Get_Table_With_Where(query_Details);
+        //}
 
         public List<PurchaseInvoiceInfo> Get_Purchase_Invoice_No_By_Id(int Vendor_Id)
         {
