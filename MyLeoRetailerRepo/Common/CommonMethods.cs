@@ -46,6 +46,12 @@ namespace MyLeoRetailerRepo.Common
 
             SmtpClient SmtpServer = new SmtpClient();
 
+            foreach (string str in sendEmail.AttachmentPath)
+            {
+                System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(str);
+                mail.Attachments.Add(attachment);
+            }
+
             if (!string.IsNullOrEmpty(sendEmail.To_Email_Id))
             {
                 if (sendEmail.To_Email_Id.Contains(','))

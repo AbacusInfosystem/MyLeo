@@ -1209,6 +1209,7 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
+    <Folder Include="UploadFiles\" />
     <Folder Include="Views\PostLogin\Dashboard\" />
   </ItemGroup>
   <ItemGroup>

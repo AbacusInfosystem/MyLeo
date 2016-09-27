@@ -9,6 +9,7 @@ using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -288,6 +289,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
+                if (TempData["poViewModel"] != null)
+                {
+                    poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
+                }
+
                 poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
                 
                 poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
@@ -304,19 +310,58 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("PrintableView", poViewModel);
         }
 
-        //demo
-        public ActionResult SendEmail(PurchaseOrderViewModel poViewModel)
+
+        public ActionResult Send_Purchase_Order_Invoice(PurchaseOrderViewModel poViewModel)
         {
             try
             {
-                _purchaseorderRepo.SendDemoEmail();
+                if (poViewModel.PurchaseOrder.Purchase_Order_Id != 0)
+                {
+                    poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
+                    poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
+                    poViewModel.PurchaseOrder.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(poViewModel.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount));
+
+                    MemoryStream attachment = _purchaseorderRepo.Create_Purchase_Order_Invoice_PDf(poViewModel.PurchaseOrder);
+
+                    var FileExtension = ".pdf";
+
+                    var fileName = "Purchase_Order_Invoice_" + poViewModel.PurchaseOrder.Purchase_Order_Id + "_" + poViewModel.PurchaseOrder.Purchase_Order_No;
+
+                    string DirectoryPath = "Invoice";
+
+                    bool directoryExists = System.IO.Directory.Exists(Server.MapPath("/UploadFiles/" + DirectoryPath));
+
+                    if (!directoryExists)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath("/UploadFiles/" + DirectoryPath));
+                    }
+
+                    string ServerPath = Server.MapPath("/UploadFiles/" + DirectoryPath + "//").ToString();
+                    string folderPath = (ServerPath + fileName + FileExtension);
+
+                    if (System.IO.File.Exists(folderPath))
+                    {
+                        System.IO.File.Delete(folderPath);
+                    }
+
+                    System.IO.File.WriteAllBytes(folderPath, attachment.ToArray());
+
+                    _purchaseorderRepo.SendDemoEmail(poViewModel.PurchaseOrder, folderPath);
+
+                    poViewModel.FriendlyMessages.Add(MessageStore.Get("PO04"));
+
+                }
+                
             }
             catch(Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details : " + ex.ToString());
+                Logger.Error("PurchaseOrder Controller - Send_Purchase_Order_Invoice : " + ex.ToString());
             }
+
+            TempData["poViewModel"] = (PurchaseOrderViewModel)poViewModel;
+
             return RedirectToAction("Get_Purchase_Order_Details");
         }
 
