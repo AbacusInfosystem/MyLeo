@@ -18,5 +18,7 @@ namespace MyLeoRetailerInfo.Common
 
         public string Body { get; set; }
 
+        public List<string> AttachmentPath { get; set; }
+
     }
 }
