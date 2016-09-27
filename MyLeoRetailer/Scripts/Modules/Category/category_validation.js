@@ -17,10 +17,10 @@ $(document).ready(function () {
 
 	$("#frmCategory").validate({
 		rules: {
-			"Category.Category": { required: true }, 
+		    "Category.Category": { required: true, validate_Category: true },
  
 			"Category.Category_Code": { required: true },
-            "Category.Category": { required: true, validate_Category: true },
+          //  "Category.Category": { required: true, validate_Category: true },
 		},
 	 
 		messages: {

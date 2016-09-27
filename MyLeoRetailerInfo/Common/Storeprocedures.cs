@@ -57,6 +57,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Tax_By_Id,
             sp_drp_Get_VAT,
             sp_drp_Get_CST,
+            sp_Check_Existing_Tax_Name, //Added by Vinod Mane on 27/09/2016
 
             //Vendor Contact
             sp_Insert_Vendor_Contact,
@@ -85,6 +86,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
             sp_Get_SizeGroup_By_Id,
+            sp_Check_Existing_Size_Group_Name, //Added by Vinod Mane on 27/09/2016
 
             #region Employee
 

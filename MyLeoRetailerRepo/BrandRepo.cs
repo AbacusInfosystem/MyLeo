@@ -122,11 +122,17 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Is_Active"))
                 {
                     Brand.IsActive = Convert.ToInt32(dr["Is_Active"]);  
-                }
+                }                
                 if (!dr.IsNull("Brand_Code"))
                 {
                     Brand.Brand_Code = Convert.ToString(dr["Brand_Code"]);
                 }
+                //Added by Vinod Mane on 26/09/2016
+                if (!dr.IsNull("Brand_Name"))
+                {
+                    Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+                }
+                //End
             }
             return Brand;    
         }

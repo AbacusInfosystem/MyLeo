@@ -96,7 +96,31 @@ namespace MyLeoRetailer
 
             #endregion
 
+            #region Size
 
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "size-1",
+           url: "size/check-size-group-name/{size_group_name}",
+           defaults: new { controller = "Size", action = "Check_Existing_Size_Group_Name", size_group_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+            #endregion
+
+            #region Tax
+          
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "Tax-1",
+           url: "Tax/check-tax-name/{Tax_name}",
+           defaults: new { controller = "Tax", action = "Check_Existing_Tax_name", Tax_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+           
+
+            #endregion
 
             #region Employee
 

@@ -135,6 +135,7 @@ function Get_Sub_Category_By_Id(obj)
 
 	        var obj = $.parseJSON(response);
 
+	        $("[name='SubCategory.Sub_Category']").val(obj.SubCategory.Category);
 	        $("[name='SubCategory.Sub_Category_Code']").val(obj.SubCategory.Sub_Category_Code);
 
 	        if (obj.SubCategory.IsActive == true) {
@@ -144,11 +145,9 @@ function Get_Sub_Category_By_Id(obj)
 	        else {
 	            $("[name='SubCategory.IsActive']").val(0);
 	            document.getElementById('SubCateFlag').checked = false;
-	        }
+	        }	        
 
-	        $("[name='SubCategory.Sub_Category']").val(obj.SubCategory.Sub_Category);
-
-	        $("#hdnSub_Category").val(obj.SubCategory.Sub_Category);//Added by Vinod Mane on 26/09/2016
+	        $("#hdnSub_Category").val(obj.SubCategory.Category);//Added by Vinod Mane on 26/09/2016
 
 	    }
 	});

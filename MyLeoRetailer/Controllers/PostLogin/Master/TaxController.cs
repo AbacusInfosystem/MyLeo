@@ -169,5 +169,22 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(tViewModel));
         }
 
+        //Added By Vinod Mane on 27/09/2016
+        public JsonResult Check_Existing_Tax_name(string Tax_name)
+        {
+            TaxRepo tRepo = new TaxRepo();
+            bool check = false;
+            try
+            {
+                check = tRepo.Check_Existing_Tax_name(Tax_name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Tax Controller - Check_Existing_Tax_name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
     }
 }
