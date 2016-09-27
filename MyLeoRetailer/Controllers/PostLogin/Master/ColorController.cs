@@ -58,7 +58,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                     cViewModel.Color.Colour_Id = cRepo.Insert_Color(cViewModel.Color);
 
-                    cViewModel.FriendlyMessages.Add(MessageStore.Get("COL"));
+                    cViewModel.FriendlyMessages.Add(MessageStore.Get("COL1"));
                 }
                 else
                 {

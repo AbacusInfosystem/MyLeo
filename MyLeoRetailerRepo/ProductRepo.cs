@@ -37,7 +37,7 @@ namespace MyLeoRetailerRepo
                 {
                     foreach (var itm in item.ProductMRP_N_WSR)
                     {
-                        Set_Date_Session(itm);
+                        Set_Date_Session(itm); 
                         if (itm.SKU_Code == null)
                         {
                             itm.SKU_Code = Generate_SKU_Code(itm);
@@ -59,8 +59,10 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Size_Id", Productmrp.Size_Id));
             sqlParams.Add(new SqlParameter("@Colour_Id", Productmrp.Colour_Id));
             sqlParams.Add(new SqlParameter("@Purchase_Price", Productmrp.Purchase_Price));
+            //sqlParams.Add(new SqlParameter("@Purchase_Price", Productmrp.Purchase_Price));
             sqlParams.Add(new SqlParameter("@MRP_Price", Productmrp.MRP_Price));
             sqlParams.Add(new SqlParameter("@Vendor_Color_Code", Productmrp.Vendor_Color_Code));
+            sqlParams.Add(new SqlParameter("@Description", Productmrp.Description));
             sqlParams.Add(new SqlParameter("@Updated_Date", Productmrp.Updated_Date));
             sqlParams.Add(new SqlParameter("@Updated_By", Productmrp.Updated_By));
             return sqlParams;
@@ -108,6 +110,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@MRP_Price", Productmrp.MRP_Price));
             sqlParams.Add(new SqlParameter("@SKU_Code", Productmrp.SKU_Code));
             sqlParams.Add(new SqlParameter("@Vendor_Color_Code", Productmrp.Vendor_Color_Code));
+            sqlParams.Add(new SqlParameter("@Description", Productmrp.Description));
             sqlParams.Add(new SqlParameter("@Created_Date", Productmrp.Created_Date));
             sqlParams.Add(new SqlParameter("@Created_By", Productmrp.Created_By));
             sqlParams.Add(new SqlParameter("@Updated_Date", Productmrp.Updated_Date));
@@ -407,7 +410,10 @@ namespace MyLeoRetailerRepo
 
             ProductMRP.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
             ProductMRP.Colour = Convert.ToString(dr["Colour_Name"]);
-            ProductMRP.Vendor_Color_Code = Convert.ToString(dr["Vendor_Color_code"]);
+            if (dr["Vendor_Color_code"] != null)
+                ProductMRP.Vendor_Color_Code = Convert.ToString(dr["Vendor_Color_code"]);
+            if (dr["Description"] != null)
+                ProductMRP.Description = Convert.ToString(dr["Description"]);
             return ProductMRP;
         }
 

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using MyLeoRetailerHelper.Logging;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
@@ -116,6 +117,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(bViewModel));
         }
+
+        //Added By Vinod Mane on 26/09/2016
+        public JsonResult Check_Existing_Brand_Name(string brand_Name)
+        {
+            bool check = false;
+            try
+            {
+                check = bRepo.Check_Existing_Brand_Name(brand_Name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Brand Controller - Check_Existing_Brand_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
 
     }
 }

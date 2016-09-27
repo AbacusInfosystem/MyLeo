@@ -122,11 +122,17 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Is_Active"))
                 {
                     Brand.IsActive = Convert.ToInt32(dr["Is_Active"]);  
-                }
+                }                
                 if (!dr.IsNull("Brand_Code"))
                 {
                     Brand.Brand_Code = Convert.ToString(dr["Brand_Code"]);
                 }
+                //Added by Vinod Mane on 26/09/2016
+                if (!dr.IsNull("Brand_Name"))
+                {
+                    Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+                }
+                //End
             }
             return Brand;    
         }
@@ -154,5 +160,33 @@ namespace MyLeoRetailerRepo
                 Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
             return Brand;
         }
+
+        //Added By Vinod Mane on 26/09/2016
+        public bool Check_Existing_Brand_Name(string Brand_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Brand_Name", Brand_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Brand_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_brand"]);
+                }
+            }
+
+            return check;
+        }
+        //End
+
 	}
 }

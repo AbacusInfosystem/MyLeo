@@ -16,6 +16,8 @@ namespace MyLeoRetailerInfo.Common
 
             sp_Get_Category,
             sp_drp_Get_Brands,
+            sp_Check_Existing_Category_Name,//Added by vinod Mane on 26/09/2016
+            sp_Check_Existing_Sub_Category_Name,//Added by vinod Mane on 26/09/2016
 
             //#endregion
 
@@ -45,6 +47,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Brand_By_Id,
             Get_Brands_By_Name_Autocomplete_Sp,
             Get_Brands_Sp,
+            sp_Check_Existing_Brand_Name,//Added by vinod mane on 26/09/2016
 
             #endregion
 
@@ -54,6 +57,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Tax_By_Id,
             sp_drp_Get_VAT,
             sp_drp_Get_CST,
+            sp_Check_Existing_Tax_Name, //Added by Vinod Mane on 27/09/2016
 
             //Vendor Contact
             sp_Insert_Vendor_Contact,
@@ -82,6 +86,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
             sp_Get_SizeGroup_By_Id,
+            sp_Check_Existing_Size_Group_Name, //Added by Vinod Mane on 27/09/2016
 
             #region Employee
 
@@ -332,6 +337,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Replacement,
         sp_Insert_Replacement_Item,
   
+            //Product warehouse
+        sp_Insert_Product_Warehouse,
 
     }
 
