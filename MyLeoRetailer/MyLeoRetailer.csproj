@@ -182,6 +182,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderRequestController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ProductWarehouseController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnRequestController.cs" />
     <Compile Include="Filters\AuthorizeUserAttribute.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ReceivableController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ReplacementController.cs" />
     <Compile Include="Controllers\PostLogin\Master\RoleController.cs" />
     <Compile Include="Controllers\PostLogin\Master\SizeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TagController.cs" />
@@ -233,8 +235,10 @@
     <Compile Include="Models\Transaction\PurchaseInvoiceViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseOrderRequestViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseOrderViewModel.cs" />
+    <Compile Include="Models\ProductWarehouseViewModel.cs" />
     <Compile Include="Models\ReceivableViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseReturnViewModel.cs" />
+    <Compile Include="Models\ReplacementViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesInvoiceViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
@@ -1036,6 +1040,8 @@
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
+    <Content Include="Scripts\Modules\ProductWarehouse\search_ProductWarehouse_event.js" />
+    <Content Include="Scripts\Modules\ProductWarehouse\search_ProductWarehouse_method.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_events.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_methods.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_validation.js" />
@@ -1063,6 +1069,10 @@
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_methods.js" />
     <Content Include="Scripts\Modules\Receivable\Receivable_events.js" />
     <Content Include="Scripts\Modules\Receivable\Receivable_methods.js" />
+    <Content Include="Scripts\Modules\Replacement\Replacement_event.js" />
+    <Content Include="Scripts\Modules\Replacement\Replacement_method.js" />
+    <Content Include="Scripts\Modules\Replacement\search_Replacement_event.js" />
+    <Content Include="Scripts\Modules\Replacement\search_Replacement_method.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
@@ -1160,6 +1170,9 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Search.cshtml" />
+    
+    <Content Include="Views\PostLogin\Master\PurchaseOrder\PrintableView.cshtml" />
+   
     <Content Include="Views\PostLogin\SalesOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
@@ -1178,6 +1191,10 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Invoice.cshtml" />
+    <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
+    <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

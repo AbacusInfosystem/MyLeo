@@ -86,6 +86,8 @@ namespace MyLeoRetailerInfo.Product
         public string Size_Name { get; set; } 
 
         public string Vendor_Color_Code { get; set; }
+
+        public string Description { get; set; } 
          
         public int Colour_Id { get; set; }
 

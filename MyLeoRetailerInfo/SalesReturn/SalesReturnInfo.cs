@@ -28,6 +28,13 @@ namespace MyLeoRetailerInfo.SalesReturn
 
         //END
 
+
+        //HIDDEN FIELD
+
+        public string Mobile1 { get; set; }
+
+        //END
+
         public string Sales_Return_No { get; set; }
 
         //public int Sales_Invoice_Id { get; set; }
@@ -92,6 +99,8 @@ namespace MyLeoRetailerInfo.SalesReturn
         public decimal Total_Amount { get; set; }
 
         public string Return_Reason { get; set; }
+
+        public bool CreateCustomerFlag { get; set; }
 
         //End
 

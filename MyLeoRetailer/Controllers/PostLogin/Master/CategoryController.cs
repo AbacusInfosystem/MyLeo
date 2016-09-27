@@ -30,9 +30,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         [AuthorizeUserAttribute(AppFunction.Category_Management_Access)]
-		public ActionResult Index()
+        public ActionResult Index(CategoryViewModel cViewModel)
         {
-			return View();
+			return View("Index",cViewModel);
         }
 
 		public JsonResult Insert_Category(CategoryViewModel cViewModel)
@@ -277,6 +277,38 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(sViewModel));
         }
+
+        //Added By Vinod Mane on 26/09/2016
+        public JsonResult Check_Existing_Category_Name(string category_Name)
+        {
+            bool check = false;
+            try
+            {
+                check = cRepo.Check_Existing_Category_Name(category_Name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Category Controller - Check_Existing_CategoryName : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
+        //Added By Vinod Mane on 26/09/2016
+        public JsonResult Check_Existing_Sub_Category_Name(string sub_category_Name)
+        {
+            bool check = false;
+            try
+            {
+                check = cRepo.Check_Existing_Sub_Category_Name(sub_category_Name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Sub Category Controller - Check_Existing_Sub_Category_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
 
     }
 }

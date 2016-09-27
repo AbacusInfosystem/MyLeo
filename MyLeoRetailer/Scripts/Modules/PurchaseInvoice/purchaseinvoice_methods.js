@@ -23,7 +23,7 @@
             $('#hdf_hdn_Tax_Percentage').val(data.Tax_Percentage);
 
             $('#textTaxPercentage_0').val(data.Tax_Percentage);
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         }
     });
 }
@@ -214,7 +214,6 @@ function CalculateTax() {
 
     $("#textNETAmount_0").val(Math.round(netAmt));
 
-
 }
 
 function CalculateDiscount() {
@@ -303,11 +302,11 @@ function ReArrangePurchaseInvoiceDetailsData() {
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
             }
 
-            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
-            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-            //    $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
-            //    $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
-            //}
+            if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+                $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
+                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+            }
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;

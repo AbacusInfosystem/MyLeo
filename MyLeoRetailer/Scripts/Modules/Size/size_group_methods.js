@@ -212,7 +212,7 @@ function Reset_SizeGroup() {
     $("[name='SizeGroup.Size_Group_Name']").val("");
 
     $("[name='SizeGroup.Size_Group_Id']").val("");
-
+    $("#hdnSizeGroupName").val("");//Added By Vinod Mane on 27/09/2016
     $("#divSize").hide();
 }
 
@@ -260,6 +260,7 @@ function Get_SizeGroup_By_Id(obj) {
             //End
 
             $("[name='SizeGroup.Size_Group_Name']").val(obj.SizeGroup.Size_Group_Name);
+            $("#hdnSizeGroupName").val(obj.SizeGroup.Size_Group_Name);//Added By Vinod Mane on 27/09/2016
 
             $("[name='SizeGroup.Size_Group_Id']").val(obj.SizeGroup.Size_Group_Id);
 

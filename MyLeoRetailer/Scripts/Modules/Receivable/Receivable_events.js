@@ -2,6 +2,12 @@
 
 $(function () {
 
+    if ($("#hdnPayment_Status1").val() == 1)
+    {
+        $("#btnSavePay").hide();
+
+    }
+
     $("#btnSearchReceivable").click(function () {
 
         $("#frmReceivable").attr("action", "/Receivable/Get_Receivable");

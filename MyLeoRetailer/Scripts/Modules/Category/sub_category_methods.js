@@ -50,7 +50,9 @@ function Save_Sub_Category()
 		{
 			SubCategory: {
 
-				Sub_Category: $("[name='SubCategory.Sub_Category']").val(),
+			    Sub_Category: $("[name='SubCategory.Sub_Category']").val(),
+
+			    Sub_Category_Code: $("[name='SubCategory.Sub_Category_Code']").val(),
 
 				Sub_Category_Id: $("[name='SubCategory.Sub_Category_Id']").val(),
 
@@ -100,9 +102,12 @@ function Save_Sub_Category()
 
 function Reset_Sub_Category()
 {
-	$("[name='SubCategory.Sub_Category']").val("");
+    $("[name='SubCategory.Sub_Category']").val("");
+
+    $("[name='SubCategory.Sub_Category_Code']").val("");
 
 	$("[name='SubCategory.Sub_Category_Id']").val("");
+	$("#hdnSub_Category").val("");//Added by vinod Mane on 26/09/2016
 }
 
 function Get_Sub_Category_By_Id(obj)
@@ -130,6 +135,9 @@ function Get_Sub_Category_By_Id(obj)
 
 	        var obj = $.parseJSON(response);
 
+	        $("[name='SubCategory.Sub_Category']").val(obj.SubCategory.Category);
+	        $("[name='SubCategory.Sub_Category_Code']").val(obj.SubCategory.Sub_Category_Code);
+
 	        if (obj.SubCategory.IsActive == true) {
 	            $("[name='SubCategory.IsActive']").val(1);
 	            document.getElementById('SubCateFlag').checked = true;
@@ -137,7 +145,9 @@ function Get_Sub_Category_By_Id(obj)
 	        else {
 	            $("[name='SubCategory.IsActive']").val(0);
 	            document.getElementById('SubCateFlag').checked = false;
-	        }
+	        }	        
+
+	        $("#hdnSub_Category").val(obj.SubCategory.Category);//Added by Vinod Mane on 26/09/2016
 
 	    }
 	});

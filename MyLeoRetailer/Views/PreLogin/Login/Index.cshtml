@@ -25,6 +25,8 @@
 
     <script type="text/javascript" src="../Content/Atlant/js/plugins/jquery/jquery.min.js"></script>
 
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/generic.custom.validation.js"></script>
 
@@ -64,42 +66,17 @@
                     <div class="col-md-5">
                         <div class="login-title">Select Branch</div>
 
-                        <div class="form-group scroll-bar">
-                            @*<div class="col-md-12">
-                                    <div class="col-md-8">
-                                        <label style="color:white;">Select All</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="switch">
-                                            <input checked value="All" name="Cookies.Branch_Id" type="checkbox">
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                </div>*@
-                            @*@foreach (var item in Model.branch_List)
-                                {
-                                    <div class="col-md-12">
-                                        <div class="col-md-8">
-                                            <label style="color:white;">@item.Branch_Name</label>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="switch">
-                                                <input checked value="@item.Branch_ID" name="Cookies.Branch_Id" type="checkbox">
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                }*@
-                        </div>
+                        <div class="form-group scroll-bar"></div>
 
                         <input type="hidden" id="hdnBranch_Ids" name="Cookies.Branch_Ids" value="" />
                     </div>
+                    <label style="color: #b64645; display:none;" class="help-block pull-right" id="lblBranchError">User having no branches.</label>
 
                 </form>
             </div>
             <div class="login-footer">
                 <div class="pull-left">
-                    &copy; 2014 AppName
+                    &copy; 2016 MyLeo
                 </div>
                 <div class="pull-right">
                     <a href="#">About</a> |

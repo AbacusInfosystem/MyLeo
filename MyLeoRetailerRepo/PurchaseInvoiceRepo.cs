@@ -271,11 +271,11 @@ namespace MyLeoRetailerRepo
         {
             using (TransactionScope scope = new TransactionScope())
             {
-                PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
+            PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
 
-                foreach (var item in PurchaseInvoice.PurchaseInvoices)
-                {
-                    List<SqlParameter> sqlParams = new List<SqlParameter>();
+            foreach (var item in PurchaseInvoice.PurchaseInvoices)
+            {
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                     item.Purchase_Invoice_Id = PurchaseInvoice.Purchase_Invoice_Id;                    
 
@@ -286,7 +286,6 @@ namespace MyLeoRetailerRepo
             }
 
             return PurchaseInvoice.Purchase_Invoice_Id;
-
         }
 
         private PurchaseInvoiceInfo Get_Purchase_Invoice_Value(DataRow dr)
@@ -316,8 +315,9 @@ namespace MyLeoRetailerRepo
             PurchaseInvoice.Lr_No = Convert.ToString(dr["Lr_No"]);
 
             return PurchaseInvoice;
-        }
 
+        }
+        
         public List<PurchaseInvoiceInfo> Get_Purchase_Invoices(ref Pagination_Info Pager, string Purchase_Invoice_No)
         {
             List<PurchaseInvoiceInfo> PurchaseInvoices = new List<PurchaseInvoiceInfo>();
@@ -577,7 +577,17 @@ namespace MyLeoRetailerRepo
             }
             return PurchaseInvoices;
         }
+
+
         //
+
+        //Product warehouse
+        public DataTable Get_WarehouseProducts(QueryInfo query_Details)
+        {
+            return sqlHelper.Get_Table_With_Where(query_Details);
+        }
+        //
+
     }
 }
 

@@ -1,6 +1,15 @@
 ﻿$(document).ready(function () {
 
-    $('#dtpInvoice_Date').datepicker({});
+    $('#dtpInvoice_Date').datepicker({
+
+
+        dateFormat: "dd-mm-yy",
+        changeMonth: true,
+        changeYear: true,
+        minDate: 0,
+        autoclose: true,
+
+    });
 
     //CalculateTotal();
 
@@ -23,7 +32,6 @@
     }
 
 
-
     debugger;
 
     CalculateDiscountAmount();
@@ -31,7 +39,6 @@
     CalculateTax();
 
 });
-
 
 $(function ()
 {
@@ -54,7 +61,43 @@ $(function ()
 
     });
 
-  
+
+    $("#btnCustomer").click(function () {
+
+        debugger;
+
+        $("#hdnCreateCustomerFlag").val(true);
+
+        alert($("#hdnCreateCustomerFlag").val());
+
+        //$("#hdnInvoiceDate").val();
+        
+        //alert($("#hdnInvoiceDate").val());
+
+        //$("#hdnMobileNo").val();
+
+        //alert($("#hdnMobileNo").val());
+
+        $('#txtInvoice_No').removeClass("login-error");
+        $('#txtInvoice_No').rules("remove");
+
+        $('#dtpInvoice_Date').removeClass("login-error");
+        $('#dtpInvoice_Date').rules("remove");
+
+        $('#txtMobileNo').removeClass("MobileNo error");
+        $('#txtMobileNo').rules("remove");
+
+        $('#txtCustomer_Name').removeClass("login-error");
+        $('#txtCustomer_Name').rules("remove");
+
+        $("#frmSalesOrder").attr("action", "/Customer/Index/");
+
+        $('#frmSalesOrder').attr("method", "POST");
+
+        $('#frmSalesOrder').submit();
+
+    });
+
 
 });
 
@@ -96,7 +139,6 @@ function CalculateTotal()
     
 }
 
-
 function CalculateTax() {
    
     var netAmt = 0;
@@ -127,7 +169,6 @@ function CalculateTax() {
     $("#textNETAmount_0").val(Math.round(netAmt));
 
 }
-
 
 function CalculateDiscountAmount()
 {

@@ -47,23 +47,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             ReceivableRepo rRepo = new ReceivableRepo();
 
-            if (rViewModel.Receivable.Receivable_Status == 0)
-            {
-                if(rViewModel.Receivable.Receivable_Status==0)
-                {
-                    rViewModel.Receivables = rRepo.Get_Receivables(rViewModel.Receivable);
-                }
-                else
-                {
-                    rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
-                }
-
-
-            }
-            else
-            {
                 rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
-            }
 
             return Index(rViewModel);
         }
@@ -76,7 +60,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 rViewModel.Receivables1 = rRepo.Get_Gift_Voucher_Details_By_Id();
 
-                rViewModel.Receivables = rRepo.Get_Credit_Note_Details_By_Id(rViewModel.Receivable.Sales_Credit_Note_Id);
+                rViewModel.Credit_Notes = rRepo.Get_Credit_Note_Details_By_Id(rViewModel.Receivable.Sales_Credit_Note_Id);
 
                 rViewModel.Receivable = rRepo.Get_Receivable_Details_By_Id(rViewModel.Receivable.Sales_Invoice_Id);
 
@@ -178,6 +162,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 rViewModel.Receivable = rRepo.Get_Receivable_Data_By_Id(Sales_Invoice_Id);
 
                 rViewModel.Receivables = rRepo.Get_Receivable_Items_By_Id(rViewModel.Receivable.Receivable_Id);
+
+                //rViewModel.Receivable = rRepo.Get_Credit_Note_Amount_By_Id(rViewModel.Receivable.Sales_Credit_Note_Id);
+
+                //rViewModel.Receivable = rRepo.Get_Gift_Voucher_Amount_By_Id(rViewModel.Receivable.Gift_Voucher_Id);
 
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("PA001"));
 

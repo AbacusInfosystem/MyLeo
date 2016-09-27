@@ -29,6 +29,13 @@ namespace MyLeoRetailerInfo.Category
 			get;
 			set;
 		}
+
+        public string Sub_Category_Code
+        {
+            get;
+            set;
+        }
+
 		public string Category
 		{
 			get;

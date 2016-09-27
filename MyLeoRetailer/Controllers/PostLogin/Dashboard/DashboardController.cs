@@ -15,8 +15,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Dashboard
 
         public ActionResult Index()
         {
+            
             return View();
         }
+
+        
 
     }
 }

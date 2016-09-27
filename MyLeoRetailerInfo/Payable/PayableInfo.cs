@@ -53,7 +53,7 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
       
-       public string Payble_Status
+       public int Payble_Status
        {
            get;
            set;
@@ -203,6 +203,13 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
 
+         public string Payment_Status_Value
+       {
+           get;
+           set;
+       }
+
+
        public List<PurchaseInvoice_Details> PurchaseInvoice_Details { get; set; }
 
        public PurchaseInvoice_Details PurchaseInvoice_Detail { get; set; }
@@ -298,6 +305,12 @@ namespace MyLeoRetailerInfo.Payable
         }
 
         public int Payament_Status
+        {
+            get;
+            set;
+        }
+
+        public string Payment_Status_Value
         {
             get;
             set;
