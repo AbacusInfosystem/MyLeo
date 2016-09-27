@@ -181,6 +181,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ProductWarehouseController.cs" />
     <Compile Include="Controllers\PostLogin\Master\PurchaseOrderRequestController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnRequestController.cs" />
     <Compile Include="Filters\AuthorizeUserAttribute.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
+    <Compile Include="Models\ProductWarehouseViewModel.cs" />
     <Compile Include="Models\PurchaseInvoiceViewModel.cs" />
     <Compile Include="Models\PurchaseOrderRequestViewModel.cs" />
     <Compile Include="Models\PurchaseOrderViewModel.cs" />
@@ -1038,6 +1040,8 @@
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
+    <Content Include="Scripts\Modules\ProductWarehouse\search_ProductWarehouse_event.js" />
+    <Content Include="Scripts\Modules\ProductWarehouse\search_ProductWarehouse_method.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_events.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_methods.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_validation.js" />
@@ -1187,6 +1191,7 @@
     <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -106,6 +106,8 @@ function Reset_Brand()
 
     $("[name='Brand.IsActive']").val("");
 
+    $("#hdnBrand_Name").val("");
+
     document.getElementById('Flag').checked = false;
 }
 
@@ -136,6 +138,9 @@ function Get_Brand_By_Id(obj)
             $("[name='Brand.IsActive']").val(obj.Brand.IsActive);
 
             $("[name='Brand.Brand_Code']").val(obj.Brand.Brand_Code);
+            $("[name='Brand.Brand_Name']").val(obj.Brand.Brand_Name);
+            $("#hdnBrand_Name").val(obj.Brand.Brand_Name);
+
             //Set IsActive Button Status
             var fix = $("[name='Brand.IsActive']").val();
 
