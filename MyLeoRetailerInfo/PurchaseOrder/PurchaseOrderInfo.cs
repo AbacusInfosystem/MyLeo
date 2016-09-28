@@ -76,6 +76,10 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public string Item_Ids { get; set; }
 
+        public string Branch_Ids { get; set; }
+
+        public int Colour_Id { get; set; }
+
               
 		public int Purchase_Order_Id { get; set; }
 

@@ -12,6 +12,7 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Vendor;
 using MyLeoRetailerInfo.Brand;
 using MyLeoRetailerInfo.Category;
+using System.Transactions;
 
 namespace MyLeoRetailerRepo
 {
@@ -471,6 +472,8 @@ namespace MyLeoRetailerRepo
 
                 PurchaseOrder.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
+                PurchaseOrder.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+
                 PurchaseOrder.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
 
                 PurchaseOrder.Brand_Name = Convert.ToString(dr["Brand_Name"]);
@@ -505,7 +508,64 @@ namespace MyLeoRetailerRepo
 
                 PurchaseOrder.Item_Ids = Convert.ToString(dr["Item_Ids"]);
 
+                PurchaseOrder.Branch_Ids = Convert.ToString(dr["Branch_Ids"]);
+
                 PurchaseOrder.Sizes = Get_Consolidate_Purchase_Order_Item_Sizes(PurchaseOrder.Item_Ids);
+
+                //Added by aditya 27092016
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    List<Sizes> Size = new List<Sizes>();
+
+                    string[] Item_Ids = PurchaseOrder.Item_Ids.Split(',');
+
+                    string[] Branch_Ids = PurchaseOrder.Branch_Ids.Split(',');
+
+                    for (int i = 0; i < PurchaseOrder.Item_Ids.Split(',').Count(); i++)
+                    {
+                        Size = Get_Consolidate_Purchase_Order_Item_Size(Item_Ids[i]);
+
+                        foreach (var item in Size)
+                        {
+                            parameters = new List<SqlParameter>();
+
+                            parameters.Add(new SqlParameter("@Article_No", PurchaseOrder.Article_No));
+
+                            parameters.Add(new SqlParameter("@Colour_Id", PurchaseOrder.Colour_Id));
+
+                            parameters.Add(new SqlParameter("@Size_Id", item.Size_Id1));
+
+                            string SKU_Code = (sqlHelper.ExecuteScalerObj(parameters, Storeprocedures.sp_Get_SKU_By_ArticleNo_ColorId_SizeId.ToString(), CommandType.StoredProcedure)).ToString();
+
+                            
+                            parameters = new List<SqlParameter>();
+
+                            parameters.Add(new SqlParameter("@Request_Id", PurchaseOrder));
+
+                            parameters.Add(new SqlParameter("@Request_Date", PurchaseOrder));
+
+                            parameters.Add(new SqlParameter("@SKU_Code", SKU_Code));
+
+                            parameters.Add(new SqlParameter("@Quantity", item.Quantity1));
+
+                            parameters.Add(new SqlParameter("@Balance_Quantity", item.Quantity1));
+
+                            parameters.Add(new SqlParameter("@Branch_Id", Branch_Ids[i]));
+
+                            parameters.Add(new SqlParameter("@Dispatch_Date", DateTime.Now.ToString("MM-dd-yyyy")));
+
+                            parameters.Add(new SqlParameter("@Status", "Dispatch")); //hardcoded coz during insertion status will always be  Dispatch
+
+                           (sqlHelper.ExecuteScalerObj(parameters, Storeprocedures.sp_Insert_Purchase_Order_Request_Consolidation.ToString(), CommandType.StoredProcedure)).ToString();
+
+                            
+
+                        }
+                    }
+
+                    scope.Complete();
+
+                }
 
                 PurchaseOrders.Add(PurchaseOrder);
 
@@ -513,6 +573,34 @@ namespace MyLeoRetailerRepo
 
             return PurchaseOrders;
         }
+
+
+        //*************************************Aditya 28092016************************************
+
+        public List<Sizes> Get_Consolidate_Purchase_Order_Item_Size(string Item_Ids)
+        {
+            List<Sizes> Size = new List<Sizes>();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@Item_Ids", Item_Ids));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Consolidate_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Sizes Sizes = new Sizes();
+                Sizes.Size_Id1 = Convert.ToInt32(dr["Size_Id"]);
+                Sizes.Quantity1 = Convert.ToInt32(dr["Quantity"]);
+                Sizes.Amount1 = Convert.ToInt32(dr["Amount"]);
+                Size.Add(Sizes);
+            }
+
+            return Size;
+        }
+
+        //*******************************************************************************
+
 
         public List<Sizes> Get_Consolidate_Purchase_Order_Item_Sizes(string Item_Ids)
         {

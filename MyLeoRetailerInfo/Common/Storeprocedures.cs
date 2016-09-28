@@ -334,6 +334,8 @@ namespace MyLeoRetailerInfo.Common
   
             //Product warehouse
         sp_Insert_Product_Warehouse,
+        sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
+        sp_Insert_Purchase_Order_Request_Consolidation,
 
     }
 
