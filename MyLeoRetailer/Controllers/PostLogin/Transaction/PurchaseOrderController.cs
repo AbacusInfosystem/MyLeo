@@ -225,10 +225,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             poViewModel.PurchaseOrder.Categories = _purchaseorderRepo.Get_Category_By_Vendor_Id(Vendor_Id);
 
-            //Addition by swapnali | Date:21/09/2016
-            //poViewModel.PurchaseOrder.SubCategories = _purchaseorderRepo.Get_Sub_Category_By_Vendor_Id(Vendor_Id);
-            //End
-
+            //Working
+            poViewModel.PurchaseOrder.Colors = _purchaseorderRepo.Get_Color_By_Vendor_Id(Vendor_Id);
+            //
 
             return Json(JsonConvert.SerializeObject(poViewModel));
         }

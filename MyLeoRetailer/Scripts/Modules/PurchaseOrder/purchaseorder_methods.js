@@ -84,6 +84,28 @@
                     }
                 }
             }
+
+            $("#drpColor").html("");
+
+            $("#drpColor").append("<option value=''>Select Color</option>");
+
+            $("#drpColor").parents('.form-group').find('ul').html("");
+
+            $("#drpColor").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Color</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+            if (obj.PurchaseOrder.Colors.length > 0) {
+
+                for (var j = 0; j < obj.PurchaseOrder.Colors.length; j++) {
+                    debugger;
+
+                    var i = j + 1;
+
+                    $("#drpColor").append("<option value='" + obj.PurchaseOrder.Colors[j].Colour_Id + "'>" + obj.PurchaseOrder.Colors[j].Colour + "</option>");
+
+                    $("#drpColor").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Colors[j].Colour + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
         }
     });
 
@@ -552,8 +574,15 @@ function AddPurchaseOrderDetails() {
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' value='' id='textColour_Id_" + i + "' />";
+    //tblHtml += "</td>";
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' value='' id='textColour_Id_" + i + "' />";
+    tblHtml += "<div class='form-group'>";
+    tblHtml += "<select class='form-control select' id='textColour_Id_" + i + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id'>";
+    tblHtml += " </select>";
+    tblHtml += " </div>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -749,15 +778,26 @@ function AddPurchaseOrderDetails() {
     var newRow = $(tblHtml);
 
     myTable.append(newRow);
+
+    
     
     var $options = $("#drpCenter_Size > option").clone();
 
     $("#textStart_Size_" + i).append($options);
 
+    $("#textStart_Size_" + i).val('');
+
 
     var $optionss = $("#drpCenter_Size > option").clone();
 
     $("#textEnd_Size_" + i).append($optionss);
+
+    $("#textEnd_Size_" + i).val('');
+
+
+    var $options1 = $("#drpColor > option").clone();
+
+    $("#textColour_Id_" + i).append($options1);
 
 
     Add_Validation(i);
@@ -823,8 +863,15 @@ function ContinuePurchaseOrderDetailsData(j) {
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
     tblHtml += "</td>";
 
+    //tblHtml += "<td>";
+    //tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' value='' id='textColour_Id_" + i + "' />";
+    //tblHtml += "</td>";
+
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' value='' id='textColour_Id_" + i + "' />";
+    tblHtml += "<div class='form-group'>";
+    tblHtml += "<select class='form-control select' id='textColour_Id_" + i + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id'>";
+    tblHtml += " </select>";
+    tblHtml += " </div>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -1009,10 +1056,19 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     $("#textStart_Size_" + i).append($options);
 
+    $("#textStart_Size_" + i).val('');
+
 
     var $optionss = $("#drpCenter_Size > option").clone();
 
     $("#textEnd_Size_" + i).append($optionss);
+
+    $("#textEnd_Size_" + i).val('');
+
+
+    var $options1 = $("#drpColor > option").clone();
+
+    $("#textColour_Id_" + i).append($options1);
 
     
     Add_Validation(i);

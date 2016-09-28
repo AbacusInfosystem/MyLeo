@@ -13,10 +13,11 @@ using MyLeoRetailerInfo.Vendor;
 using MyLeoRetailerInfo.Brand;
 using MyLeoRetailerInfo.Category;
 using System.IO;
-//using iTextSharp.text.pdf;
-//using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using System.Transactions;
 using MyLeoRetailerRepo.Common;
+using MyLeoRetailerInfo.Color;
 
 namespace MyLeoRetailerRepo
 {
@@ -118,7 +119,7 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Article_No", item.Article_No));
 
-                    sqlParam.Add(new SqlParameter("@Colour_Id", item.Colour_Id));
+                sqlParam.Add(new SqlParameter("@Colour_Id", item.Colour_Id));
 
                 sqlParam.Add(new SqlParameter("@Brand_Id", item.Brand_Id));
 
@@ -473,6 +474,27 @@ namespace MyLeoRetailerRepo
             }
             return Brands;
         }
+
+        public List<ColorInfo> Get_Color_By_Vendor_Id(int Vendor_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            List<ColorInfo> Colors = new List<ColorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Color_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                ColorInfo Color = new ColorInfo();
+
+                Color.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+
+                Color.Colour = Convert.ToString(dr["Colour_Name"]);
+
+                Colors.Add(Color);
+            }
+            return Colors;
+        }
+
 
         public List<CategoryInfo> Get_Category_By_Vendor_Id(int Vendor_Id)
         {
@@ -1227,51 +1249,51 @@ namespace MyLeoRetailerRepo
 
             using (ms = new MemoryStream())
             {
-                //iTextSharp.text.Font font = iTextSharp.text.FontFactory.GetFont("Courier", 1.4f, Font.NORMAL);
-                //iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 25, 25, 30, 30);
-                //PdfWriter writer = PdfWriter.GetInstance(document, ms);
+                iTextSharp.text.Font font = iTextSharp.text.FontFactory.GetFont("Courier", 1.4f, Font.NORMAL);
+                iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 25, 25, 30, 30);
+                PdfWriter writer = PdfWriter.GetInstance(document, ms);
 
-                //document.Open();
+                document.Open();
 
-                //iTextSharp.text.Paragraph pCompanyName = new iTextSharp.text.Paragraph("Invoice");
-                //pCompanyName.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+                iTextSharp.text.Paragraph pCompanyName = new iTextSharp.text.Paragraph("Invoice");
+                pCompanyName.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
 
-                //pCompanyName.Font = font;
-                //document.Add(pCompanyName);
-                //document.Add(new iTextSharp.text.Paragraph("\n"));
+                pCompanyName.Font = font;
+                document.Add(pCompanyName);
+                document.Add(new iTextSharp.text.Paragraph("\n"));
 
-                //iTextSharp.text.Paragraph AddLine = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
-                //document.Add(AddLine);
+                iTextSharp.text.Paragraph AddLine = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                document.Add(AddLine);
 
-                //document.Add(new iTextSharp.text.Paragraph("\n"));
+                document.Add(new iTextSharp.text.Paragraph("\n"));
 
-                //foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmldiv.ToString()), null))
-                //{
-                //    document.Add(element);
-                //}
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmldiv.ToString()), null))
+                {
+                    document.Add(element);
+                }
 
-                //document.Add(new iTextSharp.text.Paragraph("\n"));
+                document.Add(new iTextSharp.text.Paragraph("\n"));
 
-                //foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmldiv2.ToString()), null))
-                //{
-                //    document.Add(element);
-                //}
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmldiv2.ToString()), null))
+                {
+                    document.Add(element);
+                }
 
-                //foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltbl.ToString()), null))
-                //{
-                //    document.Add(new iTextSharp.text.Paragraph("\n"));
-                //    document.Add(element);
-                //}
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltbl.ToString()), null))
+                {
+                    document.Add(new iTextSharp.text.Paragraph("\n"));
+                    document.Add(element);
+                }
 
-                //foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltblItem.ToString()), null))
-                //{
-                //    document.Add(new iTextSharp.text.Paragraph("\n"));
-                //    document.Add(element);
-                //}
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltblItem.ToString()), null))
+                {
+                    document.Add(new iTextSharp.text.Paragraph("\n"));
+                    document.Add(element);
+                }
 
 
-                //document.Close();
-                //writer.Close();
+                document.Close();
+                writer.Close();
 
             }
 

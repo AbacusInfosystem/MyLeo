@@ -94,7 +94,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 }
 
                 if (poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id == 0)
-                {                    
+                {
+                    poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
                     poreqViewModel.PurchaseOrderRequest.Branch_Id = Convert.ToInt32(poreqViewModel.Cookies.Branch_Ids.TrimEnd());
 
                     poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id = _purchaseorderrequestRepo.Insert_Purchase_Order_Request(poreqViewModel.PurchaseOrderRequest);
@@ -204,6 +206,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             poreqViewModel.PurchaseOrderRequest.Brands = _purchaseorderRepo.Get_Brand_By_Vendor_Id(Vendor_Id);
 
             poreqViewModel.PurchaseOrderRequest.Categories = _purchaseorderRepo.Get_Category_By_Vendor_Id(Vendor_Id);
+
+            poreqViewModel.PurchaseOrderRequest.Colors = _purchaseorderRepo.Get_Color_By_Vendor_Id(Vendor_Id);
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }
