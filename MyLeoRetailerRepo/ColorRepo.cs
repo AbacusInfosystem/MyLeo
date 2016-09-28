@@ -50,7 +50,23 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Color_Code", Color.Colour_Code));
 
+            sqlParam.Add(new SqlParameter("@Colour_Code", Color.Color_Code));
+
+            //sqlParam.Add(new SqlParameter("@IsActive", Color.IsActive));//Commented by vinod mane on 27/09/2016
+
+            //Added by Vinod Mane on 27/09/2016
+            //Set Is_Active Flag
+
+            if (Color.IsActive == 0)
+            {
+                Color.Is_Active = false;
+            }
+            else
+            {
+                Color.Is_Active = true;
+            }
             sqlParam.Add(new SqlParameter("@IsActive", Color.IsActive));
+            //End
 
             sqlParam.Add(new SqlParameter("@Updated_Date", Color.Updated_Date));
 
@@ -78,7 +94,15 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Colour_Code"))
                     colorInfo.Colour_Code = Convert.ToString(dr["Colour_Code"]);
 
-                colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]);
+                if (!dr.IsNull("Color_Code"))
+                    colorInfo.Color_Code = Convert.ToString(dr["Color_Code"]);
+
+              //  colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]);//Commented by Vinod mane on 27/09/2016
+                //Added by Vinod Mane on 27/09/2016
+                colorInfo.IsActive = Convert.ToInt32(dr["Is_Active"]);
+                colorInfo.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+                //End
+               
 
                 colorInfo.Colour_Id = Convert.ToInt32(dr["Colour_ID"]);
 
@@ -135,5 +159,33 @@ namespace MyLeoRetailerRepo
                 Color.Colour = Convert.ToString(dr["Colour_Name"]);
             return Color;
         }
+
+        //Added By Vinod Mane on 23/09/2016
+        public bool Check_Existing_Colour_Name(string Colour_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Colour_Name", Colour_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Colour_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_colour"]);
+                }
+            }
+
+            return check;
+        }
+
+        //End
     }
 }

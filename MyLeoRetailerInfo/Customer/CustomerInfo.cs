@@ -87,6 +87,11 @@ namespace MyLeoRetailerInfo.Customer
 
         public string Last_Name { get; set; }
 
+        public string Invoice_Date { get; set; }
+
+
+        public bool CreateCustomerFlag { get; set; }      
+
 
 
     }

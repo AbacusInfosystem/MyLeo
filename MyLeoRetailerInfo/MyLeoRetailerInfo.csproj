@@ -52,6 +52,7 @@
     <Compile Include="Common\FriendlyMessage.cs" />
     <Compile Include="Common\LoginInfo.cs" />
     <Compile Include="Common\LookupInfo.cs" />
+    <Compile Include="Common\SendEmailInfo.cs" />
     <Compile Include="Common\Storeprocedures.cs" />
     <Compile Include="Customer\CustomerInfo.cs" />
     <Compile Include="Employee\EmployeeInfo.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="LookupInfo.cs" />
     <Compile Include="Pagination_Info.cs" />
     <Compile Include="Payable\PayableInfo.cs" />
+    <Compile Include="ProductWarehouse\ProductWarehouseInfo.cs" />
     <Compile Include="Product\ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PurchaseInvoice\PurchaseInvoiceInfo.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="PurchaseReturn\PurchaseReturnInfo.cs" />
     <Compile Include="QueryInfo.cs" />
     <Compile Include="Receivable\ReceivableInfo.cs" />
+    <Compile Include="Replacement\ReplacementInfo.cs" />
     <Compile Include="Role\AccessFunctionInfo.cs" />
     <Compile Include="Role\RoleInfo.cs" />
     <Compile Include="SalesInvoice\SalesInvoiceInfo.cs" />

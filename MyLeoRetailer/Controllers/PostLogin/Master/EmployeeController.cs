@@ -322,5 +322,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         #endregion 
 
+        //Added By Vinod Mane on 27/09/2016
+        public JsonResult Check_Existing_Employee_Name(string employee_Name)
+        {
+            bool check = false;
+            try
+            {
+                check = eRepo.Check_Existing_Employee_Name(employee_Name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Employee Controller - Check_Existing_Employee_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
     }
 }

@@ -8,7 +8,7 @@
 		    },
 		    Grid_Detail: {
 
-		        Pager: Set_Pager($("#divPurchaseOrderPager"))
+		        CurrentPage: $("#hdfCurrent_Page").val()
 		    }
 		}
 
@@ -26,11 +26,110 @@
 
         success: function (response) {
 
-            var obj = $.parseJSON(response);
+            var data = $.parseJSON(response);
 
-            Bind_Grid(obj, "Purchase_Order_List");
-
-            $("#divPurchaseOrderPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+            Bind_Get_Purchase_Order_Data(data);
         }
     });
 }
+
+
+function Bind_Get_Purchase_Order_Data(data) {
+    var tblHTML = "";
+
+    $('#tblPurchaseOrder tbody tr').remove();
+
+    if (data.PurchaseOrder.PurchaseOrders.length > 0) {
+
+        for (var i = 0; i < data.PurchaseOrder.PurchaseOrders.length; i++) {
+
+            tblHTML += "<tr>";
+
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Purchase_Order_No + "</td>";
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Purchase_Order_Date.substring(0, 10) + "</td>";
+
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Vendor_Name + "</td>";
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Shipping_Address + "</td>";
+
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Total_Quantity + "</td>";
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Net_Amount + "</td>";
+
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Agent_Name + "</td>";
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Transporter_Name + "</td>";
+
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Start_Supply_Date.substring(0, 10) + "</td>";
+            tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Stop_Supply_Date.substring(0, 10) + "</td>";
+            
+            tblHTML += "</tr>";
+
+        }
+
+        $('#tblPurchaseOrder tbody').append(tblHTML);
+
+    }
+
+    if (data.PurchaseOrder.PurchaseOrders.length > 0) {
+        $('#hdfCurrent_Page').val(data.Pager.CurrentPage);
+
+        if (data.Pager.PageHtmlString != null || data.Pager.PageHtmlString != "") {
+
+            $('.pagination').html(data.Pager.PageHtmlString);
+        }
+    }
+    else {
+        $('.pagination').html("");
+    }
+
+    Friendly_Messages(data);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//function Get_Purchase_Orders() {
+//    var poViewModel =
+//		{
+//		    Filter: {
+
+//		        Purchase_Order_No: $("[name='Filter.Purchase_Order_No']").val()
+//		    },
+//		    Grid_Detail: {
+
+//		        Pager: Set_Pager($("#divPurchaseOrderPager"))
+//		    }
+//		}
+
+//    $.ajax({
+
+//        url: "/PurchaseOrder/Get_Purchase_Orders",
+
+//        data: JSON.stringify(poViewModel),
+
+//        dataType: 'json',
+
+//        type: 'POST',
+
+//        contentType: 'application/json',
+
+//        success: function (response) {
+
+//            var obj = $.parseJSON(response);
+
+//            Bind_Grid(obj, "Purchase_Order_List");
+
+//            $("#divPurchaseOrderPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+//        }
+//    });
+//}

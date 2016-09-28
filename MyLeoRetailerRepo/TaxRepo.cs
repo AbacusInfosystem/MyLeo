@@ -201,5 +201,34 @@ namespace MyLeoRetailerRepo
         //    return Tax_Value;
 
         //}
+
+
+        public bool Check_Existing_Tax_name(string Tax_name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Tax_Name", Tax_name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Tax_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_tax_name"]);
+                }
+            }
+
+            return check;
+        }
+
+
+
     }
 }

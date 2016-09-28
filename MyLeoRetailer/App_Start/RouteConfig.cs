@@ -37,6 +37,14 @@ namespace MyLeoRetailer
             defaults: new { controller = "Brand", action = "Get_Brands_By_Name_Autocomplete", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "brand-2",
+           url: "brand/check-brand-name/{brand_Name}",
+           defaults: new { controller = "Brand", action = "Check_Existing_Brand_Name", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
 
             #region Colour
@@ -47,6 +55,13 @@ namespace MyLeoRetailer
             defaults: new { controller = "Color", action = "Get_Colors_By_Name_Autocomplete", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "color-2",
+           url: "colour/check-colour-name/{color_Name}",
+           defaults: new { controller = "Color", action = "Check_Existing_Colour_Name", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
             #endregion
 
             #region Category
@@ -62,6 +77,79 @@ namespace MyLeoRetailer
             url: "category/get-sub-category-by-id/{Sub_category_Id}",
             defaults: new { controller = "Category", action = "Get_Sub_Category_By_Id", Sub_category_Id = UrlParameter.Optional, id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "category-3",
+           url: "category/check-category-name/{category_Name}",
+           defaults: new { controller = "Category", action = "Check_Existing_Category_Name", category_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+            //Added By Vinod Mane on 23/09/2016
+            routes.MapRoute(
+           name: "category-4",
+           url: "sub-category/check-sub-category-name/{sub_category_Name}",
+           defaults: new { controller = "Category", action = "Check_Existing_Sub_Category_Name", sub_category_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+            #endregion
+
+            #region Size
+
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "size-1",
+           url: "size/check-size-group-name/{size_group_name}",
+           defaults: new { controller = "Size", action = "Check_Existing_Size_Group_Name", size_group_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+            #endregion
+
+            #region Tax
+          
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "Tax-1",
+           url: "Tax/check-tax-name/{Tax_name}",
+           defaults: new { controller = "Tax", action = "Check_Existing_Tax_name", Tax_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+                      
+
+            #endregion
+
+            #region Cusatomer
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "customer-1",
+           url: "customer/check-customer-name/{customer_name}",
+           defaults: new { controller = "Customer", action = "Check_Existing_Customer_Name", customer_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+            #endregion
+
+            #region Vendor
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "vendor-1",
+           url: "vendor/check-vendor-name/{vendor_name}",
+           defaults: new { controller = "Vendor", action = "Check_Existing_Vendor_Name", vendor_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+            #endregion
+
+            #region Branch
+
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "Branch-1",
+           url: "Branch/check-Branch-name/{Branch_Name}",
+           defaults: new { controller = "Branch", action = "Check_Existing_Branch_Name", Branch_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
 
             #endregion
 
@@ -79,6 +167,14 @@ namespace MyLeoRetailer
             //url: "employee/save-branch",
             //defaults: new { controller = "Employee", action = "Save_Employee_Branch_Id", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             //namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "employee-2",
+           url: "employee/check-employee-name/{employee_Name}",
+           defaults: new { controller = "Employee", action = "Check_Existing_Employee_Name", employee_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
             //End
 
             #endregion
@@ -240,7 +336,7 @@ namespace MyLeoRetailer
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Brand", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
 
         }

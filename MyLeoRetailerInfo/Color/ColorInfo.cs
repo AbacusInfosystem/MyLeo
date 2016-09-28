@@ -25,17 +25,38 @@ namespace MyLeoRetailerInfo.Color
 			get;
 			set;
 		}
+        
         public string Colour_Code
         {
             get;
             set;
         }
 
-        public bool IsActive
+        public string Color_Code
         {
             get;
             set;
         }
+        //Commented by vinod mane on 27/09/2016
+        //public bool Is_Active 
+        //{
+        //    get;
+        //    set;
+        //}
+        //End
+
+        //Added by Vinod Mane on 27/09/2016
+        public int IsActive
+        {
+            get;
+            set;
+        }
+        public bool Is_Active
+        {
+            get;
+            set;
+        }
+        //End
         
 		public DateTime Created_Date
 		{
@@ -57,6 +78,12 @@ namespace MyLeoRetailerInfo.Color
 			get;
 			set;
 		}
+
+        public string Description
+		{
+			get;
+			set;
+		} 
 
         public List<ProductMRPInfo> ProductMRP_N_WSR { get; set; }
 

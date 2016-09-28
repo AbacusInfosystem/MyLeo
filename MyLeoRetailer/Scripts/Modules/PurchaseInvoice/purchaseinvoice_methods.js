@@ -23,7 +23,7 @@
             $('#hdf_hdn_Tax_Percentage').val(data.Tax_Percentage);
 
             $('#textTaxPercentage_0').val(data.Tax_Percentage);
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
         }
     });
 }
@@ -177,26 +177,7 @@ function AddPurchaseInvoiceDetails() {
 
     myTable.append(newRow);
 
-
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
-    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
-    $("#textInvoice_No_" + i).rules("add", { required: true, messages: { required: "PO No. is required.", } });
-
-
-    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
-        var result = true;
-        var id = $(element).attr('id')
-        id = id.replace("textSKU_No_", "");
-
-        $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
-
-            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
-                result = false;
-            }
-        });
-
-        return result;
-    }, "Already mapped.");
+    Add_Validation(i);
 
 }
 
@@ -232,7 +213,6 @@ function CalculateTax() {
     $("#textRoundOff_0").val(fracPart.toFixed(2));
 
     $("#textNETAmount_0").val(Math.round(netAmt));
-
 
 }
 
@@ -283,6 +263,14 @@ function CalculateTotal() {
 
 }
 
+function Add_Validation(i) {
+
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+    $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code']").rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
+    $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
+
+}
+
 function DeletePurchaseInvoiceDetailsData(i) {
 
     debugger;
@@ -314,11 +302,11 @@ function ReArrangePurchaseInvoiceDetailsData() {
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
             }
 
-            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
-            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-            //    $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
-            //    $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
-            //}
+            if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+                $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
+                $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+            }
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;

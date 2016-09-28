@@ -50,6 +50,8 @@ namespace MyLeoRetailerRepo
 
 			sqlParam.Add(new SqlParameter("@Sub_Category", sub_Category.Sub_Category));
 
+            sqlParam.Add(new SqlParameter("@Sub_Category_Code", sub_Category.Sub_Category_Code));
+
             sqlParam.Add(new SqlParameter("@IsActive", sub_Category.IsActive));
 
 			sqlParam.Add(new SqlParameter("@Updated_Date", sub_Category.Updated_Date));
@@ -106,6 +108,9 @@ namespace MyLeoRetailerRepo
             {
                 if (!dr.IsNull("Sub_Category"))
                     subcategoryInfo.Category = Convert.ToString(dr["Sub_Category"]);
+
+                if (!dr.IsNull("Sub_Category_Code"))
+                    subcategoryInfo.Sub_Category_Code = Convert.ToString(dr["Sub_Category_Code"]);
 
                 subcategoryInfo.IsActive = Convert.ToBoolean(dr["IsActive"]);
             }

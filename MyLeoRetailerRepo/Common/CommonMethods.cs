@@ -1,8 +1,10 @@
 ﻿using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +38,60 @@ namespace MyLeoRetailerRepo.Common
 
             return drList;
         }
+
+
+        public static void SendMail(SendEmailInfo sendEmail)
+        {
+            MailMessage mail = new MailMessage();
+
+            SmtpClient SmtpServer = new SmtpClient();
+
+            foreach (string str in sendEmail.AttachmentPath)
+            {
+                System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(str);
+                mail.Attachments.Add(attachment);
+            }
+
+            if (!string.IsNullOrEmpty(sendEmail.To_Email_Id))
+            {
+                if (sendEmail.To_Email_Id.Contains(','))
+                {
+                    foreach (var item in sendEmail.To_Email_Id.Split(','))
+                    {
+                        mail.To.Add(item);
+                    }
+                }
+                else
+                {
+                    mail.To.Add(sendEmail.To_Email_Id);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(sendEmail.CC_Email_Id))
+            {
+                if (sendEmail.CC_Email_Id.Contains(','))
+                {
+                    foreach (var item in sendEmail.CC_Email_Id.Split(','))
+                    {
+                        mail.CC.Add(item);
+                    }
+                }
+                else
+                {
+                    mail.CC.Add(sendEmail.CC_Email_Id);
+                }
+            }
+
+            mail.Subject = sendEmail.Subject;
+
+            mail.Body = sendEmail.Body;
+
+            mail.IsBodyHtml = true;
+
+            SmtpServer.Send(mail);
+        }
+
+
 
     }
 }

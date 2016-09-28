@@ -48,6 +48,8 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Brand_Name", brand.Brand_Name));
 
+            sqlParam.Add(new SqlParameter("@Brand_Code", brand.Brand_Code));
+
             //Set Is_Active Flag
             if (brand.IsActive == 0)
             {
@@ -104,9 +106,10 @@ namespace MyLeoRetailerRepo
             return retVal;
         }
 		
-        public int Get_Brand_By_Id(int Brand_Id)
-        {            
-            int isactive = 0;
+        public BrandInfo Get_Brand_By_Id(int Brand_Id)
+        {
+            BrandInfo Brand = new BrandInfo();
+            //int isactive = 0;
 
             DataTable dt = null;
             List<SqlParameter> sqlParamList = new List<SqlParameter>();
@@ -118,11 +121,20 @@ namespace MyLeoRetailerRepo
             {
                 if (!dr.IsNull("Is_Active"))
                 {
-                    isactive = Convert.ToInt32(dr["Is_Active"]);                                     
+                    Brand.IsActive = Convert.ToInt32(dr["Is_Active"]);  
+                }                
+                if (!dr.IsNull("Brand_Code"))
+                {
+                    Brand.Brand_Code = Convert.ToString(dr["Brand_Code"]);
                 }
+                //Added by Vinod Mane on 26/09/2016
+                if (!dr.IsNull("Brand_Name"))
+                {
+                    Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+                }
+                //End
             }
-            return isactive;            
-
+            return Brand;    
         }
 
         public List<BrandInfo> Get_All_Barnds()
@@ -148,5 +160,33 @@ namespace MyLeoRetailerRepo
                 Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
             return Brand;
         }
+
+        //Added By Vinod Mane on 26/09/2016
+        public bool Check_Existing_Brand_Name(string Brand_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Brand_Name", Brand_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Brand_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_brand"]);
+                }
+            }
+
+            return check;
+        }
+        //End
+
 	}
 }

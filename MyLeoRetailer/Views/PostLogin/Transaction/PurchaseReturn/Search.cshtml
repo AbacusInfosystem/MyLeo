@@ -1,0 +1,105 @@
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnViewModel
+
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/PurchaseReturn/search_purchasereturn_events.js"></script>
+<script src="~/Scripts/Modules/PurchaseReturn/search_purchasereturn_methods.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Function Module</a></li>
+    <li class="active">Purchase Return Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmPurchaseReturn">
+
+                    <div class="row">
+
+                        <div class="col-md-5">
+
+                            <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit Note No.</span>
+                                <input type="text" class="form-control" name="Filter.Debit_Note_No" placeholder="Enter debit note no. to search." />
+                                <input type="hidden" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-7" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                            <div class="btn-group">
+                                <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>
+                                @*<button class="btn btn-danger active" value="Edit" id="btnEditPurchaseReturn">Edit</button>*@
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;" id="divTable">
+            <div class="row">
+                <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                    <table class="table table-bordered table-hover" id="tblPurchaseReturn">
+                        <thead>
+                            <tr>
+                                <th>Debit Note No.</th>
+                                <th>GR_No</th>
+                                <th>Vendor</th>
+                                <th>Invoice No.</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>Transporter</th>
+                                <th>Logistics Person</th>
+                                <th>Lr No.</th>
+                                <th>Return Date</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div><!-- /.col -->
+            </div>
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
+
+
+        </div>
+
+    </div>
+
+</div>

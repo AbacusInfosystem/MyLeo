@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -24,10 +25,52 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             cRepo = new CustomerRepo();
         }
 
-        public ActionResult Index(CustomerViewModel cViewModel)
+        public ActionResult Index(CustomerViewModel cViewModel, SalesInvoiceViewModel siViewModel, SalesReturnViewModel srViewModel)
         {
+
+            bool CheckFlag = false;
+
+            bool CheckFlag1 = false;
+
+            string Mobile = "";
+
+            string InvoiceDate = "";
+
+            string ReturnDate = "";
+
             try
             {
+                CheckFlag = siViewModel.SalesInvoice.CreateCustomerFlag;
+
+                CheckFlag1 = srViewModel.SalesReturn.CreateCustomerFlag;
+
+                if (CheckFlag == true)
+                {
+                    cViewModel.Customer.CreateCustomerFlag = CheckFlag;
+
+                    Mobile = siViewModel.SalesInvoice.Mobile;
+
+                    cViewModel.Customer.Customer_Mobile1 = Mobile;
+
+                    InvoiceDate = siViewModel.SalesInvoice.Invoice_Date.ToString();
+
+                    TempData["siViewModel"] = siViewModel;
+
+                    return View("Index", cViewModel);
+                }
+
+                if (CheckFlag1 == true)
+                {
+
+                    Mobile = srViewModel.SalesReturn.Mobile;
+
+                    ReturnDate = srViewModel.SalesReturn.Sales_Return_Date.ToString();
+
+                    TempData["srViewModel"] = srViewModel;
+
+                    return View("Index", cViewModel);
+                }
+
                 if (TempData["cViewModel"] != null)
                 {
                     cViewModel = (CustomerViewModel)TempData["cViewModel"];
@@ -70,24 +113,37 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(cViewModel));
         }
 
-        public ActionResult Insert_Customer(CustomerViewModel cViewModel)
+        public ActionResult Insert_Customer(CustomerViewModel cViewModel, SalesInvoiceViewModel siViewModel)
         {
             try
-            {                
+            {
+                string MobileNo = cViewModel.Customer.Customer_Mobile1;
+
                 Set_Date_Session(cViewModel.Customer);
 
                 cViewModel.Customer.Customer_Id = cRepo.Insert_Customer(cViewModel.Customer);
 
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("CUST01"));
+
+                //TempData["MobileNo"] = MobileNo;
             }
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
-            TempData["cViewModel"] = cViewModel;
+            if (cViewModel.Customer.CreateCustomerFlag == true)
+            {
+                return RedirectToAction("Index", "SalesOrder");
+            }
+            else
+            {
 
-            return RedirectToAction("Search", cViewModel);
+                TempData["cViewModel"] = cViewModel;
+
+                return RedirectToAction("Search", cViewModel);
+            }
+
         }
 
         public ActionResult Update_Customer(CustomerViewModel cViewModel)
@@ -144,5 +200,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(cViewModel));
         }
+
+
+        //Added By Vinod Mane on 28/09/2016
+        public JsonResult Check_Existing_Customer_Name(string customer_name)
+        {
+            bool check = false;
+            try
+            {
+                check = cRepo.Check_Existing_Customer_Name(customer_name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Customer Controller - Check_Existing_Customer_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
     }
 }

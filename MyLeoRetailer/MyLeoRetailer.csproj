@@ -181,7 +181,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\PostLogin\Master\PurchaseOrderRequestController.cs" />
+    <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderRequestController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ProductWarehouseController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnRequestController.cs" />
     <Compile Include="Filters\AuthorizeUserAttribute.cs" />
     <Compile Include="Common\CustomRazorViewEngine.cs" />
@@ -201,10 +202,11 @@
     <Compile Include="Controllers\PostLogin\Master\GiftVoucherController.cs" />
     <Compile Include="Controllers\PostLogin\Master\PayableController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductController.cs" />
-    <Compile Include="Controllers\PostLogin\Master\PurchaseInvoiceController.cs" />
-    <Compile Include="Controllers\PostLogin\Master\PurchaseOrderController.cs" />
-    <Compile Include="Controllers\PostLogin\Master\PurchaseReturnController.cs" />
+    <Compile Include="Controllers\PostLogin\Transaction\PurchaseInvoiceController.cs" />
+    <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ReceivableController.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ReplacementController.cs" />
     <Compile Include="Controllers\PostLogin\Master\RoleController.cs" />
     <Compile Include="Controllers\PostLogin\Master\SizeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\TagController.cs" />
@@ -230,11 +232,13 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
-    <Compile Include="Models\PurchaseInvoiceViewModel.cs" />
-    <Compile Include="Models\PurchaseOrderRequestViewModel.cs" />
-    <Compile Include="Models\PurchaseOrderViewModel.cs" />
+    <Compile Include="Models\Transaction\PurchaseInvoiceViewModel.cs" />
+    <Compile Include="Models\Transaction\PurchaseOrderRequestViewModel.cs" />
+    <Compile Include="Models\Transaction\PurchaseOrderViewModel.cs" />
+    <Compile Include="Models\ProductWarehouseViewModel.cs" />
     <Compile Include="Models\ReceivableViewModel.cs" />
-    <Compile Include="Models\PurchaseReturnViewModel.cs" />
+    <Compile Include="Models\Transaction\PurchaseReturnViewModel.cs" />
+    <Compile Include="Models\ReplacementViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\SalesInvoiceViewModel.cs" />
     <Compile Include="Models\SalesReturnViewModel.cs" />
@@ -1037,6 +1041,8 @@
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
     <Content Include="Scripts\Modules\Product\search_product_method.js" />
+    <Content Include="Scripts\Modules\ProductWarehouse\search_ProductWarehouse_event.js" />
+    <Content Include="Scripts\Modules\ProductWarehouse\search_ProductWarehouse_method.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_events.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_methods.js" />
     <Content Include="Scripts\Modules\PurchaseInvoice\purchaseinvoice_validation.js" />
@@ -1064,6 +1070,10 @@
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_methods.js" />
     <Content Include="Scripts\Modules\Receivable\Receivable_events.js" />
     <Content Include="Scripts\Modules\Receivable\Receivable_methods.js" />
+    <Content Include="Scripts\Modules\Replacement\Replacement_event.js" />
+    <Content Include="Scripts\Modules\Replacement\Replacement_method.js" />
+    <Content Include="Scripts\Modules\Replacement\search_Replacement_event.js" />
+    <Content Include="Scripts\Modules\Replacement\search_Replacement_method.js" />
     <Content Include="Scripts\Modules\Receivable\Receivable_Validation.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
@@ -1155,13 +1165,16 @@
     <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
     <Content Include="Views\PostLogin\Master\Challan\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Employee\ChangeBranch.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseOrder\Index.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseOrder\Search.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseOrder\Print.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseInvoice\Search.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseInvoice\Index.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseReturn\Index.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseReturn\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Print.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Index.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Index.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Search.cshtml" />
+    
+    <Content Include="Views\PostLogin\Master\PurchaseOrder\PrintableView.cshtml" />
+   
     <Content Include="Views\PostLogin\SalesOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
@@ -1175,11 +1188,15 @@
     <Content Include="Views\PostLogin\Master\Receivable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseOrderRequest\Index.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseOrderRequest\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\Index.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\Search.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Invoice.cshtml" />
+    <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
+    <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1194,6 +1211,7 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
+    <Folder Include="UploadFiles\" />
     <Folder Include="Views\PostLogin\Dashboard\" />
   </ItemGroup>
   <ItemGroup>

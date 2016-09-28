@@ -48,7 +48,10 @@ $(function () {
 
    
 
-   
+    //Added By Vinod Mane on 28/09/2016
+    $(document).on("change", "#hdnCustomer_Mobile_No", function () {
+        Get_Alterations();
+    });
 
    
 

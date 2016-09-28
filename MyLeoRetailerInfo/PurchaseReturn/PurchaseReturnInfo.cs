@@ -40,6 +40,8 @@ namespace MyLeoRetailerInfo.PurchaseReturn
 
         public int Vendor_Id { get; set; }
 
+        public string Vendor_Name { get; set; }
+
         public int Purchase_Invoice_Id { get; set; }
 
         public string Purchase_Invoice_No { get; set; }
@@ -67,6 +69,8 @@ namespace MyLeoRetailerInfo.PurchaseReturn
         public string Logistics_Person_Name { get; set; }
 
         public int Transporter_Id { get; set; }
+
+        public string Transporter_Name { get; set; }
 
         public string Lr_No { get; set; }
 

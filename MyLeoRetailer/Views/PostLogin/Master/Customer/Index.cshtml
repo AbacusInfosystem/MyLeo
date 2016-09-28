@@ -35,6 +35,14 @@
 
     <form role="form" id="frmCustomer">
 
+        <input type="hidden" id="hdnCreateCustomerFlag" name="Customer.CreateCustomerFlag" value="@Model.Customer.CreateCustomerFlag.ToString()">
+
+
+
+        <input type="hidden" id="hdnMobile" name="Customer.Mobile">
+
+        <input type="hidden" id="hdnInvoiceDate" name="Customer.Invoice_Date">
+
         <div class="row">
 
             <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
@@ -45,8 +53,9 @@
                     
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no.</span>
-                        <input class="form-control" placeholder="Enter mobile number." name="Customer.Mobile" value="@Model.Customer.Mobile" maxlength="12" />
-                    </div>
+                        <input class="form-control" placeholder="Enter mobile number." name="Customer.Mobile" id="txtMobileNo" value="@Model.Customer.Mobile" maxlength="12" data-toggle="modal" data-target="#myModalCustomer" />
+                        <input type="hidden" id="hdnMobileNo" value="@Model.Customer.Mobile">
+                     </div>
 
                 </div>
                 <div class="block">
@@ -55,16 +64,18 @@
                     
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">First name.</span>
-                        <input type="text" class="form-control" placeholder="Enter customer first name." name="Customer.First_Name" value="@Model.Customer.First_Name" />
+                        <input type="text" class="form-control" placeholder="Enter customer first name." name="Customer.First_Name" value="@Model.Customer.First_Name" id="txtFirstName" />
                         <input type="hidden" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id" />
                         <input type="hidden" name="Customer.Customer_Name" value="@Model.Customer.Customer_Name" />
+                        <input type="hidden" id="hdnFirstName" value="@Model.Customer.Customer_Name" />@*Added by vinod mane on 28/09/2016*@
                         @*<input type="hidden" name="Customer.IsActive" value="@Model.Customer.IsActive" />*@ @*Commented By Vinod Mane on 23/09/2016*@
+
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Last name.</span>
-                        <input type="text" class="form-control" placeholder="Enter customer last name." name="Customer.Last_Name" value="@Model.Customer.Last_Name" />
-
+                        <input type="text" class="form-control" placeholder="Enter customer last name." name="Customer.Last_Name" value="@Model.Customer.Last_Name" id="txtLastName"/>
+                        <input type="hidden" id="hdnLast_Name" value="@Model.Customer.Last_Name"/> @*Added by vinod mane on 28/09/2016*@
                     </div>
 
                     <div class="form-group">

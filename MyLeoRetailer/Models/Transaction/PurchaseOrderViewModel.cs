@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyLeoRetailer.Models
+namespace MyLeoRetailer.Models.Transaction
 {
     public class PurchaseOrderViewModel : IGridInfo, IQueryInfo
 	{
@@ -23,6 +23,8 @@ namespace MyLeoRetailer.Models
 			Filter = new Filter_PurchaseOrder();
 
 			FriendlyMessages = new List<FriendlyMessage>();
+
+            Pager = new Pagination_Info();
 
             Cookies = new LoginInfo();
 
@@ -60,6 +62,12 @@ namespace MyLeoRetailer.Models
 			get;
 			set;
 		}
+
+        public Pagination_Info Pager
+        {
+            get;
+            set;
+        }
 
         public LoginInfo Cookies
         {

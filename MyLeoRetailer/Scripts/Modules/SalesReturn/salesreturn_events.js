@@ -1,6 +1,19 @@
 ﻿$(document).ready(function () {
 
-    $('#dtpReturn_Date').datepicker({});
+
+    $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "SKU Required", digits: "Invalid quantity." } });
+    $("#textSKU_No_0").rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
+
+
+    $('#dtpReturn_Date').datepicker({
+
+        dateFormat: "dd-mm-yy",
+        changeMonth: true,
+        changeYear: true,
+        minDate: 0,
+        autoclose: true,
+
+    });
 
 });
 
@@ -17,13 +30,62 @@ $(function () {
     $("#btnSaveSalesReturn").click(function ()
     {
 
-        $("#frmSalesReturn").attr("action", "/SalesReturn/Insert_SalesReturn/");
+        $("#tblSalesReturnItems").find("[id^='SalesReturnItemRow_']").each(function (i, row)
+        {
+            Add_Validation(i);
+        });
+
+        if ($("#frmSalesReturn").valid()) {
+
+            if ($('#tblSalesReturnItems tbody tr').length > 0) {
+
+                $("#frmSalesReturn").attr("action", "/SalesReturn/Insert_SalesReturn/");
+
+                $('#frmSalesReturn').attr("method", "POST");
+
+                $('#frmSalesReturn').submit();
+            }
+        }
+
+    });
+
+
+    $("#btnCustomer").click(function () {
+
+        debugger;
+
+        $("#hdnCreateCustomerFlag").val(true);
+
+        alert($("#hdnCreateCustomerFlag").val());
+
+        //$("#hdnInvoiceDate").val();
+
+        //alert($("#hdnInvoiceDate").val());
+
+        //$("#hdnMobileNo").val();
+
+        //alert($("#hdnMobileNo").val());
+
+        $('#txtReturn_No').removeClass("login-error");
+        $('#txtReturn_No').rules("remove");
+
+        $('#dtpReturn_Date').removeClass("login-error");
+        $('#dtpReturn_Date').rules("remove");
+
+        $('#txtMobileNo').removeClass("MobileNo error");
+        $('#txtMobileNo').rules("remove");
+
+        $('#txtCustomer_Name').removeClass("login-error");
+        $('#txtCustomer_Name').rules("remove");
+
+        $("#frmSalesReturn").attr("action", "/Customer/Index/");
 
         $('#frmSalesReturn').attr("method", "POST");
 
         $('#frmSalesReturn').submit();
 
     });
+
 
 });
 

@@ -80,6 +80,102 @@ namespace MyLeoRetailerRepo
             return SalesOrderItems;
         }
 
+        public List<CreditNote> Get_Credit_Note_Details_By_Id(int Customer_Id) 
+        {
+
+            List<CreditNote> CreditNote = new List<CreditNote>();
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            sqlparam.Add(new SqlParameter("@Customer_Id", Customer_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.sp_Get_Credit_Note_Details_By_Customer_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                CreditNote.Add(Get_Credit_Note_Values1(dr));
+            }
+
+            return CreditNote;
+        }
+
+        public List<Receivable> Get_Gift_Voucher_Details()
+        {
+            List<Receivable> GiftVouncherNo = new List<Receivable>();
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.sp_Get_Gift_Voucher.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                GiftVouncherNo.Add(Get_Gift_Voucher_Values(dr));
+            }
+
+            return GiftVouncherNo;
+        }
+
+        public List<CreditNote> Get_Credit_Note_Amount_By_Id(int Sales_Credit_Note_Id)
+        {
+
+            List<CreditNote> CreditNote = new List<CreditNote>();
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            sqlparam.Add(new SqlParameter("@Sales_Credit_Note_Id", Sales_Credit_Note_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Get_Credit_Note_Details_By_Id_Sp1.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                CreditNote.Add(Get_Credit_Note_Values1(dr));
+            }
+            return CreditNote;
+        }
+
+        private CreditNote Get_Credit_Note_Values1(DataRow dr) //........
+        {
+            CreditNote CreditNoteDetails = new CreditNote();
+
+            CreditNoteDetails.Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
+            CreditNoteDetails.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+            CreditNoteDetails.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+            CreditNoteDetails.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+
+            return CreditNoteDetails;
+        }
+
+        private Receivable Get_Gift_Voucher_Values(DataRow dr) //........
+        {
+            Receivable GiftVoucherDetails = new Receivable();
+
+            GiftVoucherDetails.Gift_Voucher_Id = Convert.ToInt32(dr["Gift_Voucher_Id"]);
+            GiftVoucherDetails.Gift_Voucher_Amount = Convert.ToInt32(dr["Gift_Voucher_Amount"]);
+            GiftVoucherDetails.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+
+
+            return GiftVoucherDetails;
+        }
+
+        public SalesInvoiceInfo Get_Gift_Voucher_Amount_By_Id(int Gift_Voucher_Id)
+        {
+
+            SalesInvoiceInfo GiftVoucherAmt = new SalesInvoiceInfo();
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            sqlparam.Add(new SqlParameter("@Gift_Voucher_Id", Gift_Voucher_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.sp_Get_Gift_Voucher_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+
+                GiftVoucherAmt.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+            }
+            return GiftVoucherAmt;
+        }
+
         private SalesInvoiceInfo Get_Sales_Order_Items_By_SKU_Values(DataRow dr)
         {
             SalesInvoiceInfo SalesOrderItems = new SalesInvoiceInfo();
@@ -236,6 +332,7 @@ namespace MyLeoRetailerRepo
             salesinvoice.Branch_Landline2 = Convert.ToString(dr["Branch_Landline2"]);
             salesinvoice.Sales_Invoice_No = Convert.ToString(dr["Sales_Invoice_No"]);
             salesinvoice.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
+            salesinvoice.Invoice_Date = Convert.ToDateTime(dr["Invoice_Date"]);
             salesinvoice.Customer_Id = Convert.ToInt32(dr["Customer_Id"]);
             salesinvoice.Customer_Name = Convert.ToString(dr["Customer_Name"]);
             salesinvoice.Mobile = Convert.ToString(dr["Customer_Mobile1"]);
@@ -250,16 +347,100 @@ namespace MyLeoRetailerRepo
             return salesinvoice;
         }
 
-
-        public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems,string Branch_Id)
+        public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems, string Branch_Id, List<Receivable> ReceivableItem)
         {
 
             salesInvoice.Sales_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesOrder(salesInvoice, Branch_Id), Storeprocedures.sp_Insert_Sales_Invoice.ToString(), CommandType.StoredProcedure));
 
             Insert_SalesOrder_Items(salesOrderItems, salesInvoice, salesInvoice.Sales_Invoice_Id);
 
+            salesInvoice.Receivable_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Receivable(salesInvoice), Storeprocedures.Insert_Receivable_Data_Sp.ToString(), CommandType.StoredProcedure));
+
+            Insert_Receivable_Items(ReceivableItem, salesInvoice, salesInvoice.Receivable_Id);
+
             return salesInvoice.Sales_Invoice_Id;
 
+        }
+
+        private List<SqlParameter> Set_Values_In_Receivable(SalesInvoiceInfo salesInvoice)
+        {
+            decimal Total_Balance_Amount = 0;
+
+            decimal Balance_Amount = Get_Balance_Amount(salesInvoice.Sales_Invoice_Id);
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Receivable_Id", salesInvoice.Receivable_Id));
+
+            sqlParams.Add(new SqlParameter("@Sales_Invoice_Id", salesInvoice.Sales_Invoice_Id));
+
+            //sqlParams.Add(new SqlParameter("@Payble_Status ", Receivable.Payble_Status));
+
+            sqlParams.Add(new SqlParameter("@Payament_Date ", salesInvoice.Payament_Date));
+
+            if (Balance_Amount > 0)
+            {
+
+                Total_Balance_Amount = Balance_Amount - salesInvoice.Paid_Amount;
+
+            }
+
+            else
+            {
+
+                Total_Balance_Amount = salesInvoice.Net_Amount - salesInvoice.Paid_Amount;
+            }
+
+            salesInvoice.Balance_Amount = Total_Balance_Amount;
+
+            sqlParams.Add(new SqlParameter("@Balance_Amount", salesInvoice.Balance_Amount));
+
+            if (salesInvoice.Balance_Amount != 0)
+            {
+                sqlParams.Add(new SqlParameter("@Payment_Status", "3"));
+            }
+
+            else
+            {
+                sqlParams.Add(new SqlParameter("@Payment_Status", "1"));
+            }
+
+
+            //sqlParams.Add(new SqlParameter("@Balance_Amount ", Receivable.Balance_Amount));
+
+            sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
+
+            sqlParams.Add(new SqlParameter("@Created_By", salesInvoice.Created_By));
+
+            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
+
+            sqlParams.Add(new SqlParameter("@Updated_By", salesInvoice.Updated_By));
+
+            return sqlParams;
+        }
+
+        public decimal Get_Balance_Amount(int Sales_Invoice_Id)
+        {
+
+            decimal Balance_Amount = 0;
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.Get_Receivable_Balance_Amount_By_Id_Sp.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (!dr.IsNull("Balance_Amount"))
+
+                        Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+                }
+            }
+
+            return Balance_Amount;
         }
 
         private List<SqlParameter> Set_Values_In_SalesOrder(SalesInvoiceInfo salesInvoice, string Branch_Id)
@@ -296,6 +477,10 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Customer_Id", 0));
             }
+
+            sqlParams.Add(new SqlParameter("@Invoice_Date", salesInvoice.Invoice_Date));
+            
+
             if (salesInvoice.Total_Quantity != 0)
             {
                 sqlParams.Add(new SqlParameter("@Total_Quantity", salesInvoice.Total_Quantity));
@@ -386,6 +571,287 @@ namespace MyLeoRetailerRepo
 
                 sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Sales_Invoice_Item.ToString(), CommandType.StoredProcedure);
             }
-        } 
+        }
+
+        public void Insert_Receivable_Items(List<Receivable> ReceivableItem, SalesInvoiceInfo salesInvoice, int Receivable_Id)
+        {
+            
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Receivable_Id", Receivable_Id));
+                sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", salesInvoice.Sales_Credit_Note_Id));
+                sqlParams.Add(new SqlParameter("@Gift_Voucher_Id", salesInvoice.Gift_Voucher_Id));
+                sqlParams.Add(new SqlParameter("@Receivable_Item_Id", salesInvoice.Receivable_Item_Id));
+                sqlParams.Add(new SqlParameter("@Paid_Amount", salesInvoice.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Cash_Amount", salesInvoice.Cash_Amount));
+                sqlParams.Add(new SqlParameter("@Cheque_Amount", salesInvoice.Cheque_Amount));
+                sqlParams.Add(new SqlParameter("@Card_Amount", salesInvoice.Cheque_Amount));
+
+                if (salesInvoice.Cheque_Date == DateTime.MinValue)
+                {
+                    sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+                }
+                else
+                {
+                    sqlParams.Add(new SqlParameter("@Cheque_Date", salesInvoice.Cheque_Date));
+                }
+
+                sqlParams.Add(new SqlParameter("@Cheque_No", salesInvoice.Cheque_No));
+                sqlParams.Add(new SqlParameter("@Bank_Name", salesInvoice.Bank_Name));
+                sqlParams.Add(new SqlParameter("@Credit_Card_No", salesInvoice.Credit_Card_No));
+
+                sqlParams.Add(new SqlParameter("@Created_By", salesInvoice.Created_By));
+                sqlParams.Add(new SqlParameter("@Created_On", salesInvoice.Created_Date));
+                sqlParams.Add(new SqlParameter("@Updated_By", salesInvoice.Updated_By));
+                sqlParams.Add(new SqlParameter("@Updated_On", salesInvoice.Updated_Date));
+
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Receivable_Item_Data.ToString(), CommandType.StoredProcedure);
+            
+        }
+
+        public bool Check_Mobile_No(string MobileNo)
+        {
+            bool check = false;
+            
+            try
+
+            {
+                string ProcedureName = string.Empty;
+
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Customer_Mobile1", MobileNo));
+
+                DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Check_Mobile_No.ToString(), CommandType.StoredProcedure);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int count = dt.Rows.Count;
+
+                    List<DataRow> drList = new List<DataRow>();
+
+                    drList = dt.AsEnumerable().ToList();
+
+                    foreach (DataRow dr in drList)
+                    {
+
+                        check = Convert.ToBoolean(dr["MobileCount"]);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {            
+            }
+
+            return check;
+        }
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//public SalesInvoiceInfo Get_Receivable_Details_By_Id(int Sales_Invoice_Id) //.......
+//{
+
+//    SalesInvoiceInfo rInfo = new SalesInvoiceInfo();
+
+//    List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+//    sqlparam.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
+//    DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.sp_Get_Receivable_Search_Data_new.ToString(), CommandType.StoredProcedure);
+
+//    if (dt != null && dt.Rows.Count > 0)
+//    {
+//        foreach (DataRow dr in dt.Rows)
+//        {
+
+//            if (!dr.IsNull("Sales_Invoice_Id"))
+
+//                rInfo.Sales_Invoice_Id = Convert.ToInt32(dr["Sales_Invoice_Id"]);
+
+//            if (!dr.IsNull("Receivable_Id"))
+
+//                rInfo.Receivable_Id = Convert.ToInt32(dr["Receivable_Id"]);
+
+//            if (!dr.IsNull("Balance_Amount"))
+//            {
+//                rInfo.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+//            }
+//            else
+//            {
+//                rInfo.Balance_Amount = Convert.ToDecimal(dr["Total_MRP_Amount"]);
+//            }
+
+//            if (!dr.IsNull("Payment_Status"))
+
+//                rInfo.Payment_Status = Convert.ToInt32(dr["Payment_Status"]);
+
+//            if (!dr.IsNull("Total_MRP_Amount"))
+
+//                rInfo.Total_MRP_Amount = Convert.ToDecimal(dr["Total_MRP_Amount"]);
+
+//        }
+//    }
+
+//    return rInfo;
+//}
+
+//public List<Receivable> Get_Receivable_Items_By_Id(int Receivable_Id)
+//{
+
+//    List<Receivable> Receivables = new List<Receivable>();
+
+//    List<SqlParameter> sqlParamList = new List<SqlParameter>();
+
+//    sqlParamList.Add(new SqlParameter("@Receivable_Id", Receivable_Id));
+
+
+//    //sqlParamList.Add(new SqlParameter("@Receivable_Item_Id", Receivable_Item_Id));
+
+
+//    DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.Get_Receivable_Data_Item_By_Id_Sp.ToString(), CommandType.StoredProcedure);
+
+//    foreach (DataRow dr in dt.Rows)
+//    {
+//        Receivables.Add(Get_Receivable_Item_Values(dr));
+//    }
+
+//    return Receivables;
+//}
+
+//private SalesInvoiceInfo Get_Receivable_Item_Values(DataRow dr)
+//{
+
+//    SalesInvoiceInfo Receivable = new SalesInvoiceInfo();
+
+//    if (!dr.IsNull("Receivable_Item_Id"))
+
+//        Receivable.Receivable_Item_Id = Convert.ToInt32(dr["Receivable_Item_Id"]);
+
+//    if (!dr.IsNull("Receivable_Id"))
+
+//        Receivable.Receivable_Id = Convert.ToInt32(dr["Receivable_Id"]);
+
+//    if (!dr.IsNull("Sales_Credit_Note_Id"))
+
+//        Receivable.Sales_Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
+
+//    if (!dr.IsNull("Paid_Amount"))
+
+//        Receivable.Paid_Amount = Convert.ToInt32(dr["Paid_Amount"]);
+
+//    if (!dr.IsNull("Gift_Voucher_Id"))
+
+//        Receivable.Gift_Voucher_Id = Convert.ToInt32(dr["Gift_Voucher_Id"]);
+
+//    if (!dr.IsNull("Cash_Amount"))
+
+//        Receivable.Cash_Amount = Convert.ToInt32(dr["Cash_Amount"]);
+
+//    if (!dr.IsNull("Cheque_Amount"))
+
+//        Receivable.Cheque_Amount = Convert.ToDecimal(dr["Cheque_Amount"]);
+
+//    if (!dr.IsNull("Card_Amount"))
+
+//        Receivable.Card_Amount = Convert.ToDecimal(dr["Card_Amount"]);
+
+//    if (!dr.IsNull("Gift_Voucher_Amount"))
+
+//        Receivable.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+
+//    if (!dr.IsNull("Cheque_Date"))
+
+//        Receivable.Cheque_Date = Convert.ToDateTime(dr["Cheque_Date"]);
+
+//    Receivable.Cheque_Date.ToShortDateString();
+
+//    if (!dr.IsNull("Cheque_No"))
+
+//        Receivable.Cheque_No = Convert.ToString(dr["Cheque_No"]);
+
+//    if (!dr.IsNull("Bank_Name"))
+
+//        Receivable.Bank_Name = Convert.ToString(dr["Bank_Name"]);
+
+//    if (!dr.IsNull("Credit_Card_No"))
+
+//        Receivable.Credit_Card_No = Convert.ToString(dr["Credit_Card_No"]);
+
+//    if (!dr.IsNull("Total_MRP_Amount"))
+
+//        Receivable.Total_MRP_Amount = Convert.ToDecimal(dr["Total_MRP_Amount"]);
+
+//    if (!dr.IsNull("Created_On"))
+
+//        Receivable.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
+
+//    if (!dr.IsNull("Created_By"))
+
+//        Receivable.Created_By = Convert.ToInt32(dr["Created_By"]);
+
+//    if (!dr.IsNull("Created_Date"))
+
+//        Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+
+//    Receivable.Credit_Note_Date.ToShortDateString();
+
+//    if (!dr.IsNull("Credit_Note_Amount"))
+
+//        Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+
+//    if (!dr.IsNull("Credit_Note_No"))
+
+//        Receivable.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
+
+//    if (!dr.IsNull("Gift_Voucher_No"))
+
+//        Receivable.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+
+//    return Receivable;
+//}
+
+
+//public List<Receivable> Get_Gift_Voucher_Details_By_Id() //......
+//{
+
+//    List<Receivable> Receivables = new List<Receivable>();
+
+//    List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+//    //sqlparam.Add(new SqlParameter("@Gift_Voucher_Id", Gift_Voucher_Id));
+
+//    DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Giftvoucher_Data_sp.ToString(), CommandType.StoredProcedure);
+
+//    foreach (DataRow dr in dt.Rows)
+//    {
+//        Receivable Receivable = new Receivable();
+
+//        Receivable.Gift_Voucher_Id = Convert.ToInt32(dr["Gift_Voucher_Id"]);
+
+//        Receivable.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+
+//        Receivable.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+
+//        Receivables.Add(Receivable);
+
+//    }
+//    return Receivables;
+//}

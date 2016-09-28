@@ -16,6 +16,8 @@ namespace MyLeoRetailerInfo.Common
 
             sp_Get_Category,
             sp_drp_Get_Brands,
+            sp_Check_Existing_Category_Name,//Added by vinod Mane on 26/09/2016
+            sp_Check_Existing_Sub_Category_Name,//Added by vinod Mane on 26/09/2016
 
             //#endregion
 
@@ -45,6 +47,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Brand_By_Id,
             Get_Brands_By_Name_Autocomplete_Sp,
             Get_Brands_Sp,
+            sp_Check_Existing_Brand_Name,//Added by vinod mane on 26/09/2016
 
             #endregion
 
@@ -54,6 +57,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Tax_By_Id,
             sp_drp_Get_VAT,
             sp_drp_Get_CST,
+            sp_Check_Existing_Tax_Name, //Added by Vinod Mane on 27/09/2016
 
             //Vendor Contact
             sp_Insert_Vendor_Contact,
@@ -68,7 +72,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Color,
             sp_Get_Colors_By_Id,
             Get_Colors_By_Name_Autocomplete_Sp,
-
+            sp_Check_Existing_Colour_Name,//Added by Vinod Mane on 23/09/2016
             //#endregion
 
             //SizeGroup
@@ -82,6 +86,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Sizes_By_Size_Group_Id,
             Sp_Delete_Size_By_Id,
             sp_Get_SizeGroup_By_Id,
+            sp_Check_Existing_Size_Group_Name, //Added by Vinod Mane on 27/09/2016
 
             #region Employee
 
@@ -92,6 +97,7 @@ namespace MyLeoRetailerInfo.Common
         //Addition by swapnali | Date:15/09/2016
         sp_Get_Branch_By_EmployeeId,
         //End
+            sp_Check_Existing_Employee_Name, //added by vinod mane on 27/09/2016
 
 
             #endregion
@@ -102,6 +108,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Customer_By_Id,
             sp_Get_Customer_By_Mobile,
             Get_Employee_Sp,
+            sp_Check_Existing_Customer_Name, //Added by vinod mane on 28/09/2016
 
             //GiftVoucher
             sp_Insert_Gift_Voucher,
@@ -121,6 +128,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Delete_Branch_Location_By_Id,
             sp_Get_Employee_Branches,
         sp_Get_Branch,
+            sp_Check_Existing_Branch_Name, //Added by vinod mane on 27/09/2016
 
             #endregion
 
@@ -166,6 +174,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Transporter,
         sp_Get_Vendor,
         sp_Get_Vendor_Details_By_Id,
+            sp_Check_Existing_Vendor_Name, //Added by Vinod Mane on 28/09/2016
                   
         #endregion
 
@@ -191,7 +200,10 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Return,
         sp_Get_Purchase_Return_Items_By_Vendor_And_PI,
 
+        sp_Get_Purchase_Returns,
+
         #endregion
+
 
         #region Purchase Order
 
@@ -212,6 +224,13 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Consolidate_Purchase_Order_Item,
         sp_Get_Consolidate_Purchase_Order_Item_Sizes,
 
+        sp_Get_Purchase_Order_Details_By_Id,
+        sp_Get_Purchase_Order_Items,
+        sp_Get_Purchase_Order_Item_Sizes,
+
+        sp_Get_Purchase_Orders_Detalis,
+        sp_Get_Color_By_Vendor_Id,
+
         #endregion
 
         #region Purchase Invoice
@@ -229,6 +248,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Orders,
 
         sp_Get_Purchase_Invoice,
+        sp_Get_Purchase_Invoices,
 
         #endregion
 
@@ -237,6 +257,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Order_Request,
         sp_Insert_Purchase_Order_Request_Item,
         sp_Insert_Purchase_Order_Request_Item_Sizes,
+
+        sp_Get_Purchase_Order_Requests,
 
         #endregion
 
@@ -286,6 +308,10 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id,
        sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
+        sp_Check_Mobile_No,
+            sp_Get_Credit_Note_Details_By_Customer_Id,
+            sp_Get_Gift_Voucher,
+
 
         //Sales Return
 
@@ -329,9 +355,20 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
+
+        //Replacement
+        //sp_Get_Purchase_Invoice,
+        sp_Insert_Replacement,
+        sp_Insert_Replacement_Item,
   
+            //Product warehouse
+        sp_Insert_Product_Warehouse,
 
     }
-		}
+
+           
+          
+		
 	
 
+}

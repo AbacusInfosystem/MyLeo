@@ -17,6 +17,8 @@ namespace MyLeoRetailerInfo.Brand
 
         public string Brand_Name { get; set; }
 
+        public string Brand_Code { get; set; }
+
         public int IsActive { get; set; }
 
         public bool Is_Active { get; set; }
