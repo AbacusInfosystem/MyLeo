@@ -1,4 +1,4 @@
-﻿@model MyLeoRetailer.Models.PurchaseReturnViewModel
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnViewModel
 
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
@@ -40,7 +40,7 @@
                         <div class="col-md-5">
 
                             <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Return No.</span>
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit Note No.</span>
                                 <input type="text" class="form-control" name="Filter.Debit_Note_No" placeholder="Enter debit note no. to search." />
                                 <input type="hidden" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
                             </div>
@@ -65,11 +65,37 @@
 
         </div>
 
+        <div class="col-md-12" style="padding: 0px;" id="divTable">
+            <div class="row">
+                <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                    <table class="table table-bordered table-hover" id="tblPurchaseReturn">
+                        <thead>
+                            <tr>
+                                <th>Debit Note No.</th>
+                                <th>GR_No</th>
+                                <th>Vendor</th>
+                                <th>Invoice No.</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>Transporter</th>
+                                <th>Logistics Person</th>
+                                <th>Lr No.</th>
+                                <th>Return Date</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div><!-- /.col -->
+            </div>
+        </div>
+
         <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
+        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
 
 
         </div>

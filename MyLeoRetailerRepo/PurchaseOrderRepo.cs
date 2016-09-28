@@ -12,6 +12,12 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Vendor;
 using MyLeoRetailerInfo.Brand;
 using MyLeoRetailerInfo.Category;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.Transactions;
+using MyLeoRetailerRepo.Common;
+using MyLeoRetailerInfo.Color;
 using System.Transactions;
 
 namespace MyLeoRetailerRepo
@@ -100,6 +106,8 @@ namespace MyLeoRetailerRepo
 
         public void Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
+            using (TransactionScope scope = new TransactionScope())
+            {
             PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
 
             int j = 0;
@@ -112,7 +120,7 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Article_No", item.Article_No));
 
-                sqlParam.Add(new SqlParameter("@Colour_Name", item.Colour_Name));
+                sqlParam.Add(new SqlParameter("@Colour_Id", item.Colour_Id));
 
                 sqlParam.Add(new SqlParameter("@Brand_Id", item.Brand_Id));
 
@@ -240,7 +248,7 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity7));
 
                     //Addition
-                    sqlParam.Add(new SqlParameter("@Comment", item.Comment));
+                        //sqlParam.Add(new SqlParameter("@Comment", item.Comment));
                     //End
 
 
@@ -364,13 +372,71 @@ namespace MyLeoRetailerRepo
 
             }
 
+                scope.Complete();
+
+            }
+
+            
+
         }
 
-
-        public DataTable Get_Purchase_Orders(QueryInfo query_Details)
+        private PurchaseOrderInfo Get_Purchase_Order_Value(DataRow dr)
         {
-            return sqlHelper.Get_Table_With_Where(query_Details);
+            PurchaseOrderInfo PurchaseOrder = new PurchaseOrderInfo();
+
+            PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(dr["Purchase_Order_Id"]);
+
+            PurchaseOrder.Purchase_Order_No = Convert.ToString(dr["Purchase_Order_No"]);
+
+            PurchaseOrder.Purchase_Order_Date = Convert.ToDateTime(dr["Purchase_Order_Date"]);
+
+            PurchaseOrder.Shipping_Address = Convert.ToString(dr["Shipping_Address"]);
+
+            PurchaseOrder.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+            PurchaseOrder.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+            PurchaseOrder.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+            PurchaseOrder.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+            PurchaseOrder.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+            PurchaseOrder.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+            PurchaseOrder.Agent_Id = Convert.ToInt32(dr["Agent_Id"]);
+
+            PurchaseOrder.Agent_Name = Convert.ToString(dr["Agent_Name"]);
+
+            PurchaseOrder.Start_Supply_Date = Convert.ToDateTime(dr["Start_Supply_Date"]);
+
+            PurchaseOrder.Stop_Supply_Date = Convert.ToDateTime(dr["Stop_Supply_Date"]);           
+
+            return PurchaseOrder;
         }
+
+        public List<PurchaseOrderInfo> Get_Purchase_Order(ref Pagination_Info Pager, string Purchase_Order_No)
+        {
+            List<PurchaseOrderInfo> PurchaseOrders = new List<PurchaseOrderInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Order_No", Purchase_Order_No));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Orders_Detalis.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
+        {
+                PurchaseOrders.Add(Get_Purchase_Order_Value(dr));
+            }
+
+            return PurchaseOrders;
+        }
+
+        //public DataTable Get_Purchase_Orders(QueryInfo query_Details)
+        //{
+        //    return sqlHelper.Get_Table_With_Where(query_Details);
+        //}      
 
         public List<VendorInfo> Get_Article_No_By_Vendor_Id(int Vendor_Id)
         {
@@ -409,6 +475,27 @@ namespace MyLeoRetailerRepo
             }
             return Brands;
         }
+
+        public List<ColorInfo> Get_Color_By_Vendor_Id(int Vendor_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            List<ColorInfo> Colors = new List<ColorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Color_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                ColorInfo Color = new ColorInfo();
+
+                Color.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+
+                Color.Colour = Convert.ToString(dr["Colour_Name"]);
+
+                Colors.Add(Color);
+            }
+            return Colors;
+        }
+
 
         public List<CategoryInfo> Get_Category_By_Vendor_Id(int Vendor_Id)
         {
@@ -469,6 +556,8 @@ namespace MyLeoRetailerRepo
                 PurchaseOrderInfo PurchaseOrder = new PurchaseOrderInfo();
 
                 PurchaseOrder.Article_No = Convert.ToString(dr["Article_No"]);
+
+                PurchaseOrder.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
 
                 PurchaseOrder.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
@@ -1011,8 +1100,8 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Article_No"))
                     purchaseOrderItem.Article_No = Convert.ToString(dr["Article_No"]);
 
-                if (!dr.IsNull("Colour_Name"))
-                    purchaseOrderItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+                //if (!dr.IsNull("Colour_Name"))
+                //    purchaseOrderItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
                 if (!dr.IsNull("Start_Size"))
                     purchaseOrderItem.Start_Size = Convert.ToString(dr["Start_Size"]);
@@ -1092,18 +1181,253 @@ namespace MyLeoRetailerRepo
             return sizes;
         }
 
-        //demo
-        public void SendDemoEmail()
+        
+        public void SendDemoEmail(PurchaseOrderInfo PurchaseOrder, string attachmentPath)
         {
+            
             SendEmailInfo emailData = new SendEmailInfo();
 
-            emailData.ID = 1;
-            emailData.To_Email_Id = "sanchitasawant1493@gmail.com";
-            emailData.Subject = "Myleo Demo Email";
-            emailData.Body = "Hi Sanchita, These demo email from MyLeo of Purchase Order.";
+            emailData.ID = PurchaseOrder.Vendor_Id;
+            emailData.To_Email_Id = PurchaseOrder.Vendor_Email1;
+            emailData.Subject = "Purchase Order Invoice";
+
+            StringBuilder html = new StringBuilder();
+            html.Append("<table>");
+
+            html.Append("<tr>");
+            html.Append("<td>");
+            html.Append("Hi " + PurchaseOrder.Vendor_Name + " ,");
+            html.Append("</td>");
+            html.Append("</tr>");
+
+            html.Append("<tr>");
+            html.Append("<td>");
+            html.Append("Purchase Order Invoice attached here");
+            html.Append("</td>");
+            html.Append("</tr>");
+
+            html.Append("</table>");
+
+            emailData.Body = html.ToString();
+
+            emailData.AttachmentPath = new List<string>() { attachmentPath };
 
             MyLeoRetailerRepo.Common.CommonMethods.SendMail(emailData);
         }
+
+        public MemoryStream Create_Purchase_Order_Invoice_PDf(PurchaseOrderInfo PurchaseOrder)
+        {
+            MemoryStream ms = new MemoryStream();
+
+            //StringBuilder html = new StringBuilder();
+
+            StringBuilder htmldiv = new StringBuilder();
+            StringBuilder htmldiv2 = new StringBuilder();
+            StringBuilder htmltbl = new StringBuilder();
+            StringBuilder htmltblItem = new StringBuilder();
+
+            htmldiv.Append("<div>");
+            htmldiv.Append("<label>Company Name</label>");
+            htmldiv.Append("<br />");
+            htmldiv.Append("<label>Company Address1</label>");
+            htmldiv.Append("<br />");
+            htmldiv.Append("<label>Company Address2</label>");
+            htmldiv.Append("<h5> <b>PURCHASE ORDER</b></h5>");
+            htmldiv.Append("</div>");
+            
+            htmldiv2.Append("<div>");
+            htmldiv2.Append("<label>" + PurchaseOrder.Vendor_Name + "</label>");
+            htmldiv2.Append("<br />");
+            htmldiv2.Append("<label>" + PurchaseOrder.Vendor_Address + "</label>");
+            htmldiv2.Append("<br />");
+            htmldiv2.Append("<label>" + PurchaseOrder.Vendor_Phone1 + "</label>");
+            htmldiv2.Append("<br />");
+            htmldiv2.Append("<label>" + PurchaseOrder.Vendor_Phone2 + "</label>");
+            htmldiv2.Append("<br />");
+            htmldiv2.Append("<label>" + PurchaseOrder.Vendor_Email1 + "</label>");
+            htmldiv2.Append("</div>");
+
+            htmltbl.Append("<div>");
+            htmltbl.Append("<table border='1'>");
+            htmltbl.Append("<thead>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Po No.</th>");
+            htmltbl.Append("<td>" + PurchaseOrder.Purchase_Order_No + "</td>");
+            htmltbl.Append("</tr>");//
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Date</th>");
+            htmltbl.Append("<td>" + PurchaseOrder.Purchase_Order_Date.ToShortDateString() + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Agent</th>");
+            htmltbl.Append("<td>" + PurchaseOrder.Agent_Name + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Transport</th>");
+            htmltbl.Append("<td>" + PurchaseOrder.Transporter_Name + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Delivery At.</th>");
+            htmltbl.Append("<td>" + PurchaseOrder.Stop_Supply_Date.ToShortDateString() + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("</thead>");
+            htmltbl.Append("</table>");
+            htmltbl.Append("</div>");
+            htmltbl.Append("<br />");
+
+            htmltblItem.Append("<div>");
+            htmltblItem.Append("<table border='1'>");
+            htmltblItem.Append("<tr>");
+            htmltblItem.Append("<th>Article No.</th>");
+            htmltblItem.Append("<th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>");
+            htmltblItem.Append("<th>QTY</th><th>Center Size</th><th>Size Diff</th><th>Base Rate</th><th>Total Amount</th>");
+            htmltblItem.Append("</tr>");
+            //if (PurchaseOrder.PurchaseOrderItems.Count > 0)
+            //{
+            //    foreach (var item in PurchaseOrder.PurchaseOrderItems)
+            //    {
+            //        int colspan = 20;
+            //        if (item.sizes.Count > 0)
+            //        {
+            //            colspan = colspan - item.sizes.Count;
+            //            htmltblItem.Append("<tr>");
+            //            htmltblItem.Append("<td></td>");
+            //            foreach (var itm in item.sizes)
+            //            {
+            //                htmltblItem.Append("<td>" + itm.Size_Name + "</td>");
+            //            }
+            //            htmltblItem.Append("</tr>");
+            //        }
+
+            //        htmltblItem.Append("<tr>");
+
+            //        htmltblItem.Append("<td>" + item.Article_No + "</td>");
+            //        if (item.sizes.Count > 0)
+            //        {
+            //            foreach (var itm in item.sizes)
+            //            {
+            //                htmltblItem.Append("<td>" + itm.Quantity1 + "</td>");
+            //            }
+            //        }
+
+            //        htmltblItem.Append("<td colspan='" + colspan + "'></td>");
+            //        htmltblItem.Append("<td>" + item.Total_Quantity + "</td>");
+            //        htmltblItem.Append("<td>" + item.Center_Size + "</td>");
+            //        htmltblItem.Append("<td>" + item.Size_Difference + "</td>");
+            //        htmltblItem.Append("<td>" + item.Purchase_Price + "</td>");
+            //        htmltblItem.Append("<td>" + item.Total_Amount + "</td>");
+            //        htmltblItem.Append("</tr>");
+            //    }
+            //    htmltblItem.Append("<tr></tr>");
+            //}
+            if (PurchaseOrder.PurchaseOrderItems.Count > 0)
+            {
+                foreach (var item in PurchaseOrder.PurchaseOrderItems)
+                {
+                    int colspan = 20;
+                    if (item.sizes.Count > 0)
+                    {
+                        colspan = colspan - item.sizes.Count;
+                        int sizecolspan = 25 - item.sizes.Count;
+                        htmltblItem.Append("<tr>");
+                        htmltblItem.Append("<td></td>");
+                        foreach (var itm in item.sizes)
+                        {
+                            htmltblItem.Append("<td>" + itm.Size_Name + "</td>");
+                            htmltblItem.Append("<td colspan='" + sizecolspan + "'></td>");
+                        }
+                        htmltblItem.Append("</tr>");
+                    }
+
+                    htmltblItem.Append("<tr>");
+
+                    htmltblItem.Append("<td>" + item.Article_No + "</td>");
+                    if (item.sizes.Count > 0)
+                    {
+                        foreach (var itm in item.sizes)
+                        {
+                            htmltblItem.Append("<td>" + itm.Quantity1 + "</td>");
+                        }
+                    }
+
+                    htmltblItem.Append("<td colspan='" + colspan + "'></td>");
+                    htmltblItem.Append("<td>" + item.Total_Quantity + "</td>");
+                    htmltblItem.Append("<td>" + item.Center_Size + "</td>");
+                    htmltblItem.Append("<td>" + item.Size_Difference + "</td>");
+                    htmltblItem.Append("<td>" + item.Purchase_Price + "</td>");
+                    htmltblItem.Append("<td>" + item.Total_Amount + "</td>");
+                    htmltblItem.Append("</tr>");
+                }
+                htmltblItem.Append("<tr></tr>");
+            }
+            htmltblItem.Append("<tr>");
+            htmltblItem.Append("<th>Remark : " + PurchaseOrder.Comment + "</th>");
+            htmltblItem.Append("<th>Total : " + PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount) + "</th>");
+            htmltblItem.Append("</tr>");
+
+            htmltblItem.Append("<tr>");
+            htmltblItem.Append("<th>Amount(In words) : " + PurchaseOrder.Total_Amount_In_Word + "</th>");
+            htmltblItem.Append("</tr>");
+            htmltblItem.Append("</table>");
+            htmltblItem.Append("</div>");
+            htmltblItem.Append("<br />");
+
+            using (ms = new MemoryStream())
+            {
+                iTextSharp.text.Font font = iTextSharp.text.FontFactory.GetFont("Courier", 1.4f, Font.NORMAL);
+                iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 25, 25, 30, 30);
+                //iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 35, 35, 40, 40);
+                //iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate());
+                //iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4_LANDSCAPE, 25, 25, 30, 30);
+                PdfWriter writer = PdfWriter.GetInstance(document, ms);
+
+                document.Open();
+
+                iTextSharp.text.Paragraph pCompanyName = new iTextSharp.text.Paragraph("Invoice");
+                pCompanyName.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+                pCompanyName.Font = font;
+                document.Add(pCompanyName);
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                iTextSharp.text.Paragraph AddLine = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                document.Add(AddLine);
+
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmldiv.ToString()), null))
+                {
+                    document.Add(element);
+                }
+
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmldiv2.ToString()), null))
+                {
+                    document.Add(element);
+                }
+
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltbl.ToString()), null))
+                {
+                    document.Add(new iTextSharp.text.Paragraph("\n"));
+                    document.Add(element);
+                }
+
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltblItem.ToString()), null))
+                {
+                    document.Add(new iTextSharp.text.Paragraph("\n"));
+                    document.Add(element);
+                }
+
+
+                document.Close();
+                writer.Close();
+
+            }
+
+            return ms;
+        }
+
 
     }
 }

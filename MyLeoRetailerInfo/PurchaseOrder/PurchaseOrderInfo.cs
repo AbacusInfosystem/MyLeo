@@ -81,6 +81,7 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public int Colour_Id { get; set; }
 
               
+              
 		public int Purchase_Order_Id { get; set; }
 
         public DateTime Purchase_Order_Date { get; set; }
@@ -122,6 +123,8 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public int Purchase_Order_Item_Id { get; set; }
 
         public string Article_No { get; set; }
+
+        public int Colour_Id { get; set; }
 
         public string Colour_Name { get; set; }
 

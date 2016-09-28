@@ -1,16 +1,16 @@
 ﻿
 $(function () {
 
-    $("#frmSizeGroup").validate({
+    //$("#frmSizeGroup").validate({
 
-        rules: {
-            "SizeGroup.Size_Group_Name": { required: true },
-        },
-        messages: {
+    //    rules: {
+    //        "SizeGroup.Size_Group_Name": { required: true },
+    //    },
+    //    messages: {
 
-            "SizeGroup.Size_Group_Name": { required: "Size Group is required." }
-        }
-    });
+    //        "SizeGroup.Size_Group_Name": { required: "Size Group is required." }
+    //    }
+    //});
 
 
 
@@ -260,3 +260,39 @@ jQuery.validator.addMethod("validate_Textbox_Empty14", function (value, element)
     return result;
 
 }, "Please Enter Size.");
+
+//Added by Vinod Mane on 27/06/2016
+$(document).ready(function () {
+
+    $("#frmSizeGroup").validate({
+        rules: {
+            "SizeGroup.Size_Group_Name": { required: true, validate_Size: true },
+        },
+        messages: {
+
+            "SizeGroup.Size_Group_Name": { required: "Size Group is required." }
+        }
+    });
+
+    jQuery.validator.addMethod("validate_Size", function (value, element) {
+        var result = true;
+
+        if ($("#txtSize_Group_Name").val() != "" && $("#hdnSizeGroupName").val() != $("#txtSize_Group_Name").val()) {
+            $.ajax({
+                url: '/size/check-size-group-name',
+                data: { size_group_name: $("#txtSize_Group_Name").val() },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == true) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Size Group is already exists.");
+
+});
+//End

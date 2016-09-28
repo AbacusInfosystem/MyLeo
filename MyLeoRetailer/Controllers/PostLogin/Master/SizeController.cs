@@ -255,6 +255,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         //    return Json(JsonConvert.SerializeObject(sgViewModel));
         //}   
+        //End
+
+        //Added By Vinod Mane on 23/09/2016
+
+        public JsonResult Check_Existing_Size_Group_Name(string size_group_name)
+        {
+            bool check = false;
+            try
+            {
+                check = sgRepo.Check_Existing_Size_Group_Name(size_group_name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Size Controller - Check_Existing_Size_Group : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
 
     }
 }

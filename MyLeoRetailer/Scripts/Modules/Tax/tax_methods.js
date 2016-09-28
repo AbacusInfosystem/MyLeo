@@ -99,7 +99,7 @@ function Reset_Tax() {
     $("[name='Tax.TaxValue']").val("");
 
     $("[name='Tax.IsActive']").val("");
-
+    $("#hdnTaxName").val("");//Added By Vinod Mane on 27/09/2016
    
     $('#frmTax').trigger("reset");
    
@@ -146,6 +146,7 @@ function Get_Tax_By_Id(obj) {
             //End
 
             $("[name='Tax.Tax_Name']").val(obj.Tax.Tax_Name);
+            $("#hdnTaxName").val(obj.Tax.Tax_Name);//Added By Vinod Mane on 27/09/2016
 
             $("[name='Tax.Tax_Id']").val(obj.Tax.Tax_Id);
 

@@ -18,9 +18,19 @@
             $("#div_Non_Printable").show();
 
         });
+
+        $('#btnSendEmail').click(function () {
+
+            $("#frmPurchaseOrderInvoice").attr("action", "/PurchaseOrder/Send_Purchase_Order_Invoice/");
+            $('#frmPurchaseOrderInvoice').attr("method", "POST");
+            $('#frmPurchaseOrderInvoice').submit();
+
+        });
+
     });
 </script>
 
+@{Html.RenderPartial("_Message");}
 <div class="content-wrapper">
 
     <div class="container-fluid">
@@ -59,7 +69,7 @@
                                 </div>
 
                                 <h2 class="page-header div-border-bottom"></h2>
-
+                                <input type="hidden" name="PurchaseOrder.Purchase_Order_Id" value="@Model.PurchaseOrder.Purchase_Order_Id"/>
                                 <div class="row">
                                     <div class="col-md-4 invoice-col">
                                         <div class=" form-group">
@@ -250,7 +260,8 @@
                                     <button type="button" id="btnPrint" class="btn btn-default bg-orange">Print</button>
                                 </div>
                                 <div class="col-md-2">
-                                    <a class="btn btn-default bg-blue" role="button" id="btnSendEmail" href="@Url.Action("SendEmail", "PurchaseOrder")">Send Email</a>
+                                    @*<a class="btn btn-default bg-blue" role="button" id="btnSendEmail" href="@Url.Action("Send_Purchase_Order_Invoice", "PurchaseOrder")">Send Email</a>*@
+                                    <button type="button" id="btnSendEmail" class="btn btn-default bg-orange">Send Email</button>
                                 </div>
                                 <div class="col-md-2">
                                     <a class="btn btn-default bg-blue" role="button" id="btnBack" href="@Url.Action("Search", "PurchaseOrder")">Back</a>

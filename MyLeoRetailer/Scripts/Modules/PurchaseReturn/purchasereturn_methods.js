@@ -216,25 +216,8 @@ function AddPurchaseReturnDetails(i) {
 
     myTable.append(newRow);
 
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
-    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
-   
-    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
-        var result = true;
-        var id = $(element).attr('id')
-        id = id.replace("textSKU_No_", "");
-
-        $("#tblPurchaseReturnItems").find("[id^='PurchaseReturnItemRow_']").each(function (j, row) {
-
-            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
-                result = false;
-            }
-        });
-
-        return result;
-    }, "Already mapped.");
-
-
+    Add_Validation(i);
+    
 }
 
 
@@ -320,7 +303,12 @@ function CalculateTotal() {
     CalculateDiscount();
 }
 
+function Add_Validation(i) {
+   
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+    $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
 
+}
 
 function DeletePurchaseReturnDetailsData(i) {
 

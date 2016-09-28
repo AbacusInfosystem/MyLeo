@@ -235,7 +235,7 @@
                             <input type="hidden" id="hdn_Img_0" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[0]" class="prod_img_name">
                             <input type="hidden" id="hdn_Img_Id_0" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[0]" class="prod_img_id">
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[0] == "False" || Model.Product.ProductImage.Is_Default[0] == null || Model.Product.ProductImage.Is_Default[0] == "")
+                                @if (Model.Product.ProductImage.Is_Default[0] == "False" || Model.Product.ProductImage.Is_Default[0] == null || Model.Product.ProductImage.Is_Default[0] == "false")
                                 {
                                     <li><label class="check"><input type="radio" class="icheckbox" id="rd_0" name="iradio" value="false" /></label></li>
                                 }
@@ -271,7 +271,7 @@
                             <input type="hidden" id="hdn_Img_1" name="Product.ProductImage.Product_Image" value="@Model.Product.ProductImage.Product_Image[1]" class="prod_img_name">
                             <input type="hidden" id="hdn_Img_Id_1" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[1]" class="prod_img_id">
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[1] == "False" || Model.Product.ProductImage.Is_Default[1] == null || Model.Product.ProductImage.Is_Default[1] == "")
+                                @if (Model.Product.ProductImage.Is_Default[1] == "False" || Model.Product.ProductImage.Is_Default[1] == null || Model.Product.ProductImage.Is_Default[1] == "false")
                                 {
                                     <li><label class="check"><input type="radio" class="icheckbox" id="rd_1" name="iradio" value="false" /></label></li>
                                 }
@@ -309,7 +309,7 @@
                             <input type="hidden" id="hdn_ImgSrc_2" name="Product.ProductImage.Image_Src[2]">
 
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[2] == "False" || Model.Product.ProductImage.Is_Default[2] == null || Model.Product.ProductImage.Is_Default[2] == "")
+                                @if (Model.Product.ProductImage.Is_Default[2] == "False" || Model.Product.ProductImage.Is_Default[2] == null || Model.Product.ProductImage.Is_Default[2] == "false")
                                 {
                                     <li><label class="check"><input type="radio" class="icheckbox" id="rd_2" name="iradio" value="false" /></label></li>
                                 }
@@ -345,7 +345,7 @@
                             <input type="hidden" id="hdn_Img_Id_3" name="Product.ProductImage.Product_Image_Id" value="@Model.Product.ProductImage.Product_Image_Id[3]" class="prod_img_id">
                             <input type="hidden" id="hdn_ImgSrc_3" name="Product.ProductImage.Image_Src[3]">
                             <ul class="gallery-item-controls">
-                                @if (Model.Product.ProductImage.Is_Default[3] == "False" || Model.Product.ProductImage.Is_Default[3] == null || Model.Product.ProductImage.Is_Default[3] == "")
+                                @if (Model.Product.ProductImage.Is_Default[3] == "False" || Model.Product.ProductImage.Is_Default[3] == null || Model.Product.ProductImage.Is_Default[3] == "false")
                                 {
                                     <li><label class="check"><input type="radio" id="rd_3" name="iradio" value="false" class="icheckbox" /></label></li>
                                 }
@@ -382,7 +382,7 @@
 
             <div class="btn-group">
                 <button class="btn btn-success active" id="btnProductSave">Save</button>
-                <button class="btn btn-danger active" id="btnCancel">Cancel</button>
+                <button type="button" class="btn btn-danger active" id="btnCancel" onclick="location.href='@Url.Action("Search", "Product")'">Cancel</button>
                 <button type="button" class="btn btn-success active" id="btnProductMRP" style="display:none">Add Product MRP</button>
             </div>
 
