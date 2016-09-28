@@ -44,7 +44,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice no</span>
-                        <select class="form-control select" name="Alteration.Sales_Invoice_ID" placeholder="Select invoice no.">
+                        <select class="form-control select" name="Alteration.Sales_Invoice_ID" placeholder="Select invoice no." id="drp_Sales_Invoice_no">
                             <option value="">Select Invoice no</option>
                             @foreach (var item in Model.SalesInvoices)
                             {
@@ -122,7 +122,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Alteration date.</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" name="Alteration.Alteration_Date" value="@((Model.Alteration.Alteration_Date == DateTime.MinValue ? "" : Model.Alteration.Alteration_Date.ToString("dd-MM-yyyy")))"  reado readonly />
+                            <input type="text" class="form-control datepicker" name="Alteration.Alteration_Date" placeholder="Alteration date." value="@((Model.Alteration.Alteration_Date == DateTime.MinValue ? "" : Model.Alteration.Alteration_Date.ToString("dd-MM-yyyy")))" reado readonly />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Delivery date</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                            <input type="text" class="form-control datepicker" name="Alteration.Delivery_Date" value="@((Model.Alteration.Delivery_Date == DateTime.MinValue ? "" : Model.Alteration.Delivery_Date.ToString("dd-MM-yyyy")))"  reado readonly />
+                            <input type="text" class="form-control datepicker" placeholder="Delivery date." name="Alteration.Delivery_Date" value="@((Model.Alteration.Delivery_Date == DateTime.MinValue ? "" : Model.Alteration.Delivery_Date.ToString("dd-MM-yyyy")))" reado readonly />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>  

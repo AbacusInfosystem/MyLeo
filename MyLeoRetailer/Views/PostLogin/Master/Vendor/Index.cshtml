@@ -55,6 +55,7 @@
                                     <div class="form-group">
                                         <label for="txtVendor_Name" style="color: #333" class="">Vendor Name</label>
                                         <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" />
+                                        <input type="hidden" value="@Model.Vendor.Vendor_Name" id="hdnVendorName"/>@*Added by Vinod Mane on 28/09/2016*@
                                     </div>
 
                                 </div>
@@ -710,6 +711,7 @@
                                     <span></span>
                                 </label>
                                 </div>
+                            @*<input type="hidden" value="@Model.Vendor.IsActive" />*@
                             </div>
 
                      

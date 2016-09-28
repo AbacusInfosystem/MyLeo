@@ -16,7 +16,7 @@ namespace MyLeoRetailerInfo.SalesReturn
 
         public int Sales_Return_Id { get; set; }
 
-        public DateTime SalesReturn_Date { get; set; }
+        public DateTime Sales_Return_Date { get; set; }
 
         public int Customer_Id { get; set; }
 
@@ -96,6 +96,8 @@ namespace MyLeoRetailerInfo.SalesReturn
 
         public decimal Discount_Percentage { get; set; }
 
+        public decimal Amount { get; set; }
+
         public decimal Total_Amount { get; set; }
 
         public string Return_Reason { get; set; }
@@ -157,7 +159,7 @@ namespace MyLeoRetailerInfo.SalesReturn
 
         public decimal Discount_Amount { get; set; }
 
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public string Return_Reason { get; set; }
 

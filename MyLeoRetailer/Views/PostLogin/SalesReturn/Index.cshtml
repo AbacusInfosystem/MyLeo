@@ -3,11 +3,11 @@
 @using MyLeoRetailerInfo.Common;
 
 
-
+<script src="~/Scripts/Modules/SalesReturn/salesReturn_validation.js"></script>
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/SalesReturn/salesreturn_events.js"></script>
 <script src="~/Scripts/Modules/SalesReturn/salesreturn_methods.js"></script>
-<script src="~/Scripts/Modules/SalesReturn/salesReturn_validation.js"></script>
+
 
 
 @{
@@ -97,7 +97,7 @@
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">GR date</span>
                                         <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" id="dtpReturn_Date" name="SalesReturn.SalesReturn_Date" value="@((Model.SalesReturn.SalesReturn_Date == DateTime.MinValue ? "" : Model.SalesReturn.SalesReturn_Date.ToString("dd-MM-yyyy")))" readonly />
+                                            <input type="text" class="form-control datepicker" id="dtpReturn_Date" name="SalesReturn.Sales_Return_Date" value="@((Model.SalesReturn.Sales_Return_Date == DateTime.MinValue ? "" : Model.SalesReturn.Sales_Return_Date.ToString("dd-MM-yyyy")))" readonly />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -106,7 +106,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile No.</span>
-                                        <input type="text" class="form-control input-sm editor-field focus" name="SalesReturn.Mobile" id="txtMobileNo" value="@Model.SalesReturn.Mobile" placeholder="Enter Mobile No" @*data-toggle="modal" data-target="#myModalAddCustomer"*@ />
+                                        <input type="text" class="form-control input-sm editor-field focus" name="SalesReturn.Mobile" id="txtMobileNo" value="@Model.SalesReturn.Mobile" placeholder="Enter Mobile No" maxlength="12" @*data-toggle="modal" data-target="#myModalAddCustomer"*@ />
                                         <input type="hidden" id="hdnMobileNo" value="@Model.SalesReturn.Mobile1" name="SalesReturn.Mobile1">
                                     </div>
                                 </div>
@@ -188,7 +188,7 @@
 
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Sales_Return_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Product_MRP" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" />
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Sales_Return_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Product_MRP" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" name="SKU_Code_0" />
                                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                     <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
                                                     <input type="hidden" id="hdnSKU_No_0" value="" name="SaleReturnItemList[0].SKU_Code" class="auto-complete-label" />

@@ -52,7 +52,21 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Colour_Code", Color.Color_Code));
 
+            //sqlParam.Add(new SqlParameter("@IsActive", Color.IsActive));//Commented by vinod mane on 27/09/2016
+
+            //Added by Vinod Mane on 27/09/2016
+            //Set Is_Active Flag
+
+            if (Color.IsActive == 0)
+            {
+                Color.Is_Active = false;
+            }
+            else
+            {
+                Color.Is_Active = true;
+            }
             sqlParam.Add(new SqlParameter("@IsActive", Color.IsActive));
+            //End
 
             sqlParam.Add(new SqlParameter("@Updated_Date", Color.Updated_Date));
 
@@ -83,7 +97,12 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Color_Code"))
                     colorInfo.Color_Code = Convert.ToString(dr["Color_Code"]);
 
-                colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]);
+              //  colorInfo.IsActive = Convert.ToBoolean(dr["Is_Active"]);//Commented by Vinod mane on 27/09/2016
+                //Added by Vinod Mane on 27/09/2016
+                colorInfo.IsActive = Convert.ToInt32(dr["Is_Active"]);
+                colorInfo.Is_Active = Convert.ToBoolean(dr["Is_Active"]);
+                //End
+               
 
                 colorInfo.Colour_Id = Convert.ToInt32(dr["Colour_ID"]);
 

@@ -2,7 +2,7 @@
 
     $("#frmSalesReturn").validate(
         {
-            errorClass: 'login-error',
+            
 
             rules:
                 {
@@ -20,19 +20,13 @@
                             number: true,
                             MobileNo: true
                         },
-                    "SalesReturn.Customer_Name":
-                        {
-                            required: true,
-                        },
+                   
                     "SalesReturn.Total_Amount_Return_By_Cash":
                         {
                             required: true,
                             number: true
                         },
-                    "SaleReturnItemList[0].SKU_Code":
-                        {
-                            //required: true,
-                        },
+                 
                     "SaleReturnItemList[0].Quantity":
                         {
                             required: true,
@@ -61,19 +55,12 @@
                         required: "Mobile No is required",
                         number: "Only numbers"
                     },
-                "SalesReturn.Customer_Name":
-                    {
-                        required: "Customer Name is required",
-                    },            
+                            
                 "SalesReturn.Total_Amount_Return_By_Cash":
                     {
                         required: "Cash Amount is required",
                         number: "Only numbers"
-                    },
-                "SaleReturnItemList[0].SKU_Code":
-                      {
-                          required: "SKU Code is Required",
-                      },
+                    },  
                 "SaleReturnItemList[0].Quantity":
                     {
                         required: "Quantity Required",
@@ -87,6 +74,27 @@
 
             }
         });
+
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+
+        var result = true;
+
+        var id = $(element).attr('id');
+
+        id = id.replace("textSKU_No_", "");
+
+        $("#tblSalesReturnItems").find("[id^='SalesReturnItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+                result = false;
+            }
+        });
+
+        return result;
+
+    }, "Already mapped.");
+
+
 });
 
 jQuery.validator.addMethod("MobileNo", function (value, element) {

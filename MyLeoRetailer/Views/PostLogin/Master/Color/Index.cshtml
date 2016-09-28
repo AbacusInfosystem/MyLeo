@@ -1,4 +1,4 @@
-﻿@model MyLeoRetailer.Models.ColorViewModel 
+﻿@model MyLeoRetailer.Models.ColorViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -38,16 +38,16 @@
                 <h4 style="margin-top: 0px;">Color listing.</h4>
 
                 @*<div class="form-group">
-                    <input type="text" class="form-control color-filter" name="Filter.Color" placeholder="Enter color to search" />
-                </div>*@
-                <input type="hidden" value="@Model.Color.IsActive" />
+                        <input type="text" class="form-control color-filter" name="Filter.Color" placeholder="Enter color to search" />
+                    </div>*@
+
                 <div class="form-group auto-complete">
                     <div class="input-group">
                         <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Color" id="txtColor_Name" placeholder="Enter color to search" data-table="Colour" data-col="Colour_ID,Colour_Name" data-headernames="Colour">
                         <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                         <input type="hidden" id="hdnColourId" value="" name="Filter.Color" class="auto-complete-value" />
                         <input type="hidden" id="hdnColourName" value="" name="Filter.Color" class="auto-complete-label" />
-                        
+
                     </div>
                 </div>
 
@@ -73,6 +73,7 @@
                 <h4 style="margin-top: 0px;">Create - Update color.</h4>
 
                 <form role="form" id="frmColor">
+                    <input type="hidden" value="@Model.Color.IsActive" />@*Added by Vinod MAne on 27/09/2016*@
                     <div class="form-group">
                         @*<label>Create / Update size group:</label>*@
                         <input type="text" class="form-control" id="txtColour_Name" placeholder="Enter color name." name="Color.Colour" />
@@ -82,7 +83,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter color code." name="Color.Color_Code" /> 
+                        <input type="text" class="form-control" placeholder="Enter color code." name="Color.Color_Code" />
                     </div>
 
                     <div class="form-group">
@@ -98,7 +99,8 @@
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
                             <label class="switch">
-                                @if (Model.Color.IsActive == false)
+                                @*@if (Model.Color.IsActive == false)*@
+                                @if (Model.Color.IsActive == 0)
                                 {
                                     <input value="@Model.Color.IsActive.ToString()" name="Color.IsActive" type="checkbox">
                                 }
