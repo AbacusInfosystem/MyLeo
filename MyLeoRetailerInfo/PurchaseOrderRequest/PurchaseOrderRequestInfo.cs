@@ -75,9 +75,15 @@ namespace MyLeoRetailerInfo.PurchaseOrderRequest
 
         public int Vendor_Id { get; set; }
 
+        public string Vendor_Name { get; set; }
+
         public int Branch_Id { get; set; }
 
+        public string Branch_Name { get; set; }
+
         public int Status { get; set; }
+
+        public string Status_Flag { get; set; }
 
         public int Total_Quantity { get; set; }
 
@@ -96,6 +102,8 @@ namespace MyLeoRetailerInfo.PurchaseOrderRequest
         public int Purchase_Order_Request_Item_Id { get; set; }
 
         public string Article_No { get; set; }
+
+        public int Colour_Id { get; set; }
 
         public string Colour_Name { get; set; }
 

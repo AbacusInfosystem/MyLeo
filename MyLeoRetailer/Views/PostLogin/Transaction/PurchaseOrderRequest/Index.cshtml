@@ -1,4 +1,4 @@
-﻿@model MyLeoRetailer.Models.PurchaseOrderRequestViewModel
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseOrderRequestViewModel
 
 <script src="~/Scripts/Modules/PurchaseOrderRequest/purchaseorderrequest_events.js"></script>
 <script src="~/Scripts/Modules/PurchaseOrderRequest/purchaseorderrequest_methods.js"></script>
@@ -108,6 +108,22 @@
                         <button type="button" class="btn btn-success active" id="btnAddSizesPurchaseOrderRequest" disabled>Add Sizes</button>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-md-3" hidden>
+
+                <div class="block">
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Color.</span>
+                        <select class="form-control select" id="drpColor" name="PurchaseOrder.Colour_Id">
+                            <option value="">Select Color</option>
+                        </select>
+                    </div>
+
+                </div>
+
             </div>
         </div>
 

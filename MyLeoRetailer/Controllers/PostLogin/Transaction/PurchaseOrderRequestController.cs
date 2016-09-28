@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
-using MyLeoRetailer.Models;
+using MyLeoRetailer.Models.Transaction;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -13,7 +14,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MyLeoRetailer.Controllers.PostLogin.Master
+namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 {
     public class PurchaseOrderRequestController : BaseController
     {
@@ -87,21 +88,27 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {                
                 Set_Date_Session(poreqViewModel.PurchaseOrderRequest);
 
-                poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                foreach (var item in poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequests)
+                {
+                    Set_Date_Session(item);
+                }
 
-                poreqViewModel.PurchaseOrderRequest.Created_By = poreqViewModel.Cookies.User_Id;
+                if (poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id == 0)
+                {
+                    poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                poreqViewModel.PurchaseOrderRequest.Created_Date = DateTime.Now;
+                    poreqViewModel.PurchaseOrderRequest.Branch_Id = Convert.ToInt32(poreqViewModel.Cookies.Branch_Ids.TrimEnd());
 
-                poreqViewModel.PurchaseOrderRequest.Updated_By = poreqViewModel.Cookies.User_Id;
+                    poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id = _purchaseorderrequestRepo.Insert_Purchase_Order_Request(poreqViewModel.PurchaseOrderRequest);
 
-                poreqViewModel.PurchaseOrderRequest.Updated_Date = DateTime.Now;
+                    poreqViewModel.FriendlyMessages.Add(MessageStore.Get("POREQ01"));
+                }
+                else
+                {
 
-                poreqViewModel.PurchaseOrderRequest.Branch_Id = Convert.ToInt32(poreqViewModel.Cookies.Branch_Ids.TrimEnd());
+                }
 
-                poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id = _purchaseorderrequestRepo.Insert_Purchase_Order_Request(poreqViewModel.PurchaseOrderRequest);
-
-                poreqViewModel.FriendlyMessages.Add(MessageStore.Get("POREQ01"));
+               
             }
             catch (Exception ex)
             {
@@ -115,44 +122,71 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Purchase_Order_Requests(PurchaseOrderRequestViewModel poreqViewModel)
         {
-            string filter = "";
-
-            string dataOperator = "";
-
-            Pagination_Info pager = new Pagination_Info();
-
-            poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
             try
             {
+                poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                filter = Convert.ToString(poreqViewModel.Filter.Vendor_Id) + "," + poreqViewModel.Cookies.Branch_Ids.TrimEnd();// Set filter comma seprated
+                Pagination_Info pager = new Pagination_Info();
 
-                dataOperator = DataOperator.Like.ToString() + "," + DataOperator.In.ToString();
+                pager = poreqViewModel.Pager;
 
-                filter = Convert.ToString(poreqViewModel.Filter.Vendor_Id);// Set filter comma seprated
+                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequests = _purchaseorderrequestRepo.Get_Purchase_Order_Requests(ref pager, poreqViewModel.Cookies.Branch_Ids, poreqViewModel.Filter.Vendor_Id);
 
-                dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+                poreqViewModel.Pager = pager;
 
-                poreqViewModel.Query_Detail = Set_Query_Details(true, "Vendor_Id,Purchase_Order_Request_Id", "", "Purchase_Order_Request", "Vendor_Id,Branch_Id", filter, dataOperator); // Set query for grid
-
-                pager = poreqViewModel.Grid_Detail.Pager;
-
-                poreqViewModel.Grid_Detail = Set_Grid_Details(false, "Vendor_Id,Branch_Id", "Purchase_Order_Request_Id"); // Set grid info for front end listing
-
-                poreqViewModel.Grid_Detail.Records = _purchaseorderRepo.Get_Purchase_Orders(poreqViewModel.Query_Detail); // Call repo method 
-
-                Set_Pagination(pager, poreqViewModel.Grid_Detail); // set pagination for grid
-
-                poreqViewModel.Grid_Detail.Pager = pager;
+                poreqViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(poreqViewModel.Pager.TotalRecords, poreqViewModel.Pager.CurrentPage, poreqViewModel.Pager.PageSize, poreqViewModel.Pager.PageLimit, poreqViewModel.Pager.StartPage, poreqViewModel.Pager.EndPage, poreqViewModel.Pager.IsFirst, poreqViewModel.Pager.IsPrevious, poreqViewModel.Pager.IsNext, poreqViewModel.Pager.IsLast, poreqViewModel.Pager.IsPageAndRecordLabel, poreqViewModel.Pager.DivObject, poreqViewModel.Pager.CallBackMethod);
             }
             catch (Exception ex)
             {
                 poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrderRequest Controller - Get_Purchase_Order_Requests : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }
+
+
+        //public JsonResult Get_Purchase_Order_Requests(PurchaseOrderRequestViewModel poreqViewModel)
+        //{
+        //    string filter = "";
+
+        //    string dataOperator = "";
+
+        //    Pagination_Info pager = new Pagination_Info();
+
+        //    poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+        //    try
+        //    {
+
+        //        filter = Convert.ToString(poreqViewModel.Filter.Vendor_Id) + "," + poreqViewModel.Cookies.Branch_Ids.TrimEnd();// Set filter comma seprated
+
+        //        dataOperator = DataOperator.Like.ToString() + "," + DataOperator.In.ToString();
+
+        //        filter = Convert.ToString(poreqViewModel.Filter.Vendor_Id);// Set filter comma seprated
+
+        //        dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+
+        //        poreqViewModel.Query_Detail = Set_Query_Details(true, "Vendor_Id,Purchase_Order_Request_Id", "", "Purchase_Order_Request", "Vendor_Id,Branch_Id", filter, dataOperator); // Set query for grid
+
+        //        pager = poreqViewModel.Grid_Detail.Pager;
+
+        //        poreqViewModel.Grid_Detail = Set_Grid_Details(false, "Vendor_Id,Branch_Id", "Purchase_Order_Request_Id"); // Set grid info for front end listing
+
+        //        poreqViewModel.Grid_Detail.Records = _purchaseorderRepo.Get_Purchase_Orders(poreqViewModel.Query_Detail); // Call repo method 
+
+        //        Set_Pagination(pager, poreqViewModel.Grid_Detail); // set pagination for grid
+
+        //        poreqViewModel.Grid_Detail.Pager = pager;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(poreqViewModel));
+        //}
 
         public JsonResult Get_Sizes(int size_group_Id)
         {
@@ -172,6 +206,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             poreqViewModel.PurchaseOrderRequest.Brands = _purchaseorderRepo.Get_Brand_By_Vendor_Id(Vendor_Id);
 
             poreqViewModel.PurchaseOrderRequest.Categories = _purchaseorderRepo.Get_Category_By_Vendor_Id(Vendor_Id);
+
+            poreqViewModel.PurchaseOrderRequest.Colors = _purchaseorderRepo.Get_Color_By_Vendor_Id(Vendor_Id);
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }

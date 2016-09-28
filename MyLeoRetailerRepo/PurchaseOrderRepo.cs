@@ -15,6 +15,9 @@ using MyLeoRetailerInfo.Category;
 using System.IO;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using System.Transactions;
+using MyLeoRetailerRepo.Common;
+using MyLeoRetailerInfo.Color;
 
 namespace MyLeoRetailerRepo
 {
@@ -102,6 +105,8 @@ namespace MyLeoRetailerRepo
 
         public void Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
+            using (TransactionScope scope = new TransactionScope())
+            {
             PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
 
             int j = 0;
@@ -114,7 +119,7 @@ namespace MyLeoRetailerRepo
 
                 sqlParam.Add(new SqlParameter("@Article_No", item.Article_No));
 
-                sqlParam.Add(new SqlParameter("@Colour_Name", item.Colour_Name));
+                sqlParam.Add(new SqlParameter("@Colour_Id", item.Colour_Id));
 
                 sqlParam.Add(new SqlParameter("@Brand_Id", item.Brand_Id));
 
@@ -242,7 +247,7 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity7));
 
                     //Addition
-                    sqlParam.Add(new SqlParameter("@Comment", item.Comment));
+                        //sqlParam.Add(new SqlParameter("@Comment", item.Comment));
                     //End
 
 
@@ -366,13 +371,71 @@ namespace MyLeoRetailerRepo
 
             }
 
+                scope.Complete();
+
+            }
+
+            
+
         }
 
-
-        public DataTable Get_Purchase_Orders(QueryInfo query_Details)
+        private PurchaseOrderInfo Get_Purchase_Order_Value(DataRow dr)
         {
-            return sqlHelper.Get_Table_With_Where(query_Details);
+            PurchaseOrderInfo PurchaseOrder = new PurchaseOrderInfo();
+
+            PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(dr["Purchase_Order_Id"]);
+
+            PurchaseOrder.Purchase_Order_No = Convert.ToString(dr["Purchase_Order_No"]);
+
+            PurchaseOrder.Purchase_Order_Date = Convert.ToDateTime(dr["Purchase_Order_Date"]);
+
+            PurchaseOrder.Shipping_Address = Convert.ToString(dr["Shipping_Address"]);
+
+            PurchaseOrder.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+            PurchaseOrder.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+            PurchaseOrder.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+            PurchaseOrder.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+            PurchaseOrder.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+            PurchaseOrder.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+            PurchaseOrder.Agent_Id = Convert.ToInt32(dr["Agent_Id"]);
+
+            PurchaseOrder.Agent_Name = Convert.ToString(dr["Agent_Name"]);
+
+            PurchaseOrder.Start_Supply_Date = Convert.ToDateTime(dr["Start_Supply_Date"]);
+
+            PurchaseOrder.Stop_Supply_Date = Convert.ToDateTime(dr["Stop_Supply_Date"]);           
+
+            return PurchaseOrder;
         }
+
+        public List<PurchaseOrderInfo> Get_Purchase_Order(ref Pagination_Info Pager, string Purchase_Order_No)
+        {
+            List<PurchaseOrderInfo> PurchaseOrders = new List<PurchaseOrderInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Order_No", Purchase_Order_No));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Orders_Detalis.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
+        {
+                PurchaseOrders.Add(Get_Purchase_Order_Value(dr));
+            }
+
+            return PurchaseOrders;
+        }
+
+        //public DataTable Get_Purchase_Orders(QueryInfo query_Details)
+        //{
+        //    return sqlHelper.Get_Table_With_Where(query_Details);
+        //}      
 
         public List<VendorInfo> Get_Article_No_By_Vendor_Id(int Vendor_Id)
         {
@@ -411,6 +474,27 @@ namespace MyLeoRetailerRepo
             }
             return Brands;
         }
+
+        public List<ColorInfo> Get_Color_By_Vendor_Id(int Vendor_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            List<ColorInfo> Colors = new List<ColorInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Color_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                ColorInfo Color = new ColorInfo();
+
+                Color.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+
+                Color.Colour = Convert.ToString(dr["Colour_Name"]);
+
+                Colors.Add(Color);
+            }
+            return Colors;
+        }
+
 
         public List<CategoryInfo> Get_Category_By_Vendor_Id(int Vendor_Id)
         {
@@ -472,6 +556,8 @@ namespace MyLeoRetailerRepo
 
                 PurchaseOrder.Article_No = Convert.ToString(dr["Article_No"]);
 
+                PurchaseOrder.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+
                 PurchaseOrder.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
                 PurchaseOrder.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
@@ -507,6 +593,8 @@ namespace MyLeoRetailerRepo
                 PurchaseOrder.Comment = Convert.ToString(dr["Comment"]);
 
                 PurchaseOrder.Item_Ids = Convert.ToString(dr["Item_Ids"]);
+
+                PurchaseOrder.Branch_Ids = Convert.ToString(dr["Branch_Ids"]);
 
                 PurchaseOrder.Sizes = Get_Consolidate_Purchase_Order_Item_Sizes(PurchaseOrder.Item_Ids);
 
