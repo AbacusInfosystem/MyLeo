@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -190,6 +191,22 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             VendorRepo vRepo = new VendorRepo();
             var result = vRepo.Get_SubCategorylist(Caterory_id);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
+        //Added By Vinod Mane on 28/09/2016
+        public JsonResult Check_Existing_Vendor_Name(string vendor_name)
+        {
+            bool check = false;
+            try
+            {
+                check = vRepo.Check_Existing_Vendor_Name(vendor_name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Vendor Controller - Check_Existing_Vendor_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
         }
         //End
     }

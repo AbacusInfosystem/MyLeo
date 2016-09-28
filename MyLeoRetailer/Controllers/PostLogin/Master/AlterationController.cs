@@ -34,6 +34,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 }
 
                 //aViewModel.Employees = eRepo.Get_Employees();
+                aViewModel.Employees = bRepo.Get_Employees();//Added by vinod mane on 28/09/2016
 
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }
@@ -124,6 +125,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 aViewModel.Grid_Detail.Records = bRepo.Get_Alterations(aViewModel.Query_Detail); // Call repo method 
 
                 Set_Pagination(pager, aViewModel.Grid_Detail); // set pagination for grid
+               
+               
 
                 aViewModel.Grid_Detail.Pager = pager;
             }
@@ -142,7 +145,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Alteration.Alteration_ID);
 
                 //aViewModel.Employees = eRepo.Get_Employees();
-
+                aViewModel.Employees = bRepo.Get_Employees();//Added by vinod mane on 28/09/2016
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }
             catch (Exception ex)

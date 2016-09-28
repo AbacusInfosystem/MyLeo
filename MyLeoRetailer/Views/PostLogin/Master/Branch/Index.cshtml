@@ -44,9 +44,10 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch name.</span>
-                        <input type="text" class="form-control" placeholder="Enter Branch name." name="Branch.Branch_Name" value="@Model.Branch.Branch_Name" />
+                        <input type="text" class="form-control" placeholder="Enter Branch name." name="Branch.Branch_Name" value="@Model.Branch.Branch_Name" id="txtBranch_Name"/>
                         <input type="hidden" id="hdnBranch_Id" name="Branch.Branch_ID" value="@Model.Branch.Branch_ID" />
                         <input type="hidden" value="@Model.Branch.IsActive" />@*name="Branch.IsActive" Commented by Vinod Mane on 23/09/2016*@
+                        <input type="hidden" id="hdnBranch_Name" value="@Model.Branch.Branch_Name"/>@*Added by vinod mane on 27/09/2016*@
                     </div>
 
                 </div>
