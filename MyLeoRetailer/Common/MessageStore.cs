@@ -276,7 +276,7 @@ namespace MyLeoRetailer.Common
             FriendlyMessage PO03 = new FriendlyMessage("PO03", MessageType.Information, "No records found.");
             hash.Add("PO03", PO03);
 
-            FriendlyMessage PO04 = new FriendlyMessage("PO04", MessageType.Information, "Purchase order invoice send successfully.");
+            FriendlyMessage PO04 = new FriendlyMessage("PO04", MessageType.Success, "Purchase order invoice send successfully.");
             hash.Add("PO04", PO04);
 
             #endregion
