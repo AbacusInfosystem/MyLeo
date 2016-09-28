@@ -1,5 +1,5 @@
 ﻿using MyLeoRetailer.Common;
-using MyLeoRetailer.Models;
+using MyLeoRetailer.Models.Transaction;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
@@ -14,7 +14,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MyLeoRetailer.Controllers.PostLogin.Master
+namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 {
     public class PurchaseReturnController: BaseController
     {
@@ -46,7 +46,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     prViewModel = (PurchaseReturnViewModel)TempData["prViewModel"];
                 }
 
-              //  prViewModel.PurchaseReturn.Vendors = _vendorRepo.Get_Vendors();
+                prViewModel.PurchaseReturn.Vendors = _vendorRepo.Get_Vendors();
 
                 prViewModel.PurchaseReturn.Transporters = _vendorRepo.Get_Transporters();
 
@@ -111,19 +111,32 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 Set_Date_Session(prViewModel.PurchaseReturn);
 
-                prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                foreach (var item in prViewModel.PurchaseReturn.PurchaseReturns)
+                {
+                    Set_Date_Session(item);
+                }
 
-                prViewModel.PurchaseReturn.Created_By = prViewModel.Cookies.User_Id;
+                if (prViewModel.PurchaseReturn.Purchase_Return_Id == 0)
+                {
+                    //prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                prViewModel.PurchaseReturn.Created_Date = DateTime.Now;
+                    //prViewModel.PurchaseReturn.Created_By = prViewModel.Cookies.User_Id;
 
-                prViewModel.PurchaseReturn.Updated_By = prViewModel.Cookies.User_Id;
+                    //prViewModel.PurchaseReturn.Created_Date = DateTime.Now;
 
-                prViewModel.PurchaseReturn.Updated_Date = DateTime.Now;
+                    //prViewModel.PurchaseReturn.Updated_By = prViewModel.Cookies.User_Id;
 
-               _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+                    //prViewModel.PurchaseReturn.Updated_Date = DateTime.Now;
 
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
+                    _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+
+                    prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
+                }
+                else
+                {
+
+                }
+                
             }
             catch (Exception ex)
             {
@@ -134,41 +147,67 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return RedirectToAction("Search", prViewModel);
         }
-        
+
         public JsonResult Get_Purchase_Returns(PurchaseReturnViewModel prViewModel)
         {
-            string filter = "";
-
-            string dataOperator = "";
-
-            Pagination_Info pager = new Pagination_Info();
-
             try
             {
+                LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                filter = prViewModel.Filter.Debit_Note_No;// Set filter comma seprated
+                Pagination_Info pager = new Pagination_Info();
 
-                dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+                pager = prViewModel.Pager;
 
-                prViewModel.Query_Detail = Set_Query_Details(true, "Debit_Note_No,Purchase_Return_Id", "", "Purchase_Return", "Debit_Note_No", filter, dataOperator); // Set query for grid
+                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Returns(ref pager, prViewModel.Filter.Debit_Note_No);
 
-                pager = prViewModel.Grid_Detail.Pager;
+                prViewModel.Pager = pager;
 
-                prViewModel.Grid_Detail = Set_Grid_Details(false, "Debit_Note_No", "Purchase_Return_Id"); // Set grid info for front end listing
-
-                prViewModel.Grid_Detail.Records = _purchaseReturnRepo.Get_Purchase_Returns(prViewModel.Query_Detail); // Call repo method 
-
-                Set_Pagination(pager, prViewModel.Grid_Detail); // set pagination for grid
-
-                prViewModel.Grid_Detail.Pager = pager;
+                prViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(prViewModel.Pager.TotalRecords, prViewModel.Pager.CurrentPage, prViewModel.Pager.PageSize, prViewModel.Pager.PageLimit, prViewModel.Pager.StartPage, prViewModel.Pager.EndPage, prViewModel.Pager.IsFirst, prViewModel.Pager.IsPrevious, prViewModel.Pager.IsNext, prViewModel.Pager.IsLast, prViewModel.Pager.IsPageAndRecordLabel, prViewModel.Pager.DivObject, prViewModel.Pager.CallBackMethod);
             }
             catch (Exception ex)
             {
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseReturnRequest Controller - Get_Purchase_Return_Requests : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(prViewModel));
         }
+
+        //public JsonResult Get_Purchase_Returns(PurchaseReturnViewModel prViewModel)
+        //{
+        //    string filter = "";
+
+        //    string dataOperator = "";
+
+        //    Pagination_Info pager = new Pagination_Info();
+
+        //    try
+        //    {
+
+        //        filter = prViewModel.Filter.Debit_Note_No;// Set filter comma seprated
+
+        //        dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+
+        //        prViewModel.Query_Detail = Set_Query_Details(true, "Debit_Note_No,Purchase_Return_Id", "", "Purchase_Return", "Debit_Note_No", filter, dataOperator); // Set query for grid
+
+        //        pager = prViewModel.Grid_Detail.Pager;
+
+        //        prViewModel.Grid_Detail = Set_Grid_Details(false, "Debit_Note_No", "Purchase_Return_Id"); // Set grid info for front end listing
+
+        //        prViewModel.Grid_Detail.Records = _purchaseReturnRepo.Get_Purchase_Returns(prViewModel.Query_Detail); // Call repo method 
+
+        //        Set_Pagination(pager, prViewModel.Grid_Detail); // set pagination for grid
+
+        //        prViewModel.Grid_Detail.Pager = pager;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(prViewModel));
+        //}
 
 
         public JsonResult Get_Purchase_Return_Items_By_Vendor_And_PO(int Vendor_Id, int Purchase_Invoice_Id)

@@ -71,12 +71,22 @@
                                 int i = 0;
                                 if (Model.ProductMRPs.Count != 0)
                                 {
+                                    string Color_Ids = "", Colors = "", Vendor_Codes = "", Descriptions = "";
                                     foreach (var item in Model.ProductMRPs)
-                                    { 
+                                    {
                                         <a name="Color_List" class="list-group-item" href="#" id="@i" data-identity="@item.Colour_Id">@item.Colour</a>
                                         <input type="text" id="txtVendorCode_@item.Colour_Id" name="Vendor_Color_Code" value="@item.Vendor_Color_Code" placeholder="Enter vendor code." class="form-control">//
+                                        <input type="text" id="txtProductDesc_@item.Colour_Id" name="Product_Description" value="@item.Description" placeholder="product description." class="form-control">//
+                                        Color_Ids += item.Colour_Id + ",";
+                                        Colors += item.Colour + ",";
+                                        Vendor_Codes += item.Vendor_Color_Code + ",";
+                                        Descriptions += item.Description + ",";
                                         i++;
                                     }
+                                    <input type="hidden" id="hdn_Color_Ids" name="Model.ProductMRPs" value="@(Color_Ids.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">
+                                    <input type="hidden" id="hdn_Colors" name="Model.ProductMRPs" value="@(Colors.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                    <input type="hidden" id="hdn_Vendor_Codes" name="Model.ProductMRPs" value="@(Vendor_Codes.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                    <input type="hidden" id="hdn_Description" name="Model.ProductMRPs" value="@(Descriptions.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
                                 }
                             }
                         </div>
@@ -94,7 +104,7 @@
 
                 <div class="btn-group">
                     <button class="btn btn-success active" id="btnProductSave">Save</button>
-                    <button class="btn btn-danger active">Cancel</button>
+                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Search", "Product")'">Cancel</button>
                 </div>
             </div>
         </div>

@@ -235,5 +235,31 @@ namespace MyLeoRetailerRepo
 
             return SizeGroup;
         }
+
+        public bool Check_Existing_Size_Group_Name(string size_group_name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Size_Group_Name", size_group_name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Size_Group_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_size_group_name"]);
+                }
+            }
+
+            return check;
+        }
+
     }
 }

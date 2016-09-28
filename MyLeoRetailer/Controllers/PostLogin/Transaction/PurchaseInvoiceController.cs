@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
-using MyLeoRetailer.Models;
+using MyLeoRetailer.Models.Transaction;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -13,7 +14,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MyLeoRetailer.Controllers.PostLogin.Master
+namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 {
     public class PurchaseInvoiceController: BaseController
     {
@@ -43,7 +44,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 piViewModel.PurchaseInvoice.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Orders();
 
-               // piViewModel.PurchaseInvoice.Vendors = _vendorRepo.Get_Vendors();
+                piViewModel.PurchaseInvoice.Vendors = _vendorRepo.Get_Vendors();
 
                 piViewModel.PurchaseInvoice.Transporters = _vendorRepo.Get_Transporters();
 
@@ -95,20 +96,33 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             try
             {
                 Set_Date_Session(piViewModel.PurchaseInvoice);
-                
-                piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                piViewModel.PurchaseInvoice.Created_By = piViewModel.Cookies.User_Id;
+                foreach (var item in piViewModel.PurchaseInvoice.PurchaseInvoices)
+                {
+                    Set_Date_Session(item);
+                }
 
-                piViewModel.PurchaseInvoice.Created_Date = DateTime.Now;
+                if (piViewModel.PurchaseInvoice.Purchase_Invoice_Id == 0)
+                {
+                    //piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                piViewModel.PurchaseInvoice.Updated_By = piViewModel.Cookies.User_Id;
+                    //piViewModel.PurchaseInvoice.Created_By = piViewModel.Cookies.User_Id;
 
-                piViewModel.PurchaseInvoice.Updated_Date = DateTime.Now;
+                    //piViewModel.PurchaseInvoice.Created_Date = DateTime.Now;
 
-                _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+                    //piViewModel.PurchaseInvoice.Updated_By = piViewModel.Cookies.User_Id;
 
-                piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
+                    //piViewModel.PurchaseInvoice.Updated_Date = DateTime.Now;
+
+                    _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+
+                    piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
+                }
+                else
+                {
+
+                }
+               
             }
             catch (Exception ex)
             {
@@ -164,38 +178,64 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Purchase_Invoices(PurchaseInvoiceViewModel piViewModel)
         {
-            string filter = "";
-
-            string dataOperator = "";
-
-            Pagination_Info pager = new Pagination_Info();
-
             try
             {
+                piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                filter = piViewModel.Filter.Purchase_Invoice_No;// Set filter comma seprated
+                Pagination_Info pager = new Pagination_Info();
 
-                dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+                pager = piViewModel.Pager;
 
-                piViewModel.Query_Detail = Set_Query_Details(true, "Purchase_Invoice_No,Purchase_Invoice_Id", "", "Purchase_Invoice", "Purchase_Invoice_No", filter, dataOperator); // Set query for grid
+                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoices(ref pager, piViewModel.Filter.Purchase_Invoice_No);
 
-                pager = piViewModel.Grid_Detail.Pager;
+                piViewModel.Pager = pager;
 
-                piViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No", "Purchase_Invoice_Id"); // Set grid info for front end listing
-
-                piViewModel.Grid_Detail.Records = _purchaseinvoiceRepo.Get_Purchase_Invoices(piViewModel.Query_Detail); // Call repo method 
-
-                Set_Pagination(pager, piViewModel.Grid_Detail); // set pagination for grid
-
-                piViewModel.Grid_Detail.Pager = pager;
+                piViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(piViewModel.Pager.TotalRecords, piViewModel.Pager.CurrentPage, piViewModel.Pager.PageSize, piViewModel.Pager.PageLimit, piViewModel.Pager.StartPage, piViewModel.Pager.EndPage, piViewModel.Pager.IsFirst, piViewModel.Pager.IsPrevious, piViewModel.Pager.IsNext, piViewModel.Pager.IsLast, piViewModel.Pager.IsPageAndRecordLabel, piViewModel.Pager.DivObject, piViewModel.Pager.CallBackMethod);
             }
             catch (Exception ex)
             {
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Requests : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(piViewModel));
         }
+
+        //public JsonResult Get_Purchase_Invoices(PurchaseInvoiceViewModel piViewModel)
+        //{
+        //    string filter = "";
+
+        //    string dataOperator = "";
+
+        //    Pagination_Info pager = new Pagination_Info();
+
+        //    try
+        //    {
+
+        //        filter = piViewModel.Filter.Purchase_Invoice_No;// Set filter comma seprated
+
+        //        dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
+
+        //        piViewModel.Query_Detail = Set_Query_Details(true, "Purchase_Invoice_No,Purchase_Invoice_Id", "", "Purchase_Invoice", "Purchase_Invoice_No", filter, dataOperator); // Set query for grid
+
+        //        pager = piViewModel.Grid_Detail.Pager;
+
+        //        piViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No", "Purchase_Invoice_Id"); // Set grid info for front end listing
+
+        //        piViewModel.Grid_Detail.Records = _purchaseinvoiceRepo.Get_Purchase_Invoices(piViewModel.Query_Detail); // Call repo method 
+
+        //        Set_Pagination(pager, piViewModel.Grid_Detail); // set pagination for grid
+
+        //        piViewModel.Grid_Detail.Pager = pager;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        piViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(piViewModel));
+        //}
 
 
 

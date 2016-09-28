@@ -53,7 +53,7 @@ function Save_Category()
 
 				Category: $("[name='Category.Category']").val(),
 
-			    //IsActive: $("[name='Category.IsActive']").val(),
+			    Category_Code: $("[name='Category.Category_Code']").val(),
 				IsActive: activeFlg,
 
 				Category_Id: $("[name='Category.Category_Id']").val()
@@ -105,9 +105,15 @@ function Reset_Category()
 {
 	$("[name='Category.Category']").val("");
 
+    $("[name='Category.Category_Code']").val("");
+
 	$("[name='Category.Category_Id']").val("");
 
 	$("#dvSubCategory").html("");
+
+    //Added by Vinod Mane on 26/09/2016
+	$("#hdnCategory_Name").val("");
+    //End
 }
 
 function Get_Category_By_Id(obj)
@@ -146,6 +152,10 @@ function Get_Category_By_Id(obj)
 	        }
 
 	        $("[name='Category.Category']").val(obj.Category.Category);
+
+	        $("[name='Category.Category_Code']").val(obj.Category.Category_Code);
+
+	        $("#hdnCategory_Name").val(obj.Category.Category);//Added by Vinod Mane on 26/09/2016
 
 	        $("[name='Category.Category_Id']").val(obj.Category.Category_Id);
 

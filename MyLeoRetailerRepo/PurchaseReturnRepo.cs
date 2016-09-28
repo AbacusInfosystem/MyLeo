@@ -9,6 +9,8 @@ using System.Data.SqlClient;
 using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
+using System.Transactions;
+using MyLeoRetailerRepo.Common;
 
 namespace MyLeoRetailerRepo
 {
@@ -81,6 +83,38 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Updated_By", PurchaseReturn.Updated_By));
 
             sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseReturn.Updated_Date));
+
+            return sqlParams;
+        }
+
+        private List<SqlParameter> Set_Values_In_Purchase_Return_Item(PurchaseReturnInfo item)
+        {
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Return_Id", item.Purchase_Return_Id));
+
+            sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", item.Purchase_Invoice_Id));
+
+            sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
+
+            sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+
+            sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
+
+            sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
+
+            sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+
+            sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
+
+            sqlParams.Add(new SqlParameter("@Created_By", item.Created_By));
+
+            sqlParams.Add(new SqlParameter("@Created_Date", item.Created_Date));
+
+            sqlParams.Add(new SqlParameter("@Updated_By", item.Updated_By));
+
+            sqlParams.Add(new SqlParameter("@Updated_Date", item.Updated_Date));
 
             return sqlParams;
         }
@@ -209,54 +243,96 @@ namespace MyLeoRetailerRepo
 
             return PurchaseReturn;
         }
+
+        private PurchaseReturnInfo Get_Purchase_Return_Values(DataRow dr)
+        {
+            PurchaseReturnInfo PurchaseReturn = new PurchaseReturnInfo();
+
+            PurchaseReturn.Purchase_Return_Id = Convert.ToInt32(dr["Purchase_Return_Id"]);
+
+            PurchaseReturn.Debit_Note_No = Convert.ToString(dr["Debit_Note_No"]);
+
+            PurchaseReturn.GR_No = Convert.ToString(dr["GR_No"]);
+
+            PurchaseReturn.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+
+            PurchaseReturn.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+            PurchaseReturn.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+            PurchaseReturn.Total_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+            PurchaseReturn.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+            PurchaseReturn.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+            PurchaseReturn.Logistics_Person_Name = Convert.ToString(dr["Logistics_Person_Name"]);
+
+            PurchaseReturn.Lr_No = Convert.ToString(dr["Lr_No"]);
+
+            PurchaseReturn.Purchase_Return_Date = Convert.ToDateTime(dr["Purchase_Return_Date"]);
+           
+            if (!dr.IsNull("Vendor_Name"))
+            {
+                PurchaseReturn.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+            }
+
+            if (!dr.IsNull("Purchase_Invoice_No"))
+            {
+                PurchaseReturn.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+            }
+
+            return PurchaseReturn;
+        }
                
         public int Insert_Purchase_Return(PurchaseReturnInfo PurchaseReturn)
         {
-
-            PurchaseReturn.Purchase_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Return(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Return.ToString(), CommandType.StoredProcedure));
-                       
-            foreach (var item in PurchaseReturn.PurchaseReturns)
+            using (TransactionScope scope = new TransactionScope())
             {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
+                PurchaseReturn.Purchase_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Return(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Return.ToString(), CommandType.StoredProcedure));
 
-                sqlParams.Add(new SqlParameter("@Purchase_Return_Id", PurchaseReturn.Purchase_Return_Id));
+                foreach (var item in PurchaseReturn.PurchaseReturns)
+                {
+                    item.Purchase_Return_Id = PurchaseReturn.Purchase_Return_Id;
 
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseReturn.Purchase_Invoice_Id));
+                    item.Purchase_Invoice_Id = PurchaseReturn.Purchase_Invoice_Id;
 
-                sqlParams.Add(new SqlParameter("@Purchase_Order_Id", item.Purchase_Order_Id));
+                    sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Return_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Item.ToString(), CommandType.StoredProcedure);
+                }
 
-                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
-
-                sqlParams.Add(new SqlParameter("@Size_Group_Id", item.Size_Group_Id));
-
-                sqlParams.Add(new SqlParameter("@Size_Id", item.Size_Id));
-
-                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
-
-                sqlParams.Add(new SqlParameter("@Total_Amount", item.Amount));
+                sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Credit_Note(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Credit_Note.ToString(), CommandType.StoredProcedure);
                
-                sqlParams.Add(new SqlParameter("@Created_By", PurchaseReturn.Created_By));
+                scope.Complete();
 
-                sqlParams.Add(new SqlParameter("@Created_Date", PurchaseReturn.Created_Date));
-
-                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseReturn.Updated_By));
-
-                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseReturn.Updated_Date));
-
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Return_Item.ToString(), CommandType.StoredProcedure);
             }
-
-            sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Credit_Note(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Credit_Note.ToString(), CommandType.StoredProcedure);
-
+            
             return PurchaseReturn.Purchase_Return_Id;
 
         }
 
-        public DataTable Get_Purchase_Returns(QueryInfo query_Details)
+        public List<PurchaseReturnInfo> Get_Purchase_Returns(ref Pagination_Info Pager, string Debit_Note_No)
         {
-            return sqlHelper.Get_Table_With_Where(query_Details);
+            List<PurchaseReturnInfo> PurchaseReturns = new List<PurchaseReturnInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Debit_Note_No", Debit_Note_No));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
+            {
+                PurchaseReturns.Add(Get_Purchase_Return_Values(dr));
+            }
+
+            return PurchaseReturns;
         }
-        
+
+        //public DataTable Get_Purchase_Returns(QueryInfo query_Details)
+        //{
+        //    return sqlHelper.Get_Table_With_Where(query_Details);
+        //}
+
         public PurchaseReturnInfo Get_Vendor_Details_By_Id(int vendor_Id)
         {
             List<SqlParameter> sqlParams = new List<SqlParameter>();
@@ -369,6 +445,7 @@ namespace MyLeoRetailerRepo
 
             return purchaseReturnItem;
         }
+
 
 
     }
