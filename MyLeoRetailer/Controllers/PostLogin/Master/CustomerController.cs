@@ -63,7 +63,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                     Mobile = srViewModel.SalesReturn.Mobile;
 
-                    ReturnDate = srViewModel.SalesReturn.SalesReturn_Date.ToString();
+                    ReturnDate = srViewModel.SalesReturn.Sales_Return_Date.ToString();
 
                     TempData["srViewModel"] = srViewModel;
 
