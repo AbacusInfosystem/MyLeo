@@ -101,6 +101,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                     poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id = _purchaseorderrequestRepo.Insert_Purchase_Order_Request(poreqViewModel.PurchaseOrderRequest);
 
+                    poreqViewModel = new PurchaseOrderRequestViewModel();
+
                     poreqViewModel.FriendlyMessages.Add(MessageStore.Get("POREQ01"));
                 }
                 else

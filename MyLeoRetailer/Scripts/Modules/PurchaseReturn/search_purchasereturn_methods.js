@@ -56,7 +56,7 @@ function Bind_Get_Purchase_Return_Data(data) {
             tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Transporter_Name + "</td>";
             tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Logistics_Person_Name + "</td>";
             tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Lr_No + "</td>";
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Purchase_Return_Date + "</td>";
+            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Purchase_Return_Date.substring(0, 10) + "</td>";
 
             tblHTML += "</tr>";
 

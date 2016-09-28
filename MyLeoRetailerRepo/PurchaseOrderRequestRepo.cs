@@ -133,6 +133,8 @@ namespace MyLeoRetailerRepo
 
                     sqlParam.Add(new SqlParameter("@Comment", item.Comment));
 
+                    sqlParam.Add(new SqlParameter("@Status", PurchaseOrderRequest.Status));
+
                     PurchaseOrderRequest.PurchaseOrderRequests[j].Purchase_Order_Request_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Request_Item.ToString(), CommandType.StoredProcedure));
 
                     int i = 0;
