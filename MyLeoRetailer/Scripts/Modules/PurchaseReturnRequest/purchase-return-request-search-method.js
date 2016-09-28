@@ -8,7 +8,7 @@
 		    },
 		    pager: {
 
-		        CurrentPage: $("#divColorPager").val(),
+		        CurrentPage: $("#hdfCurrent_Page").val(),
 		    }
 		}
 

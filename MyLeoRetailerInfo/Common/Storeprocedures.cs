@@ -127,7 +127,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
             sp_Get_Employee_Branches,
-            sp_Get_Branch,
+        sp_Get_Branch,
             sp_Check_Existing_Branch_Name, //Added by vinod mane on 27/09/2016
 
             #endregion
@@ -200,6 +200,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Return,
         sp_Get_Purchase_Return_Items_By_Vendor_And_PI,
 
+        sp_Get_Purchase_Returns,
+
         #endregion
 
 
@@ -226,6 +228,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Order_Items,
         sp_Get_Purchase_Order_Item_Sizes,
 
+        sp_Get_Purchase_Orders_Detalis,
+        sp_Get_Color_By_Vendor_Id,
+
         #endregion
 
         #region Purchase Invoice
@@ -242,6 +247,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Invoice_Items_By_SKU_Code,
         sp_Get_Purchase_Orders,
 
+        sp_Get_Purchase_Invoice,
+        sp_Get_Purchase_Invoices,
+
         #endregion
 
         #region Purchase Order Request
@@ -249,6 +257,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Order_Request,
         sp_Insert_Purchase_Order_Request_Item,
         sp_Insert_Purchase_Order_Request_Item_Sizes,
+
+        sp_Get_Purchase_Order_Requests,
 
         #endregion
 
@@ -337,7 +347,7 @@ namespace MyLeoRetailerInfo.Common
 
 
         //Replacement
-        sp_Get_Purchase_Invoice,
+        //sp_Get_Purchase_Invoice,
         sp_Insert_Replacement,
         sp_Insert_Replacement_Item,
   
