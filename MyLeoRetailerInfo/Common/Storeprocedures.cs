@@ -306,6 +306,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id,
        sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
         sp_Check_Mobile_No,
+            sp_Get_Credit_Note_Details_By_Customer_Id,
+            sp_Get_Gift_Voucher,
+
 
         //Sales Return
 

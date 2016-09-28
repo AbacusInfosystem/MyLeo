@@ -1,7 +1,10 @@
 ﻿$(document).ready(function () {
 
-    $('#dtpInvoice_Date').datepicker({
+    $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "Required", digits: "Invalid quantity." } });
+    $("#textSKU_No_0").rules("add", { required: true,checkSKUExist: true, messages: { required: "Required field", } });
 
+
+    $('#dtpInvoice_Date').datepicker({
 
         dateFormat: "dd-mm-yy",
         changeMonth: true,
@@ -11,7 +14,6 @@
 
     });
 
-    //CalculateTotal();
 
     debugger
 
@@ -20,8 +22,6 @@
         alert($('#hdnSalesInvoiceID').val());
 
         debugger;
-
-        //$('#delete-salesorder-details').attr("disabled", "disabled");
 
         $('#btnAddInputRow').attr("disabled", "disabled");
 
@@ -38,6 +38,8 @@
 
     CalculateTax();
 
+    Get_Gift_Voucher_Details();
+
 });
 
 $(function ()
@@ -47,17 +49,47 @@ $(function ()
     $("[name='SalesInvoice.Mobile']").focusout(function ()
     {
         Get_Customer_Name_By_Mobile_No();
+
+        //Get_Credit_Note_Details_By_Id($(this).val());
+
+
+    });
+
+
+    $('[name = "SalesInvoice.Sales_Credit_Note_Id"]').change(function () {
+
+        Get_Credit_Note_Amount_By_Id($(this).val());
+
+    });
+
+    $('[name = "SalesInvoice.Gift_Voucher_Id"]').change(function () {
+
+        Get_Gift_Voucher_Amount_By_Id($(this).val());
+
     });
 
 
     $("#btnSaveSalesOrder").click(function ()
     {
-   
-        $("#frmSalesOrder").attr("action", "/SalesOrder/Insert_SalesOrder/");
+        debugger;
 
-        $('#frmSalesOrder').attr("method", "POST");
+        $("#tblSalesOrderItems").find("[id^='SalesOrderItemRow_']").each(function (i, row)
+        {
+            Add_Validation(i);
+        });
 
-        $('#frmSalesOrder').submit();
+        if ($("#frmSalesOrder").valid()) {
+
+            if ($('#tblSalesOrderItems tbody tr').length > 0) {
+
+                $("#frmSalesOrder").attr("action", "/SalesOrder/Insert_SalesOrder/");
+
+                $('#frmSalesOrder').attr("method", "POST");
+
+                $('#frmSalesOrder').submit();
+
+            }
+        }
 
     });
 
@@ -70,16 +102,10 @@ $(function ()
 
         alert($("#hdnCreateCustomerFlag").val());
 
-        //$("#hdnInvoiceDate").val();
-        
-        //alert($("#hdnInvoiceDate").val());
-
-        //$("#hdnMobileNo").val();
-
-        //alert($("#hdnMobileNo").val());
-
         $('#txtInvoice_No').removeClass("login-error");
         $('#txtInvoice_No').rules("remove");
+
+        $('#textSKU_No_0').rules("remove");
 
         $('#dtpInvoice_Date').removeClass("login-error");
         $('#dtpInvoice_Date').rules("remove");
@@ -97,7 +123,6 @@ $(function ()
         $('#frmSalesOrder').submit();
 
     });
-
 
 });
 
@@ -167,6 +192,8 @@ function CalculateTax() {
     $("#textTaxAmount_0").val(taxAmt.toFixed(2));
     $("#textRoundOff_0").val(fracPart.toFixed(2));
     $("#textNETAmount_0").val(Math.round(netAmt));
+    $("#textTotalAmount").val(Math.round(netAmt));
+
 
 }
 
@@ -188,6 +215,69 @@ function CalculateDiscountAmount()
     }
 }
 
+function CalculatePaidAmt() {
+
+    debugger;
+
+
+    var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
+
+    var chequeamount = parseFloat($("#txtCheque_Amount").val());
+
+    var cashamount = parseFloat($("#txtCash_amount").val());
+
+    var creditnoteamount = parseFloat($("#txtCredit_Note_Amount").val());
+
+    var giftvoucheramount = parseFloat($("#txtGift_Voucher_Amount").val());
+
+    var cardamount = parseFloat($("#txtCard_Amount").val());
+
+    if (cashamount == 0) {
+
+        paidamount = chequeamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    else if (chequeamount == 0) {
+        paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    else if (creditnoteamount == 0) {
+
+        paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
+    }
+
+    else if (giftvoucheramount == 0) {
+
+        paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
+    }
+
+    else {
+
+        paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    // var paidamount = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+
+    //var newbalanceamount = oldbalanceamount - paidamount;
+
+    //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+
+}
+
+function CalculateBalAmt()
+{
+    var oldbalanceamount = parseFloat($("#textTotalAmount").val());
+
+    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+
+    var newbalanceamount = oldbalanceamount - paidamount;
+
+    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+}
 
 
 //$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
