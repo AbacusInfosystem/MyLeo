@@ -51,6 +51,11 @@ $(function () {
         $("#frmChangeBranch").submit();
     });
     //End
+    
+    //Added By Vinod Mane on 28/09/2016
+    $(document).on("change", "#hdnEmployeeName", function () {
+        Get_Employees();
+    });
 
 
 });

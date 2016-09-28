@@ -97,6 +97,7 @@ namespace MyLeoRetailerInfo.Common
         //Addition by swapnali | Date:15/09/2016
         sp_Get_Branch_By_EmployeeId,
         //End
+            sp_Check_Existing_Employee_Name, //added by vinod mane on 27/09/2016
 
 
             #endregion
@@ -107,6 +108,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Customer_By_Id,
             sp_Get_Customer_By_Mobile,
             Get_Employee_Sp,
+            sp_Check_Existing_Customer_Name, //Added by vinod mane on 28/09/2016
 
             //GiftVoucher
             sp_Insert_Gift_Voucher,
@@ -125,7 +127,8 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Branch_Location_By_Id,
             sp_Delete_Branch_Location_By_Id,
             sp_Get_Employee_Branches,
-        sp_Get_Branch,
+            sp_Get_Branch,
+            sp_Check_Existing_Branch_Name, //Added by vinod mane on 27/09/2016
 
             #endregion
 
@@ -171,6 +174,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Transporter,
         sp_Get_Vendor,
         sp_Get_Vendor_Details_By_Id,
+            sp_Check_Existing_Vendor_Name, //Added by Vinod Mane on 28/09/2016
                   
         #endregion
 

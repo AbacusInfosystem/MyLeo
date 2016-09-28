@@ -365,5 +365,32 @@ namespace MyLeoRetailerRepo
 
             return branch;
         }
+
+        //Added By Vinod Mane on 23/09/2016
+        public bool Check_Existing_Employee_Name(string employee_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Employee_Name", employee_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Employee_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_employee_name"]);
+                }
+            }
+
+            return check;
+        }
+        //End
     }
 }

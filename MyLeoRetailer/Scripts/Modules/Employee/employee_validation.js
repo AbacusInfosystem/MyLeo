@@ -4,7 +4,8 @@ $(function ()
     $("#frmEmployee").validate({
 		rules: {
 		    "Employee.Employee_Name": {
-		        required: true
+		        required: true,
+                validate_Employee_Name:true
 		    },
 
 		    //Addition by swapnali | Date:19/09/2016
@@ -126,4 +127,30 @@ $(function ()
 
     }, "Enter password same as above.");
 
+    //Added by vinod mane on 27/09/2016
+
+    jQuery.validator.addMethod("validate_Employee_Name", function (value, element) {
+        var result = true;
+
+        if ($("#txtEmployee_Name").val() != "" && $("#hdnEmployee_Name").val() != $("#txtEmployee_Name").val()) {
+            $.ajax({
+                url: '/employee/check-employee-name',
+                data: { employee_Name: $("#txtEmployee_Name").val() },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == true) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Colour is already exists.");
+
+
+    //end
+
 });
+
