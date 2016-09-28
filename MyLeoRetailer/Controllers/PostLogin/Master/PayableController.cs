@@ -43,6 +43,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Index(PayableViewModel pViewModel)
         {
+            PayableRepo pRepo = new PayableRepo();
+
+            pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
+
             return View("Index", pViewModel);
         }
 
@@ -61,12 +65,17 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             PayableRepo pRepo = new PayableRepo();
 
             try
+
             {
-                pViewModel.Payables = pRepo.Get_Credit_Note_Details_By_Id(pViewModel.Payable.Purchase_Credit_Note_Id);
+ 
+
+                pViewModel.CreditNote = pRepo.Get_Credit_Note_Details_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 
                 pViewModel.Payable = pRepo.Get_Payable_Details_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 
                 pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id);
+
+               
               
             }
             catch (Exception ex)
@@ -140,7 +149,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 int Purchase_Invoice_Id = pViewModel.Payable.Purchase_Invoice_Id;
 
-                pViewModel.Payable.Purchase_Invoice_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
+               // pViewModel.Payable.Purchase_Invoice_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
+
+                pRepo.Insert_Payable(pViewModel.Payable);
+
+                pRepo.Update_Payable_Items_Data(pViewModel.Payable);
+
+                pViewModel.Payable.Purchase_Invoice_Id = Purchase_Invoice_Id;
 
                 pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id);
 

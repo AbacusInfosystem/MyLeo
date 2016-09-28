@@ -1,5 +1,9 @@
 ﻿
 
+//$(document).ready(function () {
+//    Get_Receivables();
+//});
+
 $(function () {
 
     if ($("#hdnPayment_Status1").val() == 1)
