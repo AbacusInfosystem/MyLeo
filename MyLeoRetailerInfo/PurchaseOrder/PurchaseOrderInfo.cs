@@ -73,15 +73,14 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public SizeGroupInfo SizeGroup { get; set; }
 
+        public string Request_Ids { get; set; }
+
+        public string Request_Dates { get; set; }
 
         public string Item_Ids { get; set; }
 
         public string Branch_Ids { get; set; }
 
-        public int Colour_Id { get; set; }
-
-              
-              
 		public int Purchase_Order_Id { get; set; }
 
         public DateTime Purchase_Order_Date { get; set; }

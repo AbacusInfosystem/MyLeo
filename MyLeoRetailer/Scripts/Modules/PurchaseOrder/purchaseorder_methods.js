@@ -147,6 +147,11 @@ function Get_Consolidate_Purchase_Orders(value) {
                     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='textArticle_No_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "</span>";
                     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
                     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Item_Ids + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
+
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Branch_Ids + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Branch_Ids' id='hdnBranch_Ids_" + i + "' />";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Request_Ids + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Ids' id='hdnRequest_Ids_" + i + "' />";
+                    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Request_Dates + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Dates' id='hdnRequest_Dates_" + i + "' />";
+
                     tblHtml += "</td>";
 
                     tblHtml += "<td>";
@@ -572,6 +577,11 @@ function AddPurchaseOrderDetails() {
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='textArticle_No_" + i + "'>" + artical_no + "</span>";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Branch_Ids' id='hdnBranch_Ids_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Ids' id='hdnRequest_Ids_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Dates' id='hdnRequest_Dates_" + i + "' />";
+
+
     tblHtml += "</td>";
 
     //tblHtml += "<td>";
@@ -861,6 +871,10 @@ function ContinuePurchaseOrderDetailsData(j) {
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='textArticle_No_" + i + "'>" + artical_no + "</span>";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Branch_Ids' id='hdnBranch_Ids_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Ids' id='hdnRequest_Ids_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Dates' id='hdnRequest_Dates_" + i + "' />";
+
     tblHtml += "</td>";
 
     //tblHtml += "<td>";
@@ -1277,6 +1291,13 @@ function ReArrangePurchaseOrderDetailsData() {
                 $(newTR).find("[id^='hdnArticle_No_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Article_No");
                 $(newTR).find("[id^='hdnItem_Ids_']")[0].id = "hdnItem_Ids_" + i;
                 $(newTR).find("[id^='hdnItem_Ids_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids");
+
+                $(newTR).find("[id^='hdnBranch_Ids_']")[0].id = "hdnBranch_Ids_" + i;
+                $(newTR).find("[id^='hdnBranch_Ids_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Branch_Ids");
+                $(newTR).find("[id^='hdnRequest_Ids_']")[0].id = "hdnRequest_Ids_" + i;
+                $(newTR).find("[id^='hdnRequest_Ids_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Request_Ids");
+                $(newTR).find("[id^='hdnRequest_Dates_']")[0].id = "hdnRequest_Dates_" + i;
+                $(newTR).find("[id^='hdnRequest_Dates_']").attr("name", "PurchaseOrder.PurchaseOrders[" + i + "].Request_Dates");
             }
             
             if ($(newTR).find("[id^='textColour_Id_']").length > 0) {
