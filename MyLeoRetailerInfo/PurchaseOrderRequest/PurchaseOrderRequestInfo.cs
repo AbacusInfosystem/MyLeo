@@ -43,6 +43,8 @@ namespace MyLeoRetailerInfo.PurchaseOrderRequest
 
             SizeGroup = new SizeGroupInfo();
 
+            PurchaseOrderRequestItems = new List<PurchaseOrderRequestItemInfo>();
+
 		}
 
         public List<PurchaseOrderRequestInfo> PurchaseOrderRequests { get; set; }
@@ -69,6 +71,8 @@ namespace MyLeoRetailerInfo.PurchaseOrderRequest
         public List<SizeGroupInfo> SizeGroups { get; set; }
 
         public SizeGroupInfo SizeGroup { get; set; }
+
+        public List<PurchaseOrderRequestItemInfo> PurchaseOrderRequestItems { get; set; }
 
               
 		public int Purchase_Order_Request_Id { get; set; }
@@ -230,6 +234,59 @@ namespace MyLeoRetailerInfo.PurchaseOrderRequest
 
         public decimal Amount15 { get; set; }
 
+        public string Size_Name { get; set; }
+
+    }
+
+    public class PurchaseOrderRequestItemInfo
+    {
+        public PurchaseOrderRequestItemInfo()
+        {
+            sizes = new List<Sizes>();
+        }
+
+
+        public int Purchase_Order_Request_Id { get; set; }
+
+        public int Purchase_Order_Request_Item_Id { get; set; }
+
+        public string Article_No { get; set; }
+
+        public string Colour_Name { get; set; }
+
+        public string Start_Size { get; set; }
+
+        public string End_Size { get; set; }
+
+        public string Center_Size { get; set; }
+
+        public decimal Purchase_Price { get; set; }
+
+        public decimal Size_Difference { get; set; }
+
+        public decimal Total_Quantity { get; set; }
+
+        public decimal Total_Amount { get; set; }
+
+        public string Comment { get; set; }
+
+        public int Brand_Id { get; set; }
+
+        public string Brand_Name { get; set; }
+
+        public int Category_Id { get; set; }
+
+        public string Category { get; set; }
+
+        public int Sub_Category_Id { get; set; }
+
+        public string Sub_Category { get; set; }
+
+        public int Size_Group_Id { get; set; }
+
+        public string Size_Group_Name { get; set; }
+
+        public List<Sizes> sizes { get; set; }
     }
 
 }

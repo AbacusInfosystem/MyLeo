@@ -263,6 +263,10 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Purchase_Order_Requests,
 
+        sp_Get_Purchase_Order_Request_Details_By_Id,
+        sp_Get_Purchase_Order_Request_Items,
+        sp_Get_Purchase_Order_Request_Item_Sizes,
+
         #endregion
 
             //Product
