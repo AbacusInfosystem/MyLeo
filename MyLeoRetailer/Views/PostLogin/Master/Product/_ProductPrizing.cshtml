@@ -10,6 +10,9 @@
         /*max-height: 150px;*/
         overflow-y: auto;
     }
+    /*.commonProduct {
+        overflow-y: auto;
+    }*/
 </style>
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -32,12 +35,6 @@
             <div class="col-md-3">
                 <div class="block">
                     <div class="row">
-                        @*<div class="form-group">
-                                <div class="form-group input-group color" data-color="rgb(255, 146, 180)" data-color-format="rgb" id="colorpicker">
-                                    <input class="form-control" type="text" id="txtColourCode" name="Product.Colour_Code">
-                                    <span class="input-group-addon"><i id="iRGBColor" style="background-color: rgb(154, 42, 77);"></i></span>
-                                </div>
-                            </div>*@
                         <div class="form-group auto-complete">
                             <div class="input-group">
                                 <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Color" id="txtColourName" placeholder="Enter color" data-table="Colour" data-col="Colour_ID,Colour_Name" data-headernames="Colour">
@@ -52,6 +49,14 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="block">
+                    <div class="form-group">
+                        @*<label for="txtCenter_Size" style="color: #333" class="">Vendor Colour Code.</label>*@
+                        <input type="text" id="txtVendorColorCode" name="ProductMRP.Vendor_Color_Code" class="form-control" value="@Model.ProductMRP.Vendor_Color_Code" placeholder="vendor colour code." />
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
     <form role="form" id="frmProductMRP">
@@ -63,30 +68,28 @@
 
 
         <div class="row">
-            <div class="col-md-3 verticle" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD;  height: 362px;">
+            <div class="col-md-3 verticle" style="border-right: 1px solid #DDD;  min-height:600px ;">
                 <div class="block">
                     <div class="row">
                         <div class="list-group border-bottom push-down-20 color-expand" id="Color_Grid">
                             @{
                                 int i = 0;
-                                if (Model.ProductMRPs.Count != 0)
+                                if (Model.Colors.Count != 0)
                                 {
-                                    string Color_Ids = "", Colors = "", Vendor_Codes = "", Descriptions = "";
-                                    foreach (var item in Model.ProductMRPs)
+                                    string Color_Ids = "", Colors = "", Vendor_Codes = "" ;//Descriptions = "";
+                                    foreach (var itm in Model.Colors)
                                     {
-                                        <a name="Color_List" class="list-group-item" href="#" id="@i" data-identity="@item.Colour_Id">@item.Colour</a>
-                                        <input type="text" id="txtVendorCode_@item.Colour_Id" name="Vendor_Color_Code" value="@item.Vendor_Color_Code" placeholder="Enter vendor code." class="form-control">//
-                                        <input type="text" id="txtProductDesc_@item.Colour_Id" name="Product_Description" value="@item.Description" placeholder="product description." class="form-control">//
-                                        Color_Ids += item.Colour_Id + ",";
-                                        Colors += item.Colour + ",";
-                                        Vendor_Codes += item.Vendor_Color_Code + ",";
-                                        Descriptions += item.Description + ",";
+                                        <a name="Color_List" class="list-group-item" href="#" id="@i" data-identity="@itm.Colour_Id">@itm.Colour</a>
+                                        Color_Ids += itm.Colour_Id + ",";
+                                        Colors += itm.Colour + ",";
+                                        Vendor_Codes += itm.Vendor_Color_Code + ",";
+                                        //Descriptions += itm.Description + ",";
                                         i++;
                                     }
-                                    <input type="hidden" id="hdn_Color_Ids" name="Model.ProductMRPs" value="@(Color_Ids.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">
-                                    <input type="hidden" id="hdn_Colors" name="Model.ProductMRPs" value="@(Colors.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
-                                    <input type="hidden" id="hdn_Vendor_Codes" name="Model.ProductMRPs" value="@(Vendor_Codes.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
-                                    <input type="hidden" id="hdn_Description" name="Model.ProductMRPs" value="@(Descriptions.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                    <input type="hidden" id="hdnColorIds" name="model.productmrps" value="@(Color_Ids.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">
+                                    <input type="hidden" id="hdnColors" name="Model.ProductMRPs" value="@(Colors.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                    <input type="hidden" id="hdnVendorCodes" name="Model.ProductMRPs" value="@(Vendor_Codes.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                    //<input type="hidden" id="hdn_Description" name="Model.ProductMRPs" value="@(Descriptions.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
                                 }
                             }
                         </div>
@@ -94,7 +97,7 @@
                 </div>
             </div>
 
-            <div id="common_Product_MRP" class="col-md-9 commonProduct" style="padding: 10px; border-top: 1px solid #DDD;">
+            <div id="common_Product_MRP" class="col-md-9" style="padding: 10px; border-top: 1px solid #DDD; min-height: 600px;">
 
             </div>
         </div>
