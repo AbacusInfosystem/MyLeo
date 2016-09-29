@@ -1,4 +1,4 @@
-﻿@model MyLeoRetailer.Models.PurchaseOrderRequestViewModel
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseOrderRequestViewModel
 
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
@@ -50,7 +50,8 @@
                             <input type="hidden" class="form-control" name="Filter.Vendor_Id" />
 
                             <div class="form-group">
-                                <select class="form-control select" name="PurchaseOrderRequest.Vendor_Id" onchange="Set_Vendor_Id(this.value)">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
+                                <select class="form-control select" name="PurchaseOrderRequest.Vendor_Id" id="drpVendor_Id">
                                     <option value="">Select Vendor</option>
                                     @foreach (var item in Model.PurchaseOrderRequest.Vendors)
                                     {
@@ -85,11 +86,33 @@
 
         </div>
 
+        <div class="col-md-12" style="padding: 0px;" id="divTable">
+            <div class="row">
+                <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                    <table class="table table-bordered table-hover" id="tblPurchaseOrderRequest">
+                        <thead>
+                            <tr>
+                                <th>Branch</th>
+                                <th>Vendor</th>
+                                <th>Status</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div><!-- /.col -->
+            </div>
+        </div>
+
+
         <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseOrderRequestPager">
+        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseOrderRequestPager">
 
 
         </div>

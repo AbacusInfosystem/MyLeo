@@ -156,11 +156,11 @@ namespace MyLeoRetailerRepo
         public int Insert_SalesReturn(SalesReturnInfo salesReturn, List<SaleReturnItems> salesReturnItems, string Branch_Id)
         {
 
-            salesReturn.Sales_Credit_Note_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesCreditNote(salesReturn, Branch_Id), Storeprocedures.sp_Insert_Sales_Credit_Notes.ToString(), CommandType.StoredProcedure));
-
             salesReturn.Sales_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesReturn(salesReturn, Branch_Id), Storeprocedures.sp_Insert_Sales_Return.ToString(), CommandType.StoredProcedure));
 
             Insert_SalesReturn_Items(salesReturnItems, salesReturn, salesReturn.Sales_Return_Id);
+
+            salesReturn.Sales_Credit_Note_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesCreditNote(salesReturn, Branch_Id), Storeprocedures.sp_Insert_Sales_Credit_Notes.ToString(), CommandType.StoredProcedure));
 
             return salesReturn.Sales_Return_Id;
 
@@ -176,6 +176,15 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", salesReturn.Sales_Credit_Note_Id));
             }
 
+            if (salesReturn.Sales_Return_Id != 0)
+            {
+                sqlParams.Add(new SqlParameter("@Sales_Return_Id", salesReturn.Sales_Return_Id));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@Sales_Return_Id", 0));
+            }
+
             if (Convert.ToInt32(Branch_Id) != 0)
             {
                 sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
@@ -184,6 +193,8 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Branch_ID", 0));
             }
+
+            sqlParams.Add(new SqlParameter("@Status", 1));
 
             if (!string.IsNullOrEmpty(salesReturn.Sales_Return_No))
             {
@@ -194,16 +205,8 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Credit_Note_No", DBNull.Value));
             }
 
-            sqlParams.Add(new SqlParameter("@Credit_Note_Type", 2));
+            sqlParams.Add(new SqlParameter("@Credit_Note_Type", 1));
 
-            //if (salesReturn.Credit_Note_Type != 0)
-            //{
-            //    sqlParams.Add(new SqlParameter("@Credit_Note_Type", 2));
-            //}
-            //else
-            //{
-            //    sqlParams.Add(new SqlParameter("@Credit_Note_Type", 0));
-            //}
       
             if (salesReturn.Total_Amount_Return_By_Credit_Note != 0)
             {
@@ -255,16 +258,6 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Branch_ID", 0));
             }
-            
-
-            if (salesReturn.Sales_Credit_Note_Id != 0)
-            {
-                sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", salesReturn.Sales_Credit_Note_Id));
-            }
-            else
-            {
-                sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", 0));
-            }
 
             if (salesReturn.Customer_Id != 0)
             {
@@ -274,6 +267,9 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Customer_Id", 0));
             }
+
+            sqlParams.Add(new SqlParameter("@Sales_Return_Date", salesReturn.Sales_Return_Date));
+
             if (salesReturn.Total_Quantity != 0)
             {
                 sqlParams.Add(new SqlParameter("@Total_Quantity", salesReturn.Total_Quantity));

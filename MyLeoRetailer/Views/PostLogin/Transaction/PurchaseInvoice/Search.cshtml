@@ -1,4 +1,4 @@
-﻿@model MyLeoRetailer.Models.PurchaseInvoiceViewModel
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseInvoiceViewModel
 
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
@@ -62,14 +62,38 @@
 
             </div>
 
-
         </div>
+
+        <div class="col-md-12" style="padding: 0px;" id="divTable">
+            <div class="row">
+                <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                    <table class="table table-bordered table-hover" id="tblPurchaseInvoice">
+                        <thead>
+                            <tr>
+                                <th>Invoice No.</th>
+                                <th>Challan No.</th>
+                                <th>Invoice Date</th>
+                                <th>Vendor</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                                <th>Transporter</th>
+                                <th>Lr No.</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div><!-- /.col -->
+            </div>
+        </div>
+
 
         <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseInvoicePager">
+        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseInvoicePager">
 
 
         </div>

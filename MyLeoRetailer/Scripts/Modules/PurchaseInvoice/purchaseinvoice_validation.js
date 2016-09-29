@@ -40,6 +40,14 @@
             "PurchaseInvoice.PurchaseInvoices[0].Quantity": {
                 required: true,
                 digits: true
+            },
+
+            "PurchaseInvoice.PurchaseInvoices[0].SKU_Code": {
+                required: true
+            },
+
+            "PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No": {
+                required: true
             }
 
         },
@@ -82,12 +90,32 @@
             "PurchaseInvoice.PurchaseInvoices[0].Quantity": {
                 required: "Quantity is required.",
                 digits: "Enter only digits"
+            },
+
+            "PurchaseInvoice.PurchaseInvoices[0].SKU_Code": {
+                required: "SKU code is required."
+            },
+
+            "PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No": {
+                required: "PO No. is required."
             }
         }
     });
 
-    $("#textSKU_No_0").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+        var result = true;
+        var id = $(element).attr('id')
+        id = id.replace("textSKU_No_", "");
 
-    $("#textInvoice_No_0").rules("add", { required: true, messages: { required: "PO No. is required.", } });
+        $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
 
+            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+                result = false;
+            }
+        });
+
+        return result;
+    }, "Already mapped.");
+
+   
 });

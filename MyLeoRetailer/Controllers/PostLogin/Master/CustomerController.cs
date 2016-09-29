@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -63,7 +64,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                     Mobile = srViewModel.SalesReturn.Mobile;
 
-                    ReturnDate = srViewModel.SalesReturn.SalesReturn_Date.ToString();
+                    ReturnDate = srViewModel.SalesReturn.Sales_Return_Date.ToString();
 
                     TempData["srViewModel"] = srViewModel;
 
@@ -199,5 +200,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(cViewModel));
         }
+
+
+        //Added By Vinod Mane on 28/09/2016
+        public JsonResult Check_Existing_Customer_Name(string customer_name)
+        {
+            bool check = false;
+            try
+            {
+                check = cRepo.Check_Existing_Customer_Name(customer_name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Customer Controller - Check_Existing_Customer_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
     }
 }

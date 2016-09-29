@@ -2,7 +2,7 @@
 
     $("#frmSalesOrder").validate(
         {
-            errorClass: 'login-error',
+            //errorClass: 'login-error',
 
             rules:
                 {
@@ -20,10 +20,10 @@
                             number: true,
                             MobileNo : true
                         },
-                    "SalesInvoice.Customer_Name":
-                        {
-                            required: true,
-                        },
+                    //"SalesInvoice.Customer_Name":
+                    //    {
+                    //        required: true,
+                    //    },
                     "SalesInvoice.Tax_Percentage":
                         {
                             required: true,
@@ -90,6 +90,28 @@
                
             }
         });
+
+
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+
+        var result = true;
+
+        var id = $(element).attr('id');
+
+        id = id.replace("textSKU_No_", "");
+
+        $("#tblSalesOrderItems").find("[id^='SalesOrderItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#textSKU_No_" + j).val())
+            {
+                result = false;
+            }
+        });
+
+        return result;
+
+    }, "Already mapped.");
+
 });
 
 

@@ -38,12 +38,26 @@ namespace MyLeoRetailerInfo.Color
             get;
             set;
         }
+        //Commented by vinod mane on 27/09/2016
+        //public bool Is_Active 
+        //{
+        //    get;
+        //    set;
+        //}
+        //End
 
-        public bool IsActive
+        //Added by Vinod Mane on 27/09/2016
+        public int IsActive
         {
             get;
             set;
         }
+        public bool Is_Active
+        {
+            get;
+            set;
+        }
+        //End
         
 		public DateTime Created_Date
 		{

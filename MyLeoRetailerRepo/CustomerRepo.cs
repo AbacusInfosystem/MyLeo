@@ -279,5 +279,32 @@ namespace MyLeoRetailerRepo
             return Customer;
         }
 
+        //Added By Vinod Mane on 28/09/2016
+        public bool Check_Existing_Customer_Name(string customer_name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Customer_Name", customer_name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Customer_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_Customer_name"]);
+                }
+            }
+
+            return check;
+        }
+        //End
+
 	}
 }

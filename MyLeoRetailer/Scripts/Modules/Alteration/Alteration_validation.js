@@ -3,7 +3,9 @@
 $(function () {
     $("#frmAlteration1").validate({
         rules: {
-            "Alteration.Customer_Mobile_No": { required: true }
+            "Alteration.Customer_Mobile_No": { required: true, },
+
+            "Alteration.Sales_Invoice_ID": { SalesInvoiceID: true,}//Added by Vinod mane on 28/09/2016
 
         },
         messages: {
@@ -16,4 +18,13 @@ $(function () {
 });
 
 
+jQuery.validator.addMethod("SalesInvoiceID", function (value, element) {
+    var result = true;
 
+    if ($("#drp_Sales_Invoice_no").val() == "") {
+        result = false;
+    }
+
+    return result;
+
+}, "Invoice no is Required.");

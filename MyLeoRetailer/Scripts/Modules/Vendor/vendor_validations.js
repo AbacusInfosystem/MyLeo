@@ -12,7 +12,7 @@
                     //  },
                     "Vendor.Vendor_Name":
                        {
-                           required: true,                          
+                           required: true, validation_Vendor_name:true                        
                        },
                     "Vendor.Vendor_Email1":
                         {
@@ -180,6 +180,29 @@ jQuery.validator.addMethod("VendorCstRate", function (value, element) {
     return result;
 
 }, "Vendor Cst Rate is Required.");
+
+//Added by Vinod Mane on 28/09/2016
+jQuery.validator.addMethod("validation_Vendor_name", function (value, element) {
+    var result = true;
+
+    if ($("#txtVendor_Name").val() != "" && $("#hdnVendorName").val() != $("#txtVendor_Name").val()) {
+        $.ajax({
+            url: '/vendor/check-vendor-name',
+            data: { vendor_name: $("#txtVendor_Name").val() },
+            method: 'GET',
+            async: false,
+            success: function (data) {
+                if (data == true) {
+                    result = false;
+                }
+            }
+        });
+    }
+    return result;
+
+}, "Vendor Name is already exists.");
+
+//end
 
 //jQuery.validator.addMethod("validateTblBrand", function (value, element) {
 //    var result = true;

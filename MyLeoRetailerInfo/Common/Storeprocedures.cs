@@ -97,6 +97,7 @@ namespace MyLeoRetailerInfo.Common
         //Addition by swapnali | Date:15/09/2016
         sp_Get_Branch_By_EmployeeId,
         //End
+            sp_Check_Existing_Employee_Name, //added by vinod mane on 27/09/2016
 
 
             #endregion
@@ -107,6 +108,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Customer_By_Id,
             sp_Get_Customer_By_Mobile,
             Get_Employee_Sp,
+            sp_Check_Existing_Customer_Name, //Added by vinod mane on 28/09/2016
 
             //GiftVoucher
             sp_Insert_Gift_Voucher,
@@ -126,6 +128,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Delete_Branch_Location_By_Id,
             sp_Get_Employee_Branches,
         sp_Get_Branch,
+            sp_Check_Existing_Branch_Name, //Added by vinod mane on 27/09/2016
 
             #endregion
 
@@ -171,6 +174,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Transporter,
         sp_Get_Vendor,
         sp_Get_Vendor_Details_By_Id,
+            sp_Check_Existing_Vendor_Name, //Added by Vinod Mane on 28/09/2016
                   
         #endregion
 
@@ -195,6 +199,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Credit_Note,
         sp_Insert_Purchase_Return,
         sp_Get_Purchase_Return_Items_By_Vendor_And_PI,
+
+        sp_Get_Purchase_Returns,
 
         #endregion
 
@@ -222,6 +228,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Order_Items,
         sp_Get_Purchase_Order_Item_Sizes,
 
+        sp_Get_Purchase_Orders_Detalis,
+        sp_Get_Color_By_Vendor_Id,
+
         #endregion
 
         #region Purchase Invoice
@@ -238,6 +247,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Invoice_Items_By_SKU_Code,
         sp_Get_Purchase_Orders,
 
+        sp_Get_Purchase_Invoice,
+        sp_Get_Purchase_Invoices,
+
         #endregion
 
         #region Purchase Order Request
@@ -245,6 +257,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Order_Request,
         sp_Insert_Purchase_Order_Request_Item,
         sp_Insert_Purchase_Order_Request_Item_Sizes,
+
+        sp_Get_Purchase_Order_Requests,
 
         #endregion
 
@@ -266,6 +280,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Product_Description_By_ProductId,
             sp_Get_Product_Color_Exist_By_ProductId,
 
+            //payable
         Get_Credit_Note_Details_By_Id_Sp,
         Get_Payable_Balance_Amount_By_Id_Sp,
         Get_Payable_Data_By_Id_Sp,
@@ -276,6 +291,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Temp_Get_Payable_Detail_By_Id1,
         sp_Temp_Get_Payable_Detail,
         sp_Get_Payable_Search_Data12,
+        Get_Credit_Note_Amount_By_Id_Sp,
+        sp_Get_Payable_Search_Details,
 
         //Employee Branch mapping
         //sp_Get_Branch,
@@ -294,6 +311,9 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id,
        sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
         sp_Check_Mobile_No,
+            sp_Get_Credit_Note_Details_By_Customer_Id,
+            sp_Get_Gift_Voucher,
+
 
         //Sales Return
 
@@ -320,6 +340,10 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Receivables,
         sp_Get_Receivable_Search_Data_new,
         sp_Get_Receivable_Search_Data12,
+        Get_Receivable_Credit_Note_Details_By_Id,
+        sp_Get_Credit_Note_Details_By_Customer_Id1,
+        sp_Get_Receivable_Search_Details,
+
 
 
         #region Purchase Return Request
@@ -335,12 +359,14 @@ namespace MyLeoRetailerInfo.Common
 
 
         //Replacement
-        sp_Get_Purchase_Invoice,
+        //sp_Get_Purchase_Invoice,
         sp_Insert_Replacement,
         sp_Insert_Replacement_Item,
   
             //Product warehouse
         sp_Insert_Product_Warehouse,
+        sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
+        sp_Insert_Purchase_Order_Request_Consolidation,
 
     }
 

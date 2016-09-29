@@ -1,6 +1,6 @@
 ﻿using MyLeoRetailer.Models.Common;
 using MyLeoRetailerInfo;
-using MyLeoRetailerInfo.PurchaseReturn;
+using MyLeoRetailerInfo.PurchaseInvoice;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Interface;
 using System;
@@ -8,27 +8,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyLeoRetailer.Models
+namespace MyLeoRetailer.Models.Transaction
 {
-    public class PurchaseReturnViewModel: IGridInfo, IQueryInfo
+    public class PurchaseInvoiceViewModel: IGridInfo, IQueryInfo
 	{
-        public PurchaseReturnViewModel() 
+        public PurchaseInvoiceViewModel() 
 		{
 			Grid_Detail = new GridInfo();
 
 			Query_Detail = new QueryInfo();
 
-			PurchaseReturn = new  PurchaseReturnInfo();
+			PurchaseInvoice = new  PurchaseInvoiceInfo();
 
-			Filter = new Filter_Purchase_Return();
+			Filter = new Filter_Purchase_Invoice();
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
+            Pager = new Pagination_Info();
+
             Cookies = new LoginInfo();
 
-			Grid_Detail.Pager.DivObject = "divPurchaseReturnPager";
+			Grid_Detail.Pager.DivObject = "divPurchaseInvoicePager";
 
-            Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Returns";
+            Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Invoices";
 		}
 
 		public GridInfo Grid_Detail
@@ -43,13 +45,13 @@ namespace MyLeoRetailer.Models
 			set;
 		}
 
-		public  PurchaseReturnInfo PurchaseReturn
+		public  PurchaseInvoiceInfo PurchaseInvoice
 		{
 			get;
 			set;
 		}
 
-		public Filter_Purchase_Return Filter
+		public Filter_Purchase_Invoice Filter
 		{
 			get;
 			set;
@@ -61,6 +63,12 @@ namespace MyLeoRetailer.Models
 			set;
 		}
 
+        public Pagination_Info Pager
+        {
+            get;
+            set;
+        }
+
         public LoginInfo Cookies
         {
             get;
@@ -68,9 +76,9 @@ namespace MyLeoRetailer.Models
         }
 	}
 
-	public class Filter_Purchase_Return
+	public class Filter_Purchase_Invoice
 	{
-        public string Debit_Note_No
+		public string Purchase_Invoice_No
 		{
 			get;
 			set;

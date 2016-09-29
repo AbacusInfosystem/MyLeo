@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Branch;
 using MyLeoRetailerInfo.Common;
@@ -173,5 +174,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             return Json(JsonConvert.SerializeObject(bViewModel));
         }
+
+
+
+        //Added By Vinod Mane on 27/09/2016
+        public JsonResult Check_Existing_Branch_Name(string Branch_Name)
+        {
+            bool check = false;
+            try
+            {
+                check = bRepo.Check_Existing_Branch_Name(Branch_Name);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Branch Controller - Check_Existing_Branch_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
     }
 }

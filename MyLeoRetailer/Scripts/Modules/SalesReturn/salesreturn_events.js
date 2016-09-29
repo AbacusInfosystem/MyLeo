@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
 
+
+    $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "SKU Required", digits: "Invalid quantity." } });
+    $("#textSKU_No_0").rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
+
+
     $('#dtpReturn_Date').datepicker({
 
         dateFormat: "dd-mm-yy",
@@ -25,11 +30,22 @@ $(function () {
     $("#btnSaveSalesReturn").click(function ()
     {
 
-        $("#frmSalesReturn").attr("action", "/SalesReturn/Insert_SalesReturn/");
+        $("#tblSalesReturnItems").find("[id^='SalesReturnItemRow_']").each(function (i, row)
+        {
+            Add_Validation(i);
+        });
 
-        $('#frmSalesReturn').attr("method", "POST");
+        if ($("#frmSalesReturn").valid()) {
 
-        $('#frmSalesReturn').submit();
+            if ($('#tblSalesReturnItems tbody tr').length > 0) {
+
+                $("#frmSalesReturn").attr("action", "/SalesReturn/Insert_SalesReturn/");
+
+                $('#frmSalesReturn').attr("method", "POST");
+
+                $('#frmSalesReturn').submit();
+            }
+        }
 
     });
 
