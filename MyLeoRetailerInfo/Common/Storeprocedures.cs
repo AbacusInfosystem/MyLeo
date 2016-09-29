@@ -249,6 +249,9 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Purchase_Invoice,
         sp_Get_Purchase_Invoices,
+        Get_Purchase_Invoice_Data_By_Id_Sp1,
+
+
 
         #endregion
 
@@ -278,7 +281,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Update_Product_Images,
             sp_Get_Product_MRP_Exist_By_ProductId,
 
-            //payable
+             #region Pyable
         Get_Credit_Note_Details_By_Id_Sp,
         Get_Payable_Balance_Amount_By_Id_Sp,
         Get_Payable_Data_By_Id_Sp,
@@ -291,6 +294,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Payable_Search_Data12,
         Get_Credit_Note_Amount_By_Id_Sp,
         sp_Get_Payable_Search_Details,
+
+              #endregion
 
         //Employee Branch mapping
         //sp_Get_Branch,
@@ -322,8 +327,8 @@ namespace MyLeoRetailerInfo.Common
 
 
 
-        //receivable
-
+       
+         #region Receivable
         sp_Get_Receivable_Search_Data,
         Get_Receivable_Details_By_Id_Sp,
         Get_Credit_Note_Details_By_Id_Sp1,
@@ -341,6 +346,7 @@ namespace MyLeoRetailerInfo.Common
         Get_Receivable_Credit_Note_Details_By_Id,
         sp_Get_Credit_Note_Details_By_Customer_Id1,
         sp_Get_Receivable_Search_Details,
+           #endregion
 
 
 

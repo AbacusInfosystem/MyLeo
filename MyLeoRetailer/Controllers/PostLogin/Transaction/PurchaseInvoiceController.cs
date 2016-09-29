@@ -72,6 +72,22 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             return View("Search", piViewModel);
         }
+
+        public ActionResult View(PurchaseInvoiceViewModel piViewModel)
+        {
+            try
+            {
+                if (TempData["piViewModel"] != null)
+                {
+                    piViewModel = (PurchaseInvoiceViewModel)TempData["piViewModel"];
+                }
+            }
+            catch (Exception ex)
+            {
+                piViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+            return View("View", piViewModel);
+        }
        
         public JsonResult Get_Purchase_Invoice_Items_By_SKU_Code(string SKU_Code)
         {
@@ -132,6 +148,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             TempData["piViewModel"] = (PurchaseInvoiceViewModel)piViewModel;
 
             return RedirectToAction("Search", piViewModel);
+        }
+
+        public ActionResult Get_Purchase_Invoice_Details_By_Id(PurchaseInvoiceViewModel piViewModel)
+        {
+            try
+            {
+
+                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_Details_By_Id(piViewModel.PurchaseInvoice.Purchase_Invoice_Id);
+
+            }
+            catch (Exception ex)
+            {
+                piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+            }
+
+           // TempData["piViewModel"] = (PurchaseInvoiceViewModel)piViewModel;
+
+            return View("View", piViewModel);
         }
 
         public ActionResult Update_Purchase_Invoice(PurchaseInvoiceViewModel piViewModel)

@@ -1172,9 +1172,7 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Search.cshtml" />
-    
     <Content Include="Views\PostLogin\Master\PurchaseOrder\PrintableView.cshtml" />
-   
     <Content Include="Views\PostLogin\SalesOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
@@ -1197,6 +1195,8 @@
     <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

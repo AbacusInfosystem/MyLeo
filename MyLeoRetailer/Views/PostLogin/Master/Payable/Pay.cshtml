@@ -3,6 +3,7 @@
 @using MyLeoRetailer.Common;
 @using MyLeoRetailerInfo.Common;
 
+<script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Payable/Payable_events.js"></script>
 <script src="~/Scripts/Modules/Payable/Payable_method.js"></script>
 <script src="~/Scripts/Modules/Payable/Payable_Validation.js"></script>
@@ -316,7 +317,7 @@
                                                 {
                                                     <span> @itm.Cheque_Date.ToShortDateString()</span>
                                                 }
-                                                <input type="hidden" id="hdnCheque_Date@(itm.Payable_Item_Id)" name="Payable.Cheque_Date[@(i-1)" value="@itm.Cheque_Date">
+                                                <input type="hidden" id="hdnCheque_Date@(itm.Payable_Item_Id)" name="Payable.Cheque_Date[@(i-1)" value="@itm.Cheque_Date.ToShortDateString()">
                                             </td>
 
                                             <td>
