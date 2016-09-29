@@ -68,7 +68,7 @@ namespace MyLeoRetailerRepo
                 {
                     if (fieldName == "Vendor_Id")
                     {
-                        strquery = " Select Product_MRP.Product_Id, Product_MRP.SKU_Code ";
+                        strquery = " Select Product_MRP.Product_MRP_Id, Product_MRP.SKU_Code ";
                         strquery += "from Product_MRP inner join Product on Product_MRP.Product_Id=Product.Product_Id ";
                         strquery += "where Product.Vendor_Id = @Vendor_Id";
                         paramList.Add(new SqlParameter("@Vendor_Id", fieldValue));

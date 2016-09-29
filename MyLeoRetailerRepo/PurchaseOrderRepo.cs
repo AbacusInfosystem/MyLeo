@@ -948,6 +948,12 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Shipping_Address"))
                     purchaseOrder.Shipping_Address = Convert.ToString(dr["Shipping_Address"]);
 
+                if (!dr.IsNull("Branch_Name"))
+                    purchaseOrder.Shipping_Address = Convert.ToString(dr["Branch_Name"]);
+
+                if (!dr.IsNull("Transporter_Name"))
+                    purchaseOrder.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
                 if (!dr.IsNull("Transporter_Id"))
                     purchaseOrder.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
 
@@ -986,7 +992,6 @@ namespace MyLeoRetailerRepo
             return purchaseOrder;
         }
 
-
         public List<PurchaseOrderItemInfo> Get_Purchase_Order_Items(int Purchase_Order_Id)
         {
             List<PurchaseOrderItemInfo> purchaseOrderItems = new List<PurchaseOrderItemInfo>();
@@ -1007,8 +1012,8 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Article_No"))
                     purchaseOrderItem.Article_No = Convert.ToString(dr["Article_No"]);
 
-                //if (!dr.IsNull("Colour_Name"))
-                //    purchaseOrderItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+                if (!dr.IsNull("Colour_Name"))
+                    purchaseOrderItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
                 if (!dr.IsNull("Start_Size"))
                     purchaseOrderItem.Start_Size = Convert.ToString(dr["Start_Size"]);

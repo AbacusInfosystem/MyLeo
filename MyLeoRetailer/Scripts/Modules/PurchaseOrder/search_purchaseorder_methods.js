@@ -45,6 +45,8 @@ function Bind_Get_Purchase_Order_Data(data) {
 
             tblHTML += "<tr>";
 
+            tblHTML += "<td><input type='radio' name='r1' id='r1_" + data.PurchaseOrder.PurchaseOrders[i].Purchase_Order_Id + "' class='iradio-list'/></td>";
+
             tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Purchase_Order_No + "</td>";
             tblHTML += "<td>" + data.PurchaseOrder.PurchaseOrders[i].Purchase_Order_Date.substring(0, 10) + "</td>";
 
@@ -79,6 +81,13 @@ function Bind_Get_Purchase_Order_Data(data) {
     else {
         $('.pagination').html("");
     }
+
+    $('[name="r1"]').on('change', function (event) {
+        if ($(this).prop('checked')) {
+            $("#hdnPurchaseOrderId").val(this.id.replace("r1_", ""));
+            document.getElementById("btnEditPurchaseOrder").disabled = false;
+        }
+    });
 
     Friendly_Messages(data);
 }

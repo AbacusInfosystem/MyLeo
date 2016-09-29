@@ -262,20 +262,37 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
         {
-            poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
+            //poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
 
-            poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
+            //poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
             // poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
 
-            poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
+            //poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
 
-            poViewModel.PurchaseOrder.Transporters = _vendorRepo.Get_Transporters();
+            //poViewModel.PurchaseOrder.Transporters = _vendorRepo.Get_Transporters();
 
-            poViewModel.PurchaseOrder.Branches = _branchRepo.Get_Branches();
+            //poViewModel.PurchaseOrder.Branches = _branchRepo.Get_Branches();
+            try
+             {
+                if (TempData["poViewModel"] != null)
+                {
+                    poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
+                }
 
+                poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
 
-            return View("Index", poViewModel);
+                poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
+                
+            }
+            catch (Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details_By_Id : " + ex.ToString());
+            }
+                      
+            return View("View", poViewModel);
         }
 
         public ActionResult Update_Purchase_Order(PurchaseOrderViewModel poViewModel)
