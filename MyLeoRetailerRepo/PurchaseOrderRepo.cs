@@ -106,6 +106,7 @@ namespace MyLeoRetailerRepo
 
         public void Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
+            PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
            
             foreach (var item in PurchaseOrder.PurchaseOrders)
             {
@@ -142,6 +143,9 @@ namespace MyLeoRetailerRepo
                 sqlParam.Add(new SqlParameter("@Item_Ids", item.Item_Ids));
 
 
+                if (item.Item_Ids != null)
+                {
+
                     //CODE Added by aditya 27092016 Start
 
                     List<Sizes> Size = new List<Sizes>();
@@ -154,14 +158,16 @@ namespace MyLeoRetailerRepo
 
                     string[] Request_Dates = new string[0];
 
-                    if (item.Item_Ids.IndexOf(',') != -1)  //if condition is use so if string does not contain ',' it wont break
-                    {
-                        Item_Ids = item.Item_Ids.Split(',');
-                    }
-                    else
-                    {
-                        Item_Ids[0] = item.Item_Ids;
-                    }
+                   
+                        if (item.Item_Ids.IndexOf(',') != -1)  //if condition is use so if string does not contain ',' it wont break
+                        {
+                            Item_Ids = item.Item_Ids.Split(',');
+                        }
+                        else
+                        {
+                            Item_Ids[0] = item.Item_Ids;
+                        }
+              
 
                     if (item.Branch_Ids.IndexOf(',') != -1)  //if condition is use so if string does not contain ',' it wont break
                     {
@@ -233,14 +239,15 @@ namespace MyLeoRetailerRepo
 
                         }
                     }
+
+                }
+               
                     //CODE Added by aditya 27092016  END
 
-                    PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
 
                     int j = 0;
 
-                PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
-
+                    PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
 
                 int i = 0;
 

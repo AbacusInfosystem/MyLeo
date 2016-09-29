@@ -153,7 +153,8 @@ function Get_Consolidate_Purchase_Orders(value) {
                     tblHtml += "</td>";
 
                     tblHtml += "<td>";
-                    tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' value='" + obj.PurchaseOrder.PurchaseOrders[i].Colour_Id + "' id='textColour_Id_" + i + "' />";
+                    tblHtml += "<input type='text' class='form-control' value='" + obj.PurchaseOrder.PurchaseOrders[i].Colour_Name + "'/>";
+                    tblHtml += "<input type='hidden' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' value='" + obj.PurchaseOrder.PurchaseOrders[i].Colour_Id + "' id='textColour_Id_" + i + "' />";
                     tblHtml += "</td>";
 
                     tblHtml += "<td>";
