@@ -30,7 +30,9 @@ function Bind_Grid(obj, name)
 	Bind_Rows(table, obj, name);
 
 	// Table 
-	table.addClass("table").addClass("table-bordered").addClass("table-striped");
+	table.addClass("table").addClass("table-hover");
+
+	table.css("margin-bottom", "0");
 
     //$("#divDynamicTable").html(table[0].innerHTML); //.html(table_str);
 
@@ -72,9 +74,15 @@ function Bind_Rows(table, obj, name)
 
 		if (obj.Grid_Detail['Identity_Columns'].length > 0)
 		{
-			var td = $("<td>").appendTo(row);
+		    var td = $("<td>").appendTo(row);
 
-			var radio = $("<input>", { type: "radio", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][0]], name: name }).appendTo(td);
+		    var label = $("<label>", { class: "switch switch-small" }).appendTo(td);
+
+		    label.css("margin", "0");
+
+		    var radio = $("<input>", { type: "radio", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][0]], name: name }).appendTo(label);
+
+		    $("<span>").appendTo(label);
 
 			radio.addClass("rd-list");
 
