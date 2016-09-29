@@ -66,15 +66,19 @@ $(function ()
 
     $("#frmProductColor").validate({
         rules: {
-            "Filter.Color": { required: true, ColorCode: true },
+            "Filter.Color": { required: true, ColorCodeExist: true },
+
+            "ProductMRP.Vendor_Color_Code":{required:true},
         },
         messages: {
 
             "Filter.Color": { required: "Colour Code is required." },
+
+            "ProductMRP.Vendor_Color_Code": { required: "Vendor Colour Code Required" },
         }
     });
 
-    jQuery.validator.addMethod("ColorCode", function (value, element) {
+    jQuery.validator.addMethod("ColorCodeExist", function (value, element) {
 
         var result = true;
         var Arr = [];
@@ -92,4 +96,5 @@ $(function ()
 
     }, "Colour Already Exists in List.");
 
-});
+}); 
+

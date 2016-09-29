@@ -33,36 +33,37 @@ namespace MyLeoRetailerRepo
         {
             foreach (var item in Colors)
             {
-                if (item.ProductMRP_N_WSR != null)
+                foreach (var prodDesc in item.ProductDescription)
                 {
-                    foreach (var itm in item.ProductMRP_N_WSR)
+                    string ProductDescription = prodDesc.Description;
+                    foreach (var itm in prodDesc.ProductMRPs)
                     {
-                        Set_Date_Session(itm); 
-                        if (itm.SKU_Code == null)
+                        Set_Date_Session(itm);
+                        if (itm.Product_MRP_Id == 0)
                         {
                             itm.SKU_Code = Generate_SKU_Code(itm);
-                            sqlHelper.ExecuteNonQuery(Set_Values_In_Product_MRP(itm), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
+                            sqlHelper.ExecuteNonQuery(Set_Values_In_Product_MRP(itm, ProductDescription), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
                         }
                         else
                         {
-                            sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm), Storeprocedures.sp_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
+                            sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm, ProductDescription), Storeprocedures.sp_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
                         }
                     }
                 }
             }
         }
 
-        private List<SqlParameter> Set_Values_In_Update_Product_MRP(ProductMRPInfo Productmrp)
+        private List<SqlParameter> Set_Values_In_Update_Product_MRP(ProductMRPInfo Productmrp, string ProductDescription)
         {
             List<SqlParameter> sqlParams = new List<SqlParameter>();
             sqlParams.Add(new SqlParameter("@Product_Id", Productmrp.Product_Id));
+            sqlParams.Add(new SqlParameter("@Product_Mrp_Id", Productmrp.Product_MRP_Id));
             sqlParams.Add(new SqlParameter("@Size_Id", Productmrp.Size_Id));
             sqlParams.Add(new SqlParameter("@Colour_Id", Productmrp.Colour_Id));
-            sqlParams.Add(new SqlParameter("@Purchase_Price", Productmrp.Purchase_Price));
-            //sqlParams.Add(new SqlParameter("@Purchase_Price", Productmrp.Purchase_Price));
+            sqlParams.Add(new SqlParameter("@Purchase_Price", Productmrp.Purchase_Price)); 
             sqlParams.Add(new SqlParameter("@MRP_Price", Productmrp.MRP_Price));
             sqlParams.Add(new SqlParameter("@Vendor_Color_Code", Productmrp.Vendor_Color_Code));
-            sqlParams.Add(new SqlParameter("@Description", Productmrp.Description));
+            sqlParams.Add(new SqlParameter("@Description", ProductDescription));
             sqlParams.Add(new SqlParameter("@Updated_Date", Productmrp.Updated_Date));
             sqlParams.Add(new SqlParameter("@Updated_By", Productmrp.Updated_By));
             return sqlParams;
@@ -98,7 +99,7 @@ namespace MyLeoRetailerRepo
             prop.SetValue(obj, 1);
         }
 
-        private List<SqlParameter> Set_Values_In_Product_MRP(ProductMRPInfo Productmrp)
+        private List<SqlParameter> Set_Values_In_Product_MRP(ProductMRPInfo Productmrp, string ProductDescription)
         {
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
@@ -110,7 +111,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@MRP_Price", Productmrp.MRP_Price));
             sqlParams.Add(new SqlParameter("@SKU_Code", Productmrp.SKU_Code));
             sqlParams.Add(new SqlParameter("@Vendor_Color_Code", Productmrp.Vendor_Color_Code));
-            sqlParams.Add(new SqlParameter("@Description", Productmrp.Description));
+            sqlParams.Add(new SqlParameter("@Description", ProductDescription));
             sqlParams.Add(new SqlParameter("@Created_Date", Productmrp.Created_Date));
             sqlParams.Add(new SqlParameter("@Created_By", Productmrp.Created_By));
             sqlParams.Add(new SqlParameter("@Updated_Date", Productmrp.Updated_Date));
@@ -127,16 +128,6 @@ namespace MyLeoRetailerRepo
             int ProductId = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product(Product), Storeprocedures.sp_Insert_Product.ToString(), CommandType.StoredProcedure));
             if (ProductId != 0)
             {
-                //List<SqlParameter> sqlparam = new List<SqlParameter>();
-
-                //sqlparam.Add(new SqlParameter("@Vendor_Id", Product.Vendor_Id));
-                //sqlparam.Add(new SqlParameter("@Article_No", Product.Article_No));
-                //sqlparam.Add(new SqlParameter("@Is_Active", true));
-                //sqlparam.Add(new SqlParameter("@Created_Date", Product.Created_Date));
-                //sqlparam.Add(new SqlParameter("@Created_By", Product.Created_By));
-                //sqlparam.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
-                //sqlparam.Add(new SqlParameter("@Updated_By", Product.Updated_By));
-                //sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Insert_Vendor_Article_Mapping.ToString(), CommandType.StoredProcedure);
                 for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
                 {
                     List<SqlParameter> sqlparam = new List<SqlParameter>();
@@ -158,7 +149,7 @@ namespace MyLeoRetailerRepo
 
         public int Update_Product(ProductInfo Product)
         {
-            int ProductId = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product(Product), Storeprocedures.sp_Update_Product.ToString(), CommandType.StoredProcedure));  
+            int ProductId = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product(Product), Storeprocedures.sp_Update_Product.ToString(), CommandType.StoredProcedure));
 
             for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
             {
@@ -197,26 +188,26 @@ namespace MyLeoRetailerRepo
         }
 
         private List<SqlParameter> Set_Values_In_Product_Images(ProductInfo Product)
-        { 
+        {
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-             for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
-             { 
-                 if (Product.ProductImage.Product_Image_Id[i] != 0)
-                 {
-                     sqlParams.Add(new SqlParameter("@Product_Image_Id", Product.ProductImage.Product_Image_Id[i]));
-                 }
-                 else
-                 { 
-                     sqlParams.Add(new SqlParameter("@Created_Date", Product.Created_Date));
-                     sqlParams.Add(new SqlParameter("@Created_By", Product.Created_By));
-                 }
-                 sqlParams.Add(new SqlParameter("@Product_Image", Product.ProductImage.Product_Image[i]));
-                 sqlParams.Add(new SqlParameter("@Is_Default", Product.ProductImage.Is_Default[i]));
-                 sqlParams.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
-                 sqlParams.Add(new SqlParameter("@Updated_By", Product.Updated_By));
-             }
-             return sqlParams;
+            for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
+            {
+                if (Product.ProductImage.Product_Image_Id[i] != 0)
+                {
+                    sqlParams.Add(new SqlParameter("@Product_Image_Id", Product.ProductImage.Product_Image_Id[i]));
+                }
+                else
+                {
+                    sqlParams.Add(new SqlParameter("@Created_Date", Product.Created_Date));
+                    sqlParams.Add(new SqlParameter("@Created_By", Product.Created_By));
+                }
+                sqlParams.Add(new SqlParameter("@Product_Image", Product.ProductImage.Product_Image[i]));
+                sqlParams.Add(new SqlParameter("@Is_Default", Product.ProductImage.Is_Default[i]));
+                sqlParams.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
+                sqlParams.Add(new SqlParameter("@Updated_By", Product.Updated_By));
+            }
+            return sqlParams;
         }
 
         private List<SqlParameter> Set_Values_In_Product(ProductInfo Product)
@@ -253,63 +244,65 @@ namespace MyLeoRetailerRepo
 
         #endregion
 
-        //public ProductInfo Get_Product_By_Id(int Product_Id)
-        //{
-        //    List<SqlParameter> sqlParamList = new List<SqlParameter>();
-        //    sqlParamList.Add(new SqlParameter("@Product_Id", Product_Id));
 
-        //    ProductInfo Product = new ProductInfo();
-        //    DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Products_By_Id.ToString(), CommandType.StoredProcedure);
-        //    foreach (DataRow dr in dt.Rows)
-        //    {
-        //        Product.Product_Id = Convert.ToInt32(dr["Product_Id"]);
-        //        Product.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
-        //        Product.Product_Name = Convert.ToString(dr["Product_Name"]);
-        //        Product.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
-        //        Product.Product_DOB = Convert.ToDateTime(dr["Product_DOB"]);
-        //        Product.Product_Gender = Convert.ToInt32(dr["Product_Gender"]);
-        //        Product.Product_Address = Convert.ToString(dr["Product_Address"]);
-        //        Product.Product_City = Convert.ToString(dr["Product_City"]);
-        //        Product.Product_State = Convert.ToString(dr["Product_State"]);
-        //        Product.Product_Country = Convert.ToString(dr["Product_Country"]);
-        //        Product.Product_Pincode = Convert.ToInt32(dr["Product_Pincode"]);
-        //        Product.Product_Native_Address = Convert.ToString(dr["Product_Native_Address"]);
-        //        Product.Product_Mobile1 = Convert.ToString(dr["Product_Mobile1"]);
-        //        Product.Product_Mobile2 = Convert.ToString(dr["Product_Mobile2"]);
-        //        Product.Product_Home_Lindline = Convert.ToString(dr["Product_Home_Lindline"]);
-        //        Product.Product_EmailId = Convert.ToString(dr["Product_EmailId"]);
-        //        Product.IsActive = Convert.ToBoolean(dr["IsActive"]);
-        //        Product.Created_Date = Convert.ToDateTime(dr["Created_On"]);
-        //        Product.Created_By = Convert.ToInt32(dr["Created_By"]);
-        //        Product.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
-        //        Product.Updated_By = Convert.ToInt32(dr["Updated_By"]);
-        //    }
-        //    return Product;
-        //}
-
-        public List<ProductMRPInfo> Get_Sizes_By_SizeGroupId(int Product_Id, int Colour_Id)
+        public List<ProductDescription> Get_Sizes_By_SizeGroupId(int Product_Id, int Colour_Id)
         {
             List<SqlParameter> sqlParamList = new List<SqlParameter>();
+            //List<ProductMRPInfo> ProductMRPs = new List<ProductMRPInfo>();
             sqlParamList.Add(new SqlParameter("@Product_Id", Product_Id));
             sqlParamList.Add(new SqlParameter("@Colour_Id", Colour_Id));
 
-            List<ProductMRPInfo> ProductMRPs = new List<ProductMRPInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Sizes_On_SizeGroupId.ToString(), CommandType.StoredProcedure);
+            List<ProductDescription> ProductDescription = new List<ProductDescription>();
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Product_Description_By_ProductId.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
-                ProductMRPs.Add(Get_Product_MRP(dr));
+                ProductDescription.Add(Get_Product_Descriptions(dr));
             }
-            return ProductMRPs;
+
+            for (int i = 0; i < ProductDescription.Count; i++)
+            {
+                List<SqlParameter> sqlParamList1 = new List<SqlParameter>();
+                sqlParamList1.Add(new SqlParameter("@Product_Id", Product_Id));
+                sqlParamList1.Add(new SqlParameter("@Colour_Id", Colour_Id));
+                sqlParamList1.Add(new SqlParameter("@Description", ProductDescription[i].Description));
+                
+                List<ProductMRPInfo> ProductMRPs = new List<ProductMRPInfo>();
+                DataTable dt1 = sqlHelper.ExecuteDataTable(sqlParamList1, Storeprocedures.sp_Get_Sizes_On_SizeGroupId.ToString(), CommandType.StoredProcedure);
+                foreach (DataRow dr1 in dt1.Rows)
+                {
+                    //ProductMRPs.Add(Get_Product_MRP(dr1));
+                    ProductDescription[i].ProductMRPs.Add(Get_Product_MRP(dr1));
+                } 
+            }
+            return ProductDescription;
+        }
+
+        private ProductDescription Get_Product_Descriptions(DataRow dr)
+        {
+            ProductDescription ProductDescription = new ProductDescription();
+            ProductDescription.Description = Convert.ToString(dr["Description"]);
+            return ProductDescription;
         }
 
         private ProductMRPInfo Get_Product_MRP(DataRow dr)
         {
             ProductMRPInfo ProductMRP = new ProductMRPInfo();
-
-            ProductMRP.Product_Id = Convert.ToInt32(dr["Product_Id"]);
-            ProductMRP.Size_Id = Convert.ToInt32(dr["Size_Id"]);
-            ProductMRP.Size_Name = Convert.ToString(dr["Size_Name"]);
-
+            if (dr["Product_Id"] != DBNull.Value)
+                ProductMRP.Product_Id = Convert.ToInt32(dr["Product_Id"]);
+            else
+                ProductMRP.Product_Id = 0;
+            if (dr["Product_Mrp_Id"] != DBNull.Value)
+                ProductMRP.Product_MRP_Id = Convert.ToInt32(dr["Product_Mrp_Id"]);
+            else
+                ProductMRP.Product_MRP_Id = 0;
+            if (dr["Size_Id"] != DBNull.Value)
+                ProductMRP.Size_Id = Convert.ToInt32(dr["Size_Id"]);
+            else
+                ProductMRP.Size_Id = 0;
+            if (dr["Size_Name"] != DBNull.Value)
+                ProductMRP.Size_Name = Convert.ToString(dr["Size_Name"]);
+            else
+                ProductMRP.Size_Name = null;
             if (dr["Colour_Id"] != DBNull.Value)
                 ProductMRP.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
             else
@@ -383,9 +376,9 @@ namespace MyLeoRetailerRepo
             {
                 //if (Product.ProductImage.Product_Image[i])
                 //{
-                    Product.ProductImage.Product_Image[i] = Convert.ToString(dt1.Rows[i]["Image_Code"]);
-                    Product.ProductImage.Product_Image_Id[i] = Convert.ToInt32(dt1.Rows[i]["Product_Image_Id"]);
-                    Product.ProductImage.Is_Default[i] = Convert.ToString(dt1.Rows[i]["Is_Default"]);
+                Product.ProductImage.Product_Image[i] = Convert.ToString(dt1.Rows[i]["Image_Code"]);
+                Product.ProductImage.Product_Image_Id[i] = Convert.ToInt32(dt1.Rows[i]["Product_Image_Id"]);
+                Product.ProductImage.Is_Default[i] = Convert.ToString(dt1.Rows[i]["Is_Default"]);
                 //}
             }
         }
@@ -421,7 +414,7 @@ namespace MyLeoRetailerRepo
         public ProductInfo Get_Product_Images(int Product_Id)
         {
             ProductInfo Product = new ProductInfo();
-         
+
             Get_Product_Images_On_Product_Id(Product_Id, Product);
 
             return Product;
@@ -434,18 +427,56 @@ namespace MyLeoRetailerRepo
             sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Delete_Product_Image.ToString(), CommandType.StoredProcedure);
         }
 
-        public List<ProductMRPInfo> Get_ProductMRP_By_ProductId(int Product_Id)
+        public List<ColorInfo> Get_ProductMRP_By_ProductId(int Product_Id)
         {
+            List<ColorInfo> Colors = new List<ColorInfo>();
             List<ProductMRPInfo> ProductMrps = new List<ProductMRPInfo>();
-            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            List<ProductDescription> ProductDescription = new List<ProductDescription>();
 
+            List<SqlParameter> sqlParams = new List<SqlParameter>(); 
             sqlParams.Add(new SqlParameter("@Product_Id", Product_Id));
-            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Product_MRP_Exist_By_ProductId.ToString(), CommandType.StoredProcedure);
-            foreach(DataRow dr in dt.Rows)
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Product_Color_Exist_By_ProductId.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
             {
-                ProductMrps.Add(Get_Product_MRP_Values(dr));
+                Colors.Add(Get_Product_Colors(dr));
             }
-            return ProductMrps;
+
+            //List<SqlParameter> sqlParams1 = new List<SqlParameter>(); 
+            //sqlParams1.Add(new SqlParameter("@Product_Id", Product_Id)); 
+            //DataTable dt1 = sqlHelper.ExecuteDataTable(sqlParams1, Storeprocedures.sp_Get_Product_MRP_Exist_By_ProductId.ToString(), CommandType.StoredProcedure);
+            //for (int j = 0; j < Colors.Count; j++)
+            //{
+            //    foreach (DataRow dr1 in dt1.Rows)
+            //    {
+            //        Colors[j].ProductDescription.Add(Get_Product_Descriptions(dr1));
+            //    }
+            //}
+
+            //for (int j = 0; j < Colors.Count; j++)
+            //{
+            //    for (int i = 0; i < Colors[j].ProductDescription.Count; i++)
+            //    {
+            //        List<SqlParameter> sqlParams2 = new List<SqlParameter>();
+            //        sqlParams2.Add(new SqlParameter("@Product_Id", Product_Id));
+            //        DataTable dt2 = sqlHelper.ExecuteDataTable(sqlParams2, Storeprocedures.sp_Get_Product_MRP_Exist_By_ProductId.ToString(), CommandType.StoredProcedure);
+            //        foreach (DataRow dr2 in dt2.Rows)
+            //        {
+            //            //ProductMRPs.Add(Get_Product_MRP(dr1));
+            //           Colors[j].ProductDescription[i].ProductMRPs.Add(Get_Product_MRP_Values(dr2));
+            //        }
+            //    }
+            //}
+            return Colors;
+        }
+
+        private ColorInfo Get_Product_Colors(DataRow dr)
+        {
+            ColorInfo color = new ColorInfo();
+            color.Colour_Id = Convert.ToInt32(dr["Colour_Id"]);
+            color.Colour = Convert.ToString(dr["Colour_Name"]);
+            if (dr["Vendor_Color_code"] != null)
+                color.Vendor_Color_Code = Convert.ToString(dr["Vendor_Color_code"]);
+            return color;
         } 
        
     }

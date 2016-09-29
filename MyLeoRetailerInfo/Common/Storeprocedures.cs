@@ -280,6 +280,8 @@ namespace MyLeoRetailerInfo.Common
             sp_Delete_Product_Image,
             sp_Update_Product_Images,
             sp_Get_Product_MRP_Exist_By_ProductId,
+            sp_Get_Product_Description_By_ProductId,
+            sp_Get_Product_Color_Exist_By_ProductId,
 
              #region Pyable
         Get_Credit_Note_Details_By_Id_Sp,
@@ -369,6 +371,8 @@ namespace MyLeoRetailerInfo.Common
   
             //Product warehouse
         sp_Insert_Product_Warehouse,
+        sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
+        sp_Insert_Purchase_Order_Request_Consolidation,
 
     }
 
