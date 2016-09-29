@@ -20,9 +20,13 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public SalesOrderRepo siRepo;
 
+        public ReceivableRepo rRepo;
+
         public SalesOrderController()
         {
             siRepo = new SalesOrderRepo();
+
+            rRepo = new ReceivableRepo();
         }
 
         public ActionResult Index(SalesInvoiceViewModel siViewModel)
@@ -56,6 +60,71 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             return Json(siViewModel.SalesInvoice, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public JsonResult Get_Credit_Note_Details_By_Id(SalesInvoiceViewModel siViewModel)
+        {
+           
+            try
+            {
+                siViewModel.CreditNote = siRepo.Get_Credit_Note_Details_By_Id(siViewModel.SalesInvoice.Customer_Id);
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+            }
+
+            return Json(siViewModel.CreditNote, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Get_Gift_Voucher_Details()
+        {
+            SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
+
+            try
+            {
+                siViewModel.ReceivableItem = siRepo.Get_Gift_Voucher_Details();
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+            }
+
+            return Json(siViewModel.ReceivableItem, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Get_Credit_Note_Amount_By_Id(SalesInvoiceViewModel siViewModel)
+        {
+
+            try
+            {
+                siViewModel.CreditNote = siRepo.Get_Credit_Note_Amount_By_Id(siViewModel.SalesInvoice.Sales_Credit_Note_Id);
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+            }
+
+            return Json(siViewModel.CreditNote, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Get_Gift_Voucher_Amount_By_Id(SalesInvoiceViewModel siViewModel)
+        {
+
+            try
+            {
+                siViewModel.SalesInvoice = siRepo.Get_Gift_Voucher_Amount_By_Id(siViewModel.SalesInvoice.Gift_Voucher_Id);
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+            }
+
+            return Json(JsonConvert.SerializeObject(siViewModel));
         }
 
         public ActionResult Search(SalesInvoiceViewModel siViewModel)
@@ -138,7 +207,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 //{
                 //Set_Date_Session(siViewModel.SalesInvoice);
 
-                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, Branch_Id);   //arr[i] instead of Branch_Id
+                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, Branch_Id, siViewModel.ReceivableItem);   //arr[i] instead of Branch_Id
 
                 //}
 
@@ -163,6 +232,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
         {
             bool CheckFlag = false;
 
+
             try
             {
                 CheckFlag = siViewModel.SalesInvoice.Flag;
@@ -170,7 +240,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 siViewModel.SalesInvoice = siRepo.Get_SalesOrder_By_Id(siViewModel.Filter.Sales_Invoice_Id);
 
                 siViewModel.SaleOrderItemList = siRepo.Get_SalesOrder_Items_By_Id(siViewModel.Filter.Sales_Invoice_Id);
-
+  
             }
             catch (Exception ex)
             {

@@ -25,6 +25,8 @@ namespace MyLeoRetailer.Models
 
             Payables = new List<PayableInfo>();
 
+            CreditNote = new List<PayableInfo>();
+
             //Grid_Detail.Pager.DivObject = "divGiftVoucherPager";
 
             //Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
@@ -49,6 +51,12 @@ namespace MyLeoRetailer.Models
         }
 
         public List<PayableInfo> Payables
+        {
+            get;
+            set;
+        }
+
+        public List<PayableInfo> CreditNote
         {
             get;
             set;

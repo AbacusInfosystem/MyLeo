@@ -43,8 +43,11 @@
                     <h4 style="margin-top: 0px;">Basic information.</h4>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" />
+                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" id="txtEmployee_Name"/>
                         <input type="hidden" class="form-control" id="hdn_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id" />
+                        @*Added by vinod mane on 27/09/2016*@
+                        <input type="hidden" id="hdnEmployee_Name" value="@Model.Employee.Employee_Name" />
+                        @*End*@
                     </div>
 
                     <div class="form-group">

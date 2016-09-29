@@ -67,11 +67,19 @@ function CalculateDiscount() {
 
     $("#txtFinal_amount").val(finalamount.toFixed(2));
 
-    //$("#txtAmount_due").val(finalamount.toFixed(2));
+}
 
-    //var finalamount2 = finalamount - paidamount;
+function FinalAmount() {
 
-    //$("#txtFinal_amount").val(finalamount2.toFixed(2));
+    debugger;
+
+    var FinalAmount = parseFloat($("#txtFinal_amount").val());
+
+    var PaidAmount = parseFloat($("#txtPaid_Amount").val());
+
+    var abcamount = FinalAmount - PaidAmount;
+
+    $("#txtFinal_amount").val(abcamount.toFixed(2));
 
 }
 
@@ -260,7 +268,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Payables[i].Cheque_Date;
+        htmlText += data.Payables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Payables[i].Cheque_Date.substring(0, 10);
 
         htmlText += "</td>";
 
@@ -314,7 +322,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<input type='hidden' id='hdnPayable_Id" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payable_Id + "'/>";
 
-        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Note_No + "'/>";
+        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Purchase_Credit_Note_Id + "'/>";
 
         htmlText += "<input type='hidden' id='hdnCredit_Note_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Note_Amount + "'/>";
 
@@ -392,7 +400,7 @@ function EditPayableData(id) {
 
     $("#txtCheque_Date").val($("#hdnCheque_Date" + id).val());
 
-    $('[name = "Payable.Credit_Note_No"]').val($("#hdnCredit_Note_No" + id).val());
+    $('[name = "Payable.Purchase_Credit_Note_Id"]').val($("#hdnCredit_Note_No" + id).val());
 
     $("#txtCN_amount").val($("#hdnCredit_Note_Amount" + id).val());
 
@@ -413,6 +421,9 @@ function EditPayableData(id) {
     total_bal_amount = parseFloat(Balance_amount) + parseFloat(paid_amount);
 
     $("#txtAmount_due").val(total_bal_amount);
+
+    $("#txtFinal_amount").val(total_bal_amount);
+
 
     //$("#txtFinal_amount").val(total_bal_amount);
 
@@ -471,5 +482,11 @@ function ClearPayableData() {
   
     $("#txtFinal_amount").val('');
 
-    $("#dp-2").val('');
+    $("#txtPerson_Name").val('');
+
+    $("#txtRemark").val('');
+
+    $("#txtPayament_Date").val('');
+
+    
 }

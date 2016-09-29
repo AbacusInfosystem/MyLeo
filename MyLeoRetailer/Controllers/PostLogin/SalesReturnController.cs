@@ -123,7 +123,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 Set_Date_Session(srViewModel.SalesReturn);
 
-                srViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+                srViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 //string[] arr = srViewModel.Cookies.Branch_Ids.Split(',');
 

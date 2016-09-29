@@ -13,6 +13,7 @@
         success: function (data) {
 
             $('#txtCustomer_Name').val(data.Customer_Name);
+
             $('#hdnCustomer_ID').val(data.Customer_Id);
 
         }
@@ -141,7 +142,7 @@ function AddSalesReturnDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -159,6 +160,8 @@ function AddSalesReturnDetails(i)
 
     myTable.append(newRow);
 
+    Add_Validation(i);
+
 }
 
 function DeleteSalesReturnDetailsData(i)
@@ -171,6 +174,8 @@ function DeleteSalesReturnDetailsData(i)
     CalculateTotal();
 
     CalculateCreditNoteAmt();
+
+    Add_Validation(i);
 
 }
 
@@ -293,4 +298,11 @@ function ReArrangeSalesReturnDetailsData()
           
         }
     });
+}
+
+function Add_Validation(i) {
+
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Required", } });
+
 }

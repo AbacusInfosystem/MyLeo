@@ -47,7 +47,7 @@
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Purchase_Invoice_No + "</td>";
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Challan_No + "</td>";
 
-                tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Purchase_Invoice_Date + "</td>";
+                tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Purchase_Invoice_Date.substring(0, 10) + "</td>";
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Vendor_Name + "</td>";
 
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Total_Quantity + "</td>";

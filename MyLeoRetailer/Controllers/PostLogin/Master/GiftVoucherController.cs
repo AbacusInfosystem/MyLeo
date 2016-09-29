@@ -84,6 +84,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 Set_Date_Session(gvViewModel.GiftVoucher);
 
+
                 gvViewModel.GiftVoucher.Gift_Voucher_Id = gvRepo.Insert_Gift_Voucher(gvViewModel.GiftVoucher);
 
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("GVAT01"));

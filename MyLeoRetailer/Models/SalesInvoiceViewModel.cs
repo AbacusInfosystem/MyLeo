@@ -27,7 +27,16 @@ namespace MyLeoRetailer.Models
 
             SalesInvoices = new List<SalesInvoiceInfo>();
 
+
             SaleOrderItemList = new List<SaleOrderItems>();
+
+            ReceivableItem = new List<Receivable>();
+
+
+
+            //GiftVoucher = new List<Receivable>();
+
+            CreditNote = new  List<CreditNote>();
 
             Filter = new SalesOrderFilter();
 
@@ -37,7 +46,7 @@ namespace MyLeoRetailer.Models
 
             Grid_Detail.Pager.DivObject = "divSalesOrderPager";
 
-            Grid_Detail.Pager.CallBackMethod = "Get_SalesOrder";
+            Grid_Detail.Pager.CallBackMethod = "Get_SalesOrders";
         }
 
 
@@ -50,6 +59,14 @@ namespace MyLeoRetailer.Models
         public LoginInfo Cookies { get; set; }
 
         public List<SaleOrderItems> SaleOrderItemList { get; set; }
+
+        public List<Receivable> ReceivableItem { get; set; }
+
+ 
+
+        //public List<Receivable> GiftVoucher { get; set; }
+
+        public List<CreditNote> CreditNote { get; set; }
 
         public SalesOrderFilter Filter { get; set; }
 

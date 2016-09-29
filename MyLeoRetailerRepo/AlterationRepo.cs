@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyLeoRetailerInfo.Employee;//Added by vinod mane on 28/09/2016
 
 namespace MyLeoRetailerRepo
 {
@@ -139,5 +140,24 @@ namespace MyLeoRetailerRepo
             return SalesInvoices;
         }
 
+       //Added by Vinod Mane on 28/09/2016
+        public List<EmployeeInfo> Get_Employees()
+        {
+            List<EmployeeInfo> Employee = new List<EmployeeInfo>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.Get_Employee_Sp.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                EmployeeInfo Emp = new EmployeeInfo();
+
+                Emp.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+
+                Emp.Employee_Name = Convert.ToString(dr["Employee_Name"]);
+
+                Employee.Add(Emp);
+            }
+            return Employee;
+        }
+       //end
     }
 }

@@ -61,9 +61,23 @@
 
                 <h4 style="margin-top: 0px;">Role listing.</h4>
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <input type="text" class="form-control" name="Filter.Role" placeholder="Enter role to search" />
+                </div>*@
+                @* LookUp Code Added by Vinod Mane on 27/09/2016*@
+                <div class="form-group auto-complete" >
+                    <div class="input-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand name.</span>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Role" id="txtRoleName" placeholder="Enter role to search." data-table="Role" data-col="Role_Id,Role_Name" data-headernames="Role Name">
+                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                           @*<input type="hidden" id="hdnRole_ID" name="role.Role_Id" />*@
+                        <input type="hidden" id="hdnRoleID" value="" name="Filter.Role" class="auto-complete-value" />
+
+                    </div>
                 </div>
+                @*End*@
 
                 <div class="list-group border-bottom push-down-20" id="Role_Grid">
 
