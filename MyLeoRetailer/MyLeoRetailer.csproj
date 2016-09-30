@@ -1036,7 +1036,6 @@
     <Content Include="Scripts\Modules\PrintThis.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
-    <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_events.js" />
     <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_methods.js" />
     <Content Include="Scripts\Modules\Product\product_validation.js" />
     <Content Include="Scripts\Modules\Product\search_product_event.js" />
