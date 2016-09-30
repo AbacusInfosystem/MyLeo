@@ -306,7 +306,10 @@ function CalculateTotal() {
 function Add_Validation(i) {
    
     $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
-    $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
+
+    $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+
+    //$("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
 
 }
 

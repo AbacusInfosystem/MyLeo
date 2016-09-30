@@ -205,17 +205,17 @@ function Get_Sizes() {
 
                     if (j < obj.PurchaseOrderRequest.SizeGroups.length) {
                         tblHtml += "<td>";
-                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + i + "-" + (j + 1) + "'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</span>";
-                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Id + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id" + i + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
+                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</span>";
+                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Id + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                         tblHtml += "</td>";
 
                         debugger;
 
-                        var i = j + 1;
+                        var K = j + 1;
 
                         $("#drpCenter_Size").append("<option value='" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Id + "'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</option>");
 
-                        $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+                        $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='" + K + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                     }
                     else {
@@ -1209,7 +1209,7 @@ function ReArrangePurchaseOrderRequestDetailsData() {
                 $(newTR).find("[id^='hdnSize_Id_11-']").attr("name", "PurchaseOrderRequest.Sizes[" + i + "].Size_Id11");
                 $(newTR).find("[id^='hdnSize_Id_11-']").attr("value", $("#hdnSize_Id_11-" + (i - 1)).val());
 
-                $(newTR).find("[id^='hdnAmount_11-']")[0].id = "hdnAmount_11-" + i + "-";
+                $(newTR).find("[id^='hdnAmount_11-']")[0].id = "hdnAmount_11-" + i;
                 $(newTR).find("[id^='hdnAmount_11-']").attr("name", "PurchaseOrderRequest.Sizes[" + i + "].Amount11");
             }
 

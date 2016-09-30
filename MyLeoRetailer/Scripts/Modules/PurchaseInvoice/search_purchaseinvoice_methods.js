@@ -44,10 +44,12 @@
 
                 tblHTML += "<tr>";
 
+                tblHTML += "<td><input type='radio' name='r1' id='r1_" + data.PurchaseInvoice.PurchaseInvoices[i].Purchase_Invoice_Id + "' class='iradio-list'/></td>";
+
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Purchase_Invoice_No + "</td>";
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Challan_No + "</td>";
 
-                tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Purchase_Invoice_Date + "</td>";
+                tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Purchase_Invoice_Date.substring(0, 10) + "</td>";
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Vendor_Name + "</td>";
 
                 tblHTML += "<td>" + data.PurchaseInvoice.PurchaseInvoices[i].Total_Quantity + "</td>";
@@ -75,6 +77,14 @@
         else {
             $('.pagination').html("");
         }
+
+
+        $('[name="r1"]').on('change', function (event) {
+            if ($(this).prop('checked')) {
+                $("#hdnPurchaseInvoiceId").val(this.id.replace("r1_", ""));
+                document.getElementById("btnViewPurchaseInvoice").disabled = false;
+            }
+        });
 
         Friendly_Messages(data);
     }

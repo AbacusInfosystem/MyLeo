@@ -76,12 +76,5 @@ namespace MyLeoRetailer.Models.Transaction
         }
 	}
 
-	public class Filter_PurchaseOrder
-	{
-		public string Purchase_Order_No
-		{
-			get;
-			set;
-		}
-	}
+	
 }

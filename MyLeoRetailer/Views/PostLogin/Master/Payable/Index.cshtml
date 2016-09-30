@@ -86,7 +86,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
-                                <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="dd-mm-yyyy">
                                     <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("dd-MM-yyyy")))" />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
@@ -98,7 +98,7 @@
                             <div class="btn-group">
                                 <button type="button" id="btnSearchPayable" class="btn btn-success active">Search</button>
                                 @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
-                                <button type="button" id="btnResetPayable" class="btn btn-success active">Reset</button>
+                                <button type="reset" id="btnResetPayable" class="btn btn-danger active">Reset</button>
                             </div>
                         </div>
 
@@ -125,7 +125,7 @@
                                                 @*<th>Credit Note</th>*@
                                                 @*<th>Credit Note Date</th>*@
                                                 @*<th>Discount Amount</th>*@
-                                                <th>Payment Date</th>
+                                                @*<th>Payment Date</th>*@
                                                 <th>Payment Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -204,24 +204,6 @@
                                                             <input type="hidden" id="hdnBalance_Amount@(i)" name="Payable.Balance_Amount[@(i-1)].Balance_Amount" value="@itm.Balance_Amount">
                                                         </td>
 
-                                                        @*<td>
-                                                            <span id="trCredit_Note_No@(i)"> @itm.Credit_Note_No</span>
-                                                            <input type="hidden" id="hdnCredit_Note_No@(i)" name="Payable.Credit_Note_No[@(i-1)].Credit_Note_No" value="@itm.Credit_Note_No">
-                                                        </td>*@
-                                                        @*<td>
-                                                <span id="trCredit_Note_Date@(i)"> @itm.Credit_Note_Date</span>
-                                                <input type="hidden" id="hdnCredit_Note_Date@(i)" name="Payable.Credit_Note_Date[@(i-1)].Credit_Note_Date" value="@itm.Credit_Note_Date">
-                                            </td>*@
-
-                                                        @*<td>
-                                                            <span id="trDiscount_Amount@(i)"> @itm.Discount_Amount</span>
-                                                            <input type="hidden" id="hdnDiscount_Amount@(i)" name="Payable.Discount_Amount[@(i-1)].Discount_Amount" value="@itm.Discount_Amount">
-                                                        </td>*@
-                                                        @*<td>
-                                                            <span id="trPayament_Date@(i)"> @itm.Payament_Date.ToShortDateString()</span>
-                                                            <input type="hidden" id="hdnPayament_Date@(i)" name="Payable.Payament_Date[@(i-1)].Payament_Date" value="@itm.Payament_Date">
-                                                        </td>*@
-
                                                         <td>
                                                             <span id="trPayament_Status@(i)"> @itm.Payment_Status_Value</span>
                                                             <input type="hidden" id="hdnPayament_Status@(i)" name="Payable.Payment_Status_Value[@(i-1)].Payment_Status_Value" value="@itm.Payment_Status_Value">
@@ -246,231 +228,7 @@
 
                     }
 
-                        @*<div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
-                            <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
-
-                                <div class="btn-group">
-                                    <button type="button" id="btnSearchPayable" class="btn btn-success active">Search</button>
-                                    @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>
-                                    <button type="button" id="btnResetPayable" class="btn btn-success active">Reset</button>
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
-
-                                <div class="row">
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
-                                            <input type="text" class="form-control input-sm" name="Payable.Vendor_Name" id="txtVnedor_Name" value="@Model.Payable.Vendor_Name" placeholder="Enter Vendor Name" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payable status</span>
-                                            <select class="form-control input-sm" id="drpPayble_Status" name="Payable.Payament_Status">
-                                                <option value="0">Select Payable Status</option>
-
-                                                @foreach (var item in LookupInfo.Get_Payment_Status())
-                                            {
-
-                                                if (Model.Payable.Payament_Status == item.Key)
-                                                {
-                                            <option value="@item.Key" selected="selected">@item.Value</option>
-                                                }
-                                                else
-                                                {
-                                            <option value="@item.Key">@item.Value</option>
-                                                }
-
-                                            }
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
-                                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                                <input type="text" class="form-control datepicker" name="Payable.From_Date" value="@((Model.Payable.From_Date == DateTime.MinValue ? "" : Model.Payable.From_Date.ToString("dd-MM-yyyy")))" />
-                                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
-                                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                                <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("dd-MM-yyyy")))" />
-                                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
-
-                                @if (Model.Payable.PurchaseInvoice_Details.Count() == 0)
-                                {
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="table-responsive" style="margin: 50px 0;">
-                                                <input type="hidden" id="hdnIsEditPurchaseInvoiceDetails" value="false" />
-                                                <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                                <table class="table table-bordered" id="tblBPurchaseInvoiceDetails">
-                                                    <thead>
-                                                        <tr id="subhead">
-
-                                                            <th>Vendor</th>
-                                                            <th>Purchase Invoice No.</th>
-                                                            <th>Purchase Invoice Date</th>
-                                                            <th>Total Amount</th>
-                                                            <th>Amount Paid</th>
-                                                            <th>Amount Balance</th>
-                                                            <th>Credit Note</th>
-                                                            @*<th>Credit Note Date</th>
-                                                            <th>Discount Amount</th>
-                                                            <th>Payment Date</th>
-                                                            <th>Payment Status</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody></tbody>
-
-
-
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                                else
-                                {
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="table-responsive" style="margin: 50px 0;">
-                                                <input type="hidden" id="hdnIsEditPurchaseInvoiceDetails" value="false" />
-                                                <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                                <table class="table table-bordered" id="tblBPurchaseInvoiceDetails">
-                                                    <thead>
-                                                        <tr id="subhead">
-                                                            <th>Vendor</th>
-                                                            <th>Purchase Invoice No.</th>
-                                                            <th>Purchase Invoice Date</th>
-                                                            <th>Total Amount</th>
-                                                            <th>Amount Paid</th>
-                                                            <th>Amount Balance</th>
-                                                            <th>Credit Note No</th>
-                                                            @*<th>Credit Note Date</th>
-                                                            <th>Discount Amount</th>
-                                                            <th>Payment Date</th>
-                                                            <th>Payment Status</th>
-                                                            <th>Action</th>
-
-                                                        </tr>
-
-                                                        @if (Model.Payable.PurchaseInvoice_Details != null && Model.Payable.PurchaseInvoice_Details.Count() > 0)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var itm in Model.Payable.PurchaseInvoice_Details)
-                                                        {
-                                                    <tr id="tr@(i)">
-
-
-                                                        <td>
-                                                            <span id="trVendor@(i)"> @itm.Vendor_Name</span>
-                                                            <input type="hidden" id="hdnVendor@(i)" name="Payable.PurchaseInvoice_Details[@(i-1)].Vendor_Name" value="@itm.Vendor_Name">
-                                                            <input type="hidden" id="hdnPurchase_Invoice_Id@(i)" name="Payable.Purchase_Invoice_Id[@(i-1)].Purchase_Invoice_Id" value="@itm.Purchase_Invoice_Id">
-                                                            <input type="hidden" id="hdnPayable_Id@(i)" name="Payable.Payable_Id[@(i-1)].Payable_Id" value="@itm.Payable_Id">
-
-
-                                                        </td>
-                                                        <td>
-                                                            <span id="trPurchase_Invoice_No@(i)"> @itm.Purchase_Invoice_No</span>
-                                                            <input type="hidden" id="hdnPurchase_Invoice_No@(i)" name="Payable.Purchase_Invoice_No[@(i-1)].Purchase_Invoice_No" value="@itm.Purchase_Invoice_No">
-                                                        </td>
-
-                                                        <td>
-                                                            <span id="trPurchase_Invoice_Date@(i)"> @itm.Purchase_Invoice_Date</span>
-                                                            <input type="hidden" id="hdnPurchase_Invoice_Date@(i)" name="Payable.Purchase_Invoice_Date[@(i-1)].Purchase_Invoice_Date" value="@itm.Purchase_Invoice_Date">
-                                                        </td>
-                                                        <td>
-                                                            <span id="trTotal_Amount@(i)"> @itm.Total_Amount</span>
-                                                            <input type="hidden" id="hdnTotal_Amount@(i)" name="Payable.Total_Amount[@(i-1)].Total_Amount" value="@itm.Total_Amount">
-                                                        </td>
-
-                                                        <td>
-                                                            <span id="trPaid_Amount@(i)"> @itm.Paid_Amount</span>
-                                                            <input type="hidden" id="hdnPaid_Amount@(i)" name="Payable.Paid_Amount[@(i-1)].Paid_Amount" value="@itm.Paid_Amount">
-                                                        </td>
-                                                        <td>
-                                                            <span id="trBalance_Amount@(i)"> @itm.Balance_Amount</span>
-                                                            <input type="hidden" id="hdnBalance_Amount@(i)" name="Payable.Balance_Amount[@(i-1)].Balance_Amount" value="@itm.Balance_Amount">
-                                                        </td>
-
-                                                        <td>
-                                                            <span id="trCredit_Note_No@(i)"> @itm.Credit_Note_No</span>
-                                                            <input type="hidden" id="hdnCredit_Note_No@(i)" name="Payable.Credit_Note_No[@(i-1)].Credit_Note_No" value="@itm.Credit_Note_No">
-                                                        </td>
-                                                        @*<td>
-                                                <span id="trCredit_Note_Date@(i)"> @itm.Credit_Note_Date</span>
-                                                <input type="hidden" id="hdnCredit_Note_Date@(i)" name="Payable.Credit_Note_Date[@(i-1)].Credit_Note_Date" value="@itm.Credit_Note_Date">
-                                            </td>
-
-                                                        <td>
-                                                            <span id="trDiscount_Amount@(i)"> @itm.Discount_Amount</span>
-                                                            <input type="hidden" id="hdnDiscount_Amount@(i)" name="Payable.Discount_Amount[@(i-1)].Discount_Amount" value="@itm.Discount_Amount">
-                                                        </td>
-                                                        <td>
-                                                            <span id="trPayament_Date@(i)"> @itm.Payament_Date</span>
-                                                            <input type="hidden" id="hdnPayament_Date@(i)" name="Payable.Payament_Date[@(i-1)].Payament_Date" value="@itm.Payament_Date">
-                                                        </td>
-
-                                                        <td>
-                                                            <span id="trPayament_Status@(i)"> @itm.Payament_Status</span>
-                                                            <input type="hidden" id="hdnPayament_Status@(i)" name="Payable.Payament_Status[@(i-1)].Payament_Status" value="@itm.Payament_Status">
-                                                        </td>
-
-                                                        <td class='edit'>
-                                                            <button class="btn btn-success active" type="button" id="btnPayablePay" onclick="Get_Payable(@itm.Purchase_Invoice_Id,@itm.Purchase_Credit_Note_Id)">Pay</button>
-                                                        </td>
-                                                    </tr>
-                                                            i = i + 1;
-                                                        }
-                                                    }
-                                                    </thead>
-                                                    <tbody></tbody>
-
-
-
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                }
-
-                            </div>
-
-
-                            @*<div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
-                </div>
-
-
-
-                        </div>*@
 
                </div>
 

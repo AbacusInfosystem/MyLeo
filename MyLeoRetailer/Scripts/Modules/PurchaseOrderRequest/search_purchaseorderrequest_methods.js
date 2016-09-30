@@ -1,5 +1,47 @@
 ﻿function Get_Purchase_Order_Requests() {
     var poreqViewModel =
+		{
+		    Filter: {
+
+		        Vendor_Id: $("#drpVendor_Id").val()
+		    },
+		    Grid_Detail: {
+
+		        Pager: Set_Pager($("#divPurchaseOrderRequestPager"))
+		    }
+		}
+
+    $.ajax({
+
+        url: "/PurchaseOrderRequest/Get_Purchase_Order_Requests",
+
+        data: JSON.stringify(poreqViewModel),
+
+        dataType: 'json',
+
+        type: 'POST',
+
+        contentType: 'application/json',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            Bind_Grid(obj, "Purchase_Order_Request_List");
+
+            $("#divPurchaseOrderRequestPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            Friendly_Messages(data);
+        }
+    });
+}
+
+
+
+
+
+function Get_Purchase_Order_Requests() {
+    var poreqViewModel =
         {
             Filter: {
 
@@ -29,6 +71,8 @@
 
             Bind_Get_Purchase_Order_Request_Data(data);
 
+           
+
         }
     });
 }
@@ -44,10 +88,10 @@ function Bind_Get_Purchase_Order_Request_Data(data) {
 
             tblHTML += "<tr>";
 
+            tblHTML += "<td><input type='radio' name='r1' id='r1_" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Purchase_Order_Request_Id + "' class='iradio-list'/></td>";
+
             tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Branch_Name + "</td>";
             tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Vendor_Name + "</td>";
-
-            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Status + "</td>";
 
             tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Total_Quantity + "</td>";
             tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Net_Amount + "</td>";
@@ -71,6 +115,15 @@ function Bind_Get_Purchase_Order_Request_Data(data) {
     else {
         $('.pagination').html("");
     }
+
+
+    $('[name="r1"]').on('change', function (event) {
+        if ($(this).prop('checked')) {
+            $("#hdnPurchaseOrderRequestId").val(this.id.replace("r1_", ""));
+            document.getElementById("btnEditPurchaseOrderRequest").disabled = false;
+            document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
+        }
+    });
 
     Friendly_Messages(data);
 }
@@ -107,45 +160,3 @@ function Bind_Get_Purchase_Order_Request_Data(data) {
 
 
 
-//function Get_Purchase_Order_Requests() {
-//    var poreqViewModel =
-//		{
-//		    Filter: {
-
-//		        Vendor_Id: $("[name='Filter.Vendor_Id']").val()
-//		    },
-//		    Grid_Detail: {
-
-//		        Pager: Set_Pager($("#divPurchaseOrderRequestPager"))
-//		    }
-//		}
-
-//    $.ajax({
-
-//        url: "/PurchaseOrderRequest/Get_Purchase_Order_Requests",
-
-//        data: JSON.stringify(poreqViewModel),
-
-//        dataType: 'json',
-
-//        type: 'POST',
-
-//        contentType: 'application/json',
-
-//        success: function (response) {
-
-//            var obj = $.parseJSON(response);
-
-//            Bind_Grid(obj, "Purchase_Order_Request_List");
-
-//            $("#divPurchaseOrderRequestPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
-//        }
-//    });
-//}
-
-//function Set_Vendor_Id(value)
-//{
-//    $("[name='Filter.Vendor_Id']").val(value);
-
-//    Get_Purchase_Order_Requests();
-//}

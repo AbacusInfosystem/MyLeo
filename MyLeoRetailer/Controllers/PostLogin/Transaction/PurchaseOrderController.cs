@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -43,12 +44,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public ActionResult Index(PurchaseOrderViewModel poViewModel)
         {
             try
-            {                
+            {
                 if (TempData["poViewModel"] != null)
                 {
                     poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
                 }
-                
+
                 poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
                 poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
@@ -66,7 +67,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
             return View("Index", poViewModel);
-        }        
+        }
 
         public ActionResult Search(PurchaseOrderViewModel poViewModel)
         {
@@ -83,50 +84,82 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             return View("Search", poViewModel);
         }
-         
+
         public ActionResult Insert_Purchase_Order(PurchaseOrderViewModel poViewModel)
         {
-            try
-            {                
-                Set_Date_Session(poViewModel.PurchaseOrder);
-
-                foreach (var item in poViewModel.PurchaseOrder.PurchaseOrders)
-                {
-                    Set_Date_Session(item);
-                }
-
-                if (poViewModel.PurchaseOrder.Purchase_Order_Id == 0)
-                {
-                    //poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                    //poViewModel.PurchaseOrder.Created_By = poViewModel.Cookies.User_Id;
-
-                    //poViewModel.PurchaseOrder.Created_Date = DateTime.Now;
-
-                    //poViewModel.PurchaseOrder.Updated_By = poViewModel.Cookies.User_Id;
-
-                    //poViewModel.PurchaseOrder.Updated_Date = DateTime.Now;
-
-                    _purchaseorderRepo.Insert_Purchase_Order(poViewModel.PurchaseOrder);
-
-                    poViewModel.FriendlyMessages.Add(MessageStore.Get("PO01"));
-                }
-                else
-                {
-
-                }
-            }
-            catch (Exception ex)
+            using (TransactionScope scope = new TransactionScope())
             {
-                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                try
+                {
+                    Set_Date_Session(poViewModel.PurchaseOrder);
+
+                    foreach (var item in poViewModel.PurchaseOrder.PurchaseOrders)
+                    {
+                        Set_Date_Session(item);
+                    }
+
+                    if (poViewModel.PurchaseOrder.Purchase_Order_Id == 0)
+                    {
+
+                        //poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                        //poViewModel.PurchaseOrder.Created_By = poViewModel.Cookies.User_Id;
+
+                        //poViewModel.PurchaseOrder.Created_Date = DateTime.Now;
+
+                        //poViewModel.PurchaseOrder.Updated_By = poViewModel.Cookies.User_Id;
+
+                        //poViewModel.PurchaseOrder.Updated_Date = DateTime.Now;
+
+                        _purchaseorderRepo.Insert_Purchase_Order(poViewModel.PurchaseOrder);
+
+
+                        poViewModel = new PurchaseOrderViewModel();
+
+                        poViewModel.FriendlyMessages.Add(MessageStore.Get("PO01"));
+                    }
+                    else
+                    {
+
+                    }
+
+                    scope.Complete();
+
+                }
+                catch (Exception ex)
+                {
+                    poViewModel = new PurchaseOrderViewModel();
+
+                    poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                    scope.Dispose();
+                }
+
+                TempData["poViewModel"] = poViewModel;
+
+                return RedirectToAction("Search", poViewModel);
+
             }
-
-            TempData["poViewModel"] = poViewModel;
-
-            return RedirectToAction("Search", poViewModel);
         }
-                
+
         public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
+        {
+            Pagination_Info pager = new Pagination_Info();
+
+            pager = poViewModel.Grid_Detail.Pager;
+
+            poViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Order_No,Purchase_Order_Date,Vendor_Name,Shipping_Address,Total_Quantity,Net_Amount,Agent_Name,Transporter_Name,Start_Supply_Date,Stop_Supply_Date", "Purchase_Order_Id"); // Set grid info for front end listing
+
+            poViewModel.Grid_Detail.Records = _purchaseorderRepo.Get_Purchase_Order(poViewModel.Filter); // Call repo method 
+
+            Set_Pagination(pager, poViewModel.Grid_Detail); // set pagination for grid
+
+            poViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(poViewModel));
+        }
+
+        public JsonResult Get_Purchase_Order_List(PurchaseOrderViewModel poViewModel)
         {
             try
             {
@@ -136,7 +169,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 pager = poViewModel.Pager;
 
-                poViewModel.PurchaseOrder.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Order(ref pager, poViewModel.Filter.Purchase_Order_No);
+                poViewModel.PurchaseOrder.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Order_List(ref pager, poViewModel.Filter.Purchase_Order_No);
 
                 poViewModel.Pager = pager;
 
@@ -151,6 +184,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
+
 
         //public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
         //{
@@ -193,8 +227,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             try
             {
-                poViewModel.PurchaseOrder.PurchaseOrders = _purchaseorderRepo.Get_Consolidate_Purchase_Order_Item(Vendor_Id);    
-           
+                poViewModel.PurchaseOrder.PurchaseOrders = _purchaseorderRepo.Get_Consolidate_Purchase_Order_Item(Vendor_Id);
+
                 //poViewModel.PurchaseOrder.Sizes= 
             }
             catch (Exception ex)
@@ -246,20 +280,37 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
         {
-            poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
+            //poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
 
-            poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
+            //poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
-           // poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
+            // poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
 
-            poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
+            //poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
 
-            poViewModel.PurchaseOrder.Transporters = _vendorRepo.Get_Transporters();
+            //poViewModel.PurchaseOrder.Transporters = _vendorRepo.Get_Transporters();
 
-            poViewModel.PurchaseOrder.Branches = _branchRepo.Get_Branches();
+            //poViewModel.PurchaseOrder.Branches = _branchRepo.Get_Branches();
+            try
+             {
+                if (TempData["poViewModel"] != null)
+                {
+                    poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
+                }
 
+                poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
 
-            return View("Index", poViewModel);
+                poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
+                
+            }
+            catch (Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details_By_Id : " + ex.ToString());
+            }
+                      
+            return View("View", poViewModel);
         }
 
         public ActionResult Update_Purchase_Order(PurchaseOrderViewModel poViewModel)
@@ -294,13 +345,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 }
 
                 poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
-                
+
                 poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
 
                 poViewModel.PurchaseOrder.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(poViewModel.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount));
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
@@ -350,9 +401,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     poViewModel.FriendlyMessages.Add(MessageStore.Get("PO04"));
 
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 

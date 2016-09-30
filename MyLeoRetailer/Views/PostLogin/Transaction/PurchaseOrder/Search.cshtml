@@ -51,8 +51,8 @@
 
                             <div class="btn-group">
                                 <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseOrder">Create</button>
-                                <button class="btn btn-danger active" value="Edit" id="btnEditPurchaseOrder">Edit</button>
-                                <button class="btn btn-info active" value="View" id="btnViewPurchaseOrder">View</button>
+                                <button class="btn btn-danger active" value="Edit" id="btnEditPurchaseOrder">View</button>
+                                <button class="btn btn-info active" value="View" id="btnViewPurchaseOrder">Print</button>
                             </div>
 
                         </div>
@@ -66,12 +66,22 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divTable">
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseOrderPager">
+
+
+        </div>
+
+        @*<div class="col-md-12" style="padding: 0px;" id="divTable">
             <div class="row">
                 <div class="table-responsive" style="width:100%; margin: 0px 0;">
                     <table class="table table-bordered table-hover" id="tblPurchaseOrder">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Order No.</th>
                                 <th>Order Date</th>
                                 <th>Vendor</th>
@@ -86,20 +96,18 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                </div><!-- /.col -->
+                </div>
             </div>
-        </div>
+        </div>*@
 
-        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+    
 
-        </div>
-
-        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+        @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
 
         <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseOrderPager">
 
 
-        </div>
+        </div>*@
 
     </div>
 
