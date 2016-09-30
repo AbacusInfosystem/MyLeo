@@ -1196,7 +1196,6 @@
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View1.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
   </ItemGroup>
