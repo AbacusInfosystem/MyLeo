@@ -167,5 +167,38 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(check, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Get_Sales_Return_By_Id(SalesReturnViewModel srViewModel)
+        {
+           
+            try
+            {
+               
+                srViewModel.SalesReturn = srRepo.Get_Sales_Return_By_Id(srViewModel.Filter.Sales_Return_Id);
+
+                srViewModel.SaleReturnItemList = srRepo.Get_Sales_Return_Items_By_Id(srViewModel.Filter.Sales_Return_Id);
+
+            }
+            catch (Exception ex)
+            {
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+
+            TempData["srViewModel"] = srViewModel;
+
+            return RedirectToAction("View_Sales_Return", "SalesReturn");          
+        }
+
+
+        public ActionResult View_Sales_Return(SalesReturnViewModel srViewModel)
+        {
+
+            if (TempData["srViewModel"] != null)
+            {
+                srViewModel = (SalesReturnViewModel)TempData["srViewModel"];
+            }
+
+            return View("SalesReturnView", srViewModel);
+        }
+
     }
 }

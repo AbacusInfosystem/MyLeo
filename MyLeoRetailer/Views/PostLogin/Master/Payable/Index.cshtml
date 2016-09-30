@@ -187,7 +187,7 @@
                                                         </td>
 
                                                         <td>
-                                                            <span id="trPurchase_Invoice_Date@(i)"> @itm.Purchase_Invoice_Date</span>
+                                                            <span id="trPurchase_Invoice_Date@(i)"> @itm.Purchase_Invoice_Date.ToShortDateString()</span>
                                                             <input type="hidden" id="hdnPurchase_Invoice_Date@(i)" name="Payable.Purchase_Invoice_Date[@(i-1)].Purchase_Invoice_Date" value="@itm.Purchase_Invoice_Date">
                                                         </td>
                                                         <td>

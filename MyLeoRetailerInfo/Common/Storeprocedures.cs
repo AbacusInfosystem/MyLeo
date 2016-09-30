@@ -316,6 +316,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Sales_Return_Item,
         sp_Insert_Sales_Credit_Notes,
         Sp_Delete_Sales_Return_Items_By_Sales_Return_Id,
+            sp_Get_Sales_Return_Details_By_Sales_Return_Id,
+            sp_Get_Sales_Return_Items_By_Sales_Return_Id,
 
 
 

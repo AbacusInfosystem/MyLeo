@@ -6,7 +6,7 @@
 
     $('#dtpInvoice_Date').datepicker({
 
-        dateFormat: "dd-mm-yy",
+        dateFormat: "dd-MM-yy",
         changeMonth: true,
         changeYear: true,
         minDate: 0,
@@ -18,8 +18,6 @@
     debugger
 
     if ($('#hdnSalesInvoiceID').val() != 0) {
-
-        alert($('#hdnSalesInvoiceID').val());
 
         debugger;
 
@@ -49,9 +47,6 @@ $(function ()
     $("[name='SalesInvoice.Mobile']").focusout(function ()
     {
         Get_Customer_Name_By_Mobile_No();
-
-        //Get_Credit_Note_Details_By_Id($(this).val());
-
 
     });
 
