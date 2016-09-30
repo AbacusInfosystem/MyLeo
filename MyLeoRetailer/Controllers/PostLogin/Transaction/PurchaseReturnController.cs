@@ -246,10 +246,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                  //prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_SalesOrder_By_Id(prViewModel.Filter.Sales_Invoice_Id);
 
-              //  prViewModel.PurchaseReturnList = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.Filter.Purchase_Return_Id);
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_By_Purchase_Return_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
 
-                prViewModel.PurchaseReturnList = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
-                if( prViewModel.PurchaseReturnList.Count>0)
+                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                if (prViewModel.PurchaseReturn.PurchaseReturns.Count > 0)
                 {
                     CheckFlag = true;
                 }
