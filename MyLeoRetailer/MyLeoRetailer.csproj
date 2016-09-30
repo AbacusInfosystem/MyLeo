@@ -1200,6 +1200,8 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\ViewPurchaseReturnRequest.cshtml" />
+    <Content Include="Views\PostLogin\SalesReturn\SalesReturnView.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\SalesInvoiceView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
