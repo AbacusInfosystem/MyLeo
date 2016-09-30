@@ -417,7 +417,7 @@ namespace MyLeoRetailerRepo
 
                     pInfo.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
 
-                    pInfo.Payament_Status = Convert.ToInt32(dr["Payament_Status"]);
+                    //pInfo.Payament_Status = Convert.ToInt32(dr["Payament_Status"]);
 
                     pInfo.Against_Form = Convert.ToInt32(dr["Against_Form"]);
 
@@ -435,7 +435,7 @@ namespace MyLeoRetailerRepo
 
                     pInfo.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
 
-                    pInfo.Total_Amount = Convert.ToInt32(dr["Total_Amount"]);
+                    //pInfo.Total_Amount = Convert.ToInt32(dr["Total_Amount"]);
 
                     pInfo.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
 
@@ -475,6 +475,8 @@ namespace MyLeoRetailerRepo
 
                     pInfo.SKU_Code = Convert.ToString(dr["SKU_Code"]);
 
+                    pInfo.Challan_No = Convert.ToString(dr["Challan_No"]);
+
                     pInfo.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
 
                     pInfo.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
@@ -484,6 +486,8 @@ namespace MyLeoRetailerRepo
                     pInfo.Quantity = Convert.ToInt32(dr["Quantity"]);
 
                     pInfo.Total_Amount = Convert.ToInt32(dr["Total_Amount"]);
+
+                    pInfo.Amount = Convert.ToInt32(dr["Amount"]);
 
                     pInfo.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
 
@@ -512,6 +516,10 @@ namespace MyLeoRetailerRepo
                     pInfo.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
 
                     pInfo.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                    pInfo.Vendor_Address = Convert.ToString(dr["Vendor_Address"]);
+
+                    pInfo.Vendor_Vat_No = Convert.ToString(dr["Vendor_Vat_No"]);
 
                     pInfo.Purchase_Order_No = Convert.ToString(dr["Purchase_Order_No"]);
 
