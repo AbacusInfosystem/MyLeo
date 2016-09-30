@@ -1,5 +1,6 @@
 ﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnRequestViewModel
 
+<script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-search-event.js"></script>
 <script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-search-method.js"></script>
 
@@ -61,6 +62,7 @@
                             <div class="btn-group">
                                 @*<button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>*@
                                 <a role="button" class="btn btn-success active" href="/purchase-return-request/create-purchase-return-request" id="btnCreate">Create</a>
+                                <button role="button" class="btn btn-danger active" value="Edit" id="btnEditPurchaseReturnRequest">View</button>
                             </div>
 
                         </div>
@@ -73,7 +75,19 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divTable">
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseReturnRequestPager">
+
+
+        </div>
+
+
+
+
+        @*<div class="col-md-12" style="padding: 0px;" id="divTable">
             <div class="row">
                 <div class="table-responsive" style="width:100%; margin: 0px 0;">
                     <table class="table table-bordered table-hover" id="tblPurchaseReturnRequest">
@@ -91,16 +105,17 @@
                  
                         </tbody>
                     </table>
-                </div><!-- /.col -->
+                </div> 
             </div>
-        </div>
-
-        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnRequestPager">
+        </div>*@
 
 
-        </div>
+        @*<div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnRequestPager">
 
-        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value=""/>
+
+        </div>*@
+    
+        @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value=""/>*@
         @*<div class="pagination pagination-sm no-margin pull-right">
         </div>*@
 

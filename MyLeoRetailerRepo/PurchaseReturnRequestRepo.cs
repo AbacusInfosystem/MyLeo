@@ -202,8 +202,23 @@ namespace MyLeoRetailerRepo
             return PurchaseReturnRequestItem;
         }
 
+        public DataTable Get_Purchase_Return_Requests(Request_Filter filter, string Branch_Ids)
+        {
 
-        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests(ref Pagination_Info Pager, string Branch_Ids, int Vendor_Id)
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Branch_Ids", Branch_Ids));
+
+            sqlParam.Add(new SqlParameter("@Vendor_Id", filter.Vendor_Id));
+
+            dt = _sqlRepo.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Return_Requests.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
+
+        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests_List(ref Pagination_Info Pager, string Branch_Ids, int Vendor_Id)
         {
             List<PurchaseReturnRequestInfo> PurchaseReturnRequests = new List<PurchaseReturnRequestInfo>();
 

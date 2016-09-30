@@ -315,11 +315,11 @@ namespace MyLeoRetailerRepo
 
             DataTable dt = new DataTable();
 
-            List<SqlParameter> sqlParam = new List<SqlParameter>();
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            sqlParam.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
+            sqlParams.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
 
-            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
 
             return dt;
         }

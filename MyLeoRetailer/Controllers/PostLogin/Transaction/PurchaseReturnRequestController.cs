@@ -58,6 +58,26 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public JsonResult Get_Purchase_Return_Requests(PurchaseReturnRequestViewModel prViewModel)
         {
+            prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            Pagination_Info pager = new Pagination_Info();
+
+            pager = prViewModel.Grid_Detail.Pager;
+
+            prViewModel.Grid_Detail = Set_Grid_Details(false, "Vendor_Name,Purchase_Invoice_No,Branch_Name,Total_Quantity,Total_Amount,Status", "Purchase_Return_Request_Id"); // Set grid info for front end listing
+
+            prViewModel.Grid_Detail.Records = _prRepo.Get_Purchase_Return_Requests(prViewModel.Filter, prViewModel.Cookies.Branch_Ids); // Call repo method 
+
+            Set_Pagination(pager, prViewModel.Grid_Detail); // set pagination for grid
+
+            prViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(prViewModel));
+        }
+
+
+        public JsonResult Get_Purchase_Return_Requests_List(PurchaseReturnRequestViewModel prViewModel)
+        {
             try
             {
                 LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
@@ -66,7 +86,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                
                 pager = prViewModel.Pager;
 
-                prViewModel.PurchaseReturnRequests = _prRepo.Get_Purchase_Return_Requests(ref pager, Cookies.Branch_Ids, prViewModel.Filter.Vendor_Id);
+                prViewModel.PurchaseReturnRequests = _prRepo.Get_Purchase_Return_Requests_List(ref pager, Cookies.Branch_Ids, prViewModel.Filter.Vendor_Id);
 
                 prViewModel.Pager = pager;
 
