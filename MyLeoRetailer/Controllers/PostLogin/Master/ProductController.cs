@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using MyLeoRetailerInfo;
 using System.IO;
 using System.Configuration;
+using MyLeoRetailerHelper.Logging;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
@@ -37,9 +38,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     pViewModel = (ProductViewModel)TempData["pViewModel"];
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Index  " + ex.Message);
             }
             return View("Index", pViewModel);
         }
@@ -56,6 +58,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Search  " + ex.Message);
             }
             return View("Search", pViewModel);
         }
@@ -72,6 +75,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product _ProductPrizing  " + ex.Message);
             }
             return View("_ProductPrizing", pViewModel);
         }
@@ -84,7 +88,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             catch (Exception ex)
             {
-                throw;
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Search_ProductPrizing  " + ex.Message);
             }
             TempData["pViewModel"] = (ProductViewModel)pViewModel;
             return RedirectToAction("_ProductPrizing", pViewModel);
@@ -98,7 +103,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             catch (Exception ex)
             {
-                throw;
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Product Prizing  " + ex.Message);
             }
             TempData["pViewModel"] = (ProductViewModel)pViewModel; 
             return Json(JsonConvert.SerializeObject(pViewModel));
@@ -135,6 +141,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Get_Products  " + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(pViewModel));
@@ -183,6 +190,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Insert_Product  " + ex.Message);
             }
             TempData["pViewModel"] = pViewModel;
             return RedirectToAction("Index", pViewModel);
@@ -232,6 +240,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Update_Product  " + ex.Message);
             }
             TempData["pViewModel"] = pViewModel;
             return RedirectToAction("Search", pViewModel);
@@ -248,6 +257,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Insert_ProductMRP  " + ex.Message);
             }
 
             TempData["pViewModel"] = pViewModel;
@@ -263,6 +273,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Get_Product_By_Id " + ex.Message);
             }
 
             TempData["pViewModel"] = (ProductViewModel)pViewModel;
@@ -288,7 +299,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                //Logger.Error("Error Deleting Product Image  " + ex.Message);
+                Logger.Error("Product Delete Image  " + ex.Message);
             }
             TempData["pViewModel"] = (ProductViewModel)pViewModel; 
             return Json(JsonConvert.SerializeObject(pViewModel));
