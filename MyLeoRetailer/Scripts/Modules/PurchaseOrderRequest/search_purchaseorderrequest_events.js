@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(document).ready(function () {
 
     document.getElementById("btnEditPurchaseOrderRequest").disabled = true;
     
@@ -7,7 +7,8 @@
     $(document).on('change', '[name="Purchase_Order_Request_List"]', function (event) {
         if ($(this).prop('checked')) {
             $("#hdnPurchaseOrderRequestId").val(this.value);
-            document.getElementById('btnEditPurchaseOrderRequest').disabled = false;
+            document.getElementById("btnEditPurchaseOrderRequest").disabled = false;
+            document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
         }
     });
 

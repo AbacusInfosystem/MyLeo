@@ -19,6 +19,8 @@ namespace MyLeoRetailer.Models.Transaction
 
             PurchaseReturnRequests = new List<PurchaseReturnRequestInfo>();
 
+            PurchaseReturnRequestItems = new List<PurchaseReturnRequestItemInfo>();
+
             Query_Detail = new QueryInfo();
 
             Grid_Detail = new GridInfo();
@@ -35,6 +37,8 @@ namespace MyLeoRetailer.Models.Transaction
         public PurchaseReturnRequestInfo PurchaseReturnRequest { get; set; }
 
         public List<PurchaseReturnRequestInfo> PurchaseReturnRequests { get; set; }
+
+        public List<PurchaseReturnRequestItemInfo> PurchaseReturnRequestItems { get; set; }
 
         public QueryInfo Query_Detail { get; set; }
 

@@ -1198,6 +1198,8 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\ViewPurchaseReturnRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1213,7 +1215,6 @@
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
     <Folder Include="UploadFiles\" />
-    <Folder Include="Views\PostLogin\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

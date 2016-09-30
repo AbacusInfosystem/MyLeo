@@ -1171,26 +1171,28 @@ function CalculateRowQuantity(i) {
 
 
     for (var j = 0; j < count ; j++) {
+        if (j < 15) {
 
-        var Qty = parseFloat($("#tblPurchaseOrderItems").find('[id="textSize_Quantity_' + (j + 1) + '-' + i + '"]').val());
+            var Qty = parseFloat($("#tblPurchaseOrderItems").find('[id="textSize_Quantity_' + (j + 1) + '-' + i + '"]').val());
 
-        var WSR = parseFloat($("#tblPurchaseOrderItems").find('[id="hdnAmount_' + (j + 1) + '-' + i + '"]').val());
+            var WSR = parseFloat($("#tblPurchaseOrderItems").find('[id="hdnAmount_' + (j + 1) + '-' + i + '"]').val());
 
-        var Amount = parseFloat(WSR * Qty);
+            var Amount = parseFloat(WSR * Qty);
 
-        $("#tblPurchaseOrderItems").find('[id="textAmount_' + i + '"]').val(Amount);
+            $("#tblPurchaseOrderItems").find('[id="textAmount_' + i + '"]').val(Amount);
 
-        sum_row_quantity = sum_row_quantity + Qty;
+            sum_row_quantity = sum_row_quantity + Qty;
 
-        sum_row_amount = sum_row_amount + Amount;
+            sum_row_amount = sum_row_amount + Amount;
 
-        document.getElementById('textTotal_Quantity_' + i).innerText = sum_row_quantity;
+            document.getElementById('textTotal_Quantity_' + i).innerText = sum_row_quantity;
 
-        document.getElementById('textTotal_Amount_' + i).innerText = sum_row_amount;
+            document.getElementById('textTotal_Amount_' + i).innerText = sum_row_amount;
 
-        $("#tblPurchaseOrderItems").find('[id="hdnTotal_Quantity_' + i + '"]').val(sum_row_quantity);
+            $("#tblPurchaseOrderItems").find('[id="hdnTotal_Quantity_' + i + '"]').val(sum_row_quantity);
 
-        $("#tblPurchaseOrderItems").find('[id="hdnTotal_Amount_' + i + '"]').val(sum_row_amount);
+            $("#tblPurchaseOrderItems").find('[id="hdnTotal_Amount_' + i + '"]').val(sum_row_amount);
+        }
 
     }
     
@@ -1498,7 +1500,7 @@ function ReArrangePurchaseOrderDetailsData() {
                 $(newTR).find("[id^='hdnSize_Id_11-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id11");
                 $(newTR).find("[id^='hdnSize_Id_11-']").attr("value", $("#hdnSize_Id_11-" + (i - 1)).val());
 
-                $(newTR).find("[id^='hdnAmount_11-']")[0].id = "hdnAmount_11-" + i + "-";
+                $(newTR).find("[id^='hdnAmount_11-']")[0].id = "hdnAmount_11-" + i;
                 $(newTR).find("[id^='hdnAmount_11-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Amount11");
             }
 

@@ -144,6 +144,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
         {
+            Pagination_Info pager = new Pagination_Info();
+
+            pager = poViewModel.Grid_Detail.Pager;
+
+            poViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Order_No,Purchase_Order_Date,Vendor_Name,Shipping_Address,Total_Quantity,Net_Amount,Agent_Name,Transporter_Name,Start_Supply_Date,Stop_Supply_Date", "Purchase_Order_Id"); // Set grid info for front end listing
+
+            poViewModel.Grid_Detail.Records = _purchaseorderRepo.Get_Purchase_Order(poViewModel.Filter); // Call repo method 
+
+            Set_Pagination(pager, poViewModel.Grid_Detail); // set pagination for grid
+
+            poViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(poViewModel));
+        }
+
+        public JsonResult Get_Purchase_Order_List(PurchaseOrderViewModel poViewModel)
+        {
             try
             {
                 poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
@@ -152,7 +169,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 pager = poViewModel.Pager;
 
-                poViewModel.PurchaseOrder.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Order(ref pager, poViewModel.Filter.Purchase_Order_No);
+                poViewModel.PurchaseOrder.PurchaseOrders = _purchaseorderRepo.Get_Purchase_Order_List(ref pager, poViewModel.Filter.Purchase_Order_No);
 
                 poViewModel.Pager = pager;
 
@@ -167,6 +184,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
+
 
         //public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
         //{

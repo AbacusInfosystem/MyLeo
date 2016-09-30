@@ -254,7 +254,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 //var barchid = Request.Cookies["LoginInfo"].Value;
                 MyLeoRetailer.Models.PreLogin.LoginViewModel lViewModel=new Models.PreLogin.LoginViewModel ();
-                lViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+                lViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(lViewModel.Cookies.User_Id,lViewModel.Cookies.Branch_Ids);
 

@@ -98,7 +98,8 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
 
         public int Quantity { get; set; }
 
-        //public decimal Total_Amount { get; set; }
+        public decimal Total_Amount { get; set; }
+
         public decimal Amount { get; set; }
 
         public DateTime Created_Date { get; set; }
@@ -129,6 +130,8 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
         public string SubCategory { get; set; }
 
         public int WSR_Price { get; set; }
+
+        public int Barcode { get; set; }
 
         
 

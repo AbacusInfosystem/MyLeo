@@ -201,6 +201,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Return_Items_By_Vendor_And_PI,
 
         sp_Get_Purchase_Returns,
+            sp_Get_Purchase_Return_Item_by_Purchase_Return_Id, //Added by vinod mane on 29/09/2016
 
         #endregion
 
@@ -363,7 +364,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Return_Request_By_Id,
         sp_Insert_Purchase_Return_Request_Item,
         sp_Get_Purchase_Return_Requests,
-
+            sp_Get_Purchase_Return_Request_Details,
 
         #endregion
 
