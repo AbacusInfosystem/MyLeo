@@ -329,5 +329,14 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public List<Sizes> sizes { get; set; }
     }
 
+    //************///
 
+    public class Filter_PurchaseOrder
+    {
+        public string Purchase_Order_No
+        {
+            get;
+            set;
+        }
+    }
 }

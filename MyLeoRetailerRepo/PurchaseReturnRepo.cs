@@ -310,7 +310,22 @@ namespace MyLeoRetailerRepo
 
         }
 
-        public List<PurchaseReturnInfo> Get_Purchase_Returns(ref Pagination_Info Pager, string Debit_Note_No)
+        public DataTable Get_Purchase_Returns(Filter_Purchase_Return filter)
+        {
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
+
+
+        public List<PurchaseReturnInfo> Get_Purchase_Return_List(ref Pagination_Info Pager, string Debit_Note_No)
         {
             List<PurchaseReturnInfo> PurchaseReturns = new List<PurchaseReturnInfo>();
 

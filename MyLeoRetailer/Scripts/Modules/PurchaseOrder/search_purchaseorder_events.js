@@ -10,6 +10,7 @@
             $("#hdnPurchaseOrderId").val(this.value);
             document.getElementById('btnEditPurchaseOrder').disabled = false;
             document.getElementById('btnViewPurchaseOrder').disabled = false;
+            document.getElementById('btnCreatePurchaseOrder').disabled = true;
 
         }
     });
