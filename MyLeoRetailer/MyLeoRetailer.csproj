@@ -1107,6 +1107,7 @@
     <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
     <Content Include="Log4Net.config" />
     <None Include="Scripts\_references.js" />
+    <Content Include="UploadedFiles\1.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1214,7 +1215,6 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
-    <Folder Include="UploadedFiles\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>
