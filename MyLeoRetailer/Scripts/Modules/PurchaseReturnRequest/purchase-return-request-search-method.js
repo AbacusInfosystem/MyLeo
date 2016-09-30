@@ -25,15 +25,15 @@
         contentType: 'application/json',
 
         success: function (response) {
-
+           
             var obj = $.parseJSON(response);
 
             Bind_Grid(obj, "Purchase_Return_Request_List");
 
             $("#divPurchaseReturnRequestPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
-
+            
             Friendly_Messages(obj);
-
+            
         }
     });
 }

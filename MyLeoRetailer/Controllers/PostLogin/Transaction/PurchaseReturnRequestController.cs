@@ -195,6 +195,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(prViewModel.PurchaseReturnRequest, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Get_Purchase_Return_Request_Details_By_Id(PurchaseReturnRequestViewModel prrViewModel)
+        {
+           
+            try
+            {  
+                prrViewModel.PurchaseReturnRequest = _prRepo.Get_Purchase_Return_Request_Details_By_Id(prrViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id);
+                
+            }
+            catch (Exception ex)
+            {
+                prrViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }  
+            TempData["prViewModel"] = prrViewModel; 
+            return View("ViewPurchaseReturnRequest", prrViewModel);
+          
+        }
+
 
     }
 }

@@ -23,6 +23,8 @@ namespace MyLeoRetailer.Models.Transaction
 
             PurchaseReturnRequests = new List<PurchaseReturnRequestInfo>();
 
+           
+
             Filter = new Request_Filter();
 
             FriendlyMessages = new List<FriendlyMessage>();
@@ -77,10 +79,10 @@ namespace MyLeoRetailer.Models.Transaction
         {
             get;
             set;
-        }
+    }
 
         public LoginInfo Cookies
-        {
+    {
             get;
             set;
         }

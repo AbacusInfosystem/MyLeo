@@ -228,6 +228,18 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return View("Invoice", siViewModel);
         }
 
+        public ActionResult View_Sales_Invoice(SalesInvoiceViewModel siViewModel)
+        {
+
+            if (TempData["siViewModel"] != null)
+            {
+                siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
+            }
+
+            return View("SalesInvoiceView", siViewModel);
+        }
+
+
         public ActionResult Get_SalesOrder_By_Id(SalesInvoiceViewModel siViewModel)
         {
             bool CheckFlag = false;
@@ -257,7 +269,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
                 TempData["siViewModel"] = siViewModel;
 
-                return RedirectToAction("Index", "SalesOrder");
+                return RedirectToAction("View_Sales_Invoice", "SalesOrder");
             }
 
         }
