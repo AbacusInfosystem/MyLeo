@@ -489,7 +489,16 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
            sqlParams.Add(new SqlParameter("@Card_Amount", Receivable.Card_Amount));
-           sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
+           //sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
+           if (Receivable.Cheque_Date == DateTime.MinValue)
+           {
+               
+               sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
+           }
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));
            

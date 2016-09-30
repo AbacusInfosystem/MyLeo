@@ -148,6 +148,30 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }
 
+        public ActionResult Get_Purchase_Order_Request_By_Id(PurchaseOrderRequestViewModel poreqViewModel)
+        {          
+            try
+            {
+                if (TempData["poreqViewModel"] != null)
+                {
+                    poreqViewModel = (PurchaseOrderRequestViewModel)TempData["poreqViewModel"];
+                }
+
+                poreqViewModel.PurchaseOrderRequest = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Details_By_Id(poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id);
+
+                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequestItems = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Items(poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id);
+
+            }
+            catch (Exception ex)
+            {
+                poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details_By_Id : " + ex.ToString());
+            }
+
+            return View("View", poreqViewModel);
+        }
+
 
         //public JsonResult Get_Purchase_Order_Requests(PurchaseOrderRequestViewModel poreqViewModel)
         //{
