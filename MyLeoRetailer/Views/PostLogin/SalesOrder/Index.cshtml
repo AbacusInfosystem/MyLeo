@@ -82,10 +82,11 @@
 
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
-        <div class="col-md-3">
+        <div class="col-md-12">
             <div class="page-title">
-                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Invoice</h2>
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Invoice</h2>           
             </div>
+            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "SalesOrder")'"><i class="fa fa-angle-double-left"></i> BACK</button>
         </div>
 
         @*<div class="col-md-9">
@@ -287,7 +288,7 @@
                                             <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateTotal();">
+                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateQuantityMRP();">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %">
@@ -671,7 +672,7 @@
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
                                 <button type="button" id="btnSaveSalesOrder" class="btn btn-success"><i class="fa fa-check"></i>Save</button>
-                                <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "SalesOrder")"><i class="fa fa-times"></i>Cancel </a>
+                                <a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesOrder")"><i class="fa fa-times"></i>Cancel </a>
                             </div>
                         </div>
 
