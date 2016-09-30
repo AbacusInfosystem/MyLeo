@@ -484,17 +484,17 @@ function Get_Sizes() {
                     if (j < obj.PurchaseOrder.SizeGroups.length)
                     {
                         tblHtml += "<td>";
-                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + i + "-" + (j + 1) + "'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span>";
-                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.SizeGroups[j].Size_Id + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + i + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
+                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span>";
+                        tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.SizeGroups[j].Size_Id + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                         tblHtml += "</td>";
 
                         debugger;
 
-                        var i = j + 1;
+                        var K = j + 1;
 
                         $("#drpCenter_Size").append("<option value='" + obj.PurchaseOrder.SizeGroups[j].Size_Id + "'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</option>");
 
-                        $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+                        $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='" + K + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
                         
                     }
                     else

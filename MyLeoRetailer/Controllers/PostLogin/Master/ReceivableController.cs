@@ -132,11 +132,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 rViewModel.Receivables = rRepo.Get_Receivable_Items_By_Id(rViewModel.Receivable.Receivable_Id);
 
-               
-
-                //pViewModel.Payable.Payable_Item_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
-
-                rViewModel.FriendlyMessages.Add(MessageStore.Get("PA001"));
+                rViewModel.FriendlyMessages.Add(MessageStore.Get("RECI01"));
 
             }
 
@@ -169,7 +165,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 rViewModel.Receivables = rRepo.Get_Receivable_Items_By_Id(rViewModel.Receivable.Receivable_Id);
 
-                rViewModel.FriendlyMessages.Add(MessageStore.Get("PA001"));
+                rViewModel.FriendlyMessages.Add(MessageStore.Get("RECI02"));
 
             }
 

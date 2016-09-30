@@ -174,6 +174,8 @@ function Save_Payable_Data() {
 
             //Get_Brands();
 
+            Friendly_Messages(obj);
+
             //Friendly_Messages(obj);
 
         }

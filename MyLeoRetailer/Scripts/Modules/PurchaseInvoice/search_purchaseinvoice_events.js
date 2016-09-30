@@ -1,5 +1,5 @@
-﻿$(function () {
-    document.getElementById("btnEditPurchaseInvoice").disabled = true;
+﻿$(document).ready(function () {
+    document.getElementById("btnViewPurchaseInvoice").disabled = true;
 
     Get_Purchase_Invoices();
 
@@ -20,8 +20,15 @@
         $("#frmPurchaseInvoice").submit();
     });
 
-    $("#btnEditPurchaseInvoice").click(function () {
+    $("#btnViewPurchaseInvoice").click(function () {
        
     });
+
+
+    $("#btnViewPurchaseInvoice").click(function () {
+        $("#frmPurchaseInvoice").attr("action", "/PurchaseInvoice/Get_Purchase_Invoice_Details_By_Id");
+        $("#frmPurchaseInvoice").submit();
+    });
+
 
 });

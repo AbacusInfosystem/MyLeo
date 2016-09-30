@@ -1,0 +1,171 @@
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseOrderRequestViewModel
+
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purhase Order Requets Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form role="form" id="frmPurchaseOrderRequestRequest">
+
+        <div class="row">
+
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
+
+                <div class="block">
+
+                    <input type="hidden" class="form-control input-sm" name="PurchaseOrderRequest.Purchase_Order_Request_Id" id="hdf_Purchase_Order_Request_Id" value="@Model.PurchaseOrderRequest.Purchase_Order_Request_Id" />
+
+                    <h4 style="margin-top: 0px;">Vendor details.</h4>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor name.</span>
+                        <input type="text" class="form-control input-sm" name="PurchaseOrderRequest.Vendor_Name" value="@Model.PurchaseOrderRequest.Vendor_Name" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
+
+                <div class="block">
+
+                    <h4 style="margin-top: 0px;">Branch details.</h4>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch name.</span>
+                        <input type="text" class="form-control input-sm" name="PurchaseOrderRequest.Branch_Name" value="@Model.PurchaseOrderRequest.Branch_Name" />
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12 table-responsive">
+                <table class="table table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th style="width:100px;">Article No.</th>
+                            <th style="width:150px;">Color</th>
+                            <th style="width:150px;">Brand</th>
+                            <th style="width:150px;">Category</th>
+                            <th style="width:150px;">Subcategory</th>
+                            <th style="width:150px;">Size group</th>
+                            <th style="width:80px;">Start size</th>
+                            <th style="width:80px;">End size</th>
+                            <th style="width:80px;">1</th>
+                            <th style="width:80px;">2</th>
+                            <th style="width:80px;">3</th>
+                            <th style="width:80px;">4</th>
+                            <th style="width:80px;">5</th>
+                            <th style="width:80px;">6</th>
+                            <th style="width:80px;">7</th>
+                            <th style="width:80px;">8</th>
+                            <th style="width:80px;">9</th>
+                            <th style="width:80px;">10</th>
+                            <th style="width:80px;">11</th>
+                            <th style="width:80px;">12</th>
+                            <th style="width:80px;">13</th>
+                            <th style="width:80px;">14</th>
+                            <th style="width:80px;">15</th>
+                            <th style="width:100px;">Total qty.</th>
+                            <th style="width:100px;">Center size</th>
+                            <th style="width:100px;">Base rate</th>
+                            <th style="width:100px;">Size diff.</th>
+                            <th style="width:100px;">Total amt.</th>
+                            <th style="width:auto;">Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+
+                            if (Model.PurchaseOrderRequest.PurchaseOrderRequestItems.Count > 0)
+                            {
+
+                                foreach (var item in Model.PurchaseOrderRequest.PurchaseOrderRequestItems)
+                                {
+                                    int colspan = 15;
+                                    if (item.sizes.Count > 0)
+                                    {
+                                        colspan = colspan - item.sizes.Count;
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            @foreach (var itm in item.sizes)
+                                            {
+                                                <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@itm.Size_Name</span></td>
+                                            }
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Article_No</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Colour_Name</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Brand_Name</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Category</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Sub_Category</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Size_Group_Name</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Start_Size</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.End_Size</span></td>
+
+
+                                        @if (item.sizes.Count > 0)
+                                        {
+                                            foreach (var itm in item.sizes)
+                                            {
+                                                <td>@itm.Quantity1</td>
+                                            }
+                                        }
+
+                                        <td colspan="@colspan"></td>
+                                        <td>@item.Total_Quantity</td>
+                                        <td>@item.Center_Size</td>
+                                        <td>@item.Purchase_Price</td>
+                                        <td>@item.Size_Difference</td>
+                                        <td>@item.Total_Amount</td>
+                                        <td>@item.Comment</td>
+                                    </tr>
+                                }
+                            }
+                            <tr></tr>
+                        }
+
+                        @{
+                            <tr>
+                                <td colspan="23" style="text-align: right;">Total Quantity </td>
+                                <td style="text-align: left;">@Model.PurchaseOrderRequest.Total_Quantity</td>
+
+                                <td colspan="3" style="text-align: right;">Total Amount </td>
+                                <td style="text-align: left;">@Model.PurchaseOrderRequest.PurchaseOrderRequestItems.Sum(a => a.Total_Amount)</td>
+                                <td></td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+
+    </form>
+
+</div>

@@ -1,4 +1,6 @@
 ﻿$(function () {
+
+    document.getElementById("btnEditPurchaseOrderRequest").disabled = true;
     
     Get_Purchase_Order_Requests();
 
@@ -17,6 +19,12 @@
      
     $("#btnCreatePurchaseOrderRequest").click(function () {
         $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Index");
+        $("#frmPurchaseOrderRequest").submit();
+    });
+
+
+    $("#btnEditPurchaseOrderRequest").click(function () {
+        $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Get_Purchase_Order_Request_By_Id");
         $("#frmPurchaseOrderRequest").submit();
     });
 });

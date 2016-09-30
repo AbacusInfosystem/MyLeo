@@ -31,6 +31,13 @@ namespace MyLeoRetailer.Models.Transaction
 			Grid_Detail.Pager.DivObject = "divPurchaseReturnPager";
 
             Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Returns";
+
+            //Added by vinod mane on 29/09/2016
+            PurchaseReturnList = new List<PurchaseReturnInfo>();
+
+           // Grid_Detail.Pager.DivObject = "divPurchaseReturn_DetailsPager";
+
+            //End
 		}
 
 		public GridInfo Grid_Detail
@@ -75,6 +82,8 @@ namespace MyLeoRetailer.Models.Transaction
             set;
         }
 
+        public List<PurchaseReturnInfo> PurchaseReturnList { get; set; }//Added by vinod mane on 29/09/2016
+
 
 	}
 
@@ -85,6 +94,13 @@ namespace MyLeoRetailer.Models.Transaction
 			get;
 			set;
 		}
+
+        //Added by vinod mane on 29/09/2016
+        public int Purchase_Return_Id
+        {
+            get;
+            set;
+        }
 
 	}
 }
