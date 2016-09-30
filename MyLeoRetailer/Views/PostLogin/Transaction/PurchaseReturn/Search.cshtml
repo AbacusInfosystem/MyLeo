@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit Note No.</span>
                                 <input type="text" class="form-control" name="Filter.Debit_Note_No" placeholder="Enter debit note no. to search." />
-                                <input type="text" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
+                                <input type="hidden" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
                             </div>
 
                         </div>
@@ -51,8 +51,8 @@
 
                             <div class="btn-group">
                                 <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>
-                                <button role="button" href="@Url.Action("Invoice", "SalesOrder")" class="btn btn-info active" id="btnView" style="display:none">View Details</button>
-                                @*<button class="btn btn-danger active" value="Edit" id="btnEditPurchaseReturn">Edit</button>*@
+                                <button class="btn btn-danger active" value="Edit" id="btnEditPurchaseReturn">View</button>
+                                
                             </div>
 
                         </div>
@@ -66,7 +66,21 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divTable">
+
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+            </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
+
+
+        </div>
+
+
+
+
+        @*<div class="col-md-12" style="padding: 0px;" id="divTable">
             <div class="row">
                 <div class="table-responsive" style="width:100%; margin: 0px 0;">
                     <table class="table table-bordered table-hover" id="tblPurchaseReturn">
@@ -87,21 +101,16 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                </div><!-- /.col -->
             </div>
         </div>
+        </div>*@
 
-        
-        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+        @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
 
-        </div>
-
-        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
-
-       <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
 
 
-        </div>
+        </div>*@
 
     </div>
 

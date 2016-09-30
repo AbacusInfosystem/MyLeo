@@ -139,4 +139,21 @@ namespace MyLeoRetailerInfo.PurchaseReturn
         public bool Flag { get; set; }//Added by vinod mane on 29/09/2016
 
     }
+
+    public class Filter_Purchase_Return
+    {
+        public string Debit_Note_No
+        {
+            get;
+            set;
+        }
+
+        //Added by vinod mane on 29/09/2016
+        public int Purchase_Return_Id
+        {
+            get;
+            set;
+        }
+
+    }
 }

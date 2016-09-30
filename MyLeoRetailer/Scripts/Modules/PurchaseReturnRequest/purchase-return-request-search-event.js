@@ -8,5 +8,14 @@
 
     });
 
+    $("#btnView").click(function () {
+
+        $("#frmPurchaseReturnRequest").attr("action", "/purchase-return-request/view-purchase-return-request");
+
+        $("#frmPurchaseReturnRequest").attr("method", "POST");
+
+        $("#frmPurchaseReturnRequest").submit();
+    });
+
 
 });

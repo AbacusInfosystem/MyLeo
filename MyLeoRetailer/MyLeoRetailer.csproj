@@ -1107,6 +1107,7 @@
     <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
     <Content Include="Log4Net.config" />
     <None Include="Scripts\_references.js" />
+    <Content Include="UploadedFiles\1.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1196,10 +1197,10 @@
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View1.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\ViewPurchaseReturnRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

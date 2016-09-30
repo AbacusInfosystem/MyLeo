@@ -1,0 +1,322 @@
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnRequestViewModel
+
+<script src="~/Scripts/Modules/PurchaseReturn/purchasereturn_events.js"></script>
+<script src="~/Scripts/Modules/PurchaseReturn/purchasereturn_methods.js"></script>
+<script src="~/Scripts/Modules/PurchaseReturn/purchasereturn_validation.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+
+
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
+
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+</style>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Purchase Return Request View</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return Request View</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <form id="frmPurchaseReturn">
+
+            <div class="box box-default">
+
+                <div class="box-body">
+
+                    <div class="row">
+
+                        <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
+
+                            <div class="block"> 
+
+                                <h4 style="margin-top: 0px;">Branch Details.</h4>
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Branch Name.</label>
+
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturnRequest.Branch_Name</span>
+                                </div> 
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
+                            <h4 style="margin-top: 0px;">Vendor Details.</h4>
+                            <div class="form-group">
+                                <label class="control-label" style="color: #33414e">Vendor Name.</label>
+                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturnRequest.Vendor_Name</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
+                            <div class="block">
+                                <h4 style="margin-top: 0px;">Purchase Invoice details.</h4>
+
+                                <input type="hidden" class="form-control input-sm" id="hdf_Purchase_Invoice_Id"> 
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Purchase Invoice No.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturnRequest.Purchase_Invoice_No</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="block" style="border-top: 1px solid #DDD; padding-top: 10px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                            <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 18px;">Purchase Return Request Details</h4>
+                            <div class="table-responsive">
+                                <table class="table table-hover" style="margin-bottom: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:150px;">Barcode No.</th>
+                                            <th style="width:150px;">SKU No.</th>
+                                            <th style="width:70px;">Article No.</th>
+                                            <th style="width:70px;">Color</th>
+                                            <th style="width:100px;">Brand</th>
+                                            <th style="width:100px;">Category</th>
+                                            <th style="width:100px;">Sub Category</th>
+                                            <th style="width:100px;">Size Group</th>
+                                            <th style="width:60px;">Size</th>
+                                            <th style="width:60px;">Quantity</th>
+                                            <th style="width:60px;">WSR</th>
+                                            <th style="width:60px;">Total Amount</th>
+                                            @*<th style="width:140px;">Action</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{decimal amt = 0;
+
+                                    decimal taxamt = 0;
+
+                                    foreach (var itm in Model.PurchaseReturnRequest.PurchaseReturnRequestItems)
+                                    {
+
+                                        //decimal mrpamt = 0;
+
+                                        //mrpamt = itm.MRP_Price * itm.Quantity;
+
+                                        //amt = itm.MRP_Price * itm.Quantity * itm.Discount_Percentage / 100;
+
+                                        //taxamt = @Model.SalesInvoice.Gross_Amount * @Model.SalesInvoice.Tax_Percentage / 100;
+
+                                        <tr>
+                                            <td>@itm.Barcode</td>
+                                            <td>@itm.SKU_Code</td>
+                                            <td>@itm.Article_No</td>
+                                            <td>@itm.Color</td>
+                                            <td>@itm.Brand</td>
+                                            <td>@itm.Category</td>
+                                            <td>@itm.SubCategory</td>
+                                            <td>@itm.Size_Group_Name</td>
+                                            <td>@itm.Size_Name</td>
+                                            <td>@itm.Quantity</td>
+                                            <td>@itm.WSR_Price</td>
+                                            <td>@itm.Total_Amount</td>
+                                        </tr>
+                                    }
+                                        } 
+                                        <tr>
+                                            <td style="width:150px;"></td>
+                                            <td style="width:150px;"></td>
+                                            <td style="width:70px;"></td>
+                                            <td style="width:70px;"></td>
+                                            <td style="width:100px;"></td>
+                                            <td style="width:100px;"></td>
+                                            <td style="width:100px;"></td>
+                                            <td style="width:100px;"></td>
+                                            <td style="width:60px;">
+                                                @*<label>Total Qty</label>*@
+                                                <span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Qty.</span>
+                                            </td>
+                                            <td style="width:60px;">
+                                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturnRequest.Total_Quantity</span>
+                                            </td>
+                                            <td style="width:60px;">
+                                                @*<label>Total Amt</label>*@
+                                                <span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Amt.</span>
+                                            </td>
+                                            <td style="width:60px;">
+                                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturnRequest.Total_Amount</span>
+                                            </td> 
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                @*<label>Discount</label>*@
+                                               
+                                            </td>
+                                            <td>
+                                                <span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Discount</span>
+                                                
+                                            </td> 
+                                            <td>
+                                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturnRequest.Discount_Amount</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                @*<label>Gross Amt</label>*@
+                                                <span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Gross Amt.</span>
+                                            </td>
+                                            <td>
+                                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturnRequest.Gross_Amount</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td> 
+                                                
+                                            </td>
+                                            <td>
+                                                <span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax</span>
+                                                
+                                            </td> 
+                                            <td>
+                                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturnRequest.Tax_Percentage</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td> 
+                                                <span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Round Off</span>
+                                            </td>
+                                            <td>
+                                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturnRequest.Round_Off_Amount</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                @*<label>NET Amt</label>*@
+                                                <span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">NET Amt</span>
+                                            </td>
+                                            <td>
+                                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturnRequest.Net_Amount</span>
+                                            </td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.col -->
+                        </div><!-- /.row --> 
+
+                      
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
