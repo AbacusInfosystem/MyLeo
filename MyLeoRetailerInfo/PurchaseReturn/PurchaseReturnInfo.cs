@@ -136,6 +136,8 @@ namespace MyLeoRetailerInfo.PurchaseReturn
 
         public decimal Credit_Note_Amount { get; set; }
 
+        public bool Flag { get; set; }//Added by vinod mane on 29/09/2016
+
     }
 
     public class Filter_Purchase_Return

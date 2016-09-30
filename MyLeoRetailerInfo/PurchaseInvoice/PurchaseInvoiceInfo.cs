@@ -104,6 +104,8 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
 
         public int Purchase_Order_Id { get; set; }
 
+        public string Purchase_Order_No { get; set; }
+
         public string SKU_Code { get; set; }
 
         public string Article_No { get; set; }

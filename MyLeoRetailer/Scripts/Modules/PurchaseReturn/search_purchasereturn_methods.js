@@ -1,30 +1,30 @@
 ﻿function Get_Purchase_Returns() {
-    var prViewModel =
-		{
-		    Filter: {
+        var prViewModel =
+    		{
+    		    Filter: {
 
-		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
-		    },
-		    Grid_Detail: {
+    		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
+    		    },
+    		    Grid_Detail: {
 
 		        Pager: Set_Pager($("#divPurchaseReturnPager"))
-		    }
-		}
+    		    }
+    		}
 
-    $.ajax({
+        $.ajax({
 
-        url: "/PurchaseReturn/Get_Purchase_Returns",
+            url: "/PurchaseReturn/Get_Purchase_Returns",
 
-        data: JSON.stringify(prViewModel),
+            data: JSON.stringify(prViewModel),
 
-        dataType: 'json',
+            dataType: 'json',
 
-        type: 'POST',
+            type: 'POST',
 
-        contentType: 'application/json',
+            contentType: 'application/json',
 
-        success: function (response) {
-
+            success: function (response) {
+                               
             var obj = $.parseJSON(response);
 
             Bind_Grid(obj, "Purchase_Return_List");

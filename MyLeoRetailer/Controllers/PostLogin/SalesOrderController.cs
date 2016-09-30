@@ -237,9 +237,10 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 CheckFlag = siViewModel.SalesInvoice.Flag;
 
+                
                 siViewModel.SalesInvoice = siRepo.Get_SalesOrder_By_Id(siViewModel.Filter.Sales_Invoice_Id);
-
                 siViewModel.SaleOrderItemList = siRepo.Get_SalesOrder_Items_By_Id(siViewModel.Filter.Sales_Invoice_Id);
+               
   
             }
             catch (Exception ex)
@@ -278,6 +279,26 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             return Json(check, JsonRequestBehavior.AllowGet);
         }
+
+        //Added by vinod mane on 29/09/2016
+        public ActionResult Report(SalesInvoiceViewModel siViewModel)
+        {
+
+            try
+            {
+                if (TempData["siViewModel"] != null)
+                {
+                    siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
+                }
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+
+            return View("Search1", siViewModel);
+        }
+        //End
 
     }
 }

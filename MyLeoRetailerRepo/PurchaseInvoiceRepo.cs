@@ -391,8 +391,140 @@ namespace MyLeoRetailerRepo
             return Vendor;
         }
 
+        public List<PurchaseInvoiceInfo> Get_Purchase_Invoice_Details_By_Id(int Purchase_Invoice_Id)
+        {
 
-        //
+            List<PurchaseInvoiceInfo> PurchaseInvoices = new List<PurchaseInvoiceInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", Purchase_Invoice_Id));
+
+            //sqlParams.Add(new SqlParameter("@SKU_Code", SKU_Code));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.Get_Purchase_Invoice_Data_By_Id_Sp1.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                   PurchaseInvoiceInfo pInfo = new PurchaseInvoiceInfo();
+
+                    pInfo.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+
+                    pInfo.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+
+                    pInfo.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                    pInfo.Payament_Status = Convert.ToInt32(dr["Payament_Status"]);
+
+                    pInfo.Against_Form = Convert.ToInt32(dr["Against_Form"]);
+
+                    pInfo.Against_Form_No = Convert.ToString(dr["Against_Form_No"]);
+
+                    pInfo.Purchase_Packing_No = Convert.ToString(dr["Purchase_Packing_No"]);
+
+                    pInfo.Purchase_Invoice_Date = Convert.ToDateTime(dr["Purchase_Invoice_Date"]);
+
+                    pInfo.Against_Form_Date = Convert.ToDateTime(dr["Against_Form_Date"]);
+
+                    pInfo.Purchase_Packing_Date = Convert.ToDateTime(dr["Purchase_Packing_Date"]);
+
+                    pInfo.Challan_Date = Convert.ToDateTime(dr["Challan_Date"]);
+
+                    pInfo.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+                    pInfo.Total_Amount = Convert.ToInt32(dr["Total_Amount"]);
+
+                    pInfo.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
+
+                    pInfo.Discount_Amount = Convert.ToInt32(dr["Discount_Amount"]);
+
+                    pInfo.Gross_Amount = Convert.ToInt32(dr["Gross_Amount"]);
+
+                    pInfo.Tax_Percentage = Convert.ToInt32(dr["Tax_Percentage"]);
+
+                    pInfo.Round_Off_Amount = Convert.ToInt32(dr["Round_Off_Amount"]);
+
+                    pInfo.Net_Amount = Convert.ToInt32(dr["Net_Amount"]);
+
+                    pInfo.Payment_Due_Date = Convert.ToDateTime(dr["Payment_Due_Date"]);
+
+                    pInfo.Discount_Percentage_Before_Due_Date = Convert.ToInt32(dr["Discount_Percentage_Before_Due_Date"]);
+
+                    pInfo.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+                    pInfo.Lr_No = Convert.ToString(dr["Lr_No"]);
+
+                    pInfo.Lr_Date = Convert.ToDateTime(dr["Lr_Date"]);
+
+                    pInfo.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
+
+                    pInfo.Created_By = Convert.ToInt32(dr["Created_By"]);
+
+                    pInfo.Updated_Date = Convert.ToDateTime(dr["Updated_Date"]);
+
+                    pInfo.Updated_By = Convert.ToInt32(dr["Updated_By"]);
+
+                    pInfo.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+
+                    pInfo.Purchase_Invoice_Item_Id = Convert.ToInt32(dr["Purchase_Invoice_Item_Id"]);
+
+                    pInfo.Purchase_Order_Id = Convert.ToInt32(dr["Purchase_Order_Id"]);
+
+                    pInfo.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+
+                    pInfo.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+
+                    pInfo.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+                    pInfo.Size_Id = Convert.ToInt32(dr["Size_Id"]);
+
+                    pInfo.Quantity = Convert.ToInt32(dr["Quantity"]);
+
+                    pInfo.Total_Amount = Convert.ToInt32(dr["Total_Amount"]);
+
+                    pInfo.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                    pInfo.Article_No = Convert.ToString(dr["Article_No"]);
+
+                    pInfo.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+                    pInfo.Brand = Convert.ToString(dr["Brand_Name"]);
+
+                    pInfo.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
+                    pInfo.Category = Convert.ToString(dr["Category"]);
+
+                    pInfo.SubCategory = Convert.ToString(dr["Sub_Category"]);
+
+                    pInfo.SubCategory_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+
+                    pInfo.Color_Id = Convert.ToInt32(dr["Colour_Id"]);
+
+                    pInfo.Color = Convert.ToString(dr["Colour_Name"]);
+
+                    pInfo.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+                    pInfo.Size_Id = Convert.ToInt32(dr["Size_Id"]);
+
+                    pInfo.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+                    pInfo.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                    pInfo.Purchase_Order_No = Convert.ToString(dr["Purchase_Order_No"]);
+
+                    pInfo.WSR_Price = Convert.ToDecimal(dr["Purchase_Price"]);
+
+                    PurchaseInvoices.Add(pInfo);
+
+                }
+            }
+
+            return PurchaseInvoices;
+        }
+
         public void Update_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
         {
             sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Update_Purchase_Invoice.ToString(), CommandType.StoredProcedure);

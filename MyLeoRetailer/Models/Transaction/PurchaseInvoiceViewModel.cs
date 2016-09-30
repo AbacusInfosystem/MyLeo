@@ -20,6 +20,8 @@ namespace MyLeoRetailer.Models.Transaction
 
 			PurchaseInvoice = new  PurchaseInvoiceInfo();
 
+            PurchaseInvoices = new List<PurchaseInvoiceInfo>();
+
 			Filter = new Filter_Purchase_Invoice();
 
 			FriendlyMessages = new List<FriendlyMessage>();
@@ -50,6 +52,14 @@ namespace MyLeoRetailer.Models.Transaction
 			get;
 			set;
 		}
+
+        public List<PurchaseInvoiceInfo> PurchaseInvoices
+        {
+            get;
+            set;
+        }
+
+        
 
 		public Filter_Purchase_Invoice Filter
 		{

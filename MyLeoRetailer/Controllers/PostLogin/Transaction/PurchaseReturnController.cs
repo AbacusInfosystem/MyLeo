@@ -245,5 +245,52 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 
+        //Added by vinod mane on 29/09/2016
+
+        public ActionResult View_Page(PurchaseReturnViewModel prViewModel)
+        {
+            return View("View_Purchase_Return_Details", prViewModel);
+        }
+
+        public ActionResult Get_Purchase_Return_Details_By_Id(PurchaseReturnViewModel prViewModel)
+        {
+            bool CheckFlag = false;
+
+
+            try
+            {
+                CheckFlag = prViewModel.PurchaseReturn.Flag;
+
+                 //prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_SalesOrder_By_Id(prViewModel.Filter.Sales_Invoice_Id);
+
+              //  prViewModel.PurchaseReturnList = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.Filter.Purchase_Return_Id);
+
+                prViewModel.PurchaseReturnList = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                if( prViewModel.PurchaseReturnList.Count>0)
+                {
+                    CheckFlag = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+
+            if (CheckFlag == true)
+            {
+                //return;//Invoice(prViewModel);
+                //return RedirectToAction("View_Page", "PurchaseReturn");
+                return View("View_Purchase_Return_Details", prViewModel);
+            }
+            else
+            {
+
+                TempData["siViewModel"] = prViewModel;
+
+                return RedirectToAction("Search", "PurchaseReturn");
+            }
+
+        }
+
     }
 }

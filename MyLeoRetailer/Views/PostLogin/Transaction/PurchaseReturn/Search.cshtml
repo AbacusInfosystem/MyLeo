@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit Note No.</span>
                                 <input type="text" class="form-control" name="Filter.Debit_Note_No" placeholder="Enter debit note no. to search." />
-                                <input type="hidden" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
+                                <input type="text" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
                             </div>
 
                         </div>
@@ -69,8 +69,8 @@
 
         <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-        </div>
-        
+            </div>
+
         <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
 
 
@@ -85,6 +85,7 @@
                     <table class="table table-bordered table-hover" id="tblPurchaseReturn">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Debit Note No.</th>
                                 <th>GR_No</th>
                                 <th>Vendor</th>
@@ -99,10 +100,10 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                </div>
             </div>
+        </div>
         </div>*@
-               
+
         @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
 
         <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">

@@ -1,0 +1,334 @@
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseInvoiceViewModel
+
+<script src="~/Scripts/Modules/PurchaseInvoice/search_purchaseinvoice_methods.js"></script>
+<script src="~/Scripts/Modules/PurchaseInvoice/search_purchaseinvoice_events.js"></script>
+<script src="~/Scripts/Modules/PurchaseInvoice/purchaseinvoice_validation.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Purchase Invoice</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Invoice</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form role="form" id="frmPurchaseInvoice">
+
+        <div class="row">
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+                <input type="hidden" class="form-control input-sm" name="PurchaseInvoice.Purchase_Invoice_Id" id="hdf_PurchaseInvoiceId" value="@Model.PurchaseInvoice.Purchase_Invoice_Id">
+
+                <div class="block">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Purchase_Invoice_No" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Purchase_Invoice_No" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment Status</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Payament_Status" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Payament_Status" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Vendor_Name" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Vendor_Name" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Against Form</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Against_Form" />
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+
+                <div class="block">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Against Form no</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form_No" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Against_Form_No" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Packing no</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Purchase_Packing_No" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Purchase_Packing_No" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice Date</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Purchase_Invoice_Date" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Purchase_Invoice_Date" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Packing Date</span>
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseInvoice.Purchase_Packing_Date" id="txtPurchase_Invoice_Date" value="@((Model.PurchaseInvoice.Purchase_Packing_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseInvoice.Purchase_Invoice_Date.ToString("MM-dd-yyyy")))" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+
+                <div class="block">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Against Form Date</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form_Date" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Against_Form_Date" placeholder="Enter challan no." />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Challan Date.</span>
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseInvoice.Challan_Date" id="txtChallan_Date" value="@((Model.PurchaseInvoice.Challan_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseInvoice.Challan_Date.ToString("MM-dd-yyyy")))" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Quantity</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Total_Quantity" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Total_Quantity" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Total_Amount" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Total_Amount" />
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+
+                <div class="block">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount%</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Discount_Percentage" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Discount_Percentage" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount Amount</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Discount_Amount" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Discount_Amount" />
+
+                        </div>
+                    </div>
+
+                    <div  class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Gross Amount</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Gross_Amount" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Gross_Amount" />
+                        </div>
+                    </div>
+
+                    <div  class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Tax%</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Tax_Percentage" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Tax_Percentage" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+
+                <div class="block">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Round Of Amount</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Round_Off_Amount" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Round_Off_Amount" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Net Amount</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Net_Amount" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Net_Amount" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payament Due date</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Payment_Due_Date" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Payment_Due_Date" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount % before due date</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Discount_Percentage_Before_Due_Date" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Discount_Percentage_Before_Due_Date" /> />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+
+                <div class="block">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Lr No</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Lr_No" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Lr_No" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount % before due date</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Lr_Date" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Lr_Date" />
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount % before due date</span>
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseInvoice.Purchase_Packing_Date" id="txtPurchase_Invoice_Date" value="@((Model.PurchaseInvoice.Purchase_Packing_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseInvoice.Purchase_Invoice_Date.ToString("MM-dd-yyyy")))" />
+                             
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Against Form Date</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form_Date" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Against_Form_Date" placeholder="Enter challan no." />
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control datepicker" name="PurchaseInvoice.Challan_Date" id="txtChallan_Date" value="@((Model.PurchaseInvoice.Challan_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseInvoice.Challan_Date.ToString("MM-dd-yyyy")))" />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+            <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                <input type="hidden" id="hdnRowIdspecific" value="0" />
+                <table class="table table-bordered table-hover" id="tblPurchaseInvoiceItems">
+                    <thead>
+                        <tr>
+                            <th style="width:150px">SKU No.</th>
+                            <th style="width:70px">Article No.</th>
+                            <th style="width:100px">Color</th>
+                            <th style="width:100px">Brand</th>
+                            <th style="width:100px">Category</th>
+                            <th style="width:100px">Sub Category</th>
+                            <th style="width:100px">Size Group</th>
+                            <th style="width:60px">Size</th>
+                            <th style="width:60px">Quantity</th>
+                            <th style="width:60px">WSR</th>
+                            <th style="width:60px">Total Amount</th>
+                            <th style="width:150px">PO No.</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+
+                            if (Model.PurchaseInvoice.PurchaseInvoices.Count > 0)
+                            {
+
+                                foreach (var item in Model.PurchaseInvoice.PurchaseInvoices)
+                                {
+
+                                    <tr>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.SKU_Code</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Article_No</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Color</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Brand</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Category</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.SubCategory</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Size_Group_Name</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Size_Name</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Quantity</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.WSR_Price</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Total_Amount</span></td>
+                                        <td><span style="margin-bottom: 1px;" class="label label-primary label-form">@item.Purchase_Order_No</span></td>
+
+                                    </tr>
+                                }
+                            }
+                            <tr></tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div><!-- /.col -->
+        </div>
+
+    </form>
+
+</div>
