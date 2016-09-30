@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    document.getElementById('btnEditPurchaseReturn').disabled = false;
+    document.getElementById('btnEditPurchaseReturn').disabled = true;
    
     Get_Purchase_Returns();
 
@@ -22,7 +22,7 @@
         $("#frmPurchaseReturn").submit();
     });
 
-    $("#btnView").click(function () {
+    $("#btnEditPurchaseReturn").click(function () {
        // Get_Purchase_Returns_Details_View();
         $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Get_Purchase_Return_Details_By_Id/");      
 

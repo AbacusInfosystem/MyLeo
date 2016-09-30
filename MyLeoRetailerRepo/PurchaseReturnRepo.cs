@@ -315,11 +315,11 @@ namespace MyLeoRetailerRepo
 
             DataTable dt = new DataTable();
 
-            List<SqlParameter> sqlParam = new List<SqlParameter>();
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            sqlParam.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
+            sqlParams.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
 
-            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
 
             return dt;
         }
@@ -461,8 +461,104 @@ namespace MyLeoRetailerRepo
             return purchaseReturnItem;
         }
 
+        //Added by vinod mane on 30/09/2016
 
-        public List<PurchaseReturnInfo> Get_Purchase_Return_Details_By_Id(int Purchase_Return_Id)
+        public PurchaseReturnInfo Get_Purchase_Return_By_Purchase_Return_Id(int Purchase_Return_Id)
+        {
+            
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            PurchaseReturnInfo PurchaseReturn = new PurchaseReturnInfo();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Return_Id", Purchase_Return_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Return_by_Purchase_Return_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    PurchaseReturn = Get_Purchase_Return_Details_Values(dr);
+                }
+            }
+           
+            return PurchaseReturn;
+        }
+
+        private PurchaseReturnInfo Get_Purchase_Return_Details_Values(DataRow dr)
+        {
+            PurchaseReturnInfo PurchaseReturn = new PurchaseReturnInfo();
+
+            PurchaseReturn.Purchase_Return_Id = Convert.ToInt32(dr["Purchase_Return_Id"]);
+
+            PurchaseReturn.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+            PurchaseReturn.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+            PurchaseReturn.Debit_Note_No = Convert.ToString(dr["Debit_Note_No"]);
+
+            PurchaseReturn.GR_No = Convert.ToString(dr["GR_No"]);
+
+            PurchaseReturn.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+           
+            PurchaseReturn.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+           
+            PurchaseReturn.Purchase_Return_Date = Convert.ToDateTime(dr["Purchase_Return_Date"]);            
+
+            PurchaseReturn.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+            PurchaseReturn.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
+
+            PurchaseReturn.Discount_Percentage = Convert.ToDecimal(dr["Discount_Percentage"]);
+
+            PurchaseReturn.Discount_Amount = Convert.ToDecimal(dr["Discount_Amount"]);
+
+            PurchaseReturn.Gross_Amount = Convert.ToDecimal(dr["Gross_Amount"]);
+
+            PurchaseReturn.Tax_Percentage = Convert.ToDecimal(dr["Tax_Percentage"]);
+
+            PurchaseReturn.Tax_Percentage = Convert.ToDecimal(dr["Tax_Percentage"]);           
+
+            PurchaseReturn.Round_Off_Amount = Convert.ToDecimal(dr["Round_Off_Amount"]);
+
+            PurchaseReturn.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+            PurchaseReturn.Logistics_Person_Name = Convert.ToString(dr["Logistics_Person_Name"]);
+
+            PurchaseReturn.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+           // PurchaseReturn.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+            PurchaseReturn.Transporter_Name = Convert.ToString(dr["Vendor_Name"]);
+            
+
+            PurchaseReturn.Lr_No = Convert.ToString(dr["Lr_No"]);
+            PurchaseReturn.Lr_Date = Convert.ToDateTime(dr["Lr_Date"]);   
+           
+            //if (PurchaseReturn.Lr_Date != DateTime.MinValue)
+            //{
+            //    sqlParams.Add(new SqlParameter("@Lr_Date", PurchaseReturn.Lr_Date));
+            //}
+            //else
+            //{
+            //    sqlParams.Add(new SqlParameter("@Lr_Date", DateTime.MinValue));
+            //}
+            
+
+            //if (!dr.IsNull("Vendor_Name"))
+            //{
+            //    PurchaseReturn.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+            //}
+
+            //if (!dr.IsNull("Purchase_Invoice_No"))
+            //{
+            //    PurchaseReturn.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+            //}
+
+            return PurchaseReturn;
+        }
+
+
+        public List<PurchaseReturnInfo> Get_Purchase_Return_Item_By_Id(int Purchase_Return_Id)
         {
             List<PurchaseReturnInfo> PurchaseReturnList = new List<PurchaseReturnInfo>();
 
@@ -480,28 +576,27 @@ namespace MyLeoRetailerRepo
 
                     if (!dr.IsNull("SKU_Code"))
                         list.SKU_Code = Convert.ToString(dr["SKU_Code"]);
-                    if (!dr.IsNull("Vendor_Name"))
-                        list.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
-                    //if (!dr.IsNull("Quantity"))
-                    //    list.Quantity = Convert.ToInt32(dr["Quantity"]);
-                    //if (!dr.IsNull("Brand_Name"))
-                    //    list.Brand = Convert.ToString(dr["Brand_Name"]);
-                    //if (!dr.IsNull("Category"))
-                    //    list.Category = Convert.ToString(dr["Category"]);
-                    //if (!dr.IsNull("Sub_Category"))
-                    //    list.SubCategory = Convert.ToString(dr["Sub_Category"]);
-                    //if (!dr.IsNull("Size_Name"))
-                    //    list.Size_Name = Convert.ToString(dr["Size_Name"]);
-                    //if (!dr.IsNull("Colour_Name"))
-                    //    list.Colour_Name = Convert.ToString(dr["Colour_Name"]);
-                    //if (!dr.IsNull("MRP_Amount"))
-                    //    list.MRP_Price = Convert.ToInt32(dr["MRP_Amount"]);
-                    //if (!dr.IsNull("Total_Amount"))
-                    //    list.Amount = Convert.ToInt32(dr["Total_Amount"]);
-                    //if (!dr.IsNull("Discount_Percentage"))
-                    //    list.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
-                    //if (!dr.IsNull("Employee_Name"))
-                    //    list.SalesMan = Convert.ToString(dr["Employee_Name"]);
+                    if (!dr.IsNull("Article_No"))
+                        list.Article_No = Convert.ToString(dr["Article_No"]);
+                    if (!dr.IsNull("Colour_Name"))
+                        list.Color = Convert.ToString(dr["Colour_Name"]);
+                    if (!dr.IsNull("Brand_Name"))
+                        list.Brand = Convert.ToString(dr["Brand_Name"]);
+                    if (!dr.IsNull("Category"))
+                        list.Category = Convert.ToString(dr["Category"]);
+                    if (!dr.IsNull("Sub_Category"))
+                        list.SubCategory = Convert.ToString(dr["Sub_Category"]);
+                    if (!dr.IsNull("Size_Group_Name"))
+                        list.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+                    if (!dr.IsNull("Size_Name"))
+                        list.Size_Name = Convert.ToString(dr["Size_Name"]);
+                    if (!dr.IsNull("Quantity"))
+                        list.Quantity = Convert.ToInt32(dr["Quantity"]);
+                    if (!dr.IsNull("Purchase_Price"))
+                        list.WSR_Price = Convert.ToInt32(dr["Purchase_Price"]);                  
+                    if (!dr.IsNull("Total_Amount"))
+                        list.Amount = Convert.ToInt32(dr["Total_Amount"]);
+                   
 
                     PurchaseReturnList.Add(list);
                 }
@@ -509,6 +604,8 @@ namespace MyLeoRetailerRepo
 
             return PurchaseReturnList;
         }
+
+        //End
 
     }
 }

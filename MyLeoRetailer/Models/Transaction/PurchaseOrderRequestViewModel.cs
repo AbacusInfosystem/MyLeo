@@ -1,12 +1,12 @@
 ﻿using MyLeoRetailer.Models.Common;
 using MyLeoRetailerInfo;
-using MyLeoRetailerInfo.PurchaseOrderRequest;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MyLeoRetailerInfo.PurchaseOrderRequest;
 
 namespace MyLeoRetailer.Models.Transaction
 {
@@ -76,18 +76,5 @@ namespace MyLeoRetailer.Models.Transaction
         }
 	}
 
-	public class Filter_Purchase_Order_Request
-	{
-        public string Vendor_Name
-		{
-			get;
-			set;
-		}
-
-        public int Vendor_Id
-        {
-            get;
-            set;
-        }
-	}
+	
 }

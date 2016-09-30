@@ -31,7 +31,7 @@
 
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
-            Friendly_Messages(data);
+            Friendly_Messages(obj);
         }
     });
 }
