@@ -252,15 +252,14 @@
                                     <tr style="background: rgba(74,77,67,0.09);"></tr>
 
                                     <tr>
-                                        
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Summary</span></th> 
                                         <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th style="width: 7%;"></th>
                                         <th style="width: 6%;"></th>
-                                        <th style="width: 6%;"></th>
-                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Summary</span></th>                                       
+                                        <th style="width: 6%;"></th>                                                                              
                                         <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Total_Quantity</span></th>
                                         <th style="width: 6%;"></th>
                                         <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Total_Amount</span></th>
@@ -287,8 +286,10 @@
                                         <th style="width: 6%;"></th>
                                         <th style="width: 7%;"></th>
                                         <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        @*<th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Discount_Percentage</span><span>%</span></th>*@
                                         <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Discount</span></th>
-                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Discount_Percentage</span><span>%</span></th>
                                         <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Discount_Amount</span></th>
 
                                     </tr>
@@ -300,6 +301,8 @@
                                         <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Gross Amt</span></th>
                                         <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Gross_Amount</span></th>
@@ -314,8 +317,10 @@
                                         <th style="width: 6%;"></th>
                                         <th style="width: 7%;"></th>
                                         <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        @*<th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Tax_Percentage</span></th>*@
                                         <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax</span></th>
-                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Tax_Percentage</span></th>
                                         <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@taxamt</span></th>
 
                                     </tr>
@@ -327,6 +332,8 @@
                                         <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Round Off</span></th>
                                         <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Round_Off_Amount</span></th>
@@ -341,6 +348,8 @@
                                         <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
                                         <th style="width: 6%;"></th>
                                         <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">NET Amt</span></th>
                                         <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Net_Amount</span></th>
