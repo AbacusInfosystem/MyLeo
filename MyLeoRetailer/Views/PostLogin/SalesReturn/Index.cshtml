@@ -8,7 +8,61 @@
 <script src="~/Scripts/Modules/SalesReturn/salesreturn_events.js"></script>
 <script src="~/Scripts/Modules/SalesReturn/salesreturn_methods.js"></script>
 
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
 
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
+
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+</style>
 
 @{
     ViewBag.Title = "Index";
