@@ -1,11 +1,14 @@
-﻿$(function () {
+﻿$(document).ready(function () {
+
+    document.getElementById('btnEditPurchaseReturn').disabled = false;
    
     Get_Purchase_Returns();
 
     $(document).on('change', '[name="Purchase_Return_List"]', function (event) {
         if ($(this).prop('checked')) {
             $("#hdnPurchaseReturnId").val(this.value);
-            //document.getElementById('btnEditPurchaseReturn').disabled = false;
+            document.getElementById('btnEditPurchaseReturn').disabled = false;
+            document.getElementById('btnCreatePurchaseReturn').disabled = true;
         }
     });
 

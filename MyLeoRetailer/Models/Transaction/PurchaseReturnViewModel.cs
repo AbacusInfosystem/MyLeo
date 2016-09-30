@@ -78,13 +78,5 @@ namespace MyLeoRetailer.Models.Transaction
 
 	}
 
-	public class Filter_Purchase_Return
-	{
-        public string Debit_Note_No
-		{
-			get;
-			set;
-		}
-
-	}
+	
 }

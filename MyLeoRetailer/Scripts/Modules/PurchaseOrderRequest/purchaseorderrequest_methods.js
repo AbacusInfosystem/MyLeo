@@ -1209,7 +1209,7 @@ function ReArrangePurchaseOrderRequestDetailsData() {
                 $(newTR).find("[id^='hdnSize_Id_11-']").attr("name", "PurchaseOrderRequest.Sizes[" + i + "].Size_Id11");
                 $(newTR).find("[id^='hdnSize_Id_11-']").attr("value", $("#hdnSize_Id_11-" + (i - 1)).val());
 
-                $(newTR).find("[id^='hdnAmount_11-']")[0].id = "hdnAmount_11-" + i + "-";
+                $(newTR).find("[id^='hdnAmount_11-']")[0].id = "hdnAmount_11-" + i;
                 $(newTR).find("[id^='hdnAmount_11-']").attr("name", "PurchaseOrderRequest.Sizes[" + i + "].Amount11");
             }
 

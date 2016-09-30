@@ -137,4 +137,14 @@ namespace MyLeoRetailerInfo.PurchaseReturn
         public decimal Credit_Note_Amount { get; set; }
 
     }
+
+    public class Filter_Purchase_Return
+    {
+        public string Debit_Note_No
+        {
+            get;
+            set;
+        }
+
+    }
 }
