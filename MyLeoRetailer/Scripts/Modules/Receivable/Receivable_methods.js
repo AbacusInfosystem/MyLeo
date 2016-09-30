@@ -35,13 +35,18 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
         contentType: 'application/json',
 
-        success: function (response) {
+        success: function (response) {            
 
             var obj = $.parseJSON(response);
 
             $("[name='Receivable.Credit_Note_Amount']").val(obj.Receivable.Credit_Note_Amount);
 
-            $("[name='Receivable.Credit_Note_Date']").val(obj.Receivable.Credit_Note_Date);
+            $("[name='Receivable.Credit_Note_Date']").val(obj.Receivable.Credit_Note_Date.substring(0, 10));
+
+            //var dd1 = new Date(parseInt(obj.Receivable.Credit_Note_Date.replace('/Date(', '')));
+            //$('#txtCredit_Note_Date').val(dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString());
+
+           // $("[name='Receivable.Credit_Note_Date']").val(ToJavaScriptDate(obj.Receivable.Credit_Note_Date));
 
         }
     });
@@ -99,40 +104,87 @@ function CalculateDiscount() {
 
     var cardamount = parseFloat($("#txtCard_Amount").val());
 
-    if (cashamount == 0) {
+    var total = 0;
 
-        paidamount = chequeamount +  creditnoteamount + giftvoucheramount + cardamount;
-    }
+    var PaidAmount = 0;
 
-    else if (chequeamount == 0)
-    {
-        paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
-    }
+    total = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
 
-    else if (creditnoteamount == 0)
-    {
+    //PaidAmount = oldbalanceamount - total;
 
-        paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
-    }
+    $("#txtPaid_Amount").val(total.toFixed(2));
 
-    else if (giftvoucheramount == 0) {
+    BalanceAmount();
 
-        paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
-    }
+    //if (cashamount == 0) {
 
-    else {
+    //    paidamount = chequeamount + creditnoteamount + giftvoucheramount + cardamount;
 
-        paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount;
-    }
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (chequeamount == 0)
+    //{
+    //    paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (creditnoteamount == 0)
+    //{
+
+    //    paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (giftvoucheramount == 0) {
+
+    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (cardamount == 0)
+    //{
+
+    //    paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount;
+
+       
+    //}
+
+    //else {
+
+    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount + giftvoucheramount;
+
+    //    var newbalanceamount = oldbalanceamount - paidamount
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
    // var paidamount = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
 
-    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+   
 
-    var newbalanceamount = oldbalanceamount - paidamount;
+    //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+ 
+    
+
+}
+
+function BalanceAmount() {
+
+    debugger;
+
+
+    var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
+
+    var PaidAmount =  parseFloat($("#txtPaid_Amount").val());
+
+    var newbalanceamount = oldbalanceamount - PaidAmount;
 
     $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
 
-    
+
 
 }
 
@@ -159,7 +211,7 @@ function Save_Receivable_Data() {
 
 		        Gift_Voucher_No: $("[name='Receivable.Gift_Voucher_No']").val(),
 
-		        Total_MRP_Amount: $("[name='Receivable.Total_MRP_Amount']").val(),
+		        Net_Amount: $("[name='Receivable.Net_Amount']").val(),
 
 		        Paid_Amount: $("[name='Receivable.Paid_Amount']").val(),
 
@@ -212,6 +264,8 @@ function Save_Receivable_Data() {
             var obj = $.parseJSON(response);
 
             Bind_Payable_Grid_Items(obj);
+
+            Friendly_Messages(obj);
 
             //Friendly_Messages(obj);
 
@@ -310,7 +364,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Receivables[i].Cheque_Date;
+        htmlText += data.Receivables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Receivables[i].Cheque_Date.substring(0, 10);
 
         htmlText += "</td>";
 
@@ -335,7 +389,13 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Credit_Note_Date == "1/1/1999" ? "NA" : data.Receivables[i].Credit_Note_Date;
+        htmlText += data.Receivables[i].Credit_Note_Date == "1/1/1999" ? "NA" : data.Receivables[i].Credit_Note_Date.substring(0, 10);
+
+        //Added By Vinod Mane on 23/09/2016
+        //var Customer_DOB = new Date(obj.Customer.Customer_DOB);
+        //Customer_DOB = (Customer_DOB.getDate().toString() + "-" + (Customer_DOB.getMonth() + 1).toString() + "-" + Customer_DOB.getFullYear());
+        //$("[name='Customer.Customer_DOB']").val(Customer_DOB);
+        //End
 
         htmlText += "</td>";
 
@@ -381,7 +441,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<input type='hidden' id='hdnBank_Name" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Bank_Name + "'/>";
 
-        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_No + "'/>";
+        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Sales_Credit_Note_Id + "'/>";
 
         htmlText += "<input type='hidden' id='hdnCredit_Note_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_Amount + "'/>";
 
@@ -391,7 +451,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<input type='hidden' id='hdnCard_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Card_Amount + "'/>";
 
-        htmlText += "<input type='hidden' id='hdnGift_Voucher_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_No + "'/>";
+        htmlText += "<input type='hidden' id='hdnGift_Voucher_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_Id + "'/>";
 
         htmlText += "<input type='hidden' id='hdnGift_Voucher_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_Amount + "'/>";
 
@@ -492,9 +552,9 @@ function EditReceivableData(id) {
 
     $("#hdnReceivable_Item_Id").val($("#hdnReceivable_Item_Id" + id).val());
 
-    $('[name = "Receivable.Credit_Note_No"]').val($("#hdnCredit_Note_No" + id).val());
+    $('[name = "Receivable.Sales_Credit_Note_Id"]').val($("#hdnCredit_Note_No" + id).val());
 
-    $('[name = "Receivable.Gift_Voucher_No"]').val($("#hdnGift_Voucher_No" + id).val());
+    $('[name = "Receivable.Gift_Voucher_Id"]').val($("#hdnGift_Voucher_No" + id).val());
 
     $("#hdnReceivable_Id").val($("#hdnReceivable_Id" + id).val());
 
@@ -508,8 +568,4 @@ function EditReceivableData(id) {
 
 
 }
-
-
-
-
 

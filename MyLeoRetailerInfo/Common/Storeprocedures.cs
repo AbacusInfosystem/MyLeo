@@ -250,6 +250,9 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Purchase_Invoice,
         sp_Get_Purchase_Invoices,
+        Get_Purchase_Invoice_Data_By_Id_Sp1,
+
+
 
         #endregion
 
@@ -260,6 +263,10 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Order_Request_Item_Sizes,
 
         sp_Get_Purchase_Order_Requests,
+
+        sp_Get_Purchase_Order_Request_Details_By_Id,
+        sp_Get_Purchase_Order_Request_Items,
+        sp_Get_Purchase_Order_Request_Item_Sizes,
 
         #endregion
 
@@ -278,7 +285,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Delete_Product_Image,
             sp_Update_Product_Images,
             sp_Get_Product_MRP_Exist_By_ProductId,
+            sp_Get_Product_Description_By_ProductId,
+            sp_Get_Product_Color_Exist_By_ProductId,
 
+             #region Pyable
         Get_Credit_Note_Details_By_Id_Sp,
         Get_Payable_Balance_Amount_By_Id_Sp,
         Get_Payable_Data_By_Id_Sp,
@@ -289,6 +299,10 @@ namespace MyLeoRetailerInfo.Common
         sp_Temp_Get_Payable_Detail_By_Id1,
         sp_Temp_Get_Payable_Detail,
         sp_Get_Payable_Search_Data12,
+        Get_Credit_Note_Amount_By_Id_Sp,
+        sp_Get_Payable_Search_Details,
+
+              #endregion
 
         //Employee Branch mapping
         //sp_Get_Branch,
@@ -320,8 +334,8 @@ namespace MyLeoRetailerInfo.Common
 
 
 
-        //receivable
-
+       
+         #region Receivable
         sp_Get_Receivable_Search_Data,
         Get_Receivable_Details_By_Id_Sp,
         Get_Credit_Note_Details_By_Id_Sp1,
@@ -336,6 +350,11 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Receivables,
         sp_Get_Receivable_Search_Data_new,
         sp_Get_Receivable_Search_Data12,
+        Get_Receivable_Credit_Note_Details_By_Id,
+        sp_Get_Credit_Note_Details_By_Customer_Id1,
+        sp_Get_Receivable_Search_Details,
+           #endregion
+
 
 
         #region Purchase Return Request
@@ -357,6 +376,8 @@ namespace MyLeoRetailerInfo.Common
   
             //Product warehouse
         sp_Insert_Product_Warehouse,
+        sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
+        sp_Insert_Purchase_Order_Request_Consolidation,
 
     }
 

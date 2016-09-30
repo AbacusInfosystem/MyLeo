@@ -78,6 +78,17 @@ $(document).ready(function () {
         $("#btnfilter_Vendor").show();
     }
 
+    $(document).on("change", "[name='r1_Lookup']", function () {
+       
+        if ($(this).prop('checked')) {
+
+            $("#hdnId").val(this.id.replace("r1_Lookup_", ""));
+
+            $("#hdnValue").val($(this).closest("td").next().find(".v1").val());
+
+        }
+    });
+
 
 });
 
@@ -97,18 +108,18 @@ function PageMoreFilter(Id) {
 
 }
 
-function RadioChanged(ele)
-{
-   // $('[name="r1_Lookup"]').on('Changed', function (event) {
+//function RadioChanged(ele)
+//{
+//   // $('[name="r1_Lookup"]').on('Changed', function (event) {
 
-        if ($(ele).prop('checked')) {
+//        if ($(ele).prop('checked')) {
 
-            $("#hdnId").val(ele.id.replace("r1_Lookup_", ""));
+//            $("#hdnId").val(ele.id.replace("r1_Lookup_", ""));
 
-            $("#hdnValue").val($(ele).parent().parent().find(".v1").val());
+//            $("#hdnValue").val($(ele).parent().parent().find(".v1").val());
 
-        }
+//        }
 
-   // });
-}
+//   // });
+//}
 

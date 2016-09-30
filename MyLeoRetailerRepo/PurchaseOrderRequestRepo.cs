@@ -133,6 +133,8 @@ namespace MyLeoRetailerRepo
 
                     sqlParam.Add(new SqlParameter("@Comment", item.Comment));
 
+                    sqlParam.Add(new SqlParameter("@Status", PurchaseOrderRequest.Status));
+
                     PurchaseOrderRequest.PurchaseOrderRequests[j].Purchase_Order_Request_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Request_Item.ToString(), CommandType.StoredProcedure));
 
                     int i = 0;
@@ -394,6 +396,145 @@ namespace MyLeoRetailerRepo
             return PurchaseOrderRequest;
         }
 
+        //**********************************************************************///
+
+        public PurchaseOrderRequestInfo Get_Purchase_Order_Request_Details_By_Id(int Purchase_Order_Request_Id)
+        {
+            PurchaseOrderRequestInfo purchaseOrderRequest = new PurchaseOrderRequestInfo();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Purchase_Order_Request_Id", Purchase_Order_Request_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Order_Request_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                purchaseOrderRequest.Purchase_Order_Request_Id = Convert.ToInt32(dr["Purchase_Order_Request_Id"]);
+
+
+                if (!dr.IsNull("Branch_Id"))
+                    purchaseOrderRequest.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+
+                if (!dr.IsNull("Vendor_Id"))
+                    purchaseOrderRequest.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                if (!dr.IsNull("Vendor_Name"))
+                    purchaseOrderRequest.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                if (!dr.IsNull("Branch_Name"))
+                    purchaseOrderRequest.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+
+                if (!dr.IsNull("Total_Quantity"))
+                    purchaseOrderRequest.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+                if (!dr.IsNull("Net_Amount"))
+                    purchaseOrderRequest.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+            }
+
+            return purchaseOrderRequest;
+        }
+
+        public List<PurchaseOrderRequestItemInfo> Get_Purchase_Order_Request_Items(int Purchase_Order_Request_Id)
+        {
+            List<PurchaseOrderRequestItemInfo> purchaseOrderRequestItems = new List<PurchaseOrderRequestItemInfo>();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Purchase_Order_Request_Id", Purchase_Order_Request_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Order_Request_Items.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                PurchaseOrderRequestItemInfo purchaseOrderRequestItem = new PurchaseOrderRequestItemInfo();
+
+                purchaseOrderRequestItem.Purchase_Order_Request_Item_Id = Convert.ToInt32(dr["Purchase_Order_Request_Item_Id"]);
+
+                purchaseOrderRequestItem.Purchase_Order_Request_Id = Convert.ToInt32(dr["Purchase_Order_Request_Id"]);
+
+                if (!dr.IsNull("Article_No"))
+                    purchaseOrderRequestItem.Article_No = Convert.ToString(dr["Article_No"]);
+
+                if (!dr.IsNull("Colour_Name"))
+                    purchaseOrderRequestItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+
+                if (!dr.IsNull("Start_Size"))
+                    purchaseOrderRequestItem.Start_Size = Convert.ToString(dr["Start_Size"]);
+
+                if (!dr.IsNull("End_Size"))
+                    purchaseOrderRequestItem.End_Size = Convert.ToString(dr["End_Size"]);
+
+                if (!dr.IsNull("Center_Size"))
+                    purchaseOrderRequestItem.Center_Size = Convert.ToString(dr["Center_Size"]);
+
+                if (!dr.IsNull("Purchase_Price"))
+                    purchaseOrderRequestItem.Purchase_Price = Convert.ToDecimal(dr["Purchase_Price"]);
+
+                if (!dr.IsNull("Size_Difference"))
+                    purchaseOrderRequestItem.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
+
+                if (!dr.IsNull("Total_Amount"))
+                    purchaseOrderRequestItem.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
+
+                if (!dr.IsNull("Comment"))
+                    purchaseOrderRequestItem.Comment = Convert.ToString(dr["Comment"]);
+
+                if (!dr.IsNull("Brand_Id"))
+                    purchaseOrderRequestItem.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+                if (!dr.IsNull("Brand_Name"))
+                    purchaseOrderRequestItem.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+
+                if (!dr.IsNull("Category_Id"))
+                    purchaseOrderRequestItem.Category_Id = Convert.ToInt32(dr["Category_Id"]);
+
+                if (!dr.IsNull("Category"))
+                    purchaseOrderRequestItem.Category = Convert.ToString(dr["Category"]);
+
+                if (!dr.IsNull("Sub_Category_Id"))
+                    purchaseOrderRequestItem.Sub_Category_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
+
+                if (!dr.IsNull("Sub_Category"))
+                    purchaseOrderRequestItem.Sub_Category = Convert.ToString(dr["Sub_Category"]);
+
+                if (!dr.IsNull("Size_Group_Id"))
+                    purchaseOrderRequestItem.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+
+                if (!dr.IsNull("Size_Group_Name"))
+                    purchaseOrderRequestItem.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+                purchaseOrderRequestItem.sizes = Get_Purchase_Order_Request_Item_Sizes(purchaseOrderRequestItem.Purchase_Order_Request_Item_Id);
+
+                purchaseOrderRequestItem.Total_Quantity = purchaseOrderRequestItem.sizes.Sum(a => a.Quantity1);
+
+                purchaseOrderRequestItems.Add(purchaseOrderRequestItem);
+            }
+
+            return purchaseOrderRequestItems;
+        }
+
+        private List<Sizes> Get_Purchase_Order_Request_Item_Sizes(int Purchase_Order_Request_Item_Id)
+        {
+            List<Sizes> sizes = new List<Sizes>();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Purchase_Order_Request_Item_Id", Purchase_Order_Request_Item_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Order_Request_Item_Sizes.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                Sizes size = new Sizes();
+
+                size.Size_Id1 = Convert.ToInt32(dr["Size_Id"]);
+                size.Quantity1 = Convert.ToInt32(dr["Quantity"]);
+                size.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+                sizes.Add(size);
+            }
+
+            return sizes;
+        }
 
         //public DataTable Get_Purchase_Order_Requests(QueryInfo query_Details)
         //{

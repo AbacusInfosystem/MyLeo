@@ -1031,6 +1031,7 @@
     <Content Include="Scripts\Modules\Login\login-event.js" />
     <Content Include="Scripts\Modules\Payable\Payable_events.js" />
     <Content Include="Scripts\Modules\Payable\Payable_method.js" />
+    <Content Include="Scripts\Modules\Payable\Payable_Validation.js" />
     <Content Include="Scripts\Modules\Payable\Pay_event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
@@ -1073,6 +1074,7 @@
     <Content Include="Scripts\Modules\Replacement\Replacement_method.js" />
     <Content Include="Scripts\Modules\Replacement\search_Replacement_event.js" />
     <Content Include="Scripts\Modules\Replacement\search_Replacement_method.js" />
+    <Content Include="Scripts\Modules\Receivable\Receivable_Validation.js" />
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
@@ -1193,9 +1195,10 @@
     <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
-    <Content Include="Views\PostLogin\Reports\SalesReport\Search.cshtml" />
-    <Content Include="Views\PostLogin\Dashboard\index1.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View1.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

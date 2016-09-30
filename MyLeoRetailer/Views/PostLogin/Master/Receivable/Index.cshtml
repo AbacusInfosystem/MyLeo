@@ -45,15 +45,15 @@
 
                     <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
-                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+                        @*<div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
 
                             <div class="btn-group">
-                                <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>
+                                <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>*@
                                 @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
-                                <button type="button" id="btnResetReceivable" class="btn btn-success active">Reset</button>
+                                @*<button type="reset" id="btnResetReceivable" class="btn btn-danger active">Reset</button>
                             </div>
 
-                        </div>
+                        </div>*@
 
 
                         <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
@@ -120,12 +120,25 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="dd-mm-yyyy">
                                             <input type="text" class="form-control datepicker" name="Receivable.To_Date" value="@((Model.Receivable.To_Date == DateTime.MinValue ? "" : Model.Receivable.To_Date.ToString("dd-MM-yyyy")))" reado readonly />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
                                 </div>
+
+                                
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <br />
+                                        <br />
+                                        <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>
+                                        @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
+                                        <button type="reset" id="btnResetReceivable" class="btn btn-danger active">Reset</button>
+                                    </div>
+                                </div>
+
 
                             </div>
 
@@ -206,7 +219,7 @@
 
                                                                 </td>
                                                                 <td>
-                                                                    <span id="trSales_Invoice_Date@(i)"> @itm.Sales_Invoice_Date</span>
+                                                                    <span id="trSales_Invoice_Date@(i)"> @itm.Sales_Invoice_Date.ToShortDateString()</span>
                                                                     <input type="hidden" id="hdnSales_Invoice_Date@(i)" name="Receivables[@(i-1)].Sales_Invoice_Date" value="@itm.Sales_Invoice_Date">
                                                                 </td>
 
@@ -221,8 +234,8 @@
                                                                 </td>
 
                                                                 <td>
-                                                                    <span id="trTotal_MRP_Amountt@(i)"> @itm.Total_MRP_Amount</span>
-                                                                    <input type="hidden" id="hdnTotal_MRP_Amount@(i)" name="Receivables[@(i-1)].Total_MRP_Amount" value="@itm.Total_MRP_Amount">
+                                                                    <span id="trNet_Amount@(i)"> @itm.Net_Amount</span>
+                                                                    <input type="hidden" id="hdnNet_Amount@(i)" name="Receivables[@(i-1)].Net_Amount" value="@itm.Net_Amount">
                                                                 </td>
 
                                                                 @*<td>
@@ -267,12 +280,6 @@
                             }
 
                         </div>
-
-
-                        @*<div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
-                            </div>*@
-
-
 
                     </div>
 
