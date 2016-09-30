@@ -328,6 +328,12 @@ namespace MyLeoRetailer
             defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Requests", id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            routes.MapRoute(
+            name: "purchase-return-request-7",
+            url: "purchase-return-request/view-purchase-return-request",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Request_Details_By_Id", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            
             
 
 

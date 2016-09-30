@@ -31,7 +31,7 @@
             <div class="block">
 
                 <form role="form" id="frmPurchaseReturnRequest">
-
+                    <input type="hidden" id="hdnPurchase_Return_Request_Id" name="PurchaseReturnRequest.Purchase_Return_Request_Id" class="auto-complete-value" value="@Model.PurchaseReturnRequest.Purchase_Return_Request_Id"/>
                     <div class="row">
 
                         <div class="col-md-5">
@@ -61,6 +61,7 @@
                             <div class="btn-group">
                                 @*<button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>*@
                                 <a role="button" class="btn btn-success active" href="/purchase-return-request/create-purchase-return-request" id="btnCreate">Create</a>
+                                <button role="button" class="btn btn-info active" id="btnView" style="display:none">View Details</button>
                             </div>
 
                         </div>
@@ -79,6 +80,7 @@
                     <table class="table table-bordered table-hover" id="tblPurchaseReturnRequest">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Vendor</th>
                                 <th>Purchase Invoice No.</th>
                                 <th>Branch</th>

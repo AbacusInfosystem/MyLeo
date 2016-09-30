@@ -46,6 +46,7 @@ function Bind_Get_Purchase_Return_Requests_Data(data)
 
             tblHTML += "<tr>";
 
+            tblHTML += "<td> <input type='radio' name='r1' id='r1_" + data.PurchaseReturnRequests[i].Purchase_Return_Request_Id + "' value='" + data.PurchaseReturnRequests[i].Purchase_Return_Request_Id + "'></td>"
             tblHTML += "<td>" + data.PurchaseReturnRequests[i].Vendor_Name + "</td>";
             tblHTML += "<td>" + data.PurchaseReturnRequests[i].Purchase_Invoice_No + "</td>";
             tblHTML += "<td>" + data.PurchaseReturnRequests[i].Branch_Name + "</td>";
@@ -75,5 +76,16 @@ function Bind_Get_Purchase_Return_Requests_Data(data)
         $('.pagination').html("");
     }
 
-    Friendly_Messages(data); 
+    $('[name="r1"]').on('change', function (event) {
+        if ($(this).prop('checked')) {
+            $("#hdnPurchase_Return_Request_Id").val(this.id.replace("r1_", ""));
+            $("#btnView").show();
+        }
+    });
+
+   // Friendly_Messages(data);
+
+    
+    //('change','[name="Product_List"]', function (event) { 
+    //$("#hdf_SizeGroupId").val($('[name="Size_Group_Id"]').val());
 }
