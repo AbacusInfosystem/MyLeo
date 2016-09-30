@@ -1170,9 +1170,7 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Search.cshtml" />
-    
     <Content Include="Views\PostLogin\Master\PurchaseOrder\PrintableView.cshtml" />
-   
     <Content Include="Views\PostLogin\SalesOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
@@ -1195,6 +1193,9 @@
     <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
+    <Content Include="Views\PostLogin\Reports\SalesReport\Search.cshtml" />
+    <Content Include="Views\PostLogin\Dashboard\index1.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1210,7 +1211,6 @@
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
     <Folder Include="UploadFiles\" />
-    <Folder Include="Views\PostLogin\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
