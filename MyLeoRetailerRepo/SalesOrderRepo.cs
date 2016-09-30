@@ -322,6 +322,8 @@ namespace MyLeoRetailerRepo
         {
             SalesInvoiceInfo salesinvoice = new SalesInvoiceInfo();
 
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
             salesinvoice.Branch_Name = Convert.ToString(dr["Branch_Name"]);
             salesinvoice.Branch_Address = Convert.ToString(dr["Branch_Address"]);
             salesinvoice.Branch_City = Convert.ToString(dr["Branch_City"]);
@@ -340,7 +342,18 @@ namespace MyLeoRetailerRepo
             salesinvoice.Total_MRP_Amount = Convert.ToInt32(dr["Total_MRP_Amount"]);
             salesinvoice.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
             salesinvoice.Tax_Percentage = Convert.ToInt32(dr["Tax_Percentage"]);
-            salesinvoice.Round_Off_Amount = Convert.ToInt32(dr["Round_Off_Amount"]);     
+
+            if (salesinvoice.Round_Off_Amount == 0)
+            {
+                sqlParams.Add(new SqlParameter("@Round_Off_Amount", 0));
+            }
+            else
+            {
+                salesinvoice.Round_Off_Amount = Convert.ToInt32(dr["Round_Off_Amount"]);           
+            }
+
+
+
             salesinvoice.Total_Discount_Amount = Convert.ToInt32(dr["Total_Discount_Amount"]);
             salesinvoice.Net_Amount = Convert.ToInt32(dr["Net_Amount"]);
 

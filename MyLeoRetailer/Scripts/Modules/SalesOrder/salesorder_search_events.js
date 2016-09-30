@@ -9,6 +9,8 @@ $(function () {
 
     $("#btnPrint").hide();
 
+    $("#btnView").hide();
+
     Get_SalesOrders();
 
 
@@ -45,6 +47,8 @@ $(function () {
             $("#hdnSalesInvoiceID").val(this.value);
 
             $('#btnPrint').show();
+
+            $('#btnView').show();
         }
     });
 

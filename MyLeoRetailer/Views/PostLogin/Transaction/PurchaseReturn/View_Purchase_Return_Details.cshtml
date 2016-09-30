@@ -105,28 +105,29 @@
                                 <input type="hidden" class="form-control input-sm" name="PurchaseReturn.hdn_Tax_Percentage" id="hdf_hdn_Tax_Percentage" value="@Model.PurchaseReturn.hdn_Tax_Percentage">
 
                                 <h4 style="margin-top: 0px;">Primary information.</h4>
-
-                                <div class="form-group">
-                                    <label class="control-label" style="color: #33414e">Debit Note No.</label>
-                                  
-                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Debit_Note_No</span>
-                                </div>
-
-                                @*<div class="col-md-3">
+                               
                                     <div class="form-group">
-                                        <label class="control-label" style="color: #33414e">Sales Invoice No</label>
-                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.SalesInvoice.Sales_Invoice_No</span>
+                                        <label class="control-label" style="color: #33414e">Debit Note No.</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Debit_Note_No</span>
+                                   
                                     </div>
-                                </div>*@
+                                
 
-                                <div class="form-group">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Retirn Date.</span>
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                        <input type="text" class="form-control datepicker" name="PurchaseReturn.Purchase_Return_Date" id="txtPurchase_Return_Date" value="@((Model.PurchaseReturn.Purchase_Return_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.PurchaseReturn.Purchase_Return_Date.ToString("dd-MM-yyyy")))" />
-                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    @*<div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Retirn Date.</span>
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" name="PurchaseReturn.Purchase_Return_Date" id="txtPurchase_Return_Date" value="@((Model.PurchaseReturn.Purchase_Return_Date == DateTime.MinValue ? DateTime.Now.ToString(" dd-mm-yyyy")
+                                                   model.purchasereturn.purchase_return_date.tostring("dd-mm-yyyy")))" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>*@
+                               
+                                    <div class="form-group">
+                                        <label class="control-label" style="color: #33414e">Purchase Retirn Date.</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Purchase_Return_Date.ToString("dd-MM-yyyy")</span>
                                     </div>
+                                
                                 </div>
-                            </div>
                         </div>
 
                         <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
@@ -134,7 +135,7 @@
                             <div class="block">
                                 <h4 style="margin-top: 0px;">Vendor Details.</h4>
 
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
                                     <select class="form-control select" name="PurchaseReturn.Vendor_Id" onchange="Get_Vendor_Tax_Details_By_Id(this.value)">
                                         <option value="">Select Vendor</option>
@@ -150,11 +151,19 @@
                                             }
                                         }
                                     </select>
+                                </div>*@
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Vendor Name.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Vendor_Name</span>
                                 </div>
 
                                 <div class="form-group">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseReturn.GR_No" id="txtGR_No" value="@Model.PurchaseReturn.GR_No" placeholder="Enter GR no." />
+                                    @*<span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
+                                    <input type="text" class="form-control input-sm" name="PurchaseReturn.GR_No" id="txtGR_No" value="@Model.PurchaseReturn.GR_No" placeholder="Enter GR no." />*@
+
+                                    <label class="control-label" style="color: #33414e">GR No.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.GR_No</span>
                                 </div>
 
                             </div>
@@ -167,12 +176,16 @@
 
                                 <input type="hidden" class="form-control input-sm" id="hdf_Purchase_Invoice_Id">
 
-                                <div class="form-group">
+                                @* <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
                                     <select class="form-control select" id="drpPurchase_Invoice_Id" name="PurchaseReturn.Purchase_Invoice_Id" onchange="Set_Purchase_Invoice_Id(this.value)">
                                         <option value="0">Select Invoice No.</option>
                                     </select>
-                                </div>
+                                </div>*@
+
+
+                                <label class="control-label" style="color: #33414e">Purchase Invoice No.</label>
+                                <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Purchase_Invoice_Id</span>
 
                             </div>
 
@@ -188,7 +201,7 @@
                             <table class="table table-bordered table-hover" id="tblPurchaseReturnItems">
                                 <thead>
                                     <tr>
-                                        <th style="width:150px;">Barcode No.</th>
+                                        @*<th style="width:150px;">Barcode No.</th>*@
                                         <th style="width:150px;">SKU No.</th>
                                         <th style="width:70px;">Article No.</th>
                                         <th style="width:70px;">Color</th>
@@ -199,18 +212,155 @@
                                         <th style="width:60px;">Size</th>
                                         <th style="width:60px;">Quantity</th>
                                         <th style="width:60px;">WSR</th>
-                                        <th style="width:60px;">Total Amount</th>
-                                        <th style="width:140px;">Action</th>
+                                        <th style="width:60px;">Total Amount</th>                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr id="PurchaseReturnItemRow_0">
+                                    @{decimal amt = 0;
+
+                                    decimal taxamt = 0;
+
+                                    foreach (var itm in Model.PurchaseReturn.PurchaseReturns)
+                                    {
+
+                                        //decimal mrpamt = 0;
+
+                                        //mrpamt = itm.MRP_Price * itm.Quantity;
+
+                                        //amt = itm.MRP_Price * itm.Quantity * itm.Discount_Percentage / 100;
+
+                                        taxamt = @Model.PurchaseReturn.Gross_Amount * @Model.PurchaseReturn.Tax_Percentage / 100;
+
+                                        <tr>
+                                            @*<td>@itm.Barcode</td>*@                                            
+                                            <td style="background: rgba(74,77,67,0.09);">@itm.SKU_Code</td>
+                                            <td>@itm.Article_No</td>
+                                            <td>@itm.Color</td>
+                                            <td>@itm.Brand</td>
+                                            <td>@itm.Category</td>
+                                            <td>@itm.SubCategory</td>
+                                            <td>@itm.Size_Group_Name</td>
+                                            <td>@itm.Size_Name</td>
+                                            <td>@itm.Quantity</td>
+                                            @*<td style="background: rgba(74,77,67,0.09);">@mrpamt</td>**@
+                                            <td>@itm.WSR_Price</td>                                           
+                                            <td style="background: rgba(74,77,67,0.09);">@itm.Amount</td>
+                                            
+                                        </tr>
+                                    }
+                                    }
+                                    <tr style="background: rgba(74,77,67,0.09);"></tr>
+
+                                    <tr>
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Summary</span></th> 
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>                                                                              
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Total_Quantity</span></th>
+                                        <th style="width: 6%;"></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Total_Amount</span></th>
+                                        
+                                    </tr>
+
+                                    @*<tr>
+                                        <th></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Discount</span></th>   
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Discount_Percentage</span></th>
+                                        
+                                    </tr>*@
+                                    <tr>
+                                        <th></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        @*<th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Discount_Percentage</span><span>%</span></th>*@
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Discount</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Discount_Amount</span></th>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Gross Amt</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Gross_Amount</span></th>
+                                       
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        @*<th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Tax_Percentage</span></th>*@
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@taxamt</span></th>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Round Off</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Round_Off_Amount</span></th>
+                                        
+
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">NET Amt</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseReturn.Net_Amount</span></th>
+                                        
+                                    </tr>
+                                    @*<tr id="PurchaseReturnItemRow_0">
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0">
+                                      
                                         </td>
-                                        @*<td>
-                                                <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
-                                            </td>*@
+                                      
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
@@ -263,146 +413,15 @@
                                                 <button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript: DeletePurchaseReturnDetailsData(0);'>Delete</button>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr>*@
+
                                 </tbody>
                             </table>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
 
 
-                    <div class="row">
-                        <div class="table-responsive" style="width:100%;">
-                            <table class="table table-bordered" id="tblPurchaseReturn">
-                                <thead>
-                                    <tr></tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td style="width:150px;"></td>
-                                        <td style="width:150px;"></td>
-                                        <td style="width:70px;"></td>
-                                        <td style="width:70px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:60px;">
-                                            <label>Total Qty</label>
-                                        </td>
-                                        <td style="width:60px;">
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Total_Quantity" readonly id="textTotalQuantity_0">
-                                        </td>
-                                        <td style="width:60px;">
-                                            <label>Total Amt</label>
-                                        </td>
-                                        <td style="width:60px;">
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Total_Amount" readonly id="textTotalAmount_0">
-                                        </td>
-                                        <td style="width:140px;"></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <label>Discount</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0">
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Amount" readonly id="textDiscountAmount_0">
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <label>Gross Amt</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Gross_Amount" readonly id="textGrossAmount_0">
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <label>Tax</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Tax_Percentage" readonly id="textTaxPercentage_0" />
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Tax_Amount" readonly id="textTaxAmount_0">
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <label>Round Off</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" readonly value="0.00" name="PurchaseReturn.Round_Off_Amount" id="textRoundOff_0">
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>
-                                            <label>NET Amt</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Net_Amount" readonly id="textNETAmount_0">
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- /.col -->
-                    </div>
+                    
 
 
                     <div class="row">
@@ -411,12 +430,16 @@
                                 <h4 style="margin-top: 0px;">Transport Details.</h4>
 
                                 <div class="form-group col-md-3">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Logistic Person Name.</span>
-                                    <input type="text" class="form-control input-sm" id="txtLogistics_Person_Name" name="PurchaseReturn.Logistics_Person_Name" placeholder="Enter logistic person name." />
+                                    @*<span class="label label-primary label-form" style="margin-bottom: 1px;">Logistic Person Name.</span>
+                                    <input type="text" class="form-control input-sm" id="txtLogistics_Person_Name" name="PurchaseReturn.Logistics_Person_Name" placeholder="Enter logistic person name." />*@
+                                    
+                                        <label class="control-label" style="color: #33414e">Logistic Person Name</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Logistics_Person_Name</span>
+                                    
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Transporter Name.</span>
+                                    @*<span class="label label-primary label-form" style="margin-bottom: 1px;">Transporter Name.</span>
                                     <select class="form-control select" name="PurchaseReturn.Transporter_Id">
                                         <option value="">Select Transporter</option>
                                         @foreach (var item in Model.PurchaseReturn.Vendors)
@@ -430,24 +453,32 @@
                                             <option value="@item.Vendor_Id">@item.Vendor_Name</option>
                                                 }
                                             }
-                                    </select>
+                                    </select>*@
+                                    <label class="control-label" style="color: #33414e">Transporter Name.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Transporter_Name</span>
                                 </div>
 
                                 <div class="form-group col-md-3">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">LR No.</span>
-                                    <input type="text" class="form-control input-sm" id="txtLR_No" name="PurchaseReturn.Lr_No" placeholder="Enter LR no." />
+                                    @*<span class="label label-primary label-form" style="margin-bottom: 1px;">LR No.</span>
+                                    <input type="text" class="form-control input-sm" id="txtLR_No" name="PurchaseReturn.Lr_No" placeholder="Enter LR no." />*@
+
+                                    <label class="control-label" style="color: #33414e">LR No.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Lr_No</span>
                                 </div>
 
 
                                 <div class="form-group col-md-3">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">LR Date.</span>
+                                    @*<span class="label label-primary label-form" style="margin-bottom: 1px;">LR Date.</span>
                                     <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
                                         <input type="text" class="form-control datepicker" name="PurchaseReturn.Lr_Date" id="txtLr_Date" value="@((Model.PurchaseReturn.Lr_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.PurchaseReturn.Lr_Date.ToString("dd-MM-yyyy")))" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
+                                    </div>*@
+
+                                    <label class="control-label" style="color: #33414e">LR Date.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Lr_Date.ToString("dd-MM-yyyy")</span>
                                 </div>
 
-
+                               
                             </div>
                         </div>
                     </div>
