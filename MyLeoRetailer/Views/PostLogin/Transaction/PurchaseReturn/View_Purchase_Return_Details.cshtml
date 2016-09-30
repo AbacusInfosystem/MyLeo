@@ -8,10 +8,67 @@
 <script src="~/Scripts/Modules/PurchaseReturn/purchasereturn_validation.js"></script>
 <script src="~/Scripts/Modules/common_methods.js"></script>
 
+
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
+
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+</style>
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
-    <li class="active">Purchase Return</li>
+    <li class="active">Purchase Return View</li>
 </ul>
 <!-- END BREADCRUMB -->
 <!-- START CONTENT FRAME -->
@@ -20,7 +77,7 @@
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
         <div class="page-title">
-            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return</h2>
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return View</h2>
         </div>
     </div>
 
@@ -50,9 +107,17 @@
                                 <h4 style="margin-top: 0px;">Primary information.</h4>
 
                                 <div class="form-group">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit Note No.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseReturn.Debit_Note_No" id="txtDebit_Note_No" value="@Model.PurchaseReturn.Debit_Note_No" placeholder="Enter debit note no." />
+                                    <label class="control-label" style="color: #33414e">Debit Note No.</label>
+                                  
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseReturn.Debit_Note_No</span>
                                 </div>
+
+                                @*<div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label" style="color: #33414e">Sales Invoice No</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.SalesInvoice.Sales_Invoice_No</span>
+                                    </div>
+                                </div>*@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Retirn Date.</span>
