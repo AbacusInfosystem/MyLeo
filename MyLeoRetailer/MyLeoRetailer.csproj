@@ -1199,6 +1199,7 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View1.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\ViewPurchaseReturnRequest.cshtml" />
   </ItemGroup>
   <ItemGroup>
