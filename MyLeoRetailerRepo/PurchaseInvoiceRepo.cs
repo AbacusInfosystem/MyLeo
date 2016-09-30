@@ -287,7 +287,7 @@ namespace MyLeoRetailerRepo
 
             return PurchaseInvoice.Purchase_Invoice_Id;
         }
-
+        
         private PurchaseInvoiceInfo Get_Purchase_Invoice_Value(DataRow dr)
         {
             PurchaseInvoiceInfo PurchaseInvoice = new PurchaseInvoiceInfo();
