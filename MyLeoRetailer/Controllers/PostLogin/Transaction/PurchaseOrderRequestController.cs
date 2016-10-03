@@ -114,6 +114,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
+                poreqViewModel = new PurchaseOrderRequestViewModel();
+
                 poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
             }
 
@@ -124,6 +126,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public JsonResult Get_Purchase_Order_Requests(PurchaseOrderRequestViewModel poreqViewModel)
         {
+            poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            Pagination_Info pager = new Pagination_Info();
+
+            pager = poreqViewModel.Grid_Detail.Pager;
+
+            poreqViewModel.Grid_Detail = Set_Grid_Details(false, "Branch_Name,Vendor_Name,Total_Quantity,Net_Amount", "Purchase_Order_Request_Id"); // Set grid info for front end listing
+
+            poreqViewModel.Grid_Detail.Records = _purchaseorderrequestRepo.Get_Purchase_Order_Requests(poreqViewModel.Filter, poreqViewModel.Cookies.Branch_Ids); // Call repo method 
+
+            Set_Pagination(pager, poreqViewModel.Grid_Detail); // set pagination for grid
+
+            poreqViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(poreqViewModel));
+        }
+
+        public JsonResult Get_Purchase_Order_Request_List(PurchaseOrderRequestViewModel poreqViewModel)
+        {
             try
             {
                 poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
@@ -132,7 +153,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 pager = poreqViewModel.Pager;
 
-                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequests = _purchaseorderrequestRepo.Get_Purchase_Order_Requests(ref pager, poreqViewModel.Cookies.Branch_Ids, poreqViewModel.Filter.Vendor_Id);
+                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequests = _purchaseorderrequestRepo.Get_Purchase_Order_Request_List(ref pager, poreqViewModel.Cookies.Branch_Ids, poreqViewModel.Filter.Vendor_Id);
 
                 poreqViewModel.Pager = pager;
 
