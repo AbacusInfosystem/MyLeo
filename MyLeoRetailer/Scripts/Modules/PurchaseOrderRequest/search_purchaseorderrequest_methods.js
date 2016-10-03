@@ -40,93 +40,93 @@
 
 
 
-function Get_Purchase_Order_Requests() {
-    var poreqViewModel =
-        {
-            Filter: {
+//function Get_Purchase_Order_Requests() {
+//    var poreqViewModel =
+//        {
+//            Filter: {
 
-                Vendor_Id: $("#drpVendor_Id").val()
-            },
-            Grid_Detail: {
+//                Vendor_Id: $("#drpVendor_Id").val()
+//            },
+//            Grid_Detail: {
 
-                CurrentPage: $("#hdfCurrent_Page").val()
-            }
-        }
+//                CurrentPage: $("#hdfCurrent_Page").val()
+//            }
+//        }
 
-    $.ajax({
+//    $.ajax({
 
-        url: "/PurchaseOrderRequest/Get_Purchase_Order_Requests",
+//        url: "/PurchaseOrderRequest/Get_Purchase_Order_Request_List",
 
-        data: JSON.stringify(poreqViewModel),
+//        data: JSON.stringify(poreqViewModel),
 
-        dataType: 'json',
+//        dataType: 'json',
 
-        type: 'POST',
+//        type: 'POST',
 
-        contentType: 'application/json',
+//        contentType: 'application/json',
 
-        success: function (response) {
+//        success: function (response) {
 
-            var data = $.parseJSON(response);
+//            var data = $.parseJSON(response);
 
-            Bind_Get_Purchase_Order_Request_Data(data);
+//            Bind_Get_Purchase_Order_Request_Data(data);
 
            
 
-        }
-    });
-}
+//        }
+//    });
+//}
 
-function Bind_Get_Purchase_Order_Request_Data(data) {
-    var tblHTML = "";
+//function Bind_Get_Purchase_Order_Request_Data(data) {
+//    var tblHTML = "";
 
-    $('#tblPurchaseOrderRequest tbody tr').remove();
+//    $('#tblPurchaseOrderRequest tbody tr').remove();
 
-    if (data.PurchaseOrderRequest.PurchaseOrderRequests.length > 0) {
+//    if (data.PurchaseOrderRequest.PurchaseOrderRequests.length > 0) {
 
-        for (var i = 0; i < data.PurchaseOrderRequest.PurchaseOrderRequests.length; i++) {
+//        for (var i = 0; i < data.PurchaseOrderRequest.PurchaseOrderRequests.length; i++) {
 
-            tblHTML += "<tr>";
+//            tblHTML += "<tr>";
 
-            tblHTML += "<td><input type='radio' name='r1' id='r1_" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Purchase_Order_Request_Id + "' class='iradio-list'/></td>";
+//            tblHTML += "<td><input type='radio' name='r1' id='r1_" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Purchase_Order_Request_Id + "' class='iradio-list'/></td>";
 
-            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Branch_Name + "</td>";
-            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Vendor_Name + "</td>";
+//            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Branch_Name + "</td>";
+//            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Vendor_Name + "</td>";
 
-            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Total_Quantity + "</td>";
-            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Net_Amount + "</td>";
+//            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Total_Quantity + "</td>";
+//            tblHTML += "<td>" + data.PurchaseOrderRequest.PurchaseOrderRequests[i].Net_Amount + "</td>";
 
-            tblHTML += "</tr>";
+//            tblHTML += "</tr>";
 
-        }
+//        }
 
-        $('#tblPurchaseOrderRequest tbody').append(tblHTML);
+//        $('#tblPurchaseOrderRequest tbody').append(tblHTML);
 
-    }
+//    }
 
-    if (data.PurchaseOrderRequest.PurchaseOrderRequests.length > 0) {
-        $('#hdfCurrent_Page').val(data.Pager.CurrentPage);
+//    if (data.PurchaseOrderRequest.PurchaseOrderRequests.length > 0) {
+//        $('#hdfCurrent_Page').val(data.Pager.CurrentPage);
 
-        if (data.Pager.PageHtmlString != null || data.Pager.PageHtmlString != "") {
+//        if (data.Pager.PageHtmlString != null || data.Pager.PageHtmlString != "") {
 
-            $('.pagination').html(data.Pager.PageHtmlString);
-        }
-    }
-    else {
-        $('.pagination').html("");
-    }
+//            $('.pagination').html(data.Pager.PageHtmlString);
+//        }
+//    }
+//    else {
+//        $('.pagination').html("");
+//    }
 
 
-    $('[name="r1"]').on('change', function (event) {
-        if ($(this).prop('checked')) {
-            $("#hdnPurchaseOrderRequestId").val(this.id.replace("r1_", ""));
-            document.getElementById("btnEditPurchaseOrderRequest").disabled = false;
-            document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
-        }
-    });
+//    $('[name="r1"]').on('change', function (event) {
+//        if ($(this).prop('checked')) {
+//            $("#hdnPurchaseOrderRequestId").val(this.id.replace("r1_", ""));
+//            document.getElementById("btnEditPurchaseOrderRequest").disabled = false;
+//            document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
+//        }
+//    });
 
-    Friendly_Messages(data);
-}
+//    Friendly_Messages(data);
+//}
 
 
 

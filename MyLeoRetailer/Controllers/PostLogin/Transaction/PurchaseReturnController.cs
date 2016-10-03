@@ -118,15 +118,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 if (prViewModel.PurchaseReturn.Purchase_Return_Id == 0)
                 {
-                    //prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                    //prViewModel.PurchaseReturn.Created_By = prViewModel.Cookies.User_Id;
-
-                    //prViewModel.PurchaseReturn.Created_Date = DateTime.Now;
-
-                    //prViewModel.PurchaseReturn.Updated_By = prViewModel.Cookies.User_Id;
-
-                    //prViewModel.PurchaseReturn.Updated_Date = DateTime.Now;
+                    prViewModel.PurchaseReturn.Debit_Note_No = Utility.Generate_Ref_No("PR-", "Debit_Note_No", "4", "15", "Purchase_Return");
 
                     _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
 
@@ -255,7 +247,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public ActionResult Get_Purchase_Return_Details_By_Id(PurchaseReturnViewModel prViewModel)
         {
             bool CheckFlag = false;
-
+            
 
             try
             {

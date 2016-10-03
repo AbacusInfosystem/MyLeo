@@ -18,7 +18,6 @@ using iTextSharp.text;
 using System.Transactions;
 using MyLeoRetailerRepo.Common;
 using MyLeoRetailerInfo.Color;
-using System.Transactions;
 
 
 namespace MyLeoRetailerRepo
