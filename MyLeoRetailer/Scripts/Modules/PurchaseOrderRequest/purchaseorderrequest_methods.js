@@ -971,6 +971,7 @@ function Add_Validation(i) {
     $("#textColour_Id_" + i).rules("add", { required: true, messages: { required: "Color is required." } });
     $("#textStart_Size_" + i).rules("add", { required: true, messages: { required: "Start size is required.", } });
     $("#textEnd_Size_" + i).rules("add", { required: true, messages: { required: "End size is required.", } });
+   
 
 }
 
