@@ -207,6 +207,8 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 //{
                 //Set_Date_Session(siViewModel.SalesInvoice);
 
+               // siViewModel.SalesInvoice.Sales_Invoice_No = Utility.Generate_Ref_No("SI-", "Sales_Invoice_No", "4", "15", "Sales_Invoice");
+
                 siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, Branch_Id, siViewModel.ReceivableItem);   //arr[i] instead of Branch_Id
 
                 //}

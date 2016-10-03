@@ -132,6 +132,7 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Receivable.Sales_Invoice_No));
            sqlParams.Add(new SqlParameter("@Customer_Name", Receivable.Customer_Name));
            sqlParams.Add(new SqlParameter("@Payment_Status", Receivable.Payment_Status));
+           sqlParams.Add(new SqlParameter("@Branch_Id", Receivable.Branch_Id));
 
            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Receivable_Search_Details.ToString(), CommandType.StoredProcedure);
 
@@ -222,6 +223,7 @@ namespace MyLeoRetailerRepo
                    {
                        rInfo.Balance_Amount = Convert.ToDecimal(dr["Net_Amount"]);
                    }
+
 
                    if (!dr.IsNull("Payment_Status"))
 
@@ -365,6 +367,15 @@ namespace MyLeoRetailerRepo
            //sqlParams.Add(new SqlParameter("@Payble_Status ", Receivable.Payble_Status));
 
            sqlParams.Add(new SqlParameter("@Payament_Date ", Receivable.Payament_Date));
+
+           if (Convert.ToInt32(Receivable.Branch_Id) != 0)
+           {
+               sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_Id));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@Branch_ID", 0));
+           }
 
            if (Receivable.Receivable_Item_Id != 0)
            {
@@ -660,6 +671,10 @@ namespace MyLeoRetailerRepo
                    if (!dr.IsNull("Balance_Amount"))
 
                        Receivable.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+
+                   if (!dr.IsNull("Branch_Id"))
+
+                       Receivable.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
 
                    if (!dr.IsNull("Payament_Date"))
 

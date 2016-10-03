@@ -120,17 +120,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 if (piViewModel.PurchaseInvoice.Purchase_Invoice_Id == 0)
                 {
-                    //piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                    //piViewModel.PurchaseInvoice.Created_By = piViewModel.Cookies.User_Id;
-
-                    //piViewModel.PurchaseInvoice.Created_Date = DateTime.Now;
-
-                    //piViewModel.PurchaseInvoice.Updated_By = piViewModel.Cookies.User_Id;
-
-                    //piViewModel.PurchaseInvoice.Updated_Date = DateTime.Now;
+                    piViewModel.PurchaseInvoice.Purchase_Invoice_No = Utility.Generate_Ref_No("PI-", "Purchase_Invoice_No", "4", "15", "Purchase_Invoice");
 
                     _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+
+                    piViewModel = new PurchaseInvoiceViewModel();
 
                     piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
                 }
@@ -142,6 +136,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
+                piViewModel = new PurchaseInvoiceViewModel();
+
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
             }
 
