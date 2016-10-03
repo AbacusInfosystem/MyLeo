@@ -277,7 +277,7 @@ function AddSalesOrderDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='1' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='1' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";

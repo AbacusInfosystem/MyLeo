@@ -141,4 +141,13 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
         public decimal Amount { get; set; }
 
     }
+
+    public class Filter_Purchase_Invoice
+    {
+        public string Purchase_Invoice_No
+        {
+            get;
+            set;
+        }
+    }
 }

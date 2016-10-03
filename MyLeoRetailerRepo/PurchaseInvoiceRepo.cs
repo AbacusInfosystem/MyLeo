@@ -318,7 +318,7 @@ namespace MyLeoRetailerRepo
 
         }
         
-        public List<PurchaseInvoiceInfo> Get_Purchase_Invoices(ref Pagination_Info Pager, string Purchase_Invoice_No)
+        public List<PurchaseInvoiceInfo> Get_Purchase_Invoices_List(ref Pagination_Info Pager, string Purchase_Invoice_No)
         {
             List<PurchaseInvoiceInfo> PurchaseInvoices = new List<PurchaseInvoiceInfo>();
 
@@ -334,6 +334,20 @@ namespace MyLeoRetailerRepo
             }
 
             return PurchaseInvoices;
+        }
+
+        public DataTable Get_Purchase_Invoice(Filter_Purchase_Invoice filter)
+        {
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Purchase_Invoice_No", filter.Purchase_Invoice_No));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Invoices.ToString(), CommandType.StoredProcedure);
+
+            return dt;
         }
 
         //public DataTable Get_Purchase_Invoices(QueryInfo query_Details)
