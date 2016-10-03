@@ -123,18 +123,22 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 Set_Date_Session(srViewModel.SalesReturn);
 
-                srViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                //srViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 //string[] arr = srViewModel.Cookies.Branch_Ids.Split(',');
 
-                string Branch_Id = srViewModel.Cookies.Branch_Ids.TrimEnd();
+                //string Branch_Id = srViewModel.Cookies.Branch_Ids.TrimEnd();
 
                 //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
 
                 //for (int i = 0; i < arr.Length; i++)
                 //{
 
-                srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList, Branch_Id);
+                srViewModel.SalesReturn.Sales_Return_No = Utility.Generate_Ref_No("SR-", "Sales_Return_No", "4", "15", "Sales_Return");
+
+                //srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList);
+
+                srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList);
                 //}
 
                 srViewModel.FriendlyMessages.Add(MessageStore.Get("SR01"));
@@ -187,7 +191,6 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             return RedirectToAction("View_Sales_Return", "SalesReturn");          
         }
-
 
         public ActionResult View_Sales_Return(SalesReturnViewModel srViewModel)
         {

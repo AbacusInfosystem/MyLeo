@@ -2,7 +2,7 @@
 @using MyLeoRetailer.Common;
 @using MyLeoRetailerInfo.Common;
 
-
+<script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_methods.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_events.js"></script>
 <!-- START BREADCRUMB -->
@@ -134,7 +134,7 @@
                                         <br />
                                         <br />
                                         <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>
-                                        @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
+                                        <button type="button" id="btnPay" class="btn btn-success green">Pay</button>
                                         <button type="reset" id="btnResetReceivable" class="btn btn-danger active">Reset</button>
                                     </div>
                                 </div>
@@ -144,142 +144,16 @@
 
                         </div>
 
-
-                        <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
-
-                            @if (Model.Receivables.Count() == 0)
-                            {
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive" style="margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditSalesInvoiceDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblBSalesInvoiceDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-
-                                                        <th>Sales Invoice No</th>
-                                                        <th>Sales Invoice Date</th>
-                                                        <th>Customer Name</th>
-                                                        <th>Customer Mobile</th>
-                                                        <th>Total Amount</th>
-                                                        <th>Amount Paid</th>
-                                                        <th>Amount Balance</th>
-                                                        @*<th>Payment Date</th>*@
-                                                        <th>Payment Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-
-
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                            else
-                            {
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive" style="margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditSalesInvoiceDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblBSalesInvoiceDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-
-                                                        <th>Sales Invoice No</th>
-                                                        <th>Sales Invoice Date</th>
-                                                        <th>Customer Name</th>
-                                                        <th>Customer Mobile</th>
-                                                        <th>Total Amount</th>
-                                                        <th>Amount Balance</th>
-                                                        @*<th>Payment Date</th>*@
-                                                        <th>Payment Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-
-                                                    @if (Model.Receivables != null && Model.Receivables.Count() > 0)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var itm in Model.Receivables)
-                                                        {
-                                                            <tr id="tr@(i)">
-
-
-                                                                <td>
-                                                                    <span id="trVendor@(i)"> @itm.Sales_Invoice_No</span>
-                                                                    <input type="hidden" id="hdnSales_Invoice_No@(i)" name="Receivables[@(i-1)].Sales_Invoice_No" value="@itm.Sales_Invoice_No">
-                                                                    <input type="hidden" id="hdnSales_Invoice_Id@(i)" name="Receivables[@(i-1)].Sales_Invoice_Id" value="@itm.Sales_Invoice_Id">
-                                                                    <input type="hidden" id="hdnReceivable_Id@(i)" name="Receivables[@(i-1)].Receivable_Id" value="@itm.Receivable_Id">
-
-
-                                                                </td>
-                                                                <td>
-                                                                    <span id="trSales_Invoice_Date@(i)"> @itm.Sales_Invoice_Date.ToShortDateString()</span>
-                                                                    <input type="hidden" id="hdnSales_Invoice_Date@(i)" name="Receivables[@(i-1)].Sales_Invoice_Date" value="@itm.Sales_Invoice_Date">
-                                                                </td>
-
-                                                                <td>
-                                                                    <span id="trCustomer_Name@(i)"> @itm.Customer_Name</span>
-                                                                    <input type="hidden" id="hdnCustomer_Name@(i)" name="Receivables[@(i-1)].Customer_Name" value="@itm.Customer_Name">
-                                                                </td>
-
-                                                                <td>
-                                                                    <span id="trCustomer_Name@(i)"> @itm.Customer_Mobile1</span>
-                                                                    <input type="hidden" id="hdnCustomer_Mobile1@(i)" name="Receivables[@(i-1)].Customer_Mobile1" value="@itm.Customer_Mobile1">
-                                                                </td>
-
-                                                                <td>
-                                                                    <span id="trNet_Amount@(i)"> @itm.Net_Amount</span>
-                                                                    <input type="hidden" id="hdnNet_Amount@(i)" name="Receivables[@(i-1)].Net_Amount" value="@itm.Net_Amount">
-                                                                </td>
-
-                                                                @*<td>
-                                                                    <span id="trPaid_Amount@(i)"> @itm.Paid_Amount</span>
-                                                                    <input type="hidden" id="hdnPaid_Amount@(i)" name="Receivables[@(i-1)].Paid_Amount" value="@itm.Paid_Amount">
-                                                                </td>*@
-                                                                <td>
-                                                                    <span id="trBalance_Amount@(i)"> @itm.Balance_Amount</span>
-                                                                    <input type="hidden" id="hdnBalance_Amount@(i)" name="Receivables[@(i-1)].Balance_Amount" value="@itm.Balance_Amount">
-                                                                </td>
-
-                                                                @*<td>
-                                                                    <span id="trPayament_Date@(i)"> @itm.Payament_Date.ToShortDateString()</span>
-                                                                    <input type="hidden" id="hdnPayament_Datet@(i)" name="Receivables[@(i-1)].Payament_Date" value="@itm.Payament_Date">
-                                                                </td>*@
-                                                                <td>
-                                                                    <span id="trPayment_Status_Value@(i)"> @itm.Payment_Status_Value</span>
-                                                                    <input type="hidden" id="hdnPayment_Status_Value@(i)" name="Receivables[@(i-1)].Payment_Status_Value" value="@itm.Payment_Status_Value">
-                                                                </td>
-
-
-
-                                                                <td class='edit'>
-                                                                    <button class="btn btn-success active" type="button" id="btnReceivablesPay" onclick="Get_Receivables(@itm.Sales_Invoice_Id,@itm.Sales_Credit_Note_Id)">Pay</button>
-                                                                </td>
-                                                            </tr>
-                                                            i = i + 1;
-                                                        }
-                                                    }
-
-
-                                                </thead>
-                                                <tbody></tbody>
-
-
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            }
+                        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
                         </div>
+
+                        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divReceivablePager">
+
+
+                        </div>
+
+               
 
                     </div>
 

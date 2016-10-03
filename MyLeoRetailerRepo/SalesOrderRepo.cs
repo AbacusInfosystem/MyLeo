@@ -360,10 +360,10 @@ namespace MyLeoRetailerRepo
             return salesinvoice;
         }
 
-        public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems, string Branch_Id, List<Receivable> ReceivableItem)
+        public int Insert_SalesOrder(SalesInvoiceInfo salesInvoice, List<SaleOrderItems> salesOrderItems, List<Receivable> ReceivableItem)
         {
 
-            salesInvoice.Sales_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesOrder(salesInvoice, Branch_Id), Storeprocedures.sp_Insert_Sales_Invoice.ToString(), CommandType.StoredProcedure));
+            salesInvoice.Sales_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesOrder(salesInvoice), Storeprocedures.sp_Insert_Sales_Invoice.ToString(), CommandType.StoredProcedure));
 
             Insert_SalesOrder_Items(salesOrderItems, salesInvoice, salesInvoice.Sales_Invoice_Id);
 
@@ -384,6 +384,15 @@ namespace MyLeoRetailerRepo
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
             sqlParams.Add(new SqlParameter("@Receivable_Id", salesInvoice.Receivable_Id));
+
+            if (salesInvoice.Branch_Id != 0)
+            {
+                sqlParams.Add(new SqlParameter("@Branch_ID", salesInvoice.Branch_Id));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@Branch_ID", 0));
+            }
 
             sqlParams.Add(new SqlParameter("@Sales_Invoice_Id", salesInvoice.Sales_Invoice_Id));
 
@@ -456,7 +465,7 @@ namespace MyLeoRetailerRepo
             return Balance_Amount;
         }
 
-        private List<SqlParameter> Set_Values_In_SalesOrder(SalesInvoiceInfo salesInvoice, string Branch_Id)
+        private List<SqlParameter> Set_Values_In_SalesOrder(SalesInvoiceInfo salesInvoice)
         {
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
@@ -474,9 +483,9 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Sales_Invoice_No", DBNull.Value));
             }
-            if (Convert.ToInt32(Branch_Id) != 0)
+            if (salesInvoice.Branch_Id != 0)
             {
-                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+                sqlParams.Add(new SqlParameter("@Branch_ID", salesInvoice.Branch_Id));
             }
             else
             {

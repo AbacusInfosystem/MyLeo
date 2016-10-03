@@ -6,10 +6,10 @@
 
             rules:
                 {
-                    "SalesReturn.Sales_Return_No":
-                       {
-                           required: true,
-                       },
+                    //"SalesReturn.Sales_Return_No":
+                    //   {
+                    //       required: true,
+                    //   },
                     "SalesReturn.SalesReturn_Date":
                         {
                             required: true,
