@@ -19,7 +19,7 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
-       public int Branch_Id
+       public int Branch_ID
        {
            get;
            set;

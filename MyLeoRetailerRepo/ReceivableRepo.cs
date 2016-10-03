@@ -101,7 +101,48 @@ namespace MyLeoRetailerRepo
            return Receivables;
        }
 
-       public List<ReceivableInfo> Get_Receivable_Search_Details(ReceivableInfo Receivable) //.... 
+       public DataTable Get_Receivable_Search_Details(ReceivableInfo Receivable, string Branch_ID) //.... 
+       {
+           DataTable dt = new DataTable();
+
+           List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
+
+           List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+           if (Receivable.From_Date == DateTime.MinValue)
+           {
+               DateTime? someDate = null;
+               sqlParams.Add(new SqlParameter("@From_Date", someDate));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@From_Date", Receivable.From_Date));
+           }
+
+           if (Receivable.To_Date == DateTime.MinValue)
+           {
+               DateTime? someDate = null;
+               sqlParams.Add(new SqlParameter("@To_Date", someDate));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@To_Date", Receivable.To_Date));
+           }
+
+           //sqlParams.Add(new SqlParameter("@From_Date", Receivable.From_Date == DateTime.MinValue ? null : Receivable.From_Date.ToString("mm-dd-yy")));
+           //sqlParams.Add(new SqlParameter("@To_Date", Receivable.To_Date == DateTime.MinValue ? null : Receivable.To_Date.ToString("mm-dd-yy")));
+           sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Receivable.Sales_Invoice_No));
+           sqlParams.Add(new SqlParameter("@Customer_Name", Receivable.Customer_Name));
+           sqlParams.Add(new SqlParameter("@Payment_Status", Receivable.Payment_Status));
+           sqlParams.Add(new SqlParameter("@Branch_ID", Branch_ID));
+
+           dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Receivable_Search_Details.ToString(), CommandType.StoredProcedure);
+                     
+           return dt;
+       }
+
+
+       public List<ReceivableInfo> Get_Receivable_Search_Details_List(ReceivableInfo Receivable, string Branch_ID) //.... 
        {
            List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
 
@@ -132,7 +173,7 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Receivable.Sales_Invoice_No));
            sqlParams.Add(new SqlParameter("@Customer_Name", Receivable.Customer_Name));
            sqlParams.Add(new SqlParameter("@Payment_Status", Receivable.Payment_Status));
-           sqlParams.Add(new SqlParameter("@Branch_Id", Receivable.Branch_Id));
+           sqlParams.Add(new SqlParameter("@Branch_ID", Branch_ID));
 
            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Receivable_Search_Details.ToString(), CommandType.StoredProcedure);
 
@@ -368,14 +409,16 @@ namespace MyLeoRetailerRepo
 
            sqlParams.Add(new SqlParameter("@Payament_Date ", Receivable.Payament_Date));
 
-           if (Convert.ToInt32(Receivable.Branch_Id) != 0)
-           {
-               sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_Id));
-           }
-           else
-           {
-               sqlParams.Add(new SqlParameter("@Branch_ID", 0));
-           }
+           sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_ID));
+
+           //if (Convert.ToInt32(Receivable.Branch_ID) != 0)
+           //{
+           //    sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_ID));
+           //}
+           //else
+           //{
+           //    sqlParams.Add(new SqlParameter("@Branch_ID", 0));
+           //}
 
            if (Receivable.Receivable_Item_Id != 0)
            {
@@ -672,9 +715,9 @@ namespace MyLeoRetailerRepo
 
                        Receivable.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
 
-                   if (!dr.IsNull("Branch_Id"))
+                   if (!dr.IsNull("Branch_ID"))
 
-                       Receivable.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+                       Receivable.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
 
                    if (!dr.IsNull("Payament_Date"))
 
