@@ -547,6 +547,8 @@ function EditReceivableData(id) {
 
     $("#txtCheque_No").val($("#hdnCheque_No" + id).val());
 
+    $("#a123").val($("#hdnCheque_Date" + id).val());
+
     $("#txtCheque_Date").val($("#hdnCheque_Date" + id).val());
 
     $("#txtBank_Name").val($("#hdnBank_Name" + id).val());

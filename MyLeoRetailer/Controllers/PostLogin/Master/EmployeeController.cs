@@ -250,7 +250,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public ActionResult ChangeBranch()
         {
             EmployeeViewModel eViewModel = new EmployeeViewModel();
-            if (Request.Cookies["LoginInfo"] != null)
+            if (Request.Cookies["MyLeoLoginInfo"] != null)
             {
                 //var barchid = Request.Cookies["LoginInfo"].Value;
                 MyLeoRetailer.Models.PreLogin.LoginViewModel lViewModel=new Models.PreLogin.LoginViewModel ();
