@@ -103,8 +103,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
-                            <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Receivable.Cheque_Date" value="@((Model.Receivable.Cheque_Date == DateTime.MinValue ? "" : Model.Receivable.Cheque_Date.ToShortDateString()))"/>
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtCheque_Date" name="Receivable.Cheque_Date" value="@((Model.Receivable.Cheque_Date == DateTime.MinValue ? "" : Model.Receivable.Cheque_Date.ToShortDateString()))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -167,9 +167,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
-                            <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" />
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                
                             </div>
                         </div>
                     </div>
@@ -322,7 +323,7 @@
                                             </td>
                                             <td>
                                                 <span> @itm.Cheque_Date.ToShortDateString()</span>
-                                                <input type="hidden" id="hdnCheque_Date@(itm.Receivable_Item_Id)" name="Receivable.Cheque_Date[@(i-1)]" value="@itm.Cheque_Date">
+                                                <input type="hidden" id="hdnCheque_Date@(itm.Receivable_Item_Id)" name="Receivable.Cheque_Date[@(i-1)]" value="@itm.Cheque_Date.ToShortDateString()">
                                             </td>
                                             <td>
                                                 <span> @itm.Bank_Name</span>
