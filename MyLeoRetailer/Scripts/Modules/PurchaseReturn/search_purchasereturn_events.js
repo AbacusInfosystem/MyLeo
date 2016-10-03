@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    document.getElementById('btnEditPurchaseReturn').disabled = false;
+    document.getElementById('btnEditPurchaseReturn').disabled = true;
    
     Get_Purchase_Returns();
 

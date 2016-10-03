@@ -120,17 +120,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 if (piViewModel.PurchaseInvoice.Purchase_Invoice_Id == 0)
                 {
-                    //piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                    //piViewModel.PurchaseInvoice.Created_By = piViewModel.Cookies.User_Id;
-
-                    //piViewModel.PurchaseInvoice.Created_Date = DateTime.Now;
-
-                    //piViewModel.PurchaseInvoice.Updated_By = piViewModel.Cookies.User_Id;
-
-                    //piViewModel.PurchaseInvoice.Updated_Date = DateTime.Now;
+                    piViewModel.PurchaseInvoice.Purchase_Invoice_No = Utility.Generate_Ref_No("PI-", "Purchase_Invoice_No", "4", "15", "Purchase_Invoice");
 
                     _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+
+                    piViewModel = new PurchaseInvoiceViewModel();
 
                     piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
                 }
@@ -142,6 +136,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
+                piViewModel = new PurchaseInvoiceViewModel();
+
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
             }
 
@@ -212,6 +208,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public JsonResult Get_Purchase_Invoices(PurchaseInvoiceViewModel piViewModel)
         {
+            Pagination_Info pager = new Pagination_Info();
+
+            pager = piViewModel.Grid_Detail.Pager;
+
+            piViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Challan_No,Purchase_Invoice_Date,Vendor_Name,Total_Quantity,Net_Amount,Transporter_Name,Lr_No", "Purchase_Invoice_Id"); // Set grid info for front end listing
+
+            piViewModel.Grid_Detail.Records = _purchaseinvoiceRepo.Get_Purchase_Invoice(piViewModel.Filter); // Call repo method 
+
+            Set_Pagination(pager, piViewModel.Grid_Detail); // set pagination for grid
+
+            piViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(piViewModel));
+        }
+
+        public JsonResult Get_Purchase_Invoices_List(PurchaseInvoiceViewModel piViewModel)
+        {
             try
             {
                 piViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
@@ -220,7 +233,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 pager = piViewModel.Pager;
 
-                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoices(ref pager, piViewModel.Filter.Purchase_Invoice_No);
+                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoices_List(ref pager, piViewModel.Filter.Purchase_Invoice_No);
 
                 piViewModel.Pager = pager;
 

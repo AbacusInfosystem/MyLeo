@@ -42,6 +42,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
            ReceivableRepo rRepo = new ReceivableRepo();
 
+
            rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
 
             return View("Index", rViewModel);
@@ -50,6 +51,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public ActionResult Get_Receivable(ReceivableViewModel rViewModel)
         {
             ReceivableRepo rRepo = new ReceivableRepo();
+
+            rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            string Branch_Id = rViewModel.Cookies.Branch_Ids.TrimEnd();
 
                 rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
 

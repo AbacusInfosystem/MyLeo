@@ -166,6 +166,9 @@ function CalculateDiscount() {
    
 
     //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+    //$("#txtPaid_Amount").enabled = false;
+    document.getElementById("txtPaid_Amount").disabled = true;
  
     
 
@@ -185,6 +188,12 @@ function BalanceAmount() {
     $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
 
 
+
+}
+
+function Cancle() {
+
+    document.getElementById("txtPaid_Amount").disabled = false;
 
 }
 
@@ -266,6 +275,8 @@ function Save_Receivable_Data() {
             Bind_Payable_Grid_Items(obj);
 
             Friendly_Messages(obj);
+
+            Cancle();
 
             //Friendly_Messages(obj);
 
@@ -445,9 +456,9 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<input type='hidden' id='hdnCredit_Note_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_Amount + "'/>";
 
-        htmlText += "<input type='hidden' id='hdnCredit_Card_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Card_No + "'/>";
-
         htmlText += "<input type='hidden' id='hdnCredit_Note_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_Date + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Card_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Card_No + "'/>";
 
         htmlText += "<input type='hidden' id='hdnCard_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Card_Amount + "'/>";
 
@@ -535,6 +546,8 @@ function EditReceivableData(id) {
     $("#txtCheque_Amount").val($("#hdnCheque_Amount" + id).val());
 
     $("#txtCheque_No").val($("#hdnCheque_No" + id).val());
+
+    $("#a123").val($("#hdnCheque_Date" + id).val());
 
     $("#txtCheque_Date").val($("#hdnCheque_Date" + id).val());
 
