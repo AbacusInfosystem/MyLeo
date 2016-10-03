@@ -97,7 +97,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 {
                     poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                    poreqViewModel.PurchaseOrderRequest.Branch_Id = Convert.ToInt32(poreqViewModel.Cookies.Branch_Ids.TrimEnd());
+                 //   poreqViewModel.PurchaseOrderRequest.Branch_Id = Convert.ToInt32(poreqViewModel.Cookies.Branch_Ids.TrimEnd());
 
                     poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id = _purchaseorderrequestRepo.Insert_Purchase_Order_Request(poreqViewModel.PurchaseOrderRequest);
 

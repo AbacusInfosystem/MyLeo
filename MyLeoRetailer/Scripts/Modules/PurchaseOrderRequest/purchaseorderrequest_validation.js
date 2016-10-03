@@ -1,6 +1,11 @@
 ﻿$(function () {
     $("#frmPurchaseOrderRequest").validate({
         rules: {
+            //Added by vinod mane on 03/10/2016
+            "PurchaseOrderRequest.Branch_Id": {
+                required: true
+            },
+            //End
             "PurchaseOrderRequest.Vendor_Id": {
                 required: true
             },
@@ -41,6 +46,11 @@
         },
         messages: {
 
+            //Added by vinod mane on 03/10/2016
+            "PurchaseOrderRequest.Branch_Id": {
+                required: "Branch name is required."
+            },
+            //End
             "PurchaseOrderRequest.Vendor_Id": {
                 required: "Vendor name is required."
             },
