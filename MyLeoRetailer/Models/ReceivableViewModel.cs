@@ -28,6 +28,8 @@ namespace MyLeoRetailer.Models
 
             Receivables1 = new List<ReceivableInfo>();
 
+            Cookies = new LoginInfo();
+
             GiftVoucher = new GiftVoucherInfo();
 
             GiftVouchers = new List<GiftVoucherInfo>();
@@ -42,6 +44,12 @@ namespace MyLeoRetailer.Models
         public List<CreditNote> Credit_Notes { get; set; }
 
         public GiftVoucherInfo GiftVoucher
+        {
+            get;
+            set;
+        }
+
+        public LoginInfo Cookies
         {
             get;
             set;
