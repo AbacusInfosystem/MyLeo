@@ -153,20 +153,20 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
-        public int Insert_SalesReturn(SalesReturnInfo salesReturn, List<SaleReturnItems> salesReturnItems, string Branch_Id)
+        public int Insert_SalesReturn(SalesReturnInfo salesReturn, List<SaleReturnItems> salesReturnItems)
         {
 
-            salesReturn.Sales_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesReturn(salesReturn, Branch_Id), Storeprocedures.sp_Insert_Sales_Return.ToString(), CommandType.StoredProcedure));
+            salesReturn.Sales_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesReturn(salesReturn), Storeprocedures.sp_Insert_Sales_Return.ToString(), CommandType.StoredProcedure));
 
             Insert_SalesReturn_Items(salesReturnItems, salesReturn, salesReturn.Sales_Return_Id);
 
-            salesReturn.Sales_Credit_Note_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesCreditNote(salesReturn, Branch_Id), Storeprocedures.sp_Insert_Sales_Credit_Notes.ToString(), CommandType.StoredProcedure));
+            salesReturn.Sales_Credit_Note_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesCreditNote(salesReturn), Storeprocedures.sp_Insert_Sales_Credit_Notes.ToString(), CommandType.StoredProcedure));
 
             return salesReturn.Sales_Return_Id;
 
         }
 
-        private List<SqlParameter> Set_Values_In_SalesCreditNote(SalesReturnInfo salesReturn, string Branch_Id)
+        private List<SqlParameter> Set_Values_In_SalesCreditNote(SalesReturnInfo salesReturn)
         {
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
@@ -185,9 +185,9 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Sales_Return_Id", 0));
             }
 
-            if (Convert.ToInt32(Branch_Id) != 0)
+            if (salesReturn.Branch_Id != 0)
             {
-                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+                sqlParams.Add(new SqlParameter("@Branch_ID", salesReturn.Branch_Id));
             }
             else
             {
@@ -232,7 +232,7 @@ namespace MyLeoRetailerRepo
             return sqlParams;
         }
 
-        private List<SqlParameter> Set_Values_In_SalesReturn(SalesReturnInfo salesReturn, string Branch_Id)
+        private List<SqlParameter> Set_Values_In_SalesReturn(SalesReturnInfo salesReturn)
         {
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
@@ -250,9 +250,9 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Sales_Return_No", DBNull.Value));
             }
-            if (Convert.ToInt32(Branch_Id) != 0)
+            if (salesReturn.Branch_Id != 0)
             {
-                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+                sqlParams.Add(new SqlParameter("@Branch_ID", salesReturn.Branch_Id));
             }
             else
             {
