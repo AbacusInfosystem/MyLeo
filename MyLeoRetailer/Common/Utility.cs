@@ -30,6 +30,8 @@ namespace MyLeoRetailer.Common
                 loginInfo = _lRepo.Get_User_Data_By_User_Token(token, branches);
 
                 loginInfo.Branch_Ids = branches;
+
+                loginInfo.Page_URL = HttpContext.Current.Request.Url.ToString().ToLower();
             }
             
             return loginInfo;
