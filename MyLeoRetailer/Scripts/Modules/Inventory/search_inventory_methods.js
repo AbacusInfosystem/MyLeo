@@ -1,5 +1,5 @@
 ﻿
-function Get_Inventory() {
+function Get_Inventories() {
     var iViewModel =
 		{
 		    Filter: {

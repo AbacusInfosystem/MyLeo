@@ -1,10 +1,10 @@
 ﻿$(function () {
 
-    Get_Inventory();
+    Get_Inventories();
 
     $("#btnSearchInventory").click(function () {
 
-        Get_Inventory();
+        Get_Inventories();
 
     });
 
