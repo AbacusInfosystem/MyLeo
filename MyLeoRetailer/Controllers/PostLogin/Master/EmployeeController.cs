@@ -51,7 +51,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         [AuthorizeUserAttribute(AppFunction.Employee_Management_Access)]
         public ActionResult Search(EmployeeViewModel eViewModel)
-        {
+        {          
             try
             {
                 if (TempData["eViewModel"] != null)
@@ -266,19 +266,31 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Save_Employee_Branch_Id(EmployeeViewModel eViewModel)
         {
-            //Response.Cookies["LoginInfo"]["Branch_Ids"] = Branch_Ids;
+            var url = Convert.ToString(eViewModel.Page_URL);
 
-           var Branch_Ids= eRepo.Save_Change_BranchId(eViewModel.Employee_Branch_List);
+            var Branch_Ids = eRepo.Save_Change_BranchId(eViewModel.Employee_Branch_List);
 
-           Set_Branch_Cookies(eViewModel.Employee.Employee_Id, Branch_Ids);
+            Set_Branch_Cookies(eViewModel.Employee.Employee_Id, Branch_Ids);
 
-           eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
+            eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
 
-           eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
+            eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
 
-           eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+            eViewModel.Cookies.Branch_Ids = Branch_Ids;
 
-           return View("ChangeBranch", eViewModel);
+            //eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            eViewModel.Cookies.Page_URL = url;
+
+            var split = url.Substring(23);
+
+            var temp = split.Split('/');
+
+            var controller = temp[0];
+
+            var method = temp[1];
+
+            return RedirectToAction(method, controller);
         }
 
         public void Set_Branch_Cookies(int User_Id, string Branch_Ids)

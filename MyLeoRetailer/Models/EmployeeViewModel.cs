@@ -104,6 +104,11 @@ namespace MyLeoRetailer.Models
 
         public LoginInfo Cookies { get; set; }
 
+        //Gauravi 4-10-2016
+        public string Page_URL { get; set; }
+
+        //
+
     }
 
     public class Filter_Employee

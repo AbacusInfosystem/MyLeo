@@ -13,6 +13,8 @@ namespace MyLeoRetailerInfo.Employee
           //  IsActive = true;
 		}
 
+       
+
         public int Employee_Id { get; set; }
 
         public int Branch_Id { get; set; }
