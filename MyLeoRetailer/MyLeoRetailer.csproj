@@ -1206,6 +1206,7 @@
     <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Employee\_ChangeBranch.cshtml" />
     <Content Include="Views\Shared\_ChangeBranch.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\_Update_GR_No.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,7 +1,9 @@
 ﻿$(function () {
 
 
-    $("#btnView").hide();
+    //$("#btnView").hide();
+
+    document.getElementById('btnView').disabled = true;
 
     Get_SalesReturns();
 
@@ -18,7 +20,9 @@
         {
             $("#hdnSalesReturnID").val(this.value);
 
-            $('#btnView').show();
+           // $('#btnView').show();
+
+            document.getElementById('btnView').disabled = false;
         }
     });
 

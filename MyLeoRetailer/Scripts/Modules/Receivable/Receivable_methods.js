@@ -1,6 +1,92 @@
-﻿
+﻿function Get_Receivables() {
 
-function Get_Receivables(Sales_Invoice_Id, Sales_Credit_Note_Id) {
+    var rViewModel =
+		{
+		    Receivable: {
+
+		        Sales_Invoice_Id: $("#hdf_Sales_Invoice_Id").val()
+		    },
+		    Grid_Detail: {
+
+		        Pager: Set_Pager($("#divReceivablePager"))
+		    }
+		}
+
+    $.ajax({
+
+        url: "/Receivable/Get_Receivable_Details_By_Id",
+
+        data: JSON.stringify(rViewModel),
+
+        dataType: 'json',
+
+        type: 'POST',
+
+        contentType: 'application/json',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            Bind_Payable_Grid_Items(obj);
+
+            Friendly_Messages(obj);
+        }
+    });
+
+    //$("#hdf_Sales_Invoice_Id").val(Sales_Invoice_Id);
+    
+    //$("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id");
+    //$("#frmReceivable").submit();
+}
+
+function Get_Receivable() {
+    var rViewModel =
+		{
+		    Receivable: {
+
+		        From_Date: $("[name='Receivable.From_Date']").val(),
+
+		        To_Date: $("[name='Receivable.To_Date']").val(),
+
+		        Sales_Invoice_No: $("[name='Receivable.Sales_Invoice_No']").val(),
+
+		        Customer_Name: $("[name='Receivable.Customer_Name']").val(),
+
+		        Payment_Status: $("[name='Receivable.Payment_Status']").val()
+		    },
+		    Grid_Detail: {
+
+		        Pager: Set_Pager($("#divReceivablePager"))
+		    }
+		}
+
+    $.ajax({
+
+        url: "/Receivable/Get_Receivable",
+
+        data: JSON.stringify(rViewModel),
+
+        dataType: 'json',
+
+        type: 'POST',
+
+        contentType: 'application/json',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            Bind_Grid(obj, "Get_Receivable_Search_Details_List");
+
+            $("#divReceivablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            Friendly_Messages(obj);
+        }
+    });
+}
+
+function Get_Receivables1(Sales_Invoice_Id, Sales_Credit_Note_Id) {
 
     $("#hdf_Sales_Invoice_Id").val(Sales_Invoice_Id);
 
@@ -295,9 +381,13 @@ function Bind_Payable_Grid_Items(data) {
 
     $("#hdnReceivable_Id").val(data.Receivable.Receivable_Id),
 
+     $("#hdf_Sales_Credit_Note_Id").val(data.Receivable.Sales_Credit_Note_Id),
+
+    $("#hdf_Gift_Voucher_Id").val(data.Receivable.Gift_Voucher_Id),
+
     $("#hdnSales_Invoice_Id").val(data.Receivable.Sales_Invoice_Id),
 
-   // $("#txtTotal_MRP_Amount").val(data.Receivable.Total_MRP_Amount),
+    $("#txtNet_Amount").val(data.Receivable.Net_Amount),
 
     $("#txtBalance_Amount").val(data.Receivable.Balance_Amount);
 

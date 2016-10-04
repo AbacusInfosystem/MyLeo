@@ -30,15 +30,20 @@ namespace MyLeoRetailer.Models
 
             Cookies = new LoginInfo();
 
+            Pager = new Pagination_Info();
+
             GiftVoucher = new GiftVoucherInfo();
 
             GiftVouchers = new List<GiftVoucherInfo>();
 
             Credit_Notes = new List<CreditNote>();
 
-            //Grid_Detail.Pager.DivObject = "divGiftVoucherPager";
+            Grid_Detail.Pager.DivObject = "divReceivablePager";
 
-            //Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
+            Grid_Detail.Pager.CallBackMethod = "Get_Receivable_Search_Details";
+
+
+            Grid_Detail.Pager.CallBackMethod = "Get_Receivable";
         }
 
         public List<CreditNote> Credit_Notes { get; set; }
@@ -55,6 +60,12 @@ namespace MyLeoRetailer.Models
             set;
         }
 
+
+        public Pagination_Info Pager
+        {
+            get;
+            set;
+        }
 
         public List<GiftVoucherInfo> GiftVouchers
         {
