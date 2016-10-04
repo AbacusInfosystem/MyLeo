@@ -169,36 +169,15 @@ namespace MyLeoRetailerRepo
             sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Delete_Dispatch_Product.ToString(), CommandType.StoredProcedure);
         }
 
-        public List<ProductDispatchInfo> Dispatched_Product_Listing(string branch_Ids)
+        public DataTable Dispatched_Product_Listing(string branch_Ids)
         {
-            List<ProductDispatchInfo> product_List = new List<ProductDispatchInfo>();
-
             List<SqlParameter> sqlparam = new List<SqlParameter>();
 
             sqlparam.Add(new SqlParameter("@branch_Ids", branch_Ids));
 
             DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.sp_Dispatched_Product_Listing.ToString(), CommandType.StoredProcedure);
 
-            foreach (DataRow dr in dt.Rows)
-            {
-                ProductDispatchInfo product = new ProductDispatchInfo();
-
-                product.Dispatch_Id = Convert.ToInt32(dr["Dispatch_Id"]);
-
-                product.Request_Id = Convert.ToInt32(dr["Request_Id"]); // purchase_Order_Request_Id
-
-                product.Dispatch_Date = Convert.ToDateTime(dr["Dispatch_Date"]);
-
-                product.SKU = Convert.ToString(dr["SKU"]);
-
-                product.Quantity = Convert.ToInt32(dr["Dispatch_Quantity"]);
-
-                product.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
-
-                product_List.Add(product);
-
-            }
-            return product_List;
+            return dt;
         }
 
     }

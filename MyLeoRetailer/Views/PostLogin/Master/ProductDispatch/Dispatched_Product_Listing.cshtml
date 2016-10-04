@@ -4,9 +4,9 @@
     ViewBag.Title = "Search";
 }
 
-<script src="/Scripts/Modules/common_methods.js"></script>
-<script src="~/Scripts/Modules/ProductDispatch/search_product_dispatch_event.js"></script>
-<script src="~/Scripts/Modules/ProductDispatch/search_product_dispatch_method.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/Customised_Comman_Method.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/dispatched_product_listing_event.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/dispatched_product_listing_method.js"></script>
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -45,50 +45,12 @@
 
                             <input type="hidden" id="hdnSKU" value="" name="product_Dispatch.SKU" />
 
-                            <div class="table-responsive" style="width:100%; margin: 0px 0;">
-                                <table class="table table-bordered table-hover" id="tblProduct_Dispatch">
-                                    <thead>
-                                        <tr>
-                                            <th width="100px"></th>
-                                            <th width="150px">SKU No.</th>
-                                            <th width="70px">Dispatch Quantity</th>
-                                            <th width="70px">Dispatch Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @{
-                                             var i=0;
-                                            foreach (var item in Model.List_product_Dispatch)
-                                            {
-                                                
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" id="" name="List_product_Dispatch[@i].Dispatch_Id" value="@item.Dispatch_Id" />
-                                                    </td>
 
-                                                     <td>
-                                                        @Model.product_Dispatch.SKU
-                                                         <input type="hidden" id="hdn_Dispatch_Id" name="List_product_Dispatch[@i].Branch_Id" value="@item.Branch_Id" />
-                                                         <input type="hidden" id="hdn_SKU" name="List_product_Dispatch[@i].SKU" value="@item.SKU" />
-                                                    </td>
+                            <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-                                                    <td>
-                                                        @item.Quantity
-                                                        <input type="hidden" id="hdn_Quantity" name="List_product_Dispatch[@i].Quantity" value="@item.Quantity" />
-                                                    </td>
+                            </div>
 
-                                                    <td>
-                                                        @item.Dispatch_Date.ToString("dd-MM-yyyy")
-                                                    </td>
-
-                                                   
-                                                </tr>
-                                            }
-                                        }
-                                    </tbody>
-                                </table>
-                                <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
-                                </div><!-- /.col -->
+                            <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
 
                             </div>
 

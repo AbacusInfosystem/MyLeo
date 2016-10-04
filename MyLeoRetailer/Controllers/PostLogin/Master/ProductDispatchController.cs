@@ -72,15 +72,28 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Dispatched_Product_Listing(ProductDispatchViewModel pViewModel)
         {
+           return View(pViewModel);
+        }
+
+        public JsonResult Dispatched_Product_Listing_binding(ProductDispatchViewModel pViewModel)
+        {
 
             Pagination_Info pager = new Pagination_Info();
 
             pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            pViewModel.List_product_Dispatch = pRepo.Dispatched_Product_Listing(pViewModel.Cookies.Branch_Ids.TrimEnd());
+            pViewModel.Grid_Detail = Set_Grid_Details(false, "SKU,Quantity,Dispatch_Date", "Dispatch_Id,Request_Id,Branch_Id"); // Set grid info for front end listing
 
-            return View(pViewModel);
+            pViewModel.Grid_Detail.Records = pRepo.Dispatched_Product_Listing(pViewModel.Cookies.Branch_Ids.TrimEnd()); // Call repo method 
+
+            Set_Pagination(pager, pViewModel.Grid_Detail); // set pagination for grid
+
+            pViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(pViewModel));
         }
        
+
+
     }
 }
