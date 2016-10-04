@@ -67,7 +67,19 @@ namespace MyLeoRetailerInfo.Inventory
 
     public class Filter_Inventory
     {
-        public string Inventory_Id
+        public int Inventory_Id
+        {
+            get;
+            set;
+        }
+
+        public int Branch_Id
+        {
+            get;
+            set;
+        }
+
+        public string Product_SKU
         {
             get;
             set;
