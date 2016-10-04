@@ -139,8 +139,10 @@ namespace MyLeoRetailerHelper
 
             currentPage = endPage;  // You can also set it to startPage.
 
+
             #endregion
 
+            
             #region Total Record Message
 
             string position_Message = Set_Position_Message(pageAndRecordLabel, currentPage, pagesize, totalRecords);
@@ -164,7 +166,10 @@ namespace MyLeoRetailerHelper
 
             if (startPage > 1)
             {
-                pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //Added by vinod mane on 04/10/2016
+                pagerStr.Append("<a href=\"javascript: MoveQuick('Previous','" + grid_div + "'," + callback + ");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //End
             }
 
             #endregion
@@ -226,6 +231,8 @@ namespace MyLeoRetailerHelper
 
             currentPage = startPage;
 
+         
+
             #endregion
 
             #region Total Record Message
@@ -251,7 +258,10 @@ namespace MyLeoRetailerHelper
 
             if (startPage > 1)
             {
-                pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //Added by vinod mane on 04/10/2016
+                pagerStr.Append("<a href=\"javascript: MoveQuick('Previous','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //End
             }
 
             #endregion
@@ -338,7 +348,10 @@ namespace MyLeoRetailerHelper
 
             if (startPage > 1)
             {
-                pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //Added by vinod mane on 04/10/2016
+                pagerStr.Append("<a href=\"javascript: MoveQuick('Previous','" + grid_div + "'," + callback + ");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //End
             }
 
             #endregion
@@ -403,7 +416,10 @@ namespace MyLeoRetailerHelper
 
             if (startPage > 1)
             {
-                pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous1</a>");
+                //Added by vinod mane on 04/10/2016
+                pagerStr.Append("<a href=\"javascript: MoveQuick('Previous','" + grid_div + "'," + callback + ");\" class='paginate_button previous' tabindex='0'>Previous</a>");
+                //End
             }
 
             #endregion
@@ -473,9 +489,11 @@ namespace MyLeoRetailerHelper
 
             if (pageAndRecordLabel)
             {
+               
                 from = ((currentPage * pagesize) - (pagesize)) + 1;
 
                 to = from + (pagesize - 1);
+              
 
                 //pagerStr.Append("<div class='dataTables_info'>Showing " + from + " to " + to + " of " + totalRecords + " entries</div>");
 
