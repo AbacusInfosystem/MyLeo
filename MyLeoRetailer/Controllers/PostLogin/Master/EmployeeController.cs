@@ -247,7 +247,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         #region Change Branch
         //Addition by swapnali | Date:14/09/2016
-        public ActionResult ChangeBranch()
+        public PartialViewResult ChangeBranch()
         {
             EmployeeViewModel eViewModel = new EmployeeViewModel();
             if (Request.Cookies["MyLeoLoginInfo"] != null)
@@ -261,7 +261,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 eViewModel.Employee.Employee_Id=lViewModel.Cookies.User_Id;
 
             }
-            return View("ChangeBranch", eViewModel);
+            return PartialView("_ChangeBranch", eViewModel);
         }
 
         public ActionResult Save_Employee_Branch_Id(EmployeeViewModel eViewModel)
