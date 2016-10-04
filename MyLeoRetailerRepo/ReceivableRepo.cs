@@ -36,6 +36,7 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Receivable.Sales_Invoice_No));
            sqlParams.Add(new SqlParameter("@Payment_Status", Receivable.Payment_Status));
 
+
            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Receivables.ToString(), CommandType.StoredProcedure);
 
            if (dt != null && dt.Rows.Count > 0)
@@ -252,6 +253,14 @@ namespace MyLeoRetailerRepo
 
                        rInfo.Sales_Invoice_Id = Convert.ToInt32(dr["Sales_Invoice_Id"]);
 
+                   if (!dr.IsNull("Branch_ID"))
+
+                       rInfo.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
+
+                   if (!dr.IsNull("Branch_Name"))
+
+                       rInfo.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+
                    if (!dr.IsNull("Receivable_Id"))
 
                        rInfo.Receivable_Id = Convert.ToInt32(dr["Receivable_Id"]);
@@ -265,6 +274,12 @@ namespace MyLeoRetailerRepo
                        rInfo.Balance_Amount = Convert.ToDecimal(dr["Net_Amount"]);
                    }
 
+                   if (!dr.IsNull("Payament_Date"))
+
+                       rInfo.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
+
+                        rInfo.Payament_Date.ToShortDateString();
+
 
                    if (!dr.IsNull("Payment_Status"))
 
@@ -277,6 +292,8 @@ namespace MyLeoRetailerRepo
                    if (!dr.IsNull("Net_Amount"))
 
                        rInfo.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+
 
                }
            }
@@ -409,16 +426,14 @@ namespace MyLeoRetailerRepo
 
            sqlParams.Add(new SqlParameter("@Payament_Date ", Receivable.Payament_Date));
 
-           sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_ID));
-
-           //if (Convert.ToInt32(Receivable.Branch_ID) != 0)
-           //{
-           //    sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_ID));
-           //}
-           //else
-           //{
-           //    sqlParams.Add(new SqlParameter("@Branch_ID", 0));
-           //}
+           if (Convert.ToInt32(Receivable.Branch_ID) != 0)
+           {
+               sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_ID));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@Branch_ID", 0));
+           }
 
            if (Receivable.Receivable_Item_Id != 0)
            {

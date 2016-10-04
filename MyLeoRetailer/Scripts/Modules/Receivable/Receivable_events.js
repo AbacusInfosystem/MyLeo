@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     
 
-    document.getElementById('btnPay').disabled = true;
+   // document.getElementById('btnPay').disabled = true;
 
     $(document).on('change', '[name="Get_Receivable_Search_Details_List"]', function (event) {
         if ($(this).prop('checked')) {
@@ -46,7 +46,7 @@ $(document).ready(function () {
     });
 
     $("#btnSavePay").click(function () {
-
+        debugger;
         alert();
         if ($("#frmPay").valid()) {
             Save_Receivable_Data();

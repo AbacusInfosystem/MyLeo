@@ -59,9 +59,22 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                            <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" id="divBranch">
+
+                        <div class="form-group auto-complete">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                            <div class="input-group">
+                                <input type="text" class="form-control invoice-filter autocomplete-text" name="Receivable.Branch_Name" id="text_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
+                                <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                <input type="hidden" id="hdnBranchID" name="Receivable.Branch_ID" class="auto-complete-value" />
+                                <input type="hidden" id="hdnBranchName" name="Receivable.Branch_Name" class="auto-complete-label" />
                             </div>
                         </div>
                     </div>
@@ -147,7 +160,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note no</span>
-                            <select class="form-control input-sm" id="drpCredit_Note_No" name="Receivable.Sales_Credit_Note_Id">
+                            <select class="form-control" id="drpCredit_Note_No" name="Receivable.Sales_Credit_Note_Id">
                                 <option value="0">Select Credit Note no</option>
 
                                 @foreach (var item in Model.Credit_Notes)
@@ -217,7 +230,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher No</span>
-                                <select class="form-control input-sm" id="drpGift_Voucher_No" name="Receivable.Gift_Voucher_Id">
+                                <select class="form-control" id="drpGift_Voucher_No" name="Receivable.Gift_Voucher_Id">
                                     <option value="0">Gift Voucher No</option>
 
                                     @foreach (var item in Model.Receivables1)
