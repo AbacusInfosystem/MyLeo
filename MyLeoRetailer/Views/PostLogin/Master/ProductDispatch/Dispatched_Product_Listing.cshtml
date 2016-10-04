@@ -1,0 +1,111 @@
+﻿@model MyLeoRetailer.Models.ProductDispatchViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<script src="/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/search_product_dispatch_event.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/search_product_dispatch_method.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Inward Product</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp;Inward Product </h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmInwardProduct">
+
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                        <div class="row">
+
+                            <input type="hidden" id="hdnRequestId" value="" name="product_Dispatch.Request_Id" />
+
+                            <input type="hidden" id="hdnSKU" value="" name="product_Dispatch.SKU" />
+
+                            <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                                <table class="table table-bordered table-hover" id="tblProduct_Dispatch">
+                                    <thead>
+                                        <tr>
+                                            <th width="100px"></th>
+                                            <th width="150px">SKU No.</th>
+                                            <th width="70px">Dispatch Quantity</th>
+                                            <th width="70px">Dispatch Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                             var i=0;
+                                            foreach (var item in Model.List_product_Dispatch)
+                                            {
+                                                
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" id="" name="List_product_Dispatch[@i].Dispatch_Id" value="@item.Dispatch_Id" />
+                                                    </td>
+
+                                                     <td>
+                                                        @Model.product_Dispatch.SKU
+                                                         <input type="hidden" id="hdn_Dispatch_Id" name="List_product_Dispatch[@i].Branch_Id" value="@item.Branch_Id" />
+                                                         <input type="hidden" id="hdn_SKU" name="List_product_Dispatch[@i].SKU" value="@item.SKU" />
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Quantity
+                                                        <input type="hidden" id="hdn_Quantity" name="List_product_Dispatch[@i].Quantity" value="@item.Quantity" />
+                                                    </td>
+
+                                                    <td>
+                                                        @item.Dispatch_Date.ToString("dd-MM-yyyy")
+                                                    </td>
+
+                                                   
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
+                                </div><!-- /.col -->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+   
+
+    </div>
+
+
+

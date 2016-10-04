@@ -181,6 +181,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ProductDispatchController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderRequestController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductWarehouseController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnRequestController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\PayableViewModel.cs" />
     <Compile Include="Models\PreLogin\LoginViewModel.cs" />
+    <Compile Include="Models\ProductDispatchViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
@@ -1034,6 +1036,10 @@
     <Content Include="Scripts\Modules\Payable\Payable_Validation.js" />
     <Content Include="Scripts\Modules\Payable\Pay_event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_method.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_event.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_event.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_method.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
     <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_events.js" />
@@ -1172,9 +1178,7 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Search.cshtml" />
-    
     <Content Include="Views\PostLogin\Master\PurchaseOrder\PrintableView.cshtml" />
-   
     <Content Include="Views\PostLogin\SalesOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
@@ -1197,6 +1201,11 @@
     <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
+    <Content Include="Views\PostLogin\Master\ProductDispatch\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\ProductDispatch\Search.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\PostLogin\Master\ProductDispatch\Dispatched_Product_Listing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

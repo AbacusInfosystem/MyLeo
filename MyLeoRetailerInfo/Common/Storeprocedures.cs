@@ -366,6 +366,16 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
         sp_Insert_Purchase_Order_Request_Consolidation,
 
+            //Product Dispatch
+        sp_Get_Product_To_Dispatch,
+        sp_Get_Product_To_Dispatch_By_Id,
+        sp_Insert_Product_Dispatch,
+        sp_Insert_Product_Dispatch_Items,
+        sp_Delete_Dispatch_Product,
+
+            //Product Inward
+        sp_Dispatched_Product_Listing,
+
     }
 
            

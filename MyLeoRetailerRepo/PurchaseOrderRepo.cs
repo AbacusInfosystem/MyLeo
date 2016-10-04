@@ -150,13 +150,13 @@ namespace MyLeoRetailerRepo
 
                     List<Sizes> Size = new List<Sizes>();
 
-                    string[] Item_Ids = new string[0];
+                    string[] Item_Ids = new string [1];
 
-                    string[] Branch_Ids = new string[0];
+                    string[] Branch_Ids = new string[1];
 
-                    string[] Request_Ids = new string[0];
+                    string[] Request_Ids = new string[1];
 
-                    string[] Request_Dates = new string[0];
+                    string[] Request_Dates = new string[1];
 
                    
                         if (item.Item_Ids.IndexOf(',') != -1)  //if condition is use so if string does not contain ',' it wont break
