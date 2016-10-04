@@ -1,0 +1,46 @@
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnViewModel
+
+<form id="frmUpdateGRNo" enctype="multipart/form-data">
+    <div class="row" style="margin-bottom: 10px; border-bottom: 1px solid rgba(153, 153, 153, 0.13)">
+        <div class="col-md-8">
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
+                <input type="text" class="form-control" name="PurchaseReturn.GR_No" id="txtGR_No" placeholder="Enter GR No." />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="margin-bottom: 10px; padding-top: 1px;">
+            <div class=" form-group">
+                <div class="input-group pull-right">
+                    <input type="hidden" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
+
+                    <button type="button" class="btn btn-success active" value="Update" id="btnUpdate">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(function () {
+        $("#frmUpdateGRNo").validate({
+            rules: {               
+
+                "PurchaseReturn.GR_No": {
+                    required: true
+                }
+
+            },
+            messages: {
+
+                "PurchaseReturn.GR_No": {
+                    required: "GR no is required."
+                }
+            }
+        });
+
+    })
+</script>
