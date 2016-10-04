@@ -1106,6 +1106,7 @@
     <Content Include="Scripts\Modules\Vendor\vendor_search_methods.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
     <Content Include="Log4Net.config" />
+    <None Include="Properties\PublishProfiles\MYLEO.pubxml" />
     <None Include="Scripts\_references.js" />
     <Content Include="UploadedFiles\1.png" />
     <Content Include="Web.config">
