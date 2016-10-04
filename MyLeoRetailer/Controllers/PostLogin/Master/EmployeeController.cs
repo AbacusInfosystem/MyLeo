@@ -247,7 +247,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         #region Change Branch
         //Addition by swapnali | Date:14/09/2016
-        public ActionResult ChangeBranch()
+        public PartialViewResult ChangeBranch()
         {
             EmployeeViewModel eViewModel = new EmployeeViewModel();
             if (Request.Cookies["MyLeoLoginInfo"] != null)
@@ -261,7 +261,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 eViewModel.Employee.Employee_Id=lViewModel.Cookies.User_Id;
 
             }
-            return View("ChangeBranch", eViewModel);
+            return PartialView("_ChangeBranch", eViewModel);
         }
 
         public ActionResult Save_Employee_Branch_Id(EmployeeViewModel eViewModel)
@@ -276,6 +276,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
            eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
 
+           eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
            return View("ChangeBranch", eViewModel);
         }
 
@@ -285,13 +287,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             LoginRepo _loginRepo = new LoginRepo();
             try
             {
-                if (Request.Cookies["LoginInfo"] == null)
+                if (Request.Cookies["MyLeoLoginInfo"] == null)
                 {
-                    HttpCookie cookies = new HttpCookie("LoginInfo");
+                    HttpCookie cookies = new HttpCookie("MyLeoLoginInfo");
 
                     string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-                    cookies.Values.Add("Token", cookie_Token);
+                    cookies.Values.Add("MyLeoToken", cookie_Token);
 
                     cookies.Values.Add("Branch_Ids", Branch_Ids);
 
@@ -303,9 +305,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 {
                     string cookie_Token = _loginRepo.Set_User_Token_For_Cookies(User_Id);
 
-                    Response.Cookies["LoginInfo"]["Token"] = cookie_Token;
+                    Response.Cookies["MyLeoLoginInfo"]["MyLeoToken"] = cookie_Token;
 
-                    Response.Cookies["LoginInfo"]["Branch_Ids"] = Branch_Ids;
+                    Response.Cookies["MyLeoLoginInfo"]["Branch_Ids"] = Branch_Ids;
 
                 }
             }

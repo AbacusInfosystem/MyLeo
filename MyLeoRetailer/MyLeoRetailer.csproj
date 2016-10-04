@@ -181,6 +181,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostLogin\Report\InventoryController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderRequestController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductWarehouseController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseReturnRequestController.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
+    <Compile Include="Models\Report\InventoryViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseInvoiceViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseOrderRequestViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseOrderViewModel.cs" />
@@ -1028,6 +1030,8 @@
     <Content Include="Scripts\Modules\GiftVoucher\GiftVoucher_validation.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_events.js" />
     <Content Include="Scripts\Modules\GiftVoucher\search_giftvoucher_method.js" />
+    <Content Include="Scripts\Modules\Inventory\search_inventory_events.js" />
+    <Content Include="Scripts\Modules\Inventory\search_inventory_methods.js" />
     <Content Include="Scripts\Modules\Login\login-event.js" />
     <Content Include="Scripts\Modules\Payable\Payable_events.js" />
     <Content Include="Scripts\Modules\Payable\Payable_method.js" />
@@ -1106,6 +1110,7 @@
     <Content Include="Scripts\Modules\Vendor\vendor_search_methods.js" />
     <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
     <Content Include="Log4Net.config" />
+    <None Include="Properties\PublishProfiles\MYLEO.pubxml" />
     <None Include="Scripts\_references.js" />
     <Content Include="UploadedFiles\1.png" />
     <Content Include="Web.config">
@@ -1203,6 +1208,11 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\ViewPurchaseReturnRequest.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\SalesReturnView.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\SalesInvoiceView.cshtml" />
+    <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Employee\_ChangeBranch.cshtml" />
+    <Content Include="Views\Shared\_ChangeBranch.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\_Update_GR_No.cshtml" />
+    <Content Include="Views\PostLogin\Report\Inventory\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

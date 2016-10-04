@@ -11,7 +11,8 @@
     <div class="col-md-12">
         <div class="">
             <div class="table-responsive">
-                <div class="scroll" style="height: 300px; overflow: auto;">
+                @*<div class="scroll" style="height: 300px; overflow: auto;">*@
+                <div class="panel-body list-group scroll" style="height: 300px; overflow: auto;">
                     <table class="table table-hover" style="margin-bottom: 0;">
                         <thead>
                             <tr id="subhead">
@@ -43,8 +44,8 @@
                                                 <label class="switch switch-small" style="margin: 0;">
                                                     <input type='radio' name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
                                                     <span></span>
-                                                </label>   
-                                                // <input type='radio' name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />                                           
+                                                </label>
+                                                // <input type='radio' name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
                                             }
 
                                         </td>
@@ -66,7 +67,6 @@
                             }
                         </tbody>
                     </table>
-
                 </div>
                 <div id="divLookupGridOverlay" class="overlay">
                     <i class="fa fa-refresh fa-spin"></i>

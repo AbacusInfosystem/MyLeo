@@ -36,7 +36,8 @@
                         htmlText += "</div>";
                         htmlText += "<div class='col-md-4'>";
                         htmlText += "<label class='switch'>";
-                        htmlText += "<input checked class='brands' value='" + objList[i].Branch_ID + "' id='chkBrand_" + i + "' type='checkbox'>";
+                        htmlText += "<input checked class='brands' value='" + objList[i].Branch_ID + "' id='chkBrand_" + i + "' type='checkbox'>";                      
+                     
                         htmlText += "<span></span>";
                         htmlText += "</label>";
                         htmlText += "</div>";
@@ -56,15 +57,34 @@
         if ($(this).prop('checked')) {
             
             $(".brands").propAttr('checked', 'checked');
+            $("#lblLoginError").hide();//Added by vinod mane on 03/10/2016
 
         }
         else {
             $(".brands").removeAttr('checked');
-         
+
+            $("#lblLoginError").show();//Added by vinod mane on 03/10/2016
         }
 
     });
 
+    //Added by Vniod Mane on 03/10/2016
+    $(document).on("change", ".brands", function () {
+       
+        if ($(this).prop('checked')) {
+           
+            $("#lblLoginError").hide();
+            
+        }
+        else
+        {
+            $(this).removeAttr('checked');
+            
+          
+        }
+    });
+    //End
+   
 
     $("#btnLogin").click(function () {
 
@@ -75,7 +95,8 @@
             if ($(this).prop('checked')) {
              
                 Ids += $(this).val() + ",";
-              
+
+               
             }
 
         });
@@ -87,19 +108,23 @@
         {
             var divHTML = "";
             divHTML = $('.scroll-bar').html();
-            
-            if (divHTML == "") {
-                $("#lblBranchError").show();
-                
+            if (Ids != "") {//Added by vinod mane on 03/10/2016
+                if (divHTML == "") {
+                    $("#lblBranchError").show();
+
+                }
+                else {
+                    $("#lblBranchError").hide();
+
+                    $("#frmLogin").attr("action", "/Login/Authenticate");
+                    $("#frmLogin").submit();
+                }
             }
-            else {
-                $("#lblBranchError").hide();
-               
-                $("#frmLogin").attr("action", "/Login/Authenticate");
-                $("#frmLogin").submit();
+            else
+            {
+                $("#lblLoginError").show();
             }
-            
-        }
+        }//End
 
     });
 

@@ -44,7 +44,7 @@ namespace MyLeoRetailer.Models
             Employee_Branch_List = new List<EmployeeInfo>();
             //End
 
-
+            Cookies = new LoginInfo();
 		}
 
         public GridInfo Grid_Detail
@@ -101,6 +101,8 @@ namespace MyLeoRetailer.Models
         //public List<MyLeoRetailerInfo.Branch.BranchInfo> Branches { get; set; }
         public List<EmployeeInfo> Employee_Branch_List { get; set; }
         //End
+
+        public LoginInfo Cookies { get; set; }
 
     }
 

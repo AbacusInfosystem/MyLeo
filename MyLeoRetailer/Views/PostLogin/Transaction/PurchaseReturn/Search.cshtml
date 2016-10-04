@@ -42,7 +42,6 @@
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit Note No.</span>
                                 <input type="text" class="form-control" name="Filter.Debit_Note_No" placeholder="Enter debit note no. to search." />
-                                @*Added by vinod mane on 03/10/2016*@
                                 <input type="hidden" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
                             </div>
 
@@ -53,12 +52,36 @@
                             <div class="btn-group">
                                 <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>
                                 <button class="btn btn-danger active" value="Edit" id="btnEditPurchaseReturn">View</button>
+                                <button role="button" type="button" class="btn btn-info active" value="Update" id="btnUpdatePurchaseReturn" data-toggle="modal" data-target="#div_Parent_Modal_Fade">Update GR No.</button>
                                 
                             </div>
 
                         </div>
 
                     </div>
+
+                    @**@
+
+                  
+                    @**@
+
+                    @*<div class="col-md-8 divUpdateGRNo">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
+                                    <input type="text" class="form-control" name="PurchaseReturn.GR_No" id="txtGR_No" placeholder="Enter GR No." />
+                                </div>
+                            </div>
+
+                            <div class="col-md-1" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                                <button type="button" class="btn btn-success active" value="Update" id="btnUpdate">Update</button>
+                            </div>
+
+                        </div>
+                        
+                    </div>*@
 
                 </form>
 

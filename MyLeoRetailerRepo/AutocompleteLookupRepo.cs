@@ -95,6 +95,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Inventory")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Inventory.Branch_Id, Branch.Branch_Name ";
+                        strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID ";
+                    }
+                }
+                              
             }
 
             DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
