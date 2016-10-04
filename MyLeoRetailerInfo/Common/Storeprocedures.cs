@@ -395,6 +395,12 @@ namespace MyLeoRetailerInfo.Common
             //Product Inward
         sp_Dispatched_Product_Listing,
 
+        #region Inventory
+
+        sp_Get_Inventories,
+
+        #endregion
+
     }
 
            

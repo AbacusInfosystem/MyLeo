@@ -57,6 +57,7 @@
     <Compile Include="EmployeeRepo.cs" />
     <Compile Include="GiftVoucherRepo.cs" />
     <Compile Include="CustomerRepo.cs" />
+    <Compile Include="InventoryRepo.cs" />
     <Compile Include="LoginRepo.cs" />
     <Compile Include="PayableRepo.cs" />
     <Compile Include="ProductDispatchRepo.cs" />

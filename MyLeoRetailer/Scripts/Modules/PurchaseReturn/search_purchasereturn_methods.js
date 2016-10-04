@@ -85,8 +85,6 @@ function call_back(data) {
 
     $("#div_Parent_Modal_Fade").find(".modal-footer").hide();
 
-   // $("#div_Parent_Modal_Fade").find("#btnOK").value('Update');
-
     $("#btnUpdate").click(function (event) {
         if ($('#frmUpdateGRNo').valid()) {
 
