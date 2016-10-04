@@ -28,7 +28,9 @@ namespace MyLeoRetailerRepo
 
              List<SqlParameter> sqlParam = new List<SqlParameter>();
 
-             sqlParam.Add(new SqlParameter("@Inventory_Id", filter.Inventory_Id));
+             sqlParam.Add(new SqlParameter("@Branch_Id", filter.Branch_Id));
+
+             sqlParam.Add(new SqlParameter("@Product_SKU", filter.Product_SKU));
 
              dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Inventories.ToString(), CommandType.StoredProcedure);
 
