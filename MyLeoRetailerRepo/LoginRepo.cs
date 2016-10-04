@@ -10,6 +10,7 @@ using MyLeoRetailerInfo;
 using MyLeoRetailerRepo.Utility;
 using MyLeoRetailerInfo.Branch;
 using MyLeoRetailerInfo.Role;
+using MyLeoRetailerInfo.Employee;
 
 namespace MyLeoRetailerRepo
 {
@@ -140,7 +141,7 @@ namespace MyLeoRetailerRepo
         }
 
 
-        public LoginInfo Get_User_Data_By_User_Token(string token)
+        public LoginInfo Get_User_Data_By_User_Token(string token,string branch_Ids)
         {
             LoginInfo user = new LoginInfo();
 
@@ -172,10 +173,42 @@ namespace MyLeoRetailerRepo
 
                     user.Access_Functions = Get_Access_Functions_By_Role(user.Role_Id);
 
+                    user.Branch_List = Get_Branch_By_Id(user.User_Id, branch_Ids);
+
                 }
             }
 
             return user;
+        }
+
+        public List<EmployeeInfo> Get_Branch_By_Id(int Employee_Id, string Branch_Id)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Employee_ID", Employee_Id));
+
+            var array = Branch_Id.Trim().Split(',');
+
+            List<EmployeeInfo> Emp_Branch_List = new List<EmployeeInfo>();
+            DataTable dt = _sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Branch_By_EmployeeId.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                EmployeeInfo Employee_Branch = new EmployeeInfo();
+                Employee_Branch.Branch_Name = Convert.ToString(dr["Branch_Name"]);
+                Employee_Branch.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+                Employee_Branch.Employee_Id = Employee_Id;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (array[i] == Employee_Branch.Branch_Id.ToString())
+                    {
+                        Employee_Branch.Is_Selected = 1;
+                    }
+                }
+
+                Emp_Branch_List.Add(Employee_Branch);
+
+            }
+            return Emp_Branch_List;
+
         }
 
 

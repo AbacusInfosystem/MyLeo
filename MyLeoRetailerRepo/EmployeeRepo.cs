@@ -223,25 +223,10 @@ namespace MyLeoRetailerRepo
                 Employee_Branch.Employee_Id = Employee_Id;
                 for (int i = 0; i < array.Length; i++)
                 {
-                    //if (Branch_Id.Contains((Employee_Branch.Branch_Id).ToString()))
-
                     if (array[i] == Employee_Branch.Branch_Id.ToString())
                     {
                         Employee_Branch.Is_Selected = 1;
                     }
-                    //else 
-                    //{
-                    //    Employee_Branch.Is_Selected = 0;
-                    //}
-
-                    //if (Employee_Branch.Branch_Id.Equals(Branch_Id))
-                    //{
-                    //    Employee_Branch.Is_Selected = (int)1;
-                    //}
-                    //else
-                    //{
-                    //    Employee_Branch.Is_Selected = 0;
-                    //}
                 }
 
                 Emp_Branch_List.Add(Employee_Branch);
