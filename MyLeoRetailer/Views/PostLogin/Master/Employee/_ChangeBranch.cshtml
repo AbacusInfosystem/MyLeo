@@ -1,0 +1,70 @@
+﻿@model MyLeoRetailer.Models.EmployeeViewModel
+@{
+
+    ViewBag.Title = "ChangeBranch";
+}
+<script src="/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Employee/search_employee_event.js"></script>
+<script src="~/Scripts/Modules/Employee/search_employee_method.js"></script>
+
+<style>
+    .switch span::after {
+        width: 18px !important;
+    }
+
+    .switch span {
+        width: 40px !important;
+        height: 18px !important;
+    }
+</style>
+
+<!-- END CONTENT FRAME -->
+<div class="page-content-wrap">
+
+    <form role="form" id="frmChangeBranch">
+        <div class="row">
+            <input type="hidden" class="form-control" id="hdf_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id" />
+
+            <div class="table-responsive">
+                <table class="table table-hover" style="margin-bottom: 0;">
+                    @*<thead>
+                        <tr>
+                            <th>Branch</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>*@
+                    <tbody>
+                        @{int counter = 0;}
+
+                        @foreach (var result in Model.Employee_Branch_List)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="hidden" id="EmployeeBranchId-@result.Branch_Id" name="Employee_Branch_List[@counter].Branch_Id" value="@result.Branch_Id" />
+                                    <input type="hidden" id="EmployeeBranchNM-@result.Branch_Id" name="Employee_Branch_List[@counter].Branch_Name" value="@result.Branch_Name" />
+                                    @result.Branch_Name
+                                </td>
+
+                                <td>
+                                    <label class="switch">
+                                        @if (@result.Is_Selected == 1)
+                                        {
+                                            <input type="checkbox" class="switch" checked="checked" id="Employee-@result.Branch_Id" name="Employee_Branch_List[@counter].Is_Selected" value="@result.Is_Selected.ToString()" /><span></span>
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" class="switch" id="Employee-@result.Branch_Id" name="Employee_Branch_List[@counter].Is_Selected" value="@result.Is_Selected.ToString()" /><span></span>
+                                        }
+                                    </label>
+                                </td>
+                            </tr>
+                                        ++@counter;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </form>
+
+</div>

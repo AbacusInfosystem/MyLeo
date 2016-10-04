@@ -12,7 +12,8 @@ namespace MyLeoRetailerInfo.Color
 
         public ColorInfo()
 		{
-            ProductMRP_N_WSR = new List<ProductMRPInfo>();
+            ProductMRPs = new List<ProductMRPInfo>();
+            ProductDescription = new List<ProductDescription>();
 		}
 
 		public int Colour_Id
@@ -83,9 +84,15 @@ namespace MyLeoRetailerInfo.Color
 		{
 			get;
 			set;
-		} 
+		}
+
+        public string Vendor_Color_Code { get; set; }
 
         public List<ProductMRPInfo> ProductMRP_N_WSR { get; set; }
 
-	}
+        public List<ProductDescription> ProductDescription { get; set; }
+
+
+        public IEnumerable<object> ProductMRPs { get; set; }
+    }
 }

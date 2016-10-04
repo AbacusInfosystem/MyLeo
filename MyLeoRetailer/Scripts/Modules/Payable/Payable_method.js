@@ -81,6 +81,14 @@ function FinalAmount() {
 
     $("#txtFinal_amount").val(abcamount.toFixed(2));
 
+    document.getElementById("txtPaid_Amount").disabled = true;
+
+}
+
+function Cancle() {
+
+    document.getElementById("txtPaid_Amount").disabled = false;
+
 }
 
 function Save_Payable_Data() {
@@ -173,6 +181,8 @@ function Save_Payable_Data() {
             //Reset_Brand();
 
             //Get_Brands();
+
+            Friendly_Messages(obj);
 
             //Friendly_Messages(obj);
 

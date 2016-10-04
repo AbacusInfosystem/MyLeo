@@ -6,10 +6,10 @@
 
             rules:
                 {
-                    "SalesInvoice.Sales_Invoice_No":
-                       {
-                           required: true,
-                       },
+                    //"SalesInvoice.Sales_Invoice_No":
+                    //   {
+                    //       required: true,
+                    //   },
                     "SalesInvoice.Invoice_Date":
                         {
                             required: true,                            

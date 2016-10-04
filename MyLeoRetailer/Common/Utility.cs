@@ -148,5 +148,15 @@ namespace MyLeoRetailer.Common
         }
 
 
+        //Add By Gauravi 3-10-2016
+
+        public static string Generate_Ref_No(string initialCharacter, string columnName, string substringStartIndex, string substringEndIndex, string tableName)
+        {
+            AutoGenerateNumberRepo _autogenerateRepo = new AutoGenerateNumberRepo();
+            return _autogenerateRepo.Generate_Ref_No(initialCharacter, columnName, substringStartIndex, substringEndIndex, tableName);
+        }
+
+        //End
+
     }
 }

@@ -230,13 +230,13 @@ function AddSalesOrderDetails(i)
     tblHtml += "<tr id='SalesOrderItemRow_"+ i +"' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Product_MRP' data-col='Product_Id,SKU_Code' data-headernames='SKU_Code'/>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:150px' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Product_MRP' data-col='Product_Id,SKU_Code' data-headernames='SKU_Code'/>";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='SaleOrderItemList[" + i + "].SKU_Code' class='auto-complete-label' />";
@@ -248,7 +248,7 @@ function AddSalesOrderDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Brand' name='SaleOrderItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Brand' name='SaleOrderItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleOrderItemList[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' />";
     tblHtml += "</td>";
 
@@ -258,7 +258,7 @@ function AddSalesOrderDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='SubCategory' name='SaleOrderItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='SubCategory' name='SaleOrderItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleOrderItemList[" + i + "].SubCategory_Id' id='hdnSubCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
@@ -273,11 +273,11 @@ function AddSalesOrderDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:50px' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='1' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='MRP' name='SaleOrderItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:50px' placeholder='MRP' name='SaleOrderItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='1' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -285,7 +285,7 @@ function AddSalesOrderDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='D Amt' name='SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount' readonly value='' id='textSalesOrder_Discount_Amount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='D Amt' name='SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount' readonly value='' id='textSalesOrder_Discount_Amount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -304,7 +304,7 @@ function AddSalesOrderDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(" + i + ")'><i class='fa fa-times'></i>Delete</button>";
     tblHtml += "</td>";
 
     tblHtml += "</tr>";

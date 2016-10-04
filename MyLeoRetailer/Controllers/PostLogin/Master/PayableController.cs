@@ -124,7 +124,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 //pViewModel.Payable.Payable_Item_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
 
-                pViewModel.FriendlyMessages.Add(MessageStore.Get("PA001"));
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("PYND01"));
 
             }
 
@@ -161,7 +161,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 pViewModel.Payable = pRepo.Get_Payable_Data_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 
-                pViewModel.FriendlyMessages.Add(MessageStore.Get("PA001"));
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("PYND02"));
 
             }
 

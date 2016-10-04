@@ -7,7 +7,7 @@
     		    },
     		    Grid_Detail: {
 
-    		        CurrentPage: $("#hdfCurrent_Page").val()
+		        Pager: Set_Pager($("#divPurchaseReturnPager"))
     		    }
     		}
 
@@ -25,94 +25,170 @@
 
             success: function (response) {
                                
-            var data = $.parseJSON(response);
+            var obj = $.parseJSON(response);
 
-            Bind_Get_Purchase_Return_Data(data);
+            Bind_Grid(obj, "Purchase_Return_List");
 
+            $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            Friendly_Messages(obj);
         }
     });
 }
 
-function Bind_Get_Purchase_Return_Data(data) {
-    var tblHTML = "";
 
-    $('#tblPurchaseReturn tbody tr').remove();
+function UpdateGRNo() {
+    var prViewModel =
+		{
+		    Filter: {
 
-    if (data.PurchaseReturn.PurchaseReturns.length > 0) {
+		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
+		    },
+		    PurchaseReturn: {
 
-        for (var i = 0; i < data.PurchaseReturn.PurchaseReturns.length; i++) {
+		        Purchase_Return_Id: $("#hdnPurchaseReturnId").val(),
 
-            tblHTML += "<tr>";
+		        GR_No: $("#txtGR_No").val()
+		    }
+		}
 
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Debit_Note_No + "</td>";
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].GR_No + "</td>";
+    $.ajax({
 
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Vendor_Name + "</td>";
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Purchase_Invoice_No + "</td>";
+        url: "/PurchaseReturn/Update_Purchase_Return",
 
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Total_Quantity + "</td>";
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Total_Amount + "</td>";
+        data: JSON.stringify(prViewModel),
 
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Transporter_Name + "</td>";
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Logistics_Person_Name + "</td>";
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Lr_No + "</td>";
-            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Purchase_Return_Date.substring(0, 10) + "</td>";
+        dataType: 'json',
 
-            tblHTML += "</tr>";
+        type: 'POST',
 
+        contentType: 'application/json',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            Friendly_Messages(obj);
+                        
+            Get_Purchase_Returns();
+            
         }
+    });
 
-        $('#tblPurchaseReturn tbody').append(tblHTML);
-
-    }
-
-    if (data.PurchaseReturn.PurchaseReturns.length > 0) {
-        $('#hdfCurrent_Page').val(data.Pager.CurrentPage);
-
-        if (data.Pager.PageHtmlString != null || data.Pager.PageHtmlString != "") {
-
-            $('.pagination').html(data.Pager.PageHtmlString);
-        }
-    }
-    else {
-        $('.pagination').html("");
-    }
-
-    Friendly_Messages(data);
+    Get_Purchase_Returns();
 }
 
+function call_back(data) {
+
+    $('#div_Parent_Modal_Fade').modal('show');
+    $("#div_Parent_Modal_Fade").find(".modal-title").text("Update GR No.");
+
+    $("#div_Parent_Modal_Fade").find(".modal-footer").hide();
+
+   // $("#div_Parent_Modal_Fade").find("#btnOK").value('Update');
+
+    $("#btnUpdate").click(function (event) {
+        if ($('#frmUpdateGRNo').valid()) {
+
+            document.getElementById('btnUpdate').disabled = true;
+
+            $('#div_Parent_Modal_Fade').modal('hide');
+
+            UpdateGRNo();
+             
+            
+        }
+
+    })
+   
+}
+
+
+
+
+
+
+
 //function Get_Purchase_Returns() {
-//    var prViewModel =
-//		{
-//		    Filter: {
+//        var prViewModel =
+//    		{
+//    		    Filter: {
 
-//		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
-//		    },
-//		    Grid_Detail: {
+//    		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
+//    		    },
+//    		    Grid_Detail: {
 
-//		        Pager: Set_Pager($("#divPurchaseReturnPager"))
-//		    }
-//		}
+//    		        CurrentPage: $("#hdfCurrent_Page").val()
+//    		    }
+//    		}
 
-//    $.ajax({
+//        $.ajax({
 
-//        url: "/PurchaseReturn/Get_Purchase_Returns",
+//            url: "/PurchaseReturn/Get_Purchase_Return_List",
 
-//        data: JSON.stringify(prViewModel),
+//            data: JSON.stringify(prViewModel),
 
-//        dataType: 'json',
+//            dataType: 'json',
 
-//        type: 'POST',
+//            type: 'POST',
 
-//        contentType: 'application/json',
+//            contentType: 'application/json',
 
-//        success: function (response) {
+//            success: function (response) {
+                               
+//            var data = $.parseJSON(response);
 
-//            var obj = $.parseJSON(response);
+//            Bind_Get_Purchase_Return_Data(data);
 
-//            Bind_Grid(obj, "Purchase_Return_List");
-
-//            $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 //        }
 //    });
 //}
+
+//function Bind_Get_Purchase_Return_Data(data) {
+//    var tblHTML = "";
+
+//    $('#tblPurchaseReturn tbody tr').remove();
+
+//    if (data.PurchaseReturn.PurchaseReturns.length > 0) {
+
+//        for (var i = 0; i < data.PurchaseReturn.PurchaseReturns.length; i++) {
+
+//            tblHTML += "<tr>";
+
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Debit_Note_No + "</td>";
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].GR_No + "</td>";
+
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Vendor_Name + "</td>";
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Purchase_Invoice_No + "</td>";
+
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Total_Quantity + "</td>";
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Total_Amount + "</td>";
+
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Transporter_Name + "</td>";
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Logistics_Person_Name + "</td>";
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Lr_No + "</td>";
+//            tblHTML += "<td>" + data.PurchaseReturn.PurchaseReturns[i].Purchase_Return_Date.substring(0, 10) + "</td>";
+
+//            tblHTML += "</tr>";
+
+//        }
+
+//        $('#tblPurchaseReturn tbody').append(tblHTML);
+
+//    }
+
+//    if (data.PurchaseReturn.PurchaseReturns.length > 0) {
+//        $('#hdfCurrent_Page').val(data.Pager.CurrentPage);
+
+//        if (data.Pager.PageHtmlString != null || data.Pager.PageHtmlString != "") {
+
+//            $('.pagination').html(data.Pager.PageHtmlString);
+//        }
+//    }
+//    else {
+//        $('.pagination').html("");
+//    }
+
+//    Friendly_Messages(data);
+//}
+

@@ -43,7 +43,7 @@ namespace MyLeoRetailer.Models
             Color = new ColorInfo();
             Colours = new List<int>();
             Colors = new List<ColorInfo>();
-
+            ProductDescription = new List<ProductDescription>();
             Filter = new Filter_Product(); 
 
             FriendlyMessages = new List<FriendlyMessage>();
@@ -59,6 +59,7 @@ namespace MyLeoRetailer.Models
         public List<SubCategoryInfo> SubCategories { get; set; }
         public List<BrandInfo> Brands { get; set; }
         public List<ColorInfo> Colors { get; set; }
+        public List<ProductDescription> ProductDescription { get; set; }  
         public List<int> Colours { get; set; }
         public ColorInfo Color { get; set; }
 

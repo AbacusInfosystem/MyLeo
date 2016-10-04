@@ -10,8 +10,61 @@
 <script src="~/Scripts/Modules/common_methods.js"></script>
 
 
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
 
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
 
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+</style>
 
 
 @{
@@ -29,10 +82,11 @@
 
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
-        <div class="col-md-3">
+        <div class="col-md-12">
             <div class="page-title">
                 <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Invoice</h2>
             </div>
+            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "SalesOrder")'"><i class="fa fa-angle-double-left"></i> BACK</button>
         </div>
 
         @*<div class="col-md-9">
@@ -93,45 +147,61 @@
 
                                 <input type="hidden" id="hdnEmployee_Id" name="Cookies.Employee_Id" value="5" />
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice No.</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Sales_Invoice_No" id="txtInvoice_No" value="@Model.SalesInvoice.Sales_Invoice_No" placeholder="Enter Sales Invoice No" />
-
-                                    </div>
-                                </div>
-
                                 @*<div class="col-md-3">
                                         <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice Date.</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Invoice_Date" id="dtpInvoice_Date" value="@(Model.SalesInvoice.Invoice_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Invoice_Date.ToString("dd/MM/yyyy"))" placeholder="Enter Invoice Date" />
-                                            <input type="hidden" id="hdnInvoiceDate" name="SalesInvoice.Invoice_Date1" value="@(Model.SalesInvoice.Invoice_Date1 == DateTime.MinValue ? "" : Model.SalesInvoice.Invoice_Date1.ToString("dd-MM-yyyy"))">
+
+                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice No.</span>
+
+                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Sales_Invoice_No" id="txtInvoice_No" value="@Model.SalesInvoice.Sales_Invoice_No" placeholder="Enter Sales Invoice No" />
+
                                         </div>
                                     </div>*@
 
                                 <div class="col-md-3">
-                                    <div class="form-group">
-                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice date</span>
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" id="dtpInvoice_Date" name="SalesInvoice.Invoice_Date" value="@((Model.SalesInvoice.Invoice_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Invoice_Date.ToString("dd-MM-yyyy")))" readonly />
-                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                   
+                                    <div class="form-group auto-complete">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesInvoice.Branch_Name" id="textSales_Branch_Name_0" placeholder="Enter Branch to search" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
+                                            <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                            <input type="hidden" id="hdnBranchID" value="" name="SalesInvoice.Branch_Id" class="auto-complete-value" />
+                                            <input type="hidden" id="hdnBranchName" value="" name="SalesInvoice.Branch_Name" class="auto-complete-label" />
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile No.</span>
-                                        <input type="text" class="form-control input-sm editor-field focus" name="SalesInvoice.Mobile" id="txtMobileNo" value="@Model.SalesInvoice.Mobile" placeholder="Enter Mobile No" maxlength="12" />
-                                        <input type="hidden" id="hdnMobileNo" value="@Model.SalesInvoice.Mobile1" name="SalesInvoice.Mobile1">
+
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice date</span>
+
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpInvoice_Date" name="SalesInvoice.Invoice_Date" value="@((Model.SalesInvoice.Invoice_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Invoice_Date.ToString("dd-MM-yyyy")))" readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
+
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile No.</span>
+
+                                        <input type="text" class="form-control input-sm editor-field focus" name="SalesInvoice.Mobile" id="txtMobileNo" value="@Model.SalesInvoice.Mobile" placeholder="Enter Mobile No" maxlength="12" />
+                                        <input type="hidden" id="hdnMobileNo" value="@Model.SalesInvoice.Mobile1" name="SalesInvoice.Mobile1">
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Customer Name.</span>
+
                                         <input type="text" class="form-control input-sm" readonly name="SalesInvoice.Customer_Name" id="txtCustomer_Name" value="@Model.SalesInvoice.Customer_Name" placeholder="Customer Name" />
                                         <input type="hidden" name="SalesInvoice.Customer_Id" value="@Model.SalesInvoice.Customer_Id" id="hdnCustomer_ID" />
+
                                     </div>
                                 </div>
 
@@ -140,60 +210,59 @@
 
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
-                            <div class="block">
-                                <div class="block" style="margin-top:0px; ">
-                                    <div class="btn-group">
-                                        <a href="javascript:AddSalesOrderDetails();" id="btnAddInputRow" class="btn btn-success active">
-                                            <i class="mdi mdi-plus"></i>
-                                            Add New Row
-                                        </a>
+                    
+                        <div class="row">
+                            <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
+                                <div class="block">
+                                    <div class="block" style="margin-top:0px; ">
+                                        <div class="btn-group pull-right">
+                                            <a href="javascript:AddSalesOrderDetails();" id="btnAddInputRow" class="btn btn-success active ">
+                                                <i class="mdi mdi-plus"></i>
+                                                Add New Row
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
-                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                            <table class="table table-bordered table-hover" id="tblSalesOrderItems">
-                                <thead>
-                                    <tr>
-                                        <th>Barcode No.</th>
-                                        <th>SKU No</th>
-                                        <th>Article No</th>
-                                        <th>Brand</th>
-                                        <th>Category</th>
-                                        <th>Sub Category</th>
-                                        <th>Size</th>
-                                        <th>Colour</th>
-                                        <th>Quantity</th>
-                                        <th>MRP</th>
-                                        <th>Discount Percentage</th>
-                                        <th>Discount Amount</th>
-                                        <th>Amount</th>
-                                        <th>Salesman Name</th>
-                                        @if (Model.Filter.Sales_Invoice_Id == 0)
-                                        {
+
+                        <div class="block" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 10px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                            <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 18px;">Sales Invoice Details.</h4>
+                            <div class="table-responsive">
+                                <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                <table class="table table-hover" style="margin-bottom: 0;" id="tblSalesOrderItems">
+                                    <thead>
+                                        <tr>
+                                            <th>Barcode No.</th>
+                                            <th>SKU No</th>
+                                            <th>Article No</th>
+                                            <th>Brand</th>
+                                            <th>Category</th>
+                                            <th>Sub Category</th>
+                                            <th>Size</th>
+                                            <th>Colour</th>
+                                            <th>MRP</th>
+                                            <th>Quantity</th>
+                                            <th>Discount Percentage</th>
+                                            <th>Discount Amount</th>
+                                            <th>Amount</th>
+                                            <th>Salesman Name</th>
                                             <th>Delete</th>
-                                        }
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-                                    @if (Model.SaleOrderItemList.Count() == 0)
-                                    {
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
                                         <tr id="SalesOrderItemRow_0">
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:150px" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" placeholder="Barcode No">
+                                                <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" placeholder="Barcode No">
                                             </td>
                                             <td>
                                                 @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleOrderItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Order_Items_By_SKU_Code(0);">*@
                                                 <div class="form-group auto-complete">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Sales_Order_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Product_MRP" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" name="SKU_Code_0" />
+                                                        <input type="text" class="form-control invoice-filter autocomplete-text" style="width:150px" id="textSKU_No_0" onblur="javascript: Get_Sales_Order_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Product_MRP" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" name="SKU_Code_0" />
                                                         <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                         <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
                                                         <input type="hidden" id="hdnSKU_No_0" value="" name="SaleOrderItemList[0].SKU_Code" class="auto-complete-label" />
@@ -205,7 +274,7 @@
                                                 <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Article_No" id="textArticle_No_0" readonly placeholder="Article No">
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].Brand" id="textBrand_0" readonly placeholder="Brand">
+                                                <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Brand" id="textBrand_0" readonly placeholder="Brand">
                                                 <input type="hidden" name="SaleOrderItemList[0].Brand_Id" id="hdnBrand_Id_0" />
                                             </td>
                                             <td>
@@ -214,7 +283,7 @@
 
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].SubCategory" id="textSub_Category_0" readonly placeholder="Sub Category">
+                                                <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].SubCategory" id="textSub_Category_0" readonly placeholder="Sub Category">
                                                 <input type="hidden" name="SaleOrderItemList[0].SubCategory_Id" id="hdnSubCategory_Id_0" />
                                             </td>
                                             <td>
@@ -228,16 +297,16 @@
 
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:50px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateTotal();">
+                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:50px" name="SaleOrderItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
+                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateQuantityMRP();">
                                             </td>
                                             <td>
                                                 <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %">
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].SalesOrder_Discount_Amount" id="textSalesOrder_Discount_Amount_0" readonly placeholder="D Amt">
+                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].SalesOrder_Discount_Amount" id="textSalesOrder_Discount_Amount_0" readonly placeholder="D Amt">
                                             </td>
                                             <td>
                                                 <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Amount" id="textAmount_0" readonly placeholder="Amt">
@@ -254,279 +323,156 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(0)'>Delete</button>
+                                                <button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(0)'><i class="fa fa-times"></i>Delete</button>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+
+                        <div class="row">
+                            <div class="col-xs-12 table-responsive">
+                                <table id="tblSalesOrderItems">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Summary</span></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 7%;"></th>
+                                            <th style="width: 26.5%;"></th>
+                                            <th><input class="form-control input-sm" type="text" style="margin-bottom: 1px; width : 80px; background: rgba(74,77,67,0.09);" name="SalesInvoice.Total_MRP_Amount" value="@Model.SalesInvoice.Total_MRP_Amount" readonly id="textMRPAmount_0"></th>
+                                            <th style="width: 0.5%;"></th>
+                                            <th><input class="form-control input-sm" type="text" style="margin-bottom: 1px; width: 80px; background: rgba(74,77,67,0.09);" name="SalesInvoice.Total_Quantity" value="@Model.SalesInvoice.Total_Quantity" readonly id="textTotalQuantity_0"></th>
+                                            <th style="width: 6.5%;"></th>
+                                            <th><input class="form-control input-sm" type="text" style="margin-bottom: 1px; width: 80px; background: rgba(74,77,67,0.09);" name="SalesInvoice.Total_Discount_Amount" value="@Model.SalesInvoice.Total_Discount_Amount" readonly id="textDiscountAmount_0"></th>
+                                            <th style="width: 1%;"></th>
+                                            <th><input class="form-control input-sm" type="text" style="margin-bottom: 1px; width: 80px; background: rgba(74,77,67,0.09);" name="SalesInvoice.Gross_Amount" value="@Model.SalesInvoice.Gross_Amount" readonly id="textGrossAmount_0"></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);"></span></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 7%;"></th>
+                                            <th style="width: 26.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 0.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 6.5%;"></th>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax Percent</span></th>
+                                            <th style="width: 1%;"></th>
+                                            <th><input type="text" class="form-control input-sm" style="width:80px" name="SalesInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" placeholder="%" value="@Model.SalesInvoice.Tax_Percentage"></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);"></span></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 7%;"></th>
+                                            <th style="width: 26.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 0.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 6.5%;"></th>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax Amount</span></th>
+                                            <th style="width: 1%;"></th>
+                                            <th><input class="form-control input-sm" type="text" style="width:80px" name="SalesInvoice.Tax_Amount" readonly value="@Model.SalesInvoice.Tax_Amount" id="textTaxAmount_0"></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);"></span></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 7%;"></th>
+                                            <th style="width: 26.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 0.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 6.5%;"></th>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Round Off</span></th>
+                                            <th style="width: 1%;"></th>
+                                            <th><input class="form-control input-sm" type="text" style="width:80px" name="SalesInvoice.Round_Off_Amount" readonly value="@Model.SalesInvoice.Round_Off_Amount" id="textRoundOff_0"></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);"></span></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 6%;"></th>
+                                            <th style="width: 7%;"></th>
+                                            <th style="width: 26.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 0.5%;"></th>
+                                            <th></th>
+                                            <th style="width: 6.5%;"></th>
+                                            <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Net Amount</span></th>
+                                            <th style="width: 1%;"></th>
+                                            <th><input class="form-control input-sm" type="text" style="width:80px" name="SalesInvoice.Net_Amount" value="@Model.SalesInvoice.Net_Amount" readonly id="textNETAmount_0"></th>
+                                            <td width="200px"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td width="150px"></td>
+                                            <td width="150px"></td>
+                                            <td width="70px"></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="80px"></td>
+                                            <td width="60px"></td>
+                                            <td width="160px"></td>
+                                            <td width="40px"></td>
+                                            <td width="40px"></td>
+                                            <td>
+                                                <label></label>
                                             </td>
                                         </tr>
-                                    }
-                                    else
-                                    {
-                                        int i = 0;
-                                        foreach (var itm in Model.SaleOrderItemList)
-                                        {
-                                            <tr id="SalesOrderItemRow_@(i)">
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:150px" name="SaleOrderItemList[@(i)].Barcode" id="textBarcode_No_@(i)" placeholder="Barcode No">
-                                                </td>
-                                                <td>
-                                                    <div class="form-group auto-complete">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_@(i)" onblur="javascript: Get_Sales_Order_Items_By_SKU_Code(@(i));" placeholder="SKU Code" value="@itm.SKU_Code" data-table="Product_MRP" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" name="SKU_Code_@(i)" />
-                                                            <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                                            <input type="hidden" id="hdnProduct_Id_@(i)" value="" class="auto-complete-value" />
-                                                            <input type="hidden" id="hdnSKU_No_@(i)" value="" name="SaleOrderItemList[@(i)].SKU_Code" class="auto-complete-label" />
-                                                        </div>
-                                                    </div>
-
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[@(i)].Article_No" id="textArticle_No_@(i)" readonly value="@itm.Article_No" placeholder="Article No">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[@(i)].Brand" id="textBrand_@(i)" readonly value="@itm.Brand" placeholder="Brand">
-                                                    <input type="hidden" name="SaleOrderItemList[0].Brand_Id" id="hdnBrand_Id_0" />
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[@(i)].Category" id="textCategory_@(i)" readonly value="@itm.Category" placeholder="Category">
-                                                    <input type="hidden" name="SaleOrderItemList[@(i)].Category_Id" id="hdnCategory_Id_@(i)" />
-
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[@(i)].SubCategory" id="textSub_Category_@(i)" readonly value="@itm.SubCategory" placeholder="Sub Category">
-                                                    <input type="hidden" name="SaleOrderItemList[@(i)].SubCategory_Id" id="hdnSubCategory_Id_@(i)" />
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:50px" name="SaleOrderItemList[@(i)].Size_Name" id="textSize_Name_@(i)" readonly value="@itm.Size_Name" placeholder="Size">
-                                                    <input type="hidden" name="SaleOrderItemList[@(i)].Size_Id" id="hdnSize_Id_@(i)" />
-
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[@(i)].Colour_Name" id="textColour_Name_@(i)" readonly value="@itm.Colour_Name" placeholder="Colour">
-                                                    <input type="hidden" name="SaleOrderItemList[@(i)].Colour_Id" id="hdnColour_Id_@(i)" />
-
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:50px" name="SaleOrderItemList[@(i)].Quantity" id="textQuantity_@(i)" value="@itm.Quantity" placeholder="Quantity" onblur="javascript: CalculateTotal(@(i));">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:50px" name="SaleOrderItemList[@(i)].MRP_Price" id="textMRP_Price_@(i)" readonly value="@itm.MRP_Price" placeholder="MRP">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[@(i)].Discount_Percentage" id="textDiscount_Percentage_@(i)" value="@itm.Discount_Percentage" onblur="javascript: CalculateTotal(@(i));" placeholder=" discount %">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[@(i)].SalesOrder_Discount_Amount" id="textSalesOrder_Discount_Amount_@(i)" readonly value="@itm.Discount_Amount" placeholder="D Amt">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[@(i)].Amount" id="textAmount_@(i)" readonly value="@itm.Amount" placeholder="Amt">
-                                                </td>
-                                                <td>
-                                                    @*<input class="form-control input-sm" type="text" name="SaleOrderItemList[0].SalesMan" id="textSalesMan_0" placeholder="SalesMan">*@
-                                                    <div class="form-group auto-complete">
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SaleOrderItemList[@(i)].SalesMan" style="width:80px" id="textSalesMan_@(i)" placeholder="Enter SalesMan" value="@itm.SalesMan" data-table="Employee" data-col="Employee_Id,Employee_Name" data-headernames="Employee" data-param="hdnEmployee_Id" data-field="Role_Id">
-                                                            <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                                            <input type="hidden" id="hdnSalesManId_@(i)" value="@itm.SalesMan_Id" name="SaleOrderItemList[@(i)].SalesMan_Id" class="auto-complete-value" />
-                                                            <input type="hidden" id="hdnSalesMan_@(i)" value="@itm.SalesMan" name="SaleOrderItemList[@(i)].SalesMan" class="auto-complete-label" />
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                @if (Model.Filter.Sales_Invoice_Id == 0)
-                                                {
-                                                    <td>
-                                                        <button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(0)'>Delete</button>
-                                                    </td>
-                                                }
-                                            </tr>
-                                                i = i + 1;
-                                        }
 
 
-                                    }
-
-
-                                </tbody>
-                            </table>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-
-                    <div class="row">
-                        <div class="col-xs-12 table-responsive">
-                            <table id="tblSalesOrderItems">
-                                <thead>
-                                    <tr></tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td>
-                                            <label>Total Qty</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesInvoice.Total_Quantity" value="@Model.SalesInvoice.Total_Quantity" readonly id="textTotalQuantity_0">
-                                        </td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
-
-                                        <td>
-                                            <label>MRP Amount</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesInvoice.Total_MRP_Amount" value="@Model.SalesInvoice.Total_MRP_Amount" readonly id="textMRPAmount_0">
-                                        </td>
-
-                                        <td width="200px"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td width="60px"></td>
-                                        <td width="160px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
-                                        <td>
-                                            <label>Discount Amount</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesInvoice.Total_Discount_Amount" value="@Model.SalesInvoice.Total_Discount_Amount" readonly id="textDiscountAmount_0">
-                                        </td>
-                                        <td width="200px"></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td width="60px"></td>
-                                        <td width="160px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
-                                        <td>
-                                            <label>Gross Amount</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesInvoice.Gross_Amount" value="@Model.SalesInvoice.Gross_Amount" readonly id="textGrossAmount_0">
-                                        </td>
-                                        <td width="200px"></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td width="60px"></td>
-                                        <td width="160px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
-                                        <td>
-                                            <label>Tax</label>
-                                            <input type="text" class="form-control input-sm" style="width:60px" name="SalesInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" placeholder="%" value="@Model.SalesInvoice.Tax_Percentage">
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesInvoice.Tax_Amount" readonly value="@Model.SalesInvoice.Tax_Amount" id="textTaxAmount_0">
-                                        </td>
-                                        <td width="200px"></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td width="60px"></td>
-                                        <td width="160px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
-                                        <td>
-                                            <label>Round Off</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesInvoice.Round_Off_Amount" value="@Model.SalesInvoice.Round_Off_Amount" readonly value="@Model.SalesInvoice.Round_Off_Amount" id="textRoundOff_0">
-                                        </td>
-                                        <td width="200px"></td>
-                                    </tr>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td width="60px"></td>
-                                        <td width="160px"></td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
-                                        <td>
-                                            <label>NET Amount</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesInvoice.Net_Amount" value="@Model.SalesInvoice.Net_Amount" readonly id="textNETAmount_0">
-                                        </td>
-                                        <td width="200px"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- /.col -->
-                    </div>
-
-
-                    @if (Model.Filter.Sales_Invoice_Id == 0)
-                    {
+                                    </tbody>
+                                </table>
+                            </div><!-- /.col -->
+                        </div>
 
                         @*Pay*@
 
                         <div class="row">
 
-                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
-                                <input type="hidden" id="hdnPayment_Status1" value="@Model.SalesInvoice.Payment_Status">
+                            <input type="hidden" id="hdnPayment_Status1" value="@Model.SalesInvoice.Payment_Status">
 
-                                <div class="block">
+                            <div class="block">
 
-                                    <h4 style="margin-top: 0px;">Payment Terms.</h4>
+                                @*<h4 style="margin-top: 0px;">Payment Terms.</h4>*@
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Net_Amount" id="textTotalAmount" value="@Model.SalesInvoice.Net_Amount" placeholder="Total Amount" />
+                                <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 18px;">Payment Terms.</h4>
 
-                                            <input type="hidden" id="hdnSales_Invoice_Id" name="SalesInvoice.Sales_Invoice_Id" value="@Model.SalesInvoice.Sales_Invoice_Id">
-                                            <input type="hidden" id="hdnReceivable_Item_Id" name="SalesInvoice.Receivable_Item_Id" value="@Model.SalesInvoice.Receivable_Item_Id">
-                                            <input type="hidden" id="hdnReceivable_Id" name="SalesInvoice.Receivable_Id" value="@Model.SalesInvoice.Receivable_Id">
-                                            @*<input type="hidden" id="hdnPurchase_Credit_Note_Id" name="Receivable.Purchase_Credit_Note_Id" value="@Model.Receivable.Purchase_Credit_Note_Id">*@
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Net_Amount" id="textTotalAmount" value="@Model.SalesInvoice.Net_Amount" placeholder="Total Amount" />
 
+                                        <input type="hidden" id="hdnSales_Invoice_Id" name="SalesInvoice.Sales_Invoice_Id" value="@Model.SalesInvoice.Sales_Invoice_Id">
+                                        <input type="hidden" id="hdnReceivable_Item_Id" name="SalesInvoice.Receivable_Item_Id" value="@Model.SalesInvoice.Receivable_Item_Id">
+                                        <input type="hidden" id="hdnReceivable_Id" name="SalesInvoice.Receivable_Id" value="@Model.SalesInvoice.Receivable_Id">
+                                        @*<input type="hidden" id="hdnPurchase_Credit_Note_Id" name="Receivable.Purchase_Credit_Note_Id" value="@Model.Receivable.Purchase_Credit_Note_Id">*@
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
+                                        <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Payament_Date" value="@((Model.SalesInvoice.Payament_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                                            <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                                <input type="text" class="form-control datepicker" name="SalesInvoice.Payament_Date" value="@((Model.SalesInvoice.Payament_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
-                                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
 
                             </div>
@@ -535,17 +481,53 @@
 
                         <div class="row">
 
-                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+                            <div class="block">
 
-                                <div class="block">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" onblur="javascript: CalculatePaidAmt();" />
+                                    </div>
+                                </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" onblur="javascript: CalculatePaidAmt();" />
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="block">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque No</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_No" id="txtCheque_No" value="@Model.SalesInvoice.Cheque_No" placeholder="Enter Cheque No" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Amount</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_Amount" id="txtCheque_Amount" value="@Model.SalesInvoice.Cheque_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Enter Cheque Amount " />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
+                                        <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Cheque_Date" value="@((Model.SalesInvoice.Cheque_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Cheque_Date.ToString("dd-MM-yyyy")))" readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank Name</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Bank_Name" id="txtBank_Name" value="@Model.SalesInvoice.Bank_Name" placeholder="Enter Bank Name" />
+                                    </div>
                                 </div>
 
                             </div>
@@ -554,169 +536,48 @@
 
                         <div class="row">
 
-                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
-
-                                <div class="block">
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque No</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_No" id="txtCheque_No" value="@Model.SalesInvoice.Cheque_No" placeholder="Enter Cheque No" />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Amount</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_Amount" id="txtCheque_Amount" value="@Model.SalesInvoice.Cheque_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Enter Cheque Amount " />
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
-                                            <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                                <input type="text" class="form-control datepicker" name="SalesInvoice.Cheque_Date" value="@((Model.SalesInvoice.Cheque_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Cheque_Date.ToString("dd-MM-yyyy")))" readonly />
-                                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank Name</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Bank_Name" id="txtBank_Name" value="@Model.SalesInvoice.Bank_Name" placeholder="Enter Bank Name" />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
-
-                                <div class="block">
+                            <div class="block">
 
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note no</span>
-                                            <select class="form-control input-sm" id="drpCredit_Note_No" name="SalesInvoice.Sales_Credit_Note_Id">
-                                                <option value="0">Select Credit Note no</option>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note no</span>
+                                        <select class="form-control" id="drpCredit_Note_No" name="SalesInvoice.Sales_Credit_Note_Id">
+                                            <option>Select Credit Note no</option>
 
-                                                @foreach (var item in Model.CreditNote)
+                                            @foreach (var item in Model.CreditNote)
+                                            {
+                                                if (Model.SalesInvoice.Sales_Credit_Note_Id == item.Credit_Note_Id)
                                                 {
-                                                    if (Model.SalesInvoice.Sales_Credit_Note_Id == item.Credit_Note_Id)
-                                                    {
-                                                        <option value="@item.Credit_Note_Id" selected="selected">@item.Credit_Note_No</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@item.Credit_Note_Id">@item.Credit_Note_No</option>
-                                                    }
+                                                    <option value="@item.Credit_Note_Id" selected="selected">@item.Credit_Note_No</option>
                                                 }
-
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-                                    <div id="divPaidAmount" class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Amount</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@Model.SalesInvoice.Credit_Note_Amount" onblur="javascript: CalculatePaidAmt();" placeholder=" Enter Paid amount" />
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
-                                            <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="dd-MM-yyyy">
-                                                <input type="text" class="form-control datepicker" id="dtpCreditNoteDate" name="SalesInvoice.Credit_Note_Date" value="@((Model.SalesInvoice.Credit_Note_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Credit_Note_Date.ToString("dd-MM-yyyy")))" readonly />
-                                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
-
-                                <div class="block">
-
-
-                                    <div id="divDebitcardno" class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Card No </span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Card_No" id="txtCredit_Card_No" value="@Model.SalesInvoice.Credit_Card_No" placeholder="Enter card no" />
-                                        </div>
-                                    </div>
-
-                                    <div id="divCreditcardno" class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Card Amount</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Card_Amount" id="txtCard_Amount" value="@Model.SalesInvoice.Card_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Card Amount" />
-                                        </div>
-                                    </div>
-
-
-
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
-
-                                <div class="block">
-
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher No</span>
-                                            <select class="form-control input-sm" id="drpGift_Voucher_No" name="SalesInvoice.Gift_Voucher_Id">
-                                                <option value="0">Gift Voucher No</option>
-
-                                                @foreach (var item in Model.ReceivableItem)
+                                                else
                                                 {
-                                                    if (Model.SalesInvoice.Gift_Voucher_Id == item.Gift_Voucher_Id)
-                                                    {
-                                                        <option value="@item.Gift_Voucher_Id" selected="selected">@item.Gift_Voucher_No</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@item.Gift_Voucher_Id">@item.Gift_Voucher_No</option>
-                                                    }
+                                                    <option value="@item.Credit_Note_Id">@item.Credit_Note_No</option>
                                                 }
+                                            }
 
-                                            </select>
+                                        </select>
+                                    </div>
+                                </div>
 
+                                <div id="divPaidAmount" class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Amount</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@Model.SalesInvoice.Credit_Note_Amount" onblur="javascript: CalculatePaidAmt();" placeholder=" Enter Paid amount" />
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
+                                        <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="dd-MM-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpCreditNoteDate" name="SalesInvoice.Credit_Note_Date" value="@((Model.SalesInvoice.Credit_Note_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Credit_Note_Date.ToString("dd-MM-yyyy")))" readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
-
-                                    <div id="divDebitcardno" class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" onblur="javascript: CalculatePaidAmt();" value="@Model.SalesInvoice.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" />
-                                        </div>
-                                    </div>
-
-
-
                                 </div>
 
                             </div>
@@ -725,24 +586,86 @@
 
                         <div class="row">
 
-                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+                            <div class="block">
 
-                                <div class="block">
 
-                                    <div id="divDebitcardno" class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Paid_Amount" id="txtPaid_Amount" onblur="javascript: CalculateBalAmt();" value="@Model.SalesInvoice.Paid_Amount" placeholder="Paid Amount" />
-                                        </div>
+                                <div id="divDebitcardno" class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Card No </span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Card_No" id="txtCredit_Card_No" value="@Model.SalesInvoice.Credit_Card_No" placeholder="Enter card no" />
                                     </div>
+                                </div>
 
-                                    <div id="divCreditcardno" class="col-md-3">
-                                        <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Balance Amount</span>
-                                            <input type="text" class="form-control input-sm" name="SalesInvoice.Balance_Amount" id="txtBalance_Amount" value="@Model.SalesInvoice.Balance_Amount" placeholder="Balance Amount" />
-                                        </div>
+                                <div id="divCreditcardno" class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Card Amount</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Card_Amount" id="txtCard_Amount" value="@Model.SalesInvoice.Card_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Card Amount" />
                                     </div>
+                                </div>
 
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="block">
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher No</span>
+                                        <select class="form-control" id="drpGift_Voucher_No" name="SalesInvoice.Gift_Voucher_Id">
+                                            <option value="0">Gift Voucher No</option>
+
+                                            @foreach (var item in Model.ReceivableItem)
+                                            {
+                                                if (Model.SalesInvoice.Gift_Voucher_Id == item.Gift_Voucher_Id)
+                                                {
+                                                    <option value="@item.Gift_Voucher_Id" selected="selected">@item.Gift_Voucher_No</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Gift_Voucher_Id">@item.Gift_Voucher_No</option>
+                                                }
+                                            }
+
+                                        </select>
+
+
+
+                                    </div>
+                                </div>
+
+                                <div id="divDebitcardno" class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" onblur="javascript: CalculatePaidAmt();" value="@Model.SalesInvoice.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" />
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="block">
+
+                                <div id="divDebitcardno" class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Paid_Amount" id="txtPaid_Amount" onblur="javascript: CalculateBalAmt();" value="@Model.SalesInvoice.Paid_Amount" placeholder="Paid Amount" />
+                                    </div>
+                                </div>
+
+                                <div id="divCreditcardno" class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Balance Amount</span>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Balance_Amount" id="txtBalance_Amount" value="@Model.SalesInvoice.Balance_Amount" placeholder="Balance Amount" />
+                                    </div>
                                 </div>
 
                             </div>
@@ -751,25 +674,21 @@
 
                         @*Pay End*@
 
+                        <div class="row">
+                            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+                                <div class="btn-group">
+                                    <button type="button" id="btnSaveSalesOrder" class="btn btn-success"><i class="fa fa-check"></i>Save</button>
+                                    <a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesOrder")"><i class="fa fa-times"></i>Cancel </a>
+                                </div>
+                            </div>
 
-                    }
 
-                    <div class="row">
-                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
-                            <div class="btn-group">
-                                <button type="button" id="btnSaveSalesOrder" class="btn btn-success active">Save</button>
-                                <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "SalesOrder")">Cancel </a>
+                            <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
                             </div>
                         </div>
 
 
-                        <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
-                        </div>
                     </div>
-
-
-
-                </div>
 
             </div>
 

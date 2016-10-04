@@ -74,6 +74,8 @@ function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
 
         }
     });
+
+    CalculateTotal();
 }
 
 function AddPurchaseInvoiceDetails() {
@@ -101,7 +103,7 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU Code to search' value=''  data-table='Product_MRP' data-col='Product_Id,SKU Code' data-headernames='SKU_Code' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU Code to search' value=''  data-table='Product_MRP' data-col='Product_MRP_Id,SKU Code' data-headernames='SKU_Code' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' />";
@@ -178,6 +180,7 @@ function AddPurchaseInvoiceDetails() {
     myTable.append(newRow);
 
     Add_Validation(i);
+
 
 }
 
@@ -266,7 +269,11 @@ function CalculateTotal() {
 function Add_Validation(i) {
 
     $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
-    $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code']").rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
+
+    $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+    
+    $("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
+
     $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 
 }

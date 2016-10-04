@@ -51,12 +51,37 @@
 
                             <div class="btn-group">
                                 <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>
-                                @*<button class="btn btn-danger active" value="Edit" id="btnEditPurchaseReturn">Edit</button>*@
+                                <button class="btn btn-danger active" value="Edit" id="btnEditPurchaseReturn">View</button>
+                                <button role="button" type="button" class="btn btn-info active" value="Update" id="btnUpdatePurchaseReturn" data-toggle="modal" data-target="#div_Parent_Modal_Fade">Update GR No.</button>
+                                
                             </div>
 
                         </div>
 
                     </div>
+
+                    @**@
+
+                  
+                    @**@
+
+                    @*<div class="col-md-8 divUpdateGRNo">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
+                                    <input type="text" class="form-control" name="PurchaseReturn.GR_No" id="txtGR_No" placeholder="Enter GR No." />
+                                </div>
+                            </div>
+
+                            <div class="col-md-1" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                                <button type="button" class="btn btn-success active" value="Update" id="btnUpdate">Update</button>
+                            </div>
+
+                        </div>
+                        
+                    </div>*@
 
                 </form>
 
@@ -65,12 +90,27 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divTable">
+
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+            </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
+
+
+        </div>
+
+
+
+
+        @*<div class="col-md-12" style="padding: 0px;" id="divTable">
             <div class="row">
                 <div class="table-responsive" style="width:100%; margin: 0px 0;">
                     <table class="table table-bordered table-hover" id="tblPurchaseReturn">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Debit Note No.</th>
                                 <th>GR_No</th>
                                 <th>Vendor</th>
@@ -85,20 +125,16 @@
                         </thead>
                         <tbody></tbody>
                     </table>
-                </div><!-- /.col -->
             </div>
         </div>
+        </div>*@
 
-        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
-
-        </div>
-
-        <input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+        @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
 
         <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
 
 
-        </div>
+        </div>*@
 
     </div>
 

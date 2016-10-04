@@ -109,6 +109,16 @@ namespace MyLeoRetailerInfo.Product
 
     }
 
+    public class ProductDescription
+    {
+        public ProductDescription()
+        {
+           ProductMRPs = new List<ProductMRPInfo>();
+        }
+        public string Description { get; set; }
+        public List<ProductMRPInfo> ProductMRPs { get; set; }
+    }
+
     public class ProductImagesInfo
     {
         public ProductImagesInfo()

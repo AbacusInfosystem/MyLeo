@@ -18,7 +18,7 @@ using iTextSharp.text;
 using System.Transactions;
 using MyLeoRetailerRepo.Common;
 using MyLeoRetailerInfo.Color;
-using System.Transactions;
+
 
 namespace MyLeoRetailerRepo
 {
@@ -347,9 +347,6 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Size_Id", PurchaseOrder.Sizes[j].Size_Id7));
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity7));
 
-                    //Addition
-                        //sqlParam.Add(new SqlParameter("@Comment", item.Comment));
-                    //End
 
                         sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
                 }
@@ -469,10 +466,6 @@ namespace MyLeoRetailerRepo
                 j++;
 
             }
-
-
-            
-
         }
 
         private PurchaseOrderInfo Get_Purchase_Order_Value(DataRow dr)
@@ -510,7 +503,7 @@ namespace MyLeoRetailerRepo
             return PurchaseOrder;
         }
 
-        public List<PurchaseOrderInfo> Get_Purchase_Order(ref Pagination_Info Pager, string Purchase_Order_No)
+        public List<PurchaseOrderInfo> Get_Purchase_Order_List(ref Pagination_Info Pager, string Purchase_Order_No)
         {
             List<PurchaseOrderInfo> PurchaseOrders = new List<PurchaseOrderInfo>();
 
@@ -532,6 +525,20 @@ namespace MyLeoRetailerRepo
         //{
         //    return sqlHelper.Get_Table_With_Where(query_Details);
         //}      
+
+        public DataTable Get_Purchase_Order(Filter_PurchaseOrder filter)
+        {
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Purchase_Order_No", filter.Purchase_Order_No));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Orders_Detalis.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
 
         public List<VendorInfo> Get_Article_No_By_Vendor_Id(int Vendor_Id)
         {
@@ -1085,6 +1092,12 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Shipping_Address"))
                     purchaseOrder.Shipping_Address = Convert.ToString(dr["Shipping_Address"]);
 
+                if (!dr.IsNull("Branch_Name"))
+                    purchaseOrder.Shipping_Address = Convert.ToString(dr["Branch_Name"]);
+
+                if (!dr.IsNull("Transporter_Name"))
+                    purchaseOrder.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
                 if (!dr.IsNull("Transporter_Id"))
                     purchaseOrder.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
 
@@ -1123,7 +1136,6 @@ namespace MyLeoRetailerRepo
             return purchaseOrder;
         }
 
-
         public List<PurchaseOrderItemInfo> Get_Purchase_Order_Items(int Purchase_Order_Id)
         {
             List<PurchaseOrderItemInfo> purchaseOrderItems = new List<PurchaseOrderItemInfo>();
@@ -1144,8 +1156,8 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Article_No"))
                     purchaseOrderItem.Article_No = Convert.ToString(dr["Article_No"]);
 
-                //if (!dr.IsNull("Colour_Name"))
-                //    purchaseOrderItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+                if (!dr.IsNull("Colour_Name"))
+                    purchaseOrderItem.Colour_Name = Convert.ToString(dr["Colour_Name"]);
 
                 if (!dr.IsNull("Start_Size"))
                     purchaseOrderItem.Start_Size = Convert.ToString(dr["Start_Size"]);

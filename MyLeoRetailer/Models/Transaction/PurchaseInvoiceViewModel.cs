@@ -75,13 +75,5 @@ namespace MyLeoRetailer.Models.Transaction
             set;
         }
 	}
-
-	public class Filter_Purchase_Invoice
-	{
-		public string Purchase_Invoice_No
-		{
-			get;
-			set;
-		}
-	}
+	
 }

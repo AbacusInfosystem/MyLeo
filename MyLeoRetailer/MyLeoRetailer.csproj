@@ -1113,6 +1113,7 @@
     <Content Include="Scripts\Modules\Vendor\vendor_validations.js" />
     <Content Include="Log4Net.config" />
     <None Include="Scripts\_references.js" />
+    <Content Include="UploadedFiles\1.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1201,6 +1202,17 @@
     <Content Include="Views\PostLogin\Master\Replacement\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\ViewPurchaseReturnRequest.cshtml" />
+    <Content Include="Views\PostLogin\SalesReturn\SalesReturnView.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\SalesInvoiceView.cshtml" />
+    <Content Include="Views\PostLogin\Dashboard\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Employee\_ChangeBranch.cshtml" />
+    <Content Include="Views\Shared\_ChangeBranch.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\_Update_GR_No.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductDispatch\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductDispatch\Search.cshtml">
       <SubType>Code</SubType>
@@ -1221,7 +1233,6 @@
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
     <Folder Include="UploadFiles\" />
-    <Folder Include="Views\PostLogin\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

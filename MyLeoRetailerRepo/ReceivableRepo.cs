@@ -101,7 +101,48 @@ namespace MyLeoRetailerRepo
            return Receivables;
        }
 
-       public List<ReceivableInfo> Get_Receivable_Search_Details(ReceivableInfo Receivable) //.... 
+       public DataTable Get_Receivable_Search_Details(ReceivableInfo Receivable, string Branch_ID) //.... 
+       {
+           DataTable dt = new DataTable();
+
+           List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
+
+           List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+           if (Receivable.From_Date == DateTime.MinValue)
+           {
+               DateTime? someDate = null;
+               sqlParams.Add(new SqlParameter("@From_Date", someDate));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@From_Date", Receivable.From_Date));
+           }
+
+           if (Receivable.To_Date == DateTime.MinValue)
+           {
+               DateTime? someDate = null;
+               sqlParams.Add(new SqlParameter("@To_Date", someDate));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@To_Date", Receivable.To_Date));
+           }
+
+           //sqlParams.Add(new SqlParameter("@From_Date", Receivable.From_Date == DateTime.MinValue ? null : Receivable.From_Date.ToString("mm-dd-yy")));
+           //sqlParams.Add(new SqlParameter("@To_Date", Receivable.To_Date == DateTime.MinValue ? null : Receivable.To_Date.ToString("mm-dd-yy")));
+           sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Receivable.Sales_Invoice_No));
+           sqlParams.Add(new SqlParameter("@Customer_Name", Receivable.Customer_Name));
+           sqlParams.Add(new SqlParameter("@Payment_Status", Receivable.Payment_Status));
+           sqlParams.Add(new SqlParameter("@Branch_ID", Branch_ID));
+
+           dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Receivable_Search_Details.ToString(), CommandType.StoredProcedure);
+                     
+           return dt;
+       }
+
+
+       public List<ReceivableInfo> Get_Receivable_Search_Details_List(ReceivableInfo Receivable, string Branch_ID) //.... 
        {
            List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
 
@@ -132,6 +173,7 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Receivable.Sales_Invoice_No));
            sqlParams.Add(new SqlParameter("@Customer_Name", Receivable.Customer_Name));
            sqlParams.Add(new SqlParameter("@Payment_Status", Receivable.Payment_Status));
+           sqlParams.Add(new SqlParameter("@Branch_ID", Branch_ID));
 
            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Receivable_Search_Details.ToString(), CommandType.StoredProcedure);
 
@@ -222,6 +264,7 @@ namespace MyLeoRetailerRepo
                    {
                        rInfo.Balance_Amount = Convert.ToDecimal(dr["Net_Amount"]);
                    }
+
 
                    if (!dr.IsNull("Payment_Status"))
 
@@ -366,6 +409,17 @@ namespace MyLeoRetailerRepo
 
            sqlParams.Add(new SqlParameter("@Payament_Date ", Receivable.Payament_Date));
 
+           sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_ID));
+
+           //if (Convert.ToInt32(Receivable.Branch_ID) != 0)
+           //{
+           //    sqlParams.Add(new SqlParameter("@Branch_ID", Receivable.Branch_ID));
+           //}
+           //else
+           //{
+           //    sqlParams.Add(new SqlParameter("@Branch_ID", 0));
+           //}
+
            if (Receivable.Receivable_Item_Id != 0)
            {
                decimal Balance_Amount1 = Get_Balance_Amount(Receivable.Sales_Invoice_Id);
@@ -489,7 +543,16 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
            sqlParams.Add(new SqlParameter("@Card_Amount", Receivable.Card_Amount));
-           sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
+           //sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
+           if (Receivable.Cheque_Date == DateTime.MinValue)
+           {
+               
+               sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
+           }
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));
            
@@ -651,6 +714,10 @@ namespace MyLeoRetailerRepo
                    if (!dr.IsNull("Balance_Amount"))
 
                        Receivable.Balance_Amount = Convert.ToDecimal(dr["Balance_Amount"]);
+
+                   if (!dr.IsNull("Branch_ID"))
+
+                       Receivable.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
 
                    if (!dr.IsNull("Payament_Date"))
 

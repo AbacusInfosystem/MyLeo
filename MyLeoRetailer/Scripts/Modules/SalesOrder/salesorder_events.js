@@ -6,7 +6,7 @@
 
     $('#dtpInvoice_Date').datepicker({
 
-        dateFormat: "dd-mm-yy",
+        dateFormat: "dd-MM-yy",
         changeMonth: true,
         changeYear: true,
         minDate: 0,
@@ -18,8 +18,6 @@
     debugger
 
     if ($('#hdnSalesInvoiceID').val() != 0) {
-
-        alert($('#hdnSalesInvoiceID').val());
 
         debugger;
 
@@ -49,9 +47,6 @@ $(function ()
     $("[name='SalesInvoice.Mobile']").focusout(function ()
     {
         Get_Customer_Name_By_Mobile_No();
-
-        //Get_Credit_Note_Details_By_Id($(this).val());
-
 
     });
 
@@ -125,6 +120,36 @@ $(function ()
     });
 
 });
+
+
+function CalculateQuantityMRP()
+{
+    debugger;
+
+    var sumQuantity = 0;
+    var sumMRPAmount = 0;
+    //var mrpAmt = 0;
+
+    var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
+
+    if (tr.size() > 0) {
+        for (var i = 0; i < tr.size() ; i++)
+        {
+            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+            //$("#textMRP_Price_" + i).val(mrpAmt);
+
+            //mrpAmt = Qty * MRP
+            sumQuantity = sumQuantity + Qty;
+            sumMRPAmount = MRP * Qty + sumMRPAmount;
+           
+        }
+        //$("#textMRP_Price_" + i).val(mrpAmt);
+    }
+    //$("#textMRP_Price_" + i).val(mrpAmt);
+    $("#textTotalQuantity_0").val(sumQuantity);
+    $("#textMRPAmount_0").val(sumMRPAmount.toFixed(2));
+}
 
 function CalculateTotal()
 {

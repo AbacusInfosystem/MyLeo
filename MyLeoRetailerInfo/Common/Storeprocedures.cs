@@ -202,6 +202,11 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Purchase_Returns,
 
+            sp_Update_Purchase_Return,
+
+            sp_Get_Purchase_Return_Item_by_Purchase_Return_Id, //Added by vinod mane on 30/09/2016
+            sp_Get_Purchase_Return_by_Purchase_Return_Id,//Added by vinod mane on 30/09/2016
+
         #endregion
 
 
@@ -249,6 +254,9 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Purchase_Invoice,
         sp_Get_Purchase_Invoices,
+        Get_Purchase_Invoice_Data_By_Id_Sp1,
+
+
 
         #endregion
 
@@ -259,6 +267,10 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Order_Request_Item_Sizes,
 
         sp_Get_Purchase_Order_Requests,
+
+        sp_Get_Purchase_Order_Request_Details_By_Id,
+        sp_Get_Purchase_Order_Request_Items,
+        sp_Get_Purchase_Order_Request_Item_Sizes,
 
         #endregion
 
@@ -277,8 +289,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Delete_Product_Image,
             sp_Update_Product_Images,
             sp_Get_Product_MRP_Exist_By_ProductId,
+            sp_Get_Product_Description_By_ProductId,
+            sp_Get_Product_Color_Exist_By_ProductId,
 
-            //payable
+             #region Pyable
         Get_Credit_Note_Details_By_Id_Sp,
         Get_Payable_Balance_Amount_By_Id_Sp,
         Get_Payable_Data_By_Id_Sp,
@@ -291,6 +305,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Payable_Search_Data12,
         Get_Credit_Note_Amount_By_Id_Sp,
         sp_Get_Payable_Search_Details,
+
+              #endregion
 
         //Employee Branch mapping
         //sp_Get_Branch,
@@ -319,11 +335,13 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Sales_Return_Item,
         sp_Insert_Sales_Credit_Notes,
         Sp_Delete_Sales_Return_Items_By_Sales_Return_Id,
+            sp_Get_Sales_Return_Details_By_Sales_Return_Id,
+            sp_Get_Sales_Return_Items_By_Sales_Return_Id,
 
 
 
-        //receivable
-
+       
+         #region Receivable
         sp_Get_Receivable_Search_Data,
         Get_Receivable_Details_By_Id_Sp,
         Get_Credit_Note_Details_By_Id_Sp1,
@@ -341,6 +359,7 @@ namespace MyLeoRetailerInfo.Common
         Get_Receivable_Credit_Note_Details_By_Id,
         sp_Get_Credit_Note_Details_By_Customer_Id1,
         sp_Get_Receivable_Search_Details,
+           #endregion
 
 
 
@@ -351,7 +370,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Return_Request_By_Id,
         sp_Insert_Purchase_Return_Request_Item,
         sp_Get_Purchase_Return_Requests,
-
+            sp_Get_Purchase_Return_Request_Details,
 
         #endregion
 

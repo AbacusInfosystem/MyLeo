@@ -247,21 +247,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         #region Change Branch
         //Addition by swapnali | Date:14/09/2016
-        public ActionResult ChangeBranch()
+        public PartialViewResult ChangeBranch()
         {
             EmployeeViewModel eViewModel = new EmployeeViewModel();
-            if (Request.Cookies["LoginInfo"] != null)
+            if (Request.Cookies["MyLeoLoginInfo"] != null)
             {
                 //var barchid = Request.Cookies["LoginInfo"].Value;
                 MyLeoRetailer.Models.PreLogin.LoginViewModel lViewModel=new Models.PreLogin.LoginViewModel ();
-                lViewModel.Cookies = Utility.Get_Login_User("LoginInfo", "Token", "Branch_Ids");
+                lViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(lViewModel.Cookies.User_Id,lViewModel.Cookies.Branch_Ids);
 
                 eViewModel.Employee.Employee_Id=lViewModel.Cookies.User_Id;
 
             }
-            return View("ChangeBranch", eViewModel);
+            return PartialView("_ChangeBranch", eViewModel);
         }
 
         public ActionResult Save_Employee_Branch_Id(EmployeeViewModel eViewModel)
@@ -316,7 +316,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 Logger.Error("Employee Controller - Set_Branch_Cookies" + ex.Message);
             }
         }
-
 
         //end
 

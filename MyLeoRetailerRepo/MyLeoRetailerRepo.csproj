@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutocompleteLookupRepo.cs" />
+    <Compile Include="AutoGenerateNumberRepo.cs" />
     <Compile Include="BranchRepo.cs" />
     <Compile Include="AlterationRepo.cs" />
     <Compile Include="BrandRepo.cs" />

@@ -3,20 +3,33 @@
 //$(document).ready(function () {
 //    Get_Receivables();
 //});
+$(document).ready(function () {
 
-$(function () {
+    Get_Receivable();
 
-    if ($("#hdnPayment_Status1").val() == 1)
-    {
+    if ($("#hdf_Sales_Credit_Note_Id").val()!= 0 || $("#hdf_Sales_Credit_Note_Id").val()!='') {
+       Get_Receivables();
+    }
+
+    
+
+    document.getElementById('btnPay').disabled = true;
+
+    $(document).on('change', '[name="Get_Receivable_Search_Details_List"]', function (event) {
+        if ($(this).prop('checked')) {
+            $("#hdf_Sales_Invoice_Id").val(this.value);
+            document.getElementById('btnPay').disabled = false;            
+        }
+    });
+
+    if ($("#hdnPayment_Status1").val() == 1) {
         $("#btnSavePay").hide();
 
     }
 
     $("#btnSearchReceivable").click(function () {
 
-        $("#frmReceivable").attr("action", "/Receivable/Get_Receivable");
-
-        $("#frmReceivable").submit();
+        Get_Receivable();
     });
 
 
@@ -39,6 +52,12 @@ $(function () {
             Save_Receivable_Data();
         }
 
+    });
+
+    $("#btnPay").click(function () {
+
+        $("#frmReceivable").attr("action", "/Receivable/Pay");
+        $("#frmReceivable").submit();
     });
 
 });

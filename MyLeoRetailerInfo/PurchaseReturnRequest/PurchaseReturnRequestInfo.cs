@@ -27,12 +27,15 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
         public int Purchase_Return_Request_Id { get; set; }
 
         public int Purchase_Invoice_Id { get; set; }
+
         public string Purchase_Invoice_No { get; set; }
 
         public int Vendor_Id { get; set; }
+
         public string Vendor_Name { get; set; }
 
         public int Branch_Id { get; set; }
+
         public string Branch_Name { get; set; }
 
         public bool Status { get; set; }
@@ -82,10 +85,6 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
 
         public int Purchase_Return_Request_Id { get; set; }
 
-        //public int Purchase_Invoice_Id { get; set; }
-
-        //public int Purchase_Order_Id { get; set; }
-
         public string SKU_Code { get; set; }
 
         public int Size_Group_Id { get; set; }
@@ -98,7 +97,8 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
 
         public int Quantity { get; set; }
 
-        //public decimal Total_Amount { get; set; }
+        public decimal Total_Amount { get; set; }
+
         public decimal Amount { get; set; }
 
         public DateTime Created_Date { get; set; }
@@ -109,7 +109,6 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
 
         public int Updated_By { get; set; }
 
-        //
         public string Article_No { get; set; }
 
         public int Brand_Id { get; set; }
@@ -130,11 +129,19 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
 
         public int WSR_Price { get; set; }
 
+        public int Barcode { get; set; }
+
         
 
 
 
 
+    }
+
+
+    public class Request_Filter
+    {
+        public int Vendor_Id { get; set; }
     }
 
 }
