@@ -61,6 +61,7 @@
     <Compile Include="GridInfo.cs" />
     <Compile Include="Interface\IGridInfo.cs" />
     <Compile Include="Interface\IQueryInfo.cs" />
+    <Compile Include="Inventory\InventoryInfo.cs" />
     <Compile Include="LookupInfo.cs" />
     <Compile Include="Pagination_Info.cs" />
     <Compile Include="Payable\PayableInfo.cs" />

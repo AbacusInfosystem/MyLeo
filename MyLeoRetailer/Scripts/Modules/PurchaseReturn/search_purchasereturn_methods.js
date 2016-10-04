@@ -75,7 +75,7 @@ function UpdateGRNo() {
         }
     });
 
-    
+    Get_Purchase_Returns();
 }
 
 function call_back(data) {
@@ -83,19 +83,21 @@ function call_back(data) {
     $('#div_Parent_Modal_Fade').modal('show');
     $("#div_Parent_Modal_Fade").find(".modal-title").text("Update GR No.");
 
-    $("#div_Parent_Modal_Fade").find("#btnOK").value('Update');
+    $("#div_Parent_Modal_Fade").find(".modal-footer").hide();
 
-    $("btnUpdate").click(function (event) {
+    $("#btnUpdate").click(function (event) {
         if ($('#frmUpdateGRNo').valid()) {
 
             document.getElementById('btnUpdate').disabled = true;
+
+            $('#div_Parent_Modal_Fade').modal('hide');
 
             UpdateGRNo();
              
             
         }
 
-    });
+    })
    
 }
 
