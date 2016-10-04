@@ -2,23 +2,23 @@
 
 <form id="frmUpdateGRNo" enctype="multipart/form-data">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-7">
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
                 <input type="text" class="form-control" name="PurchaseReturn.GR_No" id="txtGR_No" placeholder="Enter GR No." />
             </div>
         </div>
-        
-        <div class="col-md-4">
-            <div class="form-group">
+
+        <div class="col-md-5" style="padding-top: 25px; ">
+            <div class=" form-group">
                 <div class="input-group pull-left">
                     <input type="hidden" id="hdnPurchaseReturnId" name="PurchaseReturn.Purchase_Return_Id" value="@Model.PurchaseReturn.Purchase_Return_Id" />
 
                     <button type="button" class="btn btn-success active" value="Update" id="btnUpdate">Update</button>
                 </div>
             </div>
-        </div>     
-    </div>   
+        </div>
+    </div>
 </form>
 
 <script>

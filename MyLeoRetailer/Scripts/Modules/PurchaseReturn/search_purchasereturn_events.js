@@ -1,13 +1,13 @@
 ﻿$(document).ready(function () {
 
-    $("#btnUpdatePurchaseReturn").click(function (event) {
+    //$("#btnUpdatePurchaseReturn").click(function (event) {
 
-        var PurchaeReturnId = $('#hdnPurchaseReturnId').val();
-        $("#div_Parent_Modal_Fade").find(".modal-body").load("/PurchaseReturn/Update_GR_No", { Id: PurchaeReturnId }, call_back);
+    //    var PurchaeReturnId = $('#hdnPurchaseReturnId').val();
+    //    $("#div_Parent_Modal_Fade").find(".modal-body").load("/PurchaseReturn/Update_GR_No", { Id: PurchaeReturnId }, call_back);
 
-        document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+    //    document.getElementById('btnUpdatePurchaseReturn').disabled = true;
         
-    });
+    //});
 
 
     document.getElementById('btnEditPurchaseReturn').disabled = true;
@@ -46,3 +46,16 @@
 
 });
 
+$(function () {
+
+
+    $("#btnUpdatePurchaseReturn").click(function (event) {
+
+        var PurchaeReturnId = $('#hdnPurchaseReturnId').val();
+        $("#div_Parent_Modal_Fade").find(".modal-body").load("/PurchaseReturn/Update_GR_No", { Id: PurchaeReturnId }, call_back);
+
+        document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+
+    });
+
+});
