@@ -100,6 +100,7 @@ function Get_Receivables1(Sales_Invoice_Id, Sales_Credit_Note_Id) {
 
 function Get_Credit_Note_Amount_By_Id(id) {
 
+    debugger;
 
     var rViewModel =
         {
@@ -140,6 +141,7 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
 function Get_Gift_Voucher_Amount_By_Id(id) {
 
+    debugger;
 
     var rViewModel =
         {
@@ -284,6 +286,9 @@ function Cancle() {
 }
 
 function Save_Receivable_Data() {
+
+    debugger;
+
     var rViewModel =
 		{
 		    Receivable: {
@@ -320,6 +325,10 @@ function Save_Receivable_Data() {
 
 		        Cheque_Date: $("[name='Receivable.Cheque_Date']").val(),
 
+		        Branch_ID: $("[name='Receivable.Branch_ID']").val(),
+
+		        Branch_Name: $("[name='Receivable.Branch_Name']").val(),
+
 		        Cheque_No: $("[name='Receivable.Cheque_No']").val(),
 
 		        Bank_Name: $("[name='Receivable.Bank_Name']").val(),
@@ -354,6 +363,7 @@ function Save_Receivable_Data() {
         contentType: 'application/json',
 
         success: function (response) {
+
             debugger;
 
             var obj = $.parseJSON(response);
@@ -372,6 +382,8 @@ function Save_Receivable_Data() {
 }
 
 function Bind_Payable_Grid_Items(data) {
+
+    debugger;
 
     $("#tblReceivableItems").html("");
 
@@ -422,8 +434,6 @@ function Bind_Payable_Grid_Items(data) {
         htmlText += "<th>Gift voucher no</th>";
 
         htmlText += "<th>Gift voucher amount</th>";
-
-      
 
     }
 
@@ -540,6 +550,12 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<input type='hidden' id='hdnCheque_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cheque_Date + "'/>";
 
+        htmlText += "<input type='hidden' id='hdnPayament_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivable.Payament_Date + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnBranchID" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivable.Branch_ID + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnBranchName" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivable.Branch_Name + "'/>";
+
         htmlText += "<input type='hidden' id='hdnBank_Name" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Bank_Name + "'/>";
 
         htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Sales_Credit_Note_Id + "'/>";
@@ -622,6 +638,8 @@ function EditReceivableData(id) {
 
     alert("12");
 
+    debugger;
+
     var Balance_amount = 0;
     var paid_amount = 0;
     var total_bal_amount = 0;
@@ -640,6 +658,8 @@ function EditReceivableData(id) {
     $("#a123").val($("#hdnCheque_Date" + id).val());
 
     $("#txtCheque_Date").val($("#hdnCheque_Date" + id).val());
+
+    $("#txtPayament_Date").val($("#hdnPayament_Date" + id).val());
 
     $("#txtBank_Name").val($("#hdnBank_Name" + id).val());
 
@@ -660,6 +680,19 @@ function EditReceivableData(id) {
     $('[name = "Receivable.Gift_Voucher_Id"]').val($("#hdnGift_Voucher_No" + id).val());
 
     $("#hdnReceivable_Id").val($("#hdnReceivable_Id" + id).val());
+
+
+    //edited by sushant for Branch
+
+    $("#text_Branch_Name").val($("#hdnBranchName" + id).val());
+
+    $("#hdnBranchID").val($("#hdnBranchID" + id).val());
+
+
+    if ($('#text_Branch_Name').val() != 0)
+
+        $("#divBranch").find(".autocomplete-text").trigger("focusout");
+
 
     Balance_amount = $("#txtBalance_Amount").val();
 
