@@ -276,7 +276,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
            eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
 
-           //eViewModel.Employee = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+           eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
            return View("ChangeBranch", eViewModel);
         }
