@@ -28,7 +28,9 @@ namespace MyLeoRetailer.Models
 
             ProductImages = new List<ProductImagesInfo>();
 
-            //ProductColors = new List<ProductColorInfo>(); 
+            //ProductSKU = new ProductSKUInfo();
+
+            //ProductSKUs = new List<ProductSKUInfo>(); 
 
             ProductMRP = new ProductMRPInfo();
 
@@ -53,7 +55,8 @@ namespace MyLeoRetailer.Models
             Grid_Detail.Pager.CallBackMethod = "Get_Products";
         }
 
-        //public List<VendorInfo> Vendors { get; set; }
+        //public List<ProductSKUInfo> ProductSKUs { get; set; }
+        //public ProductSKUInfo ProductSKU { get; set; }
         public List<SizeGroupInfo> SizeGroups { get; set; }
         public List<CategoryInfo> Categories { get; set; }
         public List<SubCategoryInfo> SubCategories { get; set; }

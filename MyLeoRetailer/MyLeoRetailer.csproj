@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BarcodeLib.Barcode.ASP.NET, Version=5.0.0.30712, Culture=neutral, PublicKeyToken=f1ec954ce2c30e4e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Barcode And QRCode Implementation\DLL\BarcodeLib.Barcode.ASP.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Barcode_Generator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Barcode And QRCode Implementation\DLL\Barcode_Generator.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -1274,7 +1282,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60053/</IISUrl>
+          <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

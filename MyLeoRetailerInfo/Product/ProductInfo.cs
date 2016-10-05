@@ -48,9 +48,9 @@ namespace MyLeoRetailerInfo.Product
 
        // public decimal Purchase_Price { get; set; }
 
-        public decimal Size_Difference { get; set; }
+        public decimal? Size_Difference { get; set; }
 
-        public decimal MRP_Difference { get; set; }
+        public decimal? MRP_Difference { get; set; }
 
         public int MRP_Percentage { get; set; }
 
@@ -79,25 +79,33 @@ namespace MyLeoRetailerInfo.Product
     {
         public int Product_MRP_Id { get; set; }
 
+        public int Product_SKU_Map_Id { get; set; }
+
         public int Product_Id { get; set; }
 
         public int Size_Id { get; set; }
 
-        public string Size_Name { get; set; } 
+        public string Size_Name { get; set; }
 
         public string Vendor_Color_Code { get; set; }
 
-        public string Description { get; set; } 
-         
         public int Colour_Id { get; set; }
 
         public string Colour { get; set; }
 
         public decimal? Purchase_Price { get; set; }
 
+        public string SKU_Code { get; set; }
+
+        public string Description { get; set; } 
+
         public decimal? MRP_Price { get; set; }
 
-        public string SKU_Code { get; set; }
+        public byte[] Product_Barcode { get; set; }
+
+        public string Barcode_Image_Url { get; set; }
+
+        public bool Status { get; set; }
 
         public DateTime Created_Date { get; set; }
 
@@ -109,6 +117,35 @@ namespace MyLeoRetailerInfo.Product
 
     }
 
+    //public class ProductSKUInfo
+    //{
+    //    public int Product_SKU_Map_Id { get; set; }
+
+    //    public int Product_Id { get; set; }
+
+    //    public int Size_Id { get; set; }
+
+    //    public string Size_Name { get; set; }
+
+    //    public string Vendor_Color_Code { get; set; }
+
+    //    public int Colour_Id { get; set; }
+
+    //    public string Colour { get; set; }
+
+    //    public decimal? Purchase_Price { get; set; }
+
+    //    public string SKU_Code { get; set; }
+
+    //    public DateTime Created_Date { get; set; }
+
+    //    public int Created_By { get; set; }
+
+    //    public DateTime Updated_Date { get; set; }
+
+    //    public int Updated_By { get; set; }
+    //}
+
     public class ProductDescription
     {
         public ProductDescription()
@@ -116,6 +153,7 @@ namespace MyLeoRetailerInfo.Product
            ProductMRPs = new List<ProductMRPInfo>();
         }
         public string Description { get; set; }
+        public bool Status { get; set; }
         public List<ProductMRPInfo> ProductMRPs { get; set; }
     }
 
@@ -147,16 +185,6 @@ namespace MyLeoRetailerInfo.Product
 
         public string[] Image_Src { get; set; } 
 
-    }
-
-    //public class ProductColorInfo
-    //{
-    //    public int Colour_Id { get; set; }
-
-    //    public string Colour { get; set; }
-
-    //    public string ColourCode { get; set; }
-
-    //    public List<ProductMRPInfo> ProductMRP_N_WSR { get; set; }
-    //}
+    } 
+   
 }
