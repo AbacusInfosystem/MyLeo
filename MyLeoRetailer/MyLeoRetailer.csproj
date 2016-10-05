@@ -181,6 +181,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostLogin\Master\ProductDispatchController.cs" />
     <Compile Include="Controllers\PostLogin\Report\InventoryController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderRequestController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductWarehouseController.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\PayableViewModel.cs" />
     <Compile Include="Models\PreLogin\LoginViewModel.cs" />
+    <Compile Include="Models\ProductDispatchViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\LookupViewModel.cs" />
     <Compile Include="Models\GiftVoucherViewModel.cs" />
@@ -1040,6 +1042,12 @@
     <Content Include="Scripts\Modules\Payable\Payable_Validation.js" />
     <Content Include="Scripts\Modules\Payable\Pay_event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\dispatched_product_listing_method.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\dispatched_product_listing_event.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_method.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_event.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_event.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_method.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
     <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_events.js" />
@@ -1214,6 +1222,11 @@
     <Content Include="Views\PostLogin\Master\Employee\_ChangeBranch.cshtml" />
     <Content Include="Views\Shared\_ChangeBranch.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\_Update_GR_No.cshtml" />
+    <Content Include="Views\PostLogin\Master\ProductDispatch\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\ProductDispatch\Search.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\PostLogin\Master\ProductDispatch\Dispatched_Product_Listing.cshtml" />
     <Content Include="Views\PostLogin\Report\Inventory\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>

@@ -21,13 +21,15 @@
             <li><a href="/Brand/Index"><span class="fa fa-users"></span> Brand Management</a></li>
             <li><a href="/Category/Index"><span class="fa fa-users"></span> Category Management</a></li>
             <li><a href="/Color/Index"><span class="fa fa-users"></span> Color Management</a></li>
-            <li><a href="/Size/Index"><span class="fa fa-users"></span> Size Management</a></li>
-            <li><a href="/Tax/Index"><span class="fa fa-users"></span> Tax Management</a></li>
+            <li><a href="/Size/Index"><span class="fa fa-users"></span> Size Management</a></li>     
+            <li><a href="/Tax/Index"><span class="fa fa-users"></span> Tax Management</a></li>        
             <li><a href="/Customer/Search"><span class="fa fa-users"></span> Customer Management</a></li>
             <li><a href="/Vendor/Search"><span class="fa fa-users"></span> Vendor Management</a></li>
             <li><a href="/VendorContact/Search"><span class="fa fa-users"></span> Vendor Contact Management</a></li>
             <li><a href="/Product/Search"><span class="fa fa-users"></span> Product Management</a></li>
-            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Warehouse</a></li>
+                            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Product Warehouse</a></li>
+                            <li><a href="/ProductDispatch/Search"><span class="fa fa-users"></span> Product Dispatch</a></li>
+                            <li><a href="/ProductDispatch/Dispatched_Product_Listing"><span class="fa fa-users"></span>Inward Product</a></li>
             @*<li><a href="/Replacement/Search"><span class="fa fa-users"></span> Replacement</a></li>*@ @*commented bya aditya as pre sanket instruction 26092016*@
         </ul>
     </li>
@@ -74,14 +76,14 @@
         Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
     <!-- TASKS -->
-        <li class="xn-icon-button pull-right">
+    <li class="xn-icon-button pull-right">
             <a href="#" data-toggle="tooltip panel" id="btnSaveChaneBranch" data-target="#div_Change_Branch" data-placement="bottom" title="Change Branch"><span class="fa fa-map-marker"></span></a>
             <input type="hidden" value="@Cookies.Page_URL" name="Page_URL" id="hdnPage_URL" />
 
             @* Gauravi: 05-10-2016 *@
 
             <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Change_Branch" style="width: 220px;">
-                <div class="panel-heading">
+            <div class="panel-heading">
                     <h3 class="panel-title"><span class="fa fa-tasks"></span></h3>
                 </div>
 
@@ -89,17 +91,17 @@
                     <div class="page-content-wrap">
 
                     </div>
-                </div>
-
-                <div class="panel-footer text-center">
-                    <div class="btn-group">
-                    </div>
-                </div>
-
             </div>
 
+            <div class="panel-footer text-center">
+                <div class="btn-group">
+                </div>
+            </div>
+
+        </div>
+
             @* End *@
-        </li>
+    </li>
     <!-- END TASKS -->
 
     }
