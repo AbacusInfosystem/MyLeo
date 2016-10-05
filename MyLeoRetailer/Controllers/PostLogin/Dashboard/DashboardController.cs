@@ -1,4 +1,4 @@
-﻿using Barcode_Generator;
+﻿//using Barcode_Generator;
 using MyLeoRetailer.Filters;
 using System;
 using System.Collections.Generic;
@@ -16,9 +16,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Dashboard
 
         public ActionResult Index()
         {
-            Barcode bar = new Barcode();
-            byte[] barcodeInBytes = bar.Generate_Linear_Lib_Barcode("ABCD", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/ABCD22.png");
-            byte[] barcodeInBytes1 = bar.Generate_Linear_Barcode("ABACUSINFOSYSTEMNEW", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/Myleo22.png");
+            //Barcode bar = new Barcode();
+            //byte[] barcodeInBytes = bar.Generate_Linear_Lib_Barcode("ABCD", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/ABCD22.png");
+            //byte[] barcodeInBytes1 = bar.Generate_Linear_Barcode("ABACUSINFOSYSTEMNEW", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/Myleo22.png");
             return View();
         }
 

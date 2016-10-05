@@ -15,8 +15,8 @@ using MyLeoRetailerInfo;
 using System.IO;
 using System.Configuration;
 using MyLeoRetailerHelper.Logging;
-using BarcodeLib.Barcode;
-using Barcode_Generator;
+//using BarcodeLib.Barcode;
+//using Barcode_Generator;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
