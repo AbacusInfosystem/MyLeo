@@ -142,8 +142,8 @@ function Bind_Product_MRP_New_Color(data, obj, i) {
                 htmlText += "<td>";
 
                 //htmlText += "<i class='fa fa-barcode fa-3x'></i>";
-                htmlText += "<img src='" + (data.ProductDescription[p].ProductMRPs[m].Product_Barcode != null ? data.ProductDescription[p].ProductMRPs[m].Product_Barcode : "") + "' />";
-                htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + m + "].Product_Barcode' value='" + (data.ProductDescription[p].ProductMRPs[m].Product_Barcode == null ? '' : data.ProductDescription[p].ProductMRPs[m].Product_Barcode) + "'/>";
+                htmlText += "<img src='" + (data.ProductDescription[p].ProductMRPs[m].Barcode_Image_Url != null ? data.ProductDescription[p].ProductMRPs[m].Barcode_Image_Url : "") + "' style='width:100%'/>";
+                htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + m + "].Product_Barcode' value='" + (data.ProductDescription[p].ProductMRPs[m].Product_Barcode == null ? '' : data.ProductDescription[p].ProductMRPs[m].Product_Barcode) + "' />";
 
                 htmlText += "</td>";
             }
@@ -381,8 +381,8 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
                 htmlText += "<td>";
 
                 // htmlText += "<i class='fa fa-barcode fa-3x'></i>";
-                htmlText += "<img src='" + (data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url != null ? data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url : "") + "' />";
-
+                htmlText += "<img src='" + (data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url != null ? data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url : "") + "' style='width:100%'/>";
+                htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + n + "].Product_Barcode' value='" + (data.ProductDescription[i].ProductMRPs[n].Product_Barcode == null ? '' : data.ProductDescription[i].ProductMRPs[n].Product_Barcode) + "' />";
                 htmlText += "</td>";
             }
 
@@ -630,6 +630,7 @@ function Bind_MRPNWSR_Sale_Grid(data, Color_Index, Color_Name, Color_Id, Vendor_
                 htmlText += "<input type='hidden' id='hdnColorNameSale_" + Color_Name + "' class='form-control ColorName' placeholder='description.' name='Color_Name' value='" + Color_Name + "' />";
                 htmlText += "<input type='hidden' id='hdnColorIndexSale_" + Color_Index + "' class='form-control ColorIndex' placeholder='description.' name='Color_Index' value='" + Color_Index + "' />";
                 htmlText += "<input type='hidden' id='hdn_SKUCode' class='form-control' name='Colors[" + c + "].ProductDescription[" + index + "].ProductMRPs[" + k + "].SKU_Code' value='" + data.ProductDescription[r].ProductMRPs[k].SKU_Code + "'/>";
+                htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + c + "].ProductDescription[" + index + "].ProductMRPs[" + k + "].Product_Barcode' value='" + (data.ProductDescription[r].ProductMRPs[k].Product_Barcode == null ? '' : data.ProductDescription[r].ProductMRPs[k].Product_Barcode) + "' />";
                 htmlText += "</td>";
             }
             htmlText += "</tr>";

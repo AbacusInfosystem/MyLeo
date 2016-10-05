@@ -11,7 +11,6 @@ using MyLeoRetailerInfo.Product;
 using MyLeoRetailerRepo.Utility;
 using MyLeoRetailerInfo.Color;
 using System.Reflection;
-using MyLeoRetailerInfo; 
 using Barcode_Generator;
 using BarCode.Models;
 using BarcodeLib.Barcode;
@@ -376,14 +375,15 @@ namespace MyLeoRetailerRepo
             if (dr["Product_Barcode"] != DBNull.Value)
             {
                 ProductMRP.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";
+                ProductMRP.Product_Barcode = (byte[])dr["Product_Barcode"];
             }
             else
             {
                  if (!String.IsNullOrEmpty(ProductMRP.SKU_Code))
-                {
-                    // string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), "Barcode.png");
-                    ProductMRP.Product_Barcode = bar.Generate_Linear_Barcode("ABACUSINFOSYSTEM", "D:/Projects/MyLeo/MyLeoRetailer/UploadedFiles/Barcode.png");
-                    //ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
+                {  
+                    string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), ProductMRP.SKU_Code + ".png");
+                    ProductMRP.Product_Barcode = bar.Generate_Linear_Barcode(ProductMRP.SKU_Code, path);//NK_TSHR_TSRN_b_RD
+                    ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
                 }
             } 
            
