@@ -9,12 +9,12 @@ $(function () {
 
     }
 
-    $("#btnSearchPayable").click(function () {
+    //$("#btnSearchPayable").click(function () {
 
-        $("#frmPayable").attr("action", "/Payable/Get_Payable");
+    //    $("#frmPayable").attr("action", "/Payable/Get_Payable");
 
-        $("#frmPayable").submit();
-    });
+    //    $("#frmPayable").submit();
+    //});
 
 
     $('[name = "Payable.Payment_Mode"]').change(function () {

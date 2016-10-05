@@ -1,8 +1,6 @@
 ﻿
 
-//$(document).ready(function () {
-//    Get_Receivables();
-//});
+
 
 $(function () {
 
@@ -12,12 +10,12 @@ $(function () {
 
     }
 
-    $("#btnSearchReceivable").click(function () {
+    //$("#btnSearchReceivable").click(function () {
 
-        $("#frmReceivable").attr("action", "/Receivable/Get_Receivable");
+    //    $("#frmReceivable").attr("action", "/Receivable/Get_Receivable");
 
-        $("#frmReceivable").submit();
-    });
+    //    $("#frmReceivable").submit();
+    //});
 
 
     $('[name = "Receivable.Sales_Credit_Note_Id"]').change(function () {

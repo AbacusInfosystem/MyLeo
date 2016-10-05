@@ -77,6 +77,12 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
 
+       public string Payment_Mode1
+       {
+           get;
+           set;
+       }
+
        public int Payament_Status
        {
            get;

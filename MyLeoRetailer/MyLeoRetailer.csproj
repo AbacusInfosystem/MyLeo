@@ -1031,6 +1031,8 @@
     <Content Include="Scripts\Modules\Login\login-event.js" />
     <Content Include="Scripts\Modules\Payable\Payable_events.js" />
     <Content Include="Scripts\Modules\Payable\Payable_method.js" />
+    <Content Include="Scripts\Modules\Payable\Payable_Search_Events.js" />
+    <Content Include="Scripts\Modules\Payable\Payable_Search_Method.js" />
     <Content Include="Scripts\Modules\Payable\Payable_Validation.js" />
     <Content Include="Scripts\Modules\Payable\Pay_event.js" />
     <Content Include="Scripts\Modules\PrintThis.js" />
@@ -1069,6 +1071,8 @@
     <Content Include="Scripts\Modules\PurchaseReturn\search_purchasereturn_methods.js" />
     <Content Include="Scripts\Modules\Receivable\Receivable_events.js" />
     <Content Include="Scripts\Modules\Receivable\Receivable_methods.js" />
+    <Content Include="Scripts\Modules\Receivable\Receivable_Search_Event.js" />
+    <Content Include="Scripts\Modules\Receivable\Receivable_Search_Methods.js" />
     <Content Include="Scripts\Modules\Replacement\Replacement_event.js" />
     <Content Include="Scripts\Modules\Replacement\Replacement_method.js" />
     <Content Include="Scripts\Modules\Replacement\search_Replacement_event.js" />

@@ -2,10 +2,10 @@
 @using MyLeoRetailer.Common;
 @using MyLeoRetailerInfo.Common;
 
-<script src="~/Scripts/Modules/common_methods.js"></script>
+@*<script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_events.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_methods.js"></script>
-<script src="~/Scripts/Modules/Receivable/Receivable_Validation.js"></script>
+<script src="~/Scripts/Modules/Receivable/Receivable_Validation.js"></script>*@
 
 
 <!-- START BREADCRUMB -->
@@ -30,7 +30,7 @@
 
 <div class="page-content-wrap">
 
-    <form role="form" id="frmPay">
+    <form role="form" id="frmPay" method="get">
 
         <div class="row">
 
@@ -59,6 +59,19 @@
                             <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" id="divBranch">
+
+                        <div class="form-group auto-complete">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                            <div class="input-group">
+                                <input type="text" class="form-control invoice-filter autocomplete-text" name="Receivable.Branch_Name" id="text_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
+                                <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                <input type="hidden" id="hdnBranchID" name="Receivable.Branch_ID" class="auto-complete-value" />
+                                <input type="hidden" id="hdnBranchName" name="Receivable.Branch_Name" class="auto-complete-label" />
                             </div>
                         </div>
                     </div>
@@ -103,8 +116,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
-                            <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Receivable.Cheque_Date" value="@((Model.Receivable.Cheque_Date == DateTime.MinValue ? "" : Model.Receivable.Cheque_Date.ToShortDateString()))"/>
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtCheque_Date" name="Receivable.Cheque_Date" value="@((Model.Receivable.Cheque_Date == DateTime.MinValue ? "" : Model.Receivable.Cheque_Date.ToShortDateString()))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -167,9 +180,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
-                            <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" />
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                
                             </div>
                         </div>
                     </div>
@@ -322,7 +336,7 @@
                                             </td>
                                             <td>
                                                 <span> @itm.Cheque_Date.ToShortDateString()</span>
-                                                <input type="hidden" id="hdnCheque_Date@(itm.Receivable_Item_Id)" name="Receivable.Cheque_Date[@(i-1)]" value="@itm.Cheque_Date">
+                                                <input type="hidden" id="hdnCheque_Date@(itm.Receivable_Item_Id)" name="Receivable.Cheque_Date[@(i-1)]" value="@itm.Cheque_Date.ToShortDateString()">
                                             </td>
                                             <td>
                                                 <span> @itm.Bank_Name</span>

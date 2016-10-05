@@ -20,23 +20,26 @@ namespace MyLeoRetailer.Models
 
             Receivable = new ReceivableInfo();
 
-            Filter = new Filter_Receivable();
+          //  Filter = new Filter_Receivable();
 
-            FriendlyMessages = new List<FriendlyMessage>();
+           // FriendlyMessages = new List<FriendlyMessage>();
 
-            Receivables = new List<ReceivableInfo>();
+         //   Receivables = new List<ReceivableInfo>();
 
-            Receivables1 = new List<ReceivableInfo>();
+           // Receivables1 = new List<ReceivableInfo>();
 
-            GiftVoucher = new GiftVoucherInfo();
+          //  GiftVoucher = new GiftVoucherInfo();
 
-            GiftVouchers = new List<GiftVoucherInfo>();
+          //  GiftVouchers = new List<GiftVoucherInfo>();
 
-            Credit_Notes = new List<CreditNote>();
+          //  Credit_Notes = new List<CreditNote>();
 
-            //Grid_Detail.Pager.DivObject = "divGiftVoucherPager";
+         //   Cookies = new LoginInfo();
 
-            //Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
+
+          //  Grid_Detail.Pager.DivObject = "divReceivablePager";
+
+          //  Grid_Detail.Pager.CallBackMethod = "Get_Receivable";
         }
 
         public List<CreditNote> Credit_Notes { get; set; }
@@ -47,13 +50,11 @@ namespace MyLeoRetailer.Models
             set;
         }
 
-
         public List<GiftVoucherInfo> GiftVouchers
         {
             get;
             set;
         }
-
 
         public GridInfo Grid_Detail
         {
@@ -85,17 +86,24 @@ namespace MyLeoRetailer.Models
             set;
         }
 
-        public Filter_Receivable Filter
-        {
-            get;
-            set;
-        }
+        //public Filter_Receivable Filter
+        //{
+        //    get;
+        //    set;
+        //}
 
         public List<FriendlyMessage> FriendlyMessages
         {
             get;
             set;
         }
+
+        public LoginInfo Cookies
+        {
+            get;
+            set;
+        }
+
     }
 
     public class Filter_Receivable

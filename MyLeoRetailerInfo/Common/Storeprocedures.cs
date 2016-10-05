@@ -356,6 +356,7 @@ namespace MyLeoRetailerInfo.Common
         Get_Receivable_Credit_Note_Details_By_Id,
         sp_Get_Credit_Note_Details_By_Customer_Id1,
         sp_Get_Receivable_Search_Details,
+        sp_Get_Receivable_Search_Details_new1,
            #endregion
 
 
