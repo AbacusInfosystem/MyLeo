@@ -33,6 +33,10 @@ namespace MyLeoRetailerRepo
 
         public DataTable Get_Products(QueryInfo query_Details)
         {
+            Barcode bar = new Barcode();
+            byte[] barcodeInBytes = bar.Generate_Linear_Lib_Barcode("ABCD", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/ABCD22.png");
+            byte[] barcodeInBytes1 = bar.Generate_Linear_Barcode("ABACUSINFOSYSTEMNEW", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/Myleo22.png");
+
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
