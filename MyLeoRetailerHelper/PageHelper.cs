@@ -489,11 +489,16 @@ namespace MyLeoRetailerHelper
 
             if (pageAndRecordLabel)
             {
-               
-                from = ((currentPage * pagesize) - (pagesize)) + 1;
+                //Added by vinod mane on 05/10/2016
+                if (currentPage==0)
+                {
+                    currentPage = 1;
+                }    
+                //End          
+                    from = ((currentPage * pagesize) - (pagesize)) + 1;
 
-                to = from + (pagesize - 1);
-              
+                    to = from + (pagesize - 1);
+                
 
                 //pagerStr.Append("<div class='dataTables_info'>Showing " + from + " to " + to + " of " + totalRecords + " entries</div>");
 
@@ -611,6 +616,12 @@ namespace MyLeoRetailerHelper
                 for (int page = tempPage; page < totalRecords; page++)
                 {
                     tempPage = page;
+                    //Added by vinod mane on 05/10/2016
+                    if(currentPage==0)
+                    {
+                        currentPage = 1;
+                    }
+                    //End
 
                     if (currentPage >= batchStart && currentPage <= batchEnd)
                     {
