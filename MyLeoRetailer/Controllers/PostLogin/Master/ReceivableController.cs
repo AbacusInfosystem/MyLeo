@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -21,10 +22,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                if (TempData["rViewModel"] != null)
-                {
-                    rViewModel = (ReceivableViewModel)TempData["rViewModel"];
-                }
+                //if (TempData["rViewModel"] != null)
+                //{
+                //    rViewModel = (ReceivableViewModel)TempData["rViewModel"];
+                //}
 
                 //rRepo.Get_Credit_Note_Details_By_Id(rViewModel.Receivable.Sales_Credit_Note_Id);
 
@@ -42,21 +43,32 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
            ReceivableRepo rRepo = new ReceivableRepo();
 
-           rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
-
             return View("Index", rViewModel);
         }
 
-        public ActionResult Get_Receivable(ReceivableViewModel rViewModel)
+        public JsonResult Get_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+            ReceivableRepo _rRepo = new ReceivableRepo();
 
-                rViewModel.Receivables = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable);
+            rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            return Index(rViewModel);
+            Pagination_Info pager = new Pagination_Info();
+
+            pager = rViewModel.Grid_Detail.Pager;
+
+            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,Payment_Status", "Sales_Invoice_Id"); // Set grid info for front end listing
+
+            rViewModel.Grid_Detail.Records = _rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
+
+            Set_Pagination(pager, rViewModel.Grid_Detail); // set pagination for grid
+
+            rViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(rViewModel));         
+
         }
 
-        public ActionResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
+        public JsonResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
         {
             ReceivableRepo rRepo = new ReceivableRepo();
 
@@ -77,9 +89,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             }
 
-            TempData["rViewModel"] = (ReceivableViewModel)rViewModel;
+            //TempData["rViewModel"] = (ReceivableViewModel)rViewModel;
 
-            return RedirectToAction("Pay", rViewModel);
+            return Json(JsonConvert.SerializeObject(rViewModel));
         }
 
         public JsonResult Get_Credit_Note_Amount_By_Id(ReceivableViewModel rViewModel)

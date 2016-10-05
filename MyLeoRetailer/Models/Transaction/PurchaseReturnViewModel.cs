@@ -11,63 +11,63 @@ using System.Web;
 namespace MyLeoRetailer.Models.Transaction
 {
     public class PurchaseReturnViewModel : IGridInfo, IQueryInfo
-    {
-        public PurchaseReturnViewModel()
-        {
-            Grid_Detail = new GridInfo();
+	{
+        public PurchaseReturnViewModel() 
+		{
+			Grid_Detail = new GridInfo();
 
-            Query_Detail = new QueryInfo();
+			Query_Detail = new QueryInfo();
 
             PurchaseReturn = new PurchaseReturnInfo();
 
-            Filter = new Filter_Purchase_Return();
+			Filter = new Filter_Purchase_Return();
 
-            FriendlyMessages = new List<FriendlyMessage>();
+			FriendlyMessages = new List<FriendlyMessage>();
 
             Pager = new Pagination_Info();
 
             Cookies = new LoginInfo();
 
-            Grid_Detail.Pager.DivObject = "divPurchaseReturnPager";
+			Grid_Detail.Pager.DivObject = "divPurchaseReturnPager";
 
             Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Returns";
 
             //Added by vinod mane on 29/09/2016
-            PurchaseReturnList = new List<PurchaseReturnInfo>();
+         //   PurchaseReturnList = new List<PurchaseReturnInfo>();
 
 
             //End
-        }
+		}
 
-        public GridInfo Grid_Detail
-        {
-            get;
-            set;
-        }
+		public GridInfo Grid_Detail
+		{
+			get;
+			set;
+		}
 
-        public QueryInfo Query_Detail
-        {
-            get;
-            set;
-        }
+		public QueryInfo Query_Detail
+		{
+			get;
+			set;
+		}
 
         public PurchaseReturnInfo PurchaseReturn
-        {
-            get;
-            set;
-        }
+		{
+			get;
+			set;
+		}
 
-        public Filter_Purchase_Return Filter
-        {
-            get;
-            set;
-        }
+		public Filter_Purchase_Return Filter
+		{
+			get;
+			set;
+		}
 
-        public List<FriendlyMessage> FriendlyMessages
-        {
-            get;
-            set;
-        }
+		public List<FriendlyMessage> FriendlyMessages
+		{
+			get;
+			set;
+		}
 
         public Pagination_Info Pager
         {
@@ -81,9 +81,9 @@ namespace MyLeoRetailer.Models.Transaction
             set;
         }
 
-        public List<PurchaseReturnInfo> PurchaseReturnList { get; set; }//Added by vinod mane on 29/09/2016
+       // public List<PurchaseReturnInfo> PurchaseReturnList { get; set; }//Added by vinod mane on 29/09/2016
 
 
-    }
+	}
 
 }

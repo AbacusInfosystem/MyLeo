@@ -31,12 +31,75 @@
 
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
-            Friendly_Messages(data);
+            Friendly_Messages(obj);
         }
     });
 }
 
 
+function UpdateGRNo() {
+    var prViewModel =
+		{
+		    Filter: {
+
+		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
+		    },
+		    PurchaseReturn: {
+
+		        Purchase_Return_Id: $("#hdnPurchaseReturnId").val(),
+
+		        GR_No: $("#txtGR_No").val()
+		    }
+		}
+
+    $.ajax({
+
+        url: "/PurchaseReturn/Update_Purchase_Return",
+
+        data: JSON.stringify(prViewModel),
+
+        dataType: 'json',
+
+        type: 'POST',
+
+        contentType: 'application/json',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            Friendly_Messages(obj);
+                        
+            Get_Purchase_Returns();
+            
+        }
+    });
+
+    Get_Purchase_Returns();
+}
+
+function call_back(data) {
+
+    $('#div_Parent_Modal_Fade').modal('show');
+    $("#div_Parent_Modal_Fade").find(".modal-title").text("Update GR No.");
+
+    $("#div_Parent_Modal_Fade").find(".modal-footer").hide();
+
+    $("#btnUpdate").click(function (event) {
+        if ($('#frmUpdateGRNo').valid()) {
+
+            document.getElementById('btnUpdate').disabled = true;
+
+            $('#div_Parent_Modal_Fade').modal('hide');
+
+            UpdateGRNo();
+             
+            
+        }
+
+    })
+   
+}
 
 
 

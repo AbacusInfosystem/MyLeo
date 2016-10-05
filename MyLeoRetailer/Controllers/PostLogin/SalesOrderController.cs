@@ -195,11 +195,11 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 Set_Date_Session(siViewModel.SalesInvoice);
 
-                siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                //siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 //string[] arr  = siViewModel.Cookies.Branch_Ids.Split(',');  Multiple Branches Refer to the Commented Code
 
-                string Branch_Id = siViewModel.Cookies.Branch_Ids.TrimEnd();
+                //string Branch_Id = siViewModel.Cookies.Branch_Ids.TrimEnd();
 
                 //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
 
@@ -207,7 +207,9 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 //{
                 //Set_Date_Session(siViewModel.SalesInvoice);
 
-                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, Branch_Id, siViewModel.ReceivableItem);   //arr[i] instead of Branch_Id
+               siViewModel.SalesInvoice.Sales_Invoice_No = Utility.Generate_Ref_No("SI-", "Sales_Invoice_No", "4", "15", "Sales_Invoice");
+
+                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, siViewModel.ReceivableItem);   //arr[i] instead of Branch_Id
 
                 //}
 
@@ -238,7 +240,6 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             return View("SalesInvoiceView", siViewModel);
         }
-
 
         public ActionResult Get_SalesOrder_By_Id(SalesInvoiceViewModel siViewModel)
         {

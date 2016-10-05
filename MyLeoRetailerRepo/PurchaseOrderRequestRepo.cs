@@ -376,7 +376,23 @@ namespace MyLeoRetailerRepo
             return PurchaseOrderRequest.Purchase_Order_Request_Id;
         }
 
-        public List<PurchaseOrderRequestInfo> Get_Purchase_Order_Requests(ref Pagination_Info Pager, string Branch_Id, int Vendor_Id)
+        public DataTable Get_Purchase_Order_Requests(Filter_Purchase_Order_Request filter, string Branch_Id)
+        {
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Vendor_Id", filter.Vendor_Id));
+
+            sqlParam.Add(new SqlParameter("@Branch_Id", Branch_Id));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Order_Requests.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
+
+        public List<PurchaseOrderRequestInfo> Get_Purchase_Order_Request_List(ref Pagination_Info Pager, string Branch_Id, int Vendor_Id)
         {
             List<PurchaseOrderRequestInfo> PurchaseOrderRequest = new List<PurchaseOrderRequestInfo>();
 

@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutocompleteLookupRepo.cs" />
+    <Compile Include="AutoGenerateNumberRepo.cs" />
     <Compile Include="BranchRepo.cs" />
     <Compile Include="AlterationRepo.cs" />
     <Compile Include="BrandRepo.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="EmployeeRepo.cs" />
     <Compile Include="GiftVoucherRepo.cs" />
     <Compile Include="CustomerRepo.cs" />
+    <Compile Include="InventoryRepo.cs" />
     <Compile Include="LoginRepo.cs" />
     <Compile Include="PayableRepo.cs" />
     <Compile Include="ProductRepo.cs" />

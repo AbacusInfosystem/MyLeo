@@ -201,7 +201,11 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Return_Items_By_Vendor_And_PI,
 
         sp_Get_Purchase_Returns,
-            sp_Get_Purchase_Return_Item_by_Purchase_Return_Id, //Added by vinod mane on 29/09/2016
+
+        sp_Update_Purchase_Return,
+
+        sp_Get_Purchase_Return_Item_by_Purchase_Return_Id, //Added by vinod mane on 30/09/2016
+        sp_Get_Purchase_Return_by_Purchase_Return_Id,//Added by vinod mane on 30/09/2016
 
         #endregion
 
@@ -381,6 +385,12 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Product_Warehouse,
         sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
         sp_Insert_Purchase_Order_Request_Consolidation,
+
+        #region Inventory
+
+        sp_Get_Inventories,
+
+        #endregion
 
     }
 
