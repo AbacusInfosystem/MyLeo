@@ -22,10 +22,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                if (TempData["rViewModel"] != null)
-                {
-                    rViewModel = (ReceivableViewModel)TempData["rViewModel"];
-                }
+                //if (TempData["rViewModel"] != null)
+                //{
+                //    rViewModel = (ReceivableViewModel)TempData["rViewModel"];
+                //}
 
                 //rRepo.Get_Credit_Note_Details_By_Id(rViewModel.Receivable.Sales_Credit_Note_Id);
 
@@ -70,10 +70,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             rViewModel.Grid_Detail.Pager = pager;
 
             return Json(JsonConvert.SerializeObject(rViewModel));
- 
+
         }
 
-        public ActionResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
+        public JsonResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
         {
             ReceivableRepo rRepo = new ReceivableRepo();
 
@@ -94,9 +94,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             }
 
-            TempData["rViewModel"] = (ReceivableViewModel)rViewModel;
+            //TempData["rViewModel"] = (ReceivableViewModel)rViewModel;
 
-            return RedirectToAction("Pay", rViewModel);
+            return Json(JsonConvert.SerializeObject(rViewModel));
         }
 
         public JsonResult Get_Credit_Note_Amount_By_Id(ReceivableViewModel rViewModel)

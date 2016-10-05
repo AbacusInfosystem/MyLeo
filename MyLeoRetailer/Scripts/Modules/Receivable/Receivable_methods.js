@@ -1,10 +1,10 @@
 ﻿
 
-function Get_Receivables(Sales_Invoice_Id) {
+function Get_Receivables(Sales_Invoice_Id, Sales_Credit_Note_Id) {
 
     $("#hdf_Sales_Invoice_Id").val(Sales_Invoice_Id);
 
-    //$("#hdf_Sales_Credit_Note_Id").val(Sales_Credit_Note_Id);
+    $("#hdf_Sales_Credit_Note_Id").val(Sales_Credit_Note_Id);
 
     $("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id");
     $("#frmReceivable").submit();
@@ -297,9 +297,13 @@ function Bind_Payable_Grid_Items(data) {
 
     $("#hdnReceivable_Id").val(data.Receivable.Receivable_Id),
 
+     $("#hdf_Sales_Credit_Note_Id").val(data.Receivable.Sales_Credit_Note_Id),
+
+    $("#hdf_Gift_Voucher_Id").val(data.Receivable.Gift_Voucher_Id),
+
     $("#hdnSales_Invoice_Id").val(data.Receivable.Sales_Invoice_Id),
 
-   // $("#txtTotal_MRP_Amount").val(data.Receivable.Total_MRP_Amount),
+    $("#txtNet_Amount").val(data.Receivable.Net_Amount),
 
     $("#txtBalance_Amount").val(data.Receivable.Balance_Amount);
 
@@ -559,6 +563,8 @@ function EditReceivableData(id) {
 
     $("#txtCheque_Date").val($("#hdnCheque_Date" + id).val());
 
+    $("#txtPayament_Date").val($("#hdnPayament_Date" + id).val());
+
     $("#txtBank_Name").val($("#hdnBank_Name" + id).val());
 
     $("#txtCredit_Note_Amount").val($("#hdnCredit_Note_Amount" + id).val());
@@ -579,7 +585,8 @@ function EditReceivableData(id) {
 
     $("#hdnReceivable_Id").val($("#hdnReceivable_Id" + id).val());
 
-     //edited by sushant for Branch
+
+    //edited by sushant for Branch
 
     $("#text_Branch_Name").val($("#hdnBranchName" + id).val());
 
@@ -589,6 +596,7 @@ function EditReceivableData(id) {
     if ($('#text_Branch_Name').val() != 0)
 
         $("#divBranch").find(".autocomplete-text").trigger("focusout");
+
 
     Balance_amount = $("#txtBalance_Amount").val();
 

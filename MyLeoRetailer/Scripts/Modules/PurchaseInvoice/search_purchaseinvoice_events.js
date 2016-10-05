@@ -6,7 +6,8 @@
     $(document).on('change', '[name="Purchase_Invoice_List"]', function (event) {
         if ($(this).prop('checked')) {
             $("#hdnPurchaseInvoiceId").val(this.value);
-            //document.getElementById('btnEditPurchaseInvoice').disabled = false;
+            document.getElementById('btnViewPurchaseInvoice').disabled = false;
+            document.getElementById('btnCreatePurchaseInvoice').disabled = true;
         }
     });
 
@@ -31,4 +32,5 @@
     });
 
 
+   
 });

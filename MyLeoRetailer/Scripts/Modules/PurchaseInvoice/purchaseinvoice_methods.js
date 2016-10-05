@@ -74,6 +74,8 @@ function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
 
         }
     });
+
+    CalculateTotal();
 }
 
 function AddPurchaseInvoiceDetails() {
@@ -270,7 +272,7 @@ function Add_Validation(i) {
 
     $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
     
-    //$("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code']").rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
+    $("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
 
     $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 

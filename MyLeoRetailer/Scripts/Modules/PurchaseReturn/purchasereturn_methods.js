@@ -91,6 +91,8 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
        
     });
 
+    CalculateTotal();
+
     //Get_Purchase_Return_PO_By_POI(i);
 }
 
@@ -309,7 +311,7 @@ function Add_Validation(i) {
 
     $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
 
-    //$("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
+    $("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
 
 }
 

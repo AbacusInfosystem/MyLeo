@@ -101,18 +101,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     if (poViewModel.PurchaseOrder.Purchase_Order_Id == 0)
                     {
 
-                        //poViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                        //poViewModel.PurchaseOrder.Created_By = poViewModel.Cookies.User_Id;
-
-                        //poViewModel.PurchaseOrder.Created_Date = DateTime.Now;
-
-                        //poViewModel.PurchaseOrder.Updated_By = poViewModel.Cookies.User_Id;
-
-                        //poViewModel.PurchaseOrder.Updated_Date = DateTime.Now;
+                        poViewModel.PurchaseOrder.Purchase_Order_No = Utility.Generate_Ref_No("PO-", "Purchase_Order_No", "4", "15", "Purchase_Order");
 
                         _purchaseorderRepo.Insert_Purchase_Order(poViewModel.PurchaseOrder);
-
 
                         poViewModel = new PurchaseOrderViewModel();
 
@@ -129,6 +120,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 catch (Exception ex)
                 {
                     poViewModel = new PurchaseOrderViewModel();
+
+                    Logger.Error(" PurchaseOrder Controller - Insert_Purchase_Order : " + ex.ToString());
 
                     poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 

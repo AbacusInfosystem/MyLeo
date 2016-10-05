@@ -20,31 +20,48 @@ namespace MyLeoRetailer.Models
 
             Receivable = new ReceivableInfo();
 
-          //  Filter = new Filter_Receivable();
+            Filter = new Filter_Receivable();
 
-           // FriendlyMessages = new List<FriendlyMessage>();
+            FriendlyMessages = new List<FriendlyMessage>();
 
-         //   Receivables = new List<ReceivableInfo>();
+            Receivables = new List<ReceivableInfo>();
 
-           // Receivables1 = new List<ReceivableInfo>();
+            Receivables1 = new List<ReceivableInfo>();
 
-          //  GiftVoucher = new GiftVoucherInfo();
+            Cookies = new LoginInfo();
 
-          //  GiftVouchers = new List<GiftVoucherInfo>();
+            Pager = new Pagination_Info();
 
-          //  Credit_Notes = new List<CreditNote>();
+            GiftVoucher = new GiftVoucherInfo();
 
-         //   Cookies = new LoginInfo();
+            GiftVouchers = new List<GiftVoucherInfo>();
+
+            Credit_Notes = new List<CreditNote>();
+
+            Grid_Detail.Pager.DivObject = "divReceivablePager";
+
+            Grid_Detail.Pager.CallBackMethod = "Get_Receivable_Search_Details";
 
 
-          //  Grid_Detail.Pager.DivObject = "divReceivablePager";
-
-          //  Grid_Detail.Pager.CallBackMethod = "Get_Receivable";
+            Grid_Detail.Pager.CallBackMethod = "Get_Receivable";
         }
 
         public List<CreditNote> Credit_Notes { get; set; }
 
         public GiftVoucherInfo GiftVoucher
+        {
+            get;
+            set;
+        }
+
+        public LoginInfo Cookies
+        {
+            get;
+            set;
+        }
+
+
+        public Pagination_Info Pager
         {
             get;
             set;

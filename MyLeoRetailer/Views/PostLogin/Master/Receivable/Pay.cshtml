@@ -2,7 +2,8 @@
 @using MyLeoRetailer.Common;
 @using MyLeoRetailerInfo.Common;
 
-@*<script src="~/Scripts/Modules/common_methods.js"></script>
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_events.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_methods.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_Validation.js"></script>*@
@@ -35,7 +36,7 @@
         <div class="row">
 
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
-                <input type="hidden" id="hdnPayment_Status1"  value="@Model.Receivable.Payment_Status">
+                <input type="hidden" id="hdnPayment_Status1" value="@Model.Receivable.Payment_Status">
 
                 <div class="block">
 
@@ -44,10 +45,12 @@
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
                             <input type="text" class="form-control input-sm" name="Receivable.Net_Amount" id="txtNet_Amount" value="@Model.Receivable.Net_Amount" placeholder="Total Amount" />
 
-                            <input type="hidden" id="hdnSales_Invoice_Id" name="Receivable.Sales_Invoice_Id" value="@Model.Receivable.Sales_Invoice_Id">
+                            <input type="hidden" id="hdf_Sales_Invoice_Id" name="Receivable.Sales_Invoice_Id" value="@Model.Receivable.Sales_Invoice_Id">
                             <input type="hidden" id="hdnReceivable_Item_Id" name="Receivable.Receivable_Item_Id" value="@Model.Receivable.Receivable_Item_Id">
                             <input type="hidden" id="hdnReceivable_Id" name="Receivable.Receivable_Id" value="@Model.Receivable.Receivable_Id">
                             <input type="hidden" id="hdnCustomer_Id" name="Receivable.Customer_Id" value="@Model.Receivable.Customer_Id">
+                            <input type="hidden" id="hdf_Sales_Credit_Note_Id" name="Receivable.Sales_Credit_Note_Id" value="@Model.Receivable.Sales_Credit_Note_Id">
+                            <input type="hidden" id="hdf_Gift_Voucher_Id" name="Receivable.Gift_Voucher_Id" value="@Model.Receivable.Gift_Voucher_Id">
                             @*<input type="hidden" id="hdnPurchase_Credit_Note_Id" name="Receivable.Purchase_Credit_Note_Id" value="@Model.Receivable.Purchase_Credit_Note_Id">*@
 
                         </div>
@@ -56,8 +59,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                            <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -72,11 +75,11 @@
                                 <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                 <input type="hidden" id="hdnBranchID" name="Receivable.Branch_ID" class="auto-complete-value" />
                                 <input type="hidden" id="hdnBranchName" name="Receivable.Branch_Name" class="auto-complete-label" />
-                            </div>
+                </div>
                         </div>
                     </div>
 
-                </div>
+            </div>
 
             </div>
 
@@ -157,7 +160,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note no</span>
-                            <select class="form-control input-sm" id="drpCredit_Note_No" name="Receivable.Sales_Credit_Note_Id">
+                            <select class="form-control" id="drpCredit_Note_No" name="Receivable.Sales_Credit_Note_Id">
                                 <option value="0">Select Credit Note no</option>
 
                                 @foreach (var item in Model.Credit_Notes)
@@ -183,7 +186,7 @@
                             <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -227,7 +230,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher No</span>
-                                <select class="form-control input-sm" id="drpGift_Voucher_No"  name="Receivable.Gift_Voucher_Id">
+                                <select class="form-control" id="drpGift_Voucher_No" name="Receivable.Gift_Voucher_Id">
                                     <option value="0">Gift Voucher No</option>
 
                                     @foreach (var item in Model.Receivables1)

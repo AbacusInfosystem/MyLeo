@@ -39,7 +39,11 @@ namespace MyLeoRetailerInfo.SalesReturn
 
         //public int Sales_Invoice_Id { get; set; }
 
-        public int Company_Branch_Id { get; set; }
+        //public int Company_Branch_Id { get; set; }
+
+        public string Branch_Name { get; set; }
+
+        public int Branch_Id { get; set; }
 
         //Credit Note Fields
 

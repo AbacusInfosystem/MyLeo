@@ -289,4 +289,18 @@ namespace MyLeoRetailerInfo.PurchaseOrderRequest
         public List<Sizes> sizes { get; set; }
     }
 
+    public class Filter_Purchase_Order_Request
+    {
+        public string Vendor_Name
+        {
+            get;
+            set;
+        }
+
+        public int Vendor_Id
+        {
+            get;
+            set;
+        }
+    }
 }

@@ -1,0 +1,172 @@
+﻿@model MyLeoRetailer.Models.ProductDispatchViewModel
+
+
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/product_dispatch_event.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/product_dispatch_method.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Product Dispatch</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Product Dispatch</h2>
+        </div>
+        <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "ProductDispatch")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <form id="frmProductDispatch">
+
+            <div class="box box-default">
+
+                <div class="box-body">
+
+                    <input type="hidden" class="form-control input-sm" id="hdn_request_Id" name="product_Dispatch.Request_Id" value="@Model.product_Dispatch.Request_Id">
+
+                    <input type="hidden" class="form-control input-sm" id="hdn_Branch_Id" name="product_Dispatch.Branch_Id" value="@Model.product_Dispatch.Branch_Id">
+
+                    <input type="hidden" class="form-control input-sm" id="hdn_Quantity" name="product_Dispatch.Quantity" value="@Model.product_Dispatch.Quantity">
+
+                    @* <input type="hidden" id="hdnIs_View" name="product_Dispatch.Is_View" value="@Model.product_Dispatch.Is_View" />*@
+
+                    <input type="hidden" id="hdnDispatch_Id" name="product_Dispatch.Dispatch_Id" value="@Model.product_Dispatch.Dispatch_Id" />
+
+
+                    <div class="row">
+
+                        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
+
+                            <div class="block">
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">SKU Name.</span>
+                                    <input type="text" class="form-control input-sm" name="product_Dispatch.SKU" id="txtSKU" value="@Model.product_Dispatch.SKU" readonly />
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Product Quantity</span>
+
+                                    <input type="text" class="form-control input-sm" name="product_Dispatch.Balance_Quantitya" id="txtBalance_Quantitya" value="@Model.product_Dispatch.Balance_Quantitya" readonly />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
+
+                            <div class="block">
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Date</span>
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="mm-dd-yyyy">
+                                        <input type="text" class="form-control datepicker" id="txtDispatch_Date" placeholder="Enter Dispatch Date." />
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Quantity</span>
+                                    <input type="text" class="form-control input-sm" name="product_Dispatch.Quantity" id="txtDispatch_Quantity" placeholder="Enter Dispatch Quantity." />
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
+                            <div class="block">
+                                <div class="block" style="margin-top:0px; ">
+                                    <div class="btn-group">
+                                        <a href="javascript:AddProductDispatch();" id="btnProductDispatch" class="btn btn-success active">
+                                            <i class="mdi mdi-plus"></i>
+                                            Add
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                            <table class="table table-bordered table-hover" id="tblProduct_Dispatch">
+                                <thead>
+                                    <tr>
+                                        <th width="150px">SKU No.</th>
+                                        <th width="70px">Dispatch Quantity</th>
+                                        <th width="70px">Dispatch Date</th>
+                                        <th width="100px">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.product_Dispatch.grid_Dispatch_List != null)
+                                    {
+                                        foreach (var item in Model.product_Dispatch.grid_Dispatch_List)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Model.product_Dispatch.SKU
+                                                    <input type="hidden" id="hdn_Dispatch_Item_Id" value="@item.Dispatch_Item_Id" />
+                                                </td>
+
+                                                <td>
+                                                    @item.Quantity
+                                                </td>
+
+                                                <td>
+                                                    @item.Dispatch_Date.ToString("dd-MM-yyyy")
+                                                </td>
+
+                                                <td>
+                                                    @if (item.Accept_Status == "Accepted")
+                                                    {
+                                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Accepted</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="btn btn-danger active" role="button" id="btnDispatch" onclick="Delete_Dispatch_Product(this)">Delete</a>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+
+                    <div class="row">
+                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+                            <div class="btn-group">
+                                <button type="button" id="btnSaveDispatch" class="btn btn-success active">Save</button>
+                                <button type="reset" id="btnCancelDispatch" class="btn btn-danger active">Cancel</button>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

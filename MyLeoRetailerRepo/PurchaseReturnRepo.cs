@@ -310,16 +310,39 @@ namespace MyLeoRetailerRepo
 
         }
 
+        public void Update_Purchase_Return(PurchaseReturnInfo PurchaseReturn)
+        {
+            using (TransactionScope scope = new TransactionScope())
+            {
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Purchase_Return_Id", PurchaseReturn.Purchase_Return_Id));
+
+                sqlParams.Add(new SqlParameter("@GR_No", PurchaseReturn.GR_No));
+
+                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseReturn.Updated_By));
+
+                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseReturn.Updated_Date));
+
+                sqlHelper.ExecuteScalerObj(sqlParams, Storeprocedures.sp_Update_Purchase_Return.ToString(), CommandType.StoredProcedure);
+
+
+                scope.Complete();
+
+            }
+                        
+        }
+
         public DataTable Get_Purchase_Returns(Filter_Purchase_Return filter)
         {
 
             DataTable dt = new DataTable();
 
-            List<SqlParameter> sqlParam = new List<SqlParameter>();
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            sqlParam.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
+            sqlParams.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
 
-            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
 
             return dt;
         }

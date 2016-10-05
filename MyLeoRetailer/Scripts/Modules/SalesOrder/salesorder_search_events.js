@@ -7,9 +7,13 @@
 
 $(function () {
 
-    $("#btnPrint").hide();
+    //$("#btnPrint").hide();
 
-    $("#btnView").hide();
+    document.getElementById('btnPrint').disabled = true;
+
+    document.getElementById('btnView').disabled = true;
+
+    //$("#btnView").hide();
 
     Get_SalesOrders();
 
@@ -46,9 +50,13 @@ $(function () {
         {
             $("#hdnSalesInvoiceID").val(this.value);
 
-            $('#btnPrint').show();
+            //$('#btnPrint').show();
 
-            $('#btnView').show();
+            //$('#btnView').show();
+
+            document.getElementById('btnPrint').disabled = false;
+
+            document.getElementById('btnView').disabled = false;
         }
     });
 

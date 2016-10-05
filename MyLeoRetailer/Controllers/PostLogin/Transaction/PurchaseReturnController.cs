@@ -74,6 +74,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             return View("Search", prViewModel);
         }
+
+        public PartialViewResult Update_GR_No(int Id)
+        {
+            PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
+
+            prViewModel.PurchaseReturn.Purchase_Return_Id = Id;
+
+            return PartialView("_Update_GR_No", prViewModel);
+        }
+       
        
         public JsonResult Get_Purchase_Return_Items_By_SKU_Code(string SKU_Code)
         {
@@ -118,17 +128,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 if (prViewModel.PurchaseReturn.Purchase_Return_Id == 0)
                 {
-                    //prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                    //prViewModel.PurchaseReturn.Created_By = prViewModel.Cookies.User_Id;
-
-                    //prViewModel.PurchaseReturn.Created_Date = DateTime.Now;
-
-                    //prViewModel.PurchaseReturn.Updated_By = prViewModel.Cookies.User_Id;
-
-                    //prViewModel.PurchaseReturn.Updated_Date = DateTime.Now;
+                    prViewModel.PurchaseReturn.Debit_Note_No = Utility.Generate_Ref_No("DBN-", "Debit_Note_No", "5", "15", "Purchase_Return");
 
                     _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+
+                    prViewModel = new PurchaseReturnViewModel();
 
                     prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
                 }
@@ -140,12 +144,44 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
+                prViewModel = new PurchaseReturnViewModel();
+
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
             }
 
             TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
 
             return RedirectToAction("Search", prViewModel);
+        }
+
+        public JsonResult Update_Purchase_Return(PurchaseReturnViewModel prViewModel)
+        {
+            try
+            {
+                Set_Date_Session(prViewModel.PurchaseReturn);
+
+                if (prViewModel.PurchaseReturn.Purchase_Return_Id != 0)
+                {
+                    _purchaseReturnRepo.Update_Purchase_Return(prViewModel.PurchaseReturn);
+
+                    prViewModel = new PurchaseReturnViewModel();
+
+                    prViewModel.FriendlyMessages.Add(MessageStore.Get("POI02"));
+                }
+                else
+                {
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                prViewModel = new PurchaseReturnViewModel();
+
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+            }
+
+            return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Get_Purchase_Returns(PurchaseReturnViewModel prViewModel)
@@ -255,7 +291,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public ActionResult Get_Purchase_Return_Details_By_Id(PurchaseReturnViewModel prViewModel)
         {
             bool CheckFlag = false;
-
+            
 
             try
             {
