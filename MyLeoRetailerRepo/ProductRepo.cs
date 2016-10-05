@@ -13,7 +13,6 @@ using MyLeoRetailerInfo.Color;
 using System.Reflection;
 using Barcode_Generator;
 using BarCode.Models;
-using BarcodeLib.Barcode;
 using System.Configuration;
 using System.IO;
 using System.Web;
