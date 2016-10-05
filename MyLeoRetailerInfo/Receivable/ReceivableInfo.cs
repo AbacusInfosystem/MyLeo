@@ -25,6 +25,8 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
+       public string Branch_Name { get; set; }
+
        public int Sales_Invoice_Id
        {
            get;

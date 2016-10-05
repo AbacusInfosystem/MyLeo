@@ -42,6 +42,8 @@ namespace MyLeoRetailerInfo.Common
 
         public List<EmployeeInfo> Branch_List { get; set; }
 
+        public string Page_URL { get; set; }
+
 
     }
 

@@ -1,10 +1,6 @@
 ﻿@using MyLeoRetailer.Common
 @using MyLeoRetailerInfo.Common
 
-<script src="/Scripts/Modules/common_methods.js"></script>
-<script src="~/Scripts/Modules/Employee/search_employee_event.js"></script>
-<script src="~/Scripts/Modules/Employee/search_employee_method.js"></script>
-
  <!-- START X-NAVIGATION VERTICAL -->
 <ul class="x-navigation x-navigation-horizontal">
     <li class="xn-logo">
@@ -68,7 +64,6 @@
         <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
     </li>
     <!-- END SIGN OUT -->
-
     @{
         LoginInfo Cookies = new LoginInfo();
         Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
@@ -82,7 +77,10 @@
             <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
                 <div class="page-content-wrap">
 
-                    <form role="form" id="frmChangeBranch">
+                        <form form role="form" id="frmChangeBranch" action="@Url.Action("Save_Employee_Branch_Id", "Employee")" method="post">
+
+                            <input type="hidden" value="@Cookies.Page_URL" name="Page_URL" />
+
                         <div class="row">
                             @**@
 
@@ -114,7 +112,7 @@
                                                     </label>
                                                 </td>
                                             </tr>
-                                                        ++@counter;
+                                                                counter++;
                                         }
                                     </tbody>
                                 </table>
@@ -122,6 +120,8 @@
 
                         </div>
                     </form>
+
+
 
                 </div>
 
@@ -141,6 +141,3 @@
 
 </ul>
 <!-- END X-NAVIGATION VERTICAL -->
-
-
-

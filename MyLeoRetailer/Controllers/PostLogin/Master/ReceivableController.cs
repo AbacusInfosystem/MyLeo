@@ -64,11 +64,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             rViewModel.Grid_Detail.Pager = pager;
 
-
-
-            return Json(JsonConvert.SerializeObject(rViewModel));
-
-          
+            return Json(JsonConvert.SerializeObject(rViewModel));         
 
         }
 
