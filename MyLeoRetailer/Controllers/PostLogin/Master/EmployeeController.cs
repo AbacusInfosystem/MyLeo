@@ -290,7 +290,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             var method = temp[1];
 
-            return RedirectToAction(method, controller);
+            if(controller=="")
+            {
+                controller = "Dashboard";
+                method = "Index";
+            }
+
+            if (method=="")
+            {
+                method = "Search";
+            }
+
+            //return RedirectToAction(method, controller);
+
+            return View("Search", eViewModel);
         }
 
         public void Set_Branch_Cookies(int User_Id, string Branch_Ids)
@@ -332,6 +345,32 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         //end
+
+        //GAURAVI 5-10-2016
+
+        public PartialViewResult Change_Branch()
+        {
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
+
+            if (Request.Cookies["MyLeoLoginInfo"] != null)
+            {
+                //var barchid = Request.Cookies["LoginInfo"].Value;
+
+                eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(eViewModel.Cookies.User_Id, eViewModel.Cookies.Branch_Ids);
+
+                eViewModel.Employee.Employee_Id = eViewModel.Cookies.User_Id;
+
+                var branch = eViewModel.Cookies.Branch_Ids;
+
+               
+            }
+
+            return PartialView("_ChangeBranch", eViewModel);
+        }
+
+        //END
 
         #endregion 
 
