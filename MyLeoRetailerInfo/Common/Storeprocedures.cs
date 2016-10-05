@@ -276,7 +276,7 @@ namespace MyLeoRetailerInfo.Common
 
         //Product
         sp_Insert_Product_MRP,
-        sp_Update_Product_MRP,
+            sp_Insert_Update_Product_MRP,
         sp_Insert_Product,
         sp_Update_Product,
         sp_Get_Sizes_On_SizeGroupId,
@@ -291,6 +291,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Product_MRP_Exist_By_ProductId,
         sp_Get_Product_Description_By_ProductId,
         sp_Get_Product_Color_Exist_By_ProductId,
+            sp_Insert_Update_Product_SKU_Map,
 
         #region Pyable
         Get_Credit_Note_Details_By_Id_Sp,
@@ -384,6 +385,17 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Product_Warehouse,
         sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
         sp_Insert_Purchase_Order_Request_Consolidation,
+
+            //Product Dispatch
+        sp_Get_Product_To_Dispatch,
+        sp_Get_Product_To_Dispatch_By_Id,
+        sp_Insert_Product_Dispatch,
+        sp_Insert_Product_Dispatch_Items,
+        sp_Delete_Dispatch_Product,
+
+            //Product Inward
+        sp_Dispatched_Product_Listing,
+        sp_Accept_Product_Dispatch,
 
         #region Inventory
 

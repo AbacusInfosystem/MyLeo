@@ -186,12 +186,12 @@
 
         <audio id="audio-fail" src="/Content/Atlant/audio/fail.mp3" preload="auto"></audio>
         <!-- END PRELOADS -->    
-        @*@{
+        @{
             LoginInfo cookies = new LoginInfo();
-            //cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+            cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             <input type="hidden" id="hdnCookiesBranches" name="CookiesBranches" value="@cookies.Branch_Ids"/>
-        }*@
+        }
         
         <input type="hidden" id="hdnLookupLabelId" name="Label" />
         <input type="hidden" id="hdnLookupHiddenId" name="Hidden" />
@@ -215,6 +215,8 @@
             </div>
         </div>
 
+
+
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
                 <div class="mb-middle">
@@ -232,6 +234,9 @@
                 </div>
             </div>
         </div>
+
+
+       
                       
     </body>
 </html>
@@ -273,4 +278,6 @@
 			}
 		});
 	});
+
+
 </script>
