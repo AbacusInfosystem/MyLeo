@@ -715,7 +715,7 @@ namespace MyLeoRetailerRepo
         }
 
 
-        //*************************************Aditya 28092016************************************
+        //*************************************Aditya 28092016  method called from Insert_Purchase_Order [START]************************************
 
         public List<Sizes> Get_Consolidate_Purchase_Order_Item_Size(string Item_Ids)
         {
@@ -739,7 +739,7 @@ namespace MyLeoRetailerRepo
             return Size;
         }
 
-        //*******************************************************************************
+        //******************************Aditya 28092016  method called from Insert_Purchase_Order [END]*************************************************
 
 
         public List<Sizes> Get_Consolidate_Purchase_Order_Item_Sizes(string Item_Ids)

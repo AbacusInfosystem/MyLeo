@@ -13,8 +13,6 @@ namespace MyLeoRetailerInfo.ProductDispatch
       {
           grid_Dispatch_List = new List<ProductDispatchInfo>();
 
-          Is_View = 0;
-
           Dispatch_Id = 0;
       }
 
@@ -49,8 +47,10 @@ namespace MyLeoRetailerInfo.ProductDispatch
       public int Updated_By { get; set; }
 
       public DateTime Dispatch_Date { get; set; }
+     
+      public int Is_Checked { get; set; }
 
-      public int Is_View { get; set; }
+      public string Accept_Status { get; set; }
   }
 
   public class Filter

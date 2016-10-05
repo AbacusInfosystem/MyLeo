@@ -82,6 +82,8 @@ namespace MyLeoRetailerRepo
 
                 dispatch_Products.Dispatch_Date = Convert.ToDateTime(dr["Dispatch_Date"]);
 
+                dispatch_Products.Accept_Status = Convert.ToString(dr["Accept_status"]);
+
                 list_dispatch_Products.Add(dispatch_Products);
 
                 product.Dispatch_Id = dispatch_Products.Dispatch_Id;
@@ -180,5 +182,39 @@ namespace MyLeoRetailerRepo
             return dt;
         }
 
+        public void Accept_Product_Dispatch(List<ProductDispatchInfo> list_Product,ProductDispatchInfo Product)
+        {
+           List<SqlParameter>sqlparam=new List<SqlParameter>();
+
+           foreach (var item in list_Product)
+           {
+               if (item.Is_Checked == 1)
+               {
+                   sqlparam.Add(new SqlParameter("@SKU", item.SKU));
+
+                   sqlparam.Add(new SqlParameter("@Quantity", item.Quantity));
+
+                   sqlparam.Add(new SqlParameter("@Dispatch_Date", item.Dispatch_Date));
+
+                   sqlparam.Add(new SqlParameter("@Dispatch_Id", item.Dispatch_Id));
+
+                   sqlparam.Add(new SqlParameter("@Dispatch_Item_Id", item.Dispatch_Item_Id));
+
+                   sqlparam.Add(new SqlParameter("@Request_Id", item.Request_Id));
+
+                   sqlparam.Add(new SqlParameter("@Branch_Id", item.Branch_Id));
+
+                   sqlparam.Add(new SqlParameter("@Created_By", Product.Created_By));
+
+                   sqlparam.Add(new SqlParameter("@Created_Date", Product.Created_Date));
+
+                   sqlparam.Add(new SqlParameter("@Updated_By", Product.Updated_By));
+
+                   sqlparam.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
+
+                   sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Accept_Product_Dispatch.ToString(), CommandType.StoredProcedure);
+               }
+           }
+        }
     }
 }

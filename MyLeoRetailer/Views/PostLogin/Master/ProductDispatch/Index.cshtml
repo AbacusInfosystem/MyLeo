@@ -20,6 +20,7 @@
         <div class="page-title">
             <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Product Dispatch</h2>
         </div>
+        <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "ProductDispatch")'"><i class="fa fa-angle-double-left"></i> BACK</button>
     </div>
 
 </div>
@@ -41,7 +42,7 @@
 
                     <input type="hidden" class="form-control input-sm" id="hdn_Quantity" name="product_Dispatch.Quantity" value="@Model.product_Dispatch.Quantity">
 
-                    <input type="hidden" id="hdnIs_View" name="product_Dispatch.Is_View" value="@Model.product_Dispatch.Is_View" />
+                    @* <input type="hidden" id="hdnIs_View" name="product_Dispatch.Is_View" value="@Model.product_Dispatch.Is_View" />*@
 
                     <input type="hidden" id="hdnDispatch_Id" name="product_Dispatch.Dispatch_Id" value="@Model.product_Dispatch.Dispatch_Id" />
 
@@ -135,7 +136,14 @@
                                                 </td>
 
                                                 <td>
-                                                    <a class="btn btn-danger active" role="button" id="btnDispatch" onclick="Delete_Dispatch_Product(this)">Delete</a>
+                                                    @if (item.Accept_Status == "Accepted")
+                                                    {
+                                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Accepted</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="btn btn-danger active" role="button" id="btnDispatch" onclick="Delete_Dispatch_Product(this)">Delete</a>
+                                                    }
                                                 </td>
                                             </tr>
                                         }

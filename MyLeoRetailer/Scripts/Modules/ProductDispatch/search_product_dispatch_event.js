@@ -25,23 +25,25 @@
 
             $("#hdnSKU").val(sku);
 
-            if (status == "Pending" || status == "Partially Dispatch")
-            {
-                $('#btnDispatch').show();
-                $("#btnView").hide();
-            }
-            else
-            {
-                $("#btnView").show();
-                $('#btnDispatch').hide();
+            $('#btnDispatch').show();
 
-            }
+            //if (status == "Pending" || status == "Partially Dispatch")
+            //{
+            //    $('#btnDispatch').show();
+            //    $("#btnView").hide();
+            //}
+            //else
+            //{
+            //    $("#btnView").show();
+            //    $('#btnDispatch').hide();
+
+            //}
         }
     });
 
     $('#btnDispatch').click(function () {
 
-        $('#hdnIs_View').val(0);
+        //$('#hdnIs_View').val(0);
         $("#frmProductDispatch").attr("action","/ProductDispatch/Index");
         $("#frmProductDispatch").attr("method","POST");
         $("#frmProductDispatch").submit();
@@ -49,33 +51,33 @@
     });
 
 
-    $('#btnView').click(function () {
+    //$('#btnView').click(function () {
 
-        $('#hdnIs_View').val(1);
-        $("#frmProductDispatch").attr("action", "/ProductDispatch/Index");
-        $("#frmProductDispatch").attr("method", "POST");
-        $("#frmProductDispatch").submit();
+    //    $('#hdnIs_View').val(1);
+    //    $("#frmProductDispatch").attr("action", "/ProductDispatch/Index");
+    //    $("#frmProductDispatch").attr("method", "POST");
+    //    $("#frmProductDispatch").submit();
 
-    });
+    //});
 
-
-    // cause issue change event hit twise[Pending] //
 
     $("#txtFromRequestdate").change(function () {
-        this.focus();
-        this.blur();
-        $("#txtFromRequestdate").datepicker({
-            autoclose: true
-        });
-        alert();
+        $("#btnDateFilter").show();
     });
 
     $("#txtToRequestdate").change(function () {
-        $("#txtToRequestdate").datepicker({
-            autoclose: true
-        });
-        this.focus();
-        this.blur();
+        $("#btnDateFilter").show();
+    });
+
+    $("#btnDateFilter").click(function () {
+
+        $("#txtFromRequestdate").focus();
+        $("#txtFromRequestdate").trigger('change');
+
+
+        $("#txtToRequestdate").focus();
+        $("#txtToRequestdate").trigger('change');
+
     });
 
     //**********************************//

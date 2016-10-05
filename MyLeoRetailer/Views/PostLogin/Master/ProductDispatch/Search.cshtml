@@ -67,7 +67,7 @@
                             <div class="col-md-2">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">From Request Date.</span>
                                 <div class="form-group">
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="mm-dd-yyyy">
                                         <input type="text" class="form-control datepicker" name="fromDate" id="txtFromRequestdate" value="" readonly placeholder="Enter Request Date" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
@@ -77,7 +77,7 @@
                             <div class="col-md-2">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">To Request Date.</span>
                                 <div class="form-group">
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="mm-dd-yyyy">
                                         <input type="text" class="form-control datepicker" name="toDate" id="txtToRequestdate" value="" readonly placeholder="Enter Request Date" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
@@ -100,13 +100,25 @@
                                 </div>
 
                             </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                                <div class="btn-group pull-right">
+                                    <a class="btn btn-info active" role="button" id="btnDateFilter" style="display:none"> <i class="fa fa-calendar"></i>Date range  Filter </a>
+                                </div>
+
+                            </div>
+
                         </div>
 
                         <div class="row">
                             <div class="col-md-12" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                                 <div class="btn-group pull-right">
-                                    <a class="btn btn-info active" role="button" id="btnView" style="display:none">View </a>
+                                    @*  <a class="btn btn-info active" role="button" id="btnView" style="display:none">View </a>*@
                                     <a class="btn btn-success active" role="button" id="btnDispatch" style="display:none">Dispatch </a>
 
                                 </div>
@@ -123,24 +135,24 @@
 
             </div>
 
-            </div>
-
-        </div>
-
-
-        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
-
-        </div>
-
-
-
-        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
-
-        </div>
-
-        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
-
         </div>
 
     </div>
+
+
+    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+    </div>
+
+
+
+    <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+    </div>
+
+    <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
+
+    </div>
+
+</div>
 

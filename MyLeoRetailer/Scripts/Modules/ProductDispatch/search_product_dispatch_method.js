@@ -6,9 +6,9 @@ function Get_Product_Dispatch() {
 
 		        Branch_Name: $("[id='txtBranch_Name']").val(),
 
-		        From_Request_Date: $("[id='txtFromRequestDate']").val(),
+		        From_Request_Date: $("#txtFromRequestdate").val(),
 
-		        To_Request_Date: $("[id='txtToRequestDate']").val(),
+		        To_Request_Date: $("#txtToRequestdate").val(),
 
 		        Status: $("[id='drpStatus']").val(),
 		    },

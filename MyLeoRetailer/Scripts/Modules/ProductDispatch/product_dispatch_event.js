@@ -1,23 +1,23 @@
 ﻿$(document).ready(function () {
 
-    if ($("#hdnIs_View").val() == 1)
-    {
-        $("#txtDispatch_Quantity").prop("readonly", true);
+    //if ($("#hdnIs_View").val() == 1)
+    //{
+    //    $("#txtDispatch_Quantity").prop("readonly", true);
 
-        $("#txtDispatch_Date").prop('disabled', true);
+    //    $("#txtDispatch_Date").prop('disabled', true);
 
-        $("#btnProductDispatch").hide();
+    //    $("#btnProductDispatch").hide();
 
-        $("#btnSaveDispatch").hide();
+    //    $("#btnSaveDispatch").hide();
 
-        $("#btnCancelDispatch").hide();
+    //    $("#btnCancelDispatch").hide();
 
-        $("#frmProductDispatch").find("[id='btnDispatch']").hide();
+    //    $("#frmProductDispatch").find("[id='btnDispatch']").hide();
 
-        $("th", event.delegateTarget).remove(":nth-child(4)");
-        $("td", event.delegateTarget).remove(":nth-child(4)");
+    //    $("th", event.delegateTarget).remove(":nth-child(4)");
+    //    $("td", event.delegateTarget).remove(":nth-child(4)");
 
-    }
+    //}
 
     $("#btnSaveDispatch").click(function () {
 
