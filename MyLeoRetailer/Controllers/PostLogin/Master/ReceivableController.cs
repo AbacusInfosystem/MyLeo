@@ -39,16 +39,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Pay", rViewModel);
         }
 
-        public ActionResult Index(ReceivableViewModel rViewModel)
+        public ActionResult Index()
         {
-           ReceivableRepo rRepo = new ReceivableRepo();
+
+            ReceivableViewModel rViewModel = new ReceivableViewModel();
+          // ReceivableRepo rRepo = new ReceivableRepo();
+
+
+           //rViewModel.Grid_Detail.Records = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids);
 
             return View("Index", rViewModel);
         }
 
         public JsonResult Get_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo _rRepo = new ReceivableRepo();
+            ReceivableRepo rRepo = new ReceivableRepo();
 
             rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
@@ -56,15 +61,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             pager = rViewModel.Grid_Detail.Pager;
 
-            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,Payment_Status", "Sales_Invoice_Id"); // Set grid info for front end listing
+            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,Payment_Status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
 
-            rViewModel.Grid_Detail.Records = _rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
+            rViewModel.Grid_Detail.Records = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
 
             Set_Pagination(pager, rViewModel.Grid_Detail); // set pagination for grid
 
             rViewModel.Grid_Detail.Pager = pager;
 
-            return Json(JsonConvert.SerializeObject(rViewModel));         
+            return Json(JsonConvert.SerializeObject(rViewModel));
 
         }
 

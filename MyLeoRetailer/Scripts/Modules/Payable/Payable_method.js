@@ -1,11 +1,11 @@
 ﻿
-function Get_Payable(Purchase_Invoice_Id, Purchase_Credit_Note_Id) {
+function Get_Payable(Purchase_Invoice_Id) {
 
     alert(Purchase_Credit_Note_Id);
   
     $("#hdf_Purchase_Invoice_Id").val(Purchase_Invoice_Id);
 
-    $("#hdf_Purchase_Credit_Note_Id").val(Purchase_Credit_Note_Id);
+    //$("#hdf_Purchase_Credit_Note_Id").val(Purchase_Credit_Note_Id);
    
     $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");
     $("#frmPayable").submit();

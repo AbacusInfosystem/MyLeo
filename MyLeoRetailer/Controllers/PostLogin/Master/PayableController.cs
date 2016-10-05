@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -45,19 +46,39 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             PayableRepo pRepo = new PayableRepo();
 
-            pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
+            //pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
 
             return View("Index", pViewModel);
         }
 
-        public ActionResult Get_Payable(PayableViewModel pViewModel)
+        //public ActionResult Get_Payable(PayableViewModel pViewModel)
         
+        //{
+        //    PayableRepo pRepo = new PayableRepo();
+
+        //    pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
+
+        //    return Index(pViewModel);
+        //}
+
+        public JsonResult Get_Payable(PayableViewModel pViewModel)
         {
             PayableRepo pRepo = new PayableRepo();
 
-            pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
+            Pagination_Info pager = new Pagination_Info();
 
-            return Index(pViewModel);
+            pager = pViewModel.Grid_Detail.Pager;
+
+            pViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Vendor_Name,Purchase_Invoice_Date,Net_Amount,Balance_Amount,Payble_Status,Payament_Date", "Purchase_Invoice_Id,Vendor_ID"); // Set grid info for front end listing
+
+            pViewModel.Grid_Detail.Records = pRepo.Get_PurchaseInvoice(pViewModel.Payable); // Call repo method 
+
+            Set_Pagination(pager, pViewModel.Grid_Detail); // set pagination for grid
+
+            pViewModel.Grid_Detail.Pager = pager;
+
+            return Json(JsonConvert.SerializeObject(pViewModel));
+ 
         }
 
         public ActionResult Get_Payable_Details_By_Id(PayableViewModel pViewModel)

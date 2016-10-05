@@ -1,98 +1,10 @@
-﻿function Get_Receivables() {
+﻿
 
-    var rViewModel =
-		{
-		    Receivable: {
-
-		        Sales_Invoice_Id: $("#hdf_Sales_Invoice_Id").val()
-		    },
-		    Grid_Detail: {
-
-		        Pager: Set_Pager($("#divReceivablePager"))
-		    }
-		}
-
-    $.ajax({
-
-        url: "/Receivable/Get_Receivable_Details_By_Id",
-
-        data: JSON.stringify(rViewModel),
-
-        dataType: 'json',
-
-        type: 'POST',
-
-        contentType: 'application/json',
-
-        success: function (response) {
-
-            var obj = $.parseJSON(response);
-
-            Bind_Payable_Grid_Items(obj);
-
-            Friendly_Messages(obj);
-        }
-    });
-
-    //$("#hdf_Sales_Invoice_Id").val(Sales_Invoice_Id);
-    
-    //$("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id");
-    //$("#frmReceivable").submit();
-}
-
-function Get_Receivable() {
-    var rViewModel =
-		{
-		    Receivable: {
-
-		        From_Date: $("[name='Receivable.From_Date']").val(),
-
-		        To_Date: $("[name='Receivable.To_Date']").val(),
-
-		        Sales_Invoice_No: $("[name='Receivable.Sales_Invoice_No']").val(),
-
-		        Customer_Name: $("[name='Receivable.Customer_Name']").val(),
-
-		        Payment_Status: $("[name='Receivable.Payment_Status']").val()
-		    },
-		    Grid_Detail: {
-
-		        Pager: Set_Pager($("#divReceivablePager"))
-		    }
-		}
-
-    $.ajax({
-
-        url: "/Receivable/Get_Receivable",
-
-        data: JSON.stringify(rViewModel),
-
-        dataType: 'json',
-
-        type: 'POST',
-
-        contentType: 'application/json',
-
-        success: function (response) {
-
-            var obj = $.parseJSON(response);
-
-            Bind_Grid(obj, "Get_Receivable_Search_Details_List");
-
-            $("#divReceivablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
-
-            Friendly_Messages(obj);
-        }
-    });
-}
-
-function Get_Receivables1(Sales_Invoice_Id, Sales_Credit_Note_Id) {
+function Get_Receivables(Sales_Invoice_Id, Sales_Credit_Note_Id) {
 
     $("#hdf_Sales_Invoice_Id").val(Sales_Invoice_Id);
 
     $("#hdf_Sales_Credit_Note_Id").val(Sales_Credit_Note_Id);
-
-    //$("#hdf_Gift_Voucher_Id").val(Gift_Voucher_Id);
 
     $("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id");
     $("#frmReceivable").submit();
@@ -100,7 +12,6 @@ function Get_Receivables1(Sales_Invoice_Id, Sales_Credit_Note_Id) {
 
 function Get_Credit_Note_Amount_By_Id(id) {
 
-    debugger;
 
     var rViewModel =
         {
@@ -141,7 +52,6 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
 function Get_Gift_Voucher_Amount_By_Id(id) {
 
-    debugger;
 
     var rViewModel =
         {
@@ -286,9 +196,6 @@ function Cancle() {
 }
 
 function Save_Receivable_Data() {
-
-    debugger;
-
     var rViewModel =
 		{
 		    Receivable: {
@@ -363,7 +270,6 @@ function Save_Receivable_Data() {
         contentType: 'application/json',
 
         success: function (response) {
-
             debugger;
 
             var obj = $.parseJSON(response);
@@ -382,10 +288,6 @@ function Save_Receivable_Data() {
 }
 
 function Bind_Payable_Grid_Items(data) {
-
-    alert();
-
-    debugger;
 
     $("#tblReceivableItems").html("");
 
@@ -436,6 +338,8 @@ function Bind_Payable_Grid_Items(data) {
         htmlText += "<th>Gift voucher no</th>";
 
         htmlText += "<th>Gift voucher amount</th>";
+
+      
 
     }
 
@@ -640,8 +544,6 @@ function EditReceivableData(id) {
 
     alert("12");
 
-    debugger;
-
     var Balance_amount = 0;
     var paid_amount = 0;
     var total_bal_amount = 0;
@@ -706,4 +608,7 @@ function EditReceivableData(id) {
 
 
 }
+
+
+
 
