@@ -249,7 +249,36 @@ namespace MyLeoRetailerRepo
 
             }
 
+            if(Branch_Ids.EndsWith(","))
+            {   
+                Branch_Ids = Branch_Ids.Remove(Branch_Ids.Length - 1);
+
+            }
+
+
             return Branch_Ids;
+        }
+
+        public List<EmployeeInfo> Change_Branch_List(List<EmployeeInfo> Employee)
+        {
+            List<EmployeeInfo> branches = new List<EmployeeInfo>();
+
+            foreach (var ids in Employee)
+            {
+                if (ids.Is_Selected == 1)
+                {
+                    EmployeeInfo branch = new EmployeeInfo();
+
+                    branch.Branch_Id = ids.Branch_Id;
+
+                    branch.Branch_Name = ids.Branch_Name;
+
+                    branches.Add(branch);
+                }
+
+            }          
+
+            return branches;
         }
 
        
