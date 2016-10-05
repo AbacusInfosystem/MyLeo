@@ -26,7 +26,7 @@ namespace MyLeoRetailer.Models.Report
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
-			Grid_Detail.Pager.DivObject = "divInventoryPager";
+            Grid_Detail.Pager.DivObject = "divInventoryPager";
 
             Grid_Detail.Pager.CallBackMethod = "Get_Inventories";
 		}

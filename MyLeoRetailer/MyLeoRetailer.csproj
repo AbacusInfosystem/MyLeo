@@ -1021,6 +1021,8 @@
     <Content Include="Scripts\Modules\Customer\customer_validation.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_events.js" />
     <Content Include="Scripts\Modules\Customer\search_customer_methods.js" />
+    <Content Include="Scripts\Modules\Employee\change_branch_event.js" />
+    <Content Include="Scripts\Modules\Employee\change_branch_method.js" />
     <Content Include="Scripts\Modules\Employee\Employee_Branch_Mapping_Event.js" />
     <Content Include="Scripts\Modules\Employee\employee_events.js" />
     <Content Include="Scripts\Modules\Employee\employee_methods.js" />
@@ -1285,7 +1287,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60053/</IISUrl>
+          <IISUrl>http://localhost:58691/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

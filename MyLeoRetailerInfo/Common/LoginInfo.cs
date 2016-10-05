@@ -1,4 +1,5 @@
-﻿using MyLeoRetailerInfo.Role;
+﻿using MyLeoRetailerInfo.Employee;
+using MyLeoRetailerInfo.Role;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace MyLeoRetailerInfo.Common
         public LoginInfo()
         {
             Access_Functions = new List<AccessFunctionInfo>();
+
+            Branch_List = new List<EmployeeInfo>();
         }
 
         //public string Token { get; set; }
@@ -37,6 +40,11 @@ namespace MyLeoRetailerInfo.Common
 
         public List<AccessFunctionInfo> Access_Functions { get; set; }
 
+        public List<EmployeeInfo> Branch_List { get; set; }
+
+        public string Page_URL { get; set; }
+
 
     }
+
 }

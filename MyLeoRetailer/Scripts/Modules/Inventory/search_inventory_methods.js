@@ -1,12 +1,13 @@
 ﻿
-function Get_Inventory() {
+function Get_Inventories() {
     var iViewModel =
 		{
 		    Filter: {
 
-		        Inventory_Id: $("[name='Filter.Inventory_Id']").val()
-		    },
+		        Branch_Id: $("[name='Filter.Branch_Id']").val(),
 
+		        Product_SKU: $("[name='Filter.Product_SKU']").val()
+		    },
 		    Grid_Detail: {
 
 		        Pager: Set_Pager($("#divInventoryPager"))
