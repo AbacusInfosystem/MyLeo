@@ -383,6 +383,8 @@ function Save_Receivable_Data() {
 
 function Bind_Payable_Grid_Items(data) {
 
+    alert();
+
     debugger;
 
     $("#tblReceivableItems").html("");
