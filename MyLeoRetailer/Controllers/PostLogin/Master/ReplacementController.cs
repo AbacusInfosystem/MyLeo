@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -20,9 +21,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         #region View Actions
         public ActionResult Index(ReplacementViewModel rViewmodel)
         {
-         rViewmodel.Vendors =  vRepo.Get_Vendors();
-         rViewmodel.PurchaseInvoices = rRepo.Get_Purchase_Invoice();
-
+            try
+            {
+                rViewmodel.Vendors = vRepo.Get_Vendors();
+                rViewmodel.PurchaseInvoices = rRepo.Get_Purchase_Invoice();
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                rViewmodel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Replacement Controller - Index  " + ex.Message);
+            }
+            //End
             return View(rViewmodel);
         }
 
@@ -34,8 +44,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Insert(ReplacementViewModel rViewmodel)
         {
-            Set_Date_Session(rViewmodel.Replacement);
-            rRepo.Insert(rViewmodel.Replacement, rViewmodel.Replacements);
+            try
+            {
+                Set_Date_Session(rViewmodel.Replacement);
+                rRepo.Insert(rViewmodel.Replacement, rViewmodel.Replacements);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                rViewmodel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Replacement Controller - Insert  " + ex.Message);
+            }
+            //End
             return RedirectToAction("Index");
         }
 
@@ -71,6 +91,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Replacement Controller - Get_Replacemant  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(rViewModel));

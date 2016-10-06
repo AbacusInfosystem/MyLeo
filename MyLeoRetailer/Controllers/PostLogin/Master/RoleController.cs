@@ -185,12 +185,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Role_Name(string role_Name)
         {
             bool check = false;
+            RoleViewModel rViewModel = new RoleViewModel();
             try
             {
                 check = _rRepo.Check_Existing_Role_Name(role_Name);
             }
             catch (Exception ex)
             {
+                rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
                 Logger.Error("Role Controller - Check_Existing_Role_Name : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);

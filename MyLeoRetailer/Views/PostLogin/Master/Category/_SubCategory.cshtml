@@ -8,7 +8,7 @@
     <h4 style="margin-top: 0px;">Create - Update sub category. <span class="label label-primary">@Model.SubCategory.Category</span></h4>
     <form role="form" id="frmSubCategory">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Enter sub category." name="SubCategory.Sub_Category" id="txtSub_Category" />
+            <input type="text" class="form-control" placeholder="Enter sub category." name="SubCategory.Sub_Category" id="txtSub_Category" maxlength="50"/>
             <input type="hidden" name="SubCategory.Sub_Category_Id" />
             <input type="hidden" name="SubCategory.Category_Id" value="@Model.SubCategory.Category_Id" />
             <input type="hidden" name="Filter.Category_Id" value="@Model.SubCategory.Category_Id" />

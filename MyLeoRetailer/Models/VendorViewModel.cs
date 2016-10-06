@@ -22,6 +22,8 @@ namespace MyLeoRetailer.Models
 
             Vendors = new List<VendorInfo>();
 
+            Vendors_Sub_Cat = new List<VendorInfo>();//Added by vinod mane on 06/10/2016
+
             FriendlyMessages = new List<FriendlyMessage>();   
    
             Filter = new VendorFilter();
@@ -49,6 +51,8 @@ namespace MyLeoRetailer.Models
         public VendorInfo Vendor { get; set; }
 
         public List<VendorInfo> Vendors { get; set; }
+
+        public List<VendorInfo> Vendors_Sub_Cat { get; set; }//Added by vinod mane on 06/10/2016
 
         public List<FriendlyMessage> FriendlyMessages { get; set; }
         

@@ -22,6 +22,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         [AuthorizeUserAttribute(AppFunction.Tax_Management_Access)]
         public ActionResult Index(TaxViewModel tViewModel)
         {
+            //return View("Index", tViewModel);
+
+            try
+            {
+                if (TempData["tViewModel"] != null)
+                {
+                    tViewModel = (TaxViewModel)TempData["tViewModel"];
+                }
+            }
+            catch (Exception ex)
+            {
+                tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Tax Controller - Index  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
             return View("Index", tViewModel);
         }
 
@@ -173,6 +187,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Tax_name(string Tax_name)
         {
             TaxRepo tRepo = new TaxRepo();
+            TaxViewModel tViewModel = new TaxViewModel();//Added by vinod mane on 06/10/2016
             bool check = false;
             try
             {
@@ -180,6 +195,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             catch (Exception ex)
             {
+                tViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
                 Logger.Error("Tax Controller - Check_Existing_Tax_name : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);
