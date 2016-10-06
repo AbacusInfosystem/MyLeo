@@ -3,7 +3,8 @@
 @using MyLeoRetailerInfo.Common;
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
-<script src="~/Scripts/Modules/Receivable/Receivable_methods.js"></script>
+<script src="~/Scripts/Modules/Receivable/Receivable_Search_Event.js"></script>
+<script src="~/Scripts/Modules/Receivable/Receivable_Search_Methods.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_events.js"></script>
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -35,11 +36,11 @@
 
                 <div class="box-body">
 
-                    <input type="hidden" class="form-control input-sm" name="Receivable.Receivable_Id" id="hdf_Receivable_Id" value="Receivable.Receivable_Id">
+                    <input type="hidden" class="form-control input-sm" name="Receivable.Receivable_Id" id="hdf_Receivable_Id" value="@Model.Receivable.Receivable_Id">
 
                     <input type="hidden" class="form-control input-sm" name="Receivable.Sales_Credit_Note_Id" id="hdf_Sales_Credit_Note_Id">
 
-                    <input type="hidden" class="form-control input-sm" name="Receivable.Sales_Invoice_Id" id="hdf_Sales_Invoice_Id">
+                    <input type="hidden" class="form-control input-sm" name="Receivable.Sales_Invoice_Id" id="hdf_Sales_Invoice_Id" value="@Model.Receivable.Sales_Invoice_Id">
 
                     <input type="hidden" class="form-control input-sm" name="Receivable.Gift_Voucher_Id" id="hdf_Gift_Voucher_Id">
 
@@ -63,14 +64,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice no</span>
-                                        <input type="text" class="form-control input-sm" name="Receivable.Sales_Invoice_No" id="txtInvoice_no" value="@Model.Receivable.Sales_Invoice_No" placeholder="Enter Invoice no" />
+                                        <input type="text" class="form-control input-sm" name="Receivable.Sales_Invoice_No" id="txtInvoice_no" value="@Model.Receivable.Sales_Invoice_No" placeholder="Enter Invoice no" maxlength="10"/>
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Customer name</span>
-                                        <input type="text" class="form-control input-sm" name="Receivable.Customer_Name" id="txtCustomer_name" value="@Model.Receivable.Customer_Name" placeholder="Enter Customer name " />
+                                        <input type="text" class="form-control input-sm" name="Receivable.Customer_Name" id="txtCustomer_name" value="@Model.Receivable.Customer_Name" placeholder="Enter Customer name " maxlength="10" />
                                     </div>
                                 </div>
 
@@ -134,7 +135,7 @@
                                         <br />
                                         <br />
                                         <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>
-                                        <button type="button" id="btnPay" class="btn btn-success green">Pay</button>
+                                        <button type="button" id="btnPay" class="btn btn-danger active">Pay</button>
                                         <button type="reset" id="btnResetReceivable" class="btn btn-danger active">Reset</button>
                                     </div>
                                 </div>
@@ -144,16 +145,16 @@
 
                         </div>
 
+
                         <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-                        </div>
+                                        </div>
 
                         <div class="col-md-12" style="padding: 0px;text-align:center;" id="divReceivablePager">
 
 
                         </div>
 
-               
 
                     </div>
 

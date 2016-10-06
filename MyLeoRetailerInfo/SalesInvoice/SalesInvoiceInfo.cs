@@ -63,6 +63,8 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        public int Branch_Id { get; set; }
 
+       public string Branch_IDS { get; set; }
+
        public int Total_Quantity { get; set; }
 
        public decimal Total_MRP_Amount { get; set; }

@@ -1,9 +1,9 @@
 ﻿$(function () {
     $("#frmPurchaseOrder").validate({
         rules: {
-            "PurchaseOrder.Purchase_Order_No": {
-                required: true
-            },
+            //"PurchaseOrder.Purchase_Order_No": {
+            //    required: true
+            //},
 
             "PurchaseOrder.Vendor_Id": {
                 required: true
@@ -57,9 +57,9 @@
         },
         messages: {
 
-            "PurchaseOrder.Purchase_Order_No": {
-                required: "Purchase Order No is required."
-            },
+            //"PurchaseOrder.Purchase_Order_No": {
+            //    required: "Purchase Order No is required."
+            //},
 
             "PurchaseOrder.Vendor_Id": {
                 required: "Vendor name is required."

@@ -64,12 +64,12 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
-                if (table_Name == "Product_MRP")
+                if (table_Name == "Product_SKU_Mapping")
                 {
                     if (fieldName == "Vendor_Id")
                     {
-                        strquery = " Select Product_MRP.Product_MRP_Id, Product_MRP.SKU_Code ";
-                        strquery += "from Product_MRP inner join Product on Product_MRP.Product_Id=Product.Product_Id ";
+                        strquery = "Select distinct Product_SKU_Mapping.Product_Id, Product_SKU_Mapping.SKU_Code ";
+                        strquery += "from Product_SKU_Mapping inner join Product on Product.Product_Id=Product_SKU_Mapping.Product_Id ";
                         strquery += "where Product.Vendor_Id = @Vendor_Id";
                         paramList.Add(new SqlParameter("@Vendor_Id", fieldValue));
                     }
@@ -85,6 +85,19 @@ namespace MyLeoRetailerRepo
                         paramList.Add(new SqlParameter("@Purchase_Invoice_Id", fieldValue));
                     }
                 }
+
+
+                if (table_Name == "Sales_Invoice_Item")
+                {
+                    if (fieldName == "Sales_Invoice_Id")
+                    {
+                        strquery = " Select Sales_Invoice_Item.Sales_Invoice_Id, Sales_Invoice_Item.SKU_Code ";
+                        strquery += "from Sales_Invoice_Item ";
+                        strquery += "where Sales_Invoice_Item.Sales_Invoice_Id = @Sales_Invoice_Id";
+                        paramList.Add(new SqlParameter("@Sales_Invoice_Id", fieldValue));
+                    }
+                }
+
 
                 if (table_Name == "Branch")
                 {
@@ -103,6 +116,17 @@ namespace MyLeoRetailerRepo
                         strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID ";
                     }
                 }
+
+                if (table_Name == "Inventorys")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Inventory.Branch_Id, Inventory.Product_SKU ";
+                        strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID where Inventory.Branch_Id in (SELECT * FROM dbo.CSVToTable( '"+ fieldValue +"'))";
+                        strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
+                    }
+                }
+               
                               
             }
 

@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -41,6 +42,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Index  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
             return View("Index", aViewModel);
         }
@@ -57,6 +59,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Search  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
             return View("Search", aViewModel);
         }
@@ -74,6 +77,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Insert_Alteration  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["aViewModel"] = (AlterationViewModel)aViewModel;
@@ -94,6 +98,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Update_Alteration  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
  
@@ -133,6 +138,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Get_Alterations  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(aViewModel));
@@ -151,6 +157,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Alteration Controller - Get_Alteration_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return View("Index", aViewModel);

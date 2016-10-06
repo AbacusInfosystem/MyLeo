@@ -27,9 +27,9 @@ namespace MyLeoRetailer.Models
 
             CreditNote = new List<PayableInfo>();
 
-            //Grid_Detail.Pager.DivObject = "divGiftVoucherPager";
+            Grid_Detail.Pager.DivObject = "divPayablePager";
 
-            //Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
+            Grid_Detail.Pager.CallBackMethod = "Get_Payable";
         }
 
         public GridInfo Grid_Detail

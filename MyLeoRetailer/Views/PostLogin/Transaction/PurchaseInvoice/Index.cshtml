@@ -47,10 +47,10 @@
                                 
                                 <h4 style="margin-top: 0px;">Primary information.</h4>
 
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
                                     <input type="text" class="form-control input-sm" name="PurchaseInvoice.Purchase_Invoice_No" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Purchase_Invoice_No" placeholder="Enter purchase invoice no." />
-                                </div>
+                                </div>*@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice Date.</span>
@@ -80,7 +80,7 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Challan No.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Challan_No" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Challan_No" placeholder="Enter challan no." />
+                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Challan_No" id="txtPurchase_Order_No" value="@Model.PurchaseInvoice.Challan_No" placeholder="Enter challan no." maxlength="20" />
                                 </div>
 
 
@@ -159,12 +159,12 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Against Form.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form" id="txtAgainst_Form" value="@(Model.PurchaseInvoice.Against_Form == 0 ? "" : Model.PurchaseInvoice.Against_Form.ToString())" placeholder="Enter against form." />
+                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form" id="txtAgainst_Form" value="@(Model.PurchaseInvoice.Against_Form == 0 ? "" : Model.PurchaseInvoice.Against_Form.ToString())" placeholder="Enter against form." maxlength="20" />
                                 </div>
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Against Form No.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form_No" id="txtAgainst_Form_No" value="@Model.PurchaseInvoice.Against_Form_No" placeholder="Enter against form no." />
+                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Against_Form_No" id="txtAgainst_Form_No" value="@Model.PurchaseInvoice.Against_Form_No" placeholder="Enter against form no." maxlength="20"/>
                                 </div>
 
                                 <div class="form-group">
@@ -204,7 +204,7 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Packing No.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Purchase_Packing_No" id="txtPurchase_Packing_No" value="@Model.PurchaseInvoice.Purchase_Packing_No" placeholder="Enter purchase packing no." />
+                                    <input type="text" class="form-control input-sm" name="PurchaseInvoice.Purchase_Packing_No" id="txtPurchase_Packing_No" value="@Model.PurchaseInvoice.Purchase_Packing_No" placeholder="Enter purchase packing no." maxlength="20" />
                                 </div>
 
                                 <div class="form-group">
@@ -288,7 +288,7 @@
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);" placeholder="Enter SKU to search" value="" data-table="Product_MRP" data-col="Product_MRP_Id,SKU_Code" data-headernames="SKU Code" data-param="hdf_Vendor_Id" data-field="Vendor_Id" />
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);" placeholder="Enter SKU to search" value="" data-table="Product_SKU_Mapping" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" data-param="hdf_Vendor_Id" data-field="Vendor_Id" />
                                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                     <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
                                                     <input type="hidden" id="hdnSKU_No_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" class="auto-complete-label" />
@@ -323,7 +323,7 @@
                                             <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" />
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" maxlength="10"/>
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].WSR_Price" id="textWSR_Price_0" readonly />
@@ -334,7 +334,7 @@
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textPurchase_Order_No_0" placeholder="Enter PO no. to search" value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order" data-param="hdf_Vendor_Id" data-field="Vendor_Id" />
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textPurchase_Order_No_0" placeholder="Enter PO no. to search" value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order" data-param="hdf_Vendor_Id" data-field="Vendor_Id" maxlength="10"/>
                                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                     <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_Id" class="auto-complete-value" />
                                                     <input type="hidden" id="hdnPurchase_Order_No_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" class="auto-complete-label" />
@@ -399,7 +399,7 @@
                                             <label>Discount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0" maxlength="10">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Amount" readonly id="textDiscountAmount_0">
@@ -541,7 +541,7 @@
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount %.</span>
-                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="PurchaseInvoice.Discount_Percentage_Before_Due_Date" />
+                                    <input type="text" class="form-control input-sm" id="txtVendor_VAT_No" name="PurchaseInvoice.Discount_Percentage_Before_Due_Date" maxlength="10"/>
                                 </div>
 
                             </div>
@@ -573,7 +573,7 @@
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">LR No.</span>
-                                    <input type="text" class="form-control input-sm" id="txtLR_No" name="PurchaseInvoice.Lr_No" />
+                                    <input type="text" class="form-control input-sm" id="txtLR_No" name="PurchaseInvoice.Lr_No" maxlength="20"/>
                                 </div>
 
 

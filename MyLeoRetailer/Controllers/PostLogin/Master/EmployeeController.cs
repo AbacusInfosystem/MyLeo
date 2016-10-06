@@ -186,18 +186,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
 
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
-            return RedirectToAction("Index",eViewModel);
+            return RedirectToAction("Index", eViewModel);
         }
 
         public JsonResult Check_Existing_User_Name(string user_Name)
         {
             bool check = false;
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
             try
             {
                 check = eRepo.Check_Existing_User_Name(user_Name);
             }
             catch (Exception ex)
             {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
                 Logger.Error("Employee Controller - Check_Existing_User_Name" + ex.Message);
             }
             return Json(check, JsonRequestBehavior.AllowGet);
@@ -229,7 +231,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 Set_Date_Session(eViewModel.Employee);
 
-               eRepo.Insert_Employee_Mapping(eViewModel.Employee,eViewModel.List_Branch);
+                eRepo.Insert_Employee_Mapping(eViewModel.Employee, eViewModel.List_Branch);
 
                eViewModel.FriendlyMessages.Add(MessageStore.Get("EMPM01"));
                
@@ -251,100 +253,121 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public PartialViewResult ChangeBranch()
         {
             EmployeeViewModel eViewModel = new EmployeeViewModel();
+
+            try
+            {
             if (Request.Cookies["MyLeoLoginInfo"] != null)
             {
                 //var barchid = Request.Cookies["LoginInfo"].Value;
-                MyLeoRetailer.Models.PreLogin.LoginViewModel lViewModel=new Models.PreLogin.LoginViewModel ();
+                    MyLeoRetailer.Models.PreLogin.LoginViewModel lViewModel = new Models.PreLogin.LoginViewModel();
                 lViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(lViewModel.Cookies.User_Id,lViewModel.Cookies.Branch_Ids);
+                    eViewModel.Employee_Branch_List = eRepo.Get_Branch_By_Id(lViewModel.Cookies.User_Id, lViewModel.Cookies.Branch_Ids);
 
-                eViewModel.Employee.Employee_Id=lViewModel.Cookies.User_Id;
+                    eViewModel.Employee.Employee_Id = lViewModel.Cookies.User_Id;
 
             }
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Employee Controller - ChangeBranch" + ex.Message);
+            }
+            //End
             return PartialView("_ChangeBranch", eViewModel);
         }
 
         public ActionResult Save_Employee_Branch_Id(EmployeeViewModel eViewModel)
         {
-            var url = Convert.ToString(eViewModel.Page_URL);           
-
-            var Branch_Ids = eRepo.Save_Change_BranchId(eViewModel.Employee_Branch_List);
-
-            var Branch_List = eRepo.Change_Branch_List(eViewModel.Employee_Branch_List);
-
-            eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-            var User_Id = eViewModel.Cookies.User_Id; 
-
-            Set_Branch_Cookies(User_Id, Branch_Ids, Branch_List);
-
-            eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-            eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
-
-            eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
-
-            eViewModel.Cookies.Branch_Ids = Branch_Ids;
-
-
-
-
-            //eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-            eViewModel.Cookies.Page_URL = url;
-
-            var split = url.Substring(23);
-
-            if (split == "")
-            {
-                split = " / /";
-            }
-
-
-            var temp = split.Split('/');
-
             var controller = "";
 
             var method = "";
 
-
-            foreach (var item in temp)
+            try
             {
-                for (int i = 0; i < 2; i++)
+                var url = Convert.ToString(eViewModel.Page_URL);
+
+                var Branch_Ids = eRepo.Save_Change_BranchId(eViewModel.Employee_Branch_List);
+
+                var Branch_List = eRepo.Change_Branch_List(eViewModel.Employee_Branch_List);
+
+                eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                var User_Id = eViewModel.Cookies.User_Id;
+
+                Set_Branch_Cookies(User_Id, Branch_Ids, Branch_List);
+
+                eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
+
+                eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
+
+                eViewModel.Cookies.Branch_Ids = Branch_Ids;
+
+
+
+
+                //eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                eViewModel.Cookies.Page_URL = url;
+
+                var split = url.Substring(23);
+
+                if (split == "")
                 {
-                    if (i == 0)
+                    split = " / /";
+                }
+
+
+                var temp = split.Split('/');
+
+
+                foreach (var item in temp)
+                {
+                    for (int i = 0; i < 2; i++)
                     {
-                        controller = temp[i];
-                        break;
+                        if (i == 0)
+                        {
+                            controller = temp[i];
+                            break;
+                        }
+                        else if (i == 1)
+                        {
+                            method = temp[i];
+                        }
+
                     }
-                    else if (i == 1)
-                    {
-                        method = temp[i];
-                    }
-                    
+
+                }
+
+
+                if (controller == "")
+                {
+                    controller = "Dashboard";
+                    method = "Index";
+                }
+
+                if (controller == "dashboard")
+                {
+                    method = "Index";
+                }
+
+
+                if (method == "")
+                {
+                    method = "Search";
                 }
 
             }
-                     
-
-            if(controller=="")
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
             {
-                controller = "Dashboard";
-                method = "Index";
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Employee Controller - Set_Branch_Cookies" + ex.Message);
             }
-
-            if (controller == "dashboard")
-            {
-                method = "Index";
-            }
-
-
-            if (method=="")
-            {
-                method = "Search";
-            }
-
+           //End
             return RedirectToAction(method, controller);
 
             //return View("Search", eViewModel);
@@ -354,6 +377,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             MyLeoRetailer.Models.PreLogin.LoginViewModel loginViewModel = new Models.PreLogin.LoginViewModel();
             LoginRepo _loginRepo = new LoginRepo();
+            EmployeeViewModel eViewModel = new EmployeeViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 if (Request.Cookies["MyLeoLoginInfo"] == null)
@@ -387,7 +411,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 HttpContext.Request.Cookies.Clear();
-
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
                 Logger.Error("Employee Controller - Set_Branch_Cookies" + ex.Message);
             }
         }
@@ -428,13 +452,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Employee_Name(string employee_Name)
         {
             bool check = false;
+            EmployeeViewModel eViewModel = new EmployeeViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = eRepo.Check_Existing_Employee_Name(employee_Name);
             }
             catch (Exception ex)
             {
-                Logger.Error("Employee Controller - Check_Existing_Employee_Name : " + ex.ToString());
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
+                Logger.Error("Employee Controller - Check_Existing_Employee_Name " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
