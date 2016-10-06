@@ -36,6 +36,9 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];                
             }
+            siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
 
             return View("Index", siViewModel);
         }
@@ -62,12 +65,12 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         }
 
-        public JsonResult Get_Credit_Note_Details_By_Id(SalesInvoiceViewModel siViewModel)
+        public JsonResult Get_Credit_Note_Details_By_Id_abc(int cust_Id)
         {
-           
+            SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
             try
             {
-                siViewModel.CreditNote = siRepo.Get_Credit_Note_Details_By_Id(siViewModel.SalesInvoice.Customer_Id);
+                siViewModel.CreditNote = siRepo.Get_Credit_Note_Data_By_Id(cust_Id);
             }
             catch (Exception ex)
             {
