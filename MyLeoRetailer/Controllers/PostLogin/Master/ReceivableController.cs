@@ -16,6 +16,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         //
         // GET: /Receivable/
 
+        public ReceivableRepo rRepo;
+
+        public ReceivableController()
+        {
+            rRepo = new ReceivableRepo();
+
+        }
+
+
         public ActionResult Pay(ReceivableViewModel rViewModel)
         {
             ReceivableRepo rRepo = new ReceivableRepo();
@@ -53,7 +62,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
 
             rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
@@ -61,7 +69,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             pager = rViewModel.Grid_Detail.Pager;
 
-            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,Payment_Status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
+            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
 
             rViewModel.Grid_Detail.Records = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
 
@@ -73,9 +81,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         }
 
-        public JsonResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
+        public ActionResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
 
             try
             {
@@ -94,14 +101,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             }
 
-            //TempData["rViewModel"] = (ReceivableViewModel)rViewModel;
 
-            return Json(JsonConvert.SerializeObject(rViewModel));
+            return View("Pay", rViewModel);
         }
 
         public JsonResult Get_Credit_Note_Amount_By_Id(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
 
             try
             {
@@ -118,7 +123,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Gift_Voucher_Amount_By_Id(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+           
 
             try
             {
@@ -135,7 +140,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+          
 
 
             try
@@ -167,7 +172,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Update_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+            
 
 
             try
