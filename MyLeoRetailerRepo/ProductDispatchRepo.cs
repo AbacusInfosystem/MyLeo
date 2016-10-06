@@ -190,6 +190,7 @@ namespace MyLeoRetailerRepo
            {
                if (item.Is_Checked == 1)
                {
+                   sqlparam = new List<SqlParameter>();
                    sqlparam.Add(new SqlParameter("@SKU", item.SKU));
 
                    sqlparam.Add(new SqlParameter("@Quantity", item.Quantity));
