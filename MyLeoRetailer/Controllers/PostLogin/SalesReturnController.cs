@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -17,7 +18,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 {
     public class SalesReturnController : BaseController
     {
-        public SalesReturnRepo srRepo; 
+        public SalesReturnRepo srRepo;
 
         public SalesReturnController()
         {
@@ -26,12 +27,19 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult Index(SalesReturnViewModel srViewModel)
         {
-
-            if (TempData["srViewModel"] != null)
+            try
             {
-                srViewModel = (SalesReturnViewModel)TempData["srViewModel"];
+                if (TempData["srViewModel"] != null)
+                {
+                    srViewModel = (SalesReturnViewModel)TempData["srViewModel"];
+                }
             }
-            
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesReturn Controller - Index  " + ex.Message);
+            }
             return View("Index", srViewModel);
         }
 
@@ -40,18 +48,33 @@ namespace MyLeoRetailer.Controllers.PostLogin
             //string Customer_Name;
 
             SalesReturnViewModel srViewModel = new SalesReturnViewModel();
-
-            srViewModel.SalesReturn = srRepo.Get_Customer_Name_By_Mobile_No(MobileNo);
-
+            try
+            {
+                srViewModel.SalesReturn = srRepo.Get_Customer_Name_By_Mobile_No(MobileNo);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesReturn Controller - Get_Customer_Name_By_Mobile_No  " + ex.Message);
+            }
             return Json(srViewModel.SalesReturn, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult Get_Sales_Return_Items_By_SKU_Code(string SKU_Code)
-            {
+        {
 
             SalesReturnViewModel srViewModel = new SalesReturnViewModel();
-
-            srViewModel.SalesReturn = srRepo.Get_Sales_Order_Items_By_SKU_Code(SKU_Code);
+            try
+            {
+                srViewModel.SalesReturn = srRepo.Get_Sales_Order_Items_By_SKU_Code(SKU_Code);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesReturn Controller - Get_Sales_Return_Items_By_SKU_Code  " + ex.Message);
+            }
 
             return Json(srViewModel.SalesReturn, JsonRequestBehavior.AllowGet);
 
@@ -70,6 +93,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesReturn Controller - Search  " + ex.Message); //Added by vinod mane on 06/10/2016
             }
 
             return View("Search", srViewModel);
@@ -111,6 +135,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesReturn Controller - Get_SalesReturn  " + ex.Message); //Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(srViewModel));
@@ -145,7 +170,8 @@ namespace MyLeoRetailer.Controllers.PostLogin
             }
             catch (Exception ex)
             {
-                srViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesReturn Controller - Insert_SalesReturn  " + ex.Message); //Added by vinod mane on 06/10/2016
             }
 
             TempData["srViewModel"] = (SalesReturnViewModel)srViewModel;
@@ -157,7 +183,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
         {
 
             bool check = false;
-
+            SalesReturnViewModel srViewModel = new SalesReturnViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = srRepo.Check_Mobile_No(MobileNo);
@@ -165,7 +191,9 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             catch (Exception ex)
             {
-                throw ex;
+                // throw ex;
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
+                Logger.Error("SalesReturn Controller - Check_Mobile_No  " + ex.Message); //Added by vinod mane on 06/10/2016
             }
 
             return Json(check, JsonRequestBehavior.AllowGet);
@@ -173,10 +201,10 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult Get_Sales_Return_By_Id(SalesReturnViewModel srViewModel)
         {
-           
+
             try
             {
-               
+
                 srViewModel.SalesReturn = srRepo.Get_Sales_Return_By_Id(srViewModel.Filter.Sales_Return_Id);
 
                 srViewModel.SaleReturnItemList = srRepo.Get_Sales_Return_Items_By_Id(srViewModel.Filter.Sales_Return_Id);
@@ -185,21 +213,31 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesReturn Controller - Get_Sales_Return_By_Id  " + ex.Message); //Added by vinod mane on 06/10/2016
             }
 
             TempData["srViewModel"] = srViewModel;
 
-            return RedirectToAction("View_Sales_Return", "SalesReturn");          
+            return RedirectToAction("View_Sales_Return", "SalesReturn");
         }
 
         public ActionResult View_Sales_Return(SalesReturnViewModel srViewModel)
         {
-
-            if (TempData["srViewModel"] != null)
+            try
             {
-                srViewModel = (SalesReturnViewModel)TempData["srViewModel"];
+                if (TempData["srViewModel"] != null)
+                {
+                    srViewModel = (SalesReturnViewModel)TempData["srViewModel"];
+                }
             }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
+                Logger.Error("SalesReturn Controller - View_Sales_Return  " + ex.Message);
+            }
+            //End
             return View("SalesReturnView", srViewModel);
         }
 

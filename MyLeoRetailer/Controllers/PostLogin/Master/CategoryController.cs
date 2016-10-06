@@ -30,10 +30,32 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         [AuthorizeUserAttribute(AppFunction.Category_Management_Access)]
+
+        //Commeted by vinod mane on 06/10/2016
+        //public ActionResult Index(CategoryViewModel cViewModel)
+        //{
+        //    return View("Index",cViewModel);           
+        //}
+            //End
+
+        //Added by vinod mane on 06/10/2016
         public ActionResult Index(CategoryViewModel cViewModel)
-        {
-			return View("Index",cViewModel);
+        {           
+            try
+            {
+                if (TempData["cViewModel"] != null)
+                {
+                    cViewModel = (CategoryViewModel)TempData["cViewModel"];
+                }
+            }
+            catch (Exception ex)
+            {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Category Controller - Index : " + ex.ToString());
+            }
+            return View("Index", cViewModel);           
         }
+        //End
 
 		public JsonResult Insert_Category(CategoryViewModel cViewModel)
 		{
@@ -271,7 +293,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
                 Logger.Error("Category Controller - Get_Sub_Category_By_Id" + ex.Message);
             }
 
@@ -282,12 +303,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Category_Name(string category_Name)
         {
             bool check = false;
+            SubCategoryViewModel sViewModel = new SubCategoryViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = cRepo.Check_Existing_Category_Name(category_Name);
             }
             catch (Exception ex)
             {
+                sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
                 Logger.Error("Category Controller - Check_Existing_CategoryName : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);
@@ -298,13 +321,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Sub_Category_Name(string sub_category_Name)
         {
             bool check = false;
+            SubCategoryViewModel sViewModel = new SubCategoryViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = cRepo.Check_Existing_Sub_Category_Name(sub_category_Name);
             }
             catch (Exception ex)
             {
-                Logger.Error("Sub Category Controller - Check_Existing_Sub_Category_Name : " + ex.ToString());
+                sViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Category Controller - Check_Existing_Sub_Category_Name : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }

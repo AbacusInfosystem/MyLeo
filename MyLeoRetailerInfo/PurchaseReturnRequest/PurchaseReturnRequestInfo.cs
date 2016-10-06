@@ -38,7 +38,7 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
 
         public string Branch_Name { get; set; }
 
-        public bool Status { get; set; }
+        public int Status { get; set; }
 
         public decimal Total_Quantity { get; set; }
 
@@ -131,8 +131,7 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
 
         public int Barcode { get; set; }
 
-        
-
+        public int Status { get; set; }
 
 
 

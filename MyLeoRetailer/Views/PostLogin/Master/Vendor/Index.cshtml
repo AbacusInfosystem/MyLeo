@@ -57,7 +57,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Name" style="color: #333" class="">Vendor Name</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" maxlength="100"/>
                                         <input type="hidden" value="@Model.Vendor.Vendor_Name" id="hdnVendorName"/>@*Added by Vinod Mane on 28/09/2016*@
                                     </div>
 
@@ -90,14 +90,14 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Email1" style="color: #333" class="">Vendor Email1</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Email1" id="txtVendor_Email1" value="@Model.Vendor.Vendor_Email1" placeholder="Enter Email 1" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Email1" id="txtVendor_Email1" value="@Model.Vendor.Vendor_Email1" placeholder="Enter Email 1" maxlength="50" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Email2" style="color: #333" class="">Vendor Email2</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Email2" id="txtVendor_Email2" value="@Model.Vendor.Vendor_Email2" placeholder="Enter Email 2" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Email2" id="txtVendor_Email2" value="@Model.Vendor.Vendor_Email2" placeholder="Enter Email 2" maxlength="50" />
                                     </div>
                                 </div>
 
@@ -119,21 +119,21 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_City" style="color: #333" class="">City</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_City" id="txtVendor_City" value="@Model.Vendor.Vendor_City" placeholder="Enter City" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_City" id="txtVendor_City" value="@Model.Vendor.Vendor_City" placeholder="Enter City" maxlength="100" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_State" style="color: #333" class="">State</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_State" id="txtVendor_State" value="@Model.Vendor.Vendor_State" placeholder="Enter State" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_State" id="txtVendor_State" value="@Model.Vendor.Vendor_State" placeholder="Enter State" maxlength="100" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Country" style="color: #333" class="">Country</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Country" id="txtVendor_Country" value="@Model.Vendor.Vendor_Country" placeholder="Enter Country" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Country" id="txtVendor_Country" value="@Model.Vendor.Vendor_Country" placeholder="Enter Country" maxlength="100" />
                                     </div>
                                 </div>
 
@@ -177,7 +177,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Vat_No" style="color: #333" class="">Vendor Vat No.</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_No" id="txtVendor_Vat_No" value="@Model.Vendor.Vendor_Vat_No" placeholder="Enter Vat No." />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_No" id="txtVendor_Vat_No" value="@Model.Vendor.Vendor_Vat_No" placeholder="Enter Vat No." maxlength="20"/>
                                     </div>
                                 </div>
 
@@ -221,7 +221,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_CST_No" style="color: #333" class="">Vendor CST No.</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_No" id="txtVendor_CST_No" value="@Model.Vendor.Vendor_CST_No" placeholder="Enter CST No." />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_No" id="txtVendor_CST_No" value="@Model.Vendor.Vendor_CST_No" placeholder="Enter CST No." maxlength="20" />
                                     </div>
                                 </div>
 
@@ -552,28 +552,28 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="txtBank_Name" style="color: #333" class="">Bank Name</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" />
+                                            <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" maxlength="50"/>
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="txtAccount_No" style="color: #333" class="">Account No.</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Account_No" id="txtAccount_No" value="@Model.Vendor.Account_No" placeholder="Enter Account No" />
+                                            <input type="text" class="form-control input-sm" name="Vendor.Account_No" id="txtAccount_No" value="@Model.Vendor.Account_No" placeholder="Enter Account No" maxlength="30" />
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="txtBranch_Name" style="color: #333" class="">Branch Name</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Branch_Name" id="txtBranch_Name" value="@Model.Vendor.Branch_Name" placeholder="Enter Branch Name" />
+                                            <input type="text" class="form-control input-sm" name="Vendor.Branch_Name" id="txtBranch_Name" value="@Model.Vendor.Branch_Name" placeholder="Enter Branch Name" maxlength="30" />
                                         </div>
                                     </div>
 
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="txtIFSC_Code" style="color: #333" class="">IFSC Code</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Ifsc_Code" id="txtIFSC_Code" value="@Model.Vendor.Ifsc_Code" placeholder="Enter IFSC Code" />
+                                            <input type="text" class="form-control input-sm" name="Vendor.Ifsc_Code" id="txtIFSC_Code" value="@Model.Vendor.Ifsc_Code" placeholder="Enter IFSC Code" maxlength="30" />
                                         </div>
                                     </div>
 

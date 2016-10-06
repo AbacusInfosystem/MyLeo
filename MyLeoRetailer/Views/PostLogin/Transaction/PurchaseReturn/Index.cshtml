@@ -89,7 +89,7 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
-                                    <input type="text" class="form-control input-sm" name="PurchaseReturn.GR_No" id="txtGR_No" value="@Model.PurchaseReturn.GR_No" placeholder="Enter GR no." />
+                                    <input type="text" class="form-control input-sm" name="PurchaseReturn.GR_No" id="txtGR_No" value="@Model.PurchaseReturn.GR_No" placeholder="Enter GR no." maxlength="20" />
                                 </div>
 
                             </div>
@@ -154,6 +154,7 @@
                                 <tbody>
                                     <tr id="PurchaseReturnItemRow_0">
                                         <td>
+                                            <input type="hidden" name="PurchaseReturn.PurchaseReturns[0].Item_Ids" id="hdnItem_Ids_0" />
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0">
                                         </td>
                                         @*<td>
@@ -197,7 +198,7 @@
                                             <input type="hidden" name="PurchaseReturn.PurchaseReturns[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" />
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" maxlength="10" />
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].WSR_Price" id="textWSR_Price_0" readonly />
@@ -262,7 +263,7 @@
                                             <label>Discount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0">
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0" maxlength="10">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Amount" readonly id="textDiscountAmount_0">
@@ -360,7 +361,7 @@
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Logistic Person Name.</span>
-                                    <input type="text" class="form-control input-sm" id="txtLogistics_Person_Name" name="PurchaseReturn.Logistics_Person_Name" placeholder="Enter logistic person name." />
+                                    <input type="text" class="form-control input-sm" id="txtLogistics_Person_Name" name="PurchaseReturn.Logistics_Person_Name" placeholder="Enter logistic person name." maxlength="100" />
                                 </div>
 
                                 <div class="form-group col-md-3">
@@ -383,7 +384,7 @@
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">LR No.</span>
-                                    <input type="text" class="form-control input-sm" id="txtLR_No" name="PurchaseReturn.Lr_No" placeholder="Enter LR no." />
+                                    <input type="text" class="form-control input-sm" id="txtLR_No" name="PurchaseReturn.Lr_No" placeholder="Enter LR no." maxlength="20" />
                                 </div>
 
 

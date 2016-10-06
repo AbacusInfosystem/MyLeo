@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
@@ -27,6 +28,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("VendorContact Controller - Search  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
 
@@ -54,6 +56,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("VendorContact Controller - Index  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
 
@@ -77,6 +80,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("VendorContact Controller - Insert_Vendor_Contact  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["vcViewModel"] = (VendorContactViewModel)vcViewModel;
@@ -98,6 +102,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("VendorContact Controller - Update_Vendor_Contact  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["vcViewModel"] = (VendorContactViewModel)vcViewModel;
@@ -137,6 +142,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("VendorContact Controller - Get_Vendor_Contacts  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(vcViewModel));
@@ -144,17 +150,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Vendor_Contact_By_Id(VendorContactViewModel vcViewModel)
         {
-         //   VendorRepo vRepo = new VendorRepo();
 
-            VendorContactRepo vcRepo = new VendorContactRepo();
+            try
+            {
+                //   VendorRepo vRepo = new VendorRepo();
+                VendorContactRepo vcRepo = new VendorContactRepo();
+                //Added by Vinod Mane on 21/09/2016
+                //  vcViewModel.Vendors = vRepo.Get_Vendors();
+                vcViewModel.Vendor_Contact = vcRepo.Get_Vendors();
+                //End
 
-            //Added by Vinod Mane on 21/09/2016
-          //  vcViewModel.Vendors = vRepo.Get_Vendors();
+                vcViewModel.VendorContact = vcRepo.Get_Vendor_Contact_By_Id(vcViewModel.VendorContact.VendorContact_Id);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                vcViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-            vcViewModel.Vendor_Contact = vcRepo.Get_Vendors();
-            //End
-
-            vcViewModel.VendorContact = vcRepo.Get_Vendor_Contact_By_Id(vcViewModel.VendorContact.VendorContact_Id);
+                Logger.Error("VendorContact Controller - Get_Vendor_Contact_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
 
             return View("Index", vcViewModel);
         }

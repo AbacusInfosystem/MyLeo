@@ -6,7 +6,7 @@
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_events.js"></script>
 <script src="~/Scripts/Modules/Receivable/Receivable_methods.js"></script>
-<script src="~/Scripts/Modules/Receivable/Receivable_Validation.js"></script>*@
+<script src="~/Scripts/Modules/Receivable/Receivable_Validation.js"></script>
 
 
 <!-- START BREADCRUMB -->
@@ -31,7 +31,7 @@
 
 <div class="page-content-wrap">
 
-    <form role="form" id="frmPay" method="get">
+    <form role="form" id="frmPay" method="post">
 
         <div class="row">
 
@@ -43,24 +43,34 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Net_Amount" id="txtNet_Amount" value="@Model.Receivable.Net_Amount" placeholder="Total Amount" />
+                            <input type="text" class="form-control input-sm" name="Receivable.Net_Amount" id="txtNet_Amount" value="@Model.Receivable.Net_Amount" placeholder="Total Amount" maxlength="10"/>
 
                             <input type="hidden" id="hdf_Sales_Invoice_Id" name="Receivable.Sales_Invoice_Id" value="@Model.Receivable.Sales_Invoice_Id">
                             <input type="hidden" id="hdnReceivable_Item_Id" name="Receivable.Receivable_Item_Id" value="@Model.Receivable.Receivable_Item_Id">
                             <input type="hidden" id="hdnReceivable_Id" name="Receivable.Receivable_Id" value="@Model.Receivable.Receivable_Id">
                             <input type="hidden" id="hdnCustomer_Id" name="Receivable.Customer_Id" value="@Model.Receivable.Customer_Id">
-                            <input type="hidden" id="hdf_Sales_Credit_Note_Id" name="Receivable.Sales_Credit_Note_Id" value="@Model.Receivable.Sales_Credit_Note_Id">
-                            <input type="hidden" id="hdf_Gift_Voucher_Id" name="Receivable.Gift_Voucher_Id" value="@Model.Receivable.Gift_Voucher_Id">
+                            @*<input type="hidden" id="hdf_Sales_Credit_Note_Id" name="Receivable.Sales_Credit_Note_Id" value="@Model.Receivable.Sales_Credit_Note_Id">
+                            <input type="hidden" id="hdf_Gift_Voucher_Id" name="Receivable.Gift_Voucher_Id" value="@Model.Receivable.Gift_Voucher_Id">*@
                             @*<input type="hidden" id="hdnPurchase_Credit_Note_Id" name="Receivable.Purchase_Credit_Note_Id" value="@Model.Receivable.Purchase_Credit_Note_Id">*@
 
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    @*<div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
                             <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
+                            <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToShortDateString()))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -75,7 +85,7 @@
                                 <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                 <input type="hidden" id="hdnBranchID" name="Receivable.Branch_ID" class="auto-complete-value" />
                                 <input type="hidden" id="hdnBranchName" name="Receivable.Branch_Name" class="auto-complete-label" />
-                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -90,7 +100,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Cash_Amount" id="txtCash_amount" @*onchange="javascript: CalculateDiscount();"*@ value="@Model.Receivable.Cash_Amount" placeholder="Cash Amount" />
+                            <input type="text" class="form-control input-sm" name="Receivable.Cash_Amount" id="txtCash_amount" @*onchange="javascript: CalculateDiscount();"*@ value="@Model.Receivable.Cash_Amount" placeholder="Cash Amount" maxlength="10" />
                         </div>
                     </div>
 
@@ -105,14 +115,14 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Amount</span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Cheque_Amount" id="txtCheque_Amount" @*onchange="javascript: CalculateDiscount();"*@ value="@Model.Receivable.Cheque_Amount" placeholder="Enter Cheque Amount " />
+                            <input type="text" class="form-control input-sm" name="Receivable.Cheque_Amount" id="txtCheque_Amount" @*onchange="javascript: CalculateDiscount();"*@ value="@Model.Receivable.Cheque_Amount" placeholder="Enter Cheque Amount " maxlength="10" />
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque No</span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Cheque_No" id="txtCheque_No" value="@Model.Receivable.Cheque_No" placeholder="Enter Cheque No" />
+                            <input type="text" class="form-control input-sm" name="Receivable.Cheque_No" id="txtCheque_No" value="@Model.Receivable.Cheque_No" placeholder="Enter Cheque No" maxlength="20" />
                         </div>
                     </div>
 
@@ -137,7 +147,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank Name</span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Bank_Name" id="txtBank_Name" value="@Model.Receivable.Bank_Name" placeholder="Enter Bank Name" />
+                            <input type="text" class="form-control input-sm" name="Receivable.Bank_Name" id="txtBank_Name" value="@Model.Receivable.Bank_Name" placeholder="Enter Bank Name" maxlength="50" />
                         </div>
                     </div>
 
@@ -153,7 +163,7 @@
                     <div id="divPaidAmount" class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Amount</span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Credit_Note_Amount" id="txtCredit_Note_Amount" @*onblur="javascript:CalculateDiscount();"*@ value="@Model.Receivable.Credit_Note_Amount" placeholder=" Enter Paid amount" />
+                            <input type="text" class="form-control input-sm" name="Receivable.Credit_Note_Amount" id="txtCredit_Note_Amount" @*onblur="javascript:CalculateDiscount();"*@ value="@Model.Receivable.Credit_Note_Amount" placeholder=" Enter Paid amount" maxlength="20"/>
                         </div>
                     </div>
 
@@ -184,7 +194,7 @@
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
                             <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" reado readonly />
+                                <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
 
                             </div>
@@ -201,14 +211,14 @@
                     <div id="divCreditcardno" class="col-md-4  ">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Card Amount</span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Card_Amount" id="txtCard_Amount" @*onblur="javascript: CalculateDiscount();"*@ value="@Model.Receivable.Card_Amount" placeholder="Card Amount" />
+                            <input type="text" class="form-control input-sm" name="Receivable.Card_Amount" id="txtCard_Amount" @*onblur="javascript: CalculateDiscount();"*@ value="@Model.Receivable.Card_Amount" placeholder="Card Amount" maxlength="10"/>
                         </div>
                     </div>
 
                     <div id="divDebitcardno" class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Card No </span>
-                            <input type="text" class="form-control input-sm" name="Receivable.Credit_Card_No" id="txtCredit_Card_No" value="@Model.Receivable.Credit_Card_No" placeholder="Enter card no" />
+                            <input type="text" class="form-control input-sm" name="Receivable.Credit_Card_No" id="txtCredit_Card_No" value="@Model.Receivable.Credit_Card_No" placeholder="Enter card no" maxlength="30" />
                         </div>
                     </div>
 
@@ -223,7 +233,7 @@
                         <div id="divDebitcardno" class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
-                                <input type="text" class="form-control input-sm" name="Receivable.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" @*onblur="javascript:CalculateDiscount();"*@ value="@Model.Receivable.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" />
+                                <input type="text" class="form-control input-sm" name="Receivable.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" @*onblur="javascript:CalculateDiscount();"*@ value="@Model.Receivable.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" maxlength="20" />
                             </div>
                         </div>
 
@@ -261,14 +271,14 @@
                         <div id="divDebitcardno" class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
-                                <input type="text" class="form-control input-sm" name="Receivable.Paid_Amount" id="txtPaid_Amount" onclick="javascript: CalculateDiscount();" onchange="javascript: BalanceAmount();" value="@Model.Receivable.Paid_Amount" placeholder="Paid Amount" />
+                                <input type="text" class="form-control input-sm" name="Receivable.Paid_Amount" id="txtPaid_Amount" onclick="javascript: CalculateDiscount();" onchange="javascript: BalanceAmount();" value="@Model.Receivable.Paid_Amount" placeholder="Paid Amount" maxlength="10" />
                             </div>
                         </div>
 
                         <div id="divCreditcardno" class="col-md-4  ">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Balance Amount</span>
-                                <input type="text" class="form-control input-sm" name="Receivable.Balance_Amount" id="txtBalance_Amount" value="@Model.Receivable.Balance_Amount" placeholder="Balance Amount" />
+                                <input type="text" class="form-control input-sm" name="Receivable.Balance_Amount" id="txtBalance_Amount" value="@Model.Receivable.Balance_Amount" placeholder="Balance Amount" maxlength="10" />
                             </div>
                         </div>
 
@@ -306,6 +316,7 @@
                                         <th>Card amount</th>
                                         <th>Gift voucher no</th>
                                         <th>Gift voucher amount</th>
+                                        
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -323,6 +334,8 @@
                                                 <input type="hidden" id="hdnReceivable_Item_Id@(itm.Receivable_Item_Id)" name="Receivable.Receivable_Item_Id" value="@itm.Receivable_Item_Id">
                                                 <input type="hidden" id="hdnReceivable_Id@(itm.Receivable_Item_Id)" name="Receivable.Receivable_Id" value="@itm.Receivable_Id">
                                                 <input type="hidden" id="hdnSales_Credit_Note_Id@(itm.Receivable_Item_Id)" name="Receivable.Sales_Credit_Note_Id" value="@itm.Sales_Credit_Note_Id">
+                                                <input type='hidden' id="hdnBranchID@(itm.Receivable_Item_Id)" name="Receivable.Branch_ID" value="@Model.Receivable.Branch_ID">
+                                                <input type='hidden' id="hdnBranchName@(itm.Receivable_Item_Id)" name="Receivable.Branch_Name" value="@Model.Receivable.Branch_Name">
                                             </td>
                                             <td>
                                                 <span> @itm.Cash_Amount</span>

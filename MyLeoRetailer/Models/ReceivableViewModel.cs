@@ -115,17 +115,9 @@ namespace MyLeoRetailer.Models
             set;
         }
 
-        //public LoginInfo Cookies
-        //{
-        //    get;
-        //    set;
-        //}
+     
 
     }
 
-    public class Filter_Receivable
-    {
-      
         
     }
-}

@@ -51,7 +51,13 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
-     
+       public int Branch_ID
+       {
+           get;
+           set;
+       }
+
+       public string Branch_Name { get; set; }
 
        public int Receivable_Status
        {
