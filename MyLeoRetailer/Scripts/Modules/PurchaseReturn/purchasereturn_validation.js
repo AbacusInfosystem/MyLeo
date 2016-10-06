@@ -1,9 +1,9 @@
 ﻿$(function () {
     $("#frmPurchaseReturn").validate({
         rules: {
-            "PurchaseReturn.Debit_Note_No": {
-                required: true
-            },
+            //"PurchaseReturn.Debit_Note_No": {
+            //    required: true
+            //},
 
             "PurchaseReturn.Vendor_Id": {
                 required: true
@@ -38,9 +38,9 @@
         },
         messages: {
 
-            "PurchaseReturn.Debit_Note_No": {
-                required: "Debit note no is required."
-            },
+            //"PurchaseReturn.Debit_Note_No": {
+            //    required: "Debit note no is required."
+            //},
 
             "PurchaseReturn.Vendor_Id": {
                 required: "Vendor name is required."

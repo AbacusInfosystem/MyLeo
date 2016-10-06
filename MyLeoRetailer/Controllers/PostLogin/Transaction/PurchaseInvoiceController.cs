@@ -136,6 +136,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
+                Logger.Error("PurchaseInvoice Controller - Insert_Purchase_Invoice : " + ex.ToString());
+
                 piViewModel = new PurchaseInvoiceViewModel();
 
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));

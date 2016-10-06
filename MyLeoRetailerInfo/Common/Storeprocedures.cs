@@ -204,8 +204,8 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Update_Purchase_Return,
 
-        sp_Get_Purchase_Return_Item_by_Purchase_Return_Id, //Added by vinod mane on 30/09/2016
-        sp_Get_Purchase_Return_by_Purchase_Return_Id,//Added by vinod mane on 30/09/2016
+            sp_Get_Purchase_Return_Item_by_Purchase_Return_Id, //Added by vinod mane on 30/09/2016
+            sp_Get_Purchase_Return_by_Purchase_Return_Id,//Added by vinod mane on 30/09/2016
 
         #endregion
 
@@ -360,6 +360,7 @@ namespace MyLeoRetailerInfo.Common
         Get_Receivable_Credit_Note_Details_By_Id,
         sp_Get_Credit_Note_Details_By_Customer_Id1,
         sp_Get_Receivable_Search_Details,
+        sp_Get_Receivable_Search_Details_new1,
            #endregion
 
 
@@ -385,6 +386,17 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Product_Warehouse,
         sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
         sp_Insert_Purchase_Order_Request_Consolidation,
+
+            //Product Dispatch
+        sp_Get_Product_To_Dispatch,
+        sp_Get_Product_To_Dispatch_By_Id,
+        sp_Insert_Product_Dispatch,
+        sp_Insert_Product_Dispatch_Items,
+        sp_Delete_Dispatch_Product,
+
+            //Product Inward
+        sp_Dispatched_Product_Listing,
+        sp_Accept_Product_Dispatch,
 
         #region Inventory
 

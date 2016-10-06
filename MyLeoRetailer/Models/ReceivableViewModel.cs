@@ -73,7 +73,6 @@ namespace MyLeoRetailer.Models
             set;
         }
 
-
         public GridInfo Grid_Detail
         {
             get;
@@ -104,17 +103,24 @@ namespace MyLeoRetailer.Models
             set;
         }
 
-        public Filter_Receivable Filter
-        {
-            get;
-            set;
-        }
+        //public Filter_Receivable Filter
+        //{
+        //    get;
+        //    set;
+        //}
 
         public List<FriendlyMessage> FriendlyMessages
         {
             get;
             set;
         }
+
+        public LoginInfo Cookies
+        {
+            get;
+            set;
+        }
+
     }
 
     public class Filter_Receivable

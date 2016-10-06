@@ -121,6 +121,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 {
                     poViewModel = new PurchaseOrderViewModel();
 
+                    Logger.Error(" PurchaseOrder Controller - Insert_Purchase_Order : " + ex.ToString());
+
                     poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                     scope.Dispose();

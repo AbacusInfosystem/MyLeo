@@ -3,9 +3,9 @@
     $("#frmPurchaseInvoice").validate({       
 
         rules: {
-            "PurchaseInvoice.Purchase_Invoice_No": {
-                required: true
-            },
+            //"PurchaseInvoice.Purchase_Invoice_No": {
+            //    required: true
+            //},
 
             "PurchaseInvoice.Vendor_Id": {
                 required: true
@@ -53,9 +53,9 @@
         },
         messages: {
 
-            "PurchaseInvoice.Purchase_Invoice_No": {
-                required: "Purchase Invoice No. is required."
-            },
+            //"PurchaseInvoice.Purchase_Invoice_No": {
+            //    required: "Purchase Invoice No. is required."
+            //},
 
             "PurchaseInvoice.Vendor_Id": {
                 required: "Vendor name is required."

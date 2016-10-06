@@ -87,7 +87,7 @@
 		this.dates = new DateArray();
 		this.viewDate = UTCToday();
 		this.focusDate = null;
-
+		
 		this._process_options(options);
 
 		this.element = $(element);
@@ -122,7 +122,7 @@
 						});
 
 		this._allow_update = false;
-
+        
 		this.setStartDate(this._o.startDate);
 		this.setEndDate(this._o.endDate);
 		this.setDaysOfWeekDisabled(this.o.daysOfWeekDisabled);
