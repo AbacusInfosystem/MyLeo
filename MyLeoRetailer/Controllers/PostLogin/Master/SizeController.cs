@@ -34,6 +34,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", sgViewModel);
         }
 
+       
+
         public JsonResult Insert_Size_Group(SizeGroupViewModel sgViewModel)
         {
 
@@ -179,11 +181,19 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Sizes(int size_group_Id)
         {
+            SizeGroupViewModel sgViewModel = new SizeGroupViewModel();
+            try
+            {               
+                sgViewModel.SizeList = sgRepo.Get_Sizes(size_group_Id);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-            SizeGroupViewModel sgViewModel = new SizeGroupViewModel();      
-
-            sgViewModel.SizeList = sgRepo.Get_Sizes(size_group_Id);
-
+                Logger.Error("Size Controller - Get_Sizes" + ex.Message);
+            }
+            //End
             return Json(JsonConvert.SerializeObject(sgViewModel));
         }
 
@@ -232,6 +242,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 else
                 {
                     sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS011"));
+
                 }
                 
             }
@@ -262,12 +273,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Size_Group_Name(string size_group_name)
         {
             bool check = false;
+            SizeGroupViewModel sgViewModel = new SizeGroupViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = sgRepo.Check_Existing_Size_Group_Name(size_group_name);
             }
             catch (Exception ex)
             {
+                sgViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
                 Logger.Error("Size Controller - Check_Existing_Size_Group : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);

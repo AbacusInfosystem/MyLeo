@@ -65,6 +65,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             catch (Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("PurchaseOrder Controller - Index : " + ex.ToString()); //Added by vinod mane on 06/10/2016
             }
             return View("Index", poViewModel);
         }
@@ -81,6 +82,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             catch (Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("PurchaseOrder Controller - Search : " + ex.ToString()); //Added by vinod mane on 06/10/2016
             }
             return View("Search", poViewModel);
         }
@@ -122,7 +124,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     poViewModel = new PurchaseOrderViewModel();
 
                     poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                    Logger.Error("PurchaseOrder Controller - Insert_Purchase_Order : " + ex.ToString()); //Added by vinod mane on 06/10/2016
                     scope.Dispose();
                 }
 
@@ -135,6 +137,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
         {
+            try{
             Pagination_Info pager = new Pagination_Info();
 
             pager = poViewModel.Grid_Detail.Pager;
@@ -146,7 +149,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             Set_Pagination(pager, poViewModel.Grid_Detail); // set pagination for grid
 
             poViewModel.Grid_Detail.Pager = pager;
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Orders : " + ex.ToString());
+            }
+            //End
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
 
@@ -225,6 +236,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             catch (Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("PurchaseOrder Controller - Get_Consolidate_Purchase_Orders : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(poViewModel));
@@ -234,16 +246,25 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public JsonResult Get_Sizes(int size_group_Id)
         {
             PurchaseOrderViewModel poViewModel = new PurchaseOrderViewModel();
+            try
+            {
+                poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_Sizes(size_group_Id);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-            poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_Sizes(size_group_Id);
-
+                Logger.Error("PurchaseOrder Controller - Get_Sizes : " + ex.ToString());
+            }
+            //End
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
 
         public JsonResult Get_Details_By_Vendor_Id(int Vendor_Id)
         {
             PurchaseOrderViewModel poViewModel = new PurchaseOrderViewModel();
-
+            try{
             poViewModel.PurchaseOrder.Vendors = _purchaseorderRepo.Get_Article_No_By_Vendor_Id(Vendor_Id);
 
             poViewModel.PurchaseOrder.Brands = _purchaseorderRepo.Get_Brand_By_Vendor_Id(Vendor_Id);
@@ -253,16 +274,33 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             //Working
             poViewModel.PurchaseOrder.Colors = _purchaseorderRepo.Get_Color_By_Vendor_Id(Vendor_Id);
             //
+        }
+             //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
+                Logger.Error("PurchaseOrder Controller - Get_Details_By_Vendor_Id : " + ex.ToString());
+            }
+            //End
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
 
         public JsonResult Get_Details_By_Category_Vendor_Id(int Vendor_Id, int Category_Id)
         {
             PurchaseOrderViewModel poViewModel = new PurchaseOrderViewModel();
+            try
+            {
+                poViewModel.PurchaseOrder.SubCategories = _purchaseorderRepo.Get_Sub_Category_By_Vendor_Id(Vendor_Id, Category_Id);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-            poViewModel.PurchaseOrder.SubCategories = _purchaseorderRepo.Get_Sub_Category_By_Vendor_Id(Vendor_Id, Category_Id);
-
+                Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details_By_Id : " + ex.ToString());
+            }
+            //End
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
 
@@ -283,7 +321,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             //poViewModel.PurchaseOrder.Branches = _branchRepo.Get_Branches();
             try
-             {
+            {
                 if (TempData["poViewModel"] != null)
                 {
                     poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
@@ -292,7 +330,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
 
                 poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
-                
+
             }
             catch (Exception ex)
             {
@@ -300,7 +338,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 Logger.Error("PurchaseOrder Controller - Get_Purchase_Order_Details_By_Id : " + ex.ToString());
             }
-                      
+
             return View("View", poViewModel);
         }
 
@@ -317,6 +355,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             catch (Exception ex)
             {
                 poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("PurchaseOrder Controller - Update_Purchase_Order : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             TempData["poViewModel"] = poViewModel;

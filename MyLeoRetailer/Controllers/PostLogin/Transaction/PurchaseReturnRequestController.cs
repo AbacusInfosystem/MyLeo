@@ -58,20 +58,29 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public JsonResult Get_Purchase_Return_Requests(PurchaseReturnRequestViewModel prViewModel)
         {
-            prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+            try
+            {
+                prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            Pagination_Info pager = new Pagination_Info();
+                Pagination_Info pager = new Pagination_Info();
 
-            pager = prViewModel.Grid_Detail.Pager;
+                pager = prViewModel.Grid_Detail.Pager;
 
-            prViewModel.Grid_Detail = Set_Grid_Details(false, "Vendor_Name,Purchase_Invoice_No,Branch_Name,Total_Quantity,Total_Amount,Status", "Purchase_Return_Request_Id"); // Set grid info for front end listing
+                prViewModel.Grid_Detail = Set_Grid_Details(false, "Vendor_Name,Purchase_Invoice_No,Branch_Name,Total_Quantity,Total_Amount,Status", "Purchase_Return_Request_Id"); // Set grid info for front end listing
 
-            prViewModel.Grid_Detail.Records = _prRepo.Get_Purchase_Return_Requests(prViewModel.Filter, prViewModel.Cookies.Branch_Ids); // Call repo method 
+                prViewModel.Grid_Detail.Records = _prRepo.Get_Purchase_Return_Requests(prViewModel.Filter, prViewModel.Cookies.Branch_Ids); // Call repo method 
 
-            Set_Pagination(pager, prViewModel.Grid_Detail); // set pagination for grid
+                Set_Pagination(pager, prViewModel.Grid_Detail); // set pagination for grid
 
-            prViewModel.Grid_Detail.Pager = pager;
+                prViewModel.Grid_Detail.Pager = pager;
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
+                Logger.Error("PurchaseReturnRequest Controller - Get_Purchase_Return_Requests : " + ex.ToString());
+            }
             return Json(JsonConvert.SerializeObject(prViewModel));
         }
 
@@ -96,7 +105,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             {
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                Logger.Error("PurchaseReturnRequest Controller - Get_Purchase_Return_Requests : " + ex.ToString());
+                Logger.Error("PurchaseReturnRequest Controller - Get_Purchase_Return_Requests_List : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(prViewModel));
@@ -206,6 +215,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             catch (Exception ex)
             {
                 prrViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("PurchaseReturnRequest Controller - Get_Purchase_Return_Request_Details_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }  
             TempData["prViewModel"] = prrViewModel; 
             return View("ViewPurchaseReturnRequest", prrViewModel);

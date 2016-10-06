@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -36,6 +37,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Payable Controller - Pay  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return View("Pay", pViewModel);
@@ -43,20 +45,38 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Index(PayableViewModel pViewModel)
         {
-            PayableRepo pRepo = new PayableRepo();
+            try
+            {
+                PayableRepo pRepo = new PayableRepo();
 
-            pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
-
+                pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Payable Controller - Index  " + ex.Message);
+            }
+            //End
             return View("Index", pViewModel);
         }
 
         public ActionResult Get_Payable(PayableViewModel pViewModel)
         
         {
-            PayableRepo pRepo = new PayableRepo();
+            try
+            {
+                PayableRepo pRepo = new PayableRepo();
 
-            pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
-
+                pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Payable Controller - Get_Payable  " + ex.Message);
+            }
+            //End
             return Index(pViewModel);
         }
 
@@ -81,7 +101,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Payable Controller - Get_Payable_Details_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["pViewModel"] = (PayableViewModel)pViewModel;
@@ -100,7 +120,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Payable Controller - Get_Credit_Note_Amount_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(pViewModel));
@@ -131,7 +151,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Payable Controller - Insert_Payable  " + ex.Message);//Added by vinod mane on 06/10/2016
                 
             }
 
@@ -168,7 +188,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Payable Controller - Update_Payable  " + ex.Message);//Added by vinod mane on 06/10/2016
 
             }
 

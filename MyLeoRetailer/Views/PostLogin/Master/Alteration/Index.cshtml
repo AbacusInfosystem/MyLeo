@@ -85,7 +85,7 @@
 
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Address</span>
-                            <input type="text" class="form-control" placeholder="Enter product name." name="Alteration.Product_Name" value="@Model.Alteration.Product_Name" />
+                            <input type="text" class="form-control" placeholder="Enter product name." name="Alteration.Product_Name" value="@Model.Alteration.Product_Name" maxlength="50"/>
                         </div>
 
                         <div class="form-group">
@@ -108,7 +108,7 @@
 
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Comment</span>
-                            <textarea class="form-control" rows="5" placeholder="Enter Comment" name="Alteration.Additional_Info" value="@Model.Alteration.Additional_Info">@Model.Alteration.Additional_Info</textarea>
+                            <textarea class="form-control" rows="5" placeholder="Enter Comment" name="Alteration.Additional_Info" value="@Model.Alteration.Additional_Info" maxlength="250">@Model.Alteration.Additional_Info</textarea>
                         </div>
 
                     </form>

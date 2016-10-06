@@ -87,7 +87,7 @@
                     <br />
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">First name</span>
-                        <input type="text" class="form-control" placeholder="Enter first name." name="VendorContact.First_Name" value="@Model.VendorContact.First_Name" />
+                        <input type="text" class="form-control" placeholder="Enter first name." name="VendorContact.First_Name" value="@Model.VendorContact.First_Name" maxlength="48"/>
                         <input type="hidden" name="VendorContact.VendorContact_Id" id="hdnVendorContact_Id" value="@Model.VendorContact.VendorContact_Id">
                         <input type="hidden" name="VendorContact.Vendor_Contact_Name" value="@Model.VendorContact.Vendor_Contact_Name">
                         <input type="hidden" value="@Model.VendorContact.IsActive"> @*name="VendorContact.IsActive"*@ @*Change by Vinod Mane on 21/09/2016*@
@@ -96,7 +96,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Last name</span>
-                        <input type="text" class="form-control" placeholder="Enter last name." name="VendorContact.Last_Name" value="@Model.VendorContact.Last_Name" />
+                        <input type="text" class="form-control" placeholder="Enter last name." name="VendorContact.Last_Name" value="@Model.VendorContact.Last_Name" maxlength="48" />
 
                     </div>
                 </div>
@@ -114,17 +114,17 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">City</span>
-                        <input type="text" class="form-control" placeholder="Enter city." name="VendorContact.City" value="@Model.VendorContact.City" />
+                        <input type="text" class="form-control" placeholder="Enter city." name="VendorContact.City" value="@Model.VendorContact.City" maxlength="100"/>
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">State</span>
-                        <input type="text" class="form-control" placeholder="Enter state." name="VendorContact.State" value="@Model.VendorContact.State" />
+                        <input type="text" class="form-control" placeholder="Enter state." name="VendorContact.State" value="@Model.VendorContact.State" maxlength="100" />
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Country</span>
-                        <input type="text" class="form-control" placeholder="Enter country." name="VendorContact.Country" value="@Model.VendorContact.Country" />
+                        <input type="text" class="form-control" placeholder="Enter country." name="VendorContact.Country" value="@Model.VendorContact.Country" maxlength="100" />
                     </div>
 
                     <div class="form-group">
@@ -153,7 +153,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Email</span>
-                        <input type="text" class="form-control" placeholder="Enter email address." name="VendorContact.Email_Id" value="@Model.VendorContact.Email_Id" />
+                        <input type="text" class="form-control" placeholder="Enter email address." name="VendorContact.Email_Id" value="@Model.VendorContact.Email_Id" maxlength="50" />
                     </div>
                 </div>
 

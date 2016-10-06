@@ -43,7 +43,7 @@
                     <h4 style="margin-top: 0px;">Basic information.</h4>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" id="txtEmployee_Name"/>
+                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" id="txtEmployee_Name" maxlength="100"/>
                         <input type="hidden" class="form-control" id="hdn_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id" />
                         @*Added by vinod mane on 27/09/2016*@
                         <input type="hidden" id="hdnEmployee_Name" value="@Model.Employee.Employee_Name" />
@@ -135,15 +135,15 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter country." name="Employee.Employee_Country" value="@Model.Employee.Employee_Country" />
+                        <input type="text" class="form-control" placeholder="Enter country." name="Employee.Employee_Country" value="@Model.Employee.Employee_Country" maxlength="100" />
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter state." name="Employee.Employee_State" value="@Model.Employee.Employee_State" />
+                        <input type="text" class="form-control" placeholder="Enter state." name="Employee.Employee_State" value="@Model.Employee.Employee_State" maxlength="100" />
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter city." name="Employee.Employee_City" value="@Model.Employee.Employee_City" />
+                        <input type="text" class="form-control" placeholder="Enter city." name="Employee.Employee_City" value="@Model.Employee.Employee_City" maxlength="100" />
                     </div>
                 </div>
 
@@ -168,7 +168,7 @@
 
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter email address." name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" />
+                        <input type="text" class="form-control" placeholder="Enter email address." name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" maxlength="50" />
                     </div>
 
                     <div class="form-group">
@@ -193,13 +193,13 @@
                     @if (Model.Employee.Is_Online == true)
                     {
                         <div class="form-group online-field">
-                            <input type="text" class="form-control" id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" />
+                            <input type="text" class="form-control" id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" maxlength="50"/>
                         </div>
                     }
                     else
                     {
                         <div class="form-group online-field" style="display:none">
-                            <input type="text" class="form-control " id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" />
+                            <input type="text" class="form-control " id="txtUser_Name" placeholder="Enter user name." name="Employee.User_Name" value="@Model.Employee.User_Name" maxlength="50" />
                         </div>
                     }
                     <input type="hidden" id="hdnUser_Name" value="@Model.Employee.User_Name" />
@@ -207,26 +207,26 @@
                     @if (Model.Employee.Is_Online == true)
                     {
                         <div class="form-group online-field">
-                            <input type="password" class="form-control " id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" />
+                            <input type="password" class="form-control " id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" maxlength="50" />
                         </div>
                     }
                     else
                     {
                         <div class="form-group online-field" style="display:none">
-                            <input type="password" class="form-control " id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" />
+                            <input type="password" class="form-control " id="txtPassword" placeholder="Enter password." name="Employee.Password" value="@Model.Employee.Password" maxlength="50" />
                         </div>
                     }
 
                     @if (Model.Employee.Is_Online == true)
                     {
                         <div class="form-group online-field">
-                            <input type="password" class="form-control " id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" />
+                            <input type="password" class="form-control " id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" maxlength="50" />
                         </div>
                     }
                     else
                     {
                         <div class="form-group online-field" style="display:none">
-                            <input type="password" class="form-control " id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" />
+                            <input type="password" class="form-control " id="txtConfirmPassword" placeholder="Confirm password." name="Confirm_Password" value="@Model.Employee.Password" maxlength="50" />
                         </div>
                     }
 

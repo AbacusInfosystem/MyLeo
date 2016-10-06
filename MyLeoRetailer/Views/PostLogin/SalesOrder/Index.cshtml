@@ -300,10 +300,10 @@
                                                 <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateQuantityMRP();">
+                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateQuantityMRP();" maxlength="10">
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %">
+                                                <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %" maxlength="10">
                                             </td>
                                             <td>
                                                 <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].SalesOrder_Discount_Amount" id="textSalesOrder_Discount_Amount_0" readonly placeholder="D Amt">
@@ -368,7 +368,7 @@
                                             <th style="width: 6.5%;"></th>
                                             <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax Percent</span></th>
                                             <th style="width: 1%;"></th>
-                                            <th><input type="text" class="form-control input-sm" style="width:80px" name="SalesInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" placeholder="%" value="@Model.SalesInvoice.Tax_Percentage"></th>
+                                            <th><input type="text" class="form-control input-sm" style="width:80px" name="SalesInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" placeholder="%" value="@Model.SalesInvoice.Tax_Percentage" maxlength="10"></th>
                                         </tr>
 
                                         <tr>
@@ -455,7 +455,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Net_Amount" id="textTotalAmount" value="@Model.SalesInvoice.Net_Amount" placeholder="Total Amount" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Net_Amount" id="textTotalAmount" value="@Model.SalesInvoice.Net_Amount" placeholder="Total Amount" maxlength="10" />
 
                                         <input type="hidden" id="hdnSales_Invoice_Id" name="SalesInvoice.Sales_Invoice_Id" value="@Model.SalesInvoice.Sales_Invoice_Id">
                                         <input type="hidden" id="hdnReceivable_Item_Id" name="SalesInvoice.Receivable_Item_Id" value="@Model.SalesInvoice.Receivable_Item_Id">
@@ -486,7 +486,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" onblur="javascript: CalculatePaidAmt();" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" onblur="javascript: CalculatePaidAmt();" maxlength="10"/>
                                     </div>
                                 </div>
 
@@ -502,14 +502,14 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque No</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_No" id="txtCheque_No" value="@Model.SalesInvoice.Cheque_No" placeholder="Enter Cheque No" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_No" id="txtCheque_No" value="@Model.SalesInvoice.Cheque_No" placeholder="Enter Cheque No" maxlength="20" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_Amount" id="txtCheque_Amount" value="@Model.SalesInvoice.Cheque_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Enter Cheque Amount " />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_Amount" id="txtCheque_Amount" value="@Model.SalesInvoice.Cheque_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Enter Cheque Amount " maxlength="10"/>
                                     </div>
                                 </div>
 
@@ -526,7 +526,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank Name</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Bank_Name" id="txtBank_Name" value="@Model.SalesInvoice.Bank_Name" placeholder="Enter Bank Name" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Bank_Name" id="txtBank_Name" value="@Model.SalesInvoice.Bank_Name" placeholder="Enter Bank Name" maxlength="50" />
                                     </div>
                                 </div>
 
@@ -564,7 +564,7 @@
                                 <div id="divPaidAmount" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@Model.SalesInvoice.Credit_Note_Amount" onblur="javascript: CalculatePaidAmt();" placeholder=" Enter Paid amount" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@Model.SalesInvoice.Credit_Note_Amount" onblur="javascript: CalculatePaidAmt();" placeholder=" Enter Paid amount" maxlength="20"/>
                                     </div>
                                 </div>
 
@@ -592,14 +592,14 @@
                                 <div id="divDebitcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Card No </span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Card_No" id="txtCredit_Card_No" value="@Model.SalesInvoice.Credit_Card_No" placeholder="Enter card no" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Card_No" id="txtCredit_Card_No" value="@Model.SalesInvoice.Credit_Card_No" placeholder="Enter card no" maxlength="30"/>
                                     </div>
                                 </div>
 
                                 <div id="divCreditcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Card Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Card_Amount" id="txtCard_Amount" value="@Model.SalesInvoice.Card_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Card Amount" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Card_Amount" id="txtCard_Amount" value="@Model.SalesInvoice.Card_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Card Amount" maxlength="10"/>
                                     </div>
                                 </div>
 
@@ -640,7 +640,7 @@
                                 <div id="divDebitcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" onblur="javascript: CalculatePaidAmt();" value="@Model.SalesInvoice.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" onblur="javascript: CalculatePaidAmt();" value="@Model.SalesInvoice.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" maxlength="20"/>
                                     </div>
                                 </div>
 
@@ -657,14 +657,14 @@
                                 <div id="divDebitcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Paid_Amount" id="txtPaid_Amount" onblur="javascript: CalculateBalAmt();" value="@Model.SalesInvoice.Paid_Amount" placeholder="Paid Amount" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Paid_Amount" id="txtPaid_Amount" onblur="javascript: CalculateBalAmt();" value="@Model.SalesInvoice.Paid_Amount" placeholder="Paid Amount" maxlength="10"/>
                                     </div>
                                 </div>
 
                                 <div id="divCreditcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Balance Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Balance_Amount" id="txtBalance_Amount" value="@Model.SalesInvoice.Balance_Amount" placeholder="Balance Amount" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Balance_Amount" id="txtBalance_Amount" value="@Model.SalesInvoice.Balance_Amount" placeholder="Balance Amount" maxlength="10" />
                                     </div>
                                 </div>
 

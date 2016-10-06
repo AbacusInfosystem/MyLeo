@@ -297,13 +297,13 @@
                                         </td>
 
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateTotal();">
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateTotal();" maxlength="10">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" style="width:50px" name="SaleReturnItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:70px" name="SaleReturnItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %">
+                                            <input class="form-control input-sm" type="text" style="width:70px" name="SaleReturnItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %" maxlength="10">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" style="width:70px" name="SaleReturnItemList[0].SalesReturn_Discount_Amount" id="textSalesReturn_Discount_Amount_0" readonly placeholder="D Amt">
@@ -312,7 +312,7 @@
                                             <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Amount" id="textAmount_0" readonly placeholder="Amt">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Return_Reason" id="textReturn_Reason_0" placeholder="Return Reason">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Return_Reason" id="textReturn_Reason_0" placeholder="Return Reason" maxlength="200">
                                         </td>
                                         <td>
                                             <button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript: DeleteSalesReturnDetailsData(0)'>Delete</button>
@@ -370,7 +370,7 @@
                                             <label>Cash Paid Amount  </label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0">
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0" maxlength="10">
                                         </td>
                                         <td width="40px"></td>
                                         <td width="40px"></td>
@@ -379,7 +379,7 @@
                                             <label>Credit Note Amount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Credit_Note" readonly id="textTotalAmountReturnByCreditNote_0">
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Credit_Note" readonly id="textTotalAmountReturnByCreditNote_0" maxlength="10">
                                         </td>
 
                                         <td width="200px"></td>
