@@ -204,7 +204,7 @@ namespace MyLeoRetailerRepo
 
                    if (!dr.IsNull("Branch_ID"))
 
-                       rInfo.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
+                       rInfo = Convert.ToInt32(dr["Branch_ID"]);
 
                    if (!dr.IsNull("Branch_Name"))
 
