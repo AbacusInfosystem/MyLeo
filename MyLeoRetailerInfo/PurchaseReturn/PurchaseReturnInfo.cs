@@ -30,7 +30,7 @@ namespace MyLeoRetailerInfo.PurchaseReturn
 
         public List<VendorInfo> Transporters { get; set; }
 
-
+        public string Item_Ids { get; set; }
 
         public int Purchase_Return_Id { get; set; }
 

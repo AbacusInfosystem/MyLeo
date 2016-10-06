@@ -67,7 +67,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Tax_Percentage", purchasereturnrequest.Tax_Percentage));
             sqlParams.Add(new SqlParameter("@Round_Off_Amount", purchasereturnrequest.Round_Off_Amount));
             sqlParams.Add(new SqlParameter("@Net_Amount", purchasereturnrequest.Net_Amount));
-            sqlParams.Add(new SqlParameter("@Status", true));
+            sqlParams.Add(new SqlParameter("@Status", purchasereturnrequest.Status));
             sqlParams.Add(new SqlParameter("@Is_Active", true));
 
             if (purchasereturnrequest.Purchase_Return_Request_Id == 0)
@@ -99,6 +99,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Created_By", purchasereturnrequestitem.Created_By));
             sqlParams.Add(new SqlParameter("@Updated_Date", purchasereturnrequestitem.Updated_Date));
             sqlParams.Add(new SqlParameter("@Updated_By", purchasereturnrequestitem.Updated_By));
+            sqlParams.Add(new SqlParameter("@Status", purchasereturnrequestitem.Status));
 
             return sqlParams;
         }
@@ -247,7 +248,7 @@ namespace MyLeoRetailerRepo
             purchasereturnrequest.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
             purchasereturnrequest.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
             purchasereturnrequest.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
-            purchasereturnrequest.Status = Convert.ToBoolean(dr["Status"]);
+            purchasereturnrequest.Status = Convert.ToInt32(dr["Status"]);
             purchasereturnrequest.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
             //
             if (!dr.IsNull("Vendor_Name"))

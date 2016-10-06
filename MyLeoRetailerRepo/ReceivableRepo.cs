@@ -143,44 +143,7 @@ namespace MyLeoRetailerRepo
        }
 
 
-       public List<ReceivableInfo> Get_Receivable_Search_Details_List(ReceivableInfo Receivable, string Branch_ID) //.... 
-       {
-
-           DataTable dt = new DataTable();
-
-
-           List<SqlParameter> sqlParams = new List<SqlParameter>();
-
-           if (Receivable.From_Date == DateTime.MinValue)
-           {
-               DateTime? someDate = null;
-               sqlParams.Add(new SqlParameter("@From_Date", someDate));
-           }
-           else
-           {
-               sqlParams.Add(new SqlParameter("@From_Date", Receivable.From_Date));
-           }
-
-           if (Receivable.To_Date == DateTime.MinValue)
-           {
-               DateTime? someDate = null;
-               sqlParams.Add(new SqlParameter("@To_Date", someDate));
-           }
-           else
-           {
-               sqlParams.Add(new SqlParameter("@To_Date", Receivable.To_Date));
-           }
-
-
-           sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Receivable.Sales_Invoice_No));
-           sqlParams.Add(new SqlParameter("@Customer_Name", Receivable.Customer_Name));
-           sqlParams.Add(new SqlParameter("@Payment_Status", Receivable.Payment_Status));
-           sqlParams.Add(new SqlParameter("@Branch_ID", Branch_ID));
-
-           dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Receivable_Search_Details.ToString(), CommandType.StoredProcedure);
-
-           return dt;
-       }
+    
 
        public ReceivableInfo Get_Receivable_Details_By_Id(int Sales_Invoice_Id) //.......
        {

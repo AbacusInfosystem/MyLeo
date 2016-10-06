@@ -141,7 +141,8 @@ function AddPurchaseReturnDetails(i) {
     tblHtml += "<tr id='PurchaseReturnItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "'' />";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode' value='' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     //tblHtml += "<td>";
@@ -344,6 +345,8 @@ function ReArrangePurchaseReturnDetailsData() {
             if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
                 $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Barcode");
+                $(newTR).find("[id^='hdnItem_Ids_']")[0].id = "hdnItem_Ids_" + i;
+                $(newTR).find("[id^='hdnItem_Ids_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Item_Ids");
             }
 
             //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
@@ -474,6 +477,7 @@ function Bind_Purchase_Return_Items_Data(data)
             trHtml += "<tr id='PurchaseReturnItemRow_" + i + "' class='item-data-row'>";
 
             trHtml += "<td>";
+            trHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Item_Ids' value='" + data.PurchaseReturns[i].Item_Ids + "' id='hdnItem_Ids_" + i + "'' />";
             trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
             trHtml += "</td>";
 
