@@ -30,7 +30,9 @@ function Get_Inventories() {
 
             var obj = $.parseJSON(response);
 
-            Bind_Grid(obj, "Inventory_List");
+            //Bind_Grid(obj, "Inventory_List");// commented by aditya
+
+            Bind_custom_Grid(obj, "Inventory_List", "Inventories", ""); // added by aditya
 
             $("#divInventoryPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 

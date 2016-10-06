@@ -49,23 +49,23 @@ $(function () {
         
         $(".Product:visible").find(".ColorId").each(function(){
             Color_Id = this.id.split('_');
-            alert(Color_Id[1]);
+            //alert(Color_Id[1]);
         });
         $(".Product:visible").find(".ColorName").each(function () {
             Color_Name = this.id.split('_');
-            alert(Color_Name[1]);
+            //alert(Color_Name[1]);
         }); 
         $(".Product:visible").find(".VendorCode").each(function () {
             Vendor_Color_Code = this.id.split('_');
-            alert(Vendor_Color_Code[1]);
+            //alert(Vendor_Color_Code[1]);
         });
         $(".Product:visible").find(".ColorIndex").each(function () {
             Color_Index = this.id.split('_');
-            alert(Color_Index[1]);
+            //alert(Color_Index[1]);
         }); 
         $(".Product:visible").find(".Description").each(function () {
             arr = this.id.split('_');
-            alert(arr[1]);
+            //alert(arr[1]);
         });
 
         Bind_MRP_Sale_Grid(Color_Id[1], Color_Name[1], Vendor_Color_Code[1], Product_Id, Color_Index[1], arr[1]);

@@ -37,9 +37,9 @@
     });
 }
 
-function Get_Sizes() {
+function Get_Sizes(Size_Group_Id) {
 
-    var Size_Group_Id = $("#hdnSizeGroupID").val();
+    var Size_Group_Id = Size_Group_Id;
 
     $.ajax({
 
@@ -270,6 +270,8 @@ function Get_SizeGroup_By_Id(obj) {
             }
             
             Friendly_Messages(obj);
+
+            Get_Sizes(obj.SizeGroup.Size_Group_Id); //added by aditya 
           
         }
     });
