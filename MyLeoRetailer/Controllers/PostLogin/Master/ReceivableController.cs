@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -15,6 +16,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
     {
         //
         // GET: /Receivable/
+
+        public ReceivableRepo rRepo;
+
+        public ReceivableController()
+        {
+            rRepo = new ReceivableRepo();
+
+        }
+
 
         public ActionResult Pay(ReceivableViewModel rViewModel)
         {
@@ -34,26 +44,35 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Receivable Controller - Pay  " + ex.Message);  //Added by vinod mane on 06/10/2016
             }
 
             return View("Pay", rViewModel);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(ReceivableViewModel rViewModel)
         {
-
-            ReceivableViewModel rViewModel = new ReceivableViewModel();
-          // ReceivableRepo rRepo = new ReceivableRepo();
-
-
-           //rViewModel.Grid_Detail.Records = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids);
+            try
+            {
+                ReceivableRepo rRepo = new ReceivableRepo();
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Receivable Controller - Index  " + ex.Message);
+            }
+            //End
 
             return View("Index", rViewModel);
         }
 
         public JsonResult Get_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+            try
+            {
+
+                ReceivableRepo _rRepo = new ReceivableRepo();
 
             rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
@@ -61,21 +80,28 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             pager = rViewModel.Grid_Detail.Pager;
 
-            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,Payment_Status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
+            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
 
             rViewModel.Grid_Detail.Records = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
 
             Set_Pagination(pager, rViewModel.Grid_Detail); // set pagination for grid
 
             rViewModel.Grid_Detail.Pager = pager;
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Receivable Controller - Get_Receivable  " + ex.Message);
+            }
+            //End
 
             return Json(JsonConvert.SerializeObject(rViewModel));
 
         }
 
-        public JsonResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
+        public ActionResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
 
             try
             {
@@ -91,17 +117,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Receivable Controller - Get_Receivable_Details_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
-            //TempData["rViewModel"] = (ReceivableViewModel)rViewModel;
 
-            return Json(JsonConvert.SerializeObject(rViewModel));
+            return View("Pay", rViewModel);
         }
 
         public JsonResult Get_Credit_Note_Amount_By_Id(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
 
             try
             {
@@ -110,7 +134,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Receivable Controller - Get_Credit_Note_Amount_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(rViewModel));
@@ -118,7 +142,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Gift_Voucher_Amount_By_Id(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+           
 
             try
             {
@@ -127,7 +151,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Receivable Controller - Get_Gift_Voucher_Amount_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(rViewModel));
@@ -135,7 +159,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+          
 
 
             try
@@ -156,7 +180,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Receivable Controller - Insert_Receivable  " + ex.Message);//Added by vinod mane on 06/10/2016
 
             }
 
@@ -167,7 +191,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Update_Receivable(ReceivableViewModel rViewModel)
         {
-            ReceivableRepo rRepo = new ReceivableRepo();
+            
 
 
             try
@@ -189,7 +213,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Receivable Controller - Update_Receivable  " + ex.Message);//Added by vinod mane on 06/10/2016
 
             }
 

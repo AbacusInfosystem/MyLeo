@@ -50,7 +50,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <input type="text" id="txtArticle_No" class="form-control" placeholder="Enter article number." name="Product.Article_No" value="@Model.Product.Article_No" />
+                        <input type="text" id="txtArticle_No" class="form-control" placeholder="Enter article number." name="Product.Article_No" value="@Model.Product.Article_No" maxlength="20" />
                         <input type="hidden" id="hdn_ProductId" class="form-control" name="Product.Product_Id" value="@Model.Product.Product_Id" />
                     </div>
 
@@ -97,7 +97,7 @@
                     <div id="dvBrand" class="form-group auto-complete">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" value="@Model.Product.Brand_Name" id="txtBrand_Name" placeholder="Enter brand" data-table="Brand" data-col="Brand_Id,Brand_Name" data-headernames="Brand">
+                            <input type="text" class="form-control autocomplete-text lookup-text" value="@Model.Product.Brand_Name" id="txtBrand_Name" placeholder="Enter brand" data-table="Brand" data-col="Brand_Id,Brand_Name" data-headernames="Brand" maxlength="50">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnBrandId" value="@Model.Product.Brand_Id" name="Product.Brand_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnBrandName" value="@Model.Product.Brand_Name" name="Product.Brand_Name" class="auto-complete-label" />
@@ -107,7 +107,7 @@
                     <div id="dvCatergory" class="form-group auto-complete">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" value="@Model.Product.Category" id="txtCategory_Name" placeholder="Enter category" data-table="Category" data-col="Category_Id,Category" data-headernames="Category">
+                            <input type="text" class="form-control autocomplete-text lookup-text" value="@Model.Product.Category" id="txtCategory_Name" placeholder="Enter category" data-table="Category" data-col="Category_Id,Category" data-headernames="Category" maxlength="50">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnCategoryId" value="@Model.Product.Category_Id" name="Product.Category_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnCategoryName" value="@Model.Product.Category" name="Product.Category" class="auto-complete-label" />
@@ -117,7 +117,7 @@
                     <div id="dvSubC" class="form-group auto-complete">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Sub Category.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSub_Category" value="@Model.Product.Sub_Category" placeholder="Enter sub-category" data-table="Sub_Category" data-col="Sub_Category_Id,Sub_Category" data-headernames="Sub_Category">
+                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSub_Category" value="@Model.Product.Sub_Category" placeholder="Enter sub-category" data-table="Sub_Category" data-col="Sub_Category_Id,Sub_Category" data-headernames="Sub_Category" maxlength="50">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnSubcategoryId" value="@Model.Product.Sub_Category_Id" name="Product.Sub_Category_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnSubcategoryName" value="@Model.Product.Sub_Category" name="Product.Sub_Category" class="auto-complete-label" />
@@ -146,7 +146,7 @@
                     <div class="form-group">
                         @*<span class="label label-primary label-form" style="margin-bottom: 1px;">Launch date.</span>*@
                         <label for="txtCenter_Size" style="color: #333" class="">Center Size</label>
-                        <input type="text" class="form-control input-sm" name="Product.Center_Size" id="txtCenter_Size" value="@Model.Product.Center_Size" placeholder="Enter Center Size" />
+                        <input type="text" class="form-control input-sm" name="Product.Center_Size" id="txtCenter_Size" value="@Model.Product.Center_Size" placeholder="Enter Center Size" maxlength="10"/>
 
                     </div>
 
@@ -166,7 +166,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size Difference.</span>
-                        <input type="text" class="form-control" placeholder="Enter size difference." name="Product.Size_Difference" value="@(Model.Product.Size_Difference == 0 ? "" : Model.Product.Size_Difference.ToString())" />
+                        <input type="text" class="form-control" placeholder="Enter size difference." name="Product.Size_Difference" value="@(Model.Product.Size_Difference == 0 ? "" : Model.Product.Size_Difference.ToString())" maxlength="10"/>
 
                     </div>
 
@@ -178,13 +178,13 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Difference.</span>
-                        <input type="text" class="form-control" placeholder="Enter MRP difference." name="Product.MRP_Difference" value="@(Model.Product.MRP_Difference == 0 ? "" : Model.Product.MRP_Difference.ToString())" />
+                        <input type="text" class="form-control" placeholder="Enter MRP difference." name="Product.MRP_Difference" value="@(Model.Product.MRP_Difference == 0 ? "" : Model.Product.MRP_Difference.ToString())" maxlength="10" />
 
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Percentage.</span>
-                        <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." name="Product.MRP_Percentage" value="@(Model.Product.MRP_Percentage == 0 ? "" : Model.Product.MRP_Percentage.ToString())" />
+                        <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." name="Product.MRP_Percentage" value="@(Model.Product.MRP_Percentage == 0 ? "" : Model.Product.MRP_Percentage.ToString())" maxlength="10" />
 
                     </div>
 

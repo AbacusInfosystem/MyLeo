@@ -18,7 +18,9 @@ namespace MyLeoRetailer.Models
 
             Query_Detail = new QueryInfo();
 
-            Receivable = new ReceivableInfo();        
+            Receivable = new ReceivableInfo();
+
+            //Filter = new Filter_Receivable();
 
             FriendlyMessages = new List<FriendlyMessage>();
 
@@ -117,9 +119,5 @@ namespace MyLeoRetailer.Models
 
     }
 
-    public class Filter_Receivable
-    {
-      
         
     }
-}

@@ -198,12 +198,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Colour_Name(string color_Name)
         {
             bool check = false;
+            ColorViewModel cViewModel = new ColorViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = cRepo.Check_Existing_Colour_Name(color_Name);
             }
             catch (Exception ex)
             {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
                 Logger.Error("Colour Controller - Check_Existing_Colour_Name : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);

@@ -79,6 +79,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Index " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
             return View("Index", cViewModel);
         }        
@@ -95,20 +96,37 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Search " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
             return View("Search", cViewModel);
         }
 
         public ActionResult Get_Customer_By_Id(CustomerViewModel cViewModel)
-        {  
-            cViewModel.Customer = cRepo.Get_Customer_By_Id(cViewModel.Customer.Customer_Id);            
-            
+        {
+            try
+            {
+                cViewModel.Customer = cRepo.Get_Customer_By_Id(cViewModel.Customer.Customer_Id);
+            }
+            catch (Exception ex)
+            {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Get_Customer_By_Id " + ex.ToString());//Added by vinod mane on 06/10/2016
+            }
+
             return View("Index", cViewModel);
         }
 
         public JsonResult Get_Customer_By_Mobile(CustomerViewModel cViewModel)
         {
-            cViewModel.Customer = cRepo.Get_Customer_By_Mobile(Convert.ToString(cViewModel.Customer.Mobile));
+            try
+            {
+                cViewModel.Customer = cRepo.Get_Customer_By_Mobile(Convert.ToString(cViewModel.Customer.Mobile));
+            }
+            catch (Exception ex)
+            {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Get_Customer_By_Mobile " + ex.ToString());//Added by vinod mane on 06/10/2016
+            }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
         }
@@ -130,6 +148,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Insert_Customer " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             if (cViewModel.Customer.CreateCustomerFlag == true)
@@ -159,6 +178,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Update_Customer " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             TempData["cViewModel"] = cViewModel;
@@ -196,6 +216,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Get_Customers " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(cViewModel));
@@ -206,13 +227,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Customer_Name(string customer_name)
         {
             bool check = false;
+            CustomerViewModel cViewModel = new CustomerViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = cRepo.Check_Existing_Customer_Name(customer_name);
             }
             catch (Exception ex)
             {
-                Logger.Error("Customer Controller - Check_Existing_Customer_Name : " + ex.ToString());
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
+                Logger.Error("Customer Controller - Check_Existing_Customer_Name " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }

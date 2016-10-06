@@ -40,8 +40,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
             catch (Exception ex)
             {
                 iViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
-                Logger.Error("PurchaseReturnRequestController - Search : " + ex.ToString());
+                Logger.Error("Inventory Controller - Search  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
             return View("Search", iViewModel);
         }
@@ -65,13 +64,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
 			catch(Exception ex)
 			{
 				iViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
-                Logger.Error("PurchaseReturnRequestController - Get_Inventories : " + ex.ToString());
+                Logger.Error("Inventory Controller - Get_Inventories  " + ex.Message);//Added by vinod mane on 06/10/2016
 			}
 
 			return Json(JsonConvert.SerializeObject(iViewModel));
 		}
-              
 
+       
     }
 }

@@ -26,6 +26,7 @@ $(document).ready(function () {
         $("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id");
 
         $("#frmReceivable").submit();
+
     });
 
 
