@@ -56,8 +56,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
-                Logger.Error("ProductDispatch Controller - Dispatched_Product_Listing_binding : " + ex.ToString());
+                Logger.Error("ProductWarehouse Controller - Get_WarehouseProducts  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(pViewModel));

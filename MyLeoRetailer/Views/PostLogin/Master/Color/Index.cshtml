@@ -76,7 +76,7 @@
                     <input type="hidden" value="@Model.Color.IsActive" />@*Added by Vinod MAne on 27/09/2016*@
                     <div class="form-group">
                         @*<label>Create / Update size group:</label>*@
-                        <input type="text" class="form-control" id="txtColour_Name" placeholder="Enter color name." name="Color.Colour" />
+                        <input type="text" class="form-control" id="txtColour_Name" placeholder="Enter color name." name="Color.Colour" maxlength="50" />
                         <input type="hidden" id="hdnColour_Name">@*Added By Vinod Mane on 23/09/2016*@
                         @*<input type="text" class="form-control" placeholder="Enter color name." name="Color.Colour" />*@
                         <input type="hidden" name="Color.Colour_Id">
@@ -88,7 +88,7 @@
 
                     <div class="form-group">
                         <div class="form-group input-group color" data-color="rgb(255, 146, 180)" data-color-format="rgb" id="colorpicker">
-                            <input class="form-control" type="text" name="Color.Colour_Code">
+                            <input class="form-control" type="text" name="Color.Colour_Code" maxlength="50">
                             <span class="input-group-addon"><i id="iRGBColor" style="background-color: rgb(154, 42, 77);"></i></span>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -31,11 +32,24 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult Index(SalesInvoiceViewModel siViewModel)
         {
-
+            try
+            {
             if (TempData["siViewModel"] != null)
             {
                 siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];                
             }
+            siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Index  " + ex.Message);
+            }
+            //end
+           
 
             return View("Index", siViewModel);
         }
@@ -45,9 +59,17 @@ namespace MyLeoRetailer.Controllers.PostLogin
             //string Customer_Name;
 
             SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
-
+            try
+            {
             siViewModel.SalesInvoice = siRepo.Get_Customer_Name_By_Mobile_No(MobileNo);
-
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Get_Customer_Name_By_Mobile_No  " + ex.Message);
+            }
+            //end
             return Json(siViewModel.SalesInvoice, JsonRequestBehavior.AllowGet);
         }
 
@@ -55,24 +77,32 @@ namespace MyLeoRetailer.Controllers.PostLogin
         {
 
             SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
-
+            try
+            {
             siViewModel.SalesInvoice = siRepo.Get_Sales_Order_Items_By_SKU_Code(SKU_Code);
-
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Get_Sales_Order_Items_By_SKU_Code  " + ex.Message);
+            }
+            //end
             return Json(siViewModel.SalesInvoice, JsonRequestBehavior.AllowGet);
 
         }
 
-        public JsonResult Get_Credit_Note_Details_By_Id(SalesInvoiceViewModel siViewModel)
+        public JsonResult Get_Credit_Note_Details_By_Id_abc(int cust_Id)
         {
-           
+            SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
             try
             {
-                siViewModel.CreditNote = siRepo.Get_Credit_Note_Details_By_Id(siViewModel.SalesInvoice.Customer_Id);
+                siViewModel.CreditNote = siRepo.Get_Credit_Note_Data_By_Id(cust_Id);
             }
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("SalesOrder Controller - Get_Credit_Note_Details_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(siViewModel.CreditNote, JsonRequestBehavior.AllowGet);
@@ -89,7 +119,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("SalesOrder Controller - Get_Gift_Voucher_Details  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(siViewModel.ReceivableItem, JsonRequestBehavior.AllowGet);
@@ -105,7 +135,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("SalesOrder Controller - Get_Credit_Note_Amount_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(siViewModel.CreditNote, JsonRequestBehavior.AllowGet);
@@ -121,6 +151,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Get_Gift_Voucher_Amount_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
 
             }
 
@@ -140,6 +171,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Search  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return View("Search", siViewModel);
@@ -182,6 +214,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Get_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(siViewModel));
@@ -217,7 +250,8 @@ namespace MyLeoRetailer.Controllers.PostLogin
             }
             catch (Exception ex)
             {
-                siViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Insert_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["siViewModel"] = (SalesInvoiceViewModel)siViewModel;
@@ -232,12 +266,18 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult View_Sales_Invoice(SalesInvoiceViewModel siViewModel)
         {
-
+            try
+            {
             if (TempData["siViewModel"] != null)
             {
                 siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
             }
-
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - View_Sales_Invoice  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
             return View("SalesInvoiceView", siViewModel);
         }
 
@@ -259,6 +299,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Get_SalesOrder_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             if (CheckFlag == true)
@@ -279,7 +320,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
         {
 
             bool check = false;
-
+            SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
             try
             {
                 check = siRepo.Check_Mobile_No(MobileNo);
@@ -287,7 +328,9 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             catch (Exception ex)
             {
-                throw ex;
+                // throw ex;
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Check_Mobile_No  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(check, JsonRequestBehavior.AllowGet);
@@ -307,6 +350,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Report  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return View("Search1", siViewModel);

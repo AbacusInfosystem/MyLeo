@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BarcodeLib.Barcode.ASP.NET, Version=5.0.0.30712, Culture=neutral, PublicKeyToken=f1ec954ce2c30e4e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\BarcodeLib.Barcode.ASP.NET.dll</HintPath>
+    </Reference>
     <Reference Include="Barcode_Generator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libraries\Barcode_Generator.dll</HintPath>

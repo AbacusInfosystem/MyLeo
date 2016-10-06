@@ -13,6 +13,7 @@ using MyLeoRetailerRepo;
 using MyLeoRetailer.Models.PreLogin;
 using MyLeoRetailerInfo.Branch;
 using Newtonsoft.Json;
+using MyLeoRetailerHelper.Logging;
 
 namespace MyLeoRetailer.Controllers.PreLogin
 {
@@ -56,6 +57,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
             catch (Exception ex)
             {
                 lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Login Controller - Index  " + ex.Message);//Added by vinod mane on 06/10/2016
 
                 return View("Index", lViewModel);
             }
@@ -67,14 +69,15 @@ namespace MyLeoRetailer.Controllers.PreLogin
         public JsonResult Get_Employee_Branches(string user_Name)
         {
             List<BranchInfo> branch_List = new List<BranchInfo>();
-
+            LoginViewModel lViewModel = new LoginViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 branch_List = _loginRepo.Get_Branches(user_Name);
             }
             catch (Exception ex)
             {
-
+                lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
+                Logger.Error("Login Controller - Get_Employee_Branches  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
             return Json(JsonConvert.SerializeObject(branch_List));
         }
@@ -118,7 +121,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
             {
 
                 lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Login Controller - Authenticate  " + ex.Message);//Added by vinod mane on 06/10/2016
                 HttpContext.Request.Cookies.Clear();
 
                 return RedirectToAction("Index", "Login", lViewModel);
@@ -160,6 +163,8 @@ namespace MyLeoRetailer.Controllers.PreLogin
             {
                 HttpContext.Request.Cookies.Clear();
 
+                loginViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
+                Logger.Error("Login Controller - SetUsersCookies  " + ex.Message);//Added by vinod mane on 06/10/2016
                 //Logger.Error("Error at Login Controller - SetUsersCookies : " + ex.Message);
             }
         }
@@ -168,6 +173,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
         {
             //LoginInfo Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
+            LoginViewModel lViewModel = new LoginViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 LogoutUser();
@@ -178,6 +184,9 @@ namespace MyLeoRetailer.Controllers.PreLogin
             catch (Exception ex)
             {
                 //Logger.Error("Error at Login Controller - Logout: " + ex.ToString());
+                lViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Login Controller - Logout  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return RedirectToAction("Index", "login");
