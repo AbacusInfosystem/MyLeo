@@ -88,8 +88,11 @@ $(function () {
                             $('#rd_' + i).iCheck('check');
                         else
                             $('#rd_' + i).iCheck('uncheck');
+                        $("#hdn_Img_" + i).attr("value", data.Product.ProductImage.Product_Image[i]);
+                        $("#hdn_Img_Id_" + i).attr("value", data.Product.ProductImage.Product_Image_Id[i]); 
                     } else {
-                        $("#img_" + i).attr("src", "/UploadedFiles/"); 
+                        $("#img_" + i).attr("src", "/UploadedFiles/");
+                        $('#rd_' + i).iCheck('uncheck');
                     } 
                 } 
             }

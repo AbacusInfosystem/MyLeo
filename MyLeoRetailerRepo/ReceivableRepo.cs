@@ -685,7 +685,7 @@ namespace MyLeoRetailerRepo
                    if (!dr.IsNull("Payament_Date"))
 
                        Receivable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
-                   Receivable.Payament_Date.ToShortDateString();
+                       Receivable.Payament_Date.ToShortDateString();
                   // Receivable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
 
 
