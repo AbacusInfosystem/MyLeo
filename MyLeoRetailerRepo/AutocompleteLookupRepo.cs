@@ -64,12 +64,12 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
-                if (table_Name == "Product_MRP")
+                if (table_Name == "Product_SKU_Mapping")
                 {
                     if (fieldName == "Vendor_Id")
                     {
-                        strquery = " Select Product_MRP.Product_MRP_Id, Product_MRP.SKU_Code ";
-                        strquery += "from Product_MRP inner join Product on Product_MRP.Product_Id=Product.Product_Id ";
+                        strquery = "Select distinct Product_SKU_Mapping.Product_Id, Product_SKU_Mapping.SKU_Code ";
+                        strquery += "from Product_SKU_Mapping inner join Product on Product.Product_Id=Product_SKU_Mapping.Product_Id ";
                         strquery += "where Product.Vendor_Id = @Vendor_Id";
                         paramList.Add(new SqlParameter("@Vendor_Id", fieldValue));
                     }

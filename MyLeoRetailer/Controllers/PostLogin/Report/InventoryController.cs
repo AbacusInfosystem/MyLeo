@@ -21,6 +21,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
     {
         public InventoryRepo _inventoryRepo;
 
+
         public InventoryController()
         {
             _inventoryRepo = new InventoryRepo();
@@ -44,7 +45,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
             return View("Search", iViewModel);
         }
 
-
         public JsonResult Get_Inventories(InventoryViewModel iViewModel)
 		{	
 			try
@@ -53,11 +53,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
 
                 pager = iViewModel.Grid_Detail.Pager;
 
-                iViewModel.Grid_Detail = Set_Grid_Details(false, "Product_SKU,Branch_Name,Product_Quantity", "Inventory_Id"); // Set grid info for front end listing
+                iViewModel.Grid_Detail = Set_Grid_Details(false, "Product_SKU,Branch_Name,Product_Quantity", "Inventory_Id"); 
 
-                iViewModel.Grid_Detail.Records = _inventoryRepo.Get_Inventories(iViewModel.Filter); // Call repo method 
+                iViewModel.Grid_Detail.Records = _inventoryRepo.Get_Inventories(iViewModel.Filter); 
 
-                Set_Pagination(pager, iViewModel.Grid_Detail); // set pagination for grid
+                Set_Pagination(pager, iViewModel.Grid_Detail); 
 
                 iViewModel.Grid_Detail.Pager = pager;
 			}
@@ -71,6 +71,5 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
 		}
 
        
-
     }
 }

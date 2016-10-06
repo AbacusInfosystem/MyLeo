@@ -155,8 +155,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                            <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                            <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>

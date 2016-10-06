@@ -1,0 +1,85 @@
+﻿@model MyLeoRetailer.Models.ProductDispatchViewModel
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/dispatched_product_listing_event.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/dispatched_product_listing_method.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Inward Product</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp;Inward Product </h2>
+        </div>
+        <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Index", "Dashboard")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmInwardProduct">
+
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                        <div class="row">
+
+                            <input type="hidden" id="hdnRequestId" value="" name="product_Dispatch.Request_Id" />
+
+                            <input type="hidden" id="hdnSKU" value="" name="product_Dispatch.SKU" />
+
+
+                            <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+                            </div>
+
+                            <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+            <div class="btn-group pull-right">
+                <a class="btn btn-success active" role="button" id="btnAccept">Accept Dispatch </a>
+                
+            </div>
+
+        </div>
+
+    </div>
+   
+
+    </div>
+
+
+

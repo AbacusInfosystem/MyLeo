@@ -1,6 +1,11 @@
 ﻿@using MyLeoRetailer.Common
 @using MyLeoRetailerInfo.Common
 
+@*@model MyLeoRetailer.Models.EmployeeViewModel*@
+
+<script src="~/Scripts/Modules/Employee/change_branch_event.js"></script>
+<script src="~/Scripts/Modules/Employee/change_branch_method.js"></script>
+
  <!-- START X-NAVIGATION VERTICAL -->
 <ul class="x-navigation x-navigation-horizontal">
     <li class="xn-logo">
@@ -22,7 +27,9 @@
             <li><a href="/Vendor/Search"><span class="fa fa-users"></span> Vendor Management</a></li>
             <li><a href="/VendorContact/Search"><span class="fa fa-users"></span> Vendor Contact Management</a></li>
             <li><a href="/Product/Search"><span class="fa fa-users"></span> Product Management</a></li>
-            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Warehouse</a></li>
+                            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Product Warehouse</a></li>
+                            <li><a href="/ProductDispatch/Search"><span class="fa fa-users"></span> Product Dispatch</a></li>
+                            <li><a href="/ProductDispatch/Dispatched_Product_Listing"><span class="fa fa-users"></span>Inward Product</a></li>
             @*<li><a href="/Replacement/Search"><span class="fa fa-users"></span> Replacement</a></li>*@ @*commented bya aditya as pre sanket instruction 26092016*@
         </ul>
     </li>
@@ -67,71 +74,33 @@
     @{
         LoginInfo Cookies = new LoginInfo();
         Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
     <!-- TASKS -->
     <li class="xn-icon-button pull-right">
-        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Change Branch"><span class="fa fa-map-marker"></span></a>
-        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" style="width: 220px;">
+            <a href="#" data-toggle="tooltip panel" id="btnSaveChaneBranch" data-target="#div_Change_Branch" data-placement="bottom" title="Change Branch"><span class="fa fa-map-marker"></span></a>
+            <input type="hidden" value="@Cookies.Page_URL" name="Page_URL" id="hdnPage_URL" />
+
+            @* Gauravi: 05-10-2016 *@
+
+            <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Change_Branch" style="width: 220px;">
             <div class="panel-heading">
-                <h3 class="panel-title"><span class="fa fa-tasks"></span> Branches</h3>
-            </div>
-            <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
-                <div class="page-content-wrap">
-
-                        <form form role="form" id="frmChangeBranch" action="@Url.Action("Save_Employee_Branch_Id", "Employee")" method="post">
-
-                            <input type="hidden" value="@Cookies.Page_URL" name="Page_URL" />
-
-                        <div class="row">
-                            @**@
-
-                            <div class="table-responsive">
-                                <table class="table table-hover" style="margin-bottom: 0;">
-                                    <tbody>
-                                        @{int counter = 0;}
-
-                                        @foreach (var result in Cookies.Branch_List)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <input type="hidden" id="EmployeeBranchId-@result.Branch_Id" name="Employee_Branch_List[@counter].Branch_Id" value="@result.Branch_Id" />
-                                                    <input type="hidden" id="EmployeeBranchNM-@result.Branch_Id" name="Employee_Branch_List[@counter].Branch_Name" value="@result.Branch_Name" />
-                                                    <input type="hidden" class="form-control" id="hdf_EmployeeId" name="Employee.Employee_Id" value="@result.Employee_Id" />
-                                                    @result.Branch_Name
-                                                </td>
-
-                                                <td>
-                                                    <label class="switch">
-                                                        @if (@result.Is_Selected == 1)
-                                                        {
-                                                            <input type="checkbox" class="switch" checked="checked" id="Employee-@result.Branch_Id" name="Employee_Branch_List[@counter].Is_Selected" value="@result.Is_Selected.ToString()" /><span></span>
-                                                        }
-                                                        else
-                                                        {
-                                                            <input type="checkbox" class="switch" id="Employee-@result.Branch_Id" name="Employee_Branch_List[@counter].Is_Selected" value="@result.Is_Selected.ToString()" /><span></span>
-                                                        }
-                                                    </label>
-                                                </td>
-                                            </tr>
-                                                                counter++;
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </form>
-
-
-
+                    <h3 class="panel-title"><span class="fa fa-tasks"></span></h3>
                 </div>
 
+                <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
+                    <div class="page-content-wrap">
+
+                    </div>
             </div>
+
             <div class="panel-footer text-center">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success active" id="btnSaveBranch">Save</button>
                 </div>
             </div>
+
         </div>
+
+            @* End *@
     </li>
     <!-- END TASKS -->
 

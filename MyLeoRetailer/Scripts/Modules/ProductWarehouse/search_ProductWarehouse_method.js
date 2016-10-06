@@ -27,7 +27,10 @@
 
             var obj = $.parseJSON(response);
 
-            Bind_Grid(obj, "ProductWarehouse_List");
+            //Bind_Grid(obj, "ProductWarehouse_List");
+
+            Bind_custom_Grid(obj, "ProductWarehouse_List", "List_product_warehouse", ""); // Custom common method (List_product_Dispatch is used for binding in name eg: name"List_product_Dispatch[0].SKU" and checkbox is for radio type to bind on list and is check is propert in class of viewmodel )
+
 
             $("#divProductWarehousePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }

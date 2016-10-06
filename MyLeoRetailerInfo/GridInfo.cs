@@ -18,6 +18,7 @@ namespace MyLeoRetailerInfo
             Pager = new Pagination_Info();
 
 			Identity_Columns = new List<string>();
+
         }
 
         public List<string> Show_Columns { get; set; }
@@ -33,5 +34,6 @@ namespace MyLeoRetailerInfo
 			get;
 			set;
 		}
+
     }
 }

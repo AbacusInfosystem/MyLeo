@@ -41,7 +41,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Pay", rViewModel);
         }
 
-        public ActionResult Index(ReceivableViewModel rViewModel)
+        public ActionResult Index()
         {
             try
             {
@@ -65,19 +65,19 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 ReceivableRepo _rRepo = new ReceivableRepo();
 
-                rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+            rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                Pagination_Info pager = new Pagination_Info();
+            Pagination_Info pager = new Pagination_Info();
 
-                pager = rViewModel.Grid_Detail.Pager;
+            pager = rViewModel.Grid_Detail.Pager;
 
-                rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,Payment_Status", "Sales_Invoice_Id"); // Set grid info for front end listing
+            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,Payment_Status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
 
-                rViewModel.Grid_Detail.Records = _rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
+            rViewModel.Grid_Detail.Records = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
 
-                Set_Pagination(pager, rViewModel.Grid_Detail); // set pagination for grid
+            Set_Pagination(pager, rViewModel.Grid_Detail); // set pagination for grid
 
-                rViewModel.Grid_Detail.Pager = pager;
+            rViewModel.Grid_Detail.Pager = pager;
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)

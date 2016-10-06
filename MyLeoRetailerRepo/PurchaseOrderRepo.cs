@@ -107,7 +107,7 @@ namespace MyLeoRetailerRepo
         public void Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
             PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
-
+           
             foreach (var item in PurchaseOrder.PurchaseOrders)
             {
                 List<SqlParameter> sqlParam = new List<SqlParameter>();
@@ -150,15 +150,7 @@ namespace MyLeoRetailerRepo
 
                     List<Sizes> Size = new List<Sizes>();
 
-                    //string[] Item_Ids = new string[0];
-
-                    //string[] Branch_Ids = new string[0];
-
-                    //string[] Request_Ids = new string[0];
-
-                    //string[] Request_Dates = new string[0];
-
-                    string[] Item_Ids = new string[1];
+                    string[] Item_Ids = new string [1];
 
                     string[] Branch_Ids = new string[1];
 
@@ -166,15 +158,16 @@ namespace MyLeoRetailerRepo
 
                     string[] Request_Dates = new string[1];
 
-                    if (item.Item_Ids.IndexOf(',') != -1)  //if condition is use so if string does not contain ',' it wont break
-                    {
-                        Item_Ids = item.Item_Ids.Split(',');
-                    }
-                    else
-                    {
-                        Item_Ids[0] = item.Item_Ids;
-                    }
-
+                   
+                        if (item.Item_Ids.IndexOf(',') != -1)  //if condition is use so if string does not contain ',' it wont break
+                        {
+                            Item_Ids = item.Item_Ids.Split(',');
+                        }
+                        else
+                        {
+                            Item_Ids[0] = item.Item_Ids;
+                        }
+              
 
                     if (item.Branch_Ids.IndexOf(',') != -1)  //if condition is use so if string does not contain ',' it wont break
                     {
@@ -248,13 +241,13 @@ namespace MyLeoRetailerRepo
                     }
 
                 }
+               
+                    //CODE Added by aditya 27092016  END
 
-                //CODE Added by aditya 27092016  END
 
+                    int j = 0;
 
-                int j = 0;
-
-                PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
+                    PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
 
                 int i = 0;
 
@@ -355,7 +348,7 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Quantity", PurchaseOrder.Sizes[j].Quantity7));
 
 
-                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
+                        sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Purchase_Order_Item_Sizes.ToString(), CommandType.StoredProcedure);
                 }
 
                 i++;
@@ -505,7 +498,7 @@ namespace MyLeoRetailerRepo
 
             PurchaseOrder.Start_Supply_Date = Convert.ToDateTime(dr["Start_Supply_Date"]);
 
-            PurchaseOrder.Stop_Supply_Date = Convert.ToDateTime(dr["Stop_Supply_Date"]);
+            PurchaseOrder.Stop_Supply_Date = Convert.ToDateTime(dr["Stop_Supply_Date"]);           
 
             return PurchaseOrder;
         }
@@ -521,7 +514,7 @@ namespace MyLeoRetailerRepo
             DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Orders_Detalis.ToString(), CommandType.StoredProcedure);
 
             foreach (DataRow dr in CommonMethods.GetRows(dt, ref Pager))
-            {
+        {
                 PurchaseOrders.Add(Get_Purchase_Order_Value(dr));
             }
 
@@ -722,7 +715,7 @@ namespace MyLeoRetailerRepo
         }
 
 
-        //*************************************Aditya 28092016************************************
+        //*************************************Aditya 28092016  method called from Insert_Purchase_Order [START]************************************
 
         public List<Sizes> Get_Consolidate_Purchase_Order_Item_Size(string Item_Ids)
         {
@@ -746,7 +739,7 @@ namespace MyLeoRetailerRepo
             return Size;
         }
 
-        //*******************************************************************************
+        //******************************Aditya 28092016  method called from Insert_Purchase_Order [END]*************************************************
 
 
         public List<Sizes> Get_Consolidate_Purchase_Order_Item_Sizes(string Item_Ids)
