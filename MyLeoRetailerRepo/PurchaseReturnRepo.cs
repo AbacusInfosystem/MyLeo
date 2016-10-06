@@ -116,6 +116,8 @@ namespace MyLeoRetailerRepo
 
             sqlParams.Add(new SqlParameter("@Updated_Date", item.Updated_Date));
 
+            sqlParams.Add(new SqlParameter("@Item_Ids", item.Item_Ids));
+
             return sqlParams;
         }
 
@@ -128,7 +130,7 @@ namespace MyLeoRetailerRepo
 
             sqlParams.Add(new SqlParameter("@Status", 1));
 
-            sqlParams.Add(new SqlParameter("@Credit_Note_No", PurchaseReturn.Credit_Note_No));
+            sqlParams.Add(new SqlParameter("@Credit_Note_No", PurchaseReturn.GR_No));
 
             sqlParams.Add(new SqlParameter("@Credit_Note_Type", 1));
 
@@ -137,6 +139,22 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Created_By", PurchaseReturn.Created_By));
 
             sqlParams.Add(new SqlParameter("@Created_Date", PurchaseReturn.Created_Date));
+
+            sqlParams.Add(new SqlParameter("@Updated_By", PurchaseReturn.Updated_By));
+
+            sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseReturn.Updated_Date));
+
+            return sqlParams;
+        }
+
+        private List<SqlParameter> Set_Values_In_GR_No(PurchaseReturnInfo PurchaseReturn)
+        {
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Purchase_Return_Id", PurchaseReturn.Purchase_Return_Id));
+
+            sqlParams.Add(new SqlParameter("@GR_No", PurchaseReturn.GR_No));
 
             sqlParams.Add(new SqlParameter("@Updated_By", PurchaseReturn.Updated_By));
 
@@ -244,6 +262,8 @@ namespace MyLeoRetailerRepo
             return PurchaseReturn;
         }
 
+
+
         private PurchaseReturnInfo Get_Purchase_Return_Values(DataRow dr)
         {
             PurchaseReturnInfo PurchaseReturn = new PurchaseReturnInfo();
@@ -300,7 +320,7 @@ namespace MyLeoRetailerRepo
                     sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Return_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Item.ToString(), CommandType.StoredProcedure);
                 }
 
-                sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Credit_Note(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Credit_Note.ToString(), CommandType.StoredProcedure);
+                //sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Credit_Note(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Credit_Note.ToString(), CommandType.StoredProcedure);
                
                 scope.Complete();
 
@@ -316,17 +336,24 @@ namespace MyLeoRetailerRepo
             {
                 List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-                sqlParams.Add(new SqlParameter("@Purchase_Return_Id", PurchaseReturn.Purchase_Return_Id));
+                sqlHelper.ExecuteScalerObj(Set_Values_In_GR_No(PurchaseReturn), Storeprocedures.sp_Update_Purchase_Return.ToString(), CommandType.StoredProcedure);
 
-                sqlParams.Add(new SqlParameter("@GR_No", PurchaseReturn.GR_No));
+                var date = PurchaseReturn.Updated_Date;
 
-                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseReturn.Updated_By));
+                var id = PurchaseReturn.Updated_By;
 
-                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseReturn.Updated_Date));
+                PurchaseReturn = Get_Purchase_Return_By_Purchase_Return_Id(PurchaseReturn.Purchase_Return_Id);
 
-                sqlHelper.ExecuteScalerObj(sqlParams, Storeprocedures.sp_Update_Purchase_Return.ToString(), CommandType.StoredProcedure);
+                PurchaseReturn.Created_By = id;
 
+                PurchaseReturn.Created_Date = date;
 
+                PurchaseReturn.Updated_By = id;
+
+                PurchaseReturn.Updated_Date = date;
+
+                sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Credit_Note(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Credit_Note.ToString(), CommandType.StoredProcedure);
+               
                 scope.Complete();
 
             }
@@ -480,6 +507,9 @@ namespace MyLeoRetailerRepo
 
             if (!dr.IsNull("Brand_Name"))
                 purchaseReturnItem.Brand = Convert.ToString(dr["Brand_Name"]);
+
+            if (!dr.IsNull("Item_Ids"))
+                purchaseReturnItem.Item_Ids = Convert.ToString(dr["Item_Ids"]);
 
             return purchaseReturnItem;
         }

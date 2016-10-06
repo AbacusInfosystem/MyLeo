@@ -49,10 +49,10 @@
 
                                 <h4 style="margin-top: 0px;">Primary information.</h4>
 
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit Note No.</span>
                                     <input type="text" class="form-control input-sm" name="PurchaseReturn.Debit_Note_No" id="txtDebit_Note_No" value="@Model.PurchaseReturn.Debit_Note_No" placeholder="Enter debit note no." />
-                                </div>
+                                </div>*@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Retirn Date.</span>
@@ -154,6 +154,7 @@
                                 <tbody>
                                     <tr id="PurchaseReturnItemRow_0">
                                         <td>
+                                            <input type="hidden" name="PurchaseReturn.PurchaseReturns[0].Item_Ids" id="hdnItem_Ids_0" />
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0">
                                         </td>
                                         @*<td>

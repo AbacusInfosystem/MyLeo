@@ -155,8 +155,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                            <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                            <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque date</span>
                                 <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
-                                    <input type="text" id="txtCheque_Date" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("dd-MM-yyyy")))" />
+                                    <input type="text" id="txtCheque_Date" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("dd-MM-yyyy")))" readonly/>
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>
@@ -284,8 +284,8 @@
                                     {
                                         <tr id="tr(@itm.Payable_Item_Id)">
                                             <td>
-                                                <span> @itm.Payment_Mode</span>
-                                                <input type="hidden" id="hdnPayment_Mode@(itm.Payable_Item_Id)" name="Payable.Payment_Mode[@(i-1)]" value="@itm.Payment_Mode">
+                                                <span> @itm.Payment_Mode1</span>
+                                                <input type="hidden" id="hdnPayment_Mode@(itm.Payable_Item_Id)" name="Payable.Payment_Mode1[@(i-1)]" value="@itm.Payment_Mode">
                                                 <input type="hidden" id="hdnPayable_Item_Id@(itm.Payable_Item_Id)" name="Payable.Payable_Item_Id" value="@itm.Payable_Item_Id">
                                                 <input type="hidden" id="hdnPayable_Id@(itm.Payable_Item_Id)" name="Payable.Payable_Id" value="@itm.Payable_Id">
                                                 <input type="hidden" id="hdnPurchase_Credit_Note_Id@(itm.Payable_Item_Id)" name="Payable.Purchase_Credit_Note_Id" value="@itm.Purchase_Credit_Note_Id">

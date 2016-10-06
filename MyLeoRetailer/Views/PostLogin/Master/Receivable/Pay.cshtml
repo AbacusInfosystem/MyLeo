@@ -49,18 +49,28 @@
                             <input type="hidden" id="hdnReceivable_Item_Id" name="Receivable.Receivable_Item_Id" value="@Model.Receivable.Receivable_Item_Id">
                             <input type="hidden" id="hdnReceivable_Id" name="Receivable.Receivable_Id" value="@Model.Receivable.Receivable_Id">
                             <input type="hidden" id="hdnCustomer_Id" name="Receivable.Customer_Id" value="@Model.Receivable.Customer_Id">
-                            <input type="hidden" id="hdf_Sales_Credit_Note_Id" name="Receivable.Sales_Credit_Note_Id" value="@Model.Receivable.Sales_Credit_Note_Id">
-                            <input type="hidden" id="hdf_Gift_Voucher_Id" name="Receivable.Gift_Voucher_Id" value="@Model.Receivable.Gift_Voucher_Id">
+                            @*<input type="hidden" id="hdf_Sales_Credit_Note_Id" name="Receivable.Sales_Credit_Note_Id" value="@Model.Receivable.Sales_Credit_Note_Id">
+                            <input type="hidden" id="hdf_Gift_Voucher_Id" name="Receivable.Gift_Voucher_Id" value="@Model.Receivable.Gift_Voucher_Id">*@
                             @*<input type="hidden" id="hdnPurchase_Credit_Note_Id" name="Receivable.Purchase_Credit_Note_Id" value="@Model.Receivable.Purchase_Credit_Note_Id">*@
 
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    @*<div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
                             <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
+                            <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToShortDateString()))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -79,7 +89,7 @@
                         </div>
                     </div>
 
-                </div>
+            </div>
 
             </div>
 
@@ -119,7 +129,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
-                            <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
                                 <input type="text" class="form-control datepicker" id="txtCheque_Date" name="Receivable.Cheque_Date" value="@((Model.Receivable.Cheque_Date == DateTime.MinValue ? "" : Model.Receivable.Cheque_Date.ToShortDateString()))" reado readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -183,8 +193,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
-                            <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" reado readonly />
+                            <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
 
                             </div>
@@ -292,7 +302,7 @@
                             <table class="table table-bordered" id="tblReceivableItems">
                                 <thead>
                                     <tr id="subhead">
-
+                                       
                                         <th>Paid Amount</th>
                                         <th>Cash Amount</th>
                                         <th>Cheque Amount</th>
@@ -306,6 +316,7 @@
                                         <th>Card amount</th>
                                         <th>Gift voucher no</th>
                                         <th>Gift voucher amount</th>
+                                        
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -323,6 +334,8 @@
                                                 <input type="hidden" id="hdnReceivable_Item_Id@(itm.Receivable_Item_Id)" name="Receivable.Receivable_Item_Id" value="@itm.Receivable_Item_Id">
                                                 <input type="hidden" id="hdnReceivable_Id@(itm.Receivable_Item_Id)" name="Receivable.Receivable_Id" value="@itm.Receivable_Id">
                                                 <input type="hidden" id="hdnSales_Credit_Note_Id@(itm.Receivable_Item_Id)" name="Receivable.Sales_Credit_Note_Id" value="@itm.Sales_Credit_Note_Id">
+                                                <input type='hidden' id="hdnBranchID@(itm.Receivable_Item_Id)" name="Receivable.Branch_ID" value="@Model.Receivable.Branch_ID">
+                                                <input type='hidden' id="hdnBranchName@(itm.Receivable_Item_Id)" name="Receivable.Branch_Name" value="@Model.Receivable.Branch_Name">
                                             </td>
                                             <td>
                                                 <span> @itm.Cash_Amount</span>
