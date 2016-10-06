@@ -14,10 +14,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class PayableController : BaseController
     {
+        public PayableRepo pRepo;
 
         public PayableController()
         {
-            
+            pRepo = new PayableRepo();
         }
 
         public ActionResult Pay(PayableViewModel pViewModel)
@@ -50,7 +51,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
             PayableRepo pRepo = new PayableRepo();
 
-                //pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
+            //pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
@@ -71,7 +72,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         //    return Index(pViewModel);
         //}
-        
+
         public JsonResult Get_Payable(PayableViewModel pViewModel)
         {
             try
@@ -82,7 +83,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             pager = pViewModel.Grid_Detail.Pager;
 
-            pViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Vendor_Name,Purchase_Invoice_Date,Net_Amount,Balance_Amount,Payble_Status,Payament_Date", "Purchase_Invoice_Id,Vendor_ID"); // Set grid info for front end listing
+            pViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Vendor_Name,Purchase_Invoice_Date,Net_Amount,Balance_Amount,status,Payament_Date", "Purchase_Invoice_Id,Vendor_ID"); // Set grid info for front end listing
 
             pViewModel.Grid_Detail.Records = pRepo.Get_PurchaseInvoice(pViewModel.Payable); // Call repo method 
 
@@ -107,7 +108,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Payable_Details_By_Id(PayableViewModel pViewModel)
         {
-            PayableRepo pRepo = new PayableRepo();
+          
 
             try
 
@@ -153,7 +154,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Payable(PayableViewModel pViewModel)
         {
-            PayableRepo pRepo = new PayableRepo();
 
 
             try
@@ -187,8 +187,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Update_Payable(PayableViewModel pViewModel)
         {
-            PayableRepo pRepo = new PayableRepo();
-
 
             try
             {

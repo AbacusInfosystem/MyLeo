@@ -1,4 +1,5 @@
 ﻿$(function () {
+
     $("#frmPurchaseReturn").validate({
         rules: {
             //"PurchaseReturn.Debit_Note_No": {

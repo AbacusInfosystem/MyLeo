@@ -80,7 +80,7 @@ namespace MyLeoRetailerRepo
             return SalesOrderItems;
         }
 
-        public List<CreditNote> Get_Credit_Note_Details_By_Id(int Customer_Id) 
+        public List<CreditNote> Get_Credit_Note_Data_By_Id(int Customer_Id) 
         {
 
             List<CreditNote> CreditNote = new List<CreditNote>();
