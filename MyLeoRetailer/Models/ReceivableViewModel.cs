@@ -20,7 +20,7 @@ namespace MyLeoRetailer.Models
 
             Receivable = new ReceivableInfo();
 
-            Filter = new Filter_Receivable();
+            //Filter = new Filter_Receivable();
 
             FriendlyMessages = new List<FriendlyMessage>();
 
@@ -115,11 +115,11 @@ namespace MyLeoRetailer.Models
             set;
         }
 
-        public LoginInfo Cookies
-        {
-            get;
-            set;
-        }
+        //public LoginInfo Cookies
+        //{
+        //    get;
+        //    set;
+        //}
 
     }
 
