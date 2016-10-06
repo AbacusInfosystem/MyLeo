@@ -25,7 +25,7 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
-
+     
        public string Branch_Name
        {
            get;

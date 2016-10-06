@@ -50,7 +50,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Pay", rViewModel);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(ReceivableViewModel rViewModel)
         {
             try
             {
