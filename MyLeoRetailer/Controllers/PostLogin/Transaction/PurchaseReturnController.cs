@@ -162,11 +162,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             prViewModel.PurchaseReturn.Purchase_Order_Id = _purchaseorderRepo.Get_Purchase_Order_Invoice_By_Id(Purchase_Invoice_Id, SKU_Code);
             }
             //Added by vinod mane on 06/10/2016
-            catch (Exception ex)
-            {
-                prViewModel = new PurchaseReturnViewModel();
-            
-        }
+           
             catch (Exception ex)
             {
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
@@ -211,10 +207,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 Logger.Error("PurchaseReturn Controller - Get_Purchase_Return_Items_By_Vendor_And_PO :" + ex.ToString());
             }
-
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
-                Logger.Error("PurchaseReturn Controller - Get_Vendor_Details_By_Id : " + ex.ToString());
-            }
+                           
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 

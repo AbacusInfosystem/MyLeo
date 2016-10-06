@@ -286,88 +286,84 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-            var url = Convert.ToString(eViewModel.Page_URL);
+                var url = Convert.ToString(eViewModel.Page_URL);
 
-            var Branch_Ids = eRepo.Save_Change_BranchId(eViewModel.Employee_Branch_List);
+                var Branch_Ids = eRepo.Save_Change_BranchId(eViewModel.Employee_Branch_List);
 
-            var Branch_List = eRepo.Change_Branch_List(eViewModel.Employee_Branch_List);
+                var Branch_List = eRepo.Change_Branch_List(eViewModel.Employee_Branch_List);
 
-            eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            var User_Id = eViewModel.Cookies.User_Id; 
+                var User_Id = eViewModel.Cookies.User_Id;
 
-            Set_Branch_Cookies(User_Id, Branch_Ids, Branch_List);
+                Set_Branch_Cookies(User_Id, Branch_Ids, Branch_List);
 
-            eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("EMP03"));
 
-            eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
+                eViewModel.Employee_Branch_List = eViewModel.Employee_Branch_List;
 
-            eViewModel.Cookies.Branch_Ids = Branch_Ids;
-
-
+                eViewModel.Cookies.Branch_Ids = Branch_Ids;
 
 
-            //eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-            eViewModel.Cookies.Page_URL = url;
-
-            var split = url.Substring(23);
-
-            if (split == "")
-            {
-                split = " / /";
-            }
 
 
-            var temp = split.Split('/');
+                //eViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            var controller = "";
+                eViewModel.Cookies.Page_URL = url;
 
-            var method = "";
+                var split = url.Substring(23);
 
-
-            foreach (var item in temp)
-            {
-                for (int i = 0; i < 2; i++)
+                if (split == "")
                 {
-                    if (i == 0)
+                    split = " / /";
+                }
+
+
+                var temp = split.Split('/');
+
+
+                foreach (var item in temp)
+                {
+                    for (int i = 0; i < 2; i++)
                     {
-                        controller = temp[i];
-                        break;
+                        if (i == 0)
+                        {
+                            controller = temp[i];
+                            break;
+                        }
+                        else if (i == 1)
+                        {
+                            method = temp[i];
+                        }
+
                     }
-                    else if (i == 1)
-                    {
-                        method = temp[i];
-                    }
-                    
+
+                }
+
+
+                if (controller == "")
+                {
+                    controller = "Dashboard";
+                    method = "Index";
+                }
+
+                if (controller == "dashboard")
+                {
+                    method = "Index";
+                }
+
+
+                if (method == "")
+                {
+                    method = "Search";
                 }
 
             }
-                     
-
-            if(controller=="")
-            {
-                controller = "Dashboard";
-                method = "Index";
-            }
-
-            if (controller == "dashboard")
-            {
-                method = "Index";
-            }
-
-
-            if (method=="")
-            {
-                method = "Search";
-            }
-
-                
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
-            {               
+            {
                 eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
                 Logger.Error("Employee Controller - Set_Branch_Cookies" + ex.Message);
             }
