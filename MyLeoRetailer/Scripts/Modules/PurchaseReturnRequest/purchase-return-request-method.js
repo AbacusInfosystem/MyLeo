@@ -111,11 +111,11 @@ function AddPurchaseReturnRequestDetails(i) {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].WSR_Price' readonly value='' id='textWSR_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].WSR_Price' readonly value='0' id='textWSR_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Amount' readonly value='0' id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -285,6 +285,7 @@ function CalculateTotal() {
     $("#textTotalQuantity_0").val(sumQuantity);
     $("#textTotalAmount_0").val(sumWSRAmount.toFixed(2));
 
+    CalculateDiscount();
 }
 
 function CalculateDiscount() {
@@ -302,6 +303,9 @@ function CalculateDiscount() {
     $("#textGrossAmount_0").val(grossAmt.toFixed(2));
 
     $("#textGrossAmount_0").trigger('change');
+    
+    CalculateTax();
+
 }
 
 function CalculateTax() {
@@ -388,6 +392,7 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
     });
 
+    CalculateTotal();
     
 }
 

@@ -153,20 +153,20 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
-        public int Insert_SalesReturn(SalesReturnInfo salesReturn, List<SaleReturnItems> salesReturnItems, string Branch_Id)
+        public int Insert_SalesReturn(SalesReturnInfo salesReturn, List<SaleReturnItems> salesReturnItems)
         {
 
-            salesReturn.Sales_Credit_Note_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesCreditNote(salesReturn, Branch_Id), Storeprocedures.sp_Insert_Sales_Credit_Notes.ToString(), CommandType.StoredProcedure));
-
-            salesReturn.Sales_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesReturn(salesReturn, Branch_Id), Storeprocedures.sp_Insert_Sales_Return.ToString(), CommandType.StoredProcedure));
+            salesReturn.Sales_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesReturn(salesReturn), Storeprocedures.sp_Insert_Sales_Return.ToString(), CommandType.StoredProcedure));
 
             Insert_SalesReturn_Items(salesReturnItems, salesReturn, salesReturn.Sales_Return_Id);
+
+            salesReturn.Sales_Credit_Note_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_SalesCreditNote(salesReturn), Storeprocedures.sp_Insert_Sales_Credit_Notes.ToString(), CommandType.StoredProcedure));
 
             return salesReturn.Sales_Return_Id;
 
         }
 
-        private List<SqlParameter> Set_Values_In_SalesCreditNote(SalesReturnInfo salesReturn, string Branch_Id)
+        private List<SqlParameter> Set_Values_In_SalesCreditNote(SalesReturnInfo salesReturn)
         {
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
@@ -176,14 +176,25 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", salesReturn.Sales_Credit_Note_Id));
             }
 
-            if (Convert.ToInt32(Branch_Id) != 0)
+            if (salesReturn.Sales_Return_Id != 0)
             {
-                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+                sqlParams.Add(new SqlParameter("@Sales_Return_Id", salesReturn.Sales_Return_Id));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@Sales_Return_Id", 0));
+            }
+
+            if (salesReturn.Branch_Id != 0)
+            {
+                sqlParams.Add(new SqlParameter("@Branch_ID", salesReturn.Branch_Id));
             }
             else
             {
                 sqlParams.Add(new SqlParameter("@Branch_ID", 0));
             }
+
+            sqlParams.Add(new SqlParameter("@Status", 1));
 
             if (!string.IsNullOrEmpty(salesReturn.Sales_Return_No))
             {
@@ -194,16 +205,8 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Credit_Note_No", DBNull.Value));
             }
 
-            sqlParams.Add(new SqlParameter("@Credit_Note_Type", 2));
+            sqlParams.Add(new SqlParameter("@Credit_Note_Type", 1));
 
-            //if (salesReturn.Credit_Note_Type != 0)
-            //{
-            //    sqlParams.Add(new SqlParameter("@Credit_Note_Type", 2));
-            //}
-            //else
-            //{
-            //    sqlParams.Add(new SqlParameter("@Credit_Note_Type", 0));
-            //}
       
             if (salesReturn.Total_Amount_Return_By_Credit_Note != 0)
             {
@@ -229,7 +232,7 @@ namespace MyLeoRetailerRepo
             return sqlParams;
         }
 
-        private List<SqlParameter> Set_Values_In_SalesReturn(SalesReturnInfo salesReturn, string Branch_Id)
+        private List<SqlParameter> Set_Values_In_SalesReturn(SalesReturnInfo salesReturn)
         {
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
@@ -247,23 +250,13 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Sales_Return_No", DBNull.Value));
             }
-            if (Convert.ToInt32(Branch_Id) != 0)
+            if (salesReturn.Branch_Id != 0)
             {
-                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+                sqlParams.Add(new SqlParameter("@Branch_ID", salesReturn.Branch_Id));
             }
             else
             {
                 sqlParams.Add(new SqlParameter("@Branch_ID", 0));
-            }
-            
-
-            if (salesReturn.Sales_Credit_Note_Id != 0)
-            {
-                sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", salesReturn.Sales_Credit_Note_Id));
-            }
-            else
-            {
-                sqlParams.Add(new SqlParameter("@Sales_Credit_Note_Id", 0));
             }
 
             if (salesReturn.Customer_Id != 0)
@@ -274,6 +267,9 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Customer_Id", 0));
             }
+
+            sqlParams.Add(new SqlParameter("@Sales_Return_Date", salesReturn.Sales_Return_Date));
+
             if (salesReturn.Total_Quantity != 0)
             {
                 sqlParams.Add(new SqlParameter("@Total_Quantity", salesReturn.Total_Quantity));
@@ -379,6 +375,99 @@ namespace MyLeoRetailerRepo
             }
 
             return check;
+        }
+
+        public SalesReturnInfo Get_Sales_Return_By_Id(int Sales_Return_Id)
+        {
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Sales_Return_Id", Sales_Return_Id));
+
+            SalesReturnInfo salesreturn = new SalesReturnInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Return_Details_By_Sales_Return_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    salesreturn = Get_Sales_Return_Values(dr);
+                }
+            }
+
+            return salesreturn;
+        }
+
+        private SalesReturnInfo Get_Sales_Return_Values(DataRow dr)
+        {
+            SalesReturnInfo salesreturn = new SalesReturnInfo();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+
+            salesreturn.Sales_Return_No = Convert.ToString(dr["Sales_Return_No"]);
+            salesreturn.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
+            salesreturn.Sales_Return_Date = Convert.ToDateTime(dr["Sales_Return_Date"]);
+            salesreturn.Customer_Id = Convert.ToInt32(dr["Customer_Id"]);
+            salesreturn.Customer_Name = Convert.ToString(dr["Customer_Name"]);
+            salesreturn.Mobile = Convert.ToString(dr["Customer_Mobile1"]);
+            salesreturn.Gross_Amount = Convert.ToInt32(dr["Gross_Amount"]);
+            salesreturn.Total_Amount_Return_By_Cash = Convert.ToInt32(dr["Total_Amount_Return_By_Cash"]);
+            salesreturn.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+            salesreturn.Total_Amount_Return_By_Credit_Note = Convert.ToInt32(dr["Total_Amount_Return_By_Credit_Note"]);
+
+            return salesreturn;
+        }
+
+        public List<SaleReturnItems> Get_Sales_Return_Items_By_Id(int Sales_Return_Id)
+        {
+            List<SaleReturnItems> SaleReturnItemList = new List<SaleReturnItems>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Sales_Return_Id", Sales_Return_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Return_Items_By_Sales_Return_Id.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    SaleReturnItems list = new SaleReturnItems();
+
+                    if (!dr.IsNull("Sales_Invoice_No"))
+                        list.Sales_Invoice_No = Convert.ToString(dr["Sales_Invoice_No"]);
+                    if (!dr.IsNull("SKU_Code"))
+                        list.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+                    if (!dr.IsNull("Article_No"))
+                        list.Article_No = Convert.ToString(dr["Article_No"]);
+                    if (!dr.IsNull("Quantity"))
+                        list.Quantity = Convert.ToInt32(dr["Quantity"]);
+                    if (!dr.IsNull("Brand_Name"))
+                        list.Brand = Convert.ToString(dr["Brand_Name"]);
+                    if (!dr.IsNull("Category"))
+                        list.Category = Convert.ToString(dr["Category"]);
+                    if (!dr.IsNull("Sub_Category"))
+                        list.SubCategory = Convert.ToString(dr["Sub_Category"]);
+                    if (!dr.IsNull("Size_Name"))
+                        list.Size_Name = Convert.ToString(dr["Size_Name"]);
+                    if (!dr.IsNull("Colour_Name"))
+                        list.Colour_Name = Convert.ToString(dr["Colour_Name"]);
+                    if (!dr.IsNull("MRP_Amount"))
+                        list.MRP_Price = Convert.ToInt32(dr["MRP_Amount"]);
+                    if (!dr.IsNull("Total_Amount"))
+                        list.Amount = Convert.ToInt32(dr["Total_Amount"]);
+                    if (!dr.IsNull("Discount_Percentage"))
+                        list.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
+                    if (!dr.IsNull("Return_Reason"))
+                        list.Return_Reason = Convert.ToString(dr["Return_Reason"]);
+
+                    SaleReturnItemList.Add(list);
+                }
+            }
+
+            return SaleReturnItemList;
         }
 
     }

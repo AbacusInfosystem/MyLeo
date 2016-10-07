@@ -100,6 +100,63 @@
     <!-- END SCRIPTS -->         
 
 
+        <style>
+            .form-group {
+                margin-bottom: 15px !important;
+            }
+
+            .table > thead > tr > th {
+                color: #fff !important;
+                font-size: 12px !important;
+                background-color: #29343f !important;
+                font-weight: 600 !important;
+            }
+
+            .table > thead > tr > th {
+                /*text-align: center;*/
+            }
+
+            .table-hover > tbody > tr:hover {
+                background-color: #eee;
+            }
+
+            .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+                border-color: rgba(153, 153, 153, 0.13) !important;
+            }
+
+            .modal-header, .modal-body, .modal-footer {
+                background: rgba(0, 0, 0, 0.06) !important;
+            }
+
+            .modal-body {
+                padding: 0;
+            }
+
+            .modal-content {
+                border-width: 0 !important;
+                border-radius: 0 !important;
+            }
+
+            .label-read {
+                background-color: transparent;
+                color: #33414e;
+                font-size: 14px;
+                font-weight: 600;
+                border: 1px solid #33414e;
+            }
+
+            .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+                background: #ddd;
+                border-radius: 50%;
+            }
+
+            .iradio_minimal-grey.checked {
+                background: #e34724;
+                border-radius: 50%;
+            }
+        </style>
+
+
     </head>
     <body>
 
@@ -129,12 +186,12 @@
 
         <audio id="audio-fail" src="/Content/Atlant/audio/fail.mp3" preload="auto"></audio>
         <!-- END PRELOADS -->    
-        @*@{
+        @{
             LoginInfo cookies = new LoginInfo();
-            //cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+            cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             <input type="hidden" id="hdnCookiesBranches" name="CookiesBranches" value="@cookies.Branch_Ids"/>
-        }*@
+        }
         
         <input type="hidden" id="hdnLookupLabelId" name="Label" />
         <input type="hidden" id="hdnLookupHiddenId" name="Hidden" />
@@ -143,7 +200,7 @@
 
         <div class="modal fade" id="div_Parent_Modal_Fade" role="dialog" aria-hidden="true">
             <div class="modal-dialog ">
-                <div class="modal-content edit_modal_content">
+                <div class="modal-content" style="background: #f5f5f5 url('../Content/Atlant/img/bg.png') left top repeat; ">
                     <div class="modal-header" id="div_Parent_Modal_Header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#fff;">x</button>
                         <h4 class="modal-title">&nbsp;</h4>
@@ -157,6 +214,8 @@
                 </div>
             </div>
         </div>
+
+
 
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
@@ -175,6 +234,9 @@
                 </div>
             </div>
         </div>
+
+
+       
                       
     </body>
 </html>
@@ -216,4 +278,6 @@
 			}
 		});
 	});
+
+
 </script>

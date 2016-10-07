@@ -13,6 +13,7 @@
         success: function (data) {
 
             $('#txtCustomer_Name').val(data.Customer_Name);
+
             $('#hdnCustomer_ID').val(data.Customer_Id);
 
         }
@@ -88,7 +89,7 @@ function AddSalesReturnDetails(i)
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Product_MRP' data-col='Product_Id,SKU_Code' data-headernames='SKU_Code'/>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Sales_Invoice_Item' data-col='Sales_Invoice_Id,SKU_Code' data-headernames='SKU_Code' name='SKU_Code_" + i + "' data-param='hdnSalesInvoiceID_" + i + "' data-field='Sales_Invoice_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='SaleReturnItemList[" + i + "].SKU_Code' class='auto-complete-label' />";
@@ -141,7 +142,7 @@ function AddSalesReturnDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -159,6 +160,8 @@ function AddSalesReturnDetails(i)
 
     myTable.append(newRow);
 
+    Add_Validation(i);
+
 }
 
 function DeleteSalesReturnDetailsData(i)
@@ -171,6 +174,8 @@ function DeleteSalesReturnDetailsData(i)
     CalculateTotal();
 
     CalculateCreditNoteAmt();
+
+    Add_Validation(i);
 
 }
 
@@ -293,4 +298,11 @@ function ReArrangeSalesReturnDetailsData()
           
         }
     });
+}
+
+function Add_Validation(i) {
+
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Required", } });
+
 }

@@ -1,6 +1,8 @@
 ﻿
 
-$(function () {
+
+
+$(document).ready(function () {
 
     if ($("#hdnPayment_Status1").val() == 1)
     {

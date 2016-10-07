@@ -67,7 +67,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Tax_Percentage", purchasereturnrequest.Tax_Percentage));
             sqlParams.Add(new SqlParameter("@Round_Off_Amount", purchasereturnrequest.Round_Off_Amount));
             sqlParams.Add(new SqlParameter("@Net_Amount", purchasereturnrequest.Net_Amount));
-            sqlParams.Add(new SqlParameter("@Status", true));
+            sqlParams.Add(new SqlParameter("@Status", purchasereturnrequest.Status));
             sqlParams.Add(new SqlParameter("@Is_Active", true));
 
             if (purchasereturnrequest.Purchase_Return_Request_Id == 0)
@@ -99,6 +99,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Created_By", purchasereturnrequestitem.Created_By));
             sqlParams.Add(new SqlParameter("@Updated_Date", purchasereturnrequestitem.Updated_Date));
             sqlParams.Add(new SqlParameter("@Updated_By", purchasereturnrequestitem.Updated_By));
+            sqlParams.Add(new SqlParameter("@Status", purchasereturnrequestitem.Status));
 
             return sqlParams;
         }
@@ -202,8 +203,23 @@ namespace MyLeoRetailerRepo
             return PurchaseReturnRequestItem;
         }
 
+        public DataTable Get_Purchase_Return_Requests(Request_Filter filter, string Branch_Ids)
+        {
 
-        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests(ref Pagination_Info Pager, string Branch_Ids, int Vendor_Id)
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Branch_Ids", Branch_Ids));
+
+            sqlParam.Add(new SqlParameter("@Vendor_Id", filter.Vendor_Id));
+
+            dt = _sqlRepo.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Purchase_Return_Requests.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
+
+        public List<PurchaseReturnRequestInfo> Get_Purchase_Return_Requests_List(ref Pagination_Info Pager, string Branch_Ids, int Vendor_Id)
         {
             List<PurchaseReturnRequestInfo> PurchaseReturnRequests = new List<PurchaseReturnRequestInfo>();
 
@@ -232,7 +248,7 @@ namespace MyLeoRetailerRepo
             purchasereturnrequest.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
             purchasereturnrequest.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
             purchasereturnrequest.Total_Amount = Convert.ToDecimal(dr["Total_Amount"]);
-            purchasereturnrequest.Status = Convert.ToBoolean(dr["Status"]);
+            purchasereturnrequest.Status = Convert.ToInt32(dr["Status"]);
             purchasereturnrequest.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
             //
             if (!dr.IsNull("Vendor_Name"))
@@ -247,5 +263,52 @@ namespace MyLeoRetailerRepo
 
 
 
+
+        public PurchaseReturnRequestInfo Get_Purchase_Return_Request_Details_By_Id(int Purchase_Return_Request_Id)
+        {
+            PurchaseReturnRequestInfo PurchaseReturnRequest = new PurchaseReturnRequestInfo();
+            //sp_Get_Purchase_Return_Request_Details
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+            sqlParams.Add(new SqlParameter("@Purchase_Return_Request_Id", Purchase_Return_Request_Id));
+
+            DataTable dt = _sqlRepo.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Return_Request_Details.ToString(), CommandType.StoredProcedure);
+
+            if (dt.Rows.Count > 0)
+            {
+                PurchaseReturnRequest.Vendor_Name = dt.Rows[0]["Vendor_Name"].ToString();
+                PurchaseReturnRequest.Branch_Name = dt.Rows[0]["Branch_Name"].ToString();
+                PurchaseReturnRequest.Purchase_Invoice_No = dt.Rows[0]["Purchase_Invoice_No"].ToString();
+                PurchaseReturnRequest.Total_Quantity = Convert.ToDecimal(dt.Rows[0]["Total_Quantity"].ToString());
+                PurchaseReturnRequest.Total_Amount = Convert.ToDecimal(dt.Rows[0]["Total_Amount"].ToString());
+                PurchaseReturnRequest.Discount_Percentage = Convert.ToDecimal(dt.Rows[0]["Discount_Percentage"].ToString());
+                PurchaseReturnRequest.Discount_Amount = Convert.ToDecimal(dt.Rows[0]["Discount_Amount"].ToString());
+                PurchaseReturnRequest.Gross_Amount = Convert.ToDecimal(dt.Rows[0]["Gross_Amount"].ToString());
+                PurchaseReturnRequest.Tax_Percentage = Convert.ToDecimal(dt.Rows[0]["Tax_Percentage"].ToString());
+                PurchaseReturnRequest.Round_Off_Amount = Convert.ToDecimal(dt.Rows[0]["Round_Off_Amount"].ToString());
+                PurchaseReturnRequest.Net_Amount = Convert.ToDecimal(dt.Rows[0]["Net_Amount"].ToString());
+            }
+
+            foreach(DataRow dr in dt.Rows)
+            {
+                PurchaseReturnRequest.PurchaseReturnRequestItems.Add(Get_Purchase_Return_Request_Items(dr));
+            }
+
+            return PurchaseReturnRequest;
+        }
+
+        private PurchaseReturnRequestItemInfo Get_Purchase_Return_Request_Items(DataRow dr)
+        {
+            PurchaseReturnRequestItemInfo PurchaseReturnRequestItem = new PurchaseReturnRequestItemInfo(); 
+            //PurchaseReturnRequestItem.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+
+            if (!string.IsNullOrEmpty(Convert.ToString(dr["SKU_Code"])))
+                PurchaseReturnRequestItem = Get_Purchase_Return_Item_By_SKU_Code(Convert.ToString(dr["SKU_Code"]));
+
+            PurchaseReturnRequestItem.Total_Amount = Convert.ToDecimal(dr["amount"]);
+            PurchaseReturnRequestItem.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+            PurchaseReturnRequestItem.Quantity = Convert.ToInt32(dr["Quantity"]);
+
+            return PurchaseReturnRequestItem;
+        }
     }
 }

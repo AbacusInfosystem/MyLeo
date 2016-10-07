@@ -121,6 +121,27 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+            #region Payable
+
+            FriendlyMessage PYND01 = new FriendlyMessage("PYND01", MessageType.Success, "Payable Added successfully.");
+            hash.Add("PYND01", PYND01);
+
+            FriendlyMessage PYND02 = new FriendlyMessage("PYND02", MessageType.Success, "Payable Updated successfully.");
+            hash.Add("PYND02", PYND02);
+
+
+            #endregion
+
+
+            #region Receivable
+
+            FriendlyMessage RECI01 = new FriendlyMessage("RECI01", MessageType.Success, "Receivable Added successfully.");
+            hash.Add("RECI01", RECI01);
+
+            FriendlyMessage RECI02 = new FriendlyMessage("RECI02", MessageType.Success, "Receivable Updated successfully.");
+            hash.Add("RECI02", RECI02);
+
+            #endregion
 
             #region SizeGroup
 
@@ -148,7 +169,7 @@ namespace MyLeoRetailer.Common
             FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
             hash.Add("EMP01", EMP01);
 
-            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
+            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
             hash.Add("EMP02", EMP02);
 
             //Addition by swapnali | Date:16/09/2016
@@ -342,6 +363,17 @@ namespace MyLeoRetailer.Common
 
             FriendlyMessage PRR02 = new FriendlyMessage("PRR02", MessageType.Success, "Purchase Return Request updated successfully.");
             hash.Add("PRR02", PRR02);
+
+            #endregion
+
+
+            #region Product Dispatch
+
+            FriendlyMessage PD01 = new FriendlyMessage("PD01", MessageType.Success, "Request for Product Dispatch is Raised successfully.");
+            hash.Add("PD01", PD01);
+
+            FriendlyMessage PD02 = new FriendlyMessage("PD02", MessageType.Success, "Request for Product Dispatch is Accepted successfully.");
+            hash.Add("PD02", PD02);
 
             #endregion
 

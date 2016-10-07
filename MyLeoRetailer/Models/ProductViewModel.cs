@@ -28,7 +28,9 @@ namespace MyLeoRetailer.Models
 
             ProductImages = new List<ProductImagesInfo>();
 
-            //ProductColors = new List<ProductColorInfo>(); 
+            //ProductSKU = new ProductSKUInfo();
+
+            //ProductSKUs = new List<ProductSKUInfo>(); 
 
             ProductMRP = new ProductMRPInfo();
 
@@ -43,7 +45,7 @@ namespace MyLeoRetailer.Models
             Color = new ColorInfo();
             Colours = new List<int>();
             Colors = new List<ColorInfo>();
-
+            ProductDescription = new List<ProductDescription>();
             Filter = new Filter_Product(); 
 
             FriendlyMessages = new List<FriendlyMessage>();
@@ -53,12 +55,14 @@ namespace MyLeoRetailer.Models
             Grid_Detail.Pager.CallBackMethod = "Get_Products";
         }
 
-        //public List<VendorInfo> Vendors { get; set; }
+        //public List<ProductSKUInfo> ProductSKUs { get; set; }
+        //public ProductSKUInfo ProductSKU { get; set; }
         public List<SizeGroupInfo> SizeGroups { get; set; }
         public List<CategoryInfo> Categories { get; set; }
         public List<SubCategoryInfo> SubCategories { get; set; }
         public List<BrandInfo> Brands { get; set; }
         public List<ColorInfo> Colors { get; set; }
+        public List<ProductDescription> ProductDescription { get; set; }  
         public List<int> Colours { get; set; }
         public ColorInfo Color { get; set; }
 

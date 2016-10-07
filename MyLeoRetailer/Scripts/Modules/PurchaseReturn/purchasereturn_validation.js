@@ -1,9 +1,10 @@
 ﻿$(function () {
+
     $("#frmPurchaseReturn").validate({
         rules: {
-            "PurchaseReturn.Debit_Note_No": {
-                required: true
-            },
+            //"PurchaseReturn.Debit_Note_No": {
+            //    required: true
+            //},
 
             "PurchaseReturn.Vendor_Id": {
                 required: true
@@ -38,9 +39,9 @@
         },
         messages: {
 
-            "PurchaseReturn.Debit_Note_No": {
-                required: "Debit note no is required."
-            },
+            //"PurchaseReturn.Debit_Note_No": {
+            //    required: "Debit note no is required."
+            //},
 
             "PurchaseReturn.Vendor_Id": {
                 required: "Vendor name is required."
@@ -78,18 +79,17 @@
     jQuery.validator.addMethod("checkSKUExist", function (value, element) {
         var result = true;
         var id = $(element).attr('id')
-        id = id.replace("textSKU_No_", "");
+        id = id.replace("hdnSKU_No_", "");
 
         $("#tblPurchaseReturnItems").find("[id^='PurchaseReturnItemRow_']").each(function (j, row) {
 
-            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+            if (id != j && $(element).val() == $("#hdnSKU_No_" + j).val()) {
                 result = false;
             }
         });
 
         return result;
     }, "Already mapped.");
-
-    //$("#textSKU_No_0").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+    
 
 });

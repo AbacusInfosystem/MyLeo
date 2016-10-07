@@ -26,9 +26,13 @@
            
             $("#divBankName").show();
             $("#divCreditCardNo").show();
+
+
         } else {
             $("#divBankName").hide();
             $("#divCreditCardNo").hide();
+
+          
         }
     }
        
@@ -36,9 +40,19 @@
         if ($(this).val() == 2) {
             $("#divBankName").show();
             $("#divCreditCardNo").show();
+
+            //Added by vinod mane on 28/09/2016
+            $("#bankname").val("");
+            $("#creditcardno").val("");
+            //End
         } else {
             $("#divBankName").hide();
             $("#divCreditCardNo").hide();
+
+            //Added by vinod mane on 28/09/2016
+            $("#bankname").val("");
+            $("#creditcardno").val("");
+            //End
         }
     });
 });

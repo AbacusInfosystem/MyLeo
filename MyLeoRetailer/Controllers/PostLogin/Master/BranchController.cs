@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Branch;
 using MyLeoRetailerInfo.Common;
@@ -37,6 +38,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Branch Controller - Index : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
             return View("Index", bViewModel);
         }
@@ -53,19 +55,28 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Branch Controller - Search : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
             return View("Search", bViewModel);
         }
 
         public ActionResult Get_Branch_By_Id(BranchViewModel bViewModel)
-        {  
-            bViewModel.Branch = bRepo.Get_Branch_By_Id(bViewModel.Branch.Branch_ID);
+        {
+            try
+            {
+                bViewModel.Branch = bRepo.Get_Branch_By_Id(bViewModel.Branch.Branch_ID);
 
-            //bViewModel.Branch.NearLocationDetailsList = bRepo.Get_Near_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+                //bViewModel.Branch.NearLocationDetailsList = bRepo.Get_Near_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
 
-            //bViewModel.Branch.FarLocationDetailsList = bRepo.Get_Far_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+                //bViewModel.Branch.FarLocationDetailsList = bRepo.Get_Far_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
 
-            bViewModel.Branch.LocationDetailsList = bRepo.Get_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+                bViewModel.Branch.LocationDetailsList = bRepo.Get_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+            }
+            catch (Exception ex)
+            {
+                bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Branch Controller - Get_Branch_By_Id : " + ex.ToString());//Added by vinod mane on 06/10/2016
+            }
 
             return View("Index", bViewModel);
         }
@@ -96,6 +107,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Branch Controller - Insert_Branch : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             TempData["bViewModel"] = bViewModel;
@@ -131,6 +143,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Branch Controller - Update_Branch : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             TempData["bViewModel"] = bViewModel;
@@ -169,9 +182,30 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Branch Controller - Get_Branchs : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(bViewModel));
         }
+
+
+
+        //Added By Vinod Mane on 27/09/2016
+        public JsonResult Check_Existing_Branch_Name(string Branch_Name)
+        {
+            bool check = false;
+            BranchViewModel bViewModel = new BranchViewModel();//Added by vinod mane on 06/10/2016
+            try
+            {
+                check = bRepo.Check_Existing_Branch_Name(Branch_Name);
+            }
+            catch (Exception ex)
+            {
+                bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
+                Logger.Error("Branch Controller - Check_Existing_Branch_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        //End
     }
 }

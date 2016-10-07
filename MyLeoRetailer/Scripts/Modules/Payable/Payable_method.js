@@ -1,11 +1,11 @@
 ﻿
-function Get_Payable(Purchase_Invoice_Id, Purchase_Credit_Note_Id) {
+function Get_Payable(Purchase_Invoice_Id) {
 
     alert(Purchase_Credit_Note_Id);
   
     $("#hdf_Purchase_Invoice_Id").val(Purchase_Invoice_Id);
 
-    $("#hdf_Purchase_Credit_Note_Id").val(Purchase_Credit_Note_Id);
+    //$("#hdf_Purchase_Credit_Note_Id").val(Purchase_Credit_Note_Id);
    
     $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");
     $("#frmPayable").submit();
@@ -67,11 +67,27 @@ function CalculateDiscount() {
 
     $("#txtFinal_amount").val(finalamount.toFixed(2));
 
-    //$("#txtAmount_due").val(finalamount.toFixed(2));
+}
 
-    //var finalamount2 = finalamount - paidamount;
+function FinalAmount() {
 
-    //$("#txtFinal_amount").val(finalamount2.toFixed(2));
+    debugger;
+
+    var FinalAmount = parseFloat($("#txtFinal_amount").val());
+
+    var PaidAmount = parseFloat($("#txtPaid_Amount").val());
+
+    var abcamount = FinalAmount - PaidAmount;
+
+    $("#txtFinal_amount").val(abcamount.toFixed(2));
+
+    document.getElementById("txtPaid_Amount").disabled = true;
+
+}
+
+function Cancle() {
+
+    document.getElementById("txtPaid_Amount").disabled = false;
 
 }
 
@@ -166,6 +182,8 @@ function Save_Payable_Data() {
 
             //Get_Brands();
 
+            Friendly_Messages(obj);
+
             //Friendly_Messages(obj);
 
         }
@@ -226,11 +244,43 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<tr>";
 
-        htmlText += "<td>";
+       
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Payment_Mode == null ? "" : data.Payables[i].Payment_Mode;
+
+        htmlText += data.Payables[i].Payment_Mode1 == null ? "" : data.Payables[i].Payment_Mode1;
+
+        //htmlText += showPayableDate == null ? "" : showPayableDate;
+
+        htmlText += "<input type='hidden' id='hdnPayment_Mode" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payment_Mode + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnPaid_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Paid_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Card_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Card_No + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnDebit_Card_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Debit_Card_No + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCheque_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Cheque_No + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnBank_Name" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Bank_Name + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCheque_Date" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Cheque_Date + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnPayable_Item_Id" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payable_Item_Id + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnPayable_Id" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payable_Id + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Purchase_Credit_Note_Id + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Note_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Note_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnDiscount_Percentage" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Discount_Percentage + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnDiscount_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Discount_Amount + "'/>";
+
+        //htmlText += "<input type='hidden' id='hdnPayable_Date" + data.Payables[i].Payable_Item_Id + "' value='" + showPayableDate + "'/>";
+
 
         htmlText += "</td>";
 
@@ -260,7 +310,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Payables[i].Cheque_Date;
+        htmlText += data.Payables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Payables[i].Cheque_Date.substring(0, 10);
 
         htmlText += "</td>";
 
@@ -294,37 +344,8 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "</td>";
 
-        //htmlText += showPayableDate == null ? "" : showPayableDate;
-
-        htmlText += "<input type='hidden' id='hdnPayment_Mode" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payment_Mode + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnPaid_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Paid_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCredit_Card_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Card_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnDebit_Card_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Debit_Card_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCheque_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Cheque_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnBank_Name" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Bank_Name + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCheque_Date" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Cheque_Date + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnPayable_Item_Id" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payable_Item_Id + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnPayable_Id" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payable_Id + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Note_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCredit_Note_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Note_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnDiscount_Percentage" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Discount_Percentage + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnDiscount_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Discount_Amount + "'/>";
-
-        //htmlText += "<input type='hidden' id='hdnPayable_Date" + data.Payables[i].Payable_Item_Id + "' value='" + showPayableDate + "'/>";
-
-        htmlText += "</td>";
+        
+        
 
         //if (data.Payable.Status != "Payment Done") {
         htmlText += "<td>";
@@ -392,7 +413,7 @@ function EditPayableData(id) {
 
     $("#txtCheque_Date").val($("#hdnCheque_Date" + id).val());
 
-    $('[name = "Payable.Credit_Note_No"]').val($("#hdnCredit_Note_No" + id).val());
+    $('[name = "Payable.Purchase_Credit_Note_Id"]').val($("#hdnCredit_Note_No" + id).val());
 
     $("#txtCN_amount").val($("#hdnCredit_Note_Amount" + id).val());
 
@@ -413,6 +434,9 @@ function EditPayableData(id) {
     total_bal_amount = parseFloat(Balance_amount) + parseFloat(paid_amount);
 
     $("#txtAmount_due").val(total_bal_amount);
+
+    $("#txtFinal_amount").val(total_bal_amount);
+
 
     //$("#txtFinal_amount").val(total_bal_amount);
 
@@ -471,5 +495,11 @@ function ClearPayableData() {
   
     $("#txtFinal_amount").val('');
 
-    $("#dp-2").val('');
+    $("#txtPerson_Name").val('');
+
+    $("#txtRemark").val('');
+
+    $("#txtPayament_Date").val('');
+
+    
 }

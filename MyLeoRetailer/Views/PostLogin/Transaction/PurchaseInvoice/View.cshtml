@@ -1,0 +1,435 @@
+﻿@model MyLeoRetailer.Models.Transaction.PurchaseInvoiceViewModel
+
+<script src="~/Scripts/Modules/PurchaseInvoice/search_purchaseinvoice_methods.js"></script>
+<script src="~/Scripts/Modules/PurchaseInvoice/search_purchaseinvoice_events.js"></script>
+<script src="~/Scripts/Modules/PurchaseInvoice/purchaseinvoice_validation.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+
+
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
+
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+</style>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Purchase Invoice</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Invoice</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <form id="frmPurchaseInvoice">
+
+            <div class="box box-default">
+
+                <div class="box-body">
+
+
+                    <div class="row">
+
+                        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 350px;">
+                            <div class="block">
+
+                                <input type="hidden" class="form-control input-sm" name="PurchaseInvoice.Purchase_Invoice_Id" id="hdf_PurchaseInvoiceId" value="@Model.PurchaseInvoice.PurchaseInvoices[0].Purchase_Invoice_Id">
+
+                                <h4 style="margin-top: 0px;"><b>Primary information.</b></h4><br /><br />
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Purchase Invoice No.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Purchase_Invoice_No</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Purchase Invoice Date.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Purchase_Invoice_Date.ToShortDateString()</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Challan No.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Challan_No</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Challan Date.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Challan_Date.ToShortDateString()</span>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 350px;">
+                            <div class="block">
+
+                                <h4 style="margin-top: 0px;"><b>Vendor details.</b></h4><br /><br />
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Vendor Name.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Vendor_Name</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Vendor address.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Vendor_Address</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Vat No.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Vendor_Vat_No</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 350px;">
+                            <div class="block">
+
+                                <h4 style="margin-top: 0px;"><b>Against form details.</b></h4><br /><br />
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Against Form.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Against_Form</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Against Form no.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Against_Form_No</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Against Form Date.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Against_Form_Date.ToShortDateString()</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 350px;">
+                            <div class="block">
+
+                                <h4 style="margin-top: 0px;"><b>Packing details.</b></h4><br /><br />
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Purchase Packing no.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Purchase_Packing_No</span>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label" style="color: #33414e">Purchase Packing Date.</label>
+                                    <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Purchase_Packing_Date.ToShortDateString()</span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="block" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 10px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                        <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 18px;">Purchase Invoice Details</h4>
+                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                            <input type="hidden" id="hdnRowIdspecific" value="0" />
+                            <table class="table table-hover" id="tblPurchaseInvoiceItems">
+                                <thead>
+                                    <tr>
+                                        <th style="width:150px">SKU No.</th>
+                                        <th style="width:70px">Article No.</th>
+                                        <th style="width:100px">Color</th>
+                                        <th style="width:100px">Brand</th>
+                                        <th style="width:100px">Category</th>
+                                        <th style="width:100px">Sub Category</th>
+                                        <th style="width:100px">Size Group</th>
+                                        <th style="width:60px">Size</th>
+                                        <th style="width:60px">Quantity</th>
+                                        <th style="width:60px">WSR</th>
+                                        <th style="width:60px">Total Amount</th>
+                                        <th style="width:150px">PO No.</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+
+                                        if (Model.PurchaseInvoice.PurchaseInvoices.Count > 0)
+                                        {
+
+                                            foreach (var item in Model.PurchaseInvoice.PurchaseInvoices)
+                                            {
+
+                                                <tr>
+                                                    <td>@item.SKU_Code</td>
+                                                    <td>@item.Article_No</td>
+                                                    <td>@item.Color</td>
+                                                    <td>@item.Brand</td>
+                                                    <td>@item.Category</td>
+                                                    <td>@item.SubCategory</td>
+                                                    <td>@item.Size_Group_Name</td>
+                                                    <td>@item.Size_Name</td>
+                                                    <td>@item.Quantity</td>
+                                                    <td>@item.WSR_Price</td>
+                                                    <td>@item.Amount</td>
+                                                    <td>@item.Purchase_Order_No</td>
+
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                    <tr style="background: rgba(74,77,67,0.09);"></tr>
+
+                                    <tr>
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Summary</span></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Total Qty</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Total_Quantity</span></th>
+
+
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">WSR Amount</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Total_Amount</span></th>
+
+                                        <th style="width: 10%;"></th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th></th>
+                                        <th></th>
+
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Discount</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Discount_Percentage</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Discount_Amount</span></th>
+                                        <th style="width: 10%;"></th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Gross Amount</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Gross_Amount</span></th>
+                                        <th style="width: 10%;"></th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Tax_Percentage</span></th>
+                                        <th style="width: 10%;"></th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Round Off Amount</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Round_Off_Amount</span></th>
+                                        <th style="width: 10%;"></th>
+                                    </tr>
+
+                                    <tr>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 6%;"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
+                                        <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Net Amount</span></th>
+                                        <th><span class="label label-primary label-form label-read" style="margin-bottom: 1px; background: rgba(74,77,67,0.09);">@Model.PurchaseInvoice.PurchaseInvoices[0].Net_Amount</span></th>
+                                        <th style="width: 10%;"></th>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div><!-- /.col -->
+                    </div>
+
+
+                    <div class="row">
+                       
+                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
+                            <div class="block">
+
+                                <h4 style="margin-top: 0px;"><b>Payment terms.</b></h4><br /><br />
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label" style="color: #33414e">Payment due Date.</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Payment_Due_Date.ToShortDateString()</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label" style="color: #33414e">Discount%.</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Discount_Percentage_Before_Due_Date</span>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+
+
+                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
+                            <div class="block">
+
+                                <h4 style="margin-top: 0px;"><b>Transport details.</b></h4><br /><br />
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label" style="color: #33414e">Transporter name.</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Transporter_Name</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label" style="color: #33414e">Lr.no.</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Lr_No</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label" style="color: #33414e">Lr Date.</label>
+                                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseInvoice.PurchaseInvoices[0].Lr_Date.ToShortDateString()</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

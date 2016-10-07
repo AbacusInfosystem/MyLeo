@@ -19,6 +19,7 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
+
        public int Sales_Invoice_Id
        {
            get;
@@ -74,6 +75,12 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
+       public int Customer_Id
+       {
+           get;
+           set;
+       }
+
        public decimal Cash_Amount
        {
            get;
@@ -122,7 +129,7 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
-       public decimal Total_MRP_Amount
+       public decimal Net_Amount
        {
            get;
            set;

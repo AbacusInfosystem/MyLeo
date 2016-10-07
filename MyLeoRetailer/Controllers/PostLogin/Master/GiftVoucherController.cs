@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
@@ -34,6 +35,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("GiftVoucher Controller - Search  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
 
@@ -53,6 +55,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("GiftVoucher Controller - Index  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
 
@@ -69,6 +72,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("GiftVoucher Controller - Print  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return View("Print", gvViewModel);
@@ -84,6 +88,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 Set_Date_Session(gvViewModel.GiftVoucher);
 
+
                 gvViewModel.GiftVoucher.Gift_Voucher_Id = gvRepo.Insert_Gift_Voucher(gvViewModel.GiftVoucher);
 
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("GVAT01"));
@@ -91,6 +96,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("GiftVoucher Controller - Insert_Gift_Voucher  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["gvViewModel"] = (GiftVoucherViewModel)gvViewModel;
@@ -111,6 +117,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("GiftVoucher Controller - Update_Gift_Voucher  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["gvViewModel"] = (GiftVoucherViewModel)gvViewModel;
@@ -151,6 +158,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("GiftVoucher Controller - Get_Gift_Vouchers  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(gvViewModel));
@@ -158,8 +166,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Gift_Voucher_By_Id(GiftVoucherViewModel gvViewModel)
         {
+            try
+            {
+                gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.GiftVoucher.Gift_Voucher_Id);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-            gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.GiftVoucher.Gift_Voucher_Id);
+                Logger.Error("GiftVoucher Controller - Get_Gift_Voucher_By_Id  " + ex.Message);
+            }
+            //End
 
             return View("Index", gvViewModel);
         }

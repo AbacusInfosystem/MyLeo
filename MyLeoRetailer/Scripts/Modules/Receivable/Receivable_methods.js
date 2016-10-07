@@ -6,10 +6,11 @@ function Get_Receivables(Sales_Invoice_Id, Sales_Credit_Note_Id) {
 
     $("#hdf_Sales_Credit_Note_Id").val(Sales_Credit_Note_Id);
 
-    //$("#hdf_Gift_Voucher_Id").val(Gift_Voucher_Id);
-
     $("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id");
     $("#frmReceivable").submit();
+
+    //Bind_Receivable_Grid_Items(data);
+
 }
 
 function Get_Credit_Note_Amount_By_Id(id) {
@@ -35,14 +36,36 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
         contentType: 'application/json',
 
-        success: function (response) {
+        success: function (response) {            
 
             var obj = $.parseJSON(response);
 
             $("[name='Receivable.Credit_Note_Amount']").val(obj.Receivable.Credit_Note_Amount);
 
-            $("[name='Receivable.Credit_Note_Date']").val(obj.Receivable.Credit_Note_Date);
+            $("[name='Receivable.Credit_Note_Date']").val(obj.Receivable.Credit_Note_Date.substring(0, 10));
 
+            //$("#drpCredit_Note_No").html("");
+
+            //$("#drpCredit_Note_No").append("<option value=''>Select Credit Note no.</option>");
+
+            //$("#drpCredit_Note_No").parents('.form-group').find('ul').html("");
+
+            //$("#drpCredit_Note_No").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Credit Note no.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+
+            //if (obj.PurchaseOrder.Vendors.length > 0) {
+
+            //    for (var j = 0; j < obj.PurchaseOrder.Vendors.length; j++) {
+            //        debugger;
+                                       
+            //        var i = j + 1;
+                   
+            //        $("#drpCredit_Note_No").append("<option value='" + obj.PurchaseOrder.Vendors[j].Article_No + "'>" + obj.PurchaseOrder.Vendors[j].Article_No + "</option>");
+
+            //        $("#drpCredit_Note_No").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Vendors[j].Article_No + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+            //    }
+            //}
         }
     });
 }
@@ -99,40 +122,105 @@ function CalculateDiscount() {
 
     var cardamount = parseFloat($("#txtCard_Amount").val());
 
-    if (cashamount == 0) {
+    var total = 0;
 
-        paidamount = chequeamount +  creditnoteamount + giftvoucheramount + cardamount;
-    }
+    var PaidAmount = 0;
 
-    else if (chequeamount == 0)
+    total = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+    if (total > oldbalanceamount)
     {
-        paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
+        ClearReceivableData();
     }
-
-    else if (creditnoteamount == 0)
+    else
     {
+        $("#txtPaid_Amount").val(total.toFixed(2));
 
-        paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
+        BalanceAmount();
+
+        document.getElementById("txtPaid_Amount").disabled = true;
     }
 
-    else if (giftvoucheramount == 0) {
+    
 
-        paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
-    }
+    //if (cashamount == 0) {
 
-    else {
+    //    paidamount = chequeamount + creditnoteamount + giftvoucheramount + cardamount;
 
-        paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount;
-    }
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (chequeamount == 0)
+    //{
+    //    paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (creditnoteamount == 0)
+    //{
+
+    //    paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (giftvoucheramount == 0) {
+
+    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
+
+    //else if (cardamount == 0)
+    //{
+
+    //    paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount;
+
+       
+    //}
+
+    //else {
+
+    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount + giftvoucheramount;
+
+    //    var newbalanceamount = oldbalanceamount - paidamount
+
+    //    //var newbalanceamount = oldbalanceamount - paidamount
+    //}
    // var paidamount = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
 
-    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+   
 
-    var newbalanceamount = oldbalanceamount - paidamount;
+    //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+    //$("#txtPaid_Amount").enabled = false;
+   
+ 
+    
+
+}
+
+function BalanceAmount() {
+
+    debugger;
+
+
+    var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
+
+    var PaidAmount =  parseFloat($("#txtPaid_Amount").val());
+
+    var newbalanceamount = oldbalanceamount - PaidAmount;
 
     $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
 
-    
+
+
+}
+
+function Cancle() {
+
+    document.getElementById("txtPaid_Amount").disabled = false;
 
 }
 
@@ -159,7 +247,7 @@ function Save_Receivable_Data() {
 
 		        Gift_Voucher_No: $("[name='Receivable.Gift_Voucher_No']").val(),
 
-		        Total_MRP_Amount: $("[name='Receivable.Total_MRP_Amount']").val(),
+		        Net_Amount: $("[name='Receivable.Net_Amount']").val(),
 
 		        Paid_Amount: $("[name='Receivable.Paid_Amount']").val(),
 
@@ -172,6 +260,10 @@ function Save_Receivable_Data() {
 		        Gift_Voucher_Amount: $("[name='Receivable.Gift_Voucher_Amount']").val(),
 
 		        Cheque_Date: $("[name='Receivable.Cheque_Date']").val(),
+
+		        Branch_ID: $("[name='Receivable.Branch_ID']").val(),
+
+		        Branch_Name: $("[name='Receivable.Branch_Name']").val(),
 
 		        Cheque_No: $("[name='Receivable.Cheque_No']").val(),
 
@@ -211,7 +303,11 @@ function Save_Receivable_Data() {
 
             var obj = $.parseJSON(response);
 
-            Bind_Payable_Grid_Items(obj);
+            Bind_Receivable_Grid_Items(obj);
+
+            Friendly_Messages(obj);
+
+            Cancle();
 
             //Friendly_Messages(obj);
 
@@ -220,7 +316,9 @@ function Save_Receivable_Data() {
 
 }
 
-function Bind_Payable_Grid_Items(data) {
+function Bind_Receivable_Grid_Items(data) {
+
+    alert(12);
 
     $("#tblReceivableItems").html("");
 
@@ -230,9 +328,13 @@ function Bind_Payable_Grid_Items(data) {
 
     $("#hdnReceivable_Id").val(data.Receivable.Receivable_Id),
 
+     $("#hdf_Sales_Credit_Note_Id").val(data.Receivable.Sales_Credit_Note_Id),
+
+    $("#hdf_Gift_Voucher_Id").val(data.Receivable.Gift_Voucher_Id),
+
     $("#hdnSales_Invoice_Id").val(data.Receivable.Sales_Invoice_Id),
 
-   // $("#txtTotal_MRP_Amount").val(data.Receivable.Total_MRP_Amount),
+    $("#txtNet_Amount").val(data.Receivable.Net_Amount),
 
     $("#txtBalance_Amount").val(data.Receivable.Balance_Amount);
 
@@ -241,8 +343,6 @@ function Bind_Payable_Grid_Items(data) {
         htmlText += "<tr>";
 
         htmlText += "<th>Paid Amount</th>";
-
-        //htmlText += "<th>Total Amount</th>";
 
         htmlText += "<th>Cash Amount</th>";
 
@@ -268,6 +368,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<th>Gift voucher amount</th>";
 
+        htmlText += "<th></th>"
       
 
     }
@@ -281,6 +382,47 @@ function Bind_Payable_Grid_Items(data) {
         htmlText += "<td>";
 
         htmlText += data.Receivables[i].Paid_Amount == null ? "" : data.Receivables[i].Paid_Amount;
+
+
+        htmlText += "<input type='hidden' id='hdnPaid_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Paid_Amount + "'/>";
+
+        //htmlText += "<input type='hidden' id='hdnTotal_MRP_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Total_MRP_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCash_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cash_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCheque_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cheque_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCheque_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cheque_No + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCheque_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cheque_Date + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnPayament_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivable.Payament_Date + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnBranchID" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivable.Branch_ID + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnBranchName" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivable.Branch_Name + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnBank_Name" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Bank_Name + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Sales_Credit_Note_Id + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Note_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Note_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_Date + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCredit_Card_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Card_No + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnCard_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Card_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnGift_Voucher_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_Id + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnGift_Voucher_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnReceivable_Item_Id" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Receivable_Item_Id + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnReceivable_Id" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Receivable_Id + "'/>";
+
+
 
         htmlText += "</td>";
 
@@ -310,7 +452,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Receivables[i].Cheque_Date;
+        htmlText += data.Receivables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Receivables[i].Cheque_Date.substring(0, 10);
 
         htmlText += "</td>";
 
@@ -335,7 +477,13 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Credit_Note_Date == "1/1/1999" ? "NA" : data.Receivables[i].Credit_Note_Date;
+        htmlText += data.Receivables[i].Credit_Note_Date == "1/1/1999" ? "NA" : data.Receivables[i].Credit_Note_Date.substring(0, 10);
+
+        //Added By Vinod Mane on 23/09/2016
+        //var Customer_DOB = new Date(obj.Customer.Customer_DOB);
+        //Customer_DOB = (Customer_DOB.getDate().toString() + "-" + (Customer_DOB.getMonth() + 1).toString() + "-" + Customer_DOB.getFullYear());
+        //$("[name='Customer.Customer_DOB']").val(Customer_DOB);
+        //End
 
         htmlText += "</td>";
 
@@ -363,43 +511,9 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "</td>";
 
-        htmlText += "<td>";
-
         //htmlText += showPayableDate == null ? "" : showPayableDate;
 
-        htmlText += "<input type='hidden' id='hdnPaid_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Paid_Amount + "'/>";
-
-        //htmlText += "<input type='hidden' id='hdnTotal_MRP_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Total_MRP_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCash_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cash_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCheque_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cheque_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCheque_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cheque_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCheque_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Cheque_Date + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnBank_Name" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Bank_Name + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCredit_Note_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCredit_Note_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCredit_Card_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Card_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCredit_Note_Date" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Credit_Note_Date + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnCard_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Card_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnGift_Voucher_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_No + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnGift_Voucher_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_Amount + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnReceivable_Item_Id" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Receivable_Item_Id + "'/>";
-
-        htmlText += "<input type='hidden' id='hdnReceivable_Id" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Receivable_Id + "'/>";
-
-        htmlText += "</td>";
+             
 
         //if (data.Payable.Status != "Payment Done") {
         htmlText += "<td>";
@@ -455,6 +569,8 @@ function ClearReceivableData() {
 
     $("#txtGift_Voucher_Amount").val('');
 
+    $("#text_Branch_Name").val('');
+
 }
 
 function EditReceivableData(id) {
@@ -476,7 +592,11 @@ function EditReceivableData(id) {
 
     $("#txtCheque_No").val($("#hdnCheque_No" + id).val());
 
+    $("#a123").val($("#hdnCheque_Date" + id).val());
+
     $("#txtCheque_Date").val($("#hdnCheque_Date" + id).val());
+
+    $("#txtPayament_Date").val($("#hdnPayament_Date" + id).val());
 
     $("#txtBank_Name").val($("#hdnBank_Name" + id).val());
 
@@ -492,11 +612,28 @@ function EditReceivableData(id) {
 
     $("#hdnReceivable_Item_Id").val($("#hdnReceivable_Item_Id" + id).val());
 
-    $('[name = "Receivable.Credit_Note_No"]').val($("#hdnCredit_Note_No" + id).val());
+    $('[name = "Receivable.Sales_Credit_Note_Id"]').val($("#hdnCredit_Note_No" + id).val());
 
-    $('[name = "Receivable.Gift_Voucher_No"]').val($("#hdnGift_Voucher_No" + id).val());
+    $('[name = "Receivable.Gift_Voucher_Id"]').val($("#hdnGift_Voucher_No" + id).val());
 
     $("#hdnReceivable_Id").val($("#hdnReceivable_Id" + id).val());
+
+
+    //edited by sushant for Branch
+
+    //$('[name = "Receivable.Branch_Name"]').val($("#hdnBranchName" + id).val());
+
+    //$('[name = "Receivable.Gift_Voucher_Id"]').val($("#hdnGift_Voucher_No" + id).val());
+
+    $("#text_Branch_Name").val($("#hdnBranchName" + id).val());
+
+    $("#hdnBranchID").val($("#hdnBranchID" + id).val());
+
+
+    if ($('#text_Branch_Name').val() != 0)
+
+        $("#divBranch").find(".autocomplete-text").trigger("focusout");
+
 
     Balance_amount = $("#txtBalance_Amount").val();
 
@@ -508,7 +645,6 @@ function EditReceivableData(id) {
 
 
 }
-
 
 
 

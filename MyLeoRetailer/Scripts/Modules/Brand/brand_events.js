@@ -20,5 +20,9 @@ $(document).ready(function () {
         Get_Brands();
     });
 
-
+    //Added By Vinod Mane on 27/09/2016
+    $(document).on("change", "#hdnBrandID", function () {
+        Get_Brands();
+    });
+    //End
 });

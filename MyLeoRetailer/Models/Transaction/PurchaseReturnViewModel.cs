@@ -10,7 +10,7 @@ using System.Web;
 
 namespace MyLeoRetailer.Models.Transaction
 {
-    public class PurchaseReturnViewModel: IGridInfo, IQueryInfo
+    public class PurchaseReturnViewModel : IGridInfo, IQueryInfo
 	{
         public PurchaseReturnViewModel() 
 		{
@@ -18,7 +18,7 @@ namespace MyLeoRetailer.Models.Transaction
 
 			Query_Detail = new QueryInfo();
 
-			PurchaseReturn = new  PurchaseReturnInfo();
+            PurchaseReturn = new PurchaseReturnInfo();
 
 			Filter = new Filter_Purchase_Return();
 
@@ -31,6 +31,12 @@ namespace MyLeoRetailer.Models.Transaction
 			Grid_Detail.Pager.DivObject = "divPurchaseReturnPager";
 
             Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Returns";
+
+            //Added by vinod mane on 29/09/2016
+         //   PurchaseReturnList = new List<PurchaseReturnInfo>();
+
+
+            //End
 		}
 
 		public GridInfo Grid_Detail
@@ -45,7 +51,7 @@ namespace MyLeoRetailer.Models.Transaction
 			set;
 		}
 
-		public  PurchaseReturnInfo PurchaseReturn
+        public PurchaseReturnInfo PurchaseReturn
 		{
 			get;
 			set;
@@ -75,16 +81,9 @@ namespace MyLeoRetailer.Models.Transaction
             set;
         }
 
+       // public List<PurchaseReturnInfo> PurchaseReturnList { get; set; }//Added by vinod mane on 29/09/2016
+
 
 	}
 
-	public class Filter_Purchase_Return
-	{
-        public string Debit_Note_No
-		{
-			get;
-			set;
-		}
-
-	}
 }

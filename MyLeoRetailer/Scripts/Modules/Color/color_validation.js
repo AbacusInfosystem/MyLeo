@@ -20,14 +20,17 @@ $(document).ready(function () {
 
 	$("#frmColor").validate({
 		rules: {
-		    "Color.Colour": { required: true },
+		   // "Color.Colour": { required: true },
 
-            "Color.Color_Code":{required: true},
+		    "Color.Color_Code": { required: true },
+		    "Color.Colour_Code":{ required: true },
             "Color.Colour": { required: true, validate_Colour: true },
 		},
 		messages: {
 
-            "Color.Colour": { required: "Color is required." }
+		    "Color.Colour": { required: "Color is required." },
+		    "Color.Colour_Code": { required: "Color is required." },
+             "Color.Color_Code": { required: "Color Code is required." }
         }
     });
 

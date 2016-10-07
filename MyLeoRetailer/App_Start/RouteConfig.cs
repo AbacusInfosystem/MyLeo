@@ -117,8 +117,39 @@ namespace MyLeoRetailer
            defaults: new { controller = "Tax", action = "Check_Existing_Tax_name", Tax_name = UrlParameter.Optional, id = UrlParameter.Optional },
            namespaces: new string[] { "MyLeoRetailer.Controllers" });
             //End
+                      
 
-           
+            #endregion
+
+            #region Cusatomer
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "customer-1",
+           url: "customer/check-customer-name/{customer_name}",
+           defaults: new { controller = "Customer", action = "Check_Existing_Customer_Name", customer_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+            #endregion
+
+            #region Vendor
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "vendor-1",
+           url: "vendor/check-vendor-name/{vendor_name}",
+           defaults: new { controller = "Vendor", action = "Check_Existing_Vendor_Name", vendor_name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+            #endregion
+
+            #region Branch
+
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "Branch-1",
+           url: "Branch/check-Branch-name/{Branch_Name}",
+           defaults: new { controller = "Branch", action = "Check_Existing_Branch_Name", Branch_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
 
             #endregion
 
@@ -136,6 +167,14 @@ namespace MyLeoRetailer
             //url: "employee/save-branch",
             //defaults: new { controller = "Employee", action = "Save_Employee_Branch_Id", user_Name = UrlParameter.Optional, id = UrlParameter.Optional },
             //namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
+            //Added By Vinod Mane on 27/09/2016
+            routes.MapRoute(
+           name: "employee-2",
+           url: "employee/check-employee-name/{employee_Name}",
+           defaults: new { controller = "Employee", action = "Check_Existing_Employee_Name", employee_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
             //End
 
             #endregion
@@ -289,6 +328,12 @@ namespace MyLeoRetailer
             defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Requests", id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
+            routes.MapRoute(
+            name: "purchase-return-request-7",
+            url: "purchase-return-request/view-purchase-return-request",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Request_Details_By_Id", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            
             
 
 

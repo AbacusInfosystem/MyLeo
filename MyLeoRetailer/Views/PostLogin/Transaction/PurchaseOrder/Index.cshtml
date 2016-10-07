@@ -18,10 +18,13 @@
 
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
-        <div class="page-title">
-            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purhase order Management</h2>
+        <div class="col-md-12">
+            <div class="page-title">
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purhase order Management</h2>
+            </div>
+            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "PurchaseOrder")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+            </div>
         </div>
-    </div>
 
 </div>
 <!-- END CONTENT FRAME -->
@@ -40,10 +43,10 @@
 
                     <h4 style="margin-top: 0px;">Primary information.</h4>
 
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order No.</span>
                         <input type="text" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_No" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Purchase_Order_No" placeholder="Enter purchase order no." />
-                    </div>
+                    </div>*@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order Date.</span>
@@ -311,7 +314,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Base rate.</span>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price"  id="textPurchase_Price" placeholder="Enter base rate." />*@
-                        <input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price" maxlength="10" name="PurchaseOrder.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." />
+                        <input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price" maxlength="5" name="PurchaseOrder.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." />
                     </div>
                 </div>
             </div>
@@ -331,7 +334,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size difference.</span>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />*@
-                        <input type="text" class="form-control" maxlength="10" value="@Model.PurchaseOrder.Size_Difference" name="PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />
+                        <input type="text" class="form-control" maxlength="5" value="@Model.PurchaseOrder.Size_Difference" name="PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />
                     </div>
                 </div>
             </div>

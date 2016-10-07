@@ -18,7 +18,7 @@ $(function () {
 
         Get_SizeGroup_By_Id(this);
 
-        Get_Sizes();
+       // Get_Sizes(); //commited by aditya
 
     });
 
@@ -41,7 +41,7 @@ $(function () {
     });
 
     //Added By Vinod Mane on 22/09/2016
-    $(document).on("change", "#hdnSize_Group_Name", function () {
+    $(document).on("change", "#hdnSizeGroup_Name", function () {
         Get_SizeGroups();
     });
 

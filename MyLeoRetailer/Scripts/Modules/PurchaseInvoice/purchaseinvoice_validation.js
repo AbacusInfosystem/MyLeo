@@ -3,9 +3,9 @@
     $("#frmPurchaseInvoice").validate({       
 
         rules: {
-            "PurchaseInvoice.Purchase_Invoice_No": {
-                required: true
-            },
+            //"PurchaseInvoice.Purchase_Invoice_No": {
+            //    required: true
+            //},
 
             "PurchaseInvoice.Vendor_Id": {
                 required: true
@@ -53,9 +53,9 @@
         },
         messages: {
 
-            "PurchaseInvoice.Purchase_Invoice_No": {
-                required: "Purchase Invoice No. is required."
-            },
+            //"PurchaseInvoice.Purchase_Invoice_No": {
+            //    required: "Purchase Invoice No. is required."
+            //},
 
             "PurchaseInvoice.Vendor_Id": {
                 required: "Vendor name is required."
@@ -105,11 +105,11 @@
     jQuery.validator.addMethod("checkSKUExist", function (value, element) {
         var result = true;
         var id = $(element).attr('id')
-        id = id.replace("textSKU_No_", "");
+        id = id.replace("hdnSKU_No_", "");
 
         $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
 
-            if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
+            if (id != j && $(element).val() == $("#hdnSKU_No_" + j).val()) {
                 result = false;
             }
         });

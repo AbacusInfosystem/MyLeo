@@ -417,6 +417,32 @@ namespace MyLeoRetailerRepo
         }
 
 
+        //Added By Vinod Mane on 27/09/2016
+        public bool Check_Existing_Branch_Name(string Branch_Name)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Branch_Name", Branch_Name));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Branch_Name.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_Branch_name"]);
+                }
+            }
+
+            return check;
+        }
+        //End
 
 	}
 }

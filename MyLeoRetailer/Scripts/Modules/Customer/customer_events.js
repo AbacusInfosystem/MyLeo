@@ -17,7 +17,7 @@
 
             $("#hdnCreateCustomerFlag").val();
 
-            alert($("#hdnCreateCustomerFlag").val());
+            //alert($("#hdnCreateCustomerFlag").val());
 
             if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0)
             {

@@ -25,9 +25,29 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             bRepo = new BrandRepo();
         }
 
-		public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        public ActionResult Index(BrandViewModel bViewModel)
         {
-			return View();
+            
+            //Added by vinod mane on 06/10/2016
+            try
+            {
+                if (TempData["bViewModel"] != null)
+                {
+                    bViewModel = (BrandViewModel)TempData["bViewModel"];
+                }
+            }
+            catch (Exception ex)
+            {
+                bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Brand Controller - Index : " + ex.ToString());
+            }
+            return View("Index", bViewModel);
+            //End
         }
 
 		public JsonResult Insert_Brand(BrandViewModel bViewModel)
@@ -43,6 +63,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Brand Controller - Insert_Brand  " + ex.Message);//Added by vinod mane on 06/10/2016
 			}
 
 			return Json(JsonConvert.SerializeObject(bViewModel));
@@ -62,6 +83,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Brand Controller - Update_Brand  " + ex.Message);//Added by vinod mane on 06/10/2016
 			}
 
 			return Json(JsonConvert.SerializeObject(bViewModel));
@@ -98,6 +120,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			catch(Exception ex)
 			{
 				bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Brand Controller - Get_Barnds  " + ex.Message);//Added by vinod mane on 06/10/2016
 			}
 
 			return Json(JsonConvert.SerializeObject(bViewModel));
@@ -113,6 +136,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Brand Controller - Get_Brand_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(bViewModel));
@@ -122,12 +146,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         public JsonResult Check_Existing_Brand_Name(string brand_Name)
         {
             bool check = false;
+            BrandViewModel bViewModel = new BrandViewModel();//Added by vinod mane on 06/10/2016
             try
             {
                 check = bRepo.Check_Existing_Brand_Name(brand_Name);
             }
             catch (Exception ex)
             {
+                bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
                 Logger.Error("Brand Controller - Check_Existing_Brand_Name : " + ex.ToString());
             }
             return Json(check, JsonRequestBehavior.AllowGet);

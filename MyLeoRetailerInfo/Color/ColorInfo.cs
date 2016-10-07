@@ -12,7 +12,8 @@ namespace MyLeoRetailerInfo.Color
 
         public ColorInfo()
 		{
-            ProductMRP_N_WSR = new List<ProductMRPInfo>();
+            ProductMRPs = new List<ProductMRPInfo>();
+            ProductDescription = new List<ProductDescription>();
 		}
 
 		public int Colour_Id
@@ -37,12 +38,26 @@ namespace MyLeoRetailerInfo.Color
             get;
             set;
         }
+        //Commented by vinod mane on 27/09/2016
+        //public bool Is_Active 
+        //{
+        //    get;
+        //    set;
+        //}
+        //End
 
-        public bool IsActive
+        //Added by Vinod Mane on 27/09/2016
+        public int IsActive
         {
             get;
             set;
         }
+        public bool Is_Active
+        {
+            get;
+            set;
+        }
+        //End
         
 		public DateTime Created_Date
 		{
@@ -69,9 +84,15 @@ namespace MyLeoRetailerInfo.Color
 		{
 			get;
 			set;
-		} 
+		}
+
+        public string Vendor_Color_Code { get; set; }
 
         public List<ProductMRPInfo> ProductMRP_N_WSR { get; set; }
 
-	}
+        public List<ProductDescription> ProductDescription { get; set; }
+
+
+        public IEnumerable<object> ProductMRPs { get; set; }
+    }
 }

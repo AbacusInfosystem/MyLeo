@@ -1,9 +1,12 @@
 ﻿$(document).ready(function () {
 
+    $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "Required", digits: "Invalid quantity." } });
+    $("#textSKU_No_0").rules("add", { required: true,checkSKUExist: true, messages: { required: "Required field", } });
+
+
     $('#dtpInvoice_Date').datepicker({
 
-
-        dateFormat: "dd-mm-yy",
+        dateFormat: "dd-MM-yy",
         changeMonth: true,
         changeYear: true,
         minDate: 0,
@@ -11,17 +14,12 @@
 
     });
 
-    //CalculateTotal();
 
     debugger
 
     if ($('#hdnSalesInvoiceID').val() != 0) {
 
-        alert($('#hdnSalesInvoiceID').val());
-
         debugger;
-
-        //$('#delete-salesorder-details').attr("disabled", "disabled");
 
         $('#btnAddInputRow').attr("disabled", "disabled");
 
@@ -38,6 +36,8 @@
 
     CalculateTax();
 
+    Get_Gift_Voucher_Details();
+
 });
 
 $(function ()
@@ -47,17 +47,44 @@ $(function ()
     $("[name='SalesInvoice.Mobile']").focusout(function ()
     {
         Get_Customer_Name_By_Mobile_No();
+
+    });
+
+
+    $('[name = "SalesInvoice.Sales_Credit_Note_Id"]').change(function () {
+
+        Get_Credit_Note_Amount_By_Id($(this).val());
+
+    });
+
+    $('[name = "SalesInvoice.Gift_Voucher_Id"]').change(function () {
+
+        Get_Gift_Voucher_Amount_By_Id($(this).val());
+
     });
 
 
     $("#btnSaveSalesOrder").click(function ()
     {
-   
-        $("#frmSalesOrder").attr("action", "/SalesOrder/Insert_SalesOrder/");
+        debugger;
 
-        $('#frmSalesOrder').attr("method", "POST");
+        $("#tblSalesOrderItems").find("[id^='SalesOrderItemRow_']").each(function (i, row)
+        {
+            Add_Validation(i);
+        });
 
-        $('#frmSalesOrder').submit();
+        if ($("#frmSalesOrder").valid()) {
+
+            if ($('#tblSalesOrderItems tbody tr').length > 0) {
+
+                $("#frmSalesOrder").attr("action", "/SalesOrder/Insert_SalesOrder/");
+
+                $('#frmSalesOrder').attr("method", "POST");
+
+                $('#frmSalesOrder').submit();
+
+            }
+        }
 
     });
 
@@ -70,16 +97,10 @@ $(function ()
 
         alert($("#hdnCreateCustomerFlag").val());
 
-        //$("#hdnInvoiceDate").val();
-        
-        //alert($("#hdnInvoiceDate").val());
-
-        //$("#hdnMobileNo").val();
-
-        //alert($("#hdnMobileNo").val());
-
         $('#txtInvoice_No').removeClass("login-error");
         $('#txtInvoice_No').rules("remove");
+
+        $('#textSKU_No_0').rules("remove");
 
         $('#dtpInvoice_Date').removeClass("login-error");
         $('#dtpInvoice_Date').rules("remove");
@@ -98,8 +119,36 @@ $(function ()
 
     });
 
-
 });
+
+function CalculateQuantityMRP()
+{
+    debugger;
+
+    var sumQuantity = 0;
+    var sumMRPAmount = 0;
+    //var mrpAmt = 0;
+
+    var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
+
+    if (tr.size() > 0) {
+        for (var i = 0; i < tr.size() ; i++)
+        {
+            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+            //$("#textMRP_Price_" + i).val(mrpAmt);
+
+            //mrpAmt = Qty * MRP
+            sumQuantity = sumQuantity + Qty;
+            sumMRPAmount = MRP * Qty + sumMRPAmount;
+           
+        }
+        //$("#textMRP_Price_" + i).val(mrpAmt);
+    }
+    //$("#textMRP_Price_" + i).val(mrpAmt);
+    $("#textTotalQuantity_0").val(sumQuantity);
+    $("#textMRPAmount_0").val(sumMRPAmount.toFixed(2));
+}
 
 function CalculateTotal()
 {
@@ -167,6 +216,8 @@ function CalculateTax() {
     $("#textTaxAmount_0").val(taxAmt.toFixed(2));
     $("#textRoundOff_0").val(fracPart.toFixed(2));
     $("#textNETAmount_0").val(Math.round(netAmt));
+    $("#textTotalAmount").val(Math.round(netAmt));
+
 
 }
 
@@ -188,6 +239,69 @@ function CalculateDiscountAmount()
     }
 }
 
+function CalculatePaidAmt() {
+
+    debugger;
+
+
+    var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
+
+    var chequeamount = parseFloat($("#txtCheque_Amount").val());
+
+    var cashamount = parseFloat($("#txtCash_amount").val());
+
+    var creditnoteamount = parseFloat($("#txtCredit_Note_Amount").val());
+
+    var giftvoucheramount = parseFloat($("#txtGift_Voucher_Amount").val());
+
+    var cardamount = parseFloat($("#txtCard_Amount").val());
+
+    if (cashamount == 0) {
+
+        paidamount = chequeamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    else if (chequeamount == 0) {
+        paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    else if (creditnoteamount == 0) {
+
+        paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
+    }
+
+    else if (giftvoucheramount == 0) {
+
+        paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
+    }
+
+    else {
+
+        paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    // var paidamount = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+
+    //var newbalanceamount = oldbalanceamount - paidamount;
+
+    //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+
+}
+
+function CalculateBalAmt()
+{
+    var oldbalanceamount = parseFloat($("#textTotalAmount").val());
+
+    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+
+    var newbalanceamount = oldbalanceamount - paidamount;
+
+    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+}
 
 
 //$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()

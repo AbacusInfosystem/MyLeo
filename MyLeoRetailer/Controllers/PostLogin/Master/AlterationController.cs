@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -34,12 +35,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 }
 
                 //aViewModel.Employees = eRepo.Get_Employees();
+                aViewModel.Employees = bRepo.Get_Employees();//Added by vinod mane on 28/09/2016
 
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Index  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
             return View("Index", aViewModel);
         }
@@ -56,6 +59,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Search  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
             return View("Search", aViewModel);
         }
@@ -73,6 +77,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Insert_Alteration  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             TempData["aViewModel"] = (AlterationViewModel)aViewModel;
@@ -93,6 +98,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Update_Alteration  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
  
@@ -124,12 +130,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 aViewModel.Grid_Detail.Records = bRepo.Get_Alterations(aViewModel.Query_Detail); // Call repo method 
 
                 Set_Pagination(pager, aViewModel.Grid_Detail); // set pagination for grid
+               
+               
 
                 aViewModel.Grid_Detail.Pager = pager;
             }
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Alteration Controller - Get_Alterations  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(aViewModel));
@@ -142,12 +151,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Alteration.Alteration_ID);
 
                 //aViewModel.Employees = eRepo.Get_Employees();
-
+                aViewModel.Employees = bRepo.Get_Employees();//Added by vinod mane on 28/09/2016
                 aViewModel.SalesInvoices = bRepo.Get_SalesInvoices();
             }
             catch (Exception ex)
             {
                 aViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("Alteration Controller - Get_Alteration_By_Id  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return View("Index", aViewModel);

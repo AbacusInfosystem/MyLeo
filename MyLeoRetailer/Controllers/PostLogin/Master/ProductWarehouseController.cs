@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -55,11 +56,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("ProductWarehouse Controller - Get_WarehouseProducts  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
-       
     }
 }

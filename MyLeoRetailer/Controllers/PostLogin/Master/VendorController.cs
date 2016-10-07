@@ -1,6 +1,7 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
+using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
@@ -42,20 +43,26 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             _taxRepo = new TaxRepo();
 
         }
-      
+
         public ActionResult Index(VendorViewModel vViewModel)
         {
+            try
+            {
+                vViewModel.Categories = _categoryRepo.drp_Get_Categories();
 
-            vViewModel.Categories = _categoryRepo.drp_Get_Categories();
+                vViewModel.Brands = _brandRepo.drp_Get_Brands();
 
-            vViewModel.Brands = _brandRepo.drp_Get_Brands();
+                // vViewModel.SubCategorys = _subcategoryRepo.drp_Get_Sub_Categories();//commented by Vinod on 21/09/2016
 
-           // vViewModel.SubCategorys = _subcategoryRepo.drp_Get_Sub_Categories();//commented by Vinod on 21/09/2016
+                vViewModel.VATS = _taxRepo.drp_Get_VAT();
 
-            vViewModel.VATS = _taxRepo.drp_Get_VAT();
-
-            vViewModel.CSTS = _taxRepo.drp_Get_CST();
-
+                vViewModel.CSTS = _taxRepo.drp_Get_CST();
+            }
+            catch (Exception ex)
+            {
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Vendor Controller - Index : " + ex.ToString());//Added by vinod mane on 06/10/2016
+            }
             return View("Index", vViewModel);
         }
 
@@ -72,6 +79,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Vendor Controller - Search : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             return View("Search", vViewModel);
@@ -109,13 +117,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Vendor Controller - Get_Vendors : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             return Json(JsonConvert.SerializeObject(vViewModel));
         }
 
         public ActionResult Insert_Vendor(VendorViewModel vViewModel)
-        {           
+        {
 
             try
             {
@@ -128,6 +137,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                Logger.Error("Vendor Controller - Insert_Vendor : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             //return Json(JsonConvert.SerializeObject(vViewModel));
@@ -139,7 +149,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Get_Vendor_By_Id(VendorViewModel vViewModel)
         {
-          
+
             try
             {
                 vViewModel.Vendor = vRepo.Get_Vendor_By_Id(vViewModel.Filter.Vendor_Id);
@@ -156,14 +166,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-               
+                Logger.Error("Vendor Controller - Get_Vendor_By_Id : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             return Index(vViewModel);
         }
 
         public ActionResult Update_Vendor(VendorViewModel vViewModel)
-        {            
+        {
 
             try
             {
@@ -176,7 +186,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             catch (Exception ex)
             {
                 vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
+                Logger.Error("Vendor Controller - Update_Vendor : " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
 
             TempData["vViewModel"] = (VendorViewModel)vViewModel;
@@ -187,9 +197,39 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         //Added By Vinod Mane on 21/09/2016
         public JsonResult Get_SubCategorylist(int Caterory_id)
         {
-            VendorRepo vRepo = new VendorRepo();
-            var result = vRepo.Get_SubCategorylist(Caterory_id);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            VendorViewModel vViewModel = new VendorViewModel();//Added by vinod mane on 06/10/2016
+            try
+            {
+                // VendorRepo vRepo = new VendorRepo();
+                //var result = vRepo.Get_SubCategorylist(Caterory_id); 
+                vViewModel.Vendors_Sub_Cat = vRepo.Get_SubCategorylist(Caterory_id);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Vendor Controller - Get_SubCategorylist : " + ex.ToString());
+            }
+            //End
+            return Json(vViewModel.Vendors_Sub_Cat, JsonRequestBehavior.AllowGet);
+        }
+        //End
+
+        //Added By Vinod Mane on 28/09/2016
+        public JsonResult Check_Existing_Vendor_Name(string vendor_name)
+        {
+            bool check = false;
+            VendorViewModel vViewModel = new VendorViewModel();//Added by vinod mane on 06/10/2016
+            try
+            {
+                check = vRepo.Check_Existing_Vendor_Name(vendor_name);
+            }
+            catch (Exception ex)
+            {
+                vViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));//Added by vinod mane on 06/10/2016
+                Logger.Error("Vendor Controller - Check_Existing_Vendor_Name : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
         }
         //End
     }
