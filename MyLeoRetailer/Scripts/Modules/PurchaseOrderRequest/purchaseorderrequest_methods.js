@@ -989,6 +989,44 @@ function Reset_Details() {
     //document.getElementById("drpCenter_Size").selectedIndex = 0;
 }
 
+function Reset_Detalis_After_Delete() {
+
+    debugger;
+
+    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
+
+    j = temptablecount;
+
+    for (var i = 0; i < j; i++) {
+
+        var qty = $("#hdnTotal_Quantity_" + i).val();
+
+        var amt = $("#hdnTotal_Amount_" + i).val();
+
+        var total_qty = 0;
+
+        var total_amt = 0;
+
+        if (qty != 0 || qty != null) {
+
+            total_qty = parseInt(total_qty) + parseInt(qty);
+        }
+
+        if (amt != 0 || amt != null) {
+
+            total_amt = parseInt(total_amt) + parseInt(amt);
+        }
+
+        document.getElementById('tdTotalQuantity').innerText = total_qty;
+
+        document.getElementById('tdNetAmount').innerText = total_amt;
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(total_qty);
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(total_amt);
+    }
+}
+
 function DeletePurchaseOrderRequestDetailsData(i) {
 
     debugger;
@@ -996,6 +1034,8 @@ function DeletePurchaseOrderRequestDetailsData(i) {
     $("#tblPurchaseOrderRequestItems").find("[id='PurchaseOrderRequestItemRow_" + i + "']").remove();
 
     ReArrangePurchaseOrderRequestDetailsData();
+
+    Reset_Detalis_After_Delete();
         
 }
 
