@@ -109,7 +109,7 @@
 
                     <div class="block">
 
-                        <h4 style="margin-top: 0px;">Near Location information.</h4>
+                        <h4 style="margin-top: 0px;">Near Location information.</h4> @*Added by Sushant on 07/10/2016*@
 
                         <div class="col-md-10">
                             <div class="form-group">
@@ -145,7 +145,7 @@
                                             if (itm.Branch_Location_Flag == 1)
                                             {
                                                 <tr id="tr@(i)">
-                                                    <td>txtFar_Location_Pincode
+                                                    <td>
                                                         <span id="trNear_Location_Pincode@(i)"> @itm.Branch_Location_Pincode</span>
                                                         <input type="hidden" id="hdnpincode@(i)" name="Branch.LocationDetailsList[@i].Branch_Location_Pincode" value="@itm.Branch_Location_Pincode">
                                                         <input type="hidden" id="hdnNear_Branch_Location_ID@(i)" name="Branch.LocationDetailsList[@i].Branch_Location_ID" value="@itm.Branch_Location_ID">

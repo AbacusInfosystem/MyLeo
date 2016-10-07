@@ -105,6 +105,8 @@ $(function () {
         alert();
         if ($("#frmPay").valid()) {
             Save_Payable_Data();
+
+
         }
 
     });

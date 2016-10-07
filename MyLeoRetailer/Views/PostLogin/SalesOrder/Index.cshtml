@@ -157,12 +157,12 @@
                                         </div>
                                     </div>*@
 
-                                <div class="col-md-3">
-                                   
+                                <div class="col-md-3" id="divBranch">
+
                                     <div class="form-group auto-complete">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
                                         <div class="input-group">
-                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesInvoice.Branch_Name" id="textSales_Branch_Name_0" placeholder="Enter Branch to search" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
+                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesInvoice.Branch_Name" id="textSales_Branch_Name_0" placeholder="Enter Branch to search" value="@Model.SalesInvoice.Branch_Name" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
                                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                             <input type="hidden" id="hdnBranchID" value="" name="SalesInvoice.Branch_Id" class="auto-complete-value" />
                                             <input type="hidden" id="hdnBranchName" value="" name="SalesInvoice.Branch_Name" class="auto-complete-label" />
@@ -304,7 +304,7 @@
                                                 <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="1" placeholder="Quantity" onblur="javascript: CalculateQuantityMRP();" maxlength="10">
                                             </td>
                                             <td>
-                                                <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %" maxlength="10">
+                                                <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %" maxlength="5">
                                             </td>
                                             <td>
                                                 <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].SalesOrder_Discount_Amount" id="textSalesOrder_Discount_Amount_0" readonly placeholder="D Amt">
@@ -369,7 +369,7 @@
                                             <th style="width: 6.5%;"></th>
                                             <th><span class="label label-primary label-form label-read" style="background: rgba(74,77,67,0.09);">Tax Percent</span></th>
                                             <th style="width: 1%;"></th>
-                                            <th><input type="text" class="form-control input-sm" style="width:80px" name="SalesInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" placeholder="%" value="@Model.SalesInvoice.Tax_Percentage" maxlength="10"></th>
+                                            <th><input type="text" class="form-control input-sm" style="width:80px" name="SalesInvoice.Tax_Percentage" onblur="javascript: CalculateTax();" id="textTaxPercentage_0" placeholder="%" value="@Model.SalesInvoice.Tax_Percentage" maxlength="5"></th>
                                         </tr>
 
                                         <tr>

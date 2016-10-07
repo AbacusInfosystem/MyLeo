@@ -4,6 +4,18 @@
     $("#textSKU_No_0").rules("add", { required: true,checkSKUExist: true, messages: { required: "Required field", } });
 
 
+    //$("#textSales_Branch_Name_0").val($("#hdnBranchName" + id).val());
+
+    //$("#hdnBranchID").val($("#hdnBranchID" + id).val());
+
+
+    //if ($('#textSales_Branch_Name_0').val() != 0)
+
+    //    $("#divBranch").find(".autocomplete-text").trigger("focusout");
+
+
+
+
     $('#dtpInvoice_Date').datepicker({
 
         dateFormat: "dd-MM-yy",
@@ -95,17 +107,19 @@ $(function ()
 
         $("#hdnCreateCustomerFlag").val(true);
 
+       // $("#frmSalesOrder").validate().cancelSubmit = true;
+
         alert($("#hdnCreateCustomerFlag").val());
 
-        $('#txtInvoice_No').removeClass("login-error");
-        $('#txtInvoice_No').rules("remove");
+        //$('#txtInvoice_No').removeClass("login-error");
+        //$('#txtInvoice_No').rules("remove");
 
         $('#textSKU_No_0').rules("remove");
 
         $('#dtpInvoice_Date').removeClass("login-error");
         $('#dtpInvoice_Date').rules("remove");
 
-        $('#txtMobileNo').removeClass("MobileNo error");
+        $('#txtMobileNo').removeClass("MobileNo");
         $('#txtMobileNo').rules("remove");
 
         $('#txtCustomer_Name').removeClass("login-error");
