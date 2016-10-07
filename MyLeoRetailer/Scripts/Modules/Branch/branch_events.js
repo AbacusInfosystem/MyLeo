@@ -10,7 +10,7 @@
     $("#btnSaveBranch").click(function () {
         if ($("#frmBranch").valid())
         {
-            if ($("[name='Branch.Branch_ID']").val() == "" || $("[name='Branch.Branch_ID']").val() == 0) {
+            if ($('#hdnBranch_Id').val() == "" || $('#hdnBranch_Id').val() == 0) {  //Added by Sushant on 07/10/2016
                 $("#frmBranch").attr("action", "/Branch/Insert_Branch");                
             }
             else {
