@@ -32,9 +32,9 @@ namespace MyLeoRetailer.Models
             Grid_Detail.Pager.CallBackMethod = "Get_ProductWarehouse";
         }
 
-        ProductWarehouseInfo product_warehouse { get; set; }
+        public ProductWarehouseInfo product_warehouse { get; set; }
 
-        List<ProductWarehouseInfo> List_product_warehouse { get; set; }
+        public List<ProductWarehouseInfo> List_product_warehouse { get; set; }
 
         public GridInfo Grid_Detail
         {

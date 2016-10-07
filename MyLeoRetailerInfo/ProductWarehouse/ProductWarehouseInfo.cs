@@ -13,13 +13,13 @@ namespace MyLeoRetailerInfo.ProductWarehouse
       
       }
 
-      int Product_Warehouse_Id { get; set;}
-      
-      string Product_SKU { get; set; }
-      
-      int Product_Invoice_Id { get; set; }
-      
-      int Product_Quantity { get; set; }
+     public int Product_Warehouse_Id { get; set;}
+
+     public string Product_SKU { get; set; }
+
+     public int Product_Invoice_Id { get; set; }
+
+     public int Product_Quantity { get; set; }
 
       #region createdBy, UpdateBy
 

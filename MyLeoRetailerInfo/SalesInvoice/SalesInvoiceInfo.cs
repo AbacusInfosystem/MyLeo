@@ -56,6 +56,8 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
         public DateTime Invoice_Date1 { get; set; }
 
+        public int Quantity1 { get; set; }
+
        //End Hidden Field
 
 

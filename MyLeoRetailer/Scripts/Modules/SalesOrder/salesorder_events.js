@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
 
     $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "Required", digits: "Invalid quantity." } });
-    $("#textSKU_No_0").rules("add", { required: true,checkSKUExist: true, messages: { required: "Required field", } });
+
+    $("#textSKU_No_0").rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
 
 
     //$("#textSales_Branch_Name_0").val($("#hdnBranchName" + id).val());
@@ -44,11 +45,11 @@
 
     debugger;
 
-    CalculateDiscountAmount();
+    //CalculateDiscountAmount();
 
-    CalculateTax();
+    //CalculateTax();
 
-    Get_Gift_Voucher_Details();
+    //Get_Gift_Voucher_Details();
 
 });
 
@@ -107,7 +108,7 @@ $(function ()
 
         $("#hdnCreateCustomerFlag").val(true);
 
-       // $("#frmSalesOrder").validate().cancelSubmit = true;
+        //$("#frmSalesOrder").validate().cancelSubmit = false;
 
         alert($("#hdnCreateCustomerFlag").val());
 
@@ -116,14 +117,21 @@ $(function ()
 
         $('#textSKU_No_0').rules("remove");
 
+        $('#textQuantity_0').rules("remove");
+
         $('#dtpInvoice_Date').removeClass("login-error");
         $('#dtpInvoice_Date').rules("remove");
 
         $('#txtMobileNo').removeClass("MobileNo");
         $('#txtMobileNo').rules("remove");
 
+
+
         $('#txtCustomer_Name').removeClass("login-error");
         $('#txtCustomer_Name').rules("remove");
+
+        //$('#textTaxPercentage_0').removeClass("login-error");
+        $('#textTaxPercentage_0').rules("remove");
 
         $("#frmSalesOrder").attr("action", "/Customer/Index/");
 

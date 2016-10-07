@@ -51,10 +51,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Payable status</span>
-                                <select class="form-control input-sm" id="drpPayble_Status" name="Payable.Payament_Status">
+                                <select class="form-control" id="drpPayble_Status" name="Payable.Payament_Status">
                                     <option value="0">Select Payable Status</option>
 
                                     @foreach (var item in LookupInfo.Get_Payment_Status())
@@ -75,7 +75,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
                                 <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
                                 <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="dd-mm-yyyy">
@@ -97,10 +97,11 @@
 
                         <div class="col-md-2">
                             <br />
-                            <div class="btn-group">
+                            <br />
+                            <div class="btn-group" style="margin-top: -6px;">
                                 <button type="button" id="btnSearchPayable" class="btn btn-success active">Search</button>
-                                <button type="button" id="btnPay" class="btn btn-primary active">Pay</button>
                                 <button type="reset" id="btnResetPayable" class="btn btn-danger active">Reset</button>
+                                <button type="button" id="btnPay" class="btn btn-primary active">Pay</button>
                             </div>
                         </div>
 

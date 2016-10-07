@@ -62,5 +62,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
+        public PartialViewResult Warehouse_Notifiation(ProductWarehouseViewModel pViewModel)
+        {
+            pViewModel.List_product_warehouse = _purchaseinvoiceRepo.Warehouse_Notifiation();
+
+            return PartialView("_Warehouse_Notifiation", pViewModel);
+        }
+
     }
 }

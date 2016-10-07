@@ -336,6 +336,28 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(check, JsonRequestBehavior.AllowGet);
         }
 
+
+        public JsonResult Check_Quantity(int Quantity)
+        {
+
+            bool check = false;
+
+            SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
+            try
+            {
+                check = siRepo.Check_Quantity(Quantity);
+            }
+
+            catch (Exception ex)
+            {
+                // throw ex;
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - Check_Mobile_No  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
+
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
         //Added by vinod mane on 29/09/2016
         public ActionResult Report(SalesInvoiceViewModel siViewModel)
         {
