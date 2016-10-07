@@ -1404,9 +1404,15 @@ function Enable_Size_Quantity(i) {
 
     var end = document.getElementById("textEnd_Size_" + i).selectedIndex;
 
-    $(".read-only").attr("readonly", true);
+    //$(".read-only").attr("readonly", true);
 
-    $(".read-only").rules("remove");
+    //$(".read-only").rules("remove");
+
+    $("#textStart_Size_" + i).parents('tr').find(".read-only").attr("readonly", true);
+
+    $("#textStart_Size_" + i).parents('tr').find(".read-only").rules("remove");
+
+    $("#textStart_Size_" + i).parents('tr').find(".read-only").val(0);
 
     if (start <= end) {
 
