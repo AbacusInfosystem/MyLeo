@@ -62,7 +62,10 @@ namespace MyLeoRetailer.Models
 
 	public class Filter_Branch
 	{
-		public string Branch_Name
+
+        public int Branch_ID { get; set; }  //Added by Sushant on 07/10/2016
+        
+        public string Branch_Name
 		{
 			get;
 			set;
