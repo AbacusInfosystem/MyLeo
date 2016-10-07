@@ -325,13 +325,13 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Credit_Note_No == null ? "" : data.Payables[i].Credit_Note_No;
+        htmlText += data.Payables[i].Credit_Note_No == null ? "NA" : data.Payables[i].Credit_Note_No;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Credit_Note_Amount == null ? "" : data.Payables[i].Credit_Note_Amount;
+        htmlText += data.Payables[i].Credit_Note_Amount == null ? "NA" : data.Payables[i].Credit_Note_Amount;
 
         htmlText += "</td>";
 
