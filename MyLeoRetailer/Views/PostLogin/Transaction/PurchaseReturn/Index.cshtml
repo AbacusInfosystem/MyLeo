@@ -263,7 +263,7 @@
                                             <label>Discount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0" maxlength="10">
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0" maxlength="5">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.Discount_Amount" readonly id="textDiscountAmount_0">
@@ -368,7 +368,7 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Transporter Name.</span>
                                     <select class="form-control select" name="PurchaseReturn.Transporter_Id">
                                         <option value="">Select Transporter</option>
-                                        @foreach (var item in Model.PurchaseReturn.Vendors)
+                                        @foreach (var item in Model.PurchaseReturn.Transporters)
                                             {
                                                 if (Model.PurchaseReturn.Transporter_Id == item.Vendor_Id)
                                                 {

@@ -328,7 +328,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Check_Mobile_No,
             sp_Get_Credit_Note_Details_By_Customer_Id,
             sp_Get_Gift_Voucher,
-
+            sp_Check_Quantity,
 
         //Sales Return
 

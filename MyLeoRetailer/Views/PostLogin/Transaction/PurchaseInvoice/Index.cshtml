@@ -399,10 +399,10 @@
                                             <label>Discount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0" maxlength="10">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Percentage" value="0" onblur="javascript: CalculateDiscount();" id="textDiscountPercentage_0" maxlength="5">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Amount" readonly id="textDiscountAmount_0">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Discount_Amount" value="0" readonly id="textDiscountAmount_0">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -422,7 +422,7 @@
                                             <label>Gross Amount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Gross_Amount" readonly id="textGrossAmount_0">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Gross_Amount" value="0" readonly id="textGrossAmount_0">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -441,10 +441,10 @@
                                             <label>Tax</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Tax_Percentage" readonly id="textTaxPercentage_0" />
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Tax_Percentage" value="0" readonly id="textTaxPercentage_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text"  name="PurchaseInvoice.Tax_Amount" readonly id="textTaxAmount_0">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Tax_Amount" value="0" readonly id="textTaxAmount_0">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -484,7 +484,7 @@
                                             <label>NET Amount</label>
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Net_Amount" readonly id="textNETAmount_0">
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.Net_Amount" value="0" readonly id="textNETAmount_0">
                                         </td>
                                         <td></td>
                                         <td></td>
@@ -557,7 +557,7 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Transporter Name.</span>
                                     <select class="form-control select" name="PurchaseInvoice.Transporter_Id">
                                         <option value="">Select Transporter</option>
-                                        @foreach (var item in Model.PurchaseInvoice.Vendors)
+                                        @foreach (var item in Model.PurchaseInvoice.Transporters)
                                         {
                                             if (Model.PurchaseInvoice.Transporter_Id == item.Vendor_Id)
                                             {
