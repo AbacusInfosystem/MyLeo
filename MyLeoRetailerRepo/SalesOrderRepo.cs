@@ -671,6 +671,45 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
+        public bool Check_Quantity(int Quantity)
+        {
+            bool check = false;
+
+            try
+            {
+                string ProcedureName = string.Empty;
+
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Quantity", Quantity));
+
+                DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Check_Quantity.ToString(), CommandType.StoredProcedure);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int count = dt.Rows.Count;
+
+                    List<DataRow> drList = new List<DataRow>();
+
+                    drList = dt.AsEnumerable().ToList();
+
+                    foreach (DataRow dr in drList)
+                    {
+
+                        check = Convert.ToBoolean(dr["Quantity"]);
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return check;
+        }
+
     }
 }
 
