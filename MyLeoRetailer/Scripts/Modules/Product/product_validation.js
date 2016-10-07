@@ -76,19 +76,20 @@ $(function ()
 
     jQuery.validator.addMethod("validate_ArticleNo", function (value, element) {
         var result = true;
-
-        if ($("#txtArticle_No").val() != "" && $("#txtArticle_No").val() != null) {
-            $.ajax({
-                url: '/product/check-article-no',
-                data: { Article_No: $("#txtArticle_No").val() },
-                method: 'GET',
-                async: false,
-                success: function (data) {
-                    if (data == true) {
-                        result = false;
+        if ($("#hdn_ProductId").val() == 0) {
+            if ($("#txtArticle_No").val() != "" && $("#txtArticle_No").val() != null) {
+                $.ajax({
+                    url: '/product/check-article-no',
+                    data: { Article_No: $("#txtArticle_No").val() },
+                    method: 'GET',
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            result = false;
+                        }
                     }
-                }
-            });
+                });
+            }
         }
         return result;
 

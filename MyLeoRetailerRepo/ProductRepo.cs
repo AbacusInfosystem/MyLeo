@@ -17,11 +17,12 @@ using System.Configuration;
 using System.IO;
 using System.Web;
 using System.Text.RegularExpressions;
+using System.Transactions;
 
 namespace MyLeoRetailerRepo
 {
     public class ProductRepo
-    {
+    { 
         SQL_Repo sqlHelper = null;
         //string folder_path = System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString());
         //Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), Product_Image_Name);
@@ -41,38 +42,41 @@ namespace MyLeoRetailerRepo
 
         #region--Insert--Update--Product-MRP--
         public void Insert_Product_MRP(List<ColorInfo> Colors)
-        {
-
-            foreach (var item in Colors)
+        { 
+            using (TransactionScope scope = new TransactionScope())
             {
-                foreach (var prodDesc in item.ProductDescription)
+                foreach (var item in Colors)
                 {
-                    string ProductDescription = prodDesc.Description;
-                    bool MRP_Status = prodDesc.Status;
-                    foreach (var itm in prodDesc.ProductMRPs)
+                    foreach (var prodDesc in item.ProductDescription)
                     {
-                        Set_Date_Session(itm);
-                        if (itm.Product_MRP_Id == 0)
+                        string ProductDescription = prodDesc.Description;
+                        bool MRP_Status = prodDesc.Status;
+                        foreach (var itm in prodDesc.ProductMRPs)
                         {
-                            if (itm.Product_SKU_Map_Id == 0)
+                            Set_Date_Session(itm);
+                            if (itm.Product_MRP_Id == 0)
                             {
-                                int Product_SKU_Map_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product_SKU(itm, ProductDescription), Storeprocedures.sp_Insert_Update_Product_SKU_Map.ToString(), CommandType.StoredProcedure));
-                                if (Product_SKU_Map_Id != 0)
+                                if (itm.Product_SKU_Map_Id == 0)
                                 {
-                                    sqlHelper.ExecuteNonQuery(Set_Product_MRP_Values(ProductDescription, MRP_Status, itm, Product_SKU_Map_Id), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
+                                    int Product_SKU_Map_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product_SKU(itm, ProductDescription), Storeprocedures.sp_Insert_Update_Product_SKU_Map.ToString(), CommandType.StoredProcedure));
+                                    if (Product_SKU_Map_Id != 0)
+                                    {
+                                        sqlHelper.ExecuteNonQuery(Set_Product_MRP_Values(ProductDescription, MRP_Status, itm, Product_SKU_Map_Id), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
+                                    }
+                                }
+                                else
+                                {
+                                    sqlHelper.ExecuteNonQuery(Set_Product_MRP_Values(ProductDescription, MRP_Status, itm, itm.Product_SKU_Map_Id), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
                                 }
                             }
                             else
                             {
-                                sqlHelper.ExecuteNonQuery(Set_Product_MRP_Values(ProductDescription, MRP_Status, itm, itm.Product_SKU_Map_Id), Storeprocedures.sp_Insert_Product_MRP.ToString(), CommandType.StoredProcedure);
+                                sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm, ProductDescription, MRP_Status), Storeprocedures.sp_Insert_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
                             }
-                        }
-                        else
-                        {
-                            sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm, ProductDescription, MRP_Status), Storeprocedures.sp_Insert_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
                         }
                     }
                 }
+                scope.Complete();
             }
         }
 
@@ -165,74 +169,82 @@ namespace MyLeoRetailerRepo
 
         public int Insert_Product(ProductInfo Product, ProductImagesInfo ProductImage)
         {
-            List<SqlParameter> sqlparam1 = new List<SqlParameter>();
-            int ProductId = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product(Product), Storeprocedures.sp_Insert_Product.ToString(), CommandType.StoredProcedure));
-            if (ProductId != 0)
+            using (TransactionScope scope = new TransactionScope())
             {
-                for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
+                List<SqlParameter> sqlparam1 = new List<SqlParameter>();
+                int ProductId = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product(Product), Storeprocedures.sp_Insert_Product.ToString(), CommandType.StoredProcedure));
+                if (ProductId != 0)
                 {
-                    List<SqlParameter> sqlparam = new List<SqlParameter>();
-                    if (Product.ProductImage.Product_Image[i] != "" && Product.ProductImage.Product_Image[i] != null)
+                    for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
                     {
-                        sqlparam.Add(new SqlParameter("@Product_Id", ProductId));
-                        sqlparam.Add(new SqlParameter("@Product_Image", Product.ProductImage.Product_Image[i]));
-                        sqlparam.Add(new SqlParameter("@Is_Default", Product.ProductImage.Is_Default[i]));
-                        sqlparam.Add(new SqlParameter("@Created_Date", Product.Created_Date));
-                        sqlparam.Add(new SqlParameter("@Created_By", Product.Created_By));
-                        sqlparam.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
-                        sqlparam.Add(new SqlParameter("@Updated_By", Product.Updated_By));
-                        sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Insert_Product_Images.ToString(), CommandType.StoredProcedure);
+                        List<SqlParameter> sqlparam = new List<SqlParameter>();
+                        if (Product.ProductImage.Product_Image[i] != "" && Product.ProductImage.Product_Image[i] != null)
+                        {
+                            sqlparam.Add(new SqlParameter("@Product_Id", ProductId));
+                            sqlparam.Add(new SqlParameter("@Product_Image", Product.ProductImage.Product_Image[i]));
+                            sqlparam.Add(new SqlParameter("@Is_Default", Product.ProductImage.Is_Default[i]));
+                            sqlparam.Add(new SqlParameter("@Created_Date", Product.Created_Date));
+                            sqlparam.Add(new SqlParameter("@Created_By", Product.Created_By));
+                            sqlparam.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
+                            sqlparam.Add(new SqlParameter("@Updated_By", Product.Updated_By));
+                            sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Insert_Product_Images.ToString(), CommandType.StoredProcedure);
+                        }
                     }
-                }
-                sqlparam1.Add(new SqlParameter("@Vendor_Id", Product.Vendor_Id));
-                sqlparam1.Add(new SqlParameter("@Article_No", Product.Article_No));
-                sqlparam1.Add(new SqlParameter("@Created_Date", Product.Created_Date));
-                sqlparam1.Add(new SqlParameter("@Created_By", Product.Created_By));
-                sqlparam1.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
-                sqlparam1.Add(new SqlParameter("@Updated_By", Product.Updated_By));
-                sqlHelper.ExecuteNonQuery(sqlparam1, Storeprocedures.sp_Insert_Vendor_Article_Mapping.ToString(), CommandType.StoredProcedure);
-            }
-            return ProductId;
+                    sqlparam1.Add(new SqlParameter("@Vendor_Id", Product.Vendor_Id));
+                    sqlparam1.Add(new SqlParameter("@Article_No", Product.Article_No));
+                    sqlparam1.Add(new SqlParameter("@Created_Date", Product.Created_Date));
+                    sqlparam1.Add(new SqlParameter("@Created_By", Product.Created_By));
+                    sqlparam1.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
+                    sqlparam1.Add(new SqlParameter("@Updated_By", Product.Updated_By));
+                    sqlHelper.ExecuteNonQuery(sqlparam1, Storeprocedures.sp_Insert_Vendor_Article_Mapping.ToString(), CommandType.StoredProcedure);
+                } 
+                scope.Complete();
+                return ProductId;
+            } 
         }
 
         public int Update_Product(ProductInfo Product)
         {
-            int ProductId = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product(Product), Storeprocedures.sp_Update_Product.ToString(), CommandType.StoredProcedure));
-
-            for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
+            using (TransactionScope scope = new TransactionScope())
             {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
-                if (Product.ProductImage.Product_Image[i] != "" && Product.ProductImage.Product_Image[i] != null)
+                int ProductId = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product(Product), Storeprocedures.sp_Update_Product.ToString(), CommandType.StoredProcedure));
+
+                for (var i = 0; i < Product.ProductImage.Product_Image.Length; i++)
                 {
-                    if (Product.ProductImage.Product_Image_Id[i] != 0)
+                    List<SqlParameter> sqlParams = new List<SqlParameter>();
+                    if (Product.ProductImage.Product_Image[i] != "" && Product.ProductImage.Product_Image[i] != null)
                     {
-                        sqlParams.Add(new SqlParameter("@Product_Image_Id", Product.ProductImage.Product_Image_Id[i]));
-                    }
-                    else
-                    {
-                        sqlParams.Add(new SqlParameter("@Product_Image_Id", 0));
-                    }
+                        if (Product.ProductImage.Product_Image_Id[i] != 0)
+                        {
+                            sqlParams.Add(new SqlParameter("@Product_Image_Id", Product.ProductImage.Product_Image_Id[i]));
+                        }
+                        else
+                        {
+                            sqlParams.Add(new SqlParameter("@Product_Image_Id", 0));
+                        }
 
-                    sqlParams.Add(new SqlParameter("@Product_Id", Product.Product_Id));
-                    sqlParams.Add(new SqlParameter("@Product_Image", Product.ProductImage.Product_Image[i]));
+                        sqlParams.Add(new SqlParameter("@Product_Id", Product.Product_Id));
+                        sqlParams.Add(new SqlParameter("@Product_Image", Product.ProductImage.Product_Image[i]));
 
-                    if (Product.ProductImage.Is_Default[i] != null && Product.ProductImage.Is_Default[i] != "")
-                    {
-                        sqlParams.Add(new SqlParameter("@Is_Default", Product.ProductImage.Is_Default[i]));
-                    }
-                    else
-                    {
-                        sqlParams.Add(new SqlParameter("@Is_Default", false));
-                    }
+                        if (Product.ProductImage.Is_Default[i] != null && Product.ProductImage.Is_Default[i] != "")
+                        {
+                            sqlParams.Add(new SqlParameter("@Is_Default", Product.ProductImage.Is_Default[i]));
+                        }
+                        else
+                        {
+                            sqlParams.Add(new SqlParameter("@Is_Default", false));
+                        }
 
-                    sqlParams.Add(new SqlParameter("@Created_Date", Product.Created_Date));
-                    sqlParams.Add(new SqlParameter("@Created_By", Product.Created_By));
-                    sqlParams.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
-                    sqlParams.Add(new SqlParameter("@Updated_By", Product.Updated_By));
-                    sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Update_Product_Images.ToString(), CommandType.StoredProcedure);
-                }
+                        sqlParams.Add(new SqlParameter("@Created_Date", Product.Created_Date));
+                        sqlParams.Add(new SqlParameter("@Created_By", Product.Created_By));
+                        sqlParams.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
+                        sqlParams.Add(new SqlParameter("@Updated_By", Product.Updated_By));
+                        sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Update_Product_Images.ToString(), CommandType.StoredProcedure);
+                    }
+                } 
+                scope.Complete();
+                return ProductId;
             }
-            return ProductId;
         }
 
         private List<SqlParameter> Set_Values_In_Product_Images(ProductInfo Product)
@@ -480,8 +492,7 @@ namespace MyLeoRetailerRepo
             if (dr["Description"] != null)
                 ProductMRP.Description = Convert.ToString(dr["Description"]);
             return ProductMRP;
-        }
-
+        } 
 
         public ProductInfo Get_Product_Images(int Product_Id)
         {
@@ -523,8 +534,7 @@ namespace MyLeoRetailerRepo
             if (dr["Vendor_Color_code"] != null)
                 color.Vendor_Color_Code = Convert.ToString(dr["Vendor_Color_code"]);
             return color;
-        }
-
+        } 
 
         public bool Check_Existing_Article_No(string Article_No)
         {

@@ -25,7 +25,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
     {
         //
         // GET: /Product/
-        //TransactionScope scope = new TransactionScope();
+       
         public ProductRepo _ProductRepo;
 
         public ProductController()
@@ -152,11 +152,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Insert_Product(ProductViewModel pViewModel)
         {
-            //scope = new TransactionScope();
+            
             try
             {
-                //using (scope)
-                //{
+              
                     for (var i = 0; i < pViewModel.Product.ProductImage.Product_Image.Length; i++)
                     {
                         if (pViewModel.Product.ProductImage.Product_Image[i] != null && pViewModel.Product.ProductImage.Product_Image[i] != "")
@@ -193,27 +192,22 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                     pViewModel.FriendlyMessages.Add(MessageStore.Get("PROD01"));
 
-                //    scope.Complete();
-                //}
 
             }
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
                 Logger.Error("Product Insert_Product  " + ex.Message);
-                //scope.Dispose();
+              
             }
             TempData["pViewModel"] = pViewModel;
             return RedirectToAction("Index", pViewModel);
         }
 
         public ActionResult Update_Product(ProductViewModel pViewModel)
-        {
-            //scope = new TransactionScope();
+        { 
             try
-            {
-                //using (scope)
-                //{
+            { 
                     for (var i = 0; i < pViewModel.Product.ProductImage.Product_Image.Length; i++)
                     {
                         if (pViewModel.Product.ProductImage.Product_Image[i] != null && pViewModel.Product.ProductImage.Product_Image[i] != "")
@@ -250,7 +244,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     _ProductRepo.Update_Product(pViewModel.Product);
 
                     pViewModel.FriendlyMessages.Add(MessageStore.Get("PROD02"));
-                //}
+              
             }
             catch (Exception ex)
             {
@@ -262,22 +256,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public ActionResult Insert_ProductMRP(ProductViewModel pViewModel)
-        {
-            //scope = new TransactionScope();
+        { 
             try
-            {
-                //using (scope)
-                //{
-                    _ProductRepo.Insert_Product_MRP(pViewModel.Colors);
-                    //scope.Complete();
-               // }
+            { 
+                _ProductRepo.Insert_Product_MRP(pViewModel.Colors); 
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("PROD03"));
             }
             catch (Exception ex)
             {
                 pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                Logger.Error("Product Insert_ProductMRP  " + ex.Message);
-                //scope.Dispose();
+                Logger.Error("Product Insert_ProductMRP  " + ex.Message); 
             }
 
             TempData["pViewModel"] = pViewModel;
