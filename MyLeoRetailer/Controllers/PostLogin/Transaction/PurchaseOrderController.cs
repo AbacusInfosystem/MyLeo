@@ -298,7 +298,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 Logger.Error("PurchaseOrderController - Get_Purchase_Order_Details : " + ex.ToString());
             }
-            return View("PrintableView", poViewModel);
+            return View("Print", poViewModel);
         }
 
         public ActionResult Send_Purchase_Order_Invoice(PurchaseOrderViewModel poViewModel)

@@ -187,7 +187,7 @@ function Bind_Product_MRP_New_Color(data, obj, i) {
 
                 htmlText += "<td>";
 
-                htmlText += "<input type='text' id='txtProductWSR_@i' class='form-control' placeholder='WSR.' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + j + "].Purchase_Price' value='" + (data.ProductDescription[p].ProductMRPs[j].Purchase_Price == null ? '' : data.ProductDescription[p].ProductMRPs[j].Purchase_Price) + "' />";
+                htmlText += "<input type='text' id='txtProductWSR_" + j + "' class='form-control AllWSRPricesRequired' placeholder='WSR.' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + j + "].Purchase_Price' value='" + (data.ProductDescription[p].ProductMRPs[j].Purchase_Price == null ? '' : data.ProductDescription[p].ProductMRPs[j].Purchase_Price) + "' />";
 
                 htmlText += "</td>";
             }
@@ -210,7 +210,7 @@ function Bind_Product_MRP_New_Color(data, obj, i) {
 
             htmlText += "<td>";
 
-            htmlText += "<input type='text' id='txtProductWSR_" + p + "' class='form-control Description' style='' placeholder='description.' name='Colors[" + c + "].ProductDescription[" + p + "].Description' value='" + (data.ProductDescription[p].Description == null ? '' : data.ProductDescription[p].Description) + "' />";
+            htmlText += "<input type='text' id='txtProductDesc_" + p + "' class='form-control Description' style='' placeholder='description.' name='Colors[" + c + "].ProductDescription[" + p + "].Description' value='" + (data.ProductDescription[p].Description == null ? '' : data.ProductDescription[p].Description) + "' />";
 
             htmlText += "</td>";
 
@@ -239,7 +239,7 @@ function Bind_Product_MRP_New_Color(data, obj, i) {
 
                 htmlText += "<td>";
 
-                htmlText += "<input type='text' id='txtProductWSR_@i' class='form-control' placeholder='MRP.' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + k + "].MRP_Price' value='" + (data.ProductDescription[p].ProductMRPs[k].MRP_Price == null ? '' : data.ProductDescription[p].ProductMRPs[k].MRP_Price) + "' />";
+                htmlText += "<input type='text' id='txtProductMRP_" + k + "' class='form-control AllMRPPricesRequired' placeholder='MRP.' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + k + "].MRP_Price' value='" + (data.ProductDescription[p].ProductMRPs[k].MRP_Price == null ? '' : data.ProductDescription[p].ProductMRPs[k].MRP_Price) + "' />";
                 htmlText += "<input type='hidden' id='hdnMrpStatus' name='Colors[" + c + "].ProductDescription[" + p + "].Status' class='form-control' value='" + data.ProductDescription[p].Description + "'>";
                 htmlText += "</td>";
             }
@@ -311,6 +311,7 @@ function showMRPByProductColor_Exist(ColorId, Color, ProductId, index, Vendor_Co
             if ($("#" + Id).length == 0) {
 
                 Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId);
+
             }
 
             for (var i = 0 ; i < data.ProductDescription.length; i++) {
@@ -426,7 +427,7 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
 
                 htmlText += "<td>";
 
-                htmlText += "<input type='text' id='txtProductWSR_@i' class='form-control' placeholder='WSR.' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + j + "].Purchase_Price' value='" + (data.ProductDescription[i].ProductMRPs[j].Purchase_Price == 0 ? '' : data.ProductDescription[i].ProductMRPs[j].Purchase_Price) + "' />";
+                htmlText += "<input type='text' id='txtProductWSR_" + j + "' class='form-control AllWSRPricesRequired' placeholder='WSR.' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + j + "].Purchase_Price' value='" + (data.ProductDescription[i].ProductMRPs[j].Purchase_Price == 0 ? '' : data.ProductDescription[i].ProductMRPs[j].Purchase_Price) + "' />";
 
                 htmlText += "</td>";
             }
@@ -462,7 +463,7 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
 
             htmlText += "<td>";
 
-            htmlText += "<input type='text' id='txtProductWSR_" + i + "' class='form-control  Description' style='' placeholder='description.' name='Colors[" + index + "].ProductDescription[" + i + "].Description' value='" + data.ProductDescription[i].Description + "' />";
+            htmlText += "<input type='text' id='txtProductDesc_" + i + "' class='form-control  Description' style='' placeholder='description.' name='Colors[" + index + "].ProductDescription[" + i + "].Description' value='" + data.ProductDescription[i].Description + "' />";
 
             htmlText += "</td>";
 
@@ -490,7 +491,7 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
 
                 htmlText += "<td>";
 
-                htmlText += "<input type='text' id='txtProductWSR_@i' class='form-control' placeholder='MRP.' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + k + "].MRP_Price' value='" + (data.ProductDescription[i].ProductMRPs[k].MRP_Price == null ? '' : data.ProductDescription[i].ProductMRPs[k].MRP_Price) + "' />";
+                htmlText += "<input type='text' id='txtProductMRP_" + k + "' class='form-control AllMRPPricesRequired' placeholder='MRP.' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + k + "].MRP_Price' value='" + (data.ProductDescription[i].ProductMRPs[k].MRP_Price == null ? '' : data.ProductDescription[i].ProductMRPs[k].MRP_Price) + "' />";
                 htmlText += "<input type='hidden' id='hdn_ProductId_Exist' class='form-control' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + k + "].Product_Id' value='" + (data.ProductDescription[i].ProductMRPs[k].Product_Id == 0 ? '' : data.ProductDescription[i].ProductMRPs[k].Product_Id) + "'/>";
                 htmlText += "<input type='hidden' id='hdnMrpStatus' name='Colors[" + index + "].ProductDescription[" + i + "].Status' class='form-control' value='" + data.ProductDescription[i].Status + "'>";
                 htmlText += "<input type='hidden' id='hdn_ProductMRPId' class='form-control' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + k + "].Product_MRP_Id' value='" + (data.ProductDescription[i].ProductMRPs[k].Product_MRP_Id == 0 ? '' : data.ProductDescription[i].ProductMRPs[k].Product_MRP_Id) + "'/>";
@@ -515,7 +516,14 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
 
         htmlText += "</div>";
 
-        $('#common_Product_MRP').append(htmlText);
+        $('#common_Product_MRP').append(htmlText); 
+        
+
+        //$("#" + Color.replace(/ /g, '')).find(".AllWSRPricesRequired").each(function () {
+        //    $(this).rules("add", { required: true, message: "Please enter Purchase price" });
+        //});
+
+        //$("#frmProductMRP").valid();
     }
         //}
     else {
@@ -590,7 +598,7 @@ function Bind_MRPNWSR_Sale_Grid(data, Color_Index, Color_Name, Color_Id, Vendor_
 
             htmlText += "<td>";
 
-            htmlText += "<input type='text' id='txtProductWSR_" + index + "' class='form-control  Description' style='' placeholder='description.' name='Colors[" + c + "].ProductDescription[" + index + "].Description' value='' />";
+            htmlText += "<input type='text' id='txtProductDesc_" + index + "' class='form-control  Description' style='' placeholder='description.' name='Colors[" + c + "].ProductDescription[" + index + "].Description' value='' />";
 
             htmlText += "</td>";
 
@@ -618,7 +626,7 @@ function Bind_MRPNWSR_Sale_Grid(data, Color_Index, Color_Name, Color_Id, Vendor_
 
                 htmlText += "<td>";
 
-                htmlText += "<input type='text' id='txtProductWSR_@i' class='form-control' placeholder='MRP.' name='Colors[" + c + "].ProductDescription[" + index + "].ProductMRPs[" + k + "].MRP_Price' value='' />";
+                htmlText += "<input type='text' id='txtProductMRP_" + k + "' class='form-control AllMRPPricesRequired' placeholder='MRP.' name='Colors[" + c + "].ProductDescription[" + index + "].ProductMRPs[" + k + "].MRP_Price' value='' />";
                 htmlText += "<input type='hidden' id='hdnMrpStatus' name='Colors[" + c + "].ProductDescription[" + index + "].Status' class='form-control' value='" + data.ProductDescription[r].Status + "'>";
                 htmlText += "<input type='hidden' id='hdn_ProductId_Sale' class='form-control' name='Colors[" + c + "].ProductDescription[" + index + "].ProductMRPs[" + k + "].Product_Id' value=' " + data.ProductDescription[r].ProductMRPs[k].Product_Id + "'/>";
                 htmlText += "<input type='hidden' id='hdn_ProductMRPId' class='form-control' name='Colors[" + c + "].ProductDescription[" + index + "].ProductMRPs[" + k + "].Product_MRP_Id' value='" + 0 + "'/>";

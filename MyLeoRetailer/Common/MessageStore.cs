@@ -169,7 +169,7 @@ namespace MyLeoRetailer.Common
             FriendlyMessage EMP01 = new FriendlyMessage("EMP01", MessageType.Success, "Employee added successfully.");
             hash.Add("EMP01", EMP01);
 
-            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Product Updated successfully.");
+            FriendlyMessage EMP02 = new FriendlyMessage("EMP02", MessageType.Success, "Employee Updated successfully.");
             hash.Add("EMP02", EMP02);
 
             //Addition by swapnali | Date:16/09/2016
