@@ -91,7 +91,7 @@
 
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher amount</span>
-                            <input type="text" class="form-control" placeholder="Enter voucher amount." name="GiftVoucher.Gift_Voucher_Amount" value="@(Model.GiftVoucher.Gift_Voucher_Amount == 0 ? "" : Model.GiftVoucher.Gift_Voucher_Amount.ToString())" maxlength="20" />
+                            <input type="text" class="form-control" placeholder="Enter voucher amount." name="GiftVoucher.Gift_Voucher_Amount" value="@(Model.GiftVoucher.Gift_Voucher_Amount == 0 ? "" : Model.GiftVoucher.Gift_Voucher_Amount.ToString())" maxlength="10" />
                         </div>
 
                         <div class="form-group">
@@ -113,12 +113,12 @@
 
                         <div class="form-group" id="divBankName">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank name</span>
-                            <input type="text" class="form-control" placeholder="Enter bank name." id="bankname" name="GiftVoucher.Bank_Name" value="@Model.GiftVoucher.Bank_Name"  />
+                            <input type="text" class="form-control" placeholder="Enter bank name." id="bankname" name="GiftVoucher.Bank_Name" value="@Model.GiftVoucher.Bank_Name"  maxlength="50"/>
                         </div>
 
                         <div class="form-group" id="divCreditCardNo">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit-Card no</span>
-                            <input type="text" class="form-control" placeholder="Enter credit card number." id="creditcardno" name="GiftVoucher.Credit_Card_No" value="@Model.GiftVoucher.Credit_Card_No"  />
+                            <input type="text" class="form-control" placeholder="Enter credit card number." id="creditcardno" name="GiftVoucher.Credit_Card_No" value="@Model.GiftVoucher.Credit_Card_No" maxlength="20" />
                         </div>
                     </div>
 

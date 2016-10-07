@@ -24,7 +24,7 @@
 <div class="content-frame">
 
     <!-- START CONTENT FRAME TOP -->
-    <div class="content-frame-top">
+    <div class="content-frame-top"> 
         <div class="col-md-12">
             <div class="page-title">
                 <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Product Management</h2>
@@ -166,7 +166,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size Difference.</span>
-                        <input type="text" class="form-control" placeholder="Enter size difference." name="Product.Size_Difference" value="@(Model.Product.Size_Difference == 0 ? "" : Model.Product.Size_Difference.ToString())" maxlength="10"/>
+                        <input type="text" class="form-control" placeholder="Enter size difference." name="Product.Size_Difference" value="@(Model.Product.Size_Difference == 0 ? "" : Model.Product.Size_Difference.ToString())" maxlength="5"/>
 
                     </div>
 
@@ -178,13 +178,13 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Difference.</span>
-                        <input type="text" class="form-control" placeholder="Enter MRP difference." name="Product.MRP_Difference" value="@(Model.Product.MRP_Difference == 0 ? "" : Model.Product.MRP_Difference.ToString())" maxlength="10" />
+                        <input type="text" class="form-control" placeholder="Enter MRP difference." name="Product.MRP_Difference" value="@(Model.Product.MRP_Difference == 0 ? "" : Model.Product.MRP_Difference.ToString())" maxlength="5" />
 
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Percentage.</span>
-                        <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." name="Product.MRP_Percentage" value="@(Model.Product.MRP_Percentage == 0 ? "" : Model.Product.MRP_Percentage.ToString())" maxlength="10" />
+                        <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." name="Product.MRP_Percentage" value="@(Model.Product.MRP_Percentage == 0 ? "" : Model.Product.MRP_Percentage.ToString())" maxlength="5" />
 
                     </div>
 
