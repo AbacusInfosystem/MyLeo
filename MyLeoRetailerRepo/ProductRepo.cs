@@ -16,6 +16,7 @@ using BarCode.Models;
 using System.Configuration;
 using System.IO;
 using System.Web;
+using System.Text.RegularExpressions;
 //using iTextSharp.text.pdf;
 
 namespace MyLeoRetailerRepo
@@ -373,16 +374,18 @@ namespace MyLeoRetailerRepo
                 ProductMRP.SKU_Code = Generate_SKU_Code(ProductMRP);
 
             if (dr["Product_Barcode"] != DBNull.Value)
-            {
+            { 
                 ProductMRP.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";
+                //string arr = ProductMRP.Barcode_Image_Url.Split('[^\\w-]+')[0];
                 ProductMRP.Product_Barcode = (byte[])dr["Product_Barcode"];
             }
             else
             {
                  if (!String.IsNullOrEmpty(ProductMRP.SKU_Code))
-                {  
+                 { 
+                    string SKU_Code = Regex.Replace(ProductMRP.SKU_Code, @"[^0-9a-zA-Z]+", ""); 
                     string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), ProductMRP.SKU_Code + ".png");
-                    ProductMRP.Product_Barcode = bar.Generate_Linear_Barcode(ProductMRP.SKU_Code, path);//NK_TSHR_TSRN_b_RD
+                    ProductMRP.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Code, path);//NK_TSHR_TSRN_b_RD
                     ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
                 }
             } 

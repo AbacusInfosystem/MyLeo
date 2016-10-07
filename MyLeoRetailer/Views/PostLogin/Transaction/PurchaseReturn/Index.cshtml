@@ -368,7 +368,7 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Transporter Name.</span>
                                     <select class="form-control select" name="PurchaseReturn.Transporter_Id">
                                         <option value="">Select Transporter</option>
-                                        @foreach (var item in Model.PurchaseReturn.Vendors)
+                                        @foreach (var item in Model.PurchaseReturn.Transporters)
                                             {
                                                 if (Model.PurchaseReturn.Transporter_Id == item.Vendor_Id)
                                                 {

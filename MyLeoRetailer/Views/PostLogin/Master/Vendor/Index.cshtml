@@ -203,12 +203,24 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                @*<div class="col-md-3">
                                     <div class="form-group">
                                         <label for="dtpVendor_Vat_Effective_Date" style="color: #333" class="">Vat Effective Date</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_Effective_Date" id="dtpVendor_Vat_Effective_Date" value="@(Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM/dd/yyyy"))" placeholder="Enter Vat Effective Date" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_Effective_Date" id="dtpVendor_Vat_Effective_Date" value="@(Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("dd/MM/yyyy"))" placeholder="Enter Vat Effective Date" />
+                                    </div>
+                                </div>*@
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat Effective Date</span>
+                                        <div class="input-group date" id="dtpVendor_Vat_Effective_Date" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("dd-MM-yyyy")))" readonly placeholder="Enter Vat Effective Date" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
                                     </div>
                                 </div>
+
 
                             </div>
 
@@ -247,10 +259,21 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                @*<div class="col-md-3">
                                     <div class="form-group">
                                         <label for="dtpVendor_CST_Effective_Date" style="color: #333" class="">CST Effective Date</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_Effective_Date" id="dtpVendor_CST_Effective_Date" value="@(Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM/dd/yyyy"))" placeholder="Enter CST Effective Date" />
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_Effective_Date" id="dtpVendor_CST_Effective_Date" value="@(Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("dd/MM/yyyy"))" placeholder="Enter CST Effective Date" />
+                                    </div>
+                                </div>*@
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">CST Effective Date</span>
+                                        <div class="input-group date" id="dtpVendor_CST_Effective_Date" data-date="" data-date-format="dd-mm-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("dd-MM-yyyy")))" readonly placeholder="Enter CST Effective Date" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
                                     </div>
                                 </div>
 

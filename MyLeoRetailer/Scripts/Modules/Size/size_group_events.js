@@ -18,7 +18,7 @@ $(function () {
 
         Get_SizeGroup_By_Id(this);
 
-        Get_Sizes();
+       // Get_Sizes(); //commited by aditya
 
     });
 
