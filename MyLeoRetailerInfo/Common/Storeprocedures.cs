@@ -329,7 +329,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Check_Mobile_No,
             sp_Get_Credit_Note_Details_By_Customer_Id,
             sp_Get_Gift_Voucher,
-
+            sp_Check_Quantity,
 
         //Sales Return
 
@@ -387,6 +387,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Product_Warehouse,
         sp_Get_SKU_By_ArticleNo_ColorId_SizeId,
         sp_Insert_Purchase_Order_Request_Consolidation,
+            sp_Warehouse_Notifiation,
 
             //Product Dispatch
         sp_Get_Product_To_Dispatch,

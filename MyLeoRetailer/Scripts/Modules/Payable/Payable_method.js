@@ -184,7 +184,10 @@ function Save_Payable_Data() {
 
             Friendly_Messages(obj);
 
-            //Friendly_Messages(obj);
+            document.getElementById("txtPaid_Amount").disabled = false;
+
+            document.getElementById("btnResetPay").disabled = false;
+          
 
         }
     });
@@ -265,7 +268,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<input type='hidden' id='hdnBank_Name" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Bank_Name + "'/>";
 
-        htmlText += "<input type='hidden' id='hdnCheque_Date" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Cheque_Date + "'/>";
+        htmlText += "<input type='hidden' id='hdnCheque_Date" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Cheque_Date + ".ToString('dd-MM-yyyy')'/>";
 
         htmlText += "<input type='hidden' id='hdnPayable_Item_Id" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Payable_Item_Id + "'/>";
 
@@ -322,13 +325,13 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Credit_Note_No == null ? "" : data.Payables[i].Credit_Note_No;
+        htmlText += data.Payables[i].Credit_Note_No == null ? "NA" : data.Payables[i].Credit_Note_No;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Credit_Note_Amount == null ? "" : data.Payables[i].Credit_Note_Amount;
+        htmlText += data.Payables[i].Credit_Note_Amount == null ? "NA" : data.Payables[i].Credit_Note_Amount;
 
         htmlText += "</td>";
 
@@ -382,6 +385,8 @@ function Bind_Payable_Grid_Items(data) {
 }
 
 function EditPayableData(id) {
+
+    document.getElementById("btnResetPay").disabled = true;
 
     var Balance_amount = 0;
     var Discount_amount = 0;

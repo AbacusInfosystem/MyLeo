@@ -95,6 +95,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
 
             TempData["eViewModel"] = (EmployeeViewModel)eViewModel;
+
             return RedirectToAction("Search");
         }
 

@@ -323,11 +323,11 @@ function AddSalesOrderDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='1' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='Discount %' name='SaleOrderItemList[" + i + "].Discount_Percentage' value='0'  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='Disc %' name='SaleOrderItemList[" + i + "].Discount_Percentage' value=''  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -501,9 +501,13 @@ function ReArrangeSalesOrderDetailsData() {
 
 function Add_Validation(i) {
 
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
-    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Required", } });
+    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required", } });
+
+    $("#textSalesMan_" + i).rules("add", { required: true, messages: { required: "SalesMan" } });
+
+    $("#textDiscount_Percentage_" + i).rules("add", { required: true, digits: true, messages: { required: "Discount", digits: "Invalid Discount." } });
 
 }
 

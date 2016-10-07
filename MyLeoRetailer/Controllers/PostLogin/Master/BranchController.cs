@@ -64,13 +64,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                bViewModel.Branch = bRepo.Get_Branch_By_Id(bViewModel.Branch.Branch_ID);
+                bViewModel.Branch = bRepo.Get_Branch_By_Id(bViewModel.Filter.Branch_ID);
 
                 //bViewModel.Branch.NearLocationDetailsList = bRepo.Get_Near_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
 
                 //bViewModel.Branch.FarLocationDetailsList = bRepo.Get_Far_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
 
-                bViewModel.Branch.LocationDetailsList = bRepo.Get_Branch_Location_By_Id(bViewModel.Branch.Branch_ID);
+                bViewModel.Branch.LocationDetailsList = bRepo.Get_Branch_Location_By_Id(bViewModel.Filter.Branch_ID);
             }
             catch (Exception ex)
             {
@@ -113,7 +113,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             TempData["bViewModel"] = bViewModel;
 
             //return View("Search", bViewModel);   
-            return RedirectToAction("Search", bViewModel);
+            return RedirectToAction("Search");
         }
 
         public ActionResult Update_Branch(BranchViewModel bViewModel)

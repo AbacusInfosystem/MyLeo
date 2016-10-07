@@ -12,6 +12,7 @@ using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.PurchaseReturn;
 using System.Transactions;
 using MyLeoRetailerRepo.Common;
+using MyLeoRetailerInfo.ProductWarehouse;
 
 
 
@@ -766,6 +767,26 @@ namespace MyLeoRetailerRepo
         }
         //
 
+
+        public List<ProductWarehouseInfo> Warehouse_Notifiation()
+        {
+            List<ProductWarehouseInfo> list_Product = new List<ProductWarehouseInfo>();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Warehouse_Notifiation.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                ProductWarehouseInfo product = new ProductWarehouseInfo();
+
+                product.Product_SKU = Convert.ToString(dr["Product_SKU"]);
+
+                product.Product_Quantity = Convert.ToInt32(dr["Product_Quntity"]);
+
+                list_Product.Add(product);
+            }
+
+            return list_Product;
+        }
     }
 }
 

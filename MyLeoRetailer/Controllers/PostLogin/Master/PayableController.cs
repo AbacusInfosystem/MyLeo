@@ -83,7 +83,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             pager = pViewModel.Grid_Detail.Pager;
 
-            pViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Vendor_Name,Purchase_Invoice_Date,Net_Amount,Balance_Amount,status,Payament_Date", "Purchase_Invoice_Id,Vendor_ID"); // Set grid info for front end listing
+            pViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Vendor_Name,Purchase_Invoice_Date,Net_Amount,status", "Purchase_Invoice_Id,Vendor_ID"); // Set grid info for front end listing
 
             pViewModel.Grid_Detail.Records = pRepo.Get_PurchaseInvoice(pViewModel.Payable); // Call repo method 
 
