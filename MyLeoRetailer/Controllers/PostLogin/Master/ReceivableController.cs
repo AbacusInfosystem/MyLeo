@@ -80,7 +80,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             pager = rViewModel.Grid_Detail.Pager;
 
-            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,Balance_Amount,status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
+            rViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Created_Date,Customer_Name,Customer_Mobile1,Net_Amount,status", "Sales_Invoice_Id,Customer_Id,Branch_Id"); // Set grid info for front end listing
 
             rViewModel.Grid_Detail.Records = rRepo.Get_Receivable_Search_Details(rViewModel.Receivable, rViewModel.Cookies.Branch_Ids); // Call repo method 
 

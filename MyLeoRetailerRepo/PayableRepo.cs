@@ -45,6 +45,24 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
             sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
 
+            //if (Payable.Credit_Note_No == null)
+            //{
+            //    sqlParams.Add(new SqlParameter("@Credit_Note_No", "NA"));
+            //}
+            //else
+            //{
+            //  sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
+            //}
+
+            //if (Payable.Credit_Note_Amount == 0)
+            //{
+            //    sqlParams.Add(new SqlParameter("@Credit_Note_Amount", "NA"));
+            //}
+            //else
+            //{
+            //    sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
+            //}
+
             if (Payable.Payment_Mode == 1)
             {
                 sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
