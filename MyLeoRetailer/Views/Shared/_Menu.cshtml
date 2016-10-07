@@ -5,6 +5,7 @@
 
 <script src="~/Scripts/Modules/Employee/change_branch_event.js"></script>
 <script src="~/Scripts/Modules/Employee/change_branch_method.js"></script>
+<script src="~/Scripts/Modules/ProductWarehouse/product_warehouse_notification.js"></script>
 
  <!-- START X-NAVIGATION VERTICAL -->
 <ul class="x-navigation x-navigation-horizontal">
@@ -75,6 +76,29 @@
         LoginInfo Cookies = new LoginInfo();
         Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
+        
+    <!--Added by aditya[07102016] Start-->
+    <li class="xn-icon-button pull-right active">
+        <a href="#"><span class="fa fa-comments" id="btnNotification"></span></a>
+    @*<li class="xn-icon-button pull-right">
+
+    </li>*@
+
+        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Warehouse_Notification" style="width: 220px;">
+           
+            <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
+                <div class="page-content-wrap">
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </li>
+       <!--Added by aditya[07102016] End--> 
+        
+        
     <!-- TASKS -->
     <li class="xn-icon-button pull-right">
             <a href="#" data-toggle="tooltip panel" id="btnSaveChaneBranch" data-target="#div_Change_Branch" data-placement="bottom" title="Change Branch"><span class="fa fa-map-marker"></span></a>
