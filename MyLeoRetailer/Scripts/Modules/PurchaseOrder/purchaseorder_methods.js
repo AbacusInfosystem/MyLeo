@@ -5,8 +5,13 @@
     $('#hdf_Vendor_Id').val(value);
 
     $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();//added by vinod mane on 07/10/2016
-   // $("#tblPurchaseOrderCalculation").find("tr:gt(0)").remove();//added by vinod mane on 10/10/2016
     
+    document.getElementById('tdTotalQuantity').innerText = 0;//added by vinod mane on 10/10/2016
+    document.getElementById('tdNetAmount').innerText = 0;//added by vinod mane on 10/10/2016
+    
+   
+    
+
     $.ajax({
 
         url: "/PurchaseOrder/Get_Details_By_Vendor_Id",
@@ -19,7 +24,7 @@
 
             var obj = $.parseJSON(response);
 
-
+           
             $("#drpArticle_No").html("");
 
             $("#drpArticle_No").append("<option value=''>Select Article No.</option>");
@@ -42,6 +47,7 @@
 
                 }
             }
+           // $("#drpArticle_No").val();
 
             $("#drpBrand").html("");
 
