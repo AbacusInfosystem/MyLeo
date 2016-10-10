@@ -4,6 +4,9 @@
 
     $('#hdf_Vendor_Id').val(value);
 
+    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();//added by vinod mane on 07/10/2016
+   // $("#tblPurchaseOrderCalculation").find("tr:gt(0)").remove();//added by vinod mane on 10/10/2016
+    
     $.ajax({
 
         url: "/PurchaseOrder/Get_Details_By_Vendor_Id",
@@ -136,7 +139,7 @@ function Get_Consolidate_Purchase_Orders(value) {
 
             debugger;
 
-            if (obj.PurchaseOrder.PurchaseOrders.length > 0) {              
+            if (obj.PurchaseOrder.PurchaseOrders.length > 0) {               
 
                 var qty = 0;
 
@@ -528,7 +531,7 @@ function Get_Consolidate_Purchase_Orders(value) {
                     var newRow = $(tblHtml);
 
                     myTable.append(newRow);
-
+                    
 
                     qty = parseInt(qty) + parseInt(obj.PurchaseOrder.PurchaseOrders[i].Item_Quantity);
 
@@ -1506,7 +1509,7 @@ function DeletePurchaseOrderDetailsData(i) {
     $("#tblPurchaseOrderItems").find("[id='PurchaseOrderItemRow_" + i + "']").remove();
 
     ReArrangePurchaseOrderDetailsData();
-
+    
     Reset_Detalis_After_Delete();
     
 }

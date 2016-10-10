@@ -248,8 +248,8 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
-      
 
+       
        
     }
 
