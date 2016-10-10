@@ -4,13 +4,14 @@
 
     $('#hdf_Vendor_Id').val(value);
 
-    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();//added by vinod mane on 07/10/2016
+    //added by vinod mane on 10/10/2016
+    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();    
+    document.getElementById('tdTotalQuantity').innerText = 0;
+    document.getElementById('tdNetAmount').innerText = 0;
     
-    document.getElementById('tdTotalQuantity').innerText = 0;//added by vinod mane on 10/10/2016
-    document.getElementById('tdNetAmount').innerText = 0;//added by vinod mane on 10/10/2016
-    
-   
-    
+    ClearAllDropdownlist();   
+
+    //End
 
     $.ajax({
 
@@ -1845,3 +1846,25 @@ function ReArrangePurchaseOrderDetailsData() {
     });
 
 }
+
+//added by vinod mane on 10/10/2016
+function ClearAllDropdownlist()
+{
+    $("#drpArticle_No").val('');
+    $("#drpBrand").val('');
+    $("#drpCategory").val('');
+    $("#drpSubCategory").val('');   
+    $("#drpCenter_Size").val('');
+    $("#drpSize_Group").val('');
+}
+
+function Clear_Br_Cat_SubCat() {
+   
+    $("#drpBrand").val('');
+    $("#drpCategory").val('');
+    $("#drpSubCategory").val('');  
+
+}
+
+
+//End
