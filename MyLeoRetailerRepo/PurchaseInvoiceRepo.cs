@@ -768,11 +768,15 @@ namespace MyLeoRetailerRepo
         //
 
 
-        public List<ProductWarehouseInfo> Warehouse_Notifiation()
+        public List<ProductWarehouseInfo> Warehouse_Notifiation(string branch_Ids)
         {
             List<ProductWarehouseInfo> list_Product = new List<ProductWarehouseInfo>();
 
-            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Warehouse_Notifiation.ToString(), CommandType.StoredProcedure);
+            List<SqlParameter> sqlparams = new List<SqlParameter>();
+
+            sqlparams.Add(new SqlParameter("@branch_Ids", branch_Ids));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparams, Storeprocedures.sp_Warehouse_Notifiation.ToString(), CommandType.StoredProcedure);
 
             foreach (DataRow dr in dt.Rows)
             {
@@ -780,7 +784,7 @@ namespace MyLeoRetailerRepo
 
                 product.Product_SKU = Convert.ToString(dr["Product_SKU"]);
 
-                product.Product_Quantity = Convert.ToInt32(dr["Product_Quntity"]);
+                product.Product_Quantity = Convert.ToInt32(dr["Product_Quantity"]);
 
                 list_Product.Add(product);
             }
