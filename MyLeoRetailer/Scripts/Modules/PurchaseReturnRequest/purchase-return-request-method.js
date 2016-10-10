@@ -39,7 +39,7 @@
 
 }
 
-function AddPurchaseReturnRequestDetails(i) {
+function AddPurchaseReturnRequestDetails() {
 
     var html = '';
 
@@ -136,27 +136,45 @@ function AddPurchaseReturnRequestDetails(i) {
 
 function DeletePurchaseReturnRequestDetailsData(i) {
     
-    if ($('#tblPurchaseReturnRequestItems tbody tr').length == 1)
-    {
-        $("#lblError").text("Atleast one required.");
-    }
-    else
-    {
-        $("#lblError").text("");
+    //if ($('#tblPurchaseReturnRequestItems tbody tr').length == 1)
+    //{
+    //    $("#lblError").text("Atleast one required.");
+    //}
+    //else
+    //{
+        //$("#lblError").text("");
 
         $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
         ReArrangePurchaseReturnRequestDetailsData();
 
-        Add_Validation(i);
+      
 
-        CalculateTotal();
+       
 
-        CalculateDiscount();
+        if (i == 0) {
+            AddPurchaseReturnRequestDetails();
 
-        CalculateTax();
+            $("#textDiscountPercentage_0").val(0);
 
-    }
+            CalculateTotal();
+
+            CalculateDiscount();
+
+            CalculateTax();
+        }
+        else {
+
+            Add_Validation(i);
+
+            CalculateTotal();
+
+            CalculateDiscount();
+
+            CalculateTax();
+        }
+
+    //}
 
 }
 
@@ -391,6 +409,8 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
         }
 
     });
+
+    $("#textDiscountPercentage_0").val(0);
 
     CalculateTotal();
     

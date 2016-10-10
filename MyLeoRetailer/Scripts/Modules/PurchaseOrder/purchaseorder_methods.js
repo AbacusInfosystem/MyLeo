@@ -2,11 +2,10 @@
 
     $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();
 
-    $('#hdf_Vendor_Id').val(value);
+    $(".Details").hide();
 
-    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();//added by vinod mane on 07/10/2016
-   // $("#tblPurchaseOrderCalculation").find("tr:gt(0)").remove();//added by vinod mane on 10/10/2016
-    
+    $('#hdf_Vendor_Id').val(value);
+        
     $.ajax({
 
         url: "/PurchaseOrder/Get_Details_By_Vendor_Id",

@@ -1,6 +1,10 @@
 ﻿function Set_Vendor_Id(value) {
     debugger;
 
+    $("#tblPurchaseOrderRequestItems").find("tr:gt(0)").remove();
+
+    $(".Details").hide();
+
     $('#hdf_Vendor_Id').val(value);
 
     $.ajax({
@@ -107,7 +111,7 @@
         }
     });
 
-
+    Reset_Detalis_After_Delete();
 }
 
 function Set_Sub_Category_Drp_Id(value) {
