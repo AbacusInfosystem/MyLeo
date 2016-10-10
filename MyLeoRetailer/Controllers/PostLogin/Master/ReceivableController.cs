@@ -158,8 +158,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Receivable(ReceivableViewModel rViewModel)
         {
-          
-
+            Set_Date_Session(rViewModel.GiftVoucher);
 
             try
             {

@@ -44,34 +44,45 @@ function Get_Credit_Note_Amount_By_Id(id) {
     });
 }
 
-function CalculateDiscount() {
-   
-    debugger;
+function Calculate_Fianl_Amount_Using_Credit_Note_Amount() {
 
-    
-    var Amountdue = parseFloat($("#txtAmount_due").val());
+    var finalamount = parseFloat($("#txtFinal_amount").val());
 
     var CNamount = parseFloat($("#txtCN_amount").val());
-    
-    var paidamount = parseFloat($("#txtPaid_Amount").val());
-    
-    var abcamount = Amountdue - CNamount;
+
+    //var paidamount = parseFloat($("#txtPaid_Amount").val());
+
+    var newfinalamount = finalamount - CNamount;
+
+    //var discount = parseFloat($("#txtDiscount").val());
+
+    //var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((abcamount * discount) / 100);
+
+    //$("#txtDiscount_amount").val(discountAmt.toFixed(2));
+
+    //var finalamount = abcamount - discountAmt;
+
+    $("#txtFinal_amount").val(newfinalamount.toFixed(2));
+
+}
+
+function Calculate_Fianl_Amount_Using_Discount() {
+   
+    var finalamount = parseFloat($("#txtFinal_amount").val());
 
     var discount = parseFloat($("#txtDiscount").val());
 
-    var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((abcamount * discount) / 100);
+    var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((finalamount * discount) / 100);
 
     $("#txtDiscount_amount").val(discountAmt.toFixed(2));
 
-    var finalamount = abcamount - discountAmt;
+    var newfinalamount = finalamount - discountAmt;
 
-    $("#txtFinal_amount").val(finalamount.toFixed(2));
+    $("#txtFinal_amount").val(newfinalamount.toFixed(2));
 
 }
 
 function FinalAmount() {
-
-    debugger;
 
     var FinalAmount = parseFloat($("#txtFinal_amount").val());
 
@@ -172,7 +183,6 @@ function Save_Payable_Data() {
         contentType: 'application/json',
 
         success: function (response) {
-            debugger;
 
             var obj = $.parseJSON(response);
 
@@ -508,3 +518,29 @@ function ClearPayableData() {
 
     
 }
+
+
+//function CalculateDiscount() {
+
+//    debugger;
+
+
+//    var Amountdue = parseFloat($("#txtAmount_due").val());
+
+//    var CNamount = parseFloat($("#txtCN_amount").val());
+
+//    var paidamount = parseFloat($("#txtPaid_Amount").val());
+
+//    var abcamount = Amountdue - CNamount;
+
+//    var discount = parseFloat($("#txtDiscount").val());
+
+//    var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((abcamount * discount) / 100);
+
+//    $("#txtDiscount_amount").val(discountAmt.toFixed(2));
+
+//    var finalamount = abcamount - discountAmt;
+
+//    $("#txtFinal_amount").val(finalamount.toFixed(2));
+
+//}
