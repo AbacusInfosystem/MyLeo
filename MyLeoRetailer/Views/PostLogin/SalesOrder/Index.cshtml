@@ -625,7 +625,7 @@
                                         <select class="form-control" id="drpGift_Voucher_No" name="SalesInvoice.Gift_Voucher_Id">
                                             <option value="0">Gift Voucher No</option>
 
-                                            @foreach (var item in Model.ReceivableItem)
+                                            @foreach (var item in Model.GiftVoucherDetails)
                                             {
                                                 if (Model.SalesInvoice.Gift_Voucher_Id == item.Gift_Voucher_Id)
                                                 {
