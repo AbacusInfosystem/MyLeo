@@ -164,7 +164,7 @@ namespace MyLeoRetailer.Common
 
         //Added by Aditya 10102016 [Start]
 
-        public static int Get_Warehouse_Notification_Count()
+        public static int Get_Warehouse_Notification_Count(string branch_Ids)
         {
            PurchaseInvoiceRepo _purchaseinvoiceRepo =new PurchaseInvoiceRepo();
 
@@ -172,7 +172,7 @@ namespace MyLeoRetailer.Common
 
             int count = 0;
 
-            list_Product=_purchaseinvoiceRepo.Warehouse_Notifiation();
+            list_Product = _purchaseinvoiceRepo.Warehouse_Notifiation(branch_Ids);
 
             count = list_Product.Count();
 

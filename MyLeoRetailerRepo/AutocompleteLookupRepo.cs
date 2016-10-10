@@ -126,6 +126,17 @@ namespace MyLeoRetailerRepo
                         //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
                     }
                 }
+
+
+                if (table_Name == "Assign_Branches")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = "select Branch_ID,Branch_Name";
+                        strquery += " from Branch where Branch_ID in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
+                    }
+                }
                
                               
             }
