@@ -31,7 +31,6 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
-
        public int Sales_Invoice_Id
        {
            get;
@@ -250,6 +249,7 @@ namespace MyLeoRetailerInfo.Receivable
        }
 
 
+       
        
     }
 

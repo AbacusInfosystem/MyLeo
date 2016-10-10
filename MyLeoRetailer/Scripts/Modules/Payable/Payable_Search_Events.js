@@ -17,6 +17,11 @@
         Get_Payable();
     });
 
+    $("#btnResetPayable").click(function () {
+
+        Get_Payable();
+    });
+
     $("#btnPay").click(function () {
 
         $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");

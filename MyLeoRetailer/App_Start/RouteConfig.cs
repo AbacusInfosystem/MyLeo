@@ -273,7 +273,13 @@ namespace MyLeoRetailer
                name: "Product-10",
                url: "Product/Product_Image_Upload",
                defaults: new { controller = "Product", action = "Product_Image_Upload", brand_Name = UrlParameter.Optional, id = UrlParameter.Optional },
-               namespaces: new string[] { "MyLeoRetailer.Controllers" }); 
+               namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+              routes.MapRoute(
+        name: "Product-11",
+        url: "product/check-article-no",
+        defaults: new { controller = "Product", action = "Check_Existing_Article_No", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+        namespaces: new string[] { "MyLeoRetailer.Controllers" });
             
             #endregion
 

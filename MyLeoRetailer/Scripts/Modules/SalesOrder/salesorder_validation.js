@@ -6,10 +6,10 @@
 
             rules:
                 {
-                    //"SalesInvoice.Sales_Invoice_No":
-                    //   {
-                    //       required: true,
-                    //   },
+                    "SalesInvoice.Branch_Name":
+                       {
+                           required: true,
+                       },
                     "SalesInvoice.Invoice_Date":
                         {
                             required: true,                            
@@ -35,21 +35,22 @@
                     //    },
                     "SaleOrderItemList[0].Quantity":
                         {
-                            required: true,
-                            number: true
+                            //required: true,
+                            number: true,
+                            QuantityCheck : true
                         },
                     "SaleOrderItemList[0].Discount_Percentage":
                         {
-                            required: true,
+                            //required: true,
                             number: true
                         }
                 },
 
             messages: {
 
-                "SalesInvoice.Sales_Invoice_No":
+                "SalesInvoice.Branch_Name":
                 {
-                    required: "Invoice No is required."
+                    required: "Branch Name is required."
                 },
                 "SalesInvoice.Invoice_Date":
                     {
@@ -70,7 +71,7 @@
                     },
                 "SalesInvoice.Tax_Percentage":
                     {
-                        required: "Tax Percentage is required",
+                        required: "",
                         number: "Only numbers"
                     },
                 "SaleOrderItemList[0].SKU_Code":
@@ -84,7 +85,7 @@
                     },
                 "SaleOrderItemList[0].Discount_Percentage":
                     {
-                        required: "Discount % Required",
+                        required: "Required field",
                         number: "Only numbers"
                     },
                
@@ -139,5 +140,31 @@ jQuery.validator.addMethod("MobileNo", function (value, element) {
     return result;
 
 }, "Mobile Number does not exists.");
+
+
+jQuery.validator.addMethod("QuantityCheck", function (value, element) {
+
+    var result = true;
+
+    if ($("#textQuantity_").val() != "" && $("#hdnQuantity").val() != $("#textQuantity_").val()) {
+        $.ajax({
+
+            url: '/SalesOrder/Check_Quantity',
+            data:
+                {
+                    Quantity: value
+                },
+            method: 'GET',
+            async: false,
+            success: function (data) {
+                if (data == false) {
+                    result = false;
+                }
+            }
+        });
+    }
+    return result;
+
+}, "Quantity does not exists.");
 
 

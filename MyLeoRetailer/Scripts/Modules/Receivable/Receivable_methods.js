@@ -309,6 +309,8 @@ function Save_Receivable_Data() {
 
             Cancle();
 
+            document.getElementById("btnResetPay").disabled = false;
+
             //Friendly_Messages(obj);
 
         }
@@ -575,7 +577,7 @@ function ClearReceivableData() {
 
 function EditReceivableData(id) {
 
-    alert("12");
+    document.getElementById("btnResetPay").disabled = true;
 
     var Balance_amount = 0;
     var paid_amount = 0;
