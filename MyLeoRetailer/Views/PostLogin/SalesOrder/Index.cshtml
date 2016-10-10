@@ -158,11 +158,16 @@
                                     </div>*@
 
                                 <div class="col-md-3" id="divBranch">
-
+                                    @{
+                                    LoginInfo Cookies = new LoginInfo();
+                                    Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                                    
+                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids"/>
+                                    }
                                     <div class="form-group auto-complete">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
                                         <div class="input-group">
-                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesInvoice.Branch_Name" id="textSales_Branch_Name_0" placeholder="Enter Branch to search" value="@Model.SalesInvoice.Branch_Name" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
+                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesInvoice.Branch_Name" id="textSales_Branch_Name_0" placeholder="Enter Branch to search" value="@Model.SalesInvoice.Branch_Name" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
                                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                             <input type="hidden" id="hdnBranchID" value="" name="SalesInvoice.Branch_Id" class="auto-complete-value" />
                                             <input type="hidden" id="hdnBranchName" value="" name="SalesInvoice.Branch_Name" class="auto-complete-label" />

@@ -262,6 +262,7 @@
                                 <thead>
                                     <tr>
                                         <th Style="width:150px">Barcode No.</th>
+                                        <th style="width:150px">PO No.</th>
                                         <th Style="width:150px">SKU No.</th>
                                         <th Style="width:70px">Article No.</th>
                                         <th style="width:100px">Color</th>
@@ -272,9 +273,8 @@
                                         <th Style="width:60px">Size</th>
                                         <th Style="width:60px">Quantity</th>
                                         <th Style="width:60px">WSR</th>
-                                        <th Style="width:60px">Total Amount</th>
-                                        <th Style="width:150px">PO No.</th>
-                                        <th Style="width:160px">Action</th>
+                                        <th Style="width:60px">Total Amount</th>                                       
+                                        <th Style="width:165px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -288,7 +288,17 @@
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);" placeholder="Enter SKU to search" value="" data-table="Product_SKU_Mapping" data-col="Product_Id,SKU_Code" data-headernames="SKU Code" data-param="hdf_Vendor_Id" data-field="Vendor_Id" />
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textPurchase_Order_No_0" placeholder="Enter PO no. to search" value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order" data-param="hdf_Vendor_Id" data-field="Vendor_Id" maxlength="10" />
+                                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                                    <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_Id" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnPurchase_Order_No_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" class="auto-complete-label" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group auto-complete">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);" placeholder="Enter SKU to search" value="" data-table="Product_SKU_Mapping" data-col="Purchase_Order_Id,SKU_Code" data-headernames="SKU Code" data-param="hdnPurchase_Order_Id_0" data-field="Purchase_Order_Id" />
                                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                     <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
                                                     <input type="hidden" id="hdnSKU_No_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" class="auto-complete-label" />
@@ -330,21 +340,11 @@
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Amount" id="textAmount_0" readonly />
-                                        </td>
-                                        <td>
-                                            <div class="form-group auto-complete">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textPurchase_Order_No_0" placeholder="Enter PO no. to search" value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order" data-param="hdf_Vendor_Id" data-field="Vendor_Id" maxlength="10"/>
-                                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                                    <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_Id" class="auto-complete-value" />
-                                                    <input type="hidden" id="hdnPurchase_Order_No_0" value="" name="PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No" class="auto-complete-label" />
-                                                </div>
-                                            </div>
-                                        </td>
+                                        </td>                                     
                                         <td>
                                             <div class="btn-group">
                                                 <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>Add Row</button>
-                                                <button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>Delete</button>
+                                                <button type='button' id='delete-invoice-details' class='btn btn-danger active' disabled onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>Delete</button>
                                             </div>                                            
                                         </td>
                                     </tr>

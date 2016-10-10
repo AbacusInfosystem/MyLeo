@@ -229,14 +229,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             using (TransactionScope scope = new TransactionScope())
             {
-            try
-             {
+                try
+                {
                     Set_Date_Session(poViewModel.PurchaseOrder);
 
                     foreach (var item in poViewModel.PurchaseOrder.PurchaseOrders)
-                {
+                    {
                         Set_Date_Session(item);
-                }
+                    }
 
                     if (poViewModel.PurchaseOrder.Purchase_Order_Id == 0)
                     {
@@ -246,31 +246,31 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                         _purchaseorderRepo.Insert_Purchase_Order(poViewModel.PurchaseOrder);
 
                         poViewModel = new PurchaseOrderViewModel();
-                
+
                         poViewModel.FriendlyMessages.Add(MessageStore.Get("PO01"));
-            }
+                    }
                     else
-            {
-                      
-        }
+                    {
+
+                    }
 
                     scope.Complete();
 
-            }
-            catch (Exception ex)
-            {
-                    poViewModel = new PurchaseOrderViewModel();                   
+                }
+                catch (Exception ex)
+                {
+                    poViewModel = new PurchaseOrderViewModel();
 
-                poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                    poViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                     Logger.Error(" PurchaseOrderController - Insert_Purchase_Order : " + ex.ToString());
 
                     scope.Dispose();
-            }
+                }
 
-            TempData["poViewModel"] = poViewModel;
+                TempData["poViewModel"] = poViewModel;
 
-            return RedirectToAction("Search", poViewModel);
+                return RedirectToAction("Search", poViewModel);
 
             }
         }

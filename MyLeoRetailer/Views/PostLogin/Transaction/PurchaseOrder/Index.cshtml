@@ -285,14 +285,15 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control select" id="drpArticle_No" name="PurchaseOrder.Article_No">
-                            <option value="">Select Article No.</option>
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" onchange="Clear_Br_Cat_SubCat()">
+                            <option value=" ">
+                            Select Article No.</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
-                        <select class="form-control select" id="drpCenter_Size" name="PurchaseOrder.Center_Size">
+                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrder.Center_Size">
                             <option value="">Select Center Size</option>
                         </select>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Center_Size" id="textCenter_Size" placeholder="Enter center size." />*@
@@ -306,7 +307,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
-                        <select class="form-control select" id="drpBrand" name="PurchaseOrder.Brand_Id">
+                        <select class="form-control" id="drpBrand" name="PurchaseOrder.Brand_Id" onchange="clear_cat_subcat()">
                             <option value="">Select Brand</option>
                         </select>
                     </div>
@@ -326,7 +327,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
-                        <select class="form-control select" id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
+                        <select class="form-control " id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
                             <option value="">Select Category</option>
                         </select>
                     </div>
@@ -344,7 +345,7 @@
                 <div class="block">
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Subcategory.</span>
-                        <select class="form-control select" id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
+                        <select class="form-control " id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
                             <option value="">Select Sub Category</option>
                         </select>
                     </div>
@@ -438,7 +439,7 @@
                             <td style="text-align:right; width:100px;">Net Amount.</td>
                             <td id="" style="width:100px;">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;" id="tdNetAmount">0</span>
-                                <input type="hidden" id="hdnTotalQuantity" name="PurchaseOrder.Net_Amount" />
+                                <input type="hidden" id="hdnNetAmount" name="PurchaseOrder.Net_Amount" />
                             </td>
                             <td style="width:auto;"></td>
                             <td style="width:180px;"></td>

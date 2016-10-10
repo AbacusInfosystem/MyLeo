@@ -1,8 +1,18 @@
 ﻿function Set_Vendor_Id(value) {
 
+    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();
 
     $('#hdf_Vendor_Id').val(value);
 
+    //added by vinod mane on 10/10/2016
+    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();    
+    document.getElementById('tdTotalQuantity').innerText = 0;
+    document.getElementById('tdNetAmount').innerText = 0;
+    
+    ClearAllDropdownlist();   
+
+    //End
+    
     $.ajax({
 
         url: "/PurchaseOrder/Get_Details_By_Vendor_Id",
@@ -38,6 +48,7 @@
 
                 }
             }
+           // $("#drpArticle_No").val();
 
             $("#drpBrand").html("");
 
@@ -109,6 +120,10 @@
         }
     });
 
+    //$("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').html('');
+
+    //$("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').html('');
+
     Get_Consolidate_Purchase_Orders(value);
    
     debugger;
@@ -129,7 +144,9 @@ function Get_Consolidate_Purchase_Orders(value) {
 
             var obj = $.parseJSON(response);
 
-            if (obj.PurchaseOrder.PurchaseOrders.length > 0) {
+            debugger;
+
+            if (obj.PurchaseOrder.PurchaseOrders.length > 0) {               
 
                 var qty = 0;
 
@@ -160,96 +177,98 @@ function Get_Consolidate_Purchase_Orders(value) {
 
                         if (j < obj.PurchaseOrder.PurchaseOrders[i].Sizes.length) {
 
+                            debugger;
+
                             if ((j + 1) == 1 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id1 != 0)
                             {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id1 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id1 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 2 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id2 != 0)
                             {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id2 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id2 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 3 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id3 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id3 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id3 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 4 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id4 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id4 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id4 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 5 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id5 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id5 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id5 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 6 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id6 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id6 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id6 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 7 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id7 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id7 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id7 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 8 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id8 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id8 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id8 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 9 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id9 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id9 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id9 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 10 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id10 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id10 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id10 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 11 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id11 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id11 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id11 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 12 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id12 != 0) {
                                 tblHtml += "<td>";
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id12 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id12 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 13 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id13 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id13 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id13 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 14 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id14 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id14 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id14 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
                             else if ((j + 1) == 15 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id15 != 0) {
                                 tblHtml += "<td>";
-                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id15 + "</span>";
+                                tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Name + "</span>";
                                 tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id15 + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                                 tblHtml += "</td>";
                             }
@@ -284,9 +303,7 @@ function Get_Consolidate_Purchase_Orders(value) {
 
 
                     //**************************************************************************************//
-
-
-                   
+                                       
 
                     tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
 
@@ -511,7 +528,7 @@ function Get_Consolidate_Purchase_Orders(value) {
 
                     tblHtml += "<td>";
                     tblHtml += "<div class='btn-group'>";
-                    tblHtml += "<button type='button' id='continue-order-details' class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
+                    tblHtml += "<button type='button' id='continue-order-details' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
                     tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
                     tblHtml += "</div>";
                     tblHtml += "</td>";
@@ -521,7 +538,7 @@ function Get_Consolidate_Purchase_Orders(value) {
                     var newRow = $(tblHtml);
 
                     myTable.append(newRow);
-
+                    
 
                     qty = parseInt(qty) + parseInt(obj.PurchaseOrder.PurchaseOrders[i].Item_Quantity);
 
@@ -1414,6 +1431,13 @@ function Enable_Size_Quantity(i) {
 
     $("#textStart_Size_" + i).parents('tr').find(".read-only").val(0);
 
+
+    $("#textEnd_Size_" + i).parents('tr').find(".read-only").attr("readonly", true);
+
+    $("#textEnd_Size_" + i).parents('tr').find(".read-only").rules("remove");
+
+    $("#textEnd_Size_" + i).parents('tr').find(".read-only").val(0);
+
     if (start <= end) {
 
         for (var j = start; j <= end; j++) {
@@ -1423,6 +1447,8 @@ function Enable_Size_Quantity(i) {
             $("#textSize_Quantity_" + j + "-" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits.", } });
         }
     }
+
+    CalculateRowQuantity(i);
 
 }
 
@@ -1483,16 +1509,36 @@ function Reset_Detalis_After_Delete() {
 
         $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(total_amt);
     }
+
+    if (j == 0) {
+
+        document.getElementById('tdTotalQuantity').innerText = 0;
+
+        document.getElementById('tdNetAmount').innerText = 0;
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
+}
 }
 
 function DeletePurchaseOrderDetailsData(i) {
 
     debugger;
 
+    var id = $("#hdnItem_Ids_" + i).val();
+
+    if (id != 0 || id != '')
+    {
+        $("#tblPurchaseOrderItems").find("[id='PurchaseOrderSizeRow_" + i + "']").remove();
+    }
+
     $("#tblPurchaseOrderItems").find("[id='PurchaseOrderItemRow_" + i + "']").remove();
 
-    ReArrangePurchaseOrderDetailsData();
+    ReArrangePurchaseOrderSizeData();
 
+    ReArrangePurchaseOrderDetailsData();
+    
     Reset_Detalis_After_Delete();
     
 }
@@ -1822,3 +1868,130 @@ function ReArrangePurchaseOrderDetailsData() {
     });
 
 }
+
+function ReArrangePurchaseOrderSizeData() {
+
+    debugger;
+
+    $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderSizeRow_']").each(function (i, row) {
+        if ($(row)[0].id != 'tblHeading') {
+
+            $(row)[0].id = 'PurchaseOrderSizeRow_' + i
+
+            var newTR = "#" + $(row)[0].id + " td";           
+
+            if ($(newTR).find("[id^='hdnSize1-']").length > 0) {
+                $(newTR).find("[id^='hdnSize1-']")[0].id = "hdnSize1-" + i;
+                $(newTR).find("[id^='hdnSize1-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id1");
+                $(newTR).find("[id^='Size1-']")[0].id = "Size1-" + i;   
+            }
+
+            if ($(newTR).find("[id^='hdnSize2-']").length > 0) {
+                $(newTR).find("[id^='hdnSize2-']")[0].id = "hdnSize2-" + i;
+                $(newTR).find("[id^='hdnSize2-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id2");
+                $(newTR).find("[id^='Size2-']")[0].id = "Size2-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize3-']").length > 0) {
+                $(newTR).find("[id^='hdnSize3-']")[0].id = "hdnSize3-" + i;
+                $(newTR).find("[id^='hdnSize3-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id3");
+                $(newTR).find("[id^='Size3-']")[0].id = "Size3-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize4-']").length > 0) {
+                $(newTR).find("[id^='hdnSize4-']")[0].id = "hdnSize4-" + i;
+                $(newTR).find("[id^='hdnSize4-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id4");
+                $(newTR).find("[id^='Size4-']")[0].id = "Size4-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize5-']").length > 0) {
+                $(newTR).find("[id^='hdnSize5-']")[0].id = "hdnSize5-" + i;
+                $(newTR).find("[id^='hdnSize5-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id5");
+                $(newTR).find("[id^='Size5-']")[0].id = "Size5-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize6-']").length > 0) {
+                $(newTR).find("[id^='hdnSize6-']")[0].id = "hdnSize6 -" + i;
+                $(newTR).find("[id^='hdnSize6-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id6");
+                $(newTR).find("[id^='Size6-']")[0].id = "Size6-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize7-']").length > 0) {
+                $(newTR).find("[id^='hdnSize7-']")[0].id = "hdnSize7-" + i;
+                $(newTR).find("[id^='hdnSize7-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id7");
+                $(newTR).find("[id^='Size7-']")[0].id = "Size7-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize8-']").length > 0) {
+                $(newTR).find("[id^='hdnSize8-']")[0].id = "hdnSize8-" + i;
+                $(newTR).find("[id^='hdnSize8-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id8");
+                $(newTR).find("[id^='Size8-']")[0].id = "Size8-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize9-']").length > 0) {
+                $(newTR).find("[id^='hdnSize9-']")[0].id = "hdnSize9-" + i;
+                $(newTR).find("[id^='hdnSize9-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id9");
+                $(newTR).find("[id^='Size9-']")[0].id = "Size9-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize10-']").length > 0) {
+                $(newTR).find("[id^='hdnSize10-']")[0].id = "hdnSize10-" + i;
+                $(newTR).find("[id^='hdnSize10-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id10");
+                $(newTR).find("[id^='Size10-']")[0].id = "Size10-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize11-']").length > 0) {
+                $(newTR).find("[id^='hdnSize11-']")[0].id = "hdnSize11-" + i;
+                $(newTR).find("[id^='hdnSize11-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id11");
+                $(newTR).find("[id^='Size11-']")[0].id = "Size11-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize12-']").length > 0) {
+                $(newTR).find("[id^='hdnSize12-']")[0].id = "hdnSize12-" + i;
+                $(newTR).find("[id^='hdnSize12-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id12");
+                $(newTR).find("[id^='Size12-']")[0].id = "Size12-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize13-']").length > 0) {
+                $(newTR).find("[id^='hdnSize13-']")[0].id = "hdnSize13-" + i;
+                $(newTR).find("[id^='hdnSize13-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id13");
+                $(newTR).find("[id^='Size13-']")[0].id = "Size13-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize14-']").length > 0) {
+                $(newTR).find("[id^='hdnSize14-']")[0].id = "hdnSize14-" + i;
+                $(newTR).find("[id^='hdnSize14-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id14");
+                $(newTR).find("[id^='Size14-']")[0].id = "Size14-" + i;
+            }
+
+            if ($(newTR).find("[id^='hdnSize15-']").length > 0) {
+                $(newTR).find("[id^='hdnSize15-']")[0].id = "hdnSize15-" + i;
+                $(newTR).find("[id^='hdnSize15-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Size_Id15");
+                $(newTR).find("[id^='Size15-']")[0].id = "Size15-" + i;
+            }
+        }
+    });
+
+}
+
+//added by vinod mane on 10/10/2016
+function ClearAllDropdownlist()
+{
+    $("#drpArticle_No").val('');
+    $("#drpBrand").val('');
+    $("#drpCategory").val('');
+    $("#drpSubCategory").val('');   
+    $("#drpCenter_Size").val('');
+    $("#drpSize_Group").val('');
+}
+
+function Clear_Br_Cat_SubCat() {
+   
+    $("#drpBrand").val('');
+    $("#drpCategory").val('');
+    $("#drpSubCategory").val('');  
+
+}
+
+
+//End
