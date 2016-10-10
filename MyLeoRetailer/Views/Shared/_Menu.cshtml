@@ -10,7 +10,7 @@
  <!-- START X-NAVIGATION VERTICAL -->
 <ul class="x-navigation x-navigation-horizontal">
     <li class="xn-logo">
-        <a href="index.html">ATLANT</a>
+        <a href="/Dashboard/Index">ATLANT</a>
         <a href="#" class="x-navigation-control"></a>
     </li>
     <li class="xn-openable">
@@ -72,33 +72,10 @@
         <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
     </li>
     <!-- END SIGN OUT -->
+
     @{
         LoginInfo Cookies = new LoginInfo();
         Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-        
-    <!--Added by aditya[07102016] Start-->
-    <li class="xn-icon-button pull-right active">
-        <a href="#"><span class="fa fa-comments" id="btnNotification"></span></a>
-    @*<li class="xn-icon-button pull-right">
-
-    </li>*@
-
-        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Warehouse_Notification" style="width: 220px;">
-           
-            <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
-                <div class="page-content-wrap">
-
-                </div>
-            </div>
-
-        </div>
-
-
-    </li>
-       <!--Added by aditya[07102016] End--> 
-        
-        
     <!-- TASKS -->
     <li class="xn-icon-button pull-right">
             <a href="#" data-toggle="tooltip panel" id="btnSaveChaneBranch" data-target="#div_Change_Branch" data-placement="bottom" title="Change Branch"><span class="fa fa-map-marker"></span></a>
@@ -128,6 +105,35 @@
     </li>
     <!-- END TASKS -->
 
+        
+         <!--Added by aditya[07102016] Start-->
+        Cookies = new LoginInfo();
+        Cookies.Warehouse_Notification_Count = Utility.Get_Warehouse_Notification_Count();
+        
+    <li class="xn-icon-button pull-right" id="btnNotification">
+        <a href="#"><span class="fa fa-tasks"></span></a>
+
+        @if (Cookies.Warehouse_Notification_Count>0)
+        { 
+        <div class="informer informer-warning">@Cookies.Warehouse_Notification_Count</div>
+        }
+        <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Warehouse_Notification" style="width: 220px;">
+
+            <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
+                <div class="page-content-wrap">
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </li>
+       <!--Added by aditya[07102016] End--> 
+        
+        
+        
+        
     }
 
 

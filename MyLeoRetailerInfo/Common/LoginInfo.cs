@@ -34,6 +34,8 @@ namespace MyLeoRetailerInfo.Common
 
         public string Branch_Ids { get; set; }
 
+        public int Warehouse_Notification_Count { get; set; }
+
         //public string Branch_Names { get; set; }
 
         public bool Is_Online { get; set; }

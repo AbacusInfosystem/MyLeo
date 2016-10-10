@@ -4,17 +4,17 @@
    
         <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging ui-draggable">
             <div class="panel-heading ui-draggable-handle">
-                <h3 class="panel-title"><span class="fa fa-comments"></span> Notification</h3>
+                <h3 class="panel-title"><span class="fa fa-tasks"></span> Notification</h3>
                 <div class="pull-right">
                     <span class="label label-danger">@Model.List_product_warehouse.Count() new</span>
                 </div>
             </div>
-            <div class="panel-body list-group list-group-contacts scroll mCustomScrollbar _mCS_2 mCS-autoHide mCS_no_scrollbar" style="height: 200px;">
+            <div class="panel-body list-group list-group-contacts scroll mCustomScrollbar _mCS_2 mCS-autoHide mCS_no_scrollbar" style="height:100%;">
                 <div id="mCSB_2" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0">
                     <div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position: relative; top: 0px; left: 0px;" dir="ltr">
                         @foreach (var item in Model.List_product_warehouse)
                         {
-                            <a href="#" class="list-group-item">
+                            <a class="list-group-item">
                                 <div class="list-group-status status-online"></div>
                                 <span class="contacts-title">@item.Product_SKU</span>
                                 <p>Quantity in Warehouse is @item.Product_Quantity</p>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="panel-footer text-center">
-                <a href="pages-messages.html">Create Purchase Order</a>
+                <a href="/PurchaseOrder/Search">Create Purchase Order</a>
             </div>
         </div>
    
