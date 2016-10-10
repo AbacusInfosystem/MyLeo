@@ -66,12 +66,21 @@ namespace MyLeoRetailerRepo
 
                 if (table_Name == "Product_SKU_Mapping")
                 {
-                    if (fieldName == "Vendor_Id")
+                    if (fieldName == "Purchase_Order_Id")
                     {
-                        strquery = "Select distinct Product_SKU_Mapping.Product_Id, Product_SKU_Mapping.SKU_Code ";
-                        strquery += "from Product_SKU_Mapping inner join Product on Product.Product_Id=Product_SKU_Mapping.Product_Id ";
-                        strquery += "where Product.Vendor_Id = @Vendor_Id";
-                        paramList.Add(new SqlParameter("@Vendor_Id", fieldValue));
+                        strquery = "select distinct PO.Purchase_Order_Id, PSM.SKU_Code ";
+                        strquery += "from Product_SKU_Mapping PSM ";
+                        strquery += "LEFT JOIN Purchase_Order PO on PO.Purchase_Order_Id=PO.Purchase_Order_Id ";
+                        strquery += "LEFT JOIN Purchase_Order_Item POI on POI.Purchase_Order_Id=PO.Purchase_Order_Id ";
+                        strquery += "LEFT JOIN Purchase_Order_Item_Sizes POIS on POIS.Purchase_Order_Id = POI.Purchase_Order_Id ";
+                        strquery += "LEFT JOIN Product P on P.Product_Id=PSM.Product_Id ";
+                        strquery += "AND POIS.Purchase_Order_Item_Id =POI.Purchase_Order_Item_Id ";
+                        strquery += "AND POI.Colour_Id=PSM.Colour_Id ";
+                        strquery += "AND POIS.Size_Id=PSM.Size_Id ";
+                        strquery += "AND POI.Article_No=P.Article_No ";                        
+                        strquery += "where PO.Purchase_Order_Id= @Purchase_Order_Id ";
+                        strquery += "group by POI.Purchase_Order_Id, POI.Purchase_Order_Item_Id, PSM.SKU_Code, PO.Purchase_Order_Id ";
+                        paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));
                     }
                 }
 
