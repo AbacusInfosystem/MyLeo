@@ -7,7 +7,9 @@ $(document).ready(function () {
     if ($("#hdnPayment_Status1").val() == 1)
     {
         $("#btnSavePay").hide();
-
+        $(".btn_edit").hide();
+        //$("#edit-payable-details").parents('tr').find(".btn_edit").hide();
+        $("#btnResetPay").hide();
     }
 
     $("#btnSearchReceivable").click(function () {
@@ -27,6 +29,8 @@ $(document).ready(function () {
     $('[name = "Receivable.Gift_Voucher_Id"]').change(function () {
 
         Get_Gift_Voucher_Amount_By_Id($(this).val());
+
+        //Get_Balance_Amount_Using_Gift_Voucher_Amount();
 
     });
 

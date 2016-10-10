@@ -21,6 +21,11 @@ $(document).ready(function () {
         Get_Receivable();
     });
 
+    $("#btnResetReceivable").click(function () {
+
+        Get_Receivable();
+    });
+
     $("#btnPay").click(function () {
 
         $("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id");

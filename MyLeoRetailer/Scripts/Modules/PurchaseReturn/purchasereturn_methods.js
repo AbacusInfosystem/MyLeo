@@ -126,7 +126,7 @@ function Set_Purchase_Invoice_Id(value) {
 }
 
 
-function AddPurchaseReturnDetails(i) {
+function AddPurchaseReturnDetails() {
 
     var html = '';
 
@@ -199,11 +199,11 @@ function AddPurchaseReturnDetails(i) {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].WSR_Price' readonly value='' id='textWSR_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].WSR_Price' readonly value='0' id='textWSR_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Amount' readonly value='0' id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -323,12 +323,19 @@ function DeletePurchaseReturnDetailsData(i) {
     $("#tblPurchaseReturnItems").find("[id='PurchaseReturnItemRow_" + i + "']").remove();
 
     ReArrangePurchaseReturnDetailsData();
+       
+
+    if (i == 0) {
+        AddPurchaseReturnDetails();
+    }
+    
 
     CalculateTotal();
 
     CalculateDiscount();
 
     CalculateTax();
+
 }
 
 function ReArrangePurchaseReturnDetailsData() {
@@ -549,6 +556,8 @@ function Bind_Purchase_Return_Items_Data(data)
         }
 
         $('#tblPurchaseReturnItems tbody').append(trHtml);
+
+        CalculateTotal();
 
     }
 }
