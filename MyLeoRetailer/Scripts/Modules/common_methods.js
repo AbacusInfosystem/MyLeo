@@ -66,42 +66,50 @@ function Bind_Header(table, obj)
 
 function Bind_Rows(table, obj, name)
 {   
-	var tbody = $("<tbody>").appendTo(table);
+    var tbody = $("<tbody>").appendTo(table);
 
-	for (var i = 0; i < obj.Grid_Detail['Records'].length; i++)
-	{
-		var row = $("<tr>").appendTo(tbody);
+    if (obj.Grid_Detail['Records'].length > 0)
+    {
 
-		if (obj.Grid_Detail['Identity_Columns'].length > 0)
-		{
-		    var td = $("<td>").appendTo(row);
+        for (var i = 0; i < obj.Grid_Detail['Records'].length; i++) {
+            var row = $("<tr>").appendTo(tbody);
 
-		    var label = $("<label>", { class: "switch switch-small" }).appendTo(td);
+            if (obj.Grid_Detail['Identity_Columns'].length > 0) {
+                var td = $("<td>").appendTo(row);
 
-		    label.css("margin", "0");
+                var label = $("<label>", { class: "switch switch-small" }).appendTo(td);
 
-		    var radio = $("<input>", { type: "radio", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][0]], name: name }).appendTo(label);
+                label.css("margin", "0");
 
-		    $("<span>").appendTo(label);
+                var radio = $("<input>", { type: "radio", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][0]], name: name }).appendTo(label);
 
-			radio.addClass("rd-list");
+                $("<span>").appendTo(label);
 
-			for (var j = 0; j < obj.Grid_Detail['Identity_Columns'].length; j++)
-			{
-			    $("<input>", { type: "hidden",  value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][j]], name: obj.Grid_Detail['Identity_Columns'][j] }).appendTo(td);
-			}
-		}
+                radio.addClass("rd-list");
 
-		for (var j = 0; j < obj.Grid_Detail['Show_Columns'].length; j++)
-		{
-			if (j <= obj.Grid_Detail['Show_Columns'].length)
-			{
-				var td = $("<td>").appendTo(row);
+                for (var j = 0; j < obj.Grid_Detail['Identity_Columns'].length; j++) {
+                    $("<input>", { type: "hidden", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][j]], name: obj.Grid_Detail['Identity_Columns'][j] }).appendTo(td);
+                }
+            }
 
-				td.text(obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Show_Columns'][j]]);
-			}
-		}
-	}
+            for (var j = 0; j < obj.Grid_Detail['Show_Columns'].length; j++) {
+                if (j <= obj.Grid_Detail['Show_Columns'].length) {
+                    var td = $("<td>").appendTo(row);
+
+                    td.text(obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Show_Columns'][j]]);
+                }
+            }
+        }
+    }
+    else
+    {
+        var row = $("<tr>").appendTo(tbody);
+        var td = $("<td>").appendTo(row);
+        td.attr('colspan', 3)
+        td.text("No Records Found");
+        td.css("font-weight", "bold");
+    }
+
 }
 
 function Page(page,obj, callback)

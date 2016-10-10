@@ -1,5 +1,6 @@
 ﻿$(function () {
 
+    
    
     $("#btnGiftVoucherSave").click(function () {
         if ($("#frmGiftVoucher").valid()) {
@@ -21,7 +22,8 @@
         $("#frmGiftVoucher").submit();           
     });
 
-    if ($('#hdn_GiftVoucherId').val() != "") {        
+    if ($('#hdn_GiftVoucherId').val() != "") {
+        $("#btnCancel").attr('disabled', true);//Added by vinod mane on 10/10/2016
         if ($('#mode').val() == 2) {
            
             $("#divBankName").show();
@@ -55,4 +57,11 @@
             //End
         }
     });
+
+    //Added by vinod mane on 10/10/2016
+    $("#btnPrint").click(function () {
+        $('#Div_Print').printThis();
+    });
+   
+    //End
 });
