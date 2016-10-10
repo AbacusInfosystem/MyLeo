@@ -120,7 +120,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 Logger.Error("GiftVoucher Controller - Update_Gift_Voucher  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
-            TempData["gvViewModel"] = (GiftVoucherViewModel)gvViewModel;
+            TempData["gvViewModel"] = (GiftVoucherViewModel)gvViewModel;           
+            
 
             return RedirectToAction("Search");
         }

@@ -257,7 +257,9 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-success active" id="btnAddSizesPurchaseOrder" disabled>Add Sizes</button>
                     </div>
+                   
                 </div>
+               
             </div>
 
             <div class="col-md-3" hidden>
@@ -285,14 +287,15 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control select" id="drpArticle_No" name="PurchaseOrder.Article_No">
-                            <option value="">Select Article No.</option>
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" onchange="Clear_Br_Cat_SubCat()">
+                            <option value=" ">
+                            Select Article No.</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
-                        <select class="form-control select" id="drpCenter_Size" name="PurchaseOrder.Center_Size">
+                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrder.Center_Size">
                             <option value="">Select Center Size</option>
                         </select>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Center_Size" id="textCenter_Size" placeholder="Enter center size." />*@
@@ -306,7 +309,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
-                        <select class="form-control select" id="drpBrand" name="PurchaseOrder.Brand_Id">
+                        <select class="form-control" id="drpBrand" name="PurchaseOrder.Brand_Id" onchange="clear_cat_subcat()">
                             <option value="">Select Brand</option>
                         </select>
                     </div>
@@ -314,7 +317,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Base rate.</span>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price"  id="textPurchase_Price" placeholder="Enter base rate." />*@
-                        <input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price" maxlength="5" name="PurchaseOrder.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." />
+                        <input type="text" class="form-control" value="@(Model.PurchaseOrder.Purchase_Price == 0 ? "" : Model.PurchaseOrder.Purchase_Price.ToString())" maxlength="5" name="PurchaseOrder.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." />
                     </div>
                 </div>
             </div>
@@ -326,7 +329,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
-                        <select class="form-control select" id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
+                        <select class="form-control " id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
                             <option value="">Select Category</option>
                         </select>
                     </div>
@@ -334,7 +337,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size difference.</span>
                         @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />*@
-                        <input type="text" class="form-control" maxlength="5" value="@Model.PurchaseOrder.Size_Difference" name="PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />
+                        <input type="text" class="form-control" maxlength="5" value="@(Model.PurchaseOrder.Size_Difference == 0 ? "" : Model.PurchaseOrder.Size_Difference.ToString())" name="PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />
                     </div>
                 </div>
             </div>
@@ -344,7 +347,7 @@
                 <div class="block">
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Subcategory.</span>
-                        <select class="form-control select" id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
+                        <select class="form-control " id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
                             <option value="">Select Sub Category</option>
                         </select>
                     </div>
@@ -446,7 +449,9 @@
                     </tbody>
                 </table>
 
+                <input type="hidden" id="hdnrecords_Validation" name="records_Validation" />
             </div>
+          
         </div>
 
         <div class="row">
