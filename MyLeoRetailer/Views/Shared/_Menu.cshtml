@@ -107,8 +107,8 @@
 
         
          <!--Added by aditya[07102016] Start-->
-        Cookies = new LoginInfo();
-        Cookies.Warehouse_Notification_Count = Utility.Get_Warehouse_Notification_Count();
+        //Cookies = new LoginInfo();
+        Cookies.Warehouse_Notification_Count = Utility.Get_Warehouse_Notification_Count(Cookies.Branch_Ids);
         
     <li class="xn-icon-button pull-right" id="btnNotification">
         <a href="#"><span class="fa fa-tasks"></span></a>
