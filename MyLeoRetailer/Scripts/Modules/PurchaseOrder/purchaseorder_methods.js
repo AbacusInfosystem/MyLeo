@@ -2,7 +2,10 @@
 
 
     $('#hdf_Vendor_Id').val(value);
-
+    
+    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();//added by vinod mane on 07/10/2016
+   // $("#tblPurchaseOrderCalculation").find("tr:gt(0)").remove();//added by vinod mane on 10/10/2016
+    
     $.ajax({
 
         url: "/PurchaseOrder/Get_Details_By_Vendor_Id",
@@ -138,6 +141,7 @@ function Get_Consolidate_Purchase_Orders(value) {
                     var tblHtml = '';
 
                     var myTable = $("#tblPurchaseOrderItems");
+
 
                     tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
 
