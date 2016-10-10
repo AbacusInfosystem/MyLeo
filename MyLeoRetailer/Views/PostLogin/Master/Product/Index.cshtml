@@ -51,6 +51,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
                         <input type="text" id="txtArticle_No" class="form-control" placeholder="Enter article number." name="Product.Article_No" value="@Model.Product.Article_No" maxlength="20" />
+                        <input type="hidden" id="hdnArticle_No" class="form-control" placeholder="Enter article number." name="Product.Article_No" value="@Model.Product.Article_No" maxlength="20" />
                         <input type="hidden" id="hdn_ProductId" class="form-control" name="Product.Product_Id" value="@Model.Product.Product_Id" />
                     </div>
 
@@ -94,6 +95,7 @@
 
                     <h4 style="margin-top: 15px;">Association detail.</h4>
 
+                   
                     <div id="dvBrand" class="form-group auto-complete">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
                         <div class="input-group">

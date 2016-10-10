@@ -264,6 +264,12 @@ function Bind_Product_MRP_New_Color(data, obj, i) {
             htmlText += "</div>"
 
             $('#common_Product_MRP').append(htmlText);
+
+            //$("#" + $(obj).text().replace(/ /g, '')).find(".AllWSRPricesRequired").each(function () {
+            //    $(this).rules("add", { required: true, message: "Please enter Purchase price" });
+            //});
+
+            //$("#frmProductMRP").valid();
         }
     }
     else {
@@ -668,6 +674,12 @@ function Bind_MRPNWSR_Sale_Grid(data, Color_Index, Color_Name, Color_Id, Vendor_
 
 
     $('#common_Product_MRP').append(htmlText);
+
+    //$("#" + Color_Name.replace(/ /g, '')).find(".AllWSRPricesRequired").each(function () {
+    //    $(this).rules("add", { required: true, message: "Please enter Purchase price" });
+    //});
+
+    //$("#frmProductMRP").valid();
 
 }
 

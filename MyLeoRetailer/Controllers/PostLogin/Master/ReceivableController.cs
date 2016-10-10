@@ -25,7 +25,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         }
 
-
         public ActionResult Pay(ReceivableViewModel rViewModel)
         {
             ReceivableRepo rRepo = new ReceivableRepo();

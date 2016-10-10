@@ -6,6 +6,8 @@ $(function () {
     if ($("#hdnPayament_Status1").val() == 1) {
 
         $("#btnSavePay").hide();
+        $("#edit-bank-details").hide();
+        $("#btnResetPay").hide();
 
     }
 

@@ -855,6 +855,8 @@ namespace MyLeoRetailerRepo
                     Sizes.Amount15 = Convert.ToInt32(item["Amount"]);
                 }
 
+                Sizes.Size_Name = Convert.ToString(item["Size_Name"]);
+
                 Size.Add(Sizes);
 
                 i++;
