@@ -1,13 +1,14 @@
 ﻿function Set_Vendor_Id(value) {
 
-    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();
+    //$("#tblPurchaseOrderItems").find("tr:gt(0)").remove();
 
-    $('#hdf_Vendor_Id').val(value);
+    $(".Details").hide();
 
     //added by vinod mane on 10/10/2016
     $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();    
     document.getElementById('tdTotalQuantity').innerText = 0;
     document.getElementById('tdNetAmount').innerText = 0;
+    $('#hdf_Vendor_Id').val(value);
     
     ClearAllDropdownlist();   
 
@@ -969,7 +970,7 @@ function AddPurchaseOrderDetails() {
      
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details' class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")' disabled>Continue</button>";
     tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
@@ -1303,6 +1304,8 @@ function CalculateRowAmount(i) {
 
     var size_difference = $("#textSize_Difference_" + x).text();
 
+    //if(parseInt()
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     var size_difference_temp = 0;
@@ -1337,6 +1340,9 @@ function CalculateRowAmount(i) {
         $("#hdnAmount_" + j + "-" + x).val(computation);
 
     }
+
+
+   
 
 }
 
@@ -1410,6 +1416,12 @@ function CalculateRowQuantity(i) {
     $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(sumQuantity);
 
     $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(sumWSRAmount);
+       
+    //Added by aditya [10102016] Start
+    if ($("#hdnTotalQuantity").val() != 0) {
+        document.getElementById("continue-order-details"+i+"").disabled = false;
+    }
+    //Added by aditya [10102016] Start
        
 }
 
@@ -1519,7 +1531,7 @@ function Reset_Detalis_After_Delete() {
         $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
 
         $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
-}
+    }
 }
 
 function DeletePurchaseOrderDetailsData(i) {
