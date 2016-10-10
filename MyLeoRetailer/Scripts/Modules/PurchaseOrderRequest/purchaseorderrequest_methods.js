@@ -944,6 +944,11 @@ function CalculateRowQuantity(i) {
 
     $("#tblPurchaseOrderRequestCalculation").find('[id="hdnNetAmount"]').val(sumWSRAmount);
 
+
+    if ($("#hdnTotalQuantity").val() != 0) {
+        document.getElementById("continue-order-details" + i + "").disabled = false;
+    }
+
 }
 
 function Enable_Size_Quantity(i) {
