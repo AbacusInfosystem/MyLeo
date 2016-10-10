@@ -19,41 +19,41 @@
 
             "PurchaseOrder.Shipping_Address": {
                 required: true
-            },
+            }//,
 
-            "PurchaseOrder.Size_Group_Id": {
-                required: true
-            },
+            //"PurchaseOrder.Size_Group_Id": {
+            //    required: true
+            //},
 
-            "PurchaseOrder.Article_No": {
-                required: true
-            },
+            //"PurchaseOrder.Article_No": {
+            //    required: true
+            //},
 
-            "PurchaseOrder.Center_Size": {
-                required: true
-            },
+            //"PurchaseOrder.Center_Size": {
+            //    required: true
+            //},
 
-            "PurchaseOrder.Brand_Id": {
-                required: true
-            },
+            //"PurchaseOrder.Brand_Id": {
+            //    required: true
+            //},
 
-            "PurchaseOrder.Category_Id": {
-                required: true
-            },
+            //"PurchaseOrder.Category_Id": {
+            //    required: true
+            //},
 
-            "PurchaseOrder.SubCategory_Id": {
-                required: true
-            },
+            //"PurchaseOrder.SubCategory_Id": {
+            //    required: true
+            //},
 
-            "PurchaseOrder.Purchase_Price": {
-                digits: true,
-                required: true
-            },
+            //"PurchaseOrder.Purchase_Price": {
+            //    digits: true,
+            //    required: true
+            //},
 
-            "PurchaseOrder.Size_Difference": {
-                digits: true,
-                required: true
-            }
+            //"PurchaseOrder.Size_Difference": {
+            //    digits: true,
+            //    required: true
+            //}
         },
         messages: {
 
@@ -109,7 +109,14 @@
             "PurchaseOrder.Size_Difference": {
                 required: "Size difference is required.",
                 digits: "Enter only digits"
-            }
+            },
+
+            "records_Validation":
+                {
+                    required: "Atleast one Record is required."
+                }
+
+
 
         }
     });

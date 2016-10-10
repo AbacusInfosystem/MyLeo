@@ -7,6 +7,7 @@ using MyLeoRetailerRepo;
 using System.Security.Cryptography;
 using System.IO;
 using System.Text;
+using MyLeoRetailerInfo.ProductWarehouse;
 
 namespace MyLeoRetailer.Common
 {
@@ -159,6 +160,26 @@ namespace MyLeoRetailer.Common
         }
 
         //End
+
+
+        //Added by Aditya 10102016 [Start]
+
+        public static int Get_Warehouse_Notification_Count(string branch_Ids)
+        {
+           PurchaseInvoiceRepo _purchaseinvoiceRepo =new PurchaseInvoiceRepo();
+
+           List<ProductWarehouseInfo> list_Product = new List<ProductWarehouseInfo>();
+
+            int count = 0;
+
+            list_Product = _purchaseinvoiceRepo.Warehouse_Notifiation(branch_Ids);
+
+            count = list_Product.Count();
+
+            return count;
+        }
+
+        //Added by Aditya 10102016 [End]
 
     }
 }

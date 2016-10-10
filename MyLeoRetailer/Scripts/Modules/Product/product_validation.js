@@ -3,7 +3,7 @@ $(function ()
 {
     $("#frmProduct").validate({
 		rules: {
-		    "Product.Article_No": { required: true },
+		    "Product.Article_No": { required: true,validate_ArticleNo:true },
 
 		    "Product.Vendor_Name": { required: true },
 
@@ -72,5 +72,26 @@ $(function ()
 		    //    extension: "Please upload jpeg/png/jpg file"
 		    //},
 		}
-	});
+    });
+
+    jQuery.validator.addMethod("validate_ArticleNo", function (value, element) {
+        var result = true;
+        if ($("#hdn_ProductId").val() == 0) {
+            if ($("#txtArticle_No").val() != "" && $("#txtArticle_No").val() != null) {
+                $.ajax({
+                    url: '/product/check-article-no',
+                    data: { Article_No: $("#txtArticle_No").val() },
+                    method: 'GET',
+                    async: false,
+                    success: function (data) {
+                        if (data == true) {
+                            result = false;
+                        }
+                    }
+                });
+            }
+        }
+        return result;
+
+    }, "Article No is already exists.");
 });
