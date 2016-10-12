@@ -21,6 +21,8 @@ namespace MyLeoRetailer.Models
 
             Filter = new Filter_Payble();
 
+            Cookies = new LoginInfo();
+
             FriendlyMessages = new List<FriendlyMessage>();
 
             Payables = new List<PayableInfo>();
@@ -45,6 +47,12 @@ namespace MyLeoRetailer.Models
         }
 
         public PayableInfo Payable
+        {
+            get;
+            set;
+        }
+
+        public LoginInfo Cookies
         {
             get;
             set;

@@ -1201,8 +1201,6 @@
     <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
     <Content Include="Views\PreLogin\Home\AuthorizationError.cshtml" />
     <Content Include="Views\PreLogin\Home\Error.cshtml" />
-    <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
-    <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />

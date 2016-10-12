@@ -249,6 +249,8 @@ function Bind_Payable_Grid_Items(data) {
         htmlText += "<th>Discount %</th>";
 
         htmlText += "<th>Discount amount</th>";
+
+        //htmlText += "<th>Action</th>";
     }
 
     htmlText += "</tr>";
@@ -323,7 +325,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Cheque_Date == "1/1/1999" ? "NA" : data.Payables[i].Cheque_Date.substring(0, 10);
+        htmlText += data.Payables[i].Cheque_Date == "1999-01-01" ? "NA" : data.Payables[i].Cheque_Date.substring(0, 10);
 
         htmlText += "</td>";
 
@@ -361,14 +363,14 @@ function Bind_Payable_Grid_Items(data) {
         
 
         //if (data.Payable.Status != "Payment Done") {
-        htmlText += "<td>";
+        //htmlText += "<td>";
 
 
-        htmlText += "<button type='button' id='edit-Payable-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditPayableData(" + data.Payables[i].Payable_Item_Id + ")'><i class='fa fa-pencil' ></i></button>";
+        //htmlText += "<button type='button' id='edit-Payable-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditPayableData(" + data.Payables[i].Payable_Item_Id + ")'><i class='fa fa-pencil' ></i></button>";
 
-        //htmlText += "<button type='button' id='delete-Payable-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeletPayableData(" + data.Payables[i].Payable_Item_Id + ")'><i class='fa fa-times' ></i></button>";
+        ////htmlText += "<button type='button' id='delete-Payable-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeletPayableData(" + data.Payables[i].Payable_Item_Id + ")'><i class='fa fa-times' ></i></button>";
 
-        htmlText += "</td>";
+        //htmlText += "</td>";
         //}
 
         htmlText += "</tr>";

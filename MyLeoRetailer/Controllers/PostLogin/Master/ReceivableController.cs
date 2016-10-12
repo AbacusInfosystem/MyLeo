@@ -71,7 +71,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             try
             {
 
-                ReceivableRepo _rRepo = new ReceivableRepo();
+            ReceivableRepo _rRepo = new ReceivableRepo();
 
             rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
@@ -158,7 +158,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Receivable(ReceivableViewModel rViewModel)
         {
-            Set_Date_Session(rViewModel.GiftVoucher);
+            //Set_Date_Session(rViewModel.GiftVoucher);
+
+            rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            rViewModel.Receivable.Created_By = rViewModel.Cookies.User_Id;
+
+            rViewModel.Receivable.Created_On = DateTime.Now;
 
             try
             {
@@ -189,8 +195,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Update_Receivable(ReceivableViewModel rViewModel)
         {
-            
 
+            rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            rViewModel.Receivable.Updated_By = rViewModel.Cookies.User_Id;
+
+            rViewModel.Receivable.Updated_On = DateTime.Now;
 
             try
             {
