@@ -14,7 +14,7 @@
         $('#drpSubCategory').rules("remove");
 
 
-        $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function () {
+        $("#frmPurchaseOrderRequest").find('[id^="textTotal_Quantity_"]').each(function () {
             if ($(this).text() == 0) {
                 $("#hdnrecords_Validation").rules("add", "required");
 

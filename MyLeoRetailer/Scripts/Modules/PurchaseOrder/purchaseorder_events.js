@@ -23,9 +23,11 @@
         $('#textSize_Difference').rules("remove");
         $('#drpSubCategory').rules("remove");
 
+      
 
         $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function ()
         {
+            
             if ($(this).text() == 0) {
                 $("#hdnrecords_Validation").rules("add", "required");
 
@@ -36,6 +38,8 @@
             }
 
         });
+
+     
 
         //Added by aditya [10102016] END
 

@@ -1419,7 +1419,7 @@ function CalculateRowQuantity(i) {
        
     //Added by aditya [10102016] Start
     if ($("#hdnTotalQuantity").val() != 0) {
-        document.getElementById("continue-order-details"+i+"").disabled = false;
+        document.getElementById("continue-order-details" + i + "").disabled = false;
     }
     //Added by aditya [10102016] Start
        
@@ -2004,6 +2004,4 @@ function Clear_Br_Cat_SubCat() {
     $("#drpSubCategory").val('');  
 
 }
-
-
 //End
