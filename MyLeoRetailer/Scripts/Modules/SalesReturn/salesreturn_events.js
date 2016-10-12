@@ -102,9 +102,34 @@ function CalculateTotal()
     {
         for (var i = 0; i < tr.size() ; i++)
         {
-            var Qty = parseFloat($("#tblSalesReturnItems").find('[id="textQuantity_' + i + '"]').val());
-            var MRP = parseFloat($("#tblSalesReturnItems").find('[id="textMRP_Price_' + i + '"]').val());
-            var Discount = parseFloat($("#tblSalesReturnItems").find('[id="textDiscount_Percentage_' + i + '"]').val());
+            //var Qty = parseFloat($("#tblSalesReturnItems").find('[id="textQuantity_' + i + '"]').val());
+            //Added by vinod mane on 12/10/2016
+            var Qty = $("#tblSalesReturnItems").find('[id="textQuantity_' + i + '"]').val();
+            if (Qty == "" || Qty == "NaN") {
+                Qty = 1;
+                $('#textQuantity_' + i).val(1);
+            }
+            //End
+
+            //var MRP = parseFloat($("#tblSalesReturnItems").find('[id="textMRP_Price_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var MRP = $("#tblSalesReturnItems").find('[id="textMRP_Price_' + i + '"]').val();
+            if (MRP == "" || MRP == "NaN") {
+                MRP = 0;
+                $('#textMRP_Price_' + i).val(0);
+            }
+            //End
+            //var Discount = parseFloat($("#tblSalesReturnItems").find('[id="textDiscount_Percentage_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var Discount = $("#tblSalesReturnItems").find('[id="textDiscount_Percentage_' + i + '"]').val();
+            if (Discount == "" || Discount == "NaN") {
+                Discount = 0;
+                $('#textDiscount_Percentage_' + i).val(0);
+            }
+            //End
+
             var DiscountAmt = (Discount == "" || Discount == undefined) ? 0 : parseFloat((Qty * MRP * Discount) / 100);
             $("#tblSalesReturnItems").find('[id="textSalesReturn_Discount_Amount_' + i + '"]').val(DiscountAmt);
             var Amount = parseFloat(MRP * Qty - DiscountAmt);
@@ -127,8 +152,22 @@ function CalculateCreditNoteAmt()
 
     var creditNoteAmt = 0;
 
-    var CashPaidAmt = parseFloat($("#textTotalAmountReturnByCash_0").val());
-    var sumGrossAmount = parseFloat($("#textGrossAmount_0").val());
+    // var CashPaidAmt = parseFloat($("#textTotalAmountReturnByCash_0").val());
+    // var sumGrossAmount = parseFloat($("#textGrossAmount_0").val());
+
+    //Added by vinod mane on 12/10/2016
+    var CashPaidAmt = $("#textTotalAmountReturnByCash_0").val();
+    if (CashPaidAmt == "" || CashPaidAmt == "NaN") {
+        CashPaidAmt = 0;
+        $("#textTotalAmountReturnByCash_0").val(0);
+    }
+   
+    var sumGrossAmount = $("#textGrossAmount_0").val();
+    if (sumGrossAmount == "" || sumGrossAmount == "NaN") {
+        sumGrossAmount = 0;
+        $("#textGrossAmount_0").val(0);
+    }
+    //End
 
     var creditNoteAmt = sumGrossAmount - CashPaidAmt;
 

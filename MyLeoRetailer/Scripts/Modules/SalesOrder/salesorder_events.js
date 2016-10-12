@@ -156,8 +156,26 @@ function CalculateQuantityMRP()
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++)
         {
-            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
-            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+           // var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var Qty = $("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val();
+
+            if (Qty == "" || Qty == "NaN") {
+                Qty = 1;
+                $('#textQuantity_' + i).val(1);
+            }
+            //End
+            //var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var MRP = $("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val();
+
+            if (MRP == "" || MRP == "NaN") {
+                MRP = 0;
+                $('#textMRP_Price_' + i).val(0);
+            }
+            //End
             //$("#textMRP_Price_" + i).val(mrpAmt);
 
             //mrpAmt = Qty * MRP
@@ -187,9 +205,26 @@ function CalculateTotal()
     {
         for (var i = 0; i < tr.size() ; i++)
         {
-            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+            //var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var Qty = $("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val();
+            if (Qty == "" || Qty == "NaN") {
+                Qty = 1;
+                $('#textQuantity_' + i).val(1);
+            }
+            //End
             var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
-            var Discount = parseFloat($("#tblSalesOrderItems").find('[id="textDiscount_Percentage_' + i + '"]').val());
+            //var Discount = parseFloat($("#tblSalesOrderItems").find('[id="textDiscount_Percentage_' + i + '"]').val());
+           
+            //Added by vinod mane on 12/10/2016
+            var Discount = $("#tblSalesOrderItems").find('[id="textDiscount_Percentage_' + i + '"]').val();
+            if (Discount == "" || Discount == "NaN") {
+                Discount = 0;
+                $('#textDiscount_Percentage_' + i).val(0);
+            }
+            //End
+
             var DiscountAmt = (Discount == "" || Discount == undefined) ? 0 : parseFloat((Qty * MRP * Discount) / 100);
             $("#tblSalesOrderItems").find('[id="textSalesOrder_Discount_Amount_' + i + '"]').val(DiscountAmt);
             var Amount = parseFloat(MRP * Qty - DiscountAmt);
@@ -214,7 +249,16 @@ function CalculateTax() {
    
     var netAmt = 0;
 
-    var tax = parseFloat($("#textTaxPercentage_0").val());
+    //var tax = parseFloat($("#textTaxPercentage_0").val());
+
+    //Added by vinod mane on 12/10/2016
+    var tax = $("#textTaxPercentage_0").val();
+
+    if (tax == "" || tax == "NaN") {
+        tax = 0;
+        $('#textTaxPercentage_0').val(0);
+    }
+    //End
     var sumGrossAmount = parseFloat($("#textGrossAmount_0").val());
    
 
@@ -228,7 +272,11 @@ function CalculateTax() {
     var intPart = Math.floor(roundedDecimal);
    
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
-    
+    //Added by vinod mane on 12/10/2016
+    if (fracPart >= 0.50) {
+        netAmt_temp += 1;
+    }
+    //End
     var roundOff = parseFloat(netAmt_temp.toString().split(".")[1]);
 
     var netAmt = netAmt_temp - fracPart;
