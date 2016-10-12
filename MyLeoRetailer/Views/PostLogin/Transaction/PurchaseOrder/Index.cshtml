@@ -231,7 +231,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size group.</span>
-                        <select class="form-control select" id="drpSize_Group" name="PurchaseOrder.Size_Group_Id" onchange="Show_Button()">
+                        <select class="form-control " id="drpSize_Group" name="PurchaseOrder.Size_Group_Id" onchange="Show_Button()">
                             <option value="">Select Size Group</option>
                             @foreach (var item in Model.PurchaseOrder.SizeGroups)
                             {
@@ -287,7 +287,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" onchange="Clear_Br_Cat_SubCat()">
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" >
                             <option value=" ">
                             Select Article No.</option>
                         </select>

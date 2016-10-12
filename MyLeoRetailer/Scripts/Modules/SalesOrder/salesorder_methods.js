@@ -501,7 +501,7 @@ function ReArrangeSalesOrderDetailsData() {
 
 function Add_Validation(i) {
 
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
     $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required", } });
 

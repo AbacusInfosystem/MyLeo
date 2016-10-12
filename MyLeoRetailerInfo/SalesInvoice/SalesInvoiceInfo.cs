@@ -342,4 +342,24 @@ namespace MyLeoRetailerInfo.SalesInvoice
         public DateTime Credit_Note_Date { get; set; }
     }
 
+
+    public class SalesOrderFilter
+    {
+        public int Sales_Invoice_Id { get; set; }
+
+        public string Sales_Invoice_No { get; set; }
+
+        //Sales Report Fields
+
+        public int Branch_Id { get; set; }
+
+        public DateTime From_Date { get; set; }
+
+        public DateTime To_Date { get; set; }
+
+        //End Sale Report
+
+
+    }
+
 }
