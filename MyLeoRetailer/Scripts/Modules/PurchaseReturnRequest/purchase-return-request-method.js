@@ -108,6 +108,7 @@ function AddPurchaseReturnRequestDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+   
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -281,21 +282,26 @@ function CalculateTotal() {
 
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++) {
-            var Qty = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val());
+           
+            if ($('[id="textQuantity_' + i + '"]').val() != 0 && $('[id="textQuantity_' + i + '"]').val() != '') {
+                
+                    var Qty = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val());
 
-            var WSR = ""
-            if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
-                WSR = 0;
+                    var WSR = ""
+                    if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
+                        WSR = 0;
+                    }
+                    else {
+                        WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
+                    }
+
+                    var Amount = parseFloat(WSR * Qty);
+                    $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
+
+                    sumQuantity = sumQuantity + Qty;
+                    sumWSRAmount = sumWSRAmount + Amount;
+                
             }
-            else {
-                WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
-            }
-
-            var Amount = parseFloat(WSR * Qty);
-            $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
-
-            sumQuantity = sumQuantity + Qty;
-            sumWSRAmount = sumWSRAmount + Amount;
 
         }
     }
@@ -368,7 +374,7 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
         url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
 
-        data: { SKU_Code: $("[name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code']").val() },
+        data: { SKU_Code: $("[name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code']").val(), Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
 
         method: 'POST',
 
@@ -406,6 +412,7 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
             $('#textQuantity_' + i).val(1);
 
+            $('#hdnQuantity_' + i).val(data.Quantity);
         }
 
     });
@@ -425,7 +432,33 @@ function Set_Purchase_Invoice_Id(value) {
 function Add_Validation(i)
 {
 
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+    $("#textQuantity_" + i).rules("add", { required: true, digits: true, QuantityCheck:true, messages: { required: "Required field", digits: "Invalid quantity." } });
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
-  
+
+    jQuery.validator.addMethod("QuantityCheck", function (value, element) {
+
+        var result = true;
+        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
+        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
+
+        if (EnterQty != "" && EnterQty != 0) {
+            $.ajax({
+
+                url: '/purchase-return-request/get-quantity-item-by-sku-code',
+                data:
+                    {
+                        SKU_Code: $("[name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code']").val(), Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val(), Quantity: EnterQty
+                    },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == false) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Qty. less than Invoice Quantity.");
 }

@@ -314,7 +314,7 @@ namespace MyLeoRetailer
             name: "purchase-return-request-3",
             url: "purchase-return-request/get-purchase-return-request-item-by-sku-code",
             defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Item_By_SKU_Code", id = UrlParameter.Optional },
-            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            namespaces: new string[] { "MyLeoRetailer.Controllers" }); 
 
             routes.MapRoute(
             name: "purchase-return-request-4",
@@ -339,9 +339,13 @@ namespace MyLeoRetailer
             url: "purchase-return-request/view-purchase-return-request",
             defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Request_Details_By_Id", id = UrlParameter.Optional },
             namespaces: new string[] { "MyLeoRetailer.Controllers" });
-            
-            
 
+
+            routes.MapRoute(
+      name: "purchase-return-request-8",
+      url: "purchase-return-request/get-quantity-item-by-sku-code",
+      defaults: new { controller = "PurchaseReturnRequest", action = "Get_Quantity_By_SKU_Code", id = UrlParameter.Optional },
+      namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
             #endregion
 
