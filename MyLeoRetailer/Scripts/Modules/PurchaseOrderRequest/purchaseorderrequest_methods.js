@@ -183,7 +183,7 @@ function Get_Sizes() {
 
             var obj = $.parseJSON(response);
 
-
+        
             if (obj.PurchaseOrderRequest.SizeGroups.length > 0) {
 
                 $("#drpCenter_Size").empty();
