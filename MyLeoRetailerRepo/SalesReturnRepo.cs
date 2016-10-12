@@ -377,6 +377,47 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
+        public bool Check_Quantity(int Quantity, int Branch_Id, string SKU_Code)
+        {
+            bool check = false;
+
+            try
+            {
+                string ProcedureName = string.Empty;
+
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Quantity", Quantity));
+
+                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+
+                sqlParams.Add(new SqlParameter("@Product_SKU", SKU_Code));
+
+                DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Check_Quantity.ToString(), CommandType.StoredProcedure);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int count = dt.Rows.Count;
+
+                    List<DataRow> drList = new List<DataRow>();
+
+                    drList = dt.AsEnumerable().ToList();
+
+                    foreach (DataRow dr in drList)
+                    {
+                        check = Convert.ToBoolean(dr["Quantity"]);
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return check;
+        }
+
         public SalesReturnInfo Get_Sales_Return_By_Id(int Sales_Return_Id)
         {
             List<SqlParameter> sqlParams = new List<SqlParameter>();

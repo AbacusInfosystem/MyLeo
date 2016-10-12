@@ -1,13 +1,14 @@
 ﻿function Set_Vendor_Id(value) {
 
-    $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();
+    //$("#tblPurchaseOrderItems").find("tr:gt(0)").remove();
 
-    $('#hdf_Vendor_Id').val(value);
+    $(".Details").hide();
 
     //added by vinod mane on 10/10/2016
     $("#tblPurchaseOrderItems").find("tr:gt(0)").remove();    
     document.getElementById('tdTotalQuantity').innerText = 0;
     document.getElementById('tdNetAmount').innerText = 0;
+    $('#hdf_Vendor_Id').val(value);
     
     ClearAllDropdownlist();   
 
@@ -1415,7 +1416,7 @@ function CalculateRowQuantity(i) {
     $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(sumQuantity);
 
     $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(sumWSRAmount);
-
+       
     //Added by aditya [10102016] Start
     if ($("#hdnTotalQuantity").val() != 0) {
         document.getElementById("continue-order-details"+i+"").disabled = false;
@@ -1454,6 +1455,8 @@ function Enable_Size_Quantity(i) {
         for (var j = start; j <= end; j++) {
 
             $("#textSize_Quantity_" + j + "-" + i).attr("readonly", false);
+
+            $("#textSize_Quantity_" + j + "-" + i).val('');
 
             $("#textSize_Quantity_" + j + "-" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits.", } });
         }
@@ -1530,7 +1533,7 @@ function Reset_Detalis_After_Delete() {
         $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
 
         $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
-}
+    }
 }
 
 function DeletePurchaseOrderDetailsData(i) {
@@ -1988,12 +1991,33 @@ function ReArrangePurchaseOrderSizeData() {
 //added by vinod mane on 10/10/2016
 function ClearAllDropdownlist()
 {
-    $("#drpArticle_No").val('');
-    $("#drpBrand").val('');
-    $("#drpCategory").val('');
-    $("#drpSubCategory").val('');   
-    $("#drpCenter_Size").val('');
+    //$("#drpArticle_No").val('');
+    //$("#drpBrand").val('');
+    //$("#drpCategory").val('');
+    //$("#drpSubCategory").val('');   
+    //$("#drpCenter_Size").val('');
     $("#drpSize_Group").val('');
+
+    $("#drpArticle_No").html("");
+    $("#drpArticle_No").append("<option value=''>Select Article No.</option>");
+    $("#drpArticle_No").parents('.form-group').find('ul').html("");
+
+    $("#drpBrand").html("");
+    $("#drpBrand").append("<option value=''>Select Brand</option>");
+    $("#drpBrand").parents('.form-group').find('ul').html("");
+
+    $("#drpCategory").html("");
+    $("#drpCategory").append("<option value=''>Select Category</option>");
+    $("#drpCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpSubCategory").html("");
+    $("#drpSubCategory").append("<option value=''>Select SubCategory.</option>");
+    $("#drpSubCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpCenter_Size").html("");
+    $("#drpCenter_Size").append("<option value=''>Select Center Size.</option>");
+    $("#drpCenter_Size").parents('.form-group').find('ul').html("");
+
 }
 
 function Clear_Br_Cat_SubCat() {

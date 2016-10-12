@@ -10,6 +10,7 @@ using System.Data;
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 
+
 namespace MyLeoRetailerRepo
 {
     public class SalesOrderRepo
@@ -246,6 +247,24 @@ namespace MyLeoRetailerRepo
         public DataTable Get_SalesOrder(QueryInfo query_Details)
         {
             return sqlHelper.Get_Table_With_Where(query_Details);
+        }
+
+        public DataTable Get_Sales_Report(SalesOrderFilter filter)
+        {
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Branch_Id", filter.Branch_Id));
+
+            sqlParam.Add(new SqlParameter("@From_Date", filter.From_Date));
+
+            sqlParam.Add(new SqlParameter("@To_Date", filter.To_Date));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Sales_Report.ToString(), CommandType.StoredProcedure);
+
+            return dt;
         }
 
         public SalesInvoiceInfo Get_SalesOrder_By_Id(int Sales_Invoice_Id)
@@ -671,7 +690,7 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
-        public bool Check_Quantity(int Quantity)
+        public bool Check_Quantity(int Quantity,int Branch_Id, string SKU_Code)
         {
             bool check = false;
 
@@ -682,6 +701,10 @@ namespace MyLeoRetailerRepo
                 List<SqlParameter> sqlParams = new List<SqlParameter>();
 
                 sqlParams.Add(new SqlParameter("@Quantity", Quantity));
+
+                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+
+                sqlParams.Add(new SqlParameter("@Product_SKU", SKU_Code));
 
                 DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Check_Quantity.ToString(), CommandType.StoredProcedure);
 
@@ -710,6 +733,34 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
+        //Added by vinod mane on 10/10/2016
+        public List<SalesInvoiceInfo> Get_Gift_Voucher_Details_By_Id() //......
+        {
+
+            List<SalesInvoiceInfo> GiftVoucherDetails = new List<SalesInvoiceInfo>();
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            //sqlparam.Add(new SqlParameter("@Gift_Voucher_Id", Gift_Voucher_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Giftvoucher_Data_sp.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                SalesInvoiceInfo Sales = new SalesInvoiceInfo();
+
+                Sales.Gift_Voucher_Id = Convert.ToInt32(dr["Gift_Voucher_Id"]);
+
+                Sales.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+
+                Sales.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+
+                GiftVoucherDetails.Add(Sales);
+
+            }
+            return GiftVoucherDetails;
+        }
+        //End
     }
 }
 

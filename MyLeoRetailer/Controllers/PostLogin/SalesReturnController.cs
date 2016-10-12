@@ -241,5 +241,28 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return View("SalesReturnView", srViewModel);
         }
 
+        public JsonResult Check_Quantity(int Quantity, int Branch_Id, string SKU_Code)
+        {
+
+            bool check = false;
+
+            SalesReturnViewModel srViewModel = new SalesReturnViewModel();
+            try
+            {
+                check = srRepo.Check_Quantity(Quantity, Branch_Id, SKU_Code);
+            }
+
+            catch (Exception ex)
+            {
+                // throw ex;
+
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("SalesReturn Controller - Check_Quantity  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
+
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
