@@ -231,7 +231,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size group.</span>
-                        <select class="form-control select" id="drpSize_Group" name="PurchaseOrder.Size_Group_Id" onchange="Show_Button()">
+                        <select class="form-control " id="drpSize_Group" name="PurchaseOrder.Size_Group_Id" onchange="Show_Button()">
                             <option value="">Select Size Group</option>
                             @foreach (var item in Model.PurchaseOrder.SizeGroups)
                             {
@@ -287,7 +287,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" onchange="Clear_Br_Cat_SubCat()">
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" >
                             <option value=" ">
                             Select Article No.</option>
                         </select>
@@ -309,7 +309,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
-                        <select class="form-control" id="drpBrand" name="PurchaseOrder.Brand_Id" onchange="clear_cat_subcat()">
+                        <select class="form-control" id="drpBrand" name="PurchaseOrder.Brand_Id" @*onchange="clear_cat_subcat()"*@>
                             <option value="">Select Brand</option>
                         </select>
                     </div>
@@ -449,10 +449,12 @@
                     </tbody>
                 </table>
 
-                <input type="hidden" id="hdnrecords_Validation" name="records_Validation" />
+                <label id="hdnrecords_Validation" style="display:none"><span style="color:red" id="records_Message"></span></label>
             </div>
           
         </div>
+
+      
 
         <div class="row">
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); padding-left: 20px; padding-right: 0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">

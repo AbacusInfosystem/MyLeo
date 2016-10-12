@@ -116,21 +116,22 @@ function Get_Balance_Amount_Using_Cash_Amount() {
 
     var cashamount = parseFloat($("#txtCash_amount").val());
 
-    var newbalanceamount = oldbalanceamount - cashamount;
-
-    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
-
     PaidAmount = parseFloat($("#txtPaid_Amount").val());
 
     var newpaidamount = PaidAmount + cashamount;
 
     $("#txtPaid_Amount").val(newpaidamount.toFixed(2));
 
-    if (newpaidamount > oldbalanceamount) {
+    var newbalanceamount = oldbalanceamount - cashamount;
 
-        $("#txtPaid_Amount" + i).rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
+    if (newbalanceamount < 0) {
+
+        $("#txtPaid_Amount").rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
     }
 
+    else {
+        $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+    }
 
 }
 
@@ -142,19 +143,21 @@ function Get_Balance_Amount_Using_Cheque_Amount() {
 
     var chequeamount = parseFloat($("#txtCheque_Amount").val());
 
-    var newbalanceamount = oldbalanceamount - chequeamount;
-
-    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
-
     PaidAmount = parseFloat($("#txtPaid_Amount").val());
 
     var newpaidamount = PaidAmount + chequeamount;
 
     $("#txtPaid_Amount").val(newpaidamount.toFixed(2));
 
-    if (newpaidamount > oldbalanceamount) {
+    var newbalanceamount = oldbalanceamount - chequeamount;
 
-        $("#txtPaid_Amount" + i).rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
+    if (newbalanceamount < 0) {
+
+        $("#txtPaid_Amount").rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
+    }
+
+    else {
+        $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
     }
 
 
@@ -168,22 +171,24 @@ function Get_Balance_Amount_Using_Credit_Note_Amount() {
 
     var creditnoteamount = parseFloat($("#txtCredit_Note_Amount").val());
 
-    var newbalanceamount = oldbalanceamount - creditnoteamount;
-
-    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
-
     PaidAmount = parseFloat($("#txtPaid_Amount").val());
 
     var newpaidamount = PaidAmount + creditnoteamount;
 
     $("#txtPaid_Amount").val(newpaidamount.toFixed(2));
 
-    if (newpaidamount > oldbalanceamount) {
+    var newbalanceamount = oldbalanceamount - creditnoteamount;
 
-        $("#txtPaid_Amount" + i).rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
+    if (newbalanceamount < 0) {
+
+        //$("#txtPaid_Amount").rules("add", { required: true, messages: { required: "Paidamount is greater. " } });
+        $("#txtPaid_Amount").rules("add", { required: true, messages: { required: "required." } });
     }
 
- 
+    else {
+        $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+    }
+
 }
 
 function Get_Balance_Amount_Using_Gift_Voucher_Amount() {
@@ -194,20 +199,23 @@ function Get_Balance_Amount_Using_Gift_Voucher_Amount() {
 
     var giftvoucheramount = parseFloat($("#txtGift_Voucher_Amount").val());
 
-    var newbalanceamount = oldbalanceamount - giftvoucheramount;
-
-    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
-
     PaidAmount = parseFloat($("#txtPaid_Amount").val());
 
     var newpaidamount = PaidAmount + giftvoucheramount;
 
     $("#txtPaid_Amount").val(newpaidamount.toFixed(2));
 
-    if (newpaidamount > oldbalanceamount) {
+    var newbalanceamount = oldbalanceamount - giftvoucheramount;
 
-        $("#txtPaid_Amount" + i).rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
+    if (newbalanceamount < 0) {
+
+        $("#txtPaid_Amount").rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
     }
+
+    else {
+        $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+    }
+
 
 }
 
@@ -219,21 +227,29 @@ function Get_Balance_Amount_Using_Card_Amount() {
 
     var cardamount = parseFloat($("#txtCard_Amount").val());
 
-    var newbalanceamount = oldbalanceamount - cardamount;
-
-    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
-
     PaidAmount = parseFloat($("#txtPaid_Amount").val());
 
     var newpaidamount = PaidAmount + cardamount;
 
     $("#txtPaid_Amount").val(newpaidamount.toFixed(2));
 
-    if (newpaidamount > oldbalanceamount)
-    {
-        $("#txtPaid_Amount" + i).rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
+    var newbalanceamount = oldbalanceamount - cardamount;
+
+    if (newbalanceamount < 0) {
+
+        $("#txtPaid_Amount").rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
     }
 
+    else
+    {
+        $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+    }
+
+   
+
+   
+
+    
 }
 
 function Cancel() {
@@ -388,7 +404,7 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<th>Gift voucher amount</th>";
 
-        htmlText += "<th>Action</th>"
+        //htmlText += "<th>Action</th>"
       
 
     }
@@ -472,7 +488,7 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cheque_Date == "01-01-1999" ? "NA" : data.Receivables[i].Cheque_Date.substring(0, 10);
+        htmlText += data.Receivables[i].Cheque_Date == "1999-01-01" ? "NA" : data.Receivables[i].Cheque_Date.substring(0, 10);
 
         htmlText += "</td>";
 
@@ -497,7 +513,7 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Credit_Note_Date == "01-01-0001" ? "NA" : data.Receivables[i].Credit_Note_Date.substring(0, 10);
+        htmlText += data.Receivables[i].Credit_Note_Date == "0001-01-01" ? "NA" : data.Receivables[i].Credit_Note_Date.substring(0, 10);
 
         //Added By Vinod Mane on 23/09/2016
         //var Customer_DOB = new Date(obj.Customer.Customer_DOB);
@@ -536,14 +552,14 @@ function Bind_Receivable_Grid_Items(data) {
              
 
         //if (data.Payable.Status != "Payment Done") {
-        htmlText += "<td>";
+        //htmlText += "<td>";
 
 
-        htmlText += "<button type='button' id='edit-Payable-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditReceivableData(" + data.Receivables[i].Receivable_Item_Id +")'><i class='fa fa-pencil' ></i></button>";
+        //htmlText += "<button type='button' id='edit-Payable-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditReceivableData(" + data.Receivables[i].Receivable_Item_Id +")'><i class='fa fa-pencil' ></i></button>";
 
-        //htmlText += "<button type='button' id='delete-Payable-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeletPayableData(" + data.Receivables[i].Receivable_Item_Id + ")'><i class='fa fa-times' ></i></button>";
+        ////htmlText += "<button type='button' id='delete-Payable-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeletPayableData(" + data.Receivables[i].Receivable_Item_Id + ")'><i class='fa fa-times' ></i></button>";
 
-        htmlText += "</td>";
+        //htmlText += "</td>";
         //}
 
         htmlText += "</tr>";
