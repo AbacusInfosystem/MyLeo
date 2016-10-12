@@ -1456,6 +1456,8 @@ function Enable_Size_Quantity(i) {
 
             $("#textSize_Quantity_" + j + "-" + i).attr("readonly", false);
 
+            $("#textSize_Quantity_" + j + "-" + i).val('');
+
             $("#textSize_Quantity_" + j + "-" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits.", } });
         }
     }
