@@ -19,6 +19,8 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        public int Customer_Id { get; set; }
 
+       public string Logo_Path { get; set; }
+
        //START
 
        public string Mobile { get; set; }
@@ -340,6 +342,26 @@ namespace MyLeoRetailerInfo.SalesInvoice
         public decimal Credit_Note_Amount { get; set; }
 
         public DateTime Credit_Note_Date { get; set; }
+    }
+
+
+    public class SalesOrderFilter
+    {
+        public int Sales_Invoice_Id { get; set; }
+
+        public string Sales_Invoice_No { get; set; }
+
+        //Sales Report Fields
+
+        public int Branch_Id { get; set; }
+
+        public DateTime From_Date { get; set; }
+
+        public DateTime To_Date { get; set; }
+
+        //End Sale Report
+
+
     }
 
 }

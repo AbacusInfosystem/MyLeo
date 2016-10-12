@@ -61,13 +61,13 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(srViewModel.SalesReturn, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Get_Sales_Return_Items_By_SKU_Code(string SKU_Code)
+        public JsonResult Get_Sales_Return_Items_By_SKU_Code( int Sales_Invoice_Id, string SKU_Code)
         {
 
             SalesReturnViewModel srViewModel = new SalesReturnViewModel();
             try
             {
-                srViewModel.SalesReturn = srRepo.Get_Sales_Order_Items_By_SKU_Code(SKU_Code);
+                srViewModel.SalesReturn = srRepo.Get_Sales_Return_Items_By_SKU_Code(Sales_Invoice_Id, SKU_Code );
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
@@ -239,6 +239,29 @@ namespace MyLeoRetailer.Controllers.PostLogin
             }
             //End
             return View("SalesReturnView", srViewModel);
+        }
+
+        public JsonResult Check_Quantity(int Quantity, int Branch_Id, string SKU_Code)
+        {
+
+            bool check = false;
+
+            SalesReturnViewModel srViewModel = new SalesReturnViewModel();
+            try
+            {
+                check = srRepo.Check_Quantity(Quantity, Branch_Id, SKU_Code);
+            }
+
+            catch (Exception ex)
+            {
+                // throw ex;
+
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("SalesReturn Controller - Check_Quantity  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
+
+            return Json(check, JsonRequestBehavior.AllowGet);
         }
 
     }

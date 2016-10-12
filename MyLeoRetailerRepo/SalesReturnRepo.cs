@@ -59,15 +59,17 @@ namespace MyLeoRetailerRepo
             return Customer;
         }
 
-        public SalesReturnInfo Get_Sales_Order_Items_By_SKU_Code(string SKU_Code)
+        public SalesReturnInfo Get_Sales_Return_Items_By_SKU_Code(int Sales_Invoice_Id, string SKU_Code)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
 
             parameters.Add(new SqlParameter("@SKU_Code", SKU_Code));
 
+            parameters.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
             SalesReturnInfo SalesReturnItems = new SalesReturnInfo();
 
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Sales_Order_Items_By_SKU_Code.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Sales_Return_Items_By_SKU_Code.ToString(), CommandType.StoredProcedure);
 
             List<DataRow> drList = new List<DataRow>();
 
@@ -75,13 +77,13 @@ namespace MyLeoRetailerRepo
 
             foreach (DataRow dr in drList)
             {
-                SalesReturnItems = Get_Sales_Order_Items_By_SKU_Values(dr);
+                SalesReturnItems = Get_Sales_Return_Items_By_SKU_Values(dr);
             }
 
             return SalesReturnItems;
         }
 
-        private SalesReturnInfo Get_Sales_Order_Items_By_SKU_Values(DataRow dr)
+        private SalesReturnInfo Get_Sales_Return_Items_By_SKU_Values(DataRow dr)
         {
             SalesReturnInfo SalesReturnItems = new SalesReturnInfo();
 
@@ -144,6 +146,18 @@ namespace MyLeoRetailerRepo
             {
                 SalesReturnItems.MRP_Price = Convert.ToInt32(dr["MRP_Price"]);
             }
+
+            if (!dr.IsNull("Quantity"))
+            {
+                SalesReturnItems.Quantity = Convert.ToInt32(dr["Quantity"]);
+            }
+
+            if (!dr.IsNull("Discount_Percentage"))
+            {
+                SalesReturnItems.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
+            }
+
+
 
             return SalesReturnItems;
         }
@@ -369,6 +383,47 @@ namespace MyLeoRetailerRepo
                     }
 
                 }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return check;
+        }
+
+        public bool Check_Quantity(int Quantity, int Branch_Id, string SKU_Code)
+        {
+            bool check = false;
+
+            try
+            {
+                string ProcedureName = string.Empty;
+
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Quantity", Quantity));
+
+                sqlParams.Add(new SqlParameter("@Branch_ID", Branch_Id));
+
+                sqlParams.Add(new SqlParameter("@Product_SKU", SKU_Code));
+
+                DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Check_Quantity.ToString(), CommandType.StoredProcedure);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    int count = dt.Rows.Count;
+
+                    List<DataRow> drList = new List<DataRow>();
+
+                    drList = dt.AsEnumerable().ToList();
+
+                    foreach (DataRow dr in drList)
+                    {
+                        check = Convert.ToBoolean(dr["Quantity"]);
+                    }
+
+                }
+
             }
             catch (Exception ex)
             {

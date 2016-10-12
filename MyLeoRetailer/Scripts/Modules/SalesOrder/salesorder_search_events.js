@@ -22,8 +22,6 @@ $(function () {
 
         $("#hdnFlag").val(true);
 
-        alert($("#hdnFlag").val());
-
         $("#frmSearchSalesOrder").attr("action", "/SalesOrder/Get_SalesOrder_By_Id/");
 
         $('#frmSearchSalesOrder').attr("method", "POST");

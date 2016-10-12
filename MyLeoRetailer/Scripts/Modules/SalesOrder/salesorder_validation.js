@@ -144,15 +144,21 @@ jQuery.validator.addMethod("MobileNo", function (value, element) {
 
 jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
+    debugger;
+
+    alert();
+
     var result = true;
 
-    if ($("#textQuantity_").val() != "" && $("#hdnQuantity").val() != $("#textQuantity_").val()) {
+    if (($("#textQuantity_").val() != "" && $("#hdnQuantity").val() != $("#textQuantity_").val()) && ($("#textSKU_No_").val() != "" && $("#hdnSKU_No_" + $(element).closest("tr").index()).val() != $("#textSKU_No_").val()) && ($("#textSales_Branch_Name_0").val() != "" && $("#hdnBranchID").val() != $("#textSales_Branch_Name_0").val())) {
         $.ajax({
 
             url: '/SalesOrder/Check_Quantity',
             data:
                 {
-                    Quantity: value
+                    Quantity: value,
+                    SKU_Code: $("#hdnSKU_No_" + $(element).closest("tr").index()).val(),
+                    Branch_Id: $("#hdnBranchID").val()
                 },
             method: 'GET',
             async: false,

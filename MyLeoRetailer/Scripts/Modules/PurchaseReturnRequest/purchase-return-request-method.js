@@ -287,23 +287,32 @@ function CalculateTotal() {
                 
                     var Qty = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val());
 
-                    var WSR = ""
-                    if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
-                        WSR = 0;
-                    }
-                    else {
-                        WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
-                    }
+            //Added by vinod mane on 12/10/2016
+            var Qty = $("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val();
 
-                    var Amount = parseFloat(WSR * Qty);
-                    $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
-
-                    sumQuantity = sumQuantity + Qty;
-                    sumWSRAmount = sumWSRAmount + Amount;
-                
+            if (Qty == "" || Qty == "NaN")
+            {
+                Qty = 1;
+                $('#textQuantity_' + i).val(1);
+            }
+//End
+            var WSR = ""
+            if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
+                WSR = 0;
+            }
+            else {
+                WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
             }
 
+            var Amount = parseFloat(WSR * Qty);
+            $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
+
+            sumQuantity = sumQuantity + Qty;
+            sumWSRAmount = sumWSRAmount + Amount;
+
         }
+
+    }
     }
 
     $("#textTotalQuantity_0").val(sumQuantity);
@@ -316,7 +325,16 @@ function CalculateDiscount() {
 
     var netAmt = 0;
    
-    var discount = parseFloat($("#textDiscountPercentage_0").val());
+    //var discount = parseFloat($("#textDiscountPercentage_0").val());//Commented by vinod mane on 12/10/2016
+
+    //Added by vinod mane on 12/10/2016
+    var discount = $("#textDiscountPercentage_0").val();
+
+    if (discount == "" ||discount == "NaN") {
+        discount = 0;
+        $("#textDiscountPercentage_0").val(0);
+    }
+    //End
     var sumtotalAmount = parseFloat($("#textTotalAmount_0").val());
 
     var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((sumtotalAmount * discount) / 100);
@@ -343,6 +361,7 @@ function CalculateTax() {
     //$("#tblPurchaseReturnRequestItems").find("textTaxAmount_0").val(taxAmt);
     $("textTaxAmount_0").val(taxAmt);
 
+
     var netAmt_temp = taxAmt + sumGrossAmount;
 
     var roundedDecimal = netAmt_temp.toFixed(2);
@@ -350,6 +369,11 @@ function CalculateTax() {
     var intPart = Math.floor(roundedDecimal);
 
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
+    //Added by vinod mane on 12/10/2016
+    if (fracPart>=0.50) {
+        netAmt_temp += 1;
+    }
+    //End
 
     if (fracPart == "" || fracPart == null) {
         fracPart = 0.00
@@ -434,7 +458,7 @@ function Add_Validation(i)
 
     $("#textQuantity_" + i).rules("add", { required: true, digits: true, QuantityCheck:true, messages: { required: "Required field", digits: "Invalid quantity." } });
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
-
+  
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
         var result = true;

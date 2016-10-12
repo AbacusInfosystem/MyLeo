@@ -9,6 +9,7 @@ using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -23,7 +24,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ReceivableRepo rRepo;
 
-      
+
         public SalesOrderController()
         {
             siRepo = new SalesOrderRepo();
@@ -35,15 +36,15 @@ namespace MyLeoRetailer.Controllers.PostLogin
         {
             try
             {
-            if (TempData["siViewModel"] != null)
-            {
-                siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];                
-            }
-            siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                if (TempData["siViewModel"] != null)
+                {
+                    siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
+                }
+                siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
+                siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
 
-            siViewModel.GiftVoucherDetails = siRepo.Get_Gift_Voucher_Details_By_Id(); //Added by vinod mane on 10/10/2016
+                siViewModel.GiftVoucherDetails = siRepo.Get_Gift_Voucher_Details_By_Id(); //Added by vinod mane on 10/10/2016
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
@@ -52,7 +53,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 Logger.Error("SalesOrder Controller - Index  " + ex.Message);
             }
             //end
-           
+
 
             return View("Index", siViewModel);
         }
@@ -64,7 +65,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
             try
             {
-            siViewModel.SalesInvoice = siRepo.Get_Customer_Name_By_Mobile_No(MobileNo);
+                siViewModel.SalesInvoice = siRepo.Get_Customer_Name_By_Mobile_No(MobileNo);
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
@@ -82,7 +83,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
             try
             {
-            siViewModel.SalesInvoice = siRepo.Get_Sales_Order_Items_By_SKU_Code(SKU_Code);
+                siViewModel.SalesInvoice = siRepo.Get_Sales_Order_Items_By_SKU_Code(SKU_Code);
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
@@ -243,7 +244,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 //{
                 //Set_Date_Session(siViewModel.SalesInvoice);
 
-               siViewModel.SalesInvoice.Sales_Invoice_No = Utility.Generate_Ref_No("SI-", "Sales_Invoice_No", "4", "15", "Sales_Invoice");
+                siViewModel.SalesInvoice.Sales_Invoice_No = Utility.Generate_Ref_No("SI-", "Sales_Invoice_No", "4", "15", "Sales_Invoice");
 
                 siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, siViewModel.ReceivableItem);   //arr[i] instead of Branch_Id
 
@@ -264,6 +265,9 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ActionResult Invoice(SalesInvoiceViewModel siViewModel)
         {
+
+            siViewModel.SalesInvoice.Logo_Path = ConfigurationManager.AppSettings["LogoPath"].ToString();
+
             return View("Invoice", siViewModel);
         }
 
@@ -271,10 +275,10 @@ namespace MyLeoRetailer.Controllers.PostLogin
         {
             try
             {
-            if (TempData["siViewModel"] != null)
-            {
-                siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
-            }
+                if (TempData["siViewModel"] != null)
+                {
+                    siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
+                }
             }
             catch (Exception ex)
             {
@@ -293,11 +297,11 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 CheckFlag = siViewModel.SalesInvoice.Flag;
 
-                
+
                 siViewModel.SalesInvoice = siRepo.Get_SalesOrder_By_Id(siViewModel.Filter.Sales_Invoice_Id);
                 siViewModel.SaleOrderItemList = siRepo.Get_SalesOrder_Items_By_Id(siViewModel.Filter.Sales_Invoice_Id);
-               
-  
+
+
             }
             catch (Exception ex)
             {
@@ -339,8 +343,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(check, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult Check_Quantity(int Quantity)
+        public JsonResult Check_Quantity(int Quantity, int Branch_Id, string SKU_Code)
         {
 
             bool check = false;
@@ -348,13 +351,15 @@ namespace MyLeoRetailer.Controllers.PostLogin
             SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
             try
             {
-                check = siRepo.Check_Quantity(Quantity);
+                check = siRepo.Check_Quantity(Quantity, Branch_Id, SKU_Code);
             }
 
             catch (Exception ex)
             {
                 // throw ex;
+
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
                 Logger.Error("SalesOrder Controller - Check_Mobile_No  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
@@ -381,6 +386,32 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return View("Search1", siViewModel);
         }
         //End
+
+        public JsonResult Get_Sales_Report(SalesInvoiceViewModel siViewModel)
+        {
+            try
+            {
+                Pagination_Info pager = new Pagination_Info();
+
+                pager = siViewModel.Grid_Detail.Pager;
+
+                siViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount", "Sales_Invoice_Id"); // Set grid info for front end listing
+
+                siViewModel.Grid_Detail.Records = siRepo.Get_Sales_Report(siViewModel.Filter); // Call repo method 
+
+                Set_Pagination(pager, siViewModel.Grid_Detail); // set pagination for grid
+
+                siViewModel.Grid_Detail.Pager = pager;
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("SalesOrder Controller - Get_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
+
+            return Json(JsonConvert.SerializeObject(siViewModel));
+        }
 
     }
 }

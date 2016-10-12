@@ -14,23 +14,35 @@
         $('#drpSubCategory').rules("remove");
 
 
+        if ($("#hdnTotalQuantity").val() == 0) {
+            $("#hdnrecords_Validation").show();
+            $("#records_Message").html("Minimum one Record  is Required");
+
+        }
+        else {
+            $("#hdnrecords_Validation").hide();
+            $("#records_Message").html(" ");
+        }
+
         $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function () {
             if ($(this).text() == 0) {
-                $("#hdnrecords_Validation").rules("add", "required");
-
-                return false;
+                $("#records_Message").html("Minimum one size is Required");
+                $("#hdnrecords_Validation").show();
             }
             else {
-                $('#hdnrecords_Validation').rules("remove");
+                $("#hdnrecords_Validation").hide();
+                $("#records_Message").html(" ");
             }
-
         });
 
         if ($("#frmPurchaseOrderRequest").valid()) {
-            if ($("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == "" || $("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == 0) {
-                $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Insert_Purchase_Order_Request");
-                $('#frmPurchaseOrderRequest').attr("method", "POST");
-                $('#frmPurchaseOrderRequest').submit();
+            if ($("#records_Message").html == " ") 
+            {
+                if ($("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == "" || $("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == 0) {
+                    $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Insert_Purchase_Order_Request");
+                    $('#frmPurchaseOrderRequest').attr("method", "POST");
+                    $('#frmPurchaseOrderRequest').submit();
+                }
             }
         }
     });

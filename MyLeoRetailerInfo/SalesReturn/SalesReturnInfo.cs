@@ -33,6 +33,8 @@ namespace MyLeoRetailerInfo.SalesReturn
 
         public string Mobile1 { get; set; }
 
+        public int Quantity1 { get; set; }
+
         //END
 
         public string Sales_Return_No { get; set; }
