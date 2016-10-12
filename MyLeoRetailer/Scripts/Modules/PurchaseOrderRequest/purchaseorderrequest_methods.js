@@ -7,6 +7,12 @@
 
     $('#hdf_Vendor_Id').val(value);
 
+    //Added by vinod mane on 12/10/2016
+    document.getElementById('tdTotalQuantity').innerText = 0;
+    document.getElementById('tdNetAmount').innerText = 0;  
+    ClearAllDropdownlist();
+    //End
+
     $.ajax({
 
         url: "/PurchaseOrderRequest/Get_Details_By_Vendor_Id",
@@ -177,7 +183,7 @@ function Get_Sizes() {
 
             var obj = $.parseJSON(response);
 
-
+        
             if (obj.PurchaseOrderRequest.SizeGroups.length > 0) {
 
                 $("#drpCenter_Size").empty();
@@ -1392,4 +1398,35 @@ function ReArrangePurchaseOrderRequestDetailsData() {
 
 }
 
+
+//added by vinod mane on 12/10/2016
+function ClearAllDropdownlist() {
+    //$("#drpArticle_No").val('');
+    //$("#drpBrand").val('');
+    //$("#drpCategory").val('');
+    //$("#drpSubCategory").val('');   
+    //$("#drpCenter_Size").val('');
+    $("#drpSize_Group").val('');
+
+    $("#drpArticle_No").html("");
+    $("#drpArticle_No").append("<option value=''>Select Article No.</option>");
+    $("#drpArticle_No").parents('.form-group').find('ul').html("");
+
+    $("#drpBrand").html("");
+    $("#drpBrand").append("<option value=''>Select Brand</option>");
+    $("#drpBrand").parents('.form-group').find('ul').html("");
+
+    $("#drpCategory").html("");
+    $("#drpCategory").append("<option value=''>Select Category</option>");
+    $("#drpCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpSubCategory").html("");
+    $("#drpSubCategory").append("<option value=''>Select SubCategory.</option>");
+    $("#drpSubCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpCenter_Size").html("");
+    $("#drpCenter_Size").append("<option value=''>Select Center Size.</option>");
+    $("#drpCenter_Size").parents('.form-group').find('ul').html("");
+
+}
 

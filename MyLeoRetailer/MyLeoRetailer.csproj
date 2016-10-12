@@ -1050,6 +1050,7 @@
     <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_method.js" />
+    <Content Include="Scripts\Modules\ProductWarehouse\product_warehouse_notification.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
     <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_events.js" />
@@ -1202,8 +1203,6 @@
     <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
     <Content Include="Views\PreLogin\Home\AuthorizationError.cshtml" />
     <Content Include="Views\PreLogin\Home\Error.cshtml" />
-    <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
-    <Content Include="Views\PostLogin\Master\Payable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Pay.cshtml" />
     <Content Include="Views\PostLogin\Master\Payable\Index.cshtml" />
@@ -1294,7 +1293,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58691/</IISUrl>
+          <IISUrl>http://localhost:49653/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:49653/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

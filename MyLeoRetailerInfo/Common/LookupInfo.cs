@@ -108,7 +108,7 @@ namespace MyLeoRetailerInfo.Common
 
             Get_Payment_Status.Add(2, PaymentStatus.UnPaid.ToString().ToString());
 
-            Get_Payment_Status.Add(3, PaymentStatus.Partially_Paid.ToString().ToString());
+            Get_Payment_Status.Add(3, PaymentStatus.PartiallyPaid.ToString().ToString());
 
             return Get_Payment_Status;
 
@@ -122,7 +122,7 @@ namespace MyLeoRetailerInfo.Common
 
             Get_Receivable_Status.Add(2, ReceivableStatus.UnPaid.ToString().ToString());
 
-            Get_Receivable_Status.Add(3, ReceivableStatus.Partially_Paid.ToString().ToString());
+            Get_Receivable_Status.Add(3, ReceivableStatus.PartiallyPaid.ToString().ToString());
 
             return Get_Receivable_Status;
 

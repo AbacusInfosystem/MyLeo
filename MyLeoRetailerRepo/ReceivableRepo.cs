@@ -580,7 +580,7 @@ namespace MyLeoRetailerRepo
 
            if (!dr.IsNull("Cheque_Amount"))
 
-               Receivable.Cheque_Amount = Convert.ToDecimal(dr["Cheque_Amount"]);
+               Receivable.Cheque_Amount = Convert.ToInt32(dr["Cheque_Amount"]);
 
            if (!dr.IsNull("Card_Amount"))
 
