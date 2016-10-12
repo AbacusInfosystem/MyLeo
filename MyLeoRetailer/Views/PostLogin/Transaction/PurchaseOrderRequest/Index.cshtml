@@ -185,7 +185,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Base rate.</span>
-                        <input type="text" class="form-control" name="PurchaseOrderRequest.Purchase_Price" value="@Model.PurchaseOrderRequest.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." maxlength="5" />
+                        <input type="text" class="form-control" name="PurchaseOrderRequest.Purchase_Price" value="@(Model.PurchaseOrderRequest.Purchase_Price == 0 ? "" : Model.PurchaseOrderRequest.Purchase_Price.ToString())" id="textPurchase_Price" placeholder="Enter base rate." maxlength="5" />
                     </div>
                 </div>
             </div>
@@ -204,7 +204,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size difference.</span>
-                        <input type="text" class="form-control" name="PurchaseOrderRequest.Size_Difference" value="@Model.PurchaseOrderRequest.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." maxlength="5" />
+                        <input type="text" class="form-control" name="PurchaseOrderRequest.Size_Difference" value="@(Model.PurchaseOrderRequest.Size_Difference == 0 ? "" : Model.PurchaseOrderRequest.Size_Difference.ToString())" id="textSize_Difference" placeholder="Enter size difference." maxlength="5" />
                     </div>
                 </div>
             </div>

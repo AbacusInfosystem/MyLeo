@@ -289,14 +289,16 @@ function CalculateTotal() {
 
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++) {
-            var Qty = parseFloat($("#tblPurchaseReturnItems").find('[id="textQuantity_' + i + '"]').val());
-            var WSR = parseFloat($("#tblPurchaseReturnItems").find('[id="textWSR_Price_' + i + '"]').val());
-            var Amount = parseFloat(WSR * Qty);
-            $("#tblPurchaseReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
+            if ($('[id="textQuantity_' + i + '"]').val() != 0 && $('[id="textQuantity_' + i + '"]').val() != '') {
 
-            sumQuantity = sumQuantity + Qty;
-            sumWSRAmount = sumWSRAmount + Amount;
+                var Qty = parseFloat($("#tblPurchaseReturnItems").find('[id="textQuantity_' + i + '"]').val());
+                var WSR = parseFloat($("#tblPurchaseReturnItems").find('[id="textWSR_Price_' + i + '"]').val());
+                var Amount = parseFloat(WSR * Qty);
+                $("#tblPurchaseReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
 
+                sumQuantity = sumQuantity + Qty;
+                sumWSRAmount = sumWSRAmount + Amount;
+            }
         }
     }
 

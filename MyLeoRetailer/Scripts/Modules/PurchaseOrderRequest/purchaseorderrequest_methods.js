@@ -183,11 +183,17 @@ function Get_Sizes() {
 
             var obj = $.parseJSON(response);
 
+            $("#drpCenter_Size").html("");
+
+            $("#drpCenter_Size").append("<option value=''>Select Center Size.</option>");
+
+            $("#drpCenter_Size").parents('.form-group').find('ul').html("");
+
+            $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Center Size.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
 
             if (obj.PurchaseOrderRequest.SizeGroups.length > 0) {
-
-                $("#drpCenter_Size").empty();
-
+                 
                 var tblHtml = '';
 
                 var myTable = $("#tblPurchaseOrderRequestItems");
@@ -206,9 +212,6 @@ function Get_Sizes() {
                 tblHtml += "<td></td>";
                 tblHtml += "<td></td>";
                 tblHtml += "<td></td>";
-
-
-                $("#drpCenter_Size").html("");
 
                 for (var j = 0; j < 15; j++) {
 
@@ -353,7 +356,6 @@ function AddPurchaseOrderRequestDetails() {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group'>";
     tblHtml += "<select class='form-control select' id='textStart_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
-    tblHtml += " <option value='0'>Select</option>";
     tblHtml += " </select>";
     tblHtml += " </div>";
     tblHtml += "</td>";
@@ -361,7 +363,6 @@ function AddPurchaseOrderRequestDetails() {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group'>";
     tblHtml += "<select class='form-control select' id='textEnd_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
-    tblHtml += " <option value='0'>Select</option>";
     tblHtml += " </select>";
     tblHtml += " </div>";
     tblHtml += "</td>";                     
@@ -507,7 +508,7 @@ function AddPurchaseOrderRequestDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details' class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>Continue</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>Continue</button>";
     tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderRequestDetailsData(" + i + ")'>Delete</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
@@ -643,7 +644,6 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group'>";
     tblHtml += "<select class='form-control select' id='textStart_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Start_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
-    tblHtml += " <option value='0'>Select</option>";
     tblHtml += " </select>";
     tblHtml += " </div>";
     tblHtml += "</td>";
@@ -651,7 +651,6 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group'>";
     tblHtml += "<select class='form-control select' id='textEnd_Size_" + i + "' name='PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].End_Size' onchange='Enable_Size_Quantity(" + i + ")'>";
-    tblHtml += " <option value='0'>Select</option>";
     tblHtml += " </select>";
     tblHtml += " </div>";
     tblHtml += "</td>";
@@ -786,7 +785,7 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details' class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>Continue</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>Continue</button>";
     tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderRequestDetailsData(" + i + ")'>Delete</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
@@ -952,7 +951,7 @@ function CalculateRowQuantity(i) {
 
 
     if ($("#hdnTotalQuantity").val() != 0) {
-        document.getElementById("continue-order-details" + i + "").disabled = false;
+        document.getElementById('continue-order-details' + i).disabled = false;
     }
 
 }
@@ -988,6 +987,8 @@ function Enable_Size_Quantity(i) {
 
             $("#textSize_Quantity_" + j + "-" + i).attr("readonly", false);
 
+            $("#textSize_Quantity_" + j + "-" + i).val('');
+
             $("#textSize_Quantity_" + j + "-" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
         }
     }
@@ -1005,7 +1006,13 @@ function Add_Validation(i) {
 }
 
 function Show_Button() {
-    document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = false;
+
+    if ($("#drpSize_Group").val() != '') {
+        document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = false;
+    }
+    else {
+        document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = true;
+    }
 }
 
 function Reset_Details() {
@@ -1386,8 +1393,8 @@ function ReArrangePurchaseOrderRequestDetailsData() {
                 $(newTR).find("[id^='textComment_']").attr("name", "PurchaseOrderRequest.PurchaseOrderRequests[" + i + "].Comment");
             }
             
-            if ($(newTR).find("[id='continue-order-details']").length > 0) {
-                $(newTR).find("[id='continue-order-details']").attr("onclick", "ContinuePurchaseOrderRequestDetailsData(" + i + ")");
+            if ($(newTR).find("[id^='continue-order-details']").length > 0) {
+                $(newTR).find("[id^='continue-order-details']").attr("onclick", "ContinuePurchaseOrderRequestDetailsData(" + i + ")");
             }
 
             if ($(newTR).find("[id='delete-order-details']").length > 0) {

@@ -249,14 +249,16 @@ function CalculateTotal() {
 
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++) {
-            var Qty = parseFloat($("#tblPurchaseInvoiceItems").find('[id="textQuantity_' + i + '"]').val());
-            var WSR = parseFloat($("#tblPurchaseInvoiceItems").find('[id="textWSR_Price_' + i + '"]').val());
-            var Amount = parseFloat(WSR * Qty);
-            $("#tblPurchaseInvoiceItems").find('[id="textAmount_' + i + '"]').val(Amount);
 
-            sumQuantity = sumQuantity + Qty;
-            sumWSRAmount = sumWSRAmount + Amount;
+            if ($('[id="textQuantity_' + i + '"]').val() != 0 && $('[id="textQuantity_' + i + '"]').val() != '') {
+                var Qty = parseFloat($("#tblPurchaseInvoiceItems").find('[id="textQuantity_' + i + '"]').val());
+                var WSR = parseFloat($("#tblPurchaseInvoiceItems").find('[id="textWSR_Price_' + i + '"]').val());
+                var Amount = parseFloat(WSR * Qty);
+                $("#tblPurchaseInvoiceItems").find('[id="textAmount_' + i + '"]').val(Amount);
 
+                sumQuantity = sumQuantity + Qty;
+                sumWSRAmount = sumWSRAmount + Amount;
+            }
         }
     }
 

@@ -39,7 +39,7 @@
         {
             
             if ($(this).text() == 0) {
-                $("#records_Message").html("Minimum one size is Required");
+                $("#records_Message").html("Size quantity can not be Zero.");
                 $("#hdnrecords_Validation").show();
             }
             else {
@@ -51,7 +51,7 @@
         //Added by aditya [10102016] END
 
         if ($("#frmPurchaseOrder").valid()) {
-            if ($("#records_Message").html == " ") //added by aditya
+            if ($("#records_Message")[0].innerText == " ") //added by aditya
             { 
             if ($("[name='PurchaseOrder.Purchase_Order_Id']").val() == "" || $("[name='PurchaseOrder.Purchase_Order_Id']").val() == 0) {
                 $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Insert_Purchase_Order");
@@ -63,9 +63,7 @@
             $('#frmPurchaseOrder').submit();
             }
         }
-    });
-
-    
+    });    
 
     $("#btnAddSizesPurchaseOrder").click(function () {               
         Get_Sizes();
