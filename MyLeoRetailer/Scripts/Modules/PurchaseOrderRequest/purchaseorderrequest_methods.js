@@ -1008,8 +1008,8 @@ function Add_Validation(i) {
 function Show_Button() {
 
     if ($("#drpSize_Group").val() != '') {
-        document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = false;
-    }
+    document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = false;
+}
     else {
         document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = true;
     }

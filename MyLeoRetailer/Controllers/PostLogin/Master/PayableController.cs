@@ -75,6 +75,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Payable(PayableViewModel pViewModel)
         {
+            pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
             try
             {
             PayableRepo pRepo = new PayableRepo();
@@ -154,7 +156,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Insert_Payable(PayableViewModel pViewModel)
         {
+            pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
+            pViewModel.Payable.Created_By = pViewModel.Cookies.User_Id;
+
+            pViewModel.Payable.Created_On = DateTime.Now;
 
             try
             {
@@ -187,6 +193,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Update_Payable(PayableViewModel pViewModel)
         {
+            pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            pViewModel.Payable.Updated_By = pViewModel.Cookies.User_Id;
+
+            pViewModel.Payable.Updated_On = DateTime.Now;
 
             try
             {

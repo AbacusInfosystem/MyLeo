@@ -343,7 +343,7 @@ namespace MyLeoRetailerInfo.Common
         Sp_Delete_Sales_Return_Items_By_Sales_Return_Id,
             sp_Get_Sales_Return_Details_By_Sales_Return_Id,
             sp_Get_Sales_Return_Items_By_Sales_Return_Id,
-
+            sp_Get_Sales_Return_Items_By_SKU_Code,
 
 
        
@@ -378,6 +378,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Return_Request_Item,
         sp_Get_Purchase_Return_Requests,
             sp_Get_Purchase_Return_Request_Details,
+            sp_Get_Purchase_Invoice_Items_Quantity_By_SKU_Code,
 
         #endregion
 

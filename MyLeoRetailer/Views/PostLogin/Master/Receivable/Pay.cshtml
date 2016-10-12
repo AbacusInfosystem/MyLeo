@@ -99,7 +99,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
-                                    <input type="text" class="form-control input-sm" name="Receivable.Cash_Amount" id="txtCash_amount" onfocusout="javascript: Get_Balance_Amount_Using_Cash_Amount();" value="@Model.Receivable.Cash_Amount" placeholder="Cash Amount" maxlength="10" />
+                                    <input type="text" class="form-control input-sm" name="Receivable.Cash_Amount" id="txtCash_amount" onfocusout="javascript: Get_Balance_Amount_Using_Cash_Amount();" value="@(Model.Receivable.Cash_Amount == 0 ? "" : Model.Receivable.Cash_Amount.ToString())" placeholder="Cash Amount" maxlength="10" />
                                 </div>
                             </div>
 
@@ -145,7 +145,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Amount</span>
-                                    <input type="text" class="form-control input-sm" name="Receivable.Cheque_Amount" id="txtCheque_Amount" onfocusout="javascript: Get_Balance_Amount_Using_Cheque_Amount();" value="@Model.Receivable.Cheque_Amount" placeholder="Enter Cheque Amount " maxlength="10" />
+                                    <input type="text" class="form-control input-sm" name="Receivable.Cheque_Amount" id="txtCheque_Amount" onfocusout="javascript: Get_Balance_Amount_Using_Cheque_Amount();" value="@(Model.Receivable.Cheque_Amount == 0 ? "" : Model.Receivable.Cheque_Amount.ToString())" placeholder="Enter Cheque Amount " maxlength="10" />
                                 </div>
                             </div>
 
@@ -199,7 +199,7 @@
                             <div id="divPaidAmount" class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Amount</span>
-                                    <input type="text" class="form-control input-sm" name="Receivable.Credit_Note_Amount" id="txtCredit_Note_Amount"  value="@Model.Receivable.Credit_Note_Amount" placeholder=" Enter Paid amount" maxlength="20" readonly />
+                                    <input type="text" class="form-control input-sm" name="Receivable.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@(Model.Receivable.Credit_Note_Amount == 0 ? "" : Model.Receivable.Credit_Note_Amount.ToString())" placeholder=" Enter Paid amount" maxlength="20" readonly />
                                 </div>
                             </div>
 
@@ -229,7 +229,7 @@
                             <div id="divCreditcardno" class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Card Amount</span>
-                                    <input type="text" class="form-control input-sm" name="Receivable.Card_Amount" id="txtCard_Amount" onfocusout="javascript: Get_Balance_Amount_Using_Card_Amount();" value="@Model.Receivable.Card_Amount" placeholder="Card Amount" maxlength="10" />
+                                    <input type="text" class="form-control input-sm" name="Receivable.Card_Amount" id="txtCard_Amount" onfocusout="javascript: Get_Balance_Amount_Using_Card_Amount();" value="@(Model.Receivable.Card_Amount == 0 ? "" : Model.Receivable.Card_Amount.ToString())" placeholder="Card Amount" maxlength="10" />
                                 </div>
                             </div>
 
@@ -272,7 +272,7 @@
                             <div id="divDebitcardno" class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
-                                    <input type="text" class="form-control input-sm" name="Receivable.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" onchange="javascript: Get_Balance_Amount_Using_Gift_Voucher_Amount();" value="@Model.Receivable.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" maxlength="20" readonly />
+                                    <input type="text" class="form-control input-sm" name="Receivable.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" onchange="javascript: Get_Balance_Amount_Using_Gift_Voucher_Amount();" value="@(Model.Receivable.Gift_Voucher_Amount == 0 ? "" : Model.Receivable.Gift_Voucher_Amount.ToString())" placeholder="Enter Gift Voucher Amount" maxlength="20" readonly />
                                 </div>
                             </div>
 
@@ -287,7 +287,7 @@
                         <div id="divDebitcardno" class="col-md-3">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
-                                <input type="text" class="form-control input-sm" name="Receivable.Paid_Amount" id="txtPaid_Amount" @*onclick="javascript: CalculateDiscount();"*@ onchange="javascript: BalanceAmount();" value="@Model.Receivable.Paid_Amount" placeholder="Paid Amount" maxlength="10" />
+                                <input type="text" class="form-control input-sm" name="Receivable.Paid_Amount" id="txtPaid_Amount" @*onclick="javascript: CalculateDiscount();"*@ @*onchange="javascript: BalanceAmount();"*@ value="@Model.Receivable.Paid_Amount" placeholder="Paid Amount" maxlength="10" />
                             </div>
                         </div>
 
@@ -313,6 +313,7 @@
                 </div>
 
                 <div class="row">
+                    
                     <div class="col-md-12">
                         <div class="table-responsive" style="margin: 50px 0;">
                             <table class="table table-bordered" id="tblReceivableItems">
@@ -333,7 +334,6 @@
                                         <th>Gift voucher no</th>
                                         <th>Gift voucher amount</th>
 
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -417,22 +417,23 @@
                                                 <input type="hidden" id="hdnGift_Voucher_Amount@(itm.Receivable_Item_Id)" name="Receivable.Gift_Voucher_Amount[@(i-1)]" value="@itm.Gift_Voucher_Amount">
                                             </td>
 
-                                            <td>
+                                          
                                                 @*@if (Model.Payable.Status != "Payment Done")
-                                            {*@
-                                                <button type="button" id="edit-receivable-details" class="btn btn-box-tool btn-tel-edit btn_edit" onclick="javascript:EditReceivableData(@itm.Receivable_Item_Id,@itm.Sales_Credit_Note_Id)"><i class='fa fa-pencil'></i></button>
+                                                    {*@
+                                                @*<button type="button" id="edit-receivable-details" class="btn btn-box-tool btn-tel-edit btn_edit" onclick="javascript:EditReceivableData(@itm.Receivable_Item_Id,@itm.Sales_Credit_Note_Id)"><i class='fa fa-pencil'></i></button>*@
                                                 @*<button type="button" id="delete-bank-details" class="btn btn-box-tool btn-tel-delete" onclick="javascript:DeletPayableData(@itm.Payable_Item_Id)"><i class='fa fa-times'></i></button>*@
                                                 @*}*@
 
-                                            </td>
+                                          
                                         </tr>
-                                        i = i + 1;
+                                                i = i + 1;
                                     }
                                 }
 
                             </table>
                         </div>
                     </div>
+
                 </div>
 
 

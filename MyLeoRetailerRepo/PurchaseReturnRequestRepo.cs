@@ -185,7 +185,7 @@ namespace MyLeoRetailerRepo
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
 
-            parameters.Add(new SqlParameter("@SKU_Code", SKU_Code));
+            parameters.Add(new SqlParameter("@SKU_Code", SKU_Code)); 
 
             PurchaseReturnRequestItemInfo PurchaseReturnRequestItem = new PurchaseReturnRequestItemInfo();
 
@@ -309,6 +309,25 @@ namespace MyLeoRetailerRepo
             PurchaseReturnRequestItem.Quantity = Convert.ToInt32(dr["Quantity"]);
 
             return PurchaseReturnRequestItem;
+        }
+
+        public bool Get_Quantity_By_SKU_Code(string SKU_Code, int Purchase_Invoice_Id, int Quantity)
+        {
+            bool check = false;
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@SKU_Code", SKU_Code));
+            parameters.Add(new SqlParameter("@Purchase_Invoice_Id", Purchase_Invoice_Id));
+            parameters.Add(new SqlParameter("@Quantity", Quantity));
+             
+            DataTable dt = _sqlRepo.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Invoice_Items_Quantity_By_SKU_Code.ToString(), CommandType.StoredProcedure);
+           // List<DataRow> drList = new List<DataRow>(); 
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                check = Convert.ToBoolean(dt.Rows[0]["Quantity"]);//Get_Purchase_Return_Items_By_SKU_Values(dr);
+
+            }
+            return check;
         }
     }
 }

@@ -96,21 +96,21 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">CN amount</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Credit_Note_Amount" id="txtCN_amount" value="@Model.Payable.Credit_Note_Amount" onfocusout="javascript: Calculate_Fianl_Amount_Using_Credit_Note_Amount();" placeholder="Credit Note Amount" readonly />
+                            <input type="text" class="form-control input-sm" name="Payable.Credit_Note_Amount" id="txtCN_amount" value="@(Model.Payable.Credit_Note_Amount == 0 ? "" : Model.Payable.Credit_Note_Amount.ToString())" onfocusout="javascript: Calculate_Fianl_Amount_Using_Credit_Note_Amount();" placeholder="Credit Note Amount" readonly />
                         </div>
                     </div>
                  
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount%</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Discount_Percentage" id="txtDiscount" onfocusout="javascript: Calculate_Fianl_Amount_Using_Discount();" value="@Model.Payable.Discount_Percentage" placeholder="Discount" />
+                            <input type="text" class="form-control input-sm" name="Payable.Discount_Percentage" id="txtDiscount" onfocusout="javascript: Calculate_Fianl_Amount_Using_Discount();" value="@(Model.Payable.Discount_Percentage == 0 ? "" : Model.Payable.Discount_Percentage.ToString())" placeholder="Discount" />
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount amount</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Discount_Amount" id="txtDiscount_amount" value="@Model.Payable.Discount_Amount" placeholder="Discount Amount" />
+                            <input type="text" class="form-control input-sm" name="Payable.Discount_Amount" id="txtDiscount_amount" value="@(Model.Payable.Discount_Amount == 0 ? "" : Model.Payable.Discount_Amount.ToString())" placeholder="Discount Amount" />
                         </div>
                     </div>
 
@@ -193,7 +193,7 @@
                     <div id="divPaidAmount" style="display:none" class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@Model.Payable.Paid_Amount" onfocusout="javascript: FinalAmount();" placeholder=" Enter Paid amount" />
+                            <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@(Model.Payable.Paid_Amount == 0 ? "" : Model.Payable.Paid_Amount.ToString())" onfocusout="javascript: FinalAmount();" placeholder=" Enter Paid amount" />
                         </div>
                     </div>
                 </div>
@@ -277,7 +277,7 @@
                                         <th>Credit note amount</th>
                                         <th>Discount %</th>
                                         <th>Discount amount</th>
-                                        <th>Action</th>
+                                        @*<th>Action</th>*@
                                     </tr>
                                 </thead>
                                 @if (Model.Payables != null && Model.Payables.Count() > 0)
@@ -311,8 +311,7 @@
                                             </td>
                                             
                                             <td>
-
-                                                @if (itm.Cheque_Date.ToString() == "1/1/1999 12:00:00 AM")
+                                                @if (itm.Cheque_Date.ToShortDateString() == "01-01-1999")
                                                 {
                                                     <span> NA </span>
                                                 }
@@ -344,14 +343,12 @@
                                                 <input type="hidden" id="hdnDiscount_Amount@(itm.Payable_Item_Id)" name="Payable.Discount_Amount[@(i-1)]" value="@itm.Discount_Amount">
                                             </td>
 
-                                            <td>
-                                                @*@if (Model.Payable.Status != "Payment Done")
-                                        {*@
+                                            @*<td>
+                                             
                                                 <button type="button" id="edit-payable-details" class="btn btn-box-tool btn-tel-edit" onclick="javascript:EditPayableData(@itm.Payable_Item_Id)"><i class='fa fa-pencil'></i></button>
-                                                @*<button type="button" id="delete-bank-details" class="btn btn-box-tool btn-tel-delete" onclick="javascript:DeletPayableData(@itm.Payable_Item_Id)"><i class='fa fa-times'></i></button>*@
-                                                @*}*@
+                                               
 
-                                            </td>
+                                            </td>*@
                                         </tr>
                                                 i = i + 1;
                                     }

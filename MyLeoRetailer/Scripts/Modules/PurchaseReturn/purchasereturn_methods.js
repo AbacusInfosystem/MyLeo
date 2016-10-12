@@ -242,6 +242,12 @@ function CalculateTax() {
 
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
     
+    //Added by vinod mane on 12/10/2016
+    if (fracPart >= 0.50) {
+        netAmt_temp += 1;
+    }
+    //End
+    
     if (fracPart == "" || fracPart == null) {
         fracPart = 0.00
     }
@@ -292,12 +298,12 @@ function CalculateTotal() {
             if ($('[id="textQuantity_' + i + '"]').val() != 0 && $('[id="textQuantity_' + i + '"]').val() != '') {
 
                 var Qty = parseFloat($("#tblPurchaseReturnItems").find('[id="textQuantity_' + i + '"]').val());
-                var WSR = parseFloat($("#tblPurchaseReturnItems").find('[id="textWSR_Price_' + i + '"]').val());
-                var Amount = parseFloat(WSR * Qty);
-                $("#tblPurchaseReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
+            var WSR = parseFloat($("#tblPurchaseReturnItems").find('[id="textWSR_Price_' + i + '"]').val());
+            var Amount = parseFloat(WSR * Qty);
+            $("#tblPurchaseReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
 
-                sumQuantity = sumQuantity + Qty;
-                sumWSRAmount = sumWSRAmount + Amount;
+            sumQuantity = sumQuantity + Qty;
+            sumWSRAmount = sumWSRAmount + Amount;
             }
         }
     }
