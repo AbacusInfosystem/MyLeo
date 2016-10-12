@@ -1,6 +1,10 @@
 ﻿function Set_Vendor_Id(value) {
     debugger;
 
+    $("#tblPurchaseOrderRequestItems").find("tr:gt(0)").remove();
+
+    $(".Details").hide();
+
     $('#hdf_Vendor_Id').val(value);
 
     $.ajax({
@@ -107,7 +111,7 @@
         }
     });
 
-
+    Reset_Detalis_After_Delete();
 }
 
 function Set_Sub_Category_Drp_Id(value) {
@@ -940,6 +944,11 @@ function CalculateRowQuantity(i) {
 
     $("#tblPurchaseOrderRequestCalculation").find('[id="hdnNetAmount"]').val(sumWSRAmount);
 
+
+    if ($("#hdnTotalQuantity").val() != 0) {
+        document.getElementById("continue-order-details" + i + "").disabled = false;
+    }
+
 }
 
 function Enable_Size_Quantity(i) {
@@ -950,9 +959,22 @@ function Enable_Size_Quantity(i) {
 
     var end = document.getElementById("textEnd_Size_" + i).selectedIndex;
 
-    $(".read-only").attr("readonly", true);
+    //$(".read-only").attr("readonly", true);
     
-    $(".read-only").rules("remove");
+    //$(".read-only").rules("remove");
+
+    $("#textStart_Size_" + i).parents('tr').find(".read-only").attr("readonly", true);
+
+    $("#textStart_Size_" + i).parents('tr').find(".read-only").rules("remove");
+
+    $("#textStart_Size_" + i).parents('tr').find(".read-only").val(0);
+
+
+    $("#textEnd_Size_" + i).parents('tr').find(".read-only").attr("readonly", true);
+
+    $("#textEnd_Size_" + i).parents('tr').find(".read-only").rules("remove");
+
+    $("#textEnd_Size_" + i).parents('tr').find(".read-only").val(0);
 
     if (start <= end) {
 
@@ -964,6 +986,7 @@ function Enable_Size_Quantity(i) {
         }
     }
 
+    CalculateRowQuantity(i);
 }
 
 function Add_Validation(i) {
@@ -989,6 +1012,55 @@ function Reset_Details() {
     //document.getElementById("drpCenter_Size").selectedIndex = 0;
 }
 
+function Reset_Detalis_After_Delete() {
+
+    debugger;
+
+    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
+
+    j = temptablecount;
+
+    for (var i = 0; i < j; i++) {
+
+        var qty = $("#hdnTotal_Quantity_" + i).val();
+
+        var amt = $("#hdnTotal_Amount_" + i).val();
+
+        var total_qty = 0;
+
+        var total_amt = 0;
+
+        if (qty != 0 || qty != null) {
+
+            total_qty = parseInt(total_qty) + parseInt(qty);
+        }
+
+        if (amt != 0 || amt != null) {
+
+            total_amt = parseInt(total_amt) + parseInt(amt);
+        }
+
+        document.getElementById('tdTotalQuantity').innerText = total_qty;
+
+        document.getElementById('tdNetAmount').innerText = total_amt;
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(total_qty);
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(total_amt);
+    }
+
+    if (j == 0) {
+
+        document.getElementById('tdTotalQuantity').innerText = 0;
+
+        document.getElementById('tdNetAmount').innerText = 0;
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
+
+        $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
+    }
+}
+
 function DeletePurchaseOrderRequestDetailsData(i) {
 
     debugger;
@@ -996,6 +1068,8 @@ function DeletePurchaseOrderRequestDetailsData(i) {
     $("#tblPurchaseOrderRequestItems").find("[id='PurchaseOrderRequestItemRow_" + i + "']").remove();
 
     ReArrangePurchaseOrderRequestDetailsData();
+
+    Reset_Detalis_After_Delete();
         
 }
 
@@ -1317,3 +1391,5 @@ function ReArrangePurchaseOrderRequestDetailsData() {
     });
 
 }
+
+

@@ -46,36 +46,27 @@
 
                     <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
-                        @*<div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
-
-                            <div class="btn-group">
-                                <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>*@
-                                @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
-                                @*<button type="reset" id="btnResetReceivable" class="btn btn-danger active">Reset</button>
-                            </div>
-
-                        </div>*@
-
-
                         <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
 
                             <div class="row">
 
-                                <div class="col-md-4">
+                               
+
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice no</span>
                                         <input type="text" class="form-control input-sm" name="Receivable.Sales_Invoice_No" id="txtInvoice_no" value="@Model.Receivable.Sales_Invoice_No" placeholder="Enter Invoice no" maxlength="10"/>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Customer name</span>
                                         <input type="text" class="form-control input-sm" name="Receivable.Customer_Name" id="txtCustomer_name" value="@Model.Receivable.Customer_Name" placeholder="Enter Customer name " maxlength="10" />
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment status</span>
                                         <select class="form-control" id="drpPayble_Status" name="Receivable.Payment_Status">
@@ -99,16 +90,7 @@
                                     </div>
                                 </div>
 
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
-
-                            <div class="row">
-
-
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
                                         <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
@@ -118,7 +100,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-2">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
                                         <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="dd-mm-yyyy">
@@ -128,15 +110,14 @@
                                     </div>
                                 </div>
 
-                                
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
+                                <div class="col-md-2">
+                                    <div class="form-group" style="margin-top: -6px;">
                                         <br />
                                         <br />
                                         <button type="button" id="btnSearchReceivable" class="btn btn-success active">Search</button>
-                                        <button type="button" id="btnPay" class="btn btn-danger active">Pay</button>
                                         <button type="reset" id="btnResetReceivable" class="btn btn-danger active">Reset</button>
+                                        <button type="button" id="btnPay" class="btn btn-primary active">Pay</button>
+                                        
                                     </div>
                                 </div>
 
@@ -145,10 +126,20 @@
 
                         </div>
 
+                        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                            <div class="row">
+
+                                
+
+                            </div>
+
+                        </div>
+
 
                         <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-                                        </div>
+                        </div>
 
                         <div class="col-md-12" style="padding: 0px;text-align:center;" id="divReceivablePager">
 

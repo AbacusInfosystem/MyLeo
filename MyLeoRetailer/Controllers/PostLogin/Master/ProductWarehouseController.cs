@@ -2,6 +2,7 @@
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -60,6 +61,17 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
 
             return Json(JsonConvert.SerializeObject(pViewModel));
+        }
+
+        public PartialViewResult Warehouse_Notifiation(ProductWarehouseViewModel pViewModel)
+        {
+
+            LoginInfo Cookies = new LoginInfo();
+            Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            pViewModel.List_product_warehouse = _purchaseinvoiceRepo.Warehouse_Notifiation(Cookies.Branch_Ids);
+
+            return PartialView("_Warehouse_Notifiation", pViewModel);
         }
 
     }

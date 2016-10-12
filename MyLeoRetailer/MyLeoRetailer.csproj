@@ -1150,7 +1150,9 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\PreLogin\Home\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Category\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />

@@ -733,6 +733,34 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
+        //Added by vinod mane on 10/10/2016
+        public List<SalesInvoiceInfo> Get_Gift_Voucher_Details_By_Id() //......
+        {
+
+            List<SalesInvoiceInfo> GiftVoucherDetails = new List<SalesInvoiceInfo>();
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            //sqlparam.Add(new SqlParameter("@Gift_Voucher_Id", Gift_Voucher_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Giftvoucher_Data_sp.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                SalesInvoiceInfo Sales = new SalesInvoiceInfo();
+
+                Sales.Gift_Voucher_Id = Convert.ToInt32(dr["Gift_Voucher_Id"]);
+
+                Sales.Gift_Voucher_No = Convert.ToString(dr["Gift_Voucher_No"]);
+
+                Sales.Gift_Voucher_Amount = Convert.ToDecimal(dr["Gift_Voucher_Amount"]);
+
+                GiftVoucherDetails.Add(Sales);
+
+            }
+            return GiftVoucherDetails;
+        }
+        //End
     }
 }
 

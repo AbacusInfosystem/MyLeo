@@ -37,7 +37,7 @@
                         {
                             //required: true,
                             number: true,
-                            QuantityCheck : true
+                            //QuantityCheck : true
                         },
                     "SaleOrderItemList[0].Discount_Percentage":
                         {

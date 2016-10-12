@@ -2,6 +2,7 @@
 using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.SalesInvoice;
 using MyLeoRetailerInfo.Vendor;
+
 using MyLeoRetailerInfo.Category;
 using MyLeoRetailerInfo.Brand;
 using MyLeoRetailerInfo.Tax;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+
 
 namespace MyLeoRetailer.Models
 {
@@ -32,9 +34,10 @@ namespace MyLeoRetailer.Models
 
             ReceivableItem = new List<Receivable>();
 
+            GiftVoucherDetails = new List<SalesInvoiceInfo>();//Added by vinod mane on 10/10/2016
 
 
-            //GiftVoucher = new List<Receivable>();
+          //GiftVoucher = new List<Receivable>();
 
             CreditNote = new  List<CreditNote>();
 
@@ -56,13 +59,19 @@ namespace MyLeoRetailer.Models
 
         public List<SalesInvoiceInfo> SalesInvoices { get; set; }
 
+        public List<SalesInvoiceInfo> GiftVoucherDetails { get; set; }//Added by vinod mane on 10/10/2016
+
         public LoginInfo Cookies { get; set; }
 
         public List<SaleOrderItems> SaleOrderItemList { get; set; }
 
         public List<Receivable> ReceivableItem { get; set; }
 
- 
+        //public List<ReceivableInfo> Receivables1
+        //{
+        //    get;
+        //    set;
+        //}
 
         //public List<Receivable> GiftVoucher { get; set; }
 

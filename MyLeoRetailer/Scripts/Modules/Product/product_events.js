@@ -1,5 +1,4 @@
-﻿
-
+﻿  
 $(function () {
     if ($("#hdnVendorId").val() != 0) {
         $("#dvVendor").find(".autocomplete-text").trigger("focusout");
@@ -19,7 +18,7 @@ $(function () {
     if ($("#hdn_ProductId").val() != 0) {
         $("#txtArticle_No").attr('readonly', true);
         $("#btnCancel").attr('disabled', true);
-        $("#btnProductMRP").show();
+        $("#btnProductMRP").show(); 
     }
 
     $("#btnProductSave").click(function () {
@@ -27,7 +26,7 @@ $(function () {
             if ($("#hdn_ProductId").val() == 0) {
                 $("#frmProduct").attr("action", "/Product/Insert_Product/");
             }
-            else {
+            else { 
                 $("#frmProduct").attr("action", "/Product/Update_Product/");
             }
             $('#frmProduct').attr("method", "POST");

@@ -12,37 +12,37 @@
 
             "PurchaseOrderRequest.Size_Group_Id": {
                 required: true
-            },
+            }//,
 
-            "PurchaseOrderRequest.Article_No": {
-                required: true
-            },
+            //"PurchaseOrderRequest.Article_No": {
+            //    required: true
+            //},
 
-            "PurchaseOrderRequest.Center_Size": {
-                required: true
-            },
+            //"PurchaseOrderRequest.Center_Size": {
+            //    required: true
+            //},
 
-            "PurchaseOrderRequest.Brand_Id": {
-                required: true
-            },
+            //"PurchaseOrderRequest.Brand_Id": {
+            //    required: true
+            //},
 
-            "PurchaseOrderRequest.Category_Id": {
-                required: true
-            },
+            //"PurchaseOrderRequest.Category_Id": {
+            //    required: true
+            //},
 
-            "PurchaseOrderRequest.SubCategory_Id": {
-                required: true
-            },
+            //"PurchaseOrderRequest.SubCategory_Id": {
+            //    required: true
+            //},
 
-            "PurchaseOrderRequest.Purchase_Price": {
-                digits: true,
-                required: true
-            },
+            //"PurchaseOrderRequest.Purchase_Price": {
+            //    digits: true,
+            //    required: true
+            //},
 
-            "PurchaseOrderRequest.Size_Difference": {
-                digits: true,
-                required: true
-            }
+            //"PurchaseOrderRequest.Size_Difference": {
+            //    digits: true,
+            //    required: true
+            //}
         },
         messages: {
 
@@ -87,7 +87,12 @@
             "PurchaseOrderRequest.Size_Difference": {
                 required: "Size difference is required.",
                 digits: "Enter only digits"
-            }
+            },
+
+            "records_Validation":{
+                    required: "Atleast one Record is required."
+                }
+
 
         }
     });

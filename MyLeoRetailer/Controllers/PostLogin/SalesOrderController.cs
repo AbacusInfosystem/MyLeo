@@ -23,6 +23,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ReceivableRepo rRepo;
 
+      
         public SalesOrderController()
         {
             siRepo = new SalesOrderRepo();
@@ -41,6 +42,8 @@ namespace MyLeoRetailer.Controllers.PostLogin
             siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
+
+            siViewModel.GiftVoucherDetails = siRepo.Get_Gift_Voucher_Details_By_Id(); //Added by vinod mane on 10/10/2016
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
