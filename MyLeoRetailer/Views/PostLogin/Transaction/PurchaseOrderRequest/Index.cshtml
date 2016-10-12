@@ -104,7 +104,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size group.</span>
-                        <select class="form-control select" id="drpSize_Group" name="PurchaseOrderRequest.Size_Group_Id" onchange="Show_Button()">
+                        <select class="form-control " id="drpSize_Group" name="PurchaseOrderRequest.Size_Group_Id" onchange="Show_Button()">
                             <option value="">Select Size Group</option>
                             @foreach (var item in Model.PurchaseOrderRequest.SizeGroups)
                             {
@@ -158,14 +158,14 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control select" id="drpArticle_No" name="PurchaseOrderRequest.Article_No">
+                        <select class="form-control " id="drpArticle_No" name="PurchaseOrderRequest.Article_No" >
                             <option value="">Select Article No.</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
-                        <select class="form-control select" id="drpCenter_Size" name="PurchaseOrderRequest.Center_Size">
+                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrderRequest.Center_Size">
                             <option value="">Select Center Size</option>
                         </select>
                     </div>
@@ -178,7 +178,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
-                        <select class="form-control select" id="drpBrand" name="PurchaseOrderRequest.Brand_Id">
+                        <select class="form-control " id="drpBrand" name="PurchaseOrderRequest.Brand_Id">
                             <option value="">Select Brand</option>
                         </select>
                     </div>
@@ -197,7 +197,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
-                        <select class="form-control select" id="drpCategory" name="PurchaseOrderRequest.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
+                        <select class="form-control " id="drpCategory" name="PurchaseOrderRequest.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
                             <option value="">Select Category</option>
                         </select>
                     </div>
@@ -214,7 +214,7 @@
                 <div class="block">
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Subcategory.</span>
-                        <select class="form-control select" id="drpSubCategory" name="PurchaseOrderRequest.SubCategory_Id">
+                        <select class="form-control " id="drpSubCategory" name="PurchaseOrderRequest.SubCategory_Id">
                             <option value="">Select Sub Category</option>
                         </select>
                     </div>
@@ -317,7 +317,7 @@
 
                     </tbody>
                 </table>
-                <input type="hidden" id="hdnrecords_Validation" name="records_Validation" />
+                <label id="hdnrecords_Validation" style="display:none"><span style="color:red" id="records_Message"></span></label>
             </div>
         </div>
 

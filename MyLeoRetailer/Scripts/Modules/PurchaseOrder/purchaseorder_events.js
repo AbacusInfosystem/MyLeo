@@ -23,27 +23,36 @@
         $('#textSize_Difference').rules("remove");
         $('#drpSubCategory').rules("remove");
 
-      
+
+        if ($("#hdnTotalQuantity").val() == 0)
+        {
+            $("#hdnrecords_Validation").show();
+            $("#records_Message").html("Minimum one Record  is Required");
+            
+        }
+        else {
+            $("#hdnrecords_Validation").hide();
+            $("#records_Message").html(" ");
+        }
 
         $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function ()
         {
             
             if ($(this).text() == 0) {
-                $("#hdnrecords_Validation").rules("add", "required");
-
-                return false;
+                $("#records_Message").html("Minimum one size is Required");
+                $("#hdnrecords_Validation").show();
             }
             else {
-                $('#hdnrecords_Validation').rules("remove");
+                $("#hdnrecords_Validation").hide();
+                $("#records_Message").html(" ");
             }
 
         });
-
-     
-
         //Added by aditya [10102016] END
 
         if ($("#frmPurchaseOrder").valid()) {
+            if ($("#records_Message").html == " ") //added by aditya
+            { 
             if ($("[name='PurchaseOrder.Purchase_Order_Id']").val() == "" || $("[name='PurchaseOrder.Purchase_Order_Id']").val() == 0) {
                 $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Insert_Purchase_Order");
             }
@@ -52,7 +61,7 @@
             }
             $('#frmPurchaseOrder').attr("method", "POST");
             $('#frmPurchaseOrder').submit();
-
+            }
         }
     });
 
