@@ -1050,7 +1050,6 @@
     <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_method.js" />
-    <Content Include="Scripts\Modules\ProductWarehouse\product_warehouse_notification.js" />
     <Content Include="Scripts\Modules\Product\product_events.js" />
     <Content Include="Scripts\Modules\Product\product_methods.js" />
     <Content Include="Scripts\Modules\Product\_ProductPricing\product_price_events.js" />
@@ -1151,7 +1150,9 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\PreLogin\Home\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Category\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
@@ -1233,7 +1234,7 @@
     </Content>
     <Content Include="Views\PostLogin\Master\ProductDispatch\Dispatched_Product_Listing.cshtml" />
     <Content Include="Views\PostLogin\Report\Inventory\Search.cshtml" />
-    <Content Include="Views\PostLogin\Master\ProductWarehouse\_Warehouse_Notifiation.cshtml" />
+    <Content Include="Views\PostLogin\Report\Sales\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1293,7 +1294,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58691/</IISUrl>
+          <IISUrl>http://localhost:49653/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
