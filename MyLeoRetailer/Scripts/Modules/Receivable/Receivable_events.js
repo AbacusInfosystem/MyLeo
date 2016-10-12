@@ -7,17 +7,17 @@ $(document).ready(function () {
     if ($("#hdnPayment_Status1").val() == 1)
     {
         $("#btnSavePay").hide();
-        $(".btn_edit").hide();
+        //$(".btn_edit").hide();
         //$("#edit-payable-details").parents('tr').find(".btn_edit").hide();
         $("#btnResetPay").hide();
     }
 
-    $("#btnSearchReceivable").click(function () {
+    //$("#btnSearchReceivable").click(function () {
 
-        $("#frmReceivable").attr("action", "/Receivable/Get_Receivable");
+    //    $("#frmReceivable").attr("action", "/Receivable/Get_Receivable");
 
-        $("#frmReceivable").submit();
-    });
+    //    $("#frmReceivable").submit();
+    //});
 
 
     $('[name = "Receivable.Sales_Credit_Note_Id"]').change(function () {

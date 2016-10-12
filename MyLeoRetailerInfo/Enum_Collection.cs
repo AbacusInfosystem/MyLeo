@@ -60,7 +60,7 @@ namespace MyLeoRetailerInfo
     {
         Paid = 1,
         UnPaid = 2,
-        Partially_Paid=3,
+        PartiallyPaid=3,
     }
 
     public enum PayablePaymentMode
@@ -77,7 +77,7 @@ namespace MyLeoRetailerInfo
     {
         Paid = 1,
         UnPaid = 2,
-        Partially_Paid=3,
+        PartiallyPaid=3,
     }
 
 }
