@@ -330,6 +330,10 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Gift_Voucher,
             sp_Check_Quantity,
 
+            //Sales_Report
+
+            sp_Get_Sales_Report,
+
         //Sales Return
 
         sp_Insert_Sales_Return,

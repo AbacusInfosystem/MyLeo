@@ -336,8 +336,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(check, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult Check_Quantity(int Quantity)
+        public JsonResult Check_Quantity(int Quantity, int Branch_Id, string SKU_Code)
         {
 
             bool check = false;
@@ -345,13 +344,15 @@ namespace MyLeoRetailer.Controllers.PostLogin
             SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
             try
             {
-                check = siRepo.Check_Quantity(Quantity);
+                check = siRepo.Check_Quantity(Quantity, Branch_Id, SKU_Code);
             }
 
             catch (Exception ex)
             {
                 // throw ex;
+
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
                 Logger.Error("SalesOrder Controller - Check_Mobile_No  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
@@ -378,6 +379,32 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return View("Search1", siViewModel);
         }
         //End
+
+        public JsonResult Get_Sales_Report(SalesInvoiceViewModel siViewModel)
+        {
+            try
+            {
+                Pagination_Info pager = new Pagination_Info();
+
+                pager = siViewModel.Grid_Detail.Pager;
+
+                siViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount", "Sales_Invoice_Id"); // Set grid info for front end listing
+
+                siViewModel.Grid_Detail.Records = siRepo.Get_Sales_Report(siViewModel.Filter); // Call repo method 
+
+                Set_Pagination(pager, siViewModel.Grid_Detail); // set pagination for grid
+
+                siViewModel.Grid_Detail.Pager = pager;
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("SalesOrder Controller - Get_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
+            }
+
+            return Json(JsonConvert.SerializeObject(siViewModel));
+        }
 
     }
 }
