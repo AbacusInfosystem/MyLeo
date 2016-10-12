@@ -22,35 +22,52 @@
 
 function Get_Sales_Return_Items_By_SKU_Code(i) {
 
-    $.ajax({
+    debugger;
 
-        url: "/SalesReturn/Get_Sales_Return_Items_By_SKU_Code",
+    alert();
 
-        data: { SKU_Code: $("[name='SaleReturnItemList[" + i + "].SKU_Code']").val() },
+        $.ajax({
 
-        method: 'GET',
+            url: "/SalesReturn/Get_Sales_Return_Items_By_SKU_Code",
 
-        async: false,
+            data: {
 
-        success: function (data)
-        {
+                Sales_Invoice_Id: $("[name='SaleReturnItemList[" + i + "].Sales_Invoice_Id']").val(),
 
-            $('#textArticle_No_' + i).val(data.Article_No);
+                SKU_Code: $("[name='SaleReturnItemList[" + i + "].SKU_Code']").val()
+                
+            },
 
-            $('#textBrand_' + i).val(data.Brand);
+            method: 'GET',
 
-            $('#textCategory_' + i).val(data.Category);
+            async: false,
 
-            $('#textSub_Category_' + i).val(data.SubCategory);
+            success: function (data) {
 
-            $('#textSize_Name_' + i).val(data.Size_Name);
+                $('#textArticle_No_' + i).val(data.Article_No);
 
-            $('#textColour_Name_' + i).val(data.Colour_Name);
+                $('#textBrand_' + i).val(data.Brand);
 
-            $('#textMRP_Price_' + i).val(data.MRP_Price);
+                $('#textCategory_' + i).val(data.Category);
 
-        }
-    });
+                $('#textSub_Category_' + i).val(data.SubCategory);
+
+                $('#textSize_Name_' + i).val(data.Size_Name);
+
+                $('#textColour_Name_' + i).val(data.Colour_Name);
+
+                $('#textMRP_Price_' + i).val(data.MRP_Price);
+
+                $('#textQuantity_' + i).val(data.Quantity);
+
+                $('#textDiscount_Percentage_' + i).val(data.Discount_Percentage);
+
+                CalculateTotal();
+
+
+            }
+        });
+    
 }
 
 function AddSalesReturnDetails(i)
@@ -303,6 +320,7 @@ function ReArrangeSalesReturnDetailsData()
 function Add_Validation(i) {
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+
     $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Required", } });
 
 }
