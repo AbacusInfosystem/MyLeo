@@ -40,6 +40,8 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
             $("[name='Payable.Credit_Note_Amount']").val(obj.Payable.Credit_Note_Amount);
 
+            Calculate_Fianl_Amount_Using_Credit_Note_Amount();
+
         }
     });
 }

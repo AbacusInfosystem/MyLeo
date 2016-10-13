@@ -1,7 +1,9 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -49,6 +51,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Pay", rViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Receivable_Management_Access)]
         public ActionResult Index(ReceivableViewModel rViewModel)
         {
             try
@@ -99,6 +102,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         }
 
+        [AuthorizeUserAttribute(AppFunction.Receivable_Management_View)]
         public ActionResult Get_Receivable_Details_By_Id(ReceivableViewModel rViewModel)
         {
 
@@ -156,6 +160,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(rViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Receivable_Management_Create)]
         public JsonResult Insert_Receivable(ReceivableViewModel rViewModel)
         {
             //Set_Date_Session(rViewModel.GiftVoucher);
@@ -165,6 +170,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             rViewModel.Receivable.Created_By = rViewModel.Cookies.User_Id;
 
             rViewModel.Receivable.Created_On = DateTime.Now;
+
+            rViewModel.Receivable.Updated_By = rViewModel.Cookies.User_Id;
 
             try
             {
@@ -193,6 +200,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(rViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Receivable_Management_Edit)]
         public JsonResult Update_Receivable(ReceivableViewModel rViewModel)
         {
 

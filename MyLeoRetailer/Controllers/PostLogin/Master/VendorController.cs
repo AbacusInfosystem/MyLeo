@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
@@ -66,6 +67,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", vViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_Access)]
         public ActionResult Search(VendorViewModel vViewModel)
         {
 
@@ -123,6 +125,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(vViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_Create)]
         public ActionResult Insert_Vendor(VendorViewModel vViewModel)
         {
 
@@ -147,6 +150,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_View)]
         public ActionResult Get_Vendor_By_Id(VendorViewModel vViewModel)
         {
 
@@ -172,6 +176,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Index(vViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_Edit)]
         public ActionResult Update_Vendor(VendorViewModel vViewModel)
         {
 

@@ -23,8 +23,8 @@
                 <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purhase order Management</h2>
             </div>
             <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "PurchaseOrder")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+            </div>
         </div>
-    </div>
 
 </div>
 <!-- END CONTENT FRAME -->
@@ -44,22 +44,22 @@
                     <h4 style="margin-top: 0px;">Primary information.</h4>
 
                     @*<div class="form-group">
-                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order No.</span>
-                            <input type="text" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_No" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Purchase_Order_No" placeholder="Enter purchase order no." />
-                        </div>*@
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order No.</span>
+                        <input type="text" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_No" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Purchase_Order_No" placeholder="Enter purchase order no." />
+                    </div>*@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order Date.</span>
                         @if (Model.PurchaseOrder.Purchase_Order_Date != DateTime.MinValue)
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@Model.PurchaseOrder.Purchase_Order_Date.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -77,7 +77,7 @@
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Start supply date.</span>
                         @if (Model.PurchaseOrder.Start_Supply_Date != DateTime.MinValue)
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@Model.PurchaseOrder.Start_Supply_Date.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -85,7 +85,7 @@
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -96,15 +96,15 @@
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Stop supply date.</span>
                         @if (Model.PurchaseOrder.Stop_Supply_Date != DateTime.MinValue)
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@Model.PurchaseOrder.Stop_Supply_Date.ToShortDateString()" />
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@Model.PurchaseOrder.Stop_Supply_Date.ToShortDateString()"  />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
 
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -222,7 +222,7 @@
                 </div>
             </div>
         </div>
-
+              
         <div class="row">
             <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
 
@@ -257,9 +257,9 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-success active" id="btnAddSizesPurchaseOrder" disabled>Add Sizes</button>
                     </div>
-
+                   
                 </div>
-
+               
             </div>
 
             <div class="col-md-3" hidden>
@@ -270,7 +270,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Color.</span>
                         <select class="form-control select" id="drpColor" name="PurchaseOrder.Colour_Id">
-                            <option value="">Select Color</option>
+                            <option value="">Select Color</option>                           
                         </select>
                     </div>
 
@@ -431,7 +431,7 @@
                             <td style="width:80px;"></td>
                             <td style="width:80px;"></td>
                             <td style="width:80px;"></td>
-                            <td style="width:60px;"></td>
+                            <td style="width:60px;"></td>                  
                             <td style="text-align:right; width:100px;">Total quantity.</td>
                             <td style="width:100px;">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;" id="tdTotalQuantity">0</span>
@@ -452,10 +452,10 @@
 
                 <label id="hdnrecords_Validation" style="display:none"><span style="color:red" id="records_Message"></span></label>
             </div>
-
+          
         </div>
 
-
+      
 
         <div class="row">
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); padding-left: 20px; padding-right: 0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">

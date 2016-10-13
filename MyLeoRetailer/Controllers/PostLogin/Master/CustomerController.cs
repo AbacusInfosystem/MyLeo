@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
@@ -82,8 +83,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 Logger.Error("Customer Controller - Index " + ex.ToString());//Added by vinod mane on 06/10/2016
             }
             return View("Index", cViewModel);
-        }        
+        }
 
+        [AuthorizeUserAttribute(AppFunction.Customer_Management_Access)]
         public ActionResult Search(CustomerViewModel cViewModel)
         {
             try
@@ -101,6 +103,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Search", cViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Customer_Management_View)]
         public ActionResult Get_Customer_By_Id(CustomerViewModel cViewModel)
         {
             try
@@ -131,6 +134,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(cViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Customer_Management_Create)]
         public ActionResult Insert_Customer(CustomerViewModel cViewModel, SalesInvoiceViewModel siViewModel)
         {
             try
@@ -165,6 +169,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         }
 
+        [AuthorizeUserAttribute(AppFunction.Customer_Management_Edit)]
         public ActionResult Update_Customer(CustomerViewModel cViewModel)
         {
             try

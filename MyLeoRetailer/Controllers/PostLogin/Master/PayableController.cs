@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyLeoRetailer.Filters;
+using MyLeoRetailerInfo.Common;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
@@ -21,6 +23,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             pRepo = new PayableRepo();
         }
 
+        //[AuthorizeUserAttribute(AppFunction.Payable_Management_Access)]
         public ActionResult Pay(PayableViewModel pViewModel)
         {
             PayableRepo pRepo = new PayableRepo();
@@ -45,6 +48,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Pay", pViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Payable_Management_Access)]
         public ActionResult Index(PayableViewModel pViewModel)
         {
             try
@@ -108,6 +112,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
  
         }
 
+        [AuthorizeUserAttribute(AppFunction.Payable_Management_View)]
         public ActionResult Get_Payable_Details_By_Id(PayableViewModel pViewModel)
         {
           
@@ -154,6 +159,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Payable_Management_Create)]
         public JsonResult Insert_Payable(PayableViewModel pViewModel)
         {
             pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
@@ -191,6 +197,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Payable_Management_Edit)]
         public JsonResult Update_Payable(PayableViewModel pViewModel)
         {
             pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");

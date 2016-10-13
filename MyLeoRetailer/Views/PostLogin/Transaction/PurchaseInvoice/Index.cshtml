@@ -56,14 +56,14 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice Date.</span>
                                     @if (Model.PurchaseInvoice.Purchase_Invoice_Date != DateTime.MinValue)
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Purchase_Invoice_Date" id="txtPurchase_Invoice_Date" value="@Model.PurchaseInvoice.Purchase_Invoice_Date.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Purchase_Invoice_Date" id="txtPurchase_Invoice_Date" value="@DateTime.Now.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
@@ -88,14 +88,14 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Challan Date.</span>
                                     @if (Model.PurchaseInvoice.Challan_Date != DateTime.MinValue)
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Challan_Date" id="txtChallan_Date" value="@Model.PurchaseInvoice.Challan_Date.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Challan_Date" id="txtChallan_Date" value="@DateTime.Now.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
@@ -171,14 +171,14 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Against Form Date.</span>
                                     @if (Model.PurchaseInvoice.Against_Form_Date != DateTime.MinValue)
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Against_Form_Date" id="txtAgainst_Form_Date" value="@Model.PurchaseInvoice.Against_Form_Date.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Against_Form_Date" id="txtAgainst_Form_Date" value="@DateTime.Now.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
@@ -211,14 +211,14 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Packing Date.</span>
                                     @if (Model.PurchaseInvoice.Purchase_Packing_Date != DateTime.MinValue)
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Purchase_Packing_Date" id="txtPurchase_Packing_Date" value="@Model.PurchaseInvoice.Purchase_Packing_Date.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Purchase_Packing_Date" id="txtPurchase_Packing_Date" value="@DateTime.Now.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
@@ -227,7 +227,7 @@
 
                                 @*<div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Packing Date.</span>
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                         <input type="text" class="form-control datepicker" name="PurchaseInvoice.Purchase_Packing_Date" id="txtPurchase_Packing_Date" value="@((Model.PurchaseInvoice.Purchase_Packing_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseInvoice.Purchase_Packing_Date.ToString("MM-dd-yyyy")))" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
@@ -518,14 +518,14 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment Due Date.</span>
                                     @if (Model.PurchaseInvoice.Payment_Due_Date != DateTime.MinValue)
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Payment_Due_Date" id="txtPayment_Due_Date" value="@Model.PurchaseInvoice.Payment_Due_Date.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Payment_Due_Date" id="txtPayment_Due_Date" value="@DateTime.Now.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
@@ -582,14 +582,14 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">LR Date.</span>
                                     @if (Model.PurchaseInvoice.Lr_Date != DateTime.MinValue)
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Lr_Date" id="txtLr_Date" value="@Model.PurchaseInvoice.Lr_Date.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     }
                                     else
                                     {
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                             <input type="text" class="form-control datepicker" name="PurchaseInvoice.Lr_Date" id="txtLr_Date" value="@DateTime.Now.ToShortDateString()" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
