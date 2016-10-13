@@ -1,7 +1,9 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -47,6 +49,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", aViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Alteration_Management_Access)]
         public ActionResult Search(AlterationViewModel aViewModel)
         {
             try
@@ -64,6 +67,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Search", aViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Alteration_Management_Create)]
         public ActionResult Insert_Alteration(AlterationViewModel aViewModel)
         {
             try
@@ -85,6 +89,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        [AuthorizeUserAttribute(AppFunction.Alteration_Management_Edit)]
         public ActionResult Update_Alteration(AlterationViewModel aViewModel)
         {
             try
@@ -144,6 +149,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(aViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Alteration_Management_View)]
         public ActionResult Get_Alteration_By_Id(AlterationViewModel aViewModel)
         {
             try

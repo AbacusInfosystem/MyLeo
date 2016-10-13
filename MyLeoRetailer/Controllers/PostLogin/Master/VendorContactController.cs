@@ -1,7 +1,9 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -15,7 +17,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
     public class VendorContactController : BaseController
     {
-
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_Access)]
         public ActionResult Search(VendorContactViewModel vcViewModel)
         {
             try
@@ -63,6 +65,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", vcViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_Create)]
         public ActionResult Insert_Vendor_Contact(VendorContactViewModel vcViewModel)
         {
             VendorContactRepo vcRepo = new VendorContactRepo();
@@ -87,6 +90,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_Edit)]
         public ActionResult Update_Vendor_Contact(VendorContactViewModel vcViewModel)
         {
             VendorContactRepo vcRepo = new VendorContactRepo();
@@ -148,6 +152,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(vcViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Vendor_Management_View)]
         public ActionResult Get_Vendor_Contact_By_Id(VendorContactViewModel vcViewModel)
         {
 
