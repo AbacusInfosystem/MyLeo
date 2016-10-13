@@ -1,5 +1,19 @@
 ﻿
+$(document).ready(function () {
+
+    //Added by vinod mane on 13/10/2016
+    if ($("#hdnVendorContact_Id").val() != 0) {
+
+        $("#btnCancel").attr('disabled', true);
+
+    }
+    //End
+
+});
+
 $(function () {
+
+    
 
     $("#btnSaveVendorContact").click(function () {
         if ($("#frmVendorContact").valid()) {

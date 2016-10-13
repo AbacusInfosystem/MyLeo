@@ -9,6 +9,14 @@
     //}
     //end
 
+    // Added by Vinod Mane on 13/10/2016
+    if ($("#hdn_CustomerID").val() != 0) {
+        
+        $("#btnCancel").attr('disabled', true);
+       
+    }
+    //End
+
     $("#btnSaveCustomer").click(function () {
 
         debugger;
