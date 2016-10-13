@@ -319,6 +319,30 @@ namespace MyLeoRetailerRepo
            return Balance_Amount;
        }
 
+       public decimal Get_Credit_Note_Amount(int Sales_Credit_Note_Id)
+       {
+
+           decimal creditnoteamount = 0;
+
+           List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+           sqlparam.Add(new SqlParameter("@Sales_Credit_Note_Id", Sales_Credit_Note_Id));
+
+           DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Get_Credit_Note_Details_By_Id_Sp1.ToString(), CommandType.StoredProcedure);
+
+           if (dt != null && dt.Rows.Count > 0)
+           {
+               foreach (DataRow dr in dt.Rows)
+               {
+                   if (!dr.IsNull("Credit_Note_Amount"))
+
+                       creditnoteamount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+               }
+           }
+
+           return creditnoteamount;
+       }
+
        public decimal Get_Paid_Amount(int Receivable_Id)
        {
 
@@ -446,6 +470,7 @@ namespace MyLeoRetailerRepo
 
        private List<SqlParameter> Set_Values_In_Receivable_Item(ReceivableInfo Receivable)
        {
+           decimal creditnoteamount = Get_Credit_Note_Amount(Receivable.Sales_Credit_Note_Id);
 
            List<SqlParameter> sqlParams = new List<SqlParameter>();
            //if (Receivable.Receivable_Item_Id != 0)
@@ -460,8 +485,6 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
            sqlParams.Add(new SqlParameter("@Card_Amount", Receivable.Card_Amount));
-           
-           //sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
 
            if (Receivable.Cheque_Date == DateTime.MinValue)
            {
@@ -472,6 +495,12 @@ namespace MyLeoRetailerRepo
                sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
            }
 
+           sqlParams.Add(new SqlParameter("@CreditNote_Amount", Receivable.Credit_Note_Amount));
+
+           decimal newcreditnoteamount = creditnoteamount - Receivable.Credit_Note_Amount;
+
+           sqlParams.Add(new SqlParameter("@Credit_Note_Amount", newcreditnoteamount));
+
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));
            sqlParams.Add(new SqlParameter("@Credit_Card_No", Receivable.Credit_Card_No));
@@ -480,6 +509,8 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
            sqlParams.Add(new SqlParameter("@Updated_By", Receivable.Updated_By));
            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
+           sqlParams.Add(new SqlParameter("@Updated_Date", DateTime.Now));
+           //sqlParams.Add(new SqlParameter("@Created_Date", DateTime.Now));
 
            return sqlParams;
        }
@@ -626,9 +657,9 @@ namespace MyLeoRetailerRepo
 
                Receivable.Credit_Note_Date.ToShortDateString();
 
-           if (!dr.IsNull("Credit_Note_Amount"))
+               if (!dr.IsNull("CreditNote_Amount"))
 
-               Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+                   Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["CreditNote_Amount"]);
 
            if (!dr.IsNull("Credit_Note_No"))
 
@@ -748,6 +779,8 @@ namespace MyLeoRetailerRepo
            }
            return Receivable;
        }
+
+      
 
      
     }

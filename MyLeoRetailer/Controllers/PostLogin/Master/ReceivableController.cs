@@ -171,6 +171,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             rViewModel.Receivable.Created_On = DateTime.Now;
 
+            rViewModel.Receivable.Updated_By = rViewModel.Cookies.User_Id;
+
             try
             {
 

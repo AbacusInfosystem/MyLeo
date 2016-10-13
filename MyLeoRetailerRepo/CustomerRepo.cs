@@ -250,7 +250,7 @@ namespace MyLeoRetailerRepo
                     Customer.Customer_Spouse_DOB = Convert.ToDateTime(dr["Customer_Spouse_DOB"]);
                 }
 
-                if (dr.IsNull("Customer_Spouse_DOB"))
+                if (dr.IsNull("Customer_Wedding_Anniversary"))
                 {
                     Customer.Customer_Wedding_Anniversary = DateTime.MinValue;
                 }

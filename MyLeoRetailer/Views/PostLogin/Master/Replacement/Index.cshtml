@@ -280,7 +280,7 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment Due Date.</span>
                                     <div class="input-group date" id="dp-2" data-date="" data-date-format="mm-dd-yyyy">
                                         <input type="text" class="form-control datepicker" name="Replacement.Payment_Due_Date" id="txtPayment_Due_Date" value="@((Model.Replacement.Payment_Due_Date == DateTime.MinValue ? "" : Model.Replacement.Payment_Due_Date.ToString("mm-dd-yyyy")))" />
-                                        @*<input type="text" class="form-control datepicker" name="Replacement.Payment_Due_Date" id="txtPayment_Due_Date" value="@((Model.Replacement.Payment_Due_Date == "" ? DateTime.Now.ToString("dd-MM-yyyy") : Model.Replacement.Payment_Due_Date))" />*@
+                                        @*<input type="text" class="form-control datepicker" name="Replacement.Payment_Due_Date" id="txtPayment_Due_Date" value="@((Model.Replacement.Payment_Due_Date == "" ? DateTime.Now.ToString("MM-dd-yyyy") : Model.Replacement.Payment_Due_Date))" />*@
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>

@@ -180,8 +180,8 @@
 
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice date</span>
 
-                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" id="dtpInvoice_Date" name="SalesInvoice.Invoice_Date" value="@((Model.SalesInvoice.Invoice_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Invoice_Date.ToString("dd-MM-yyyy")))" readonly />
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpInvoice_Date" name="SalesInvoice.Invoice_Date" value="@((Model.SalesInvoice.Invoice_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Invoice_Date.ToString("MM-dd-yyyy")))" readonly />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
 
@@ -319,7 +319,7 @@
                                             </td>
                                             <td>
                                                 @*<input class="form-control input-sm" type="text" name="SaleOrderItemList[0].SalesMan" id="textSalesMan_0" placeholder="SalesMan">*@
-                                                <div class="form-group auto-complete">
+                                                <div class="form-group auto-complete">  
                                                     <div class="input-group">
                                                         <input type="text" class="form-control invoice-filter autocomplete-text" name="SaleOrderItemList[0].SalesMan" style="width:80px" id="textSalesMan_0" placeholder="Enter SalesMan" value="" data-table="Employee" data-col="Employee_Id,Employee_Name" data-headernames="Employee" data-param="hdnEmployee_Id" data-field="Role_Id">
                                                         <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
@@ -474,8 +474,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                                        <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Payament_Date" value="@((Model.SalesInvoice.Payament_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
+                                        <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Payament_Date" value="@((Model.SalesInvoice.Payament_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Payament_Date.ToString("MM-dd-yyyy")))" readonly />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -522,8 +522,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
-                                        <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Cheque_Date" value="@((Model.SalesInvoice.Cheque_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Cheque_Date.ToString("dd-MM-yyyy")))" readonly />
+                                        <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Cheque_Date" value="@((Model.SalesInvoice.Cheque_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Cheque_Date.ToString("MM-dd-yyyy")))" readonly />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -579,8 +579,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
-                                        <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="dd-MM-yyyy">
-                                            <input type="text" class="form-control datepicker" id="dtpCreditNoteDate" name="SalesInvoice.Credit_Note_Date" value="@((Model.SalesInvoice.Credit_Note_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Credit_Note_Date.ToString("dd-MM-yyyy")))" readonly />
+                                        <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpCreditNoteDate" name="SalesInvoice.Credit_Note_Date" value="@((Model.SalesInvoice.Credit_Note_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Credit_Note_Date.ToString("MM-dd-yyyy")))" readonly />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>

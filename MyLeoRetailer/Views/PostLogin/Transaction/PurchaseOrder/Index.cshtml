@@ -52,14 +52,14 @@
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order Date.</span>
                         @if (Model.PurchaseOrder.Purchase_Order_Date != DateTime.MinValue)
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@Model.PurchaseOrder.Purchase_Order_Date.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -77,7 +77,7 @@
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Start supply date.</span>
                         @if (Model.PurchaseOrder.Start_Supply_Date != DateTime.MinValue)
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@Model.PurchaseOrder.Start_Supply_Date.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -85,7 +85,7 @@
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -96,7 +96,7 @@
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Stop supply date.</span>
                         @if (Model.PurchaseOrder.Stop_Supply_Date != DateTime.MinValue)
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@Model.PurchaseOrder.Stop_Supply_Date.ToShortDateString()"  />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -104,7 +104,7 @@
                         }
                         else
                         {
-                            <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                                 <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
@@ -264,7 +264,7 @@
 
             <div class="col-md-3" hidden>
 
-                <div class="block" >
+                <div class="block">
 
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
@@ -287,9 +287,10 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" >
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No">
                             <option value=" ">
-                            Select Article No.</option>
+                                Select Article No.
+                            </option>
                         </select>
                     </div>
 

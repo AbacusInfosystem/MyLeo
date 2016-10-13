@@ -214,8 +214,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat Effective Date</span>
-                                        <div class="input-group date" id="dtpVendor_Vat_Effective_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("dd-MM-yyyy")))" readonly placeholder="Enter Vat Effective Date" />
+                                        <div class="input-group date" id="dtpVendor_Vat_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Vat Effective Date" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -270,8 +270,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">CST Effective Date</span>
-                                        <div class="input-group date" id="dtpVendor_CST_Effective_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("dd-MM-yyyy")))" readonly placeholder="Enter CST Effective Date" />
+                                        <div class="input-group date" id="dtpVendor_CST_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM-dd-yyyy")))" readonly placeholder="Enter CST Effective Date" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -749,7 +749,7 @@
                                 <div class="btn-group">
                                     <button type="button" id="btnSaveVendor" class="btn btn-success active">Save</button>
                                     @*<button type="button" id="btnCancelVendor" class="btn btn-danger active">Cancel</button>*@
-                                    <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "Vendor")">Cancel </a>
+                                    <a class="btn btn-danger active" id="btnCancel" role="button" href="@Url.Action("Search", "Vendor")">Cancel </a>
                                 </div>
 
                             </div>
