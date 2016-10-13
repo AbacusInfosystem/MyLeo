@@ -238,9 +238,9 @@
     <Compile Include="Models\Report\InventoryViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseInvoiceViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseOrderRequestViewModel.cs" />
-    <Compile Include="Models\Transaction\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\ProductWarehouseViewModel.cs" />
     <Compile Include="Models\ReceivableViewModel.cs" />
+    <Compile Include="Models\Transaction\PurchaseOrderViewModel.cs" />
     <Compile Include="Models\Transaction\PurchaseReturnViewModel.cs" />
     <Compile Include="Models\ReplacementViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
