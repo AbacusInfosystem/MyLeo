@@ -1,4 +1,17 @@
 ﻿
+
+$(document).ready(function () {
+
+    //Added by vinod mane on 13/10/2016
+    if ($("#hdn_EmployeeId").val() != 0) {
+
+        $("#btnCancel").attr('disabled', true);
+
+    }
+    //End
+
+});
+
 $(function ()
 {
  //addition by swapnali | Date:19/09/2016
