@@ -281,10 +281,10 @@ function AddSalesOrderDetails(i)
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:150px' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SKU_Code_" + i + "' data-param='hdf_Branch_Id' data-field='Branch_Id'/>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:150px' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SKU_Code_" + i + "' data-param='hdnBranchID' data-field='Branch_Id'/>";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
-    tblHtml += "<input type='hidden' id='hdf_Branch_Id' value='@Model.SalesInvoice.Branch_IDS' />";
+    //tblHtml += "<input type='hidden' id='hdnBranchID_" + i + "' value='' name='SalesInvoice.Branch_Id' />";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='SaleOrderItemList[" + i + "].SKU_Code' class='auto-complete-label' />";
     tblHtml += "</div>";
     tblHtml += "</div>";

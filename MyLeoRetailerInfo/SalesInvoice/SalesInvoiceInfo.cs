@@ -19,6 +19,8 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        public int Customer_Id { get; set; }
 
+       public string Logo_Path { get; set; }
+
        //START
 
        public string Mobile { get; set; }

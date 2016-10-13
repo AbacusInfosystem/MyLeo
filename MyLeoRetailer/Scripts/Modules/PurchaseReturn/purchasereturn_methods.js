@@ -196,6 +196,7 @@ function AddPurchaseReturnDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input class='form-control input-sm' type='hidden' name='' id='hdnQuantity_" + i + "' value='' /> ";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -241,7 +242,7 @@ function CalculateTax() {
     var intPart = Math.floor(roundedDecimal);
 
     var fracPart = parseFloat((roundedDecimal - intPart), 2);
-
+    
     //Added by vinod mane on 12/10/2016
     if (fracPart >= 0.50) {
         netAmt_temp += 1;
@@ -269,17 +270,7 @@ function CalculateDiscount() {
 
     var netAmt = 0;
 
-   // var discount = parseFloat($("#textDiscountPercentage_0").val());
-
-    //Added by vinod mane on 12/10/2016
-    var discount = $("#textDiscountPercentage_0").val();
-
-    if (discount == "" || discount == "NaN") {
-        discount = 0;
-        $("#textDiscountPercentage_0").val(0);
-    }
-    //End
-
+    var discount = parseFloat($("#textDiscountPercentage_0").val());
     var sumtotalAmount = parseFloat($("#textTotalAmount_0").val());
 
     var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((sumtotalAmount * discount) / 100);
@@ -305,23 +296,16 @@ function CalculateTotal() {
 
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++) {
-           // var Qty = parseFloat($("#tblPurchaseReturnItems").find('[id="textQuantity_' + i + '"]').val());
+            if ($('[id="textQuantity_' + i + '"]').val() != 0 && $('[id="textQuantity_' + i + '"]').val() != '') {
 
-            //Added by vinod mane on 12/10/2016
-            var Qty = $("#tblPurchaseReturnItems").find('[id="textQuantity_' + i + '"]').val();
-
-            if (Qty == "" || Qty == "NaN") {
-                Qty = 1;
-                $('#textQuantity_' + i).val(1);
-            }
-            //End
+                var Qty = parseFloat($("#tblPurchaseReturnItems").find('[id="textQuantity_' + i + '"]').val());
             var WSR = parseFloat($("#tblPurchaseReturnItems").find('[id="textWSR_Price_' + i + '"]').val());
             var Amount = parseFloat(WSR * Qty);
             $("#tblPurchaseReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
 
             sumQuantity = sumQuantity + Qty;
             sumWSRAmount = sumWSRAmount + Amount;
-
+            }
         }
     }
 
@@ -333,11 +317,43 @@ function CalculateTotal() {
 
 function Add_Validation(i) {
    
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
 
     $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
 
     $("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
+
+
+    jQuery.validator.addMethod("QuantityCheck", function (value, element) {
+
+        var result = true;
+        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
+        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
+
+        if (EnterQty != "" && EnterQty != 0) {
+            $.ajax({
+
+                url: '/PurchaseReturn/Get_Quantity_By_SKU_Code',
+                data:
+                    {
+                        SKU_Code: $("[name='PurchaseReturn.PurchaseReturnItems[" + i + "].SKU_Code']").val(),
+
+                        Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val(),
+
+                        Quantity: EnterQty
+                    },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == false) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Quantity less than Invoice Quantity.");
 
 }
 
@@ -449,6 +465,7 @@ function ReArrangePurchaseReturnDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Quantity");
+                $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {
