@@ -35,9 +35,9 @@
                     //    },
                     "SaleOrderItemList[0].Quantity":
                         {
-                            //required: true,
+                            required: true,
                             number: true,
-                            //QuantityCheck : true
+                            QuantityCheck : true
                         },
                     "SaleOrderItemList[0].Discount_Percentage":
                         {
@@ -146,7 +146,7 @@ jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
     debugger;
 
-    alert();
+    alert(this.id);
 
     var result = true;
 
