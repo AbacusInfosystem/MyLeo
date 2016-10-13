@@ -626,7 +626,9 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Paid_Amount", salesInvoice.Paid_Amount));
                 sqlParams.Add(new SqlParameter("@Cash_Amount", salesInvoice.Cash_Amount));
                 sqlParams.Add(new SqlParameter("@Cheque_Amount", salesInvoice.Cheque_Amount));
-                sqlParams.Add(new SqlParameter("@Card_Amount", salesInvoice.Cheque_Amount));
+                sqlParams.Add(new SqlParameter("@Card_Amount", salesInvoice.Card_Amount));
+                //sqlParams.Add(new SqlParameter("@Credit_Note_Amount", salesInvoice.Credit_Note_Amount));
+                
 
                 if (salesInvoice.Cheque_Date == DateTime.MinValue)
                 {

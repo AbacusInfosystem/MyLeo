@@ -44,7 +44,7 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
             $("[name='Receivable.Credit_Note_Date']").val(obj.Receivable.Credit_Note_Date.substring(0, 10));
 
-            Get_Balance_Amount_Using_Credit_Note_Amount();
+            //Get_Balance_Amount_Using_Credit_Note_Amount();
 
             //$("#drpCredit_Note_No").html("");
 
@@ -189,6 +189,7 @@ function Get_Balance_Amount_Using_Credit_Note_Amount() {
         $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
     }
 
+    document.getElementById("txtCredit_Note_Amount").disabled = true;
 }
 
 function Get_Balance_Amount_Using_Gift_Voucher_Amount() {
@@ -271,6 +272,8 @@ function Save_Receivable_Data() {
 
 		        Sales_Credit_Note_Id: $("[name='Receivable.Sales_Credit_Note_Id']").val(),
 
+		        Credit_Note_Amount: $("[name='Receivable.Credit_Note_Amount']").val(),
+
 		        Gift_Voucher_Id: $("[name='Receivable.Gift_Voucher_Id']").val(),
 
 		        Sales_Invoice_Id: $("[name='Receivable.Sales_Invoice_Id']").val(),
@@ -341,10 +344,11 @@ function Save_Receivable_Data() {
 
             Friendly_Messages(obj);
 
-            Cancle();
+            //Cancle();
 
             document.getElementById("btnResetPay").disabled = false;
 
+            document.getElementById("txtCredit_Note_Amount").disabled = false;
             //Friendly_Messages(obj);
 
         }
@@ -470,13 +474,13 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cash_Amount == null ? "" : data.Receivables[i].Cash_Amount;
+        htmlText += data.Receivables[i].Cash_Amount == 0 ? "" : data.Receivables[i].Cash_Amount;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cheque_Amount == null ? "" : data.Receivables[i].Cheque_Amount;
+        htmlText += data.Receivables[i].Cheque_Amount == 0 ? "" : data.Receivables[i].Cheque_Amount;
 
         htmlText += "</td>";
 
@@ -543,7 +547,7 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Gift_Voucher_Amount == null ? "" : data.Receivables[i].Gift_Voucher_Amount;
+        htmlText += data.Receivables[i].Gift_Voucher_Amount == 0 ? "" : data.Receivables[i].Gift_Voucher_Amount;
 
         htmlText += "</td>";
 
@@ -807,5 +811,11 @@ function BalanceAmount() {
     $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
 
 
+
+}
+
+function Cancle() {
+
+    document.getElementById("txtCredit_Note_Amount").disabled = false;
 
 }

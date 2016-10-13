@@ -43,4 +43,9 @@ $(document).ready(function () {
 
     });
 
+    $("#btnResetReceivable").click(function () {
+
+        document.getElementById("txtCredit_Note_Amount").disabled = false;
+    });
+
 });

@@ -28,12 +28,13 @@ $(document).ready(function () {
     $("#frmTax").validate({
         rules: {
             "Tax.Tax_Name": { required: true, validate_Tax: true },
-            "Tax.Tax_Value": {number: true },
+            "Tax.Tax_Value": { required: true, number: true },
         },
         messages: {
 
             "Tax.Tax_Name": { required: "Tax Name is required." },
-            "Tax.Tax_Value": { number: "Enter Only Digits" },
+          
+            "Tax.Tax_Value": { required: "Tax value is required" ,number: "Enter Only Digits" },
 
         }
     });

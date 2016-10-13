@@ -143,7 +143,7 @@ function AddSalesReturnDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Quantity' name='SaleReturnItemList[" + i + "].Quantity' value='1' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Quantity' name='SaleReturnItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";

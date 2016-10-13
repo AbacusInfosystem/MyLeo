@@ -68,7 +68,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">First name.</span>
                         <input type="text" class="form-control" placeholder="Enter customer first name." name="Customer.First_Name" value="@Model.Customer.First_Name" id="txtFirstName" maxlength="48" />
-                        <input type="hidden" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id" />
+                        <input type="hidden" id="hdn_CustomerID" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id" />
                         <input type="hidden" name="Customer.Customer_Name" value="@Model.Customer.Customer_Name" />
                         <input type="hidden" id="hdnFirstName" value="@Model.Customer.Customer_Name" />@*Added by vinod mane on 28/09/2016*@
                         @*<input type="hidden" name="Customer.IsActive" value="@Model.Customer.IsActive" />*@ @*Commented By Vinod Mane on 23/09/2016*@
@@ -279,7 +279,7 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-success active" id="btnSaveCustomer">Save</button>
                     @*<button type="reset" class="btn btn-danger active" id="btnCancleCustomer">Cancel</button>*@
-                    <a class="btn btn-danger active" role="button" href="@Url.Action("Search", "Customer")">Cancel </a>@*Added by vinod Mane on 22/09/2016*@
+                    <a class="btn btn-danger active" id="btnCancel" role="button" href="@Url.Action("Search", "Customer")">Cancel </a>@*Added by vinod Mane on 22/09/2016*@
                 </div> 
                
                     
