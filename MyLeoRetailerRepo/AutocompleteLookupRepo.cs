@@ -68,7 +68,7 @@ namespace MyLeoRetailerRepo
                 {
                     if (fieldName == "Purchase_Order_Id")
                     {
-                        strquery = "select distinct PO.Purchase_Order_Id, PSM.SKU_Code ";
+                        strquery = "select distinct POIS.Quantity, PSM.SKU_Code ";
                         strquery += "from Product_SKU_Mapping PSM, Purchase_Order PO, Purchase_Order_Item POI,Purchase_Order_Item_Sizes POIS, Product P ";
                         strquery += "where ";
                         strquery += "PO.Purchase_Order_Id=POI.Purchase_Order_Id ";
@@ -79,7 +79,7 @@ namespace MyLeoRetailerRepo
                         strquery += "AND POIS.Size_Id=PSM.Size_Id ";
                         strquery += "AND P.Product_Id=PSM.Product_Id  ";                        
                         strquery += "AND PO.Purchase_Order_Id= @Purchase_Order_Id ";
-                        strquery += "group by POI.Purchase_Order_Id, POI.Purchase_Order_Item_Id, PSM.SKU_Code, PO.Purchase_Order_Id ";
+                        strquery += "group by POI.Purchase_Order_Id, POI.Purchase_Order_Item_Id, PSM.SKU_Code, POIS.Quantity ";
                         paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));                      
                     }
                 }
