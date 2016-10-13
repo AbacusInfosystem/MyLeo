@@ -51,6 +51,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("Index", prViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Purchase_Return_Request_Management_Access)]
         public ActionResult Search(PurchaseReturnRequestViewModel prViewModel)
         {
             try
@@ -183,6 +184,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(prViewModel.PurchaseReturnRequest, JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Purchase_Return_Request_Management_View)]
         public ActionResult Get_Purchase_Return_Request_Details_By_Id(PurchaseReturnRequestViewModel prrViewModel)
         {
             try
@@ -201,7 +203,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("ViewPurchaseReturnRequest", prrViewModel);
         }
 
-
+        [AuthorizeUserAttribute(AppFunction.Purchase_Return_Request_Management_Create)]
         public ActionResult Save_Purchase_Return_Request(PurchaseReturnRequestViewModel prViewModel)
         {
             try

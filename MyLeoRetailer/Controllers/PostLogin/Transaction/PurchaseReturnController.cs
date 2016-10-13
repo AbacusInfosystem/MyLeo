@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models.Transaction;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
@@ -67,6 +68,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("Index", prViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Access)]
         public ActionResult Search(PurchaseReturnViewModel prViewModel)
         {
             try
@@ -248,6 +250,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return PartialView("_Update_GR_No", prViewModel);
         }
 
+         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Create)]
         public ActionResult Insert_Purchase_Return(PurchaseReturnViewModel prViewModel)
         {
             try
@@ -289,6 +292,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return RedirectToAction("Search", prViewModel);
         }
 
+         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Edit)]
         public JsonResult Update_Purchase_Return(PurchaseReturnViewModel prViewModel)
         {
             try
@@ -343,6 +347,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("View_Purchase_Return_Details", prViewModel);
         }
 
+         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_View)]
         public ActionResult Get_Purchase_Return_Details_By_Id(PurchaseReturnViewModel prViewModel)
         {
             bool CheckFlag = false;

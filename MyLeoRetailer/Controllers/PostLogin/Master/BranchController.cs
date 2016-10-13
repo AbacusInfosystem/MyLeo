@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
@@ -43,6 +44,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", bViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Branch_Management_Access)]
         public ActionResult Search(BranchViewModel bViewModel)
         {
             try
@@ -60,6 +62,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Search", bViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Branch_Management_View)]
         public ActionResult Get_Branch_By_Id(BranchViewModel bViewModel)
         {
             try
@@ -81,20 +84,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", bViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Branch_Management_Create)]
         public ActionResult Insert_Branch(BranchViewModel bViewModel)
         {
             try
             {
                 Set_Date_Session(bViewModel.Branch);
 
-                bViewModel.Branch.Branch_ID = bRepo.Insert_Branch(bViewModel.Branch);                
-                
+                bViewModel.Branch.Branch_ID = bRepo.Insert_Branch(bViewModel.Branch);
+
                 //bRepo.Insert_Near_Branch_Location(bViewModel.Branch);
 
                 //bRepo.Insert_Far_Branch_Location(bViewModel.Branch);
 
                 bViewModel.Branch.LocationDetailsList.ForEach(a => a.Branch_Id = bViewModel.Branch.Branch_ID);
-                
+
                 foreach (var item in bViewModel.Branch.LocationDetailsList)
                 {
                     Set_Date_Session(item);
@@ -102,7 +106,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 bRepo.Save_Branch_Location(bViewModel.Branch);
 
-                bViewModel.FriendlyMessages.Add(MessageStore.Get("BRNCH01"));                
+                bViewModel.FriendlyMessages.Add(MessageStore.Get("BRNCH01"));
             }
             catch (Exception ex)
             {
@@ -116,6 +120,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        [AuthorizeUserAttribute(AppFunction.Branch_Management_Edit)]
         public ActionResult Update_Branch(BranchViewModel bViewModel)
         {
             try
@@ -153,7 +158,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public JsonResult Get_Branchs(BranchViewModel bViewModel)
-        {  
+        {
             string filter = "";
 
             string dataOperator = "";
