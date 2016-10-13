@@ -218,6 +218,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
                 Logger.Error("SalesOrder Controller - Get_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
