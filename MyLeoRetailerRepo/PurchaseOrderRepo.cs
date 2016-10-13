@@ -193,7 +193,7 @@ namespace MyLeoRetailerRepo
                     }
                     else
                     {
-                        Request_Ids[0] = item.Request_Ids;
+                        Request_Dates[0] = item.Request_Dates;
                     }
 
 

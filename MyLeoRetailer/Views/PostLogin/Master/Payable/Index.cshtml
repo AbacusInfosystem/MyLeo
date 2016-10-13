@@ -78,8 +78,8 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
-                                <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control datepicker" name="Payable.From_Date" value="@((Model.Payable.From_Date == DateTime.MinValue ? "" : Model.Payable.From_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                    <input type="text" class="form-control datepicker" name="Payable.From_Date" value="@((Model.Payable.From_Date == DateTime.MinValue ? "" : Model.Payable.From_Date.ToString("MM-dd-yyyy")))" reado readonly />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>
@@ -88,8 +88,8 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
-                                <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="dd-mm-yyyy">
-                                    <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("dd-MM-yyyy")))" reado readonly />
+                                <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                    <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("MM-dd-yyyy")))" reado readonly />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>

@@ -56,8 +56,8 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Retirn Date.</span>
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                        <input type="text" class="form-control datepicker" name="PurchaseReturn.Purchase_Return_Date" id="txtPurchase_Return_Date" value="@((Model.PurchaseReturn.Purchase_Return_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.PurchaseReturn.Purchase_Return_Date.ToString("dd-MM-yyyy")))" />
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                        <input type="text" class="form-control datepicker" name="PurchaseReturn.Purchase_Return_Date" id="txtPurchase_Return_Date" value="@((Model.PurchaseReturn.Purchase_Return_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseReturn.Purchase_Return_Date.ToString("MM-dd-yyyy")))" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
@@ -391,8 +391,8 @@
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">LR Date.</span>
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="dd-mm-yyyy">
-                                        <input type="text" class="form-control datepicker" name="PurchaseReturn.Lr_Date" id="txtLr_Date" value="@((Model.PurchaseReturn.Lr_Date == DateTime.MinValue ? DateTime.Now.ToString("dd-MM-yyyy") : Model.PurchaseReturn.Lr_Date.ToString("dd-MM-yyyy")))" />
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                        <input type="text" class="form-control datepicker" name="PurchaseReturn.Lr_Date" id="txtLr_Date" value="@((Model.PurchaseReturn.Lr_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseReturn.Lr_Date.ToString("MM-dd-yyyy")))" />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
