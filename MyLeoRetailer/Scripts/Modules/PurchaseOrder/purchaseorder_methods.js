@@ -529,7 +529,7 @@ function Get_Consolidate_Purchase_Orders(value) {
 
                     tblHtml += "<td>";
                     tblHtml += "<div class='btn-group'>";
-                    tblHtml += "<button type='button' id='continue-order-details' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
+                    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
                     tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
                     tblHtml += "</div>";
                     tblHtml += "</td>";
@@ -616,7 +616,8 @@ function Set_Sub_Category_Drp_Id(value) {
 
 }
 
-function Get_Sizes() {
+function Get_Sizes()
+{
 
     var Size_Group_Id = $("#drpSize_Group").val();
 
@@ -1247,7 +1248,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details' class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
     tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
@@ -1419,7 +1420,7 @@ function CalculateRowQuantity(i) {
        
     //Added by aditya [10102016] Start
     if ($("#hdnTotalQuantity").val() != 0) {
-        document.getElementById("continue-order-details"+i+"").disabled = false;
+        document.getElementById("continue-order-details" + i).disabled = false;
     }
     //Added by aditya [10102016] Start
        
@@ -1474,7 +1475,14 @@ function Add_Validation(i) {
 }
 
 function Show_Button() {
-    document.getElementById("btnAddSizesPurchaseOrder").disabled = false;
+
+    if ($("#drpSize_Group").val() != '') {
+
+        document.getElementById("btnAddSizesPurchaseOrder").disabled = false;
+    }
+    else {
+        document.getElementById("btnAddSizesPurchaseOrder").disabled = true;
+    }
 }
 
 function Reset_Details() {
@@ -1871,8 +1879,8 @@ function ReArrangePurchaseOrderDetailsData() {
             }
 
                       
-            if ($(newTR).find("[id='continue-order-details']").length > 0) {
-                $(newTR).find("[id='continue-order-details']").attr("onclick", "ContinuePurchaseOrderDetailsData(" + i + ")");
+            if ($(newTR).find("[id^='continue-order-details']").length > 0) {
+                $(newTR).find("[id^='continue-order-details']").attr("onclick", "ContinuePurchaseOrderDetailsData(" + i + ")");
             }
            
             if ($(newTR).find("[id='delete-order-details']").length > 0) {
@@ -2027,6 +2035,4 @@ function Clear_Br_Cat_SubCat() {
     $("#drpSubCategory").val('');  
 
 }
-
-
 //End

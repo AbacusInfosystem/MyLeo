@@ -20,13 +20,33 @@
 
         $('#btnPrint').click(function ()
         {
-            $('#Div_Print').printThis();
+            //$('#Div_Print').printThis(); //commented by aditya
+
+            var divToPrint = document.getElementById('Div_Print');
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+            newWin.document.close();
+
+            setTimeout(function () { newWin.close(); }, 10);
         });
 
     });
 
-</script>
 
+</script>
+<style>
+img{
+        display: block;
+        position: relative;
+        left: 50%;
+    }
+    
+    </style>
 <div class="content-wrapper">
 
     <div class="container-fluid">
@@ -55,9 +75,7 @@
                                     </div><!-- /.col -->
 
                                     <div class="col-md-3 invoice-col">
-                                        <div class="form-group">
-
-                                        </div>
+                                        <img src="@Model.SalesInvoice.Logo_Path" width="42" height="42" >
                                     </div><!-- /.col -->
 
                                     <div class="col-md-5 invoice-col" style="text-align:right">
@@ -143,7 +161,7 @@
                                     <div class="col-xs-12 table-responsive">
                                         <table class="table table-bordered">
                                             <thead>
-                                                <tr>                                                  
+                                                <tr>
                                                     <th width="10%">SKU Code</th>
                                                     <th width="10%">Article No</th>
                                                     <th width="10%">Quantity</th>
@@ -160,7 +178,7 @@
 
                                             @foreach (var item in Model.SaleOrderItemList)
                                             {
-                                                <tr id=@("SItem"+item.Sales_Invoice_Id.ToString())>                                                    
+                                                <tr id=@("SItem"+item.Sales_Invoice_Id.ToString())>
 
                                                     <td>@item.SKU_Code</td>
 
@@ -172,18 +190,18 @@
 
                                                     <td>@item.Category</td>
 
-                                                    <td>@item.SubCategory</td>    
-                                                    
-                                                    <td>@item.Size_Name</td>    
-                                                    
-                                                    <td>@item.Colour_Name</td>    
+                                                    <td>@item.SubCategory</td>
+
+                                                    <td>@item.Size_Name</td>
+
+                                                    <td>@item.Colour_Name</td>
 
                                                     <td>@item.MRP_Price</td>
-                                                    
-                                                    <td>@item.Amount</td>    
-                                                    
-                                                    <td>@item.SalesMan</td>                                                                                                                                             
-                                                    
+
+                                                    <td>@item.Amount</td>
+
+                                                    <td>@item.SalesMan</td>
+
                                                 </tr>
                                             }
 
@@ -192,14 +210,14 @@
                                                     <tr>
                                                         <th colspan="9" style="text-align: right;"> Gross Amount : </th>
                                                         <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Gross_Amount</th>
-                                                        
+
                                                     </tr>
-                                                    
+
                                                      <tr>
                                                         <th colspan="9" style="text-align: right;"> Total Discount Amount : </th>
                                                          <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Total_Discount_Amount</th>
                                                     </tr>
-                                                    
+
                                                      <tr>
                                                         <th colspan="9" style="text-align: right;"> Net Amount : </th>
                                                          <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Net_Amount</th>

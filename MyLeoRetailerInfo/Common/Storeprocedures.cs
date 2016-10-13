@@ -378,6 +378,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Purchase_Return_Request_Item,
         sp_Get_Purchase_Return_Requests,
             sp_Get_Purchase_Return_Request_Details,
+            sp_Get_Purchase_Invoice_Items_Quantity_By_SKU_Code,
 
         #endregion
 

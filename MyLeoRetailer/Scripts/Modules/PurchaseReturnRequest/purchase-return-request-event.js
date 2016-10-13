@@ -16,13 +16,12 @@
 
         if ($("#frmPurchaseReturnRequest").valid()) {
             
-            if ($('#tblPurchaseReturnRequestItems tbody tr').length > 0)
-            {
+            if ($('#tblPurchaseReturnRequestItems tbody tr').length > 0) {
                 
-                $("#frmPurchaseReturnRequest").attr("action", "/purchase-return-request/save-purchase-return-request");
-                $('#frmPurchaseReturnRequest').attr("method", "POST");
-                $('#frmPurchaseReturnRequest').submit();
-               
+                       $("#frmPurchaseReturnRequest").attr("action", "/purchase-return-request/save-purchase-return-request");
+                       $('#frmPurchaseReturnRequest').attr("method", "POST");
+                       $('#frmPurchaseReturnRequest').submit();
+                    
             }
             
         }

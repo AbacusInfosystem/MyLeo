@@ -24,9 +24,9 @@
             $("#records_Message").html(" ");
         }
 
-        $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function () {
+        $("#frmPurchaseOrderRequest").find('[id^="textTotal_Quantity_"]').each(function () {
             if ($(this).text() == 0) {
-                $("#records_Message").html("Minimum one size is Required");
+                $("#records_Message").html("Size quantity can not be Zero.");
                 $("#hdnrecords_Validation").show();
             }
             else {
@@ -36,14 +36,14 @@
         });
 
         if ($("#frmPurchaseOrderRequest").valid()) {
-            if ($("#records_Message").html == " ") 
+            if ($("#records_Message")[0].innerText == " ") //added by aditya
             {
-                if ($("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == "" || $("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == 0) {
-                    $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Insert_Purchase_Order_Request");
-                    $('#frmPurchaseOrderRequest').attr("method", "POST");
-                    $('#frmPurchaseOrderRequest').submit();
-                }
+            if ($("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == "" || $("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == 0) {
+                $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Insert_Purchase_Order_Request");
+                $('#frmPurchaseOrderRequest').attr("method", "POST");
+                $('#frmPurchaseOrderRequest').submit();
             }
+        }
         }
     });
     
