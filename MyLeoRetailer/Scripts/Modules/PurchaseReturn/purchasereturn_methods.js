@@ -196,6 +196,7 @@ function AddPurchaseReturnDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input class='form-control input-sm' type='hidden' name='' id='hdnQuantity_" + i + "' value='' /> ";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -316,11 +317,43 @@ function CalculateTotal() {
 
 function Add_Validation(i) {
    
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
 
     $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
 
     $("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
+
+
+    jQuery.validator.addMethod("QuantityCheck", function (value, element) {
+
+        var result = true;
+        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
+        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
+
+        if (EnterQty != "" && EnterQty != 0) {
+            $.ajax({
+
+                url: '/PurchaseReturn/Get_Quantity_By_SKU_Code',
+                data:
+                    {
+                        SKU_Code: $("[name='PurchaseReturn.PurchaseReturnItems[" + i + "].SKU_Code']").val(),
+
+                        Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val(),
+
+                        Quantity: EnterQty
+                    },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == false) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Quantity less than Invoice Quantity.");
 
 }
 
@@ -432,6 +465,7 @@ function ReArrangePurchaseReturnDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Quantity");
+                $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {

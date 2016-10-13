@@ -156,8 +156,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 check = _prRepo.Get_Quantity_By_SKU_Code(SKU_Code, Purchase_Invoice_Id, Quantity);
             }
             catch (Exception ex)
-            { 
-                Logger.Error("PurchaseReturnRequestController - Get_Purchase_Return_Item_By_SKU_Code : " + ex.ToString());
+            {
+                Logger.Error("PurchaseReturnRequestController - Get_Quantity_By_SKU_Code : " + ex.ToString());
             } 
             return Json(check, JsonRequestBehavior.AllowGet);
         }
