@@ -20,6 +20,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
     {
         public PurchaseReturnRepo _purchaseReturnRepo;
 
+        public PurchaseReturnRequestRepo _purchaseReturnRequestRepo;
+
         public PurchaseInvoiceRepo _purchaseinvoiceRepo;
 
         public PurchaseOrderRepo _purchaseorderRepo;
@@ -30,6 +32,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public PurchaseReturnController()
         {
             _purchaseReturnRepo = new PurchaseReturnRepo();
+
+            _purchaseReturnRequestRepo = new PurchaseReturnRequestRepo();
 
             _purchaseinvoiceRepo = new PurchaseInvoiceRepo();
 
@@ -205,10 +209,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             {
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                Logger.Error("PurchaseReturn Controller - Get_Purchase_Return_Items_By_Vendor_And_PO :" + ex.ToString());
+                Logger.Error("PurchaseReturnController - Get_Purchase_Return_Items_By_Vendor_And_PO :" + ex.ToString());
             }
                            
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult Get_Quantity_By_SKU_Code(string SKU_Code, int Purchase_Invoice_Id, int Quantity)
+        {
+            bool check = false;
+            try
+            {
+                check = _purchaseReturnRequestRepo.Get_Quantity_By_SKU_Code(SKU_Code, Purchase_Invoice_Id, Quantity);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("PurchaseReturnController - Get_Quantity_By_SKU_Code : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
         }
 
 

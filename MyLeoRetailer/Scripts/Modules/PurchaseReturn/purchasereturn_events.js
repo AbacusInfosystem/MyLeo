@@ -1,13 +1,11 @@
 ﻿$(document).ready(function () {
 
+    Add_Validation(0);
+
     $('#txtPurchase_Return_Date').datepicker({});
 
     $('#txtLr_Date').datepicker({});
 
-});
-
-
-$(function () {
 
     $("#btnSavePurchaseReturn").click(function () {
         if ($("#frmPurchaseReturn").valid()) {

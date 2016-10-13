@@ -1,6 +1,11 @@
 ﻿$(document).ready(function () {
 
-  
+  //Added by vinod mane on 13/10/2016
+    if ($("#hdf_Vendor_Id").val() != 0) {
+
+        $("#btnCancel").attr('disabled', true);
+    }
+    //end
 
     $('#dtpVendor_Vat_Effective_Date').datepicker({});
 
@@ -34,7 +39,8 @@
 
 $(function () {
 
- 
+    
+
     $("#btnSaveVendor").click(function () {
 
         //if ($("#frmVendor").valid())
