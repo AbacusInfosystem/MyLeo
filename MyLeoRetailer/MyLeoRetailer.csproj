@@ -1188,14 +1188,10 @@
     <Content Include="Views\PostLogin\Master\Product\_ProductPrizing.cshtml" />
     <Content Include="Views\PostLogin\Master\Challan\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Employee\ChangeBranch.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Search.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Print.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Search.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Search.cshtml" />
-    <Content Include="Views\PostLogin\Master\PurchaseOrder\PrintableView.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
@@ -1217,7 +1213,6 @@
     <Content Include="Views\PostLogin\Master\Replacement\Search.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\Search.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseInvoice\View.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrderRequest\View.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\View_Purchase_Return_Details.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturnRequest\ViewPurchaseReturnRequest.cshtml" />
@@ -1234,6 +1229,10 @@
     <Content Include="Views\PostLogin\Master\ProductDispatch\Dispatched_Product_Listing.cshtml" />
     <Content Include="Views\PostLogin\Report\Inventory\Search.cshtml" />
     <Content Include="Views\PostLogin\Report\Sales\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Search.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Print.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
