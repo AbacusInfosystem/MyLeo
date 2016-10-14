@@ -34,5 +34,10 @@ $(function () {
                 $("#btnProductMRP").show();
                 $("#btnEdit").show();
             }
-        }); 
+        });
+
+    //Added By Vinod Mane on 14/10/2016
+        $(document).on("change", "#hdnArticle_No", function () {
+            Get_Products();
+        });
 });

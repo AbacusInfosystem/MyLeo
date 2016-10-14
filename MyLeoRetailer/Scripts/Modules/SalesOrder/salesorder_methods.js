@@ -258,7 +258,7 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
 
 function AddSalesOrderDetails(i) 
 {
-    alert(i);
+    //alert(i);
 
     var html = '';
     

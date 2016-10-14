@@ -110,7 +110,7 @@ $(function ()
 
         //$("#frmSalesOrder").validate().cancelSubmit = false;
 
-        alert($("#hdnCreateCustomerFlag").val());
+       // alert($("#hdnCreateCustomerFlag").val());
 
         //$('#txtInvoice_No').removeClass("login-error");
         //$('#txtInvoice_No').rules("remove");
