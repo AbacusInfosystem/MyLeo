@@ -97,7 +97,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">CN amount</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Credit_Note_Amount" id="txtCN_amount" value="@(Model.Payable.Credit_Note_Amount == 0 ? "" : Model.Payable.Credit_Note_Amount.ToString())" onfocusout="javascript: Calculate_Fianl_Amount_Using_Credit_Note_Amount();" placeholder="Credit Note Amount" readonly />
+                            <input type="text" class="form-control input-sm" name="Payable.Credit_Note_Amount" id="txtCN_amount" value="@(Model.Payable.Credit_Note_Amount == 0 ? "" : Model.Payable.Credit_Note_Amount.ToString())" @*onfocusout="javascript: Calculate_Fianl_Amount_Using_Credit_Note_Amount();"*@ placeholder="Credit Note Amount" readonly />
                         </div>
                     </div>
                  
@@ -111,7 +111,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount amount</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Discount_Amount" id="txtDiscount_amount" value="@(Model.Payable.Discount_Amount == 0 ? "" : Model.Payable.Discount_Amount.ToString())" placeholder="Discount Amount" />
+                            <input type="text" class="form-control input-sm" name="Payable.Discount_Amount" id="txtDiscount_amount" value="@(Model.Payable.Discount_Amount)" placeholder="Discount Amount" />
                         </div>
                     </div>
 
@@ -194,7 +194,7 @@
                     <div id="divPaidAmount" style="display:none" class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount</span>
-                            <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@(Model.Payable.Paid_Amount == 0 ? "" : Model.Payable.Paid_Amount.ToString())" onfocusout="javascript: FinalAmount();" placeholder=" Enter Paid amount" />
+                            <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@(Model.Payable.Paid_Amount)" onfocusout="javascript: FinalAmount();" placeholder=" Enter Paid amount" />
                         </div>
                     </div>
                 </div>

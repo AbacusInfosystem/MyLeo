@@ -215,6 +215,10 @@ function Get_Credit_Note_Amount_By_Id(id) {
                 var dd1 = new Date(parseInt(data[0].Credit_Note_Date.replace('/Date(', '')));
                 $('#dtpCreditNoteDate').val(dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString());
 
+                $("[name='SalesInvoice.Credit_Note_Amount']").focus();
+
+                $("[name='SalesInvoice.Credit_Note_Amount']").blur();
+
             }
 
         }
@@ -251,6 +255,10 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
             $("[name='SalesInvoice.Gift_Voucher_Amount']").val(obj.SalesInvoice.Gift_Voucher_Amount);
 
             $("[name='SalesInvoice.Gift_Voucher_No']").val(obj.SalesInvoice.Gift_Voucher_No);
+
+            $("[name='SalesInvoice.Gift_Voucher_Amount']").focus();
+
+            $("[name='SalesInvoice.Gift_Voucher_Amount']").blur();
 
         }
     });

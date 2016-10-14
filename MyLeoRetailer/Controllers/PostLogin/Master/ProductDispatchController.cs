@@ -199,5 +199,45 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
            return RedirectToAction("Dispatched_Product_Listing");
         }
 
+        public ActionResult Reject_Product_Dispatch(ProductDispatchViewModel pViewModel)
+        {
+            TransactionScope scope = new TransactionScope();
+            try
+            {
+                using (scope)
+                {
+                    Set_Date_Session(pViewModel.product_Dispatch);
+
+                    pRepo.Reject_Product_Dispatch(pViewModel.List_product_Dispatch, pViewModel.product_Dispatch);
+
+                    pViewModel.FriendlyMessages.Add(MessageStore.Get("PD03"));
+
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("ProductDispatch Controller - Reject_Product_Dispatch : " + ex.ToString());
+
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                scope.Dispose();
+
+            }
+
+            TempData["pViewModel"] = pViewModel;
+
+            return RedirectToAction("Dispatched_Product_Listing");
+        }
+
+        public JsonResult Get_Product_Quantity_Warehouse(string sku)
+        {
+            var quantity = 0;
+
+            quantity = pRepo.Get_Product_Quantity_Warehouse(sku);
+
+            return Json(quantity, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
