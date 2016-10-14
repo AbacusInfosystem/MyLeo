@@ -43,7 +43,33 @@
                         {
                             //required: true,
                             number: true
-                        }
+                        },
+                    "SalesInvoice.Payament_Date": {
+                        required: true
+                    },
+
+                    "SalesInvoice.Cheque_Amount": {
+                        digits: true,
+                        checkBalanceamount: true
+                    },
+
+                    "SalesInvoice.Cash_Amount": {
+                        digits: true,
+                        checkBalanceamount: true
+                    },
+
+                    "SalesInvoice.Card_Amount": {
+                        digits: true,
+                        checkBalanceamount: true
+                    },
+
+                    "SalesInvoice.Credit_Note_Amount": {
+                        checkBalanceamount: true
+                    },
+                    "SalesInvoice.Gift_Voucher_Amount": {
+                        checkBalanceamount: true
+
+                    },
                 },
 
             messages: {
@@ -88,6 +114,22 @@
                         required: "Required field",
                         number: "Only numbers"
                     },
+                "SalesInvoice.Payament_Date": {
+                    required: "Payament Date is required."
+
+                },
+
+                "SalesInvoice.Cheque_Amount": {
+                    digits: "Enter only Digits."
+                },
+
+                "SalesInvoice.Cash_Amount": {
+                    digits: "Enter only Digits"
+                },
+
+                "SalesInvoice.Card_Amount": {
+                    digits: "Enter only Digits"
+                }
                
             }
         });
@@ -172,5 +214,30 @@ jQuery.validator.addMethod("QuantityCheck", function (value, element) {
     return result;
 
 }, "Quantity does not exists.");
+
+
+jQuery.validator.addMethod("checkBalanceamount", function (value, element) {
+
+  
+    var result = true;
+    var bal_amt = parseFloat($("#textTotalAmount").val());
+    var paid_amt = parseFloat($("#txtPaid_Amount").val());
+    var total = parseInt($("#txtCash_amount").val()) + parseInt($("#txtCheque_Amount").val()) + parseInt($("#txtCredit_Note_Amount").val()) + parseInt($("#txtCard_Amount").val()) + parseInt($("#txtGift_Voucher_Amount").val());
+
+
+
+    if (bal_amt != "" && bal_amt != 0) {
+
+        if (bal_amt >= total) {
+            result = true;
+            calculate();
+        }
+        else {
+            result = false;
+        }
+    }
+    return result;
+
+}, "Entered amount is greater than balance amount.");
 
 

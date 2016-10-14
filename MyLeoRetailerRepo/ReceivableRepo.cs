@@ -495,11 +495,11 @@ namespace MyLeoRetailerRepo
                sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
            }
 
-           sqlParams.Add(new SqlParameter("@CreditNote_Amount", Receivable.Credit_Note_Amount));
+               sqlParams.Add(new SqlParameter("@CreditNote_Amount", Receivable.Credit_Note_Amount));
 
-           decimal newcreditnoteamount = creditnoteamount - Receivable.Credit_Note_Amount;
+               decimal newcreditnoteamount = creditnoteamount - Receivable.Credit_Note_Amount;
 
-           sqlParams.Add(new SqlParameter("@Credit_Note_Amount", newcreditnoteamount));
+               sqlParams.Add(new SqlParameter("@Credit_Note_Amount", newcreditnoteamount));
 
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));

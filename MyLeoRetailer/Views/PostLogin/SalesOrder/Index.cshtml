@@ -492,7 +492,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" onblur="javascript: CalculatePaidAmt();" maxlength="10"/>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" @*onchange="javascript: CalculatePaidAmt();"*@ maxlength="10"/>
                                     </div>
                                 </div>
 
@@ -515,7 +515,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_Amount" id="txtCheque_Amount" value="@Model.SalesInvoice.Cheque_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Enter Cheque Amount " maxlength="10"/>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_Amount" id="txtCheque_Amount" value="@Model.SalesInvoice.Cheque_Amount" @*onchange="javascript: CalculatePaidAmt();"*@ placeholder="Enter Cheque Amount " maxlength="10" />
                                     </div>
                                 </div>
 
@@ -570,7 +570,7 @@
                                 <div id="divPaidAmount" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@Model.SalesInvoice.Credit_Note_Amount" onblur="javascript: CalculatePaidAmt();" placeholder=" Enter Paid amount" maxlength="20"/>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@Model.SalesInvoice.Credit_Note_Amount" @*onchange="javascript: CalculatePaidAmt();"*@ placeholder=" Enter Paid amount" maxlength="20" />
                                     </div>
                                 </div>
 
@@ -605,7 +605,7 @@
                                 <div id="divCreditcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Card Amount</span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Card_Amount" id="txtCard_Amount" value="@Model.SalesInvoice.Card_Amount" onblur="javascript: CalculatePaidAmt();" placeholder="Card Amount" maxlength="10"/>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Card_Amount" id="txtCard_Amount" value="@Model.SalesInvoice.Card_Amount" @*onchange="javascript: CalculatePaidAmt();"*@ placeholder="Card Amount" maxlength="10" />
                                     </div>
                                 </div>
 
@@ -646,7 +646,7 @@
                                 <div id="divDebitcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" onblur="javascript: CalculatePaidAmt();" value="@Model.SalesInvoice.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" maxlength="20"/>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" @*onblur="javascript: CalculatePaidAmt();"*@ value="@Model.SalesInvoice.Gift_Voucher_Amount" placeholder="Enter Gift Voucher Amount" maxlength="20" />
                                     </div>
                                 </div>
 
@@ -663,7 +663,7 @@
                                 <div id="divDebitcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
-                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Paid_Amount" id="txtPaid_Amount" onblur="javascript: CalculateBalAmt();" value="@Model.SalesInvoice.Paid_Amount" placeholder="Paid Amount" maxlength="10"/>
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Paid_Amount" id="txtPaid_Amount" onchange="javascript: CalculateBalAmt();" value="@Model.SalesInvoice.Paid_Amount" placeholder="Paid Amount" maxlength="10" />
                                     </div>
                                 </div>
 
