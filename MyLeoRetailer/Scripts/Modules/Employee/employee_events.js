@@ -66,11 +66,9 @@ $(function ()
 		}
 	}); 
 	 
-    $("#btnReset").click(function () {
+  
 
-        ResetForm();
-
-    });
+   
 	 
     $("#chkSwitch").find('span').click(function () {
         $('[name="Employee.Is_Online"]').trigger("change");

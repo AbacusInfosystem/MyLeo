@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
@@ -162,6 +163,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(JsonConvert.SerializeObject(siViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Sales_Order_Management_Access)]
         public ActionResult Search(SalesInvoiceViewModel siViewModel)
         {
 
@@ -225,6 +227,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(JsonConvert.SerializeObject(siViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Sales_Order_Management_Create)]
         public ActionResult Insert_SalesOrder(SalesInvoiceViewModel siViewModel)
         {
             //string arr [] ;
@@ -289,6 +292,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return View("SalesInvoiceView", siViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Sales_Order_Management_View)]
         public ActionResult Get_SalesOrder_By_Id(SalesInvoiceViewModel siViewModel)
         {
             bool CheckFlag = false;

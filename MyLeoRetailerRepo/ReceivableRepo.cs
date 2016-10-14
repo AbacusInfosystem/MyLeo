@@ -407,33 +407,39 @@ namespace MyLeoRetailerRepo
                sqlParams.Add(new SqlParameter("@Branch_ID", 0));
            }
 
-           if (Receivable.Receivable_Item_Id != 0)
-           {
-               decimal Balance_Amount1 = Get_Balance_Amount(Receivable.Sales_Invoice_Id);
+           Receivable.Balance_Amount = Receivable.Balance_Amount - Receivable.Paid_Amount;
 
-               decimal Paid_Amount1 = Get_Paid_Amount(Receivable.Receivable_Id);
+           //Balance_Amount = Get_Balance_Amount(Receivable.Sales_Invoice_Id);
 
-               Balance_Amount = Balance_Amount1 + Paid_Amount1;
-           }
-           else
-           {
-               Balance_Amount = Get_Balance_Amount(Receivable.Sales_Invoice_Id);
-           }
+           //Total_Balance_Amount = Balance_Amount - Receivable.Paid_Amount;
 
-           if (Balance_Amount > 0)
-           {
+           //if (Receivable.Receivable_Item_Id != 0)
+           //{
+           //    decimal Balance_Amount1 = Get_Balance_Amount(Receivable.Sales_Invoice_Id);
 
-               Total_Balance_Amount = Balance_Amount - Receivable.Paid_Amount;
+           //    decimal Paid_Amount1 = Get_Paid_Amount(Receivable.Receivable_Id);
 
-           }
+           //    Balance_Amount = Balance_Amount1 + Paid_Amount1;
+           //}
+           //else
+           //{
+           //    Balance_Amount = Get_Balance_Amount(Receivable.Sales_Invoice_Id);
+           //}
 
-           else
-           {
+           //if (Balance_Amount > 0)
+           //{
 
-               Total_Balance_Amount = Receivable.Net_Amount - Receivable.Paid_Amount;
-           }
+           //    Total_Balance_Amount = Balance_Amount - Receivable.Paid_Amount;
 
-           Receivable.Balance_Amount = Total_Balance_Amount;
+           //}
+
+           //else
+           //{
+
+           //    Total_Balance_Amount = Receivable.Net_Amount - Receivable.Paid_Amount;
+           //}
+
+           //Receivable.Balance_Amount = Total_Balance_Amount;
 
            sqlParams.Add(new SqlParameter("@Balance_Amount", Receivable.Balance_Amount));
 

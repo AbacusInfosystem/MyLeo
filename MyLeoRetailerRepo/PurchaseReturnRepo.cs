@@ -513,6 +513,26 @@ namespace MyLeoRetailerRepo
 
             return purchaseReturnItem;
         }
+                 
+
+        //public bool Get_Quantity_By_SKU_Code(string SKU_Code, int Purchase_Invoice_Id, int Quantity)
+        //{
+        //    bool check = false;
+        //    List<SqlParameter> parameters = new List<SqlParameter>();
+
+        //    parameters.Add(new SqlParameter("@SKU_Code", SKU_Code));
+        //    parameters.Add(new SqlParameter("@Purchase_Invoice_Id", Purchase_Invoice_Id));
+        //    parameters.Add(new SqlParameter("@Quantity", Quantity));
+
+        //    DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Return_Request_Quantity_By_SKU_Code.ToString(), CommandType.StoredProcedure);
+            
+        //    if (dt != null && dt.Rows.Count > 0)
+        //    {
+        //        check = Convert.ToBoolean(dt.Rows[0]["Quantity"]);
+
+        //    }
+        //    return check;
+        //}
 
         //Added by vinod mane on 30/09/2016
 

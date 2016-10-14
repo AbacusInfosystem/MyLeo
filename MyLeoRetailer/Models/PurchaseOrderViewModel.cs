@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyLeoRetailer.Models.Transaction
+namespace MyLeoRetailer.Models
 {
     public class PurchaseOrderViewModel : IGridInfo, IQueryInfo
     {

@@ -69,6 +69,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Search", eViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Create)]
         public ActionResult Insert_Employee(EmployeeViewModel eViewModel)
         {
             try
@@ -99,6 +100,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        [AuthorizeUserAttribute(AppFunction.Employee_Management_Edit)]
         public ActionResult Update_Employee(EmployeeViewModel eViewModel)
         {
             try

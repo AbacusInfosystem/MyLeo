@@ -1,5 +1,9 @@
 ﻿function Get_Vendor_Tax_Details_By_Id(value) {
 
+    $('#tblPurchaseReturnItems tbody tr').remove();
+
+    AddPurchaseReturnDetails();
+
     $.ajax({
 
         url: "/PurchaseReturn/Get_Vendor_Details_By_Id",
@@ -316,13 +320,12 @@ function CalculateTotal() {
 }
 
 function Add_Validation(i) {
-   
-    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
 
-    $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+    //$("#frmPurchaseReturn").validate();
 
-    $("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
 
+    $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
@@ -336,11 +339,7 @@ function Add_Validation(i) {
                 url: '/PurchaseReturn/Get_Quantity_By_SKU_Code',
                 data:
                     {
-                        SKU_Code: $("[name='PurchaseReturn.PurchaseReturnItems[" + i + "].SKU_Code']").val(),
-
-                        Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val(),
-
-                        Quantity: EnterQty
+                        SKU_Code: $("[name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code']").val(), Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val(), Quantity: EnterQty
                     },
                 method: 'GET',
                 async: false,
@@ -510,6 +509,7 @@ function Get_Purchase_Return_Items()
         }
     });
 
+    
 }
 
 function Bind_Purchase_Return_Items_Data(data)
@@ -601,5 +601,13 @@ function Bind_Purchase_Return_Items_Data(data)
 
         CalculateTotal();
 
+        var x = $("#tblPurchaseReturnItems").find('[id^="PurchaseReturnItemRow_"]').size();
+
+        if (parseInt(x) == 0) {
+
+            Add_Validation(0);
+
+        }
+        
     }
 }
