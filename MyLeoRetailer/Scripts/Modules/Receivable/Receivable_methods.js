@@ -44,30 +44,13 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
             $("[name='Receivable.Credit_Note_Date']").val(obj.Receivable.Credit_Note_Date.substring(0, 10));
 
-            //Get_Balance_Amount_Using_Credit_Note_Amount();
+            alert($("[name='Receivable.Credit_Note_Amount']").val());
 
-            //$("#drpCredit_Note_No").html("");
+            //calculate(obj.Receivable.Credit_Note_Amount);
 
-            //$("#drpCredit_Note_No").append("<option value=''>Select Credit Note no.</option>");
+            $("[name='Receivable.Credit_Note_Amount']").focus();
 
-            //$("#drpCredit_Note_No").parents('.form-group').find('ul').html("");
-
-            //$("#drpCredit_Note_No").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Credit Note no.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-
-            //if (obj.PurchaseOrder.Vendors.length > 0) {
-
-            //    for (var j = 0; j < obj.PurchaseOrder.Vendors.length; j++) {
-            //        debugger;
-                                       
-            //        var i = j + 1;
-                   
-            //        $("#drpCredit_Note_No").append("<option value='" + obj.PurchaseOrder.Vendors[j].Article_No + "'>" + obj.PurchaseOrder.Vendors[j].Article_No + "</option>");
-
-            //        $("#drpCredit_Note_No").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Vendors[j].Article_No + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-            //    }
-            //}
+            $("[name='Receivable.Credit_Note_Amount']").blur();
         }
     });
 }
@@ -103,9 +86,70 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
 
             $("[name='Receivable.Gift_Voucher_No']").val(obj.Receivable.Gift_Voucher_No);
 
-            Get_Balance_Amount_Using_Gift_Voucher_Amount();
+            //calculate(obj.Receivable.Gift_Voucher_Amount);
+
+            $("[name='Receivable.Gift_Voucher_Amount']").focus();
+
+            $("[name='Receivable.Gift_Voucher_Amount']").blur();
         }
     });
+}
+
+function calculate(element)
+{
+    //if (element.id == "txtCash_amount")
+    //{
+    //    $("#hdnCash_Amount").val(parseInt($("#txtBalance_Amount").val()) - parseInt(element.value));
+    //}
+    //if (element.id == "txtCheque_Amount") {
+    //    $("#hdnCheque_Amount").val(parseInt($("#txtBalance_Amount").val()) - parseInt(element.value));
+    //}
+    //if (element.id == "txtCredit_Note_Amount") {
+    //    $("#hdnCredit_Note_Amount").val(parseInt($("#txtBalance_Amount").val()) - parseInt(element.value));
+    //}
+
+    //if (element.id == "txtCard_Amount") {
+    //    $("#hdnCard_Amount").val(parseInt($("#txtBalance_Amount").val()) - parseInt(element.value));
+    //}
+
+    //if (element.id == "txtGift_Voucher_Amount") {
+    //    $("#hdnGift_Voucher_Amount").val(parseInt($("#txtBalance_Amount").val()) - parseInt(element.value));
+    //}
+
+    var cash = 0;
+    var credit = 0;
+    var card = 0;
+    var gift = 0;
+    var check = 0;
+
+
+    if ($("#txtCash_amount").val() != "")
+    {
+        cash = $("#txtCash_amount").val()
+    }
+
+    if ($("#txtCheque_Amount").val() != "") {
+        credit = $("#txtCheque_Amount").val()
+    }
+
+    if ($("#txtCredit_Note_Amount").val() != "") {
+        card = $("#txtCredit_Note_Amount").val()
+    }
+
+    if ($("#txtCard_Amount").val() != "") {
+        gift = $("#txtCard_Amount").val()
+    }
+
+    if ($("#txtGift_Voucher_Amount").val() != "") {
+        check = $("#txtGift_Voucher_Amount").val()
+    }
+
+
+    //$("#txtPaid_Amount").val(parseInt($("#txtCash_amount").val()) + parseInt($("#txtCheque_Amount").val()) + parseInt($("#txtCredit_Note_Amount").val()) + parseInt($("#txtCard_Amount").val()) + parseInt($("#txtGift_Voucher_Amount").val()));
+    $("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
+
+
+
 }
 
 function Get_Balance_Amount_Using_Cash_Amount() {
@@ -124,14 +168,9 @@ function Get_Balance_Amount_Using_Cash_Amount() {
 
     var newbalanceamount = oldbalanceamount - cashamount;
 
-    if (newbalanceamount < 0) {
+    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
 
-        $("#txtPaid_Amount").rules("add", { required: true, messages: { required: "Paid amount is greater than balance amount." } });
-    }
-
-    else {
-        $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
-    }
+   
 
 }
 
@@ -474,19 +513,19 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cash_Amount == 0 ? "" : data.Receivables[i].Cash_Amount;
+        htmlText += data.Receivables[i].Cash_Amount == 0 ? "NA" : data.Receivables[i].Cash_Amount;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cheque_Amount == 0 ? "" : data.Receivables[i].Cheque_Amount;
+        htmlText += data.Receivables[i].Cheque_Amount == 0 ? "NA" : data.Receivables[i].Cheque_Amount;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Cheque_No == null ? "" : data.Receivables[i].Cheque_No;
+        htmlText += data.Receivables[i].Cheque_No == null ? "NA" : data.Receivables[i].Cheque_No;
 
         htmlText += "</td>";
 
@@ -498,20 +537,20 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Bank_Name == null ? "" : data.Receivables[i].Bank_Name;
+        htmlText += data.Receivables[i].Bank_Name == null ? "NA" : data.Receivables[i].Bank_Name;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Credit_Note_No == null ? "" : data.Receivables[i].Credit_Note_No;
+        htmlText += data.Receivables[i].Credit_Note_No == null ? "NA" : data.Receivables[i].Credit_Note_No;
 
         htmlText += "</td>";
 
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Credit_Note_Amount == null ? "" : data.Receivables[i].Credit_Note_Amount;
+        htmlText += data.Receivables[i].Credit_Note_Amount == 0 ? "NA" : data.Receivables[i].Credit_Note_Amount;
 
         htmlText += "</td>";
 
@@ -529,25 +568,25 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Credit_Card_No == null ? "" : data.Receivables[i].Credit_Card_No;
+        htmlText += data.Receivables[i].Credit_Card_No == null ? "NA" : data.Receivables[i].Credit_Card_No;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Card_Amount == null ? "" : data.Receivables[i].Card_Amount;
+        htmlText += data.Receivables[i].Card_Amount == 0 ? "NA" : data.Receivables[i].Card_Amount;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Gift_Voucher_No == null ? "" : data.Receivables[i].Gift_Voucher_No;
+        htmlText += data.Receivables[i].Gift_Voucher_No == null ? "NA" : data.Receivables[i].Gift_Voucher_No;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Receivables[i].Gift_Voucher_Amount == 0 ? "" : data.Receivables[i].Gift_Voucher_Amount;
+        htmlText += data.Receivables[i].Gift_Voucher_Amount == 0 ? "NA" : data.Receivables[i].Gift_Voucher_Amount;
 
         htmlText += "</td>";
 
@@ -801,7 +840,7 @@ function BalanceAmount() {
 
     debugger;
 
-
+    alert("5000");
     var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
 
     var PaidAmount = parseFloat($("#txtPaid_Amount").val());
@@ -819,3 +858,28 @@ function Cancle() {
     document.getElementById("txtCredit_Note_Amount").disabled = false;
 
 }
+
+//function add_Validation(elem)
+//{
+//    $("#txtBalance_Amount").rules("add", "checkBalanceamount" );
+
+//    jQuery.validator.addMethod("checkBalanceamount", function (value, element) {
+
+//        alert();
+//        var result = true;
+//        var bal_amt = parseFloat($("#txtBalance_Amount").val());
+
+//        if (bal_amt != "" && bal_amt != 0) {
+
+//            if (bal_amt >= 0) {
+//                result = true;
+//            }
+//            else {
+//                result = false;
+//            }
+//        }
+//        return result;
+
+//    }, "Paid amount is greater than balance amount.");
+
+//}

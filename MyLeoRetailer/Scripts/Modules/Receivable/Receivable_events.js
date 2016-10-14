@@ -4,6 +4,8 @@
 
 $(document).ready(function () {
 
+    //add_Validation();
+
     if ($("#hdnPayment_Status1").val() == 1)
     {
         $("#btnSavePay").hide();
@@ -23,6 +25,8 @@ $(document).ready(function () {
     $('[name = "Receivable.Sales_Credit_Note_Id"]').change(function () {
 
         Get_Credit_Note_Amount_By_Id($(this).val());
+        
+        
 
     });
 

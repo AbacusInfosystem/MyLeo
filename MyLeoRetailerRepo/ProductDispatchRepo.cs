@@ -40,7 +40,7 @@ namespace MyLeoRetailerRepo
             return dt;
         }
 
-        public ProductDispatchInfo Get_Product_To_Dispatch_By_Id(int request_Id, string SKU)
+        public ProductDispatchInfo Get_Product_To_Dispatch_By_Id(int request_Id, string sku)
         {
             ProductDispatchInfo product = new ProductDispatchInfo();
 
@@ -48,7 +48,7 @@ namespace MyLeoRetailerRepo
 
             sqlparam.Add(new SqlParameter("@request_Id", request_Id));
 
-            sqlparam.Add(new SqlParameter("@SKU", SKU));
+            sqlparam.Add(new SqlParameter("@SKU", sku));
 
             DataSet ds = sqlHelper.ExecuteDataSet(sqlparam, Storeprocedures.sp_Get_Product_To_Dispatch_By_Id.ToString(), CommandType.StoredProcedure);
 
@@ -182,7 +182,7 @@ namespace MyLeoRetailerRepo
             return dt;
         }
 
-        public void Accept_Product_Dispatch(List<ProductDispatchInfo> list_Product,ProductDispatchInfo Product)
+        public void Accept_Product_Dispatch(List<ProductDispatchInfo> list_Product,ProductDispatchInfo product)
         {
            List<SqlParameter>sqlparam=new List<SqlParameter>();
 
@@ -205,17 +205,50 @@ namespace MyLeoRetailerRepo
 
                    sqlparam.Add(new SqlParameter("@Branch_Id", item.Branch_Id));
 
-                   sqlparam.Add(new SqlParameter("@Created_By", Product.Created_By));
+                   sqlparam.Add(new SqlParameter("@Created_By", product.Created_By));
 
-                   sqlparam.Add(new SqlParameter("@Created_Date", Product.Created_Date));
+                   sqlparam.Add(new SqlParameter("@Created_Date", product.Created_Date));
 
-                   sqlparam.Add(new SqlParameter("@Updated_By", Product.Updated_By));
+                   sqlparam.Add(new SqlParameter("@Updated_By", product.Updated_By));
 
-                   sqlparam.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
+                   sqlparam.Add(new SqlParameter("@Updated_Date", product.Updated_Date));
 
                    sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Accept_Product_Dispatch.ToString(), CommandType.StoredProcedure);
                }
            }
+        }
+
+        public int Get_Product_Quantity_Warehouse(string sku)
+        {
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            sqlparam.Add(new SqlParameter("@sku", sku));
+
+            var quantity = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Get_Product_Quantity_Warehouse.ToString(), CommandType.StoredProcedure));
+
+            return quantity;
+        }
+
+        public void Reject_Product_Dispatch(List<ProductDispatchInfo> list_Product, ProductDispatchInfo product)
+        {
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            foreach (var item in list_Product)
+            {
+                if (item.Is_Checked == 1)
+                {
+                    sqlparam = new List<SqlParameter>();
+
+                    sqlparam.Add(new SqlParameter("@Dispatch_Item_Id", item.Dispatch_Item_Id));
+
+                    sqlparam.Add(new SqlParameter("@Updated_By", product.Updated_By));
+
+                    sqlparam.Add(new SqlParameter("@Updated_Date", product.Updated_Date));
+
+                    sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Reject_Product_Dispatch.ToString(), CommandType.StoredProcedure);
+                }
+            }
         }
     }
 }
