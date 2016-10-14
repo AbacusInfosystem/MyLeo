@@ -50,7 +50,14 @@ namespace MyLeoRetailerRepo
                         strquery += "from Employee inner join Role on Employee.Role_Id=Role.Role_Id ";
                         strquery += "where Role.Role_Id= @Role_Id";
                         paramList.Add(new SqlParameter("@Role_Id", fieldValue));
-                    }                   
+                    }
+                    if (fieldName == "Sales_Invoice")
+                    {
+                        strquery = " Select Employee.Employee_Id , Employee.Employee_Name  ";
+                        strquery += "from Employee inner join Role on Employee.Role_Id=Role.Role_Id ";
+                        strquery += "where Role.Role_Name like '" + fieldValue + "%'";
+                        //paramList.Add(new SqlParameter("@Role_Name", fieldValue));
+                    } 
                 }
 
                 if (table_Name == "Purchase_Order")
@@ -68,7 +75,7 @@ namespace MyLeoRetailerRepo
                 {
                     if (fieldName == "Purchase_Order_Id")
                     {
-                        strquery = "select distinct PO.Purchase_Order_Id, PSM.SKU_Code ";
+                        strquery = "select distinct Sum(POIS.Quantity) as Quantity, PSM.SKU_Code ";
                         strquery += "from Product_SKU_Mapping PSM, Purchase_Order PO, Purchase_Order_Item POI,Purchase_Order_Item_Sizes POIS, Product P ";
                         strquery += "where ";
                         strquery += "PO.Purchase_Order_Id=POI.Purchase_Order_Id ";
@@ -79,8 +86,8 @@ namespace MyLeoRetailerRepo
                         strquery += "AND POIS.Size_Id=PSM.Size_Id ";
                         strquery += "AND P.Product_Id=PSM.Product_Id  ";                        
                         strquery += "AND PO.Purchase_Order_Id= @Purchase_Order_Id ";
-                        strquery += "group by POI.Purchase_Order_Id, POI.Purchase_Order_Item_Id, PSM.SKU_Code, PO.Purchase_Order_Id ";
-                        paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));                      
+                        strquery += "group by PO.Purchase_Order_Id, PSM.SKU_Code ";
+                        paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));                       
                     }
                 }
 

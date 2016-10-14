@@ -1,7 +1,9 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerManager;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
@@ -22,6 +24,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             gvRepo = new GiftVoucherRepo();
         }
 
+        [AuthorizeUserAttribute(AppFunction.Gift_Voucher_Management_Access)]
         public ActionResult Search(GiftVoucherViewModel gvViewModel)
         {
             
@@ -79,6 +82,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         }
 
+        [AuthorizeUserAttribute(AppFunction.Gift_Voucher_Management_Create)]
         public ActionResult Insert_Gift_Voucher(GiftVoucherViewModel gvViewModel)
         {
 
@@ -103,6 +107,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search");
         }
 
+        [AuthorizeUserAttribute(AppFunction.Gift_Voucher_Management_Edit)]
         public ActionResult Update_Gift_Voucher(GiftVoucherViewModel gvViewModel)
         {
 
@@ -165,6 +170,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(gvViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Gift_Voucher_Management_View)]
         public ActionResult Get_Gift_Voucher_By_Id(GiftVoucherViewModel gvViewModel)
         {
             try

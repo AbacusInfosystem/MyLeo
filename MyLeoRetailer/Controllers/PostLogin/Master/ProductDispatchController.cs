@@ -1,8 +1,10 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Common;
 using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
@@ -23,6 +25,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         ProductDispatchRepo pRepo;
 
+        [AuthorizeUserAttribute(AppFunction.Product_Dispatch_Management_View)]
         public ActionResult Index(ProductDispatchViewModel pViewModel)
         {
             try
@@ -39,6 +42,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View(pViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Dispatch_Management_Access)]
         public ActionResult Search(ProductDispatchViewModel pViewModel)
         {
             if (TempData["pViewModel"] != null)
@@ -76,6 +80,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Dispatch_Management_Create)]
         public ActionResult Insert(ProductDispatchViewModel pViewModel)
         {
             TransactionScope scope = new TransactionScope();
@@ -122,6 +127,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Inward_Management_Access)]
         public ActionResult Dispatched_Product_Listing(ProductDispatchViewModel pViewModel)
         {
             if (TempData["pViewModel"] != null)
@@ -161,6 +167,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Inward_Management_Edit)]
         public ActionResult Accept_Product_Dispatch(ProductDispatchViewModel pViewModel)
         {
             TransactionScope scope = new TransactionScope();

@@ -9,11 +9,18 @@ $(function () {
 
             "Payable.Person_Name": {
                 required: true
-            },
-
-            "Payable.Discount_Percentage": {
-                digits: true
             }
+
+           // "Payable.Discount_Percentage": {
+           //     digits: true
+           // },
+           // //"Payable.Credit_Note_Amount": {
+           // //     checkCreditnoteamount: true
+           // //},
+           // "Payable.Discount_Amount": {
+           //     checkdiscountamt: true
+           //}
+
         },
         messages: {
 
@@ -24,11 +31,13 @@ $(function () {
 
             "Payable.Person_Name": {
                 required: "Person Name is required."
-            },
-
-            "Payable.Discount_Percentage": {
-                digits: "Enter only Digits"
             }
+
+        //    "Payable.Discount_Percentage": {
+        //        digits: "Enter only Digits"
+        //    }
         }
     });
 });
+
+

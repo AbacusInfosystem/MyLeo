@@ -100,6 +100,7 @@ $(function () {
 
         Get_Credit_Note_Amount_By_Id($(this).val());
 
+       
     });
 
 

@@ -35,20 +35,21 @@
             "PurchaseInvoice.Discount_Percentage": {
                 required: true,
                 number: true
-            },
-
-            "PurchaseInvoice.PurchaseInvoices[0].Quantity": {
-                required: true,
-                digits: true
-            },
-
-            "PurchaseInvoice.PurchaseInvoices[0].SKU_Code": {
-                required: true
-            },
-
-            "PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No": {
-                required: true
             }
+            //},
+
+            //"PurchaseInvoice.PurchaseInvoices[0].Quantity": {
+            //    required: true,
+            //    digits: true
+            //},
+
+            //"PurchaseInvoice.PurchaseInvoices[0].SKU_Code": {
+            //    required: true
+            //},
+
+            //"PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No": {
+            //    required: true
+            //}
 
         },
         messages: {
@@ -85,20 +86,21 @@
             "PurchaseInvoice.Discount_Percentage": {
                 required: "Discount % is required.",
                 number: "Enter only numbers"
-            },
-
-            "PurchaseInvoice.PurchaseInvoices[0].Quantity": {
-                required: "Quantity is required.",
-                digits: "Enter only digits"
-            },
-
-            "PurchaseInvoice.PurchaseInvoices[0].SKU_Code": {
-                required: "SKU code is required."
-            },
-
-            "PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No": {
-                required: "PO No. is required."
             }
+            //},
+
+            //"PurchaseInvoice.PurchaseInvoices[0].Quantity": {
+            //    required: "Quantity is required.",
+            //    digits: "Enter only digits"
+            //},
+
+            //"PurchaseInvoice.PurchaseInvoices[0].SKU_Code": {
+            //    required: "SKU code is required."
+            //},
+
+            //"PurchaseInvoice.PurchaseInvoices[0].Purchase_Order_No": {
+            //    required: "PO No. is required."
+            //}
         }
     });
 

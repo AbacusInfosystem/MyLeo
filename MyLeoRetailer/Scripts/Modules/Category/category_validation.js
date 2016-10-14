@@ -15,7 +15,8 @@
 //Added by Vinod Mane on 26/09/2016
 $(document).ready(function () {
 
-	$("#frmCategory").validate({
+    $("#frmCategory").validate({
+        
 		rules: {
 		    "Category.Category": { required: true, validate_Category: true },
  

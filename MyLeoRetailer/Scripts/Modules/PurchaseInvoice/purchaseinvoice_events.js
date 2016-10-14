@@ -16,7 +16,8 @@
 
 
 $(function () {
-        
+
+    Add_Validation(0);        
     
     $("#btnSavePurchaseInvoice").click(function () {       
         if ($("#frmPurchaseInvoice").valid()) {

@@ -107,7 +107,9 @@ namespace MyLeoRetailerRepo
         public void Insert_Purchase_Order(PurchaseOrderInfo PurchaseOrder)
         {
             PurchaseOrder.Purchase_Order_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Order(PurchaseOrder), Storeprocedures.sp_Insert_Purchase_Order.ToString(), CommandType.StoredProcedure));
-           
+
+            int j = 0;
+
             foreach (var item in PurchaseOrder.PurchaseOrders)
             {
                 List<SqlParameter> sqlParam = new List<SqlParameter>();
@@ -245,7 +247,7 @@ namespace MyLeoRetailerRepo
                     //CODE Added by aditya 27092016  END
 
 
-                    int j = 0;
+              
 
                     PurchaseOrder.PurchaseOrders[j].Purchase_Order_Item_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlParam, Storeprocedures.sp_Insert_Purchase_Order_Item.ToString(), CommandType.StoredProcedure));
 
