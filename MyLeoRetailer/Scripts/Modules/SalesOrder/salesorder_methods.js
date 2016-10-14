@@ -215,6 +215,10 @@ function Get_Credit_Note_Amount_By_Id(id) {
                 var dd1 = new Date(parseInt(data[0].Credit_Note_Date.replace('/Date(', '')));
                 $('#dtpCreditNoteDate').val(dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString());
 
+                $("[name='SalesInvoice.Credit_Note_Amount']").focus();
+
+                $("[name='SalesInvoice.Credit_Note_Amount']").blur();
+
             }
 
         }
@@ -252,13 +256,17 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
 
             $("[name='SalesInvoice.Gift_Voucher_No']").val(obj.SalesInvoice.Gift_Voucher_No);
 
+            $("[name='SalesInvoice.Gift_Voucher_Amount']").focus();
+
+            $("[name='SalesInvoice.Gift_Voucher_Amount']").blur();
+
         }
     });
 }
 
 function AddSalesOrderDetails(i) 
 {
-    alert(i);
+    //alert(i);
 
     var html = '';
     
@@ -365,25 +373,56 @@ function AddSalesOrderDetails(i)
 
 function DeleteSalesOrderDetailsData(i) {
 
-    if ($('#tblSalesOrderItems tbody tr').length == 1)
-    {
-        $("#lblError").text("Atleast one required.");
-    }
-    else
-    {
-        $("#lblError").text("");
+    //if ($('#tblSalesOrderItems tbody tr').length == 1)
+    //{
+    //    $("#lblError").text("Atleast one required.");
+    //}
+    //else
+    //{
+    //    $("#lblError").text("");
 
+    //    $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
+
+    //    ReArrangeSalesOrderDetailsData();
+
+    //    Add_Validation(i);
+
+    //    CalculateTotal();
+
+    //    CalculateTax()
+
+    //}
+
+
+
+//Added by vinod mane on 14/10/2016
         $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
 
         ReArrangeSalesOrderDetailsData();
+
+
+
+    if (i == 0) {
+        AddSalesOrderDetails(i);
+
+      //  $("#textDiscountPercentage_0").val(0);
+
+        CalculateTotal();       
+
+        CalculateTax();
+    }
+    else {
 
         Add_Validation(i);
 
         CalculateTotal();
 
-        CalculateTax()
+       // CalculateDiscount();
 
+        CalculateTax();
     }
+//End
+
 }
 
 function ReArrangeSalesOrderDetailsData() {

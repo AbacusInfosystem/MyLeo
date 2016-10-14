@@ -417,7 +417,16 @@ namespace MyLeoRetailerRepo
 
             //sqlParams.Add(new SqlParameter("@Payble_Status ", Receivable.Payble_Status));
 
-            sqlParams.Add(new SqlParameter("@Payament_Date ", salesInvoice.Payament_Date));
+            if (salesInvoice.Payament_Date != DateTime.MinValue)
+            {
+                sqlParams.Add(new SqlParameter("@Payament_Date ", salesInvoice.Payament_Date));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@Payament_Date", DBNull.Value));
+            }
+
+            
 
             if (Balance_Amount > 0)
             {
@@ -436,24 +445,26 @@ namespace MyLeoRetailerRepo
 
             sqlParams.Add(new SqlParameter("@Balance_Amount", salesInvoice.Balance_Amount));
 
-            if (salesInvoice.Balance_Amount != 0)
+            if (salesInvoice.Balance_Amount == salesInvoice.Net_Amount)
             {
-                sqlParams.Add(new SqlParameter("@Payment_Status", "3"));
+                sqlParams.Add(new SqlParameter("@Payment_Status", "2"));
             }
-
-            else
+            else if (salesInvoice.Balance_Amount == 0)
             {
                 sqlParams.Add(new SqlParameter("@Payment_Status", "1"));
             }
-
-
+            else if (salesInvoice.Balance_Amount != salesInvoice.Net_Amount)
+            {
+                sqlParams.Add(new SqlParameter("@Payment_Status", "3"));
+            }
+           
             //sqlParams.Add(new SqlParameter("@Balance_Amount ", Receivable.Balance_Amount));
 
-            sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Created_On", salesInvoice.Created_Date));
 
             sqlParams.Add(new SqlParameter("@Created_By", salesInvoice.Created_By));
 
-            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Updated_On", salesInvoice.Updated_Date));
 
             sqlParams.Add(new SqlParameter("@Updated_By", salesInvoice.Updated_By));
 
@@ -616,6 +627,8 @@ namespace MyLeoRetailerRepo
 
         public void Insert_Receivable_Items(List<Receivable> ReceivableItem, SalesInvoiceInfo salesInvoice, int Receivable_Id)
         {
+
+            decimal creditnoteamount = Get_Credit_Note_Amount(salesInvoice.Sales_Credit_Note_Id);
             
                 List<SqlParameter> sqlParams = new List<SqlParameter>();
 
@@ -639,17 +652,49 @@ namespace MyLeoRetailerRepo
                     sqlParams.Add(new SqlParameter("@Cheque_Date", salesInvoice.Cheque_Date));
                 }
 
+                sqlParams.Add(new SqlParameter("@CreditNote_Amount", salesInvoice.Credit_Note_Amount));
+
+                decimal newcreditnoteamount = creditnoteamount - salesInvoice.Credit_Note_Amount;
+
+                sqlParams.Add(new SqlParameter("@Credit_Note_Amount", newcreditnoteamount));
+
+
                 sqlParams.Add(new SqlParameter("@Cheque_No", salesInvoice.Cheque_No));
                 sqlParams.Add(new SqlParameter("@Bank_Name", salesInvoice.Bank_Name));
                 sqlParams.Add(new SqlParameter("@Credit_Card_No", salesInvoice.Credit_Card_No));
 
                 sqlParams.Add(new SqlParameter("@Created_By", salesInvoice.Created_By));
-                sqlParams.Add(new SqlParameter("@Created_On", salesInvoice.Created_Date));
+                sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
                 sqlParams.Add(new SqlParameter("@Updated_By", salesInvoice.Updated_By));
-                sqlParams.Add(new SqlParameter("@Updated_On", salesInvoice.Updated_Date));
+                sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
+                sqlParams.Add(new SqlParameter("@Updated_Date", DateTime.Now));
 
                 sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Receivable_Item_Data.ToString(), CommandType.StoredProcedure);
             
+        }
+
+        public decimal Get_Credit_Note_Amount(int Sales_Credit_Note_Id)
+        {
+
+            decimal creditnoteamount = 0;
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            sqlparam.Add(new SqlParameter("@Sales_Credit_Note_Id", Sales_Credit_Note_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.Get_Credit_Note_Details_By_Id_Sp1.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (!dr.IsNull("Credit_Note_Amount"))
+
+                        creditnoteamount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
+                }
+            }
+
+            return creditnoteamount;
         }
 
         public bool Check_Mobile_No(string MobileNo)

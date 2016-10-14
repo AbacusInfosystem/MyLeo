@@ -224,6 +224,23 @@
         </div>
               
         <div class="row">
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
+                <input type="hidden" id="hdf_Article_No" />
+
+                <div class="block">
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" onchange="Set_Article_No(this.value)">
+                            <option value=" ">
+                                Select Article No.
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
             <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
 
                 <div class="block">
@@ -232,18 +249,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size group.</span>
                         <select class="form-control " id="drpSize_Group" name="PurchaseOrder.Size_Group_Id" onchange="Show_Button()">
-                            <option value="">Select Size Group</option>
-                            @foreach (var item in Model.PurchaseOrder.SizeGroups)
-                            {
-                                if (Model.PurchaseOrder.Size_Group_Id == item.Size_Group_Id)
-                                {
-                                    <option value="@item.Size_Group_Id" selected="selected">@item.Size_Group_Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@item.Size_Group_Id">@item.Size_Group_Name</option>
-                                }
-                            }
+                            <option value="">Select Size Group</option>                            
                         </select>
                     </div>
 
@@ -251,7 +257,7 @@
 
             </div>
 
-            <div class="col-md-9" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
+            <div class="col-md-6" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
 
                 <div class="block" style="margin-top:26px;">
                     <div class="btn-group">
@@ -277,32 +283,28 @@
                 </div>
 
             </div>
+
+            <div class="col-md-3" hidden>
+
+                <div class="block">
+
+                    <div class="form-group">
+                        <select class="form-control " id="drpTemp_Center_Size">
+                            <option value="">Select Center Size</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+          
         </div>
 
         <div class="row Details">
 
-            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
-
-                <div class="block">
-                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No">
-                            <option value=" ">
-                                Select Article No.
-                            </option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
-                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrder.Center_Size">
-                            <option value="">Select Center Size</option>
-                        </select>
-                        @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Center_Size" id="textCenter_Size" placeholder="Enter center size." />*@
-                    </div>
-                </div>
-            </div>
+         
 
             <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
 
@@ -358,6 +360,18 @@
                             <button type="button" class="btn btn-success active" id="btnAddDetailsPurchaseOrder">Add Details</button>
                             <button type="button" class="btn btn-danger active" id="btnResetPurchaseOrder">Cancel</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
+
+                <div class="block">
+                   <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
+                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrder.Center_Size">
+                            <option value="">Select Center Size</option>
+                        </select>
                     </div>
                 </div>
             </div>

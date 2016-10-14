@@ -157,7 +157,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             {
                 poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                Logger.Error("PurchaseOrderController - Get_Sizes : " + ex.ToString());
+                Logger.Error("PurchaseOrderRequestController - Get_Sizes : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));
@@ -171,35 +171,54 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             {
                 poreqViewModel.PurchaseOrderRequest.Vendors = _purchaseorderRepo.Get_Article_No_By_Vendor_Id(Vendor_Id);
 
-                poreqViewModel.PurchaseOrderRequest.Brands = _purchaseorderRepo.Get_Brand_By_Vendor_Id(Vendor_Id);
-
-                poreqViewModel.PurchaseOrderRequest.Categories = _purchaseorderRepo.Get_Category_By_Vendor_Id(Vendor_Id);
-
                 poreqViewModel.PurchaseOrderRequest.Colors = _purchaseorderRepo.Get_Color_By_Vendor_Id(Vendor_Id);
             }
             catch (Exception ex)
             {
                 poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                Logger.Error("PurchaseOrderController - Get_Details_By_Vendor_Id : " + ex.ToString());
+                Logger.Error("PurchaseOrderRequestController - Get_Details_By_Vendor_Id : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }
 
-        public JsonResult Get_Details_By_Category_Vendor_Id(int Vendor_Id, int Category_Id)
+        public JsonResult Get_Details_By_Article_No(string Article_No)
         {
             PurchaseOrderRequestViewModel poreqViewModel = new PurchaseOrderRequestViewModel();
 
             try
             {
-                poreqViewModel.PurchaseOrderRequest.SubCategories = _purchaseorderRepo.Get_Sub_Category_By_Vendor_Id(Vendor_Id, Category_Id);
+                poreqViewModel.PurchaseOrderRequest.SizeGroups = _purchaseorderRepo.Get_Size_Group_By_Article_No(Article_No);
+
+                poreqViewModel.PurchaseOrderRequest.Brands = _purchaseorderRepo.Get_Brand_By_Article_No(Article_No);
+
+                poreqViewModel.PurchaseOrderRequest.Categories = _purchaseorderRepo.Get_Category_By_Article_No(Article_No);
+
             }
             catch (Exception ex)
             {
                 poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                Logger.Error("PurchaseOrderController - Get_Details_By_Category_Vendor_Id : " + ex.ToString());
+                Logger.Error(" PurchaseOrderRequestController - Get_Details_By_Article_No : " + ex.ToString());
+            }
+
+            return Json(JsonConvert.SerializeObject(poreqViewModel));
+        }
+
+        public JsonResult Get_Details_By_Category_Article_No(string Article_No, int Category_Id)
+        {
+            PurchaseOrderRequestViewModel poreqViewModel = new PurchaseOrderRequestViewModel();
+
+            try
+            {
+                poreqViewModel.PurchaseOrderRequest.SubCategories = _purchaseorderRepo.Get_Sub_Category_By_Article_No(Article_No, Category_Id);
+            }
+            catch (Exception ex)
+            {
+                poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrderController - Get_Details_By_Category_Article_No : " + ex.ToString());
             }
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));

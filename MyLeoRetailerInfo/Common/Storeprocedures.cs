@@ -236,6 +236,13 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Orders_Detalis,
         sp_Get_Color_By_Vendor_Id,
 
+        //*****//
+        sp_Get_Size_Group_By_Article_no,
+        sp_Get_Brand_By_Article_no,
+        sp_Get_Category_By_Article_no,
+        sp_Get_Sub_Category_By_Article_no,
+
+        //*****//
         #endregion
 
         #region Purchase Invoice
@@ -400,6 +407,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Product_Dispatch,
         sp_Insert_Product_Dispatch_Items,
         sp_Delete_Dispatch_Product,
+        sp_Get_Product_Quantity_Warehouse,
+        sp_Reject_Product_Dispatch,
 
             //Product Inward
         sp_Dispatched_Product_Listing,
@@ -414,8 +423,4 @@ namespace MyLeoRetailerInfo.Common
     }
 
            
-          
-		
-	
-
 }
