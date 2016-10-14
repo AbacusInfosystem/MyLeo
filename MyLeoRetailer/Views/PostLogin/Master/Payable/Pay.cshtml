@@ -4,9 +4,10 @@
 @using MyLeoRetailerInfo.Common;
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Payable/Payable_Validation.js"></script>
 <script src="~/Scripts/Modules/Payable/Payable_events.js"></script>
 <script src="~/Scripts/Modules/Payable/Payable_method.js"></script>
-<script src="~/Scripts/Modules/Payable/Payable_Validation.js"></script>
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -327,19 +328,53 @@
                                                 <input type="hidden" id="hdnBank_Name@(itm.Payable_Item_Id)" name="Payable.Bank_Name[@(i-1)]" value="@itm.Bank_Name">
                                             </td>
                                             <td>
-                                                <span> @itm.Credit_Note_No</span>
+                                                @if (itm.Credit_Note_No == null)
+                                                {
+                                                    <span> NA </span>
+                                                }
+                                                else
+                                                {
+                                                    <span> @itm.Credit_Note_No</span>
+                                                }
+
+                                               
                                                 <input type="hidden" id="hdnCredit_Note_No@(itm.Payable_Item_Id)" name="Payable.Credit_Note_No[@(i-1)]" value="@itm.Purchase_Credit_Note_Id">
                                             </td>
                                             <td>
-                                                <span> @itm.Credit_Note_Amount</span>
+                                                @if (itm.Credit_Note_Amount == 0)
+                                                {
+                                                    <span> NA </span>
+                                                }
+                                                else
+                                                {
+                                                    <span> @itm.Credit_Note_Amount</span>
+                                                }
+
+                                                
                                                 <input type="hidden" id="hdnCredit_Note_Amount@(itm.Payable_Item_Id)" name="Payable.Credit_Note_Amount[@(i-1)]" value="@itm.Credit_Note_Amount">
                                             </td>
                                             <td>
-                                                <span> @itm.Discount_Percentage</span>
+                                                @if (itm.Discount_Percentage == 0)
+                                                {
+                                                    <span> NA </span>
+                                                }
+                                                else
+                                                {
+                                                    <span> @itm.Discount_Percentage</span>
+                                                }
+                                               
                                                 <input type="hidden" id="hdnDiscount_Percentage@(itm.Payable_Item_Id)" name="Payable.Discount_Percentage[@(i-1)]" value="@itm.Discount_Percentage">
                                             </td>
                                             <td>
-                                                <span> @itm.Discount_Amount</span>
+                                                @if (itm.Discount_Amount == 0)
+                                                {
+                                                    <span> NA </span>
+                                                }
+                                                else
+                                                {
+                                                    <span> @itm.Discount_Amount</span>
+                                                }
+                                                
                                                 <input type="hidden" id="hdnDiscount_Amount@(itm.Payable_Item_Id)" name="Payable.Discount_Amount[@(i-1)]" value="@itm.Discount_Amount">
                                             </td>
 

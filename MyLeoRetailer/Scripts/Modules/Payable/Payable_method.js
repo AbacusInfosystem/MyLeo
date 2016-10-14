@@ -40,7 +40,29 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
             $("[name='Payable.Credit_Note_Amount']").val(obj.Payable.Credit_Note_Amount);
 
-            Calculate_Fianl_Amount_Using_Credit_Note_Amount();
+            //Calculate_Fianl_Amount_Using_Credit_Note_Amount();
+
+            $("#txtCN_amount").rules("add", { checkCreditnoteamount: true });
+
+            jQuery.validator.addMethod("checkCreditnoteamount", function (value, element) {
+
+                var result = true;
+                var final_amt = parseFloat($("#txtFinal_amount").val());
+                var creditnote_amt = parseFloat($("#txtCN_amount").val());
+
+                if (final_amt != "" && final_amt != 0) {
+                    alert("500")
+                    if (final_amt >= creditnote_amt) {
+                        result = true;
+                        Calculate_Fianl_Amount_Using_Credit_Note_Amount();
+                    }
+                    else {
+                        result = false;
+                    }
+                }
+                return result;
+
+            }, "Entered amount is greater than final amount.");
 
         }
     });
@@ -345,19 +367,19 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Credit_Note_Amount == null ? "NA" : data.Payables[i].Credit_Note_Amount;
+        htmlText += data.Payables[i].Credit_Note_Amount == 0 ? "NA" : data.Payables[i].Credit_Note_Amount;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Discount_Percentage == null ? "" : data.Payables[i].Discount_Percentage;
+        htmlText += data.Payables[i].Discount_Percentage == 0 ? "NA" : data.Payables[i].Discount_Percentage;
 
         htmlText += "</td>";
 
         htmlText += "<td>";
 
-        htmlText += data.Payables[i].Discount_Amount == null ? "" : data.Payables[i].Discount_Amount;
+        htmlText += data.Payables[i].Discount_Amount == 0 ? "NA" : data.Payables[i].Discount_Amount;
 
         htmlText += "</td>";
 
