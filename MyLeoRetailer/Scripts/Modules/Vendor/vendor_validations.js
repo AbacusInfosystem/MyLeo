@@ -2,7 +2,7 @@
 
     $("#frmVendor").validate(
         {
-            errorClass: 'login-error',
+         //   errorClass: 'login-error',
 
             rules:
                 {
