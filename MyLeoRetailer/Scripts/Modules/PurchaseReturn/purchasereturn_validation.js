@@ -25,16 +25,16 @@
             "PurchaseReturn.Discount_Percentage": {
                 required: true,
                 number: true
-            },
+            }//,
 
-            "PurchaseReturn.PurchaseReturns[0].Quantity": {
-                required: true,
-                digits: true
-            },
+            //"PurchaseReturn.PurchaseReturns[0].Quantity": {
+            //    required: true,
+            //    digits: true
+            //},
 
-            "PurchaseReturn.PurchaseReturns[0].SKU_Code": {
-                required: true
-            }
+            //"PurchaseReturn.PurchaseReturns[0].SKU_Code": {
+            //    required: true
+            //}
 
         },
         messages: {
@@ -62,16 +62,16 @@
             "PurchaseReturn.Discount_Percentage": {
                 required: "Discount % is required.",
                 number: "Enter only numbers"
-            },
+            }//,
 
-            "PurchaseReturn.PurchaseReturns[0].Quantity": {
-                required: "Quantity is required.",
-                digits: "Enter only digits"
-            },
+            //"PurchaseReturn.PurchaseReturns[0].Quantity": {
+            //    required: "Quantity is required.",
+            //    digits: "Enter only digits"
+            //},
 
-            "PurchaseReturn.PurchaseReturns[0].SKU_Code": {
-                required: "SKU code is required.",
-            }
+            //"PurchaseReturn.PurchaseReturns[0].SKU_Code": {
+            //    required: "SKU code is required.",
+            //}
 
         }
     });
@@ -91,9 +91,6 @@
         return result;
     }, "Already mapped.");
 
-
-   
-
-    
+        
 
 });

@@ -1,6 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Filters;
-using MyLeoRetailer.Models.Transaction;
+using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
@@ -66,7 +66,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 Logger.Error("PurchaseOrderRequestController - Index : " + ex.ToString());
             }
             return View("Index", poreqViewModel);
-        }
+        }        
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Request_Management_Access)]
         public ActionResult Search(PurchaseOrderRequestViewModel poreqViewModel)

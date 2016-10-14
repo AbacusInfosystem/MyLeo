@@ -1,10 +1,21 @@
-﻿$(document).ready(function () {
-
-    Add_Validation(0);
+﻿$(document).ready(function () {    
 
     $('#txtPurchase_Return_Date').datepicker({});
 
     $('#txtLr_Date').datepicker({});
+
+    $("[name='PurchaseReturn.Purchase_Invoice_Id']").change(function () {
+
+        $('#tblPurchaseReturnItems tbody tr').remove();
+
+        AddPurchaseReturnDetails();
+
+        Get_Purchase_Return_Items();
+        
+    });
+
+
+  
 
 
     $("#btnSavePurchaseReturn").click(function () {
@@ -18,10 +29,7 @@
     });
 
     
-    $("[name='PurchaseReturn.Purchase_Invoice_Id']").change(function () {
+   
 
-        Get_Purchase_Return_Items();
-
-    });
 
 });

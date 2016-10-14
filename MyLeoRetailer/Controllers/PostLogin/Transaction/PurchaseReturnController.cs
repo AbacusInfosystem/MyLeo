@@ -1,6 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Filters;
-using MyLeoRetailer.Models.Transaction;
+using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;

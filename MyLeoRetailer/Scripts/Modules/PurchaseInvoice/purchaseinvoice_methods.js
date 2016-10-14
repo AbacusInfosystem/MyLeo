@@ -1,5 +1,11 @@
 ﻿function Get_Vendor_Details_By_Id(value) {
 
+    $('#tblPurchaseInvoiceItems tbody tr').remove();
+
+    AddPurchaseInvoiceDetails();
+
+    CalculateTotal();
+
     debugger;
 
     $.ajax({
@@ -116,7 +122,7 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "<div class='input-group'>";
     tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU Code to search' value=''  data-table='Product_SKU_Mapping' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdnPurchase_Order_Id_" + i + "' data-field='Purchase_Order_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
-    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
@@ -193,7 +199,7 @@ function CalculateTax() {
     var sumGrossAmount = parseFloat($("#textGrossAmount_0").val());
     
     var taxAmt = (tax == "" || tax == undefined) ? 0 : parseFloat((sumGrossAmount * tax) / 100);
-    $("#tblPurchaseInvoiceItems").find("textTaxAmount_0").val(taxAmt);
+    $("#tblPurchaseInvoice").find("textTaxAmount_0").val(taxAmt);
 
     var netAmt_temp = taxAmt + sumGrossAmount;
 
@@ -286,14 +292,34 @@ function CalculateTotal() {
 
 function Add_Validation(i) {
 
-    $("#textQuantity_" + i).rules("add", { required: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
 
-    $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code']").rules("add", { required: true, messages: { required: "SKU Code is required.", } });
+    $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
     
-    $("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
+    //$("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
 
     $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 
+
+    jQuery.validator.addMethod("QuantityCheck", function (value, element) {
+
+        var result = true;
+        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
+        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
+
+        if (EnterQty != "" && EnterQty != 0) {
+
+            if (OrgQty >= EnterQty) {
+                result = true;
+            }
+            else
+            {
+                result = false;
+            }          
+        }
+        return result;
+
+    }, "Quantity greater than PO Quantity.");
 }
 
 function DeletePurchaseInvoiceDetailsData(i) {
@@ -340,7 +366,7 @@ function ReArrangePurchaseInvoiceDetailsData() {
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
                 $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
-                $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
+                $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
             }

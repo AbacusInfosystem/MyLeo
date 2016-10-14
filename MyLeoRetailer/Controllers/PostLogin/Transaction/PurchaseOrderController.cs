@@ -1,6 +1,6 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailer.Filters;
-using MyLeoRetailer.Models.Transaction;
+using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
@@ -355,8 +355,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             TempData["poViewModel"] = (PurchaseOrderViewModel)poViewModel;
 
             return RedirectToAction("Get_Purchase_Order_Details");
-        } 
-        
+        }
+
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_View)]
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
         {
