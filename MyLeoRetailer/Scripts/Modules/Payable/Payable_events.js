@@ -100,6 +100,7 @@ $(function () {
 
         Get_Credit_Note_Amount_By_Id($(this).val());
 
+       
     });
 
 
@@ -107,7 +108,7 @@ $(function () {
 
         alert();
         if ($("#frmPay").valid()) {
-            Save_Payable_Data();
+            //Save_Payable_Data();
 
 
         }
