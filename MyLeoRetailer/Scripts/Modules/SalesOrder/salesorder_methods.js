@@ -373,25 +373,56 @@ function AddSalesOrderDetails(i)
 
 function DeleteSalesOrderDetailsData(i) {
 
-    if ($('#tblSalesOrderItems tbody tr').length == 1)
-    {
-        $("#lblError").text("Atleast one required.");
-    }
-    else
-    {
-        $("#lblError").text("");
+    //if ($('#tblSalesOrderItems tbody tr').length == 1)
+    //{
+    //    $("#lblError").text("Atleast one required.");
+    //}
+    //else
+    //{
+    //    $("#lblError").text("");
 
+    //    $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
+
+    //    ReArrangeSalesOrderDetailsData();
+
+    //    Add_Validation(i);
+
+    //    CalculateTotal();
+
+    //    CalculateTax()
+
+    //}
+
+
+
+//Added by vinod mane on 14/10/2016
         $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
 
         ReArrangeSalesOrderDetailsData();
+
+
+
+    if (i == 0) {
+        AddSalesOrderDetails(i);
+
+      //  $("#textDiscountPercentage_0").val(0);
+
+        CalculateTotal();       
+
+        CalculateTax();
+    }
+    else {
 
         Add_Validation(i);
 
         CalculateTotal();
 
-        CalculateTax()
+       // CalculateDiscount();
 
+        CalculateTax();
     }
+//End
+
 }
 
 function ReArrangeSalesOrderDetailsData() {
