@@ -46,7 +46,11 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
             alert($("[name='Receivable.Credit_Note_Amount']").val());
 
-            calculate(obj.Receivable.Credit_Note_Amount);
+            //calculate(obj.Receivable.Credit_Note_Amount);
+
+            $("[name='Receivable.Credit_Note_Amount']").focus();
+
+            $("[name='Receivable.Credit_Note_Amount']").blur();
         }
     });
 }
@@ -82,7 +86,11 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
 
             $("[name='Receivable.Gift_Voucher_No']").val(obj.Receivable.Gift_Voucher_No);
 
-            calculate(obj.Receivable.Gift_Voucher_Amount);
+            //calculate(obj.Receivable.Gift_Voucher_Amount);
+
+            $("[name='Receivable.Gift_Voucher_Amount']").focus();
+
+            $("[name='Receivable.Gift_Voucher_Amount']").blur();
         }
     });
 }
@@ -139,6 +147,8 @@ function calculate(element)
 
     //$("#txtPaid_Amount").val(parseInt($("#txtCash_amount").val()) + parseInt($("#txtCheque_Amount").val()) + parseInt($("#txtCredit_Note_Amount").val()) + parseInt($("#txtCard_Amount").val()) + parseInt($("#txtGift_Voucher_Amount").val()));
     $("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
+
+
 
 }
 
