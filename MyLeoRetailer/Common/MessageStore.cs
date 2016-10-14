@@ -375,6 +375,9 @@ namespace MyLeoRetailer.Common
             FriendlyMessage PD02 = new FriendlyMessage("PD02", MessageType.Success, "Request for Product Dispatch is Accepted successfully.");
             hash.Add("PD02", PD02);
 
+            FriendlyMessage PD03 = new FriendlyMessage("PD03", MessageType.Success, "Request for Product Dispatch is Rejected successfully.");
+            hash.Add("PD03", PD03);
+
             #endregion
 
         }
