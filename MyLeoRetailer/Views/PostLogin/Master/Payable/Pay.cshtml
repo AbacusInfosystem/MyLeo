@@ -29,10 +29,9 @@
 </div>
 
 <!-- END CONTENT FRAME -->
-
 <div class="page-content-wrap">
 
-    <form role="form" id="frmPay">
+    <form role="form" id="frmPay" method="post">
 
         <div class="row">
 
@@ -81,11 +80,11 @@
                                 {
                                     if (Model.Payable.Purchase_Credit_Note_Id == item.Purchase_Credit_Note_Id)
                                     {
-                                <option value="@item.Purchase_Credit_Note_Id" selected="selected">@item.Credit_Note_No</option>
+                                        <option value="@item.Purchase_Credit_Note_Id" selected="selected">@item.Credit_Note_No</option>
                                     }
                                     else
                                     {
-                                <option value="@item.Purchase_Credit_Note_Id">@item.Credit_Note_No</option>
+                                        <option value="@item.Purchase_Credit_Note_Id">@item.Credit_Note_No</option>
                                     }
                                 }
 
@@ -133,14 +132,14 @@
                         </div>
                     </div>
                     @*<div class="col-md-4">
-                <div class="form-group">
-                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Person Name</span>
-                    <input type="text" class="form-control input-sm" name="Payable.Person_Name" id="txtPerson_Name" value="@Model.Payable.Person_Name" placeholder="Enter person name" />
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Person Name</span>
+                                        <input type="text" class="form-control input-sm" name="Payable.Person_Name" id="txtPerson_Name" value="@Model.Payable.Person_Name" placeholder="Enter person name" />
+                                    </div>
+                        </div>*@
+
                 </div>
-            </div>*@
-                   
-                </div>
-            </div> 
+            </div>
 
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
 
@@ -185,11 +184,11 @@
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount</span>
                             <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@(Model.Payable.Paid_Amount == 0 ? "" : Model.Payable.Paid_Amount.ToString())" onfocusout="javascript: FinalAmount();" placeholder=" Enter Paid amount" />
-                            <label style="color: #b64645; display:none;" class="help-block pull-left" id="lblPaidPriceError">Please enter amount less than final amount.</label> 
+                            <label style="color: #b64645; display:none;" class="help-block pull-left" id="lblPaidPriceError">Please enter amount less than final amount.</label>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
 
@@ -235,170 +234,171 @@
                     </div>
                 </div>
             </div>
-                <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;"> 
-                    <div class="block">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Final amount</span>
-                                <input type="text" class="form-control input-sm" name="Payable.Final_Amount" id="txtFinal_amount" @*onclick="javascript: CalculateDiscount();"*@ value="@(Model.Payable.Balance_Amount == 0 ? "" : Model.Payable.Balance_Amount.ToString())" placeholder="Final amount" readonly />
-                                <label style="color: #b64645; display:none;" class="help-block pull-left" id="lblFinalPriceError">Final amount should not 0 or less.</label> 
-                            </div>
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+                <div class="block">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Final amount</span>
+                            <input type="text" class="form-control input-sm" name="Payable.Final_Amount" id="txtFinal_amount" @*onclick="javascript: CalculateDiscount();"*@ value="@(Model.Payable.Balance_Amount == 0 ? "" : Model.Payable.Balance_Amount.ToString())" placeholder="Final amount" readonly />
+                            <label style="color: #b64645; display:none;" class="help-block pull-left" id="lblFinalPriceError">Final amount should not 0 or less.</label>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Remark</span>
-                                <input type="text" class="form-control input-sm" name="Payable.Remark" id="txtRemark" value="@Model.Payable.Remark" placeholder="Enter remark" />
-                            </div>
-                        </div> 
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Remark</span>
+                            <input type="text" class="form-control input-sm" name="Payable.Remark" id="txtRemark" value="@Model.Payable.Remark" placeholder="Enter remark" />
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
 
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-success active" id="btnSavePay">Save</button>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success active" id="btnSavePay">Save</button>
 
-                        <button type="reset" class="btn btn-danger active" id="btnResetPay" onclick="javascript: Cancle();">Reset</button>
-                    </div>
-
+                    <button type="reset" class="btn btn-danger active" id="btnResetPay" onclick="javascript: Cancle();">Reset</button>
                 </div>
 
+            </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive" style="margin: 50px 0;">
-                            <table class="table table-bordered" id="tblPayableItems">
-                                <thead>
-                                    <tr id="subhead">
 
-                                        <th>Payment mode</th>
-                                        <th>Paid Amount</th>
-                                        <th>Credit Card no</th>
-                                        <th>Debit Card no</th>
-                                        <th>Cheque No</th>
-                                        <th>Cheque Date</th>
-                                        <th>Bank Name</th>
-                                        <th>Credit note no</th>
-                                        <th>Credit note amount</th>
-                                        <th>Discount %</th>
-                                        <th>Discount amount</th>
-                                        @*<th>Action</th>*@
-                                    </tr>
-                                </thead>
-                                @if (Model.Payables != null && Model.Payables.Count() > 0)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive" style="margin: 50px 0;">
+                        <table class="table table-bordered" id="tblPayableItems">
+                            <thead>
+                                <tr id="subhead">
+
+                                    <th>Payment mode</th>
+                                    <th>Paid Amount</th>
+                                    <th>Credit Card no</th>
+                                    <th>Debit Card no</th>
+                                    <th>Cheque No</th>
+                                    <th>Cheque Date</th>
+                                    <th>Bank Name</th>
+                                    <th>Credit note no</th>
+                                    <th>Credit note amount</th>
+                                    <th>Discount %</th>
+                                    <th>Discount amount</th>
+                                    @*<th>Action</th>*@
+                                </tr>
+                            </thead>
+                            @if (Model.Payables != null && Model.Payables.Count() > 0)
+                            {
+                                int i = 1;
+                                foreach (var itm in Model.Payables)
                                 {
-                                    int i = 1;
-                                    foreach (var itm in Model.Payables)
-                                    {
-                                        <tr id="tr(@itm.Payable_Item_Id)">
-                                            <td>
-                                                <span> @itm.Payment_Mode1</span>
-                                                <input type="hidden" id="hdnPayment_Mode@(itm.Payable_Item_Id)" name="Payable.Payment_Mode1[@(i-1)]" value="@itm.Payment_Mode">
-                                                <input type="hidden" id="hdnPayable_Item_Id@(itm.Payable_Item_Id)" name="Payable.Payable_Item_Id" value="@itm.Payable_Item_Id">
-                                                <input type="hidden" id="hdnPayable_Id@(itm.Payable_Item_Id)" name="Payable.Payable_Id" value="@itm.Payable_Id">
-                                                <input type="hidden" id="hdnPurchase_Credit_Note_Id@(itm.Payable_Item_Id)" name="Payable.Purchase_Credit_Note_Id" value="@itm.Purchase_Credit_Note_Id">
-                                            </td>
-                                            <td>
-                                                <span> @itm.Paid_Amount</span>
-                                                <input type="hidden" id="hdnPaid_Amount@(itm.Payable_Item_Id)" name="Payable.Paid_Amount[@(i-1)]" value="@itm.Paid_Amount">
-                                            </td>
-                                            <td>
-                                                <span> @itm.Credit_Card_No</span>
-                                                <input type="hidden" id="hdnCredit_Card_No@(itm.Payable_Item_Id)" name="Payable.Credit_Card_No[@(i-1)]" value="@itm.Credit_Card_No">
-                                            </td>
-                                            <td>
-                                                <span> @itm.Debit_Card_No</span>
-                                                <input type="hidden" id="hdnDebit_Card_No@(itm.Payable_Item_Id)" name="Payable.Debit_Card_No[@(i-1)]" value="@itm.Debit_Card_No">
-                                            </td>
-                                            <td>
-                                                <span> @itm.Cheque_No</span>
-                                                <input type="hidden" id="hdnCheque_No@(itm.Payable_Item_Id)" name="Payable.Cheque_No[@(i-1)]" value="@itm.Cheque_No">
-                                            </td>
+                                    <tr id="tr(@itm.Payable_Item_Id)">
+                                        <td>
+                                            <span> @itm.Payment_Mode1</span>
+                                            <input type="hidden" id="hdnPayment_Mode@(itm.Payable_Item_Id)" name="Payable.Payment_Mode1[@(i - 1)]" value="@itm.Payment_Mode">
+                                            <input type="hidden" id="hdnPayable_Item_Id@(itm.Payable_Item_Id)" name="Payable.Payable_Item_Id" value="@itm.Payable_Item_Id">
+                                            <input type="hidden" id="hdnPayable_Id@(itm.Payable_Item_Id)" name="Payable.Payable_Id" value="@itm.Payable_Id">
+                                            <input type="hidden" id="hdnPurchase_Credit_Note_Id@(itm.Payable_Item_Id)" name="Payable.Purchase_Credit_Note_Id" value="@itm.Purchase_Credit_Note_Id">
+                                        </td>
+                                        <td>
+                                            <span> @itm.Paid_Amount</span>
+                                            <input type="hidden" id="hdnPaid_Amount@(itm.Payable_Item_Id)" name="Payable.Paid_Amount[@(i - 1)]" value="@itm.Paid_Amount">
+                                        </td>
+                                        <td>
+                                            <span> @itm.Credit_Card_No</span>
+                                            <input type="hidden" id="hdnCredit_Card_No@(itm.Payable_Item_Id)" name="Payable.Credit_Card_No[@(i - 1)]" value="@itm.Credit_Card_No">
+                                        </td>
+                                        <td>
+                                            <span> @itm.Debit_Card_No</span>
+                                            <input type="hidden" id="hdnDebit_Card_No@(itm.Payable_Item_Id)" name="Payable.Debit_Card_No[@(i - 1)]" value="@itm.Debit_Card_No">
+                                        </td>
+                                        <td>
+                                            <span> @itm.Cheque_No</span>
+                                            <input type="hidden" id="hdnCheque_No@(itm.Payable_Item_Id)" name="Payable.Cheque_No[@(i - 1)]" value="@itm.Cheque_No">
+                                        </td>
 
-                                            <td>
-                                                @if (itm.Cheque_Date.ToShortDateString() == "01-01-1999")
-                                                {
-                                                    <span> NA </span>
-                                                }
-                                                else
-                                                {
-                                                    <span> @itm.Cheque_Date.ToShortDateString()</span>
-                                                }
-                                                <input type="hidden" id="hdnCheque_Date@(itm.Payable_Item_Id)" name="Payable.Cheque_Date[@(i-1)" value="@itm.Cheque_Date.ToShortDateString()">
-                                            </td>
+                                        <td>
+                                            @if (itm.Cheque_Date.ToShortDateString() == "01-01-1999")
+                                            {
+                                                <span> NA </span>
+                                            }
+                                            else
+                                            {
+                                                <span> @itm.Cheque_Date.ToShortDateString()</span>
+                                            }
+                                            <input type="hidden" id="hdnCheque_Date@(itm.Payable_Item_Id)" name="Payable.Cheque_Date[@(i - 1)" value="@itm.Cheque_Date.ToShortDateString()">
+                                        </td>
 
-                                            <td>
-                                                <span> @itm.Bank_Name</span>
-                                                <input type="hidden" id="hdnBank_Name@(itm.Payable_Item_Id)" name="Payable.Bank_Name[@(i-1)]" value="@itm.Bank_Name">
-                                            </td>
-                                            <td>
-                                                @if (itm.Credit_Note_No == null)
-                                                {
-                                                    <span> NA </span>
-                                                }
-                                                else
-                                                {
-                                                    <span> @itm.Credit_Note_No</span>
-                                                }
+                                        <td>
+                                            <span> @itm.Bank_Name</span>
+                                            <input type="hidden" id="hdnBank_Name@(itm.Payable_Item_Id)" name="Payable.Bank_Name[@(i - 1)]" value="@itm.Bank_Name">
+                                        </td>
+                                        <td>
+                                            @if (itm.Credit_Note_No == null)
+                                            {
+                                                <span> NA </span>
+                                            }
+                                            else
+                                            {
+                                                <span> @itm.Credit_Note_No</span>
+                                            }
 
 
-                                                <input type="hidden" id="hdnCredit_Note_No@(itm.Payable_Item_Id)" name="Payable.Credit_Note_No[@(i-1)]" value="@itm.Purchase_Credit_Note_Id">
-                                            </td>
-                                            <td>
-                                                @if (itm.Credit_Note_Amount == 0)
-                                                {
-                                                    <span> NA </span>
-                                                }
-                                                else
-                                                {
-                                                    <span> @itm.Credit_Note_Amount</span>
-                                                }
+                                            <input type="hidden" id="hdnCredit_Note_No@(itm.Payable_Item_Id)" name="Payable.Credit_Note_No[@(i - 1)]" value="@itm.Purchase_Credit_Note_Id">
+                                        </td>
+                                        <td>
+                                            @if (itm.Credit_Note_Amount == 0)
+                                            {
+                                                <span> NA </span>
+                                            }
+                                            else
+                                            {
+                                                <span> @itm.Credit_Note_Amount</span>
+                                            }
 
 
-                                                <input type="hidden" id="hdnCredit_Note_Amount@(itm.Payable_Item_Id)" name="Payable.Credit_Note_Amount[@(i-1)]" value="@itm.Credit_Note_Amount">
-                                            </td>
-                                            <td>
-                                                @if (itm.Discount_Percentage == 0)
-                                                {
-                                                    <span> NA </span>
-                                                }
-                                                else
-                                                {
-                                                    <span> @itm.Discount_Percentage</span>
-                                                }
+                                            <input type="hidden" id="hdnCredit_Note_Amount@(itm.Payable_Item_Id)" name="Payable.Credit_Note_Amount[@(i - 1)]" value="@itm.Credit_Note_Amount">
+                                        </td>
+                                        <td>
+                                            @if (itm.Discount_Percentage == 0)
+                                            {
+                                                <span> NA </span>
+                                            }
+                                            else
+                                            {
+                                                <span> @itm.Discount_Percentage</span>
+                                            }
 
-                                                <input type="hidden" id="hdnDiscount_Percentage@(itm.Payable_Item_Id)" name="Payable.Discount_Percentage[@(i-1)]" value="@itm.Discount_Percentage">
-                                            </td>
-                                            <td>
-                                                @if (itm.Discount_Amount == 0)
-                                                {
-                                                    <span> NA </span>
-                                                }
-                                                else
-                                                {
-                                                    <span> @itm.Discount_Amount</span>
-                                                }
+                                            <input type="hidden" id="hdnDiscount_Percentage@(itm.Payable_Item_Id)" name="Payable.Discount_Percentage[@(i - 1)]" value="@itm.Discount_Percentage">
+                                        </td>
+                                        <td>
+                                            @if (itm.Discount_Amount == 0)
+                                            {
+                                                <span> NA </span>
+                                            }
+                                            else
+                                            {
+                                                <span> @itm.Discount_Amount</span>
+                                            }
 
-                                                <input type="hidden" id="hdnDiscount_Amount@(itm.Payable_Item_Id)" name="Payable.Discount_Amount[@(i-1)]" value="@itm.Discount_Amount">
-                                            </td>
+                                            <input type="hidden" id="hdnDiscount_Amount@(itm.Payable_Item_Id)" name="Payable.Discount_Amount[@(i - 1)]" value="@itm.Discount_Amount">
+                                        </td>
 
-                                            @*<td>
+                                        @*<td>
 
-                                                    <button type="button" id="edit-payable-details" class="btn btn-box-tool btn-tel-edit" onclick="javascript:EditPayableData(@itm.Payable_Item_Id)"><i class='fa fa-pencil'></i></button>
+                                                <button type="button" id="edit-payable-details" class="btn btn-box-tool btn-tel-edit" onclick="javascript:EditPayableData(@itm.Payable_Item_Id)"><i class='fa fa-pencil'></i></button>
 
 
-                                                </td>*@
-                                        </tr>
-                                                i = i + 1;
-                                    }
+                                            </td>*@
+                                    </tr>
+                                            i = i + 1;
                                 }
+                            }
 
-                            </table>
-                        </div>
+                        </table>
                     </div>
-                </div> 
+                </div>
+            </div>
 
         </div>
+
     </form>
 
 </div>

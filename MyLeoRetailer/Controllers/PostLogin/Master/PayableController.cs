@@ -26,7 +26,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         //[AuthorizeUserAttribute(AppFunction.Payable_Management_Access)]
         public ActionResult Pay(PayableViewModel pViewModel)
         {
-            PayableRepo pRepo = new PayableRepo();
+            //PayableRepo pRepo = new PayableRepo();
 
             try
             {
@@ -139,7 +139,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             TempData["pViewModel"] = (PayableViewModel)pViewModel;
 
-            return RedirectToAction("Pay", pViewModel);
+            return View("Pay", pViewModel);
         }
 
         public JsonResult Get_Credit_Note_Amount_By_Id(PayableViewModel pViewModel)

@@ -68,11 +68,15 @@ $(function ()
 
         Get_Credit_Note_Amount_By_Id($(this).val());
 
+        
+
     });
 
     $('[name = "SalesInvoice.Gift_Voucher_Id"]').change(function () {
 
         Get_Gift_Voucher_Amount_By_Id($(this).val());
+
+       
 
     });
 
@@ -110,7 +114,7 @@ $(function ()
 
         //$("#frmSalesOrder").validate().cancelSubmit = false;
 
-        alert($("#hdnCreateCustomerFlag").val());
+       // alert($("#hdnCreateCustomerFlag").val());
 
         //$('#txtInvoice_No').removeClass("login-error");
         //$('#txtInvoice_No').rules("remove");
@@ -313,6 +317,7 @@ function CalculatePaidAmt() {
 
     debugger;
 
+    alert();
 
     var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
 
@@ -370,6 +375,45 @@ function CalculateBalAmt()
     var newbalanceamount = oldbalanceamount - paidamount;
 
     $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+}
+
+function calculate() {
+
+    var cash = 0;
+    var credit = 0;
+    var card = 0;
+    var gift = 0;
+    var check = 0;
+
+
+    if ($("#txtCash_amount").val() != "") {
+        cash = $("#txtCash_amount").val()
+    }
+
+    if ($("#txtCheque_Amount").val() != "") {
+        credit = $("#txtCheque_Amount").val()
+    }
+
+    if ($("#txtCredit_Note_Amount").val() != "") {
+        card = $("#txtCredit_Note_Amount").val()
+    }
+
+    if ($("#txtCard_Amount").val() != "") {
+        gift = $("#txtCard_Amount").val()
+    }
+
+    if ($("#txtGift_Voucher_Amount").val() != "") {
+        check = $("#txtGift_Voucher_Amount").val()
+    }
+
+
+    $("#txtPaid_Amount").val(parseInt($("#txtCash_amount").val()) + parseInt($("#txtCheque_Amount").val()) + parseInt($("#txtCredit_Note_Amount").val()) + parseInt($("#txtCard_Amount").val()) + parseInt($("#txtGift_Voucher_Amount").val()));
+
+
+    $("#txtBalance_Amount").val( parseInt($("#textTotalAmount").val()) -  parseInt($("#txtPaid_Amount").val()));
+   //$("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
+
 
 }
 

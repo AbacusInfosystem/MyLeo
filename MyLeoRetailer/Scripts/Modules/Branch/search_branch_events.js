@@ -19,10 +19,19 @@
        
     $("#btnCreateBranch").click(function () {
 
-        $("#frmBranch").attr("action", "/Branch/Index");
-        $("#frmBranch").submit();
-
+       
+            $("#frmBranch").attr("action", "/Branch/Index");
+            $("#frmBranch").submit();
+       
     });
+
+    //$('#frmBranch').on('keyup keypress', function (e) {
+    //    var keyCode = e.keyCode || e.which;
+    //    if (keyCode === 13) {
+    //        e.preventDefault();
+    //        return false;
+    //    }
+    //});
 
     $("#btnEditBranch").click(function () {
         $("#frmBranch").attr("action", "/Branch/Get_Branch_By_Id");

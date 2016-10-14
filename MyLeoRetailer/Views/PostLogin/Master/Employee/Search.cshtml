@@ -104,8 +104,8 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Employee" id="txtEmployee_Name" placeholder="Enter employee name to search." data-table="Employee" data-col="Employee_Id,Employee_Name" data-headernames="Employee">
                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                    <input type="hidden" id="hdf_EmployeeId" value="" name="Employee.Employee_Id" class="auto-complete-value" />
-                                    <input type="hidden" id="hdnEmployeeName" value="" name="Filter.Employee_Name" class="auto-complete-label" />
+                                    <input type="hidden" id="hdf_EmployeeId" name="Employee.Employee_Id">  @*value="@Model.Customer.Customer_Id"*@
+                                    <input type="hidden" id="hdnEmployeeName" value="" name="Filter.Employee" class="auto-complete-value" />
                                 </div>
                             </div>
 

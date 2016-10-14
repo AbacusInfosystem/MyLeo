@@ -10,7 +10,7 @@ $(function () {
         //$("#edit-payable-details").parents('tr').find(".btn_edit").hide();
         $("#btnResetPay").hide();
 
-    } 
+    }
 
     $('[name = "Payable.Payment_Mode"]').change(function () {
 
@@ -90,12 +90,12 @@ $(function () {
 
     $('[name = "Payable.Purchase_Credit_Note_Id"]').change(function () {
 
-        Get_Credit_Note_Amount_By_Id($(this).val()); 
-       
-    }); 
+        Get_Credit_Note_Amount_By_Id($(this).val());
+
+    });
     // $(element).is(":visible");
 
-    $("#btnSavePay").click(function () { 
+    $("#btnSavePay").click(function () {
         alert();
         if ($("#frmPay").valid()) {
             if ($("#lblPaidPriceError").is(":visible") || $("#lblFinalPriceError").is(":visible")) {
@@ -103,9 +103,9 @@ $(function () {
             else {
                 Save_Payable_Data();
             }
-        } 
+        }
 
-    }); 
+    });
 });
 
 function Get_Payable(id) {

@@ -1,32 +1,21 @@
 ﻿$(document).ready(function () {
 
-    //if ($("#hdnIs_View").val() == 1)
-    //{
-    //    $("#txtDispatch_Quantity").prop("readonly", true);
-
-    //    $("#txtDispatch_Date").prop('disabled', true);
-
-    //    $("#btnProductDispatch").hide();
-
-    //    $("#btnSaveDispatch").hide();
-
-    //    $("#btnCancelDispatch").hide();
-
-    //    $("#frmProductDispatch").find("[id='btnDispatch']").hide();
-
-    //    $("th", event.delegateTarget).remove(":nth-child(4)");
-    //    $("td", event.delegateTarget).remove(":nth-child(4)");
-
-    //}
-
     $("#btnSaveDispatch").click(function () {
 
-        $("#frmProductDispatch").attr("action", "/ProductDispatch/Insert");
+           var row_Count=document.getElementById("tblProduct_Dispatch").children[1].rows.length;
 
-        $("#frmProductDispatch").attr("Method","Post");
+           if (row_Count > 0) {
+               $("#frmProductDispatch").attr("action", "/ProductDispatch/Insert");
 
-        $("#frmProductDispatch").submit();
+               $("#frmProductDispatch").attr("Method", "Post");
 
+               $("#frmProductDispatch").submit();
+
+               $("#lbl_Records_Required").hide();
+           }
+           else {
+               $("#lbl_Records_Required").show();
+           }
     });
 
     $("#frmProductDispatch").validate({
@@ -34,29 +23,70 @@
         rules: {
             "product_Dispatch.Quantity":
             {
+                
+                number:true,
                 validate_Quantity: true
             }
 
         },
         messages: {
-
-
+           
         }
     });
 
 
 });
 
-jQuery.validator.addMethod("validate_Quantity", function (value, element) {
-    var result = true;
-    if ($("#txtDispatch_Quantity").val() != "") {
+var message = "";
 
-        var dateTime1 = new Date($("#txtBalance_Quantitya").val()).getTime(),
-          dateTime2 = new Date($("#txtDispatch_Quantity").val()).getTime();
-        if (dateTime2 > dateTime1) {
-            return false;
+jQuery.validator.addMethod("validate_Quantity", function (value, element){
+    var result = true;
+    if ($("#txtDispatch_Quantity").val() != "")
+    {
+
+        var balance_Qty = $("#txtBalance_Quantitya").val()
+        if (value > balance_Qty)
+        {
+            result = false;
+
+            $("#txtDispatch_Quantity").val("");
+
+            message = "Dispatch Quantity cannot be greater than Product Quantity.";
         }
+        else 
+        {
+           
+            $.ajax({
+
+                url: "/ProductDispatch/Get_Product_Quantity_Warehouse",
+
+                data: { sku: $("#txtSKU").val() },
+
+                method: 'GET',
+
+                async: false,
+
+                success: function (data)
+                {
+                    if (value > data) {
+
+                        result = false;
+
+                        message ="Dispatch is Cancel as the Quantity of these product in Warehouse is " + data + ".";
+                        
+                        $("#txtDispatch_Quantity").val("");
+                    }
+                    else
+                    {
+                        result = true;
+                    }
+                }
+            });
+        }
+       
     }
     return result;
 
-}, "Dispatch Quantity is greater than Product Quantity");
+},function(){
+    return message;
+});
