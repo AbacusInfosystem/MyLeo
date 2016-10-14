@@ -16,8 +16,8 @@ $(function ()
 		        Designation: true
 		    },
 		    "Employee.Employee_Mobile2": {
-		        // digits: true
-		        number: true
+		        digits: true
+		        //number: true
 		    },
 		    "Employee.Employee_DOB": {
 		        // digits: true
@@ -32,8 +32,8 @@ $(function ()
 		    },
             		   
 		    "Employee.Employee_Mobile1": {		       
-		        // digits: true
-		        number: true
+		         digits: true
+		        //number: true
 		    },
 
 		    "Employee.Employee_EmailId": {
