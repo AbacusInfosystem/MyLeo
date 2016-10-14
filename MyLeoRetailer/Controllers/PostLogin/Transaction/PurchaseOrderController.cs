@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
-using MyLeoRetailer.Models.Transaction;
+using MyLeoRetailer.Filters;
+using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
@@ -71,6 +72,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("Index", poViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_Access)]
         public ActionResult Search(PurchaseOrderViewModel poViewModel)
         {
             try
@@ -224,7 +226,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
 
-
+        [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_Create)]
         public ActionResult Insert_Purchase_Order(PurchaseOrderViewModel poViewModel)
         {
             using (TransactionScope scope = new TransactionScope())
@@ -355,10 +357,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return RedirectToAction("Get_Purchase_Order_Details");
         }
 
-
-
-        ////***************************************************************************////
-
+        [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_View)]
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
         {
             //poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
@@ -394,6 +393,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("View", poViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_Edit)]
         public ActionResult Update_Purchase_Order(PurchaseOrderViewModel poViewModel)
         {
             try

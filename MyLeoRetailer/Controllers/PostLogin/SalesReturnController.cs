@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailer.Common;
+using MyLeoRetailer.Filters;
 using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
@@ -80,6 +81,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         }
 
+        [AuthorizeUserAttribute(AppFunction.Sales_Return_Management_Access)]
         public ActionResult Search(SalesReturnViewModel srViewModel)
         {
 
@@ -141,6 +143,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(JsonConvert.SerializeObject(srViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Sales_Return_Management_Create)]
         public ActionResult Insert_SalesReturn(SalesReturnViewModel srViewModel)
         {
 
@@ -199,6 +202,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(check, JsonRequestBehavior.AllowGet);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Sales_Return_Management_View)]
         public ActionResult Get_Sales_Return_By_Id(SalesReturnViewModel srViewModel)
         {
 

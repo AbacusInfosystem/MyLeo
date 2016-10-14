@@ -16,6 +16,7 @@ using System.IO;
 using System.Configuration;
 using MyLeoRetailerHelper.Logging;
 using System.Transactions;
+using MyLeoRetailer.Filters;
 //using BarcodeLib.Barcode;
 //using Barcode_Generator;
 
@@ -33,6 +34,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             _ProductRepo = new ProductRepo();
         }
 
+        //[AuthorizeUserAttribute(AppFunction.Product_Management_Edit)]
+        //[AuthorizeUserAttribute(AppFunction.Product_Management_Create)]
         public ActionResult Index(ProductViewModel pViewModel)
         {
             try
@@ -50,6 +53,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", pViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Management_Access)]
         public ActionResult Search(ProductViewModel pViewModel)
         {
             try
@@ -150,6 +154,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Management_Create)]
         public ActionResult Insert_Product(ProductViewModel pViewModel)
         {
             
@@ -204,6 +209,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Index", pViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Management_Edit)]
         public ActionResult Update_Product(ProductViewModel pViewModel)
         { 
             try
@@ -272,6 +278,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Search", pViewModel);
         }
 
+        [AuthorizeUserAttribute(AppFunction.Product_Management_View)]
         public ActionResult Get_Product_By_Id(ProductViewModel pViewModel)
         {
             try

@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using MyLeoRetailerHelper.Logging;
+using MyLeoRetailer.Filters;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Master
 {
@@ -30,6 +31,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         //    return View();
         //}
 
+        [AuthorizeUserAttribute(AppFunction.Brand_Management_Access)]
         public ActionResult Index(BrandViewModel bViewModel)
         {
             
@@ -50,6 +52,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             //End
         }
 
+        [AuthorizeUserAttribute(AppFunction.Brand_Management_Create)]
 		public JsonResult Insert_Brand(BrandViewModel bViewModel)
 		{
 			try
@@ -69,6 +72,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			return Json(JsonConvert.SerializeObject(bViewModel));
 		}
 
+        [AuthorizeUserAttribute(AppFunction.Brand_Management_Edit)]
 		public JsonResult Update_Brand(BrandViewModel bViewModel)
 		{
 			try
@@ -126,6 +130,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 			return Json(JsonConvert.SerializeObject(bViewModel));
 		}
 
+        [AuthorizeUserAttribute(AppFunction.Brand_Management_View)]
         public JsonResult Get_Brand_By_Id(int Brand_Id)
         {
             BrandViewModel bViewModel = new BrandViewModel();

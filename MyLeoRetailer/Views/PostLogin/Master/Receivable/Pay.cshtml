@@ -69,7 +69,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                                <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
+                                <div class="input-group date" data-date="" data-date-format="MM-dd-yyyy">
                                     <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Receivable.Payament_Date" value="@((Model.Receivable.Payament_Date == DateTime.MinValue ? "" : Model.Receivable.Payament_Date.ToString("MM-dd-yyyy")))" readonly />
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
@@ -191,7 +191,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
-                                    <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
+                                    <div class="input-group date" data-date="" data-date-format="MM-dd-yyyy">
                                         <input type="text" class="form-control datepicker" id="txtCredit_Note_Date" name="Receivable.Credit_Note_Date" value="@((Model.Receivable.Credit_Note_Date == DateTime.MinValue ? "" : Model.Receivable.Credit_Note_Date.ToShortDateString()))" readonly />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
 

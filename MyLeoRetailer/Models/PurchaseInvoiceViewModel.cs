@@ -1,26 +1,26 @@
 ﻿using MyLeoRetailer.Models.Common;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.PurchaseInvoice;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MyLeoRetailerInfo.PurchaseOrderRequest;
 
-namespace MyLeoRetailer.Models.Transaction
+namespace MyLeoRetailer.Models
 {
-    public class PurchaseOrderRequestViewModel : IGridInfo, IQueryInfo
+    public class PurchaseInvoiceViewModel: IGridInfo, IQueryInfo
 	{
-        public PurchaseOrderRequestViewModel() 
+        public PurchaseInvoiceViewModel() 
 		{
 			Grid_Detail = new GridInfo();
 
 			Query_Detail = new QueryInfo();
 
-			PurchaseOrderRequest = new  PurchaseOrderRequestInfo();
+			PurchaseInvoice = new  PurchaseInvoiceInfo();
 
-            Filter = new Filter_Purchase_Order_Request();
+			Filter = new Filter_Purchase_Invoice();
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
@@ -28,9 +28,9 @@ namespace MyLeoRetailer.Models.Transaction
 
             Cookies = new LoginInfo();
 
-			Grid_Detail.Pager.DivObject = "divPurchaseOrderRequestPager";
+			Grid_Detail.Pager.DivObject = "divPurchaseInvoicePager";
 
-            Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Order_Requests";
+            Grid_Detail.Pager.CallBackMethod = "Get_Purchase_Invoices";
 		}
 
 		public GridInfo Grid_Detail
@@ -45,13 +45,13 @@ namespace MyLeoRetailer.Models.Transaction
 			set;
 		}
 
-		public  PurchaseOrderRequestInfo PurchaseOrderRequest
+		public  PurchaseInvoiceInfo PurchaseInvoice
 		{
 			get;
 			set;
 		}
 
-        public Filter_Purchase_Order_Request Filter
+		public Filter_Purchase_Invoice Filter
 		{
 			get;
 			set;
@@ -75,6 +75,5 @@ namespace MyLeoRetailer.Models.Transaction
             set;
         }
 	}
-
 	
 }

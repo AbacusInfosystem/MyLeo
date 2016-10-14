@@ -1,5 +1,6 @@
 ﻿using MyLeoRetailer.Common;
-using MyLeoRetailer.Models.Transaction;
+using MyLeoRetailer.Filters;
+using MyLeoRetailer.Models;
 using MyLeoRetailerHelper;
 using MyLeoRetailerHelper.Logging;
 using MyLeoRetailerInfo;
@@ -67,6 +68,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("Index", poreqViewModel);
         }        
 
+        [AuthorizeUserAttribute(AppFunction.Purchase_Order_Request_Management_Access)]
         public ActionResult Search(PurchaseOrderRequestViewModel poreqViewModel)
         {
             try
@@ -203,6 +205,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }
 
+        [AuthorizeUserAttribute(AppFunction.Purchase_Order_Request_Management_View)]
         public ActionResult Get_Purchase_Order_Request_By_Id(PurchaseOrderRequestViewModel poreqViewModel)
         {          
             try
@@ -227,7 +230,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("View", poreqViewModel);
         }
 
-
+        [AuthorizeUserAttribute(AppFunction.Purchase_Order_Request_Management_Create)]
         public ActionResult Insert_Purchase_Order_Request(PurchaseOrderRequestViewModel poreqViewModel)
         {
             try

@@ -159,8 +159,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                            <div class="input-group date" data-date="" data-date-format="dd-mm-yyyy">
-                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("dd-MM-yyyy")))" readonly />
+                            <div class="input-group date" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("MM-dd-yyyy")))" readonly />
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>
@@ -224,8 +224,8 @@
                         <div id="divChequedate" style="display:none" class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque date</span>
-                                <div class="input-group date"  data-date="" data-date-format="dd-mm-yyyy">
-                                    <input type="text" id="txtCheque_Date" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("dd-MM-yyyy")))" readonly/>
+                                <div class="input-group date"  data-date="" data-date-format="MM-dd-yyyy">
+                                    <input type="text" id="txtCheque_Date" class="form-control datepicker" name="Payable.Cheque_Date" value="@((Model.Payable.Cheque_Date == DateTime.MinValue ? "" : Model.Payable.Cheque_Date.ToString("MM-dd-yyyy")))" readonly/>
                                     <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                             </div>

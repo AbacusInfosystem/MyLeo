@@ -28,8 +28,8 @@ $(document).ready(function () {
 		},
 		messages: {
 
-		    "Color.Colour": { required: "Color is required." },
-		    "Color.Colour_Code": { required: "Color is required." },
+		    "Color.Colour": { required: "Color Name is required." },
+		    "Color.Colour_Code": { required: "rgb Color Code is required." },
              "Color.Color_Code": { required: "Color Code is required." }
         }
     });
