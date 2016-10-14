@@ -25,17 +25,16 @@
 
             var obj = $.parseJSON(response);
 
+            $("#drpArticle_No").html("");
+
+            $("#drpArticle_No").append("<option value=''>Select Article No.</option>");
+
+            $("#drpArticle_No").parents('.form-group').find('ul').html("");
+
+            $("#drpArticle_No").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Article No.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
            
             if (obj.PurchaseOrderRequest.Vendors.length > 0) {
-
-                $("#drpArticle_No").html("");
-
-                $("#drpArticle_No").append("<option value='0'>Select Article No.</option>");
-
-                $("#drpArticle_No").parents('.form-group').find('ul').html("");
-
-                $("#drpArticle_No").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Article No.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
+              
                 for (var j = 0; j < obj.PurchaseOrderRequest.Vendors.length; j++) {
                     debugger;
 
@@ -48,50 +47,6 @@
                 }
             }
 
-
-            if (obj.PurchaseOrderRequest.Brands.length > 0) {
-
-                $("#drpBrand").html("");
-
-                $("#drpBrand").append("<option value='0'>Select Brand</option>");
-
-                $("#drpBrand").parents('.form-group').find('ul').html("");
-
-                $("#drpBrand").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Brand</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-
-                for (var j = 0; j < obj.PurchaseOrderRequest.Brands.length; j++) {
-                    debugger;
-
-                    var i = j + 1;
-
-                    $("#drpBrand").append("<option value='" + obj.PurchaseOrderRequest.Brands[j].Brand_Id + "'>" + obj.PurchaseOrderRequest.Brands[j].Brand_Name + "</option>");
-
-                    $("#drpBrand").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Brands[j].Brand_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-                }
-            }
-
-            if (obj.PurchaseOrderRequest.Categories.length > 0) {
-                
-                $("#drpCategory").html("");
-
-                $("#drpCategory").append("<option value='0'>Select Category</option>");
-
-                $("#drpCategory").parents('.form-group').find('ul').html("");
-
-                $("#drpCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Category</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-                for (var j = 0; j < obj.PurchaseOrderRequest.Categories.length; j++) {
-                    debugger;
-                    var i = j + 1;
-
-                    $("#drpCategory").append("<option value='" + obj.PurchaseOrderRequest.Categories[j].Category_Id + "'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</option>");
-
-                    $("#drpCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-                }
-            }
 
             $("#drpColor").html("");
 
@@ -120,16 +75,108 @@
     Reset_Detalis_After_Delete();
 }
 
+function Set_Article_No(value) {
+    debugger;
+   
+    $(".Details").hide();
+
+    $("#hdf_Article_No").val(value);
+    
+    $.ajax({
+
+        url: "/PurchaseOrderRequest/Get_Details_By_Article_No",
+
+        data: { Article_No: value },
+
+        type: 'POST',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+
+            $("#drpSize_Group").html("");
+
+            $("#drpSize_Group").append("<option value=''>Select Size Group</option>");
+
+            $("#drpSize_Group").parents('.form-group').find('ul').html("");
+
+            $("#drpSize_Group").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Size Group</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+            if (obj.PurchaseOrderRequest.SizeGroups.length > 0) {
+
+                for (var j = 0; j < obj.PurchaseOrderRequest.SizeGroups.length; j++) {
+                    debugger;
+
+                    var i = j + 1;
+
+                    $("#drpSize_Group").append("<option value='" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Group_Id + "'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Group_Name + "</option>");
+
+                    $("#drpSize_Group").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Group_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
+            
+
+            if (obj.PurchaseOrderRequest.Brands.length > 0) {
+
+                $("#drpBrand").html("");
+
+                $("#drpBrand").append("<option value='0'>Select Brand</option>");
+
+                $("#drpBrand").parents('.form-group').find('ul').html("");
+
+                $("#drpBrand").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Brand</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+
+                for (var j = 0; j < obj.PurchaseOrderRequest.Brands.length; j++) {
+                    debugger;
+
+                    var i = j + 1;
+
+                    $("#drpBrand").append("<option value='" + obj.PurchaseOrderRequest.Brands[j].Brand_Id + "'>" + obj.PurchaseOrderRequest.Brands[j].Brand_Name + "</option>");
+
+                    $("#drpBrand").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Brands[j].Brand_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
+
+            if (obj.PurchaseOrderRequest.Categories.length > 0) {
+
+                $("#drpCategory").html("");
+
+                $("#drpCategory").append("<option value='0'>Select Category</option>");
+
+                $("#drpCategory").parents('.form-group').find('ul').html("");
+
+                $("#drpCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Category</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                for (var j = 0; j < obj.PurchaseOrderRequest.Categories.length; j++) {
+                    debugger;
+                    var i = j + 1;
+
+                    $("#drpCategory").append("<option value='" + obj.PurchaseOrderRequest.Categories[j].Category_Id + "'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</option>");
+
+                    $("#drpCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
+        }
+    });
+
+    Reset_Detalis_After_Delete();
+}
+
 function Set_Sub_Category_Drp_Id(value) {
     debugger;
 
-    var Vendor_Id = $("#hdf_Vendor_Id").val();
+    var Article_No = $("#hdf_Article_No").val();
 
     $.ajax({
 
-        url: "/PurchaseOrderRequest/Get_Details_By_Category_Vendor_Id",
+        url: "/PurchaseOrderRequest/Get_Details_By_Category_Article_No",
 
-        data: { Vendor_Id: Vendor_Id, Category_Id: value },
+        data: { Article_No: Article_No, Category_Id: value },
 
         type: 'POST',
 
@@ -159,8 +206,6 @@ function Set_Sub_Category_Drp_Id(value) {
 
                 }
             }
-
-
         }
     });
 
@@ -168,6 +213,8 @@ function Set_Sub_Category_Drp_Id(value) {
 }
 
 function Get_Sizes() {
+
+    Delete_Size_Row();
 
     var Size_Group_Id = $("#drpSize_Group").val();
 
@@ -190,6 +237,15 @@ function Get_Sizes() {
             $("#drpCenter_Size").parents('.form-group').find('ul').html("");
 
             $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Center Size.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+
+            $("#drpTemp_Center_Size").html("");
+
+            $("#drpTemp_Center_Size").append("<option value=''>Select Center Size.</option>");
+
+            $("#drpTemp_Center_Size").parents('.form-group').find('ul').html("");
+
+            $("#drpTemp_Center_Size").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Center Size.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
 
             if (obj.PurchaseOrderRequest.SizeGroups.length > 0) {
@@ -230,10 +286,17 @@ function Get_Sizes() {
 
                         $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='" + K + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
+                        //*************//
+
+                        $("#drpTemp_Center_Size").append("<option value='" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</option>");
+
+                        $("#drpTemp_Center_Size").parents('.form-group').find('ul').append("<li rel='" + K + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+                        
+                        //************//
                     }
                     else {
                         tblHtml += "<td>";
-                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + i + "-" + (j + 1) + "'></span>";
+                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'></span>";
                         tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id" + i + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                         tblHtml += "</td>";
                     }
@@ -264,7 +327,11 @@ function AddPurchaseOrderRequestDetails() {
 
     var tdSizeCount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestSizeRow_"]').size();
 
-    x = tdSizeCount - 1;
+    var x = tdSizeCount;
+
+    if (x != 0) {
+        var x = tdSizeCount - 1;
+    }
 
     var counter = 1;
 
@@ -520,18 +587,19 @@ function AddPurchaseOrderRequestDetails() {
 
     myTable.append(newRow);
 
+    $("#PurchaseOrderRequestItemRow_" + i).addClass("PORI_Row_" + x);
 
     debugger;
 
 
-    var $options = $("#drpCenter_Size > option").clone();
+    var $options = $("#drpTemp_Center_Size > option").clone();
 
     $("#textStart_Size_" + i).append($options);
 
     $("#textStart_Size_" + i).val('');
 
 
-    var $optionss = $("#drpCenter_Size > option").clone();
+    var $optionss = $("#drpTemp_Center_Size > option").clone();
 
     $("#textEnd_Size_" + i).append($optionss);
 
@@ -553,8 +621,13 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
     debugger;
 
     var tdSizeCount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestSizeRow_"]').size();
+    
+    var x = tdSizeCount;
 
-    x = tdSizeCount - 1;
+    if (x != 0)
+    {
+        var x = tdSizeCount - 1;
+    }
 
     var counter = 1;
 
@@ -797,15 +870,16 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
 
     myTable.append(newRow);
 
+    $("#PurchaseOrderRequestItemRow_" + i).addClass("PORI_Row_" + x);
     
-    var $options = $("#drpCenter_Size > option").clone();
+    var $options = $("#drpTemp_Center_Size > option").clone();
 
     $("#textStart_Size_" + i).append($options);
 
     $("#textStart_Size_" + i).val('');
 
 
-    var $optionss = $("#drpCenter_Size > option").clone();
+    var $optionss = $("#drpTemp_Center_Size > option").clone();
 
     $("#textEnd_Size_" + i).append($optionss);
 
@@ -1023,6 +1097,39 @@ function Reset_Details() {
    
     $("#textSize_Difference").val(0);
     //document.getElementById("drpCenter_Size").selectedIndex = 0;
+}
+
+function Delete_Size_Row() {
+
+    var temptablecount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestSizeRow_"]').size();
+
+    k = temptablecount;
+
+    if (k != 0) {
+        k = k - 1;
+    }
+
+    var count = $("#tblPurchaseOrderRequestItems").find(".PORI_Row_" + k).size();
+
+    if (count == 0) {
+        $("#tblPurchaseOrderRequestItems").find("[id='PurchaseOrderRequestSizeRow_" + k + "']").remove();
+    }
+
+}
+
+function Disable_AddDetalis_Button() {
+
+    var temptablecount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestItemRow_"]').size();
+
+    j = temptablecount;
+
+    for (var i = 0; i < j; i++) {
+
+        // $("#continue-order-details" + i).parents('tr').find(".POI_Row_" + k).attr("disabled", true);
+
+        document.getElementById("continue-order-details" + i).disabled = true;
+    }
+
 }
 
 function Reset_Detalis_After_Delete() {

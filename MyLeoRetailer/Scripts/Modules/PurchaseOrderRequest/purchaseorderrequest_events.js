@@ -48,11 +48,18 @@
     });
     
     $("#btnAddSizesPurchaseOrderRequest").click(function () {
-        Get_Sizes();
 
-        document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = true;
+        if ($("#frmPurchaseOrderRequest").valid()) {
 
-        $(".Details").show();
+            Get_Sizes();
+
+            Disable_AddDetalis_Button();
+
+            document.getElementById("btnAddSizesPurchaseOrderRequest").disabled = true;
+
+            $(".Details").show();
+
+        }
     });
 
     $("#btnResetPurchaseOrderRequest").click(function () {
