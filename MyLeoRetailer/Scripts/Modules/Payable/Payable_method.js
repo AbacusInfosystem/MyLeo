@@ -2,11 +2,11 @@
 function Get_Payable(Purchase_Invoice_Id) {
 
     alert(Purchase_Credit_Note_Id);
-  
+
     $("#hdf_Purchase_Invoice_Id").val(Purchase_Invoice_Id);
 
     //$("#hdf_Purchase_Credit_Note_Id").val(Purchase_Credit_Note_Id);
-   
+
     $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");
     $("#frmPayable").submit();
 }
@@ -40,84 +40,95 @@ function Get_Credit_Note_Amount_By_Id(id) {
 
             $("[name='Payable.Credit_Note_Amount']").val(obj.Payable.Credit_Note_Amount);
 
-            //Calculate_Fianl_Amount_Using_Credit_Note_Amount();
+            Calculate_Fianl_Amount_Using_Credit_Note_Amount();
+            //$("#frmPay").validate();
+            //$("#txtCN_amount").rules("add", { checkCreditnoteamount: true });
 
-            $("#txtCN_amount").rules("add", { checkCreditnoteamount: true });
+            //jQuery.validator.addMethod("checkCreditnoteamount", function (value, element) {
 
-            jQuery.validator.addMethod("checkCreditnoteamount", function (value, element) {
+            //    var result = true;
+            //    var final_amt = parseFloat($("#txtFinal_amount").val());
+            //    var creditnote_amt = parseFloat($("#txtCN_amount").val());
 
-                var result = true;
-                var final_amt = parseFloat($("#txtFinal_amount").val());
-                var creditnote_amt = parseFloat($("#txtCN_amount").val());
+            //    if (final_amt != "" && final_amt != 0) {
+            //        alert("500")
+            //        if (final_amt >= creditnote_amt) {
+            //            result = true;
+            //            Calculate_Fianl_Amount_Using_Credit_Note_Amount();
+            //        }
+            //        else {
+            //            result = false;
+            //        }
+            //    }
+            //    return result;
 
-                if (final_amt != "" && final_amt != 0) {
-                    alert("500")
-                    if (final_amt >= creditnote_amt) {
-                        result = true;
-                        Calculate_Fianl_Amount_Using_Credit_Note_Amount();
-                    }
-                    else {
-                        result = false;
-                    }
-                }
-                return result;
-
-            }, "Entered amount is greater than final amount.");
+            //}, "Entered amount is greater than final amount.");
 
         }
     });
 }
 
 function Calculate_Fianl_Amount_Using_Credit_Note_Amount() {
+    debugger
 
-    var finalamount = parseFloat($("#txtFinal_amount").val());
+    if ($("#drpCredit_Note_No").val() != 0) {
 
-    var CNamount = parseFloat($("#txtCN_amount").val());
+        $("#hdnChangebleFAmt").val(0);
 
-    //var paidamount = parseFloat($("#txtPaid_Amount").val());
+        var finalamount = parseFloat($("#txtFinal_amount").val());
 
-    var newfinalamount = finalamount - CNamount;
+        var CNamount = parseFloat($("#txtCN_amount").val());
 
-    //var discount = parseFloat($("#txtDiscount").val());
+        var newfinalamount = finalamount - CNamount;
 
-    //var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((abcamount * discount) / 100);
-
-    //$("#txtDiscount_amount").val(discountAmt.toFixed(2));
-
-    //var finalamount = abcamount - discountAmt;
-
-    $("#txtFinal_amount").val(newfinalamount.toFixed(2));
-
+        if (newfinalamount <= 0)
+            $("#lblFinalPriceError").show();
+        else 
+        $("#txtFinal_amount").val(newfinalamount.toFixed(2)); 
+        
+    }
 }
 
 function Calculate_Fianl_Amount_Using_Discount() {
-   
-    var finalamount = parseFloat($("#txtFinal_amount").val());
+    debugger
+    if ($("#txtDiscount").val() != 0 && $("#txtDiscount").val() != '') {
 
-    var discount = parseFloat($("#txtDiscount").val());
+        $("#hdnChangebleFAmt").val(0);
 
-    var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((finalamount * discount) / 100);
+        var finalamount = parseFloat($("#txtFinal_amount").val());
 
-    $("#txtDiscount_amount").val(discountAmt.toFixed(2));
+        var discount = parseFloat($("#txtDiscount").val());
 
-    var newfinalamount = finalamount - discountAmt;
+        var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((finalamount * discount) / 100);
 
-    $("#txtFinal_amount").val(newfinalamount.toFixed(2));
+        $("#txtDiscount_amount").val(discountAmt.toFixed(2));
 
+        var newfinalamount = finalamount - discountAmt;
+
+        if (newfinalamount <= 0)
+            $("#lblFinalPriceError").show(); 
+        else
+            $("#txtFinal_amount").val(newfinalamount.toFixed(2));
+         
+    }
 }
 
 function FinalAmount() {
+    debugger
+    if ($("#txtFinal_amount").val() != 0 && $("#txtFinal_amount").val() != '') {
+        var FinalAmount = parseFloat($("#txtFinal_amount").val());
 
-    var FinalAmount = parseFloat($("#txtFinal_amount").val());
+        var PaidAmount = parseFloat($("#txtPaid_Amount").val());
 
-    var PaidAmount = parseFloat($("#txtPaid_Amount").val());
-
-    var abcamount = FinalAmount - PaidAmount;
-
-    $("#txtFinal_amount").val(abcamount.toFixed(2));
-
-    document.getElementById("txtPaid_Amount").disabled = true;
-
+        if (FinalAmount >= PaidAmount) {
+            var abcamount = FinalAmount - PaidAmount;
+            $("#txtFinal_amount").val(abcamount.toFixed(2));
+        }
+        else { 
+            $("#lblPaidPriceError").show();
+        }
+        //document.getElementById("txtPaid_Amount").disabled = true;
+    }
 }
 
 function Cancle() {
@@ -131,7 +142,7 @@ function Save_Payable_Data() {
 		{
 		    Payable: {
 
-		        
+
 
 		        Payable_Item_Id: $("[name='Payable.Payable_Item_Id']").val(),
 
@@ -161,7 +172,7 @@ function Save_Payable_Data() {
 
 		        Bank_Name: $("[name='Payable.Bank_Name']").val(),
 
-                Person_Name: $("[name='Payable.Person_Name']").val(),
+		        Person_Name: $("[name='Payable.Person_Name']").val(),
 
 		        Remark: $("[name='Payable.Remark']").val(),
 
@@ -177,6 +188,8 @@ function Save_Payable_Data() {
 
 		        Debit_Card_No: $("[name='Payable.Debit_Card_No']").val(),
 
+		        Employee: $("[name='Payable.Employee']").val(),
+		        Employee_Id: $("[name='Payable.Employee_Id']").val(),
 		        //Gift_Voucher_No: $("[name='Payable.Gift_Voucher_No']").val(),
 		    }
 		}
@@ -184,13 +197,13 @@ function Save_Payable_Data() {
     var url = "";
 
 
-          if ($("[name='Payable.Payable_Item_Id']").val() == "" || $("[name='Payable.Payable_Item_Id']").val() == 0) {
+    if ($("[name='Payable.Payable_Item_Id']").val() == "" || $("[name='Payable.Payable_Item_Id']").val() == 0) {
 
-              url = "/Payable/Insert_Payable";
-            }
-            else {
-              url = "/Payable/Update_Payable";
-            }
+        url = "/Payable/Insert_Payable";
+    }
+    else {
+        url = "/Payable/Update_Payable";
+    }
 
     //alert(Payable_Item_Id);
 
@@ -221,7 +234,7 @@ function Save_Payable_Data() {
             document.getElementById("txtPaid_Amount").disabled = false;
 
             document.getElementById("btnResetPay").disabled = false;
-          
+
 
         }
     });
@@ -283,7 +296,7 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<tr>";
 
-       
+
 
         htmlText += "<td>";
 
@@ -383,8 +396,8 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "</td>";
 
-        
-        
+
+
 
         //if (data.Payable.Status != "Payment Done") {
         //htmlText += "<td>";
@@ -399,8 +412,8 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "</tr>";
     }
-//}
-//else {
+    //}
+    //else {
     //    htmlText += "<tr>";
 
     //    htmlText += "<td colspan='3'> No Record found.";
@@ -408,16 +421,16 @@ function Bind_Payable_Grid_Items(data) {
     //    htmlText += "</td>";
 
     //    htmlText += "</tr>";
-   // }
+    // }
 
-  
+
     $('#tblPayableItems').html(htmlText);
 
     //Friendly_Message(data);
 
 
-    
-    
+
+
 }
 
 function EditPayableData(id) {
@@ -531,9 +544,9 @@ function ClearPayableData() {
     $("#txtCN_amount").val('');
 
     $("#txtDiscount").val('');
-   
+
     $("#txtDiscount_amount").val('');
-  
+
     $("#txtFinal_amount").val('');
 
     $("#txtPerson_Name").val('');
@@ -542,7 +555,7 @@ function ClearPayableData() {
 
     $("#txtPayament_Date").val('');
 
-    
+
 }
 
 
