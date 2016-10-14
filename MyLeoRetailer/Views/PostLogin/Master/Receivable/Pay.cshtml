@@ -50,7 +50,7 @@
                             <div class="form-group auto-complete">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control invoice-filter autocomplete-text" name="Receivable.Branch_Name" id="text_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
+                                    <input type="text" class="form-control invoice-filter autocomplete-text" name="Receivable.Branch_Name" id="text_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Branch" data-field="Branch_ID" data-param="hdnCookiesBranches" data-col=" branch_id,branch_name" data-headernames="Branch">
                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                     <input type="hidden" id="hdnBranchID" name="Receivable.Branch_ID" class="auto-complete-value" />
                                     <input type="hidden" id="hdnBranchName" name="Receivable.Branch_Name" class="auto-complete-label" />
@@ -80,7 +80,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
-                                <input type="text" class="form-control input-sm" name="Receivable.Net_Amount" id="txtNet_Amount" value="@Model.Receivable.Net_Amount" placeholder="Total Amount" maxlength="10" />
+                                <input type="text" class="form-control input-sm" name="Receivable.Net_Amount" id="txtNet_Amount" value="@(Model.Receivable.Net_Amount == 0 ? "" : Model.Receivable.Net_Amount.ToString())" placeholder="Total Amount" maxlength="10" />
                             </div>
                         </div>
 
@@ -297,7 +297,7 @@
                         <div id="divDebitcardno" class="col-md-3">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
-                                <input type="text" class="form-control input-sm" name="Receivable.Paid_Amount" id="txtPaid_Amount" @*onclick="javascript: CalculateDiscount();"*@ @*onchange="javascript: BalanceAmount();"*@ value="@Model.Receivable.Paid_Amount" placeholder="Paid Amount" maxlength="10" />
+                                <input type="text" class="form-control input-sm" name="Receivable.Paid_Amount" id="txtPaid_Amount" @*onclick="javascript: CalculateDiscount();"*@ @*onchange="javascript: BalanceAmount();"*@ value="@(Model.Receivable.Paid_Amount == 0 ? "" : Model.Receivable.Paid_Amount.ToString())" placeholder="Paid Amount" maxlength="10" />
                             </div>
                         </div>
 
