@@ -238,6 +238,6 @@ jQuery.validator.addMethod("checkBalanceamount", function (value, element) {
     }
     return result;
 
-}, "Entered amount is greater than balance amount.");
+}, "Entered amount is greater than Total Amount.");
 
 

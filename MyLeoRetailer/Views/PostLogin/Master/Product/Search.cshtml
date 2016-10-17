@@ -43,13 +43,14 @@
                                     <input type="text" class="form-control" placeholder="Enter Product article no." name="Filter.Article_No" />
                                 </div>
                             </div>*@
-                        <div class="col-md-10">
+                        <div class="col-md-3">
                             <div class="form-group auto-complete">
                                 <div class="input-group">
-                                    <input type="text" class="form-control brand-filter autocomplete-text" name="Filter.Article_No" id="txtArticle_No" placeholder="Enter Product article no." value="" data-table="Product" data-col="Product_Id,Article_No" data-headernames="Product">
+                                    <input type="text" class="form-control brand-filter autocomplete-text" name="Filter.Article_No" id="txtArticle_No" placeholder="Enter Product article no." data-table="Product" data-col="Product_Id,Article_No" data-headernames="Product">
                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                    <input type="hidden" id="hdnProduct_Id" value="" name="Filter.Product_Id" class="auto-complete-value" />
-                                    <input type="hidden" id="hdnArticle_No" value="" name="Filter.Article_No" class="auto-complete-label" />
+                                    <input type="hidden" id="hdnProduct_Id" value="" name="Product.Product_Id"  />
+                                    <input type="hidden" id="hdnArticle_No" value="" name="Filter.Article_No" class="auto-complete-value" />
+                                   
                                 </div>
                             </div>
                         </div>
@@ -59,9 +60,9 @@
                         <div class="block">
                             <div class="col-md-10" style="padding-top: 20px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;"> 
                                 <div class="btn-group"> 
-                                    <a class="btn btn-success active" role="button" href="@Url.Action("Index", "Product")">Create </a>
-                                    <button class="btn btn-danger active" id="btnEdit" style="display:none">Edit</button> 
-                                    <button class="btn btn-success active" id="btnProductMRP" style="display:none">Add Product MRP</button>
+                                    <a type="button" class="btn btn-success active" role="button" href="@Url.Action("Index", "Product")">Create </a>
+                                    <button type="button" class="btn btn-danger active" id="btnEdit" style="display:none">Edit</button> 
+                                    <button type="button" class="btn btn-success active" id="btnProductMRP" style="display:none">Add Product MRP</button>
                                 </div>
 
                             </div>

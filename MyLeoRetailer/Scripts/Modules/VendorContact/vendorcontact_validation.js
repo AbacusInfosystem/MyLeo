@@ -21,11 +21,11 @@ $(function () {
             },
 
             "VendorContact.Mobile1": {
-                number: true,
+                digits: true,
             },
 
             "VendorContact.Mobile2": {
-                number: true,
+                digits: true,
             },
 
             "VendorContact.Email_Id": {

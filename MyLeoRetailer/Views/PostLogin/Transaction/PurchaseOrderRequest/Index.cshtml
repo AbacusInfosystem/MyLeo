@@ -40,7 +40,7 @@
 
         <div class="row">
             @*Added by vinod Mane on 03/10/2016*@
-            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 130px;">
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
             <div class="block">
                 <h4 style="margin-top: 0px;">Branch Details.</h4>
 
@@ -58,15 +58,15 @@
             </div>
             @*End*@
 
-            <div class="col-md-14" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 130px;">
-
+            <div class="col-md-8" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
+                <div class="block">
                 <input type="hidden" class="form-control input-sm" name="PurchaseOrderRequest.Purchase_Order_Request_Id" id="hdf_Purchase_Order_Request_Id" value="@Model.PurchaseOrderRequest.Purchase_Order_Request_Id" />
 
                 <h4 style="margin-top: 0px;">Vendor details.</h4>
 
                 <input type="hidden" id="hdf_Vendor_Id" />
 
-
+               
 
                 <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                 <div class="form-group col-md-4">
@@ -88,10 +88,8 @@
                 </div>
 
             </div>
-
         </div>
-
-
+        </div>
 
         <div class="row">
             <div class="col-md-12">
@@ -105,6 +103,20 @@
         <div class="row">
             <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
 
+                <input type="hidden" id="hdf_Article_No" />
+                <div class="block">
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
+                        <select class="form-control " id="drpArticle_No" name="PurchaseOrderRequest.Article_No" onchange="Set_Article_No(this.value)">
+                            <option value="">Select Article No.</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
+
                 <div class="block">
 
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
@@ -112,17 +124,6 @@
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Size group.</span>
                         <select class="form-control " id="drpSize_Group" name="PurchaseOrderRequest.Size_Group_Id" onchange="Show_Button()">
                             <option value="">Select Size Group</option>
-                            @foreach (var item in Model.PurchaseOrderRequest.SizeGroups)
-                            {
-                                if (Model.PurchaseOrderRequest.Size_Group_Id == item.Size_Group_Id)
-                                {
-                                    <option value="@item.Size_Group_Id" selected="selected">@item.Size_Group_Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@item.Size_Group_Id">@item.Size_Group_Name</option>
-                                }
-                            }
                         </select>
                     </div>
 
@@ -130,7 +131,7 @@
 
             </div>
 
-            <div class="col-md-9" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
+            <div class="col-md-6" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
 
                 <div class="block" style="margin-top:26px;">
                     <div class="btn-group">
@@ -146,7 +147,7 @@
                     <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Color.</span>
-                        <select class="form-control select" id="drpColor" name="PurchaseOrder.Colour_Id">
+                        <select class="form-control select" id="drpColor" name="PurchaseOrderRequest.Colour_Id">
                             <option value="">Select Color</option>
                         </select>
                     </div>
@@ -154,29 +155,26 @@
                 </div>
 
             </div>
-        </div>
 
-        <div class="row Details">
 
-            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
+            <div class="col-md-3" hidden>
 
                 <div class="block">
-                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
-                    <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
-                        <select class="form-control " id="drpArticle_No" name="PurchaseOrderRequest.Article_No" >
-                            <option value="">Select Article No.</option>
-                        </select>
-                    </div>
 
                     <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
-                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrderRequest.Center_Size">
+                        <select class="form-control " id="drpTemp_Center_Size">
                             <option value="">Select Center Size</option>
                         </select>
                     </div>
+
+                    </div>
+
                 </div>
+                       
+
             </div>
+
+        <div class="row Details">
 
             <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
 
@@ -234,6 +232,17 @@
                 </div>
             </div>
 
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
+
+                <div class="block">
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
+                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrder.Center_Size">
+                            <option value="">Select Center Size</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
@@ -337,6 +346,7 @@
 
             </div>
         </div>
+
     </form>
 
 </div>

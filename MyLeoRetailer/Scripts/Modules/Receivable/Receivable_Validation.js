@@ -64,13 +64,48 @@ $(function () {
 
     jQuery.validator.addMethod("checkBalanceamount", function (value, element) {
 
+        debugger;
+
         var result = true;
+
+        var cash = 0;
+        var credit = 0;
+        var card = 0;
+        var gift = 0;
+        var check = 0;
+
+
+        if ($("#txtCash_amount").val() != "") {
+            cash = $("#txtCash_amount").val()
+        }
+
+        if ($("#txtCheque_Amount").val() != "") {
+            credit = $("#txtCheque_Amount").val()
+        }
+
+        if ($("#txtCredit_Note_Amount").val() != "") {
+            card = $("#txtCredit_Note_Amount").val()
+        }
+
+        if ($("#txtCard_Amount").val() != "") {
+            gift = $("#txtCard_Amount").val()
+        }
+
+        if ($("#txtGift_Voucher_Amount").val() != "") {
+            check = $("#txtGift_Voucher_Amount").val()
+        }
+
         var bal_amt = parseFloat($("#txtBalance_Amount").val());
+
         var paid_amt = parseFloat($("#txtPaid_Amount").val());
+
+        var total = parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check);
+
+        //$("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
 
         if (bal_amt != "" && bal_amt != 0) {
 
-            if (bal_amt >= paid_amt) {
+            if (bal_amt >= total) {
                 result = true;
                 calculate(element);
             }
@@ -82,7 +117,7 @@ $(function () {
         }
         return result;
 
-    }, "Entered amount is greater than balance amount.");
+    }, "Entered amount is greater than Balance Amount.");
 
 });
 
