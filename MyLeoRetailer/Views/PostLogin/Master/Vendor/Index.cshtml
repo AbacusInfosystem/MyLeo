@@ -66,7 +66,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpVendor_Type" style="color: #333" class="">Vendor Type</label>
-                                        <select class="form-control input-sm" id="drpVendor_Type" name="Vendor.Vendor_Type">
+                                        <select class="form-control" id="drpVendor_Type" name="Vendor.Vendor_Type">
                                             <option value="0">Select Vendor Type</option>
 
                                             @foreach (var item in LookupInfo.Get_Vendor_Types())
@@ -184,7 +184,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpVendor_Vat_Rate" style="color: #333" class="">Vendor Vat Rate</label>
-                                        <select class="form-control input-sm" id="drpVendor_Vat_Rate" name="Vendor.Vendor_Vat_Rate">
+                                        <select class="form-control" id="drpVendor_Vat_Rate" name="Vendor.Vendor_Vat_Rate">
                                             <option value="0">Select Vat Rate</option>
 
                                             @foreach (var item in Model.VATS)
@@ -240,7 +240,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpVendor_CST_Rate" style="color: #333" class="">Vendor CST Rate</label>
-                                        <select class="form-control input-sm" id="drpVendor_CST_Rate" name="Vendor.Vendor_CST_Rate">
+                                        <select class="form-control" id="drpVendor_CST_Rate" name="Vendor.Vendor_CST_Rate">
                                             <option value="0">Select CST Rate</option>
 
                                             @foreach (var item in Model.CSTS)
@@ -287,7 +287,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpBrand" style="color: #333" class="">Brand</label>
-                                        <select class="form-control input-sm" id="drpBrand" name="Vendor.Brand_Id">
+                                        <select class="form-control" id="drpBrand" name="Vendor.Brand_Id">
                                             <option value="0">Select Brand</option>
                                             @foreach (var item in Model.Brands)
                                             {
@@ -315,7 +315,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpCategory" style="color: #333" class="">Category</label>
-                                        <select class="form-control input-sm" id="drpCategory" name="Vendor.Category_Id" onchange="Get_SubCategorylist(this.value)"> @* //Added By Vinod Mane on 21/09/2016*@
+                                        <select class="form-control" id="drpCategory" name="Vendor.Category_Id" onchange="Get_SubCategorylist(this.value)"> @* //Added By Vinod Mane on 21/09/2016*@
                                             <option value="0">Select Category</option>
 
                                             @foreach (var item in Model.Categories)
@@ -344,7 +344,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpSubCategory" style="color: #333" class="">Sub Category</label>
-                                        <select class="form-control input-sm" id="drpSubCategory" name="Vendor.SubCategory_Id">
+                                        <select class="form-control" id="drpSubCategory" name="Vendor.SubCategory_Id">
                                             <option value="0">Select Sub Category</option>
 
                                             @foreach (var item in Model.SubCategorys)
