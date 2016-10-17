@@ -40,7 +40,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
             sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
 
-            sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
+            sqlParams.Add(new SqlParameter("@Employee_Id", Payable.Employee_Id));
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
             sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
             sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
@@ -129,7 +129,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Discount_Amount", Payable.Discount_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
             sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
-            sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
+            sqlParams.Add(new SqlParameter("@Employee_Id", Payable.Employee_Id));
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
             sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
             sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
@@ -445,9 +445,13 @@ namespace MyLeoRetailerRepo
 
                 payable.Bank_Name = Convert.ToString(dr["Bank_Name"]);
 
-            if (!dr.IsNull("Person_Name"))
+            if (!dr.IsNull("Employee_Id"))
 
-                payable.Person_Name = Convert.ToString(dr["Person_Name"]);
+                payable.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+
+            if (!dr.IsNull("Employee_Name"))
+
+                payable.Employee = Convert.ToString(dr["Employee_Name"]);
 
             if (!dr.IsNull("Remark"))
 

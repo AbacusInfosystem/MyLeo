@@ -1,7 +1,5 @@
 ﻿function Set_Vendor_Id(value) {
 
-    //$("#tblPurchaseOrderItems").find("tr:gt(0)").remove();
-
     $(".Details").hide();
 
     //added by vinod mane on 10/10/2016
@@ -34,8 +32,7 @@
             $("#drpArticle_No").parents('.form-group').find('ul').html("");
 
             $("#drpArticle_No").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Article No.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-
+            
             if (obj.PurchaseOrder.Vendors.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrder.Vendors.length; j++) {
@@ -49,7 +46,78 @@
 
                 }
             }
-           // $("#drpArticle_No").val();
+
+            $("#drpColor").html("");
+
+            $("#drpColor").append("<option value=''>Select Color</option>");
+
+            $("#drpColor").parents('.form-group').find('ul').html("");
+
+            $("#drpColor").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Color</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+            if (obj.PurchaseOrder.Colors.length > 0) {
+
+                for (var j = 0; j < obj.PurchaseOrder.Colors.length; j++) {
+                    debugger;
+
+                    var i = j + 1;
+
+                    $("#drpColor").append("<option value='" + obj.PurchaseOrder.Colors[j].Colour_Id + "'>" + obj.PurchaseOrder.Colors[j].Colour + "</option>");
+
+                    $("#drpColor").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Colors[j].Colour + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
+           
+        }
+    });
+
+   
+    Get_Consolidate_Purchase_Orders(value);
+   
+    debugger;
+       
+}
+
+function Set_Article_No(value) {
+
+    $("#hdf_Article_No").val(value);
+
+    $(".Details").hide();
+       
+    $.ajax({
+
+        url: "/PurchaseOrder/Get_Details_By_Article_No",
+
+        data: { Article_No: value },
+
+        type: 'POST',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            $("#drpSize_Group").html("");
+
+            $("#drpSize_Group").append("<option value=''>Select Size Group</option>");
+
+            $("#drpSize_Group").parents('.form-group').find('ul').html("");
+
+            $("#drpSize_Group").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Size Group</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+            if (obj.PurchaseOrder.SizeGroups.length > 0) {
+
+                for (var j = 0; j < obj.PurchaseOrder.SizeGroups.length; j++) {
+                    debugger;
+
+                    var i = j + 1;
+
+                    $("#drpSize_Group").append("<option value='" + obj.PurchaseOrder.SizeGroups[j].Size_Group_Id + "'>" + obj.PurchaseOrder.SizeGroups[j].Size_Group_Name + "</option>");
+
+                    $("#drpSize_Group").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SizeGroups[j].Size_Group_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
 
             $("#drpBrand").html("");
 
@@ -60,12 +128,12 @@
             $("#drpBrand").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Brand</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
             if (obj.PurchaseOrder.Brands.length > 0) {
-                                
+
                 for (var j = 0; j < obj.PurchaseOrder.Brands.length; j++) {
                     debugger;
 
                     var i = j + 1;
-                    
+
                     $("#drpBrand").append("<option value='" + obj.PurchaseOrder.Brands[j].Brand_Id + "'>" + obj.PurchaseOrder.Brands[j].Brand_Name + "</option>");
 
                     $("#drpBrand").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Brands[j].Brand_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
@@ -97,38 +165,56 @@
                 }
             }
 
-            $("#drpColor").html("");
+           
+        }
+    });
+    
+}
 
-            $("#drpColor").append("<option value=''>Select Color</option>");
+function Set_Sub_Category_Drp_Id(value) {
+    debugger;
 
-            $("#drpColor").parents('.form-group').find('ul').html("");
+    var Article_No = $("#hdf_Article_No").val();
 
-            $("#drpColor").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Color</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+    $.ajax({
 
-            if (obj.PurchaseOrder.Colors.length > 0) {
+        url: "/PurchaseOrder/Get_Details_By_Category_Article_No",
 
-                for (var j = 0; j < obj.PurchaseOrder.Colors.length; j++) {
+        data: { Article_No: Article_No, Category_Id: value },
+
+        type: 'POST',
+
+        success: function (response) {
+
+            var obj = $.parseJSON(response);
+
+            $("#drpSubCategory").html("");
+
+            $("#drpSubCategory").append("<option value=''>Select SubCategory.</option>");
+
+            $("#drpSubCategory").parents('.form-group').find('ul').html("");
+
+            $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select SubCategory.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+
+            if (obj.PurchaseOrder.SubCategories.length > 0) {
+
+                for (var j = 0; j < obj.PurchaseOrder.SubCategories.length; j++) {
                     debugger;
-
                     var i = j + 1;
 
-                    $("#drpColor").append("<option value='" + obj.PurchaseOrder.Colors[j].Colour_Id + "'>" + obj.PurchaseOrder.Colors[j].Colour + "</option>");
+                    $("#drpSubCategory").append("<option value='" + obj.PurchaseOrder.SubCategories[j].Sub_Category_Id + "'>" + obj.PurchaseOrder.SubCategories[j].Sub_Category + "</option>");
 
-                    $("#drpColor").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.Colors[j].Colour + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+                    $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SubCategories[j].Sub_Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                 }
             }
+
+
         }
     });
 
-    //$("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').html('');
 
-    //$("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').html('');
-
-    Get_Consolidate_Purchase_Orders(value);
-   
-    debugger;
-       
 }
 
 function Get_Consolidate_Purchase_Orders(value) {
@@ -570,54 +656,9 @@ function Get_Consolidate_Purchase_Orders(value) {
 
 }
 
-function Set_Sub_Category_Drp_Id(value) {
-    debugger;
-
-    var Vendor_Id = $("#hdf_Vendor_Id").val();
-
-    $.ajax({
-
-        url: "/PurchaseOrder/Get_Details_By_Category_Vendor_Id",
-
-        data: { Vendor_Id: Vendor_Id, Category_Id: value },
-
-        type: 'POST',
-
-        success: function (response) {
-
-            var obj = $.parseJSON(response);
-
-            $("#drpSubCategory").html("");
-
-            $("#drpSubCategory").append("<option value=''>Select SubCategory.</option>");
-
-            $("#drpSubCategory").parents('.form-group').find('ul').html("");
-
-            $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select SubCategory.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-              
-
-            if (obj.PurchaseOrder.SubCategories.length > 0) {
-          
-                for (var j = 0; j < obj.PurchaseOrder.SubCategories.length; j++) {
-                    debugger;
-                    var i = j + 1;
-
-                    $("#drpSubCategory").append("<option value='" + obj.PurchaseOrder.SubCategories[j].Sub_Category_Id + "'>" + obj.PurchaseOrder.SubCategories[j].Sub_Category + "</option>");
-                    
-                    $("#drpSubCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SubCategories[j].Sub_Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-                }
-            }
-
-          
-        }
-    });
-
-
-}
-
 function Get_Sizes()
 {
+    Delete_Size_Row();
 
     var Size_Group_Id = $("#drpSize_Group").val();
 
@@ -641,6 +682,15 @@ function Get_Sizes()
             $("#drpCenter_Size").parents('.form-group').find('ul').html("");
 
             $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Center Size.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+
+            $("#drpTemp_Center_Size").html("");
+
+            $("#drpTemp_Center_Size").append("<option value=''>Select Center Size.</option>");
+
+            $("#drpTemp_Center_Size").parents('.form-group').find('ul').html("");
+
+            $("#drpTemp_Center_Size").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Center Size.</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
 
             if (obj.PurchaseOrder.SizeGroups.length > 0) {
@@ -683,11 +733,20 @@ function Get_Sizes()
 
                         $("#drpCenter_Size").parents('.form-group').find('ul').append("<li rel='" + K + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
                         
+
+                        //*************//
+
+                        $("#drpTemp_Center_Size").append("<option value='" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</option>");
+
+                        $("#drpTemp_Center_Size").parents('.form-group').find('ul').append("<li rel='" + K + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrder.SizeGroups[j].Size_Name + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+
+                        //************//
                     }
                     else
                     {
                         tblHtml += "<td>";
-                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + i + "-" + (j + 1) + "'></span>";
+                        tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='Size" + (j + 1) + "-" + i + "'></span>";
                         tblHtml += "<input type='hidden' class='form-control input-sm' value='0' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + i + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                         tblHtml += "</td>";
                     }
@@ -715,10 +774,17 @@ function Get_Sizes()
 }
 
 function AddPurchaseOrderDetails() {
+
+
   
     var tdSizeCount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
 
-    x = tdSizeCount - 1;
+    var x = tdSizeCount;
+
+    if (x != 0) {
+        var x = tdSizeCount - 1;
+    }
+
 
     var counter = 1;
 
@@ -983,16 +1049,16 @@ function AddPurchaseOrderDetails() {
 
     myTable.append(newRow);
 
+    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
     
-    
-    var $options = $("#drpCenter_Size > option").clone();
+    var $options = $("#drpTemp_Center_Size > option").clone();
 
     $("#textStart_Size_" + i).append($options);
 
     $("#textStart_Size_" + i).val('');
 
 
-    var $optionss = $("#drpCenter_Size > option").clone();
+    var $optionss = $("#drpTemp_Center_Size > option").clone();
 
     $("#textEnd_Size_" + i).append($optionss);
 
@@ -1014,7 +1080,11 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     var tdSizeCount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
 
-    x = tdSizeCount - 1;
+    var x = tdSizeCount;
+
+    if (x != 0) {
+        var x = tdSizeCount - 1;
+    }
 
     var counter = 1;
 
@@ -1054,6 +1124,10 @@ function ContinuePurchaseOrderDetailsData(j) {
     var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
 
     var i = temptablecount;
+
+    if (i > 0) {
+        document.getElementById("continue-order-details" + (i - 1)).disabled = true;
+    }    
 
     tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
 
@@ -1260,14 +1334,16 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     myTable.append(newRow);
 
-    var $options = $("#drpCenter_Size > option").clone();
+    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
+
+    var $options = $("#drpTemp_Center_Size > option").clone();
 
     $("#textStart_Size_" + i).append($options);
 
     $("#textStart_Size_" + i).val('');
 
 
-    var $optionss = $("#drpCenter_Size > option").clone();
+    var $optionss = $("#drpTemp_Center_Size > option").clone();
 
     $("#textEnd_Size_" + i).append($optionss);
 
@@ -1495,6 +1571,39 @@ function Reset_Details() {
     //document.getElementById("drpCenter_Size").selectedIndex = 0;
 }
 
+function Disable_AddDetalis_Button() {
+
+    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
+
+    j = temptablecount;
+    
+    for (var i = 0; i < j; i++) {
+
+       // $("#continue-order-details" + i).parents('tr').find(".POI_Row_" + k).attr("disabled", true);
+
+        document.getElementById("continue-order-details" + i).disabled = true;
+    }  
+   
+}
+
+function Delete_Size_Row() {
+
+    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
+
+    k = temptablecount;
+
+    if (k != 0) {
+        k = k - 1;
+    }
+
+    var count = $("#tblPurchaseOrderItems").find(".POI_Row_" + k).size();
+
+    if (count == 0) {
+        $("#tblPurchaseOrderItems").find("[id='PurchaseOrderSizeRow_" + k + "']").remove();
+    }
+
+}
+
 function Reset_Detalis_After_Delete() {
 
     debugger;
@@ -1548,6 +1657,8 @@ function DeletePurchaseOrderDetailsData(i) {
 
     debugger;
 
+    //*************//
+
     var id = $("#hdnItem_Ids_" + i).val();
 
     if (id != 0 || id != '')
@@ -1557,11 +1668,36 @@ function DeletePurchaseOrderDetailsData(i) {
 
     $("#tblPurchaseOrderItems").find("[id='PurchaseOrderItemRow_" + i + "']").remove();
 
+
+    //*************//
+
+           
     ReArrangePurchaseOrderSizeData();
 
     ReArrangePurchaseOrderDetailsData();
+
+
+    //*************//
+
+
+    //var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
+
+    //k = temptablecount;
+
+    //for (var x = 0; x < k; x++) {
+
+    //    var count = $("#PurchaseOrderItemRow_" + i).find(".POI_Row_" + x).size();
+
+    //    if (count == 0) {
+    //        $("#tblPurchaseOrderItems").find("[id='PurchaseOrderSizeRow_" + x + "']").remove();
+    //    }
+    //}
+
+    //*************//
     
     Reset_Detalis_After_Delete();
+
+   
     
 }
 
@@ -2004,11 +2140,12 @@ function ClearAllDropdownlist()
     //$("#drpCategory").val('');
     //$("#drpSubCategory").val('');   
     //$("#drpCenter_Size").val('');
-    $("#drpSize_Group").val('');
 
     $("#drpArticle_No").html("");
     $("#drpArticle_No").append("<option value=''>Select Article No.</option>");
     $("#drpArticle_No").parents('.form-group').find('ul').html("");
+
+    $("#drpSize_Group").val('');
 
     $("#drpBrand").html("");
     $("#drpBrand").append("<option value=''>Select Brand</option>");

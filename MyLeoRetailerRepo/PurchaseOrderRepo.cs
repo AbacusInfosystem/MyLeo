@@ -18,6 +18,7 @@ using iTextSharp.text;
 using System.Transactions;
 using MyLeoRetailerRepo.Common;
 using MyLeoRetailerInfo.Color;
+using MyLeoRetailerInfo.Size;
 
 
 namespace MyLeoRetailerRepo
@@ -560,26 +561,6 @@ namespace MyLeoRetailerRepo
             return Vendors;
         }
 
-        public List<BrandInfo> Get_Brand_By_Vendor_Id(int Vendor_Id)
-        {
-            List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
-
-            List<BrandInfo> Brands = new List<BrandInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Brand_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
-            foreach (DataRow dr in dt.Rows)
-            {
-                BrandInfo Brand = new BrandInfo();
-
-                Brand.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
-
-                Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
-
-                Brands.Add(Brand);
-            }
-            return Brands;
-        }
-
         public List<ColorInfo> Get_Color_By_Vendor_Id(int Vendor_Id)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
@@ -601,13 +582,53 @@ namespace MyLeoRetailerRepo
         }
 
 
-        public List<CategoryInfo> Get_Category_By_Vendor_Id(int Vendor_Id)
+        public List<SizeGroupInfo> Get_Size_Group_By_Article_No(string Article_No)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+            parameters.Add(new SqlParameter("@Article_No", Article_No));
+
+            List<SizeGroupInfo> SizeGroups = new List<SizeGroupInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Size_Group_By_Article_no.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                SizeGroupInfo SizeGroup = new SizeGroupInfo();
+
+                SizeGroup.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+
+                SizeGroup.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+                SizeGroups.Add(SizeGroup);
+            }
+            return SizeGroups;
+        }
+        
+        public List<BrandInfo> Get_Brand_By_Article_No(string Article_No)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Article_No", Article_No));
+
+            List<BrandInfo> Brands = new List<BrandInfo>();
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Brand_By_Article_no.ToString(), CommandType.StoredProcedure);
+            foreach (DataRow dr in dt.Rows)
+            {
+                BrandInfo Brand = new BrandInfo();
+
+                Brand.Brand_Id = Convert.ToInt32(dr["Brand_Id"]);
+
+                Brand.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+
+                Brands.Add(Brand);
+            }
+            return Brands;
+        }
+
+        public List<CategoryInfo> Get_Category_By_Article_No(string Article_No)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Article_No", Article_No));
 
             List<CategoryInfo> Categories = new List<CategoryInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Category_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Category_By_Article_no.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
                 CategoryInfo Category = new CategoryInfo();
@@ -621,20 +642,21 @@ namespace MyLeoRetailerRepo
             return Categories;
         }
 
-        public List<SubCategoryInfo> Get_Sub_Category_By_Vendor_Id(int Vendor_Id, int Category_Id)
+        public List<SubCategoryInfo> Get_Sub_Category_By_Article_No(string Article_No, int Category_Id)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+
+            parameters.Add(new SqlParameter("@Article_No", Article_No));
 
             parameters.Add(new SqlParameter("@Category_Id", Category_Id));
 
             List<SubCategoryInfo> SubCategories = new List<SubCategoryInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Sub_Category_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Sub_Category_By_Article_no.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
                 SubCategoryInfo SubCategory = new SubCategoryInfo();
 
-                SubCategory.Sub_Category_Id = Convert.ToInt32(dr["SubCategory_Id"]);
+                SubCategory.Sub_Category_Id = Convert.ToInt32(dr["Sub_Category_Id"]);
 
                 SubCategory.Sub_Category = Convert.ToString(dr["Sub_Category"]);
 
