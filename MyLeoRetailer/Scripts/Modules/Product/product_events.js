@@ -98,4 +98,11 @@ $(function () {
         });
     });
 
+    $('.remove-image-src').click(function (event) {
+        $(this).closest(".image").find(".ImgSrc").attr("src", "/UploadFiles/");
+        $(this).closest(".image").find(".prod_img_src").val('');
+        $(this).closest(".image").find(".prod_img_name").val('');
+        //$("#img_" + i).attr("src", "/UploadedFiles/");
+    });
+
 });
