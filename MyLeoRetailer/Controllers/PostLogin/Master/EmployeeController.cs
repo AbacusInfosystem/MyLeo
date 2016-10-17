@@ -468,6 +468,27 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(check, JsonRequestBehavior.AllowGet);
         }
         //End
+        //Added by vinod mane on 17/10/2016
+        public JsonResult Compare_Dates(DateTime DOB_Date)
+        {
+            bool check = true;
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
+            try
+            {
+                DateTime Today_Date = DateTime.Now.Date;
 
+                if (Today_Date <= DOB_Date)
+                {
+                    check = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Employee Controller - Compare_Dates " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        // END
     }
 }

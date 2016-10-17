@@ -1,7 +1,9 @@
 ﻿$(function () {
 
     
-   
+    $("#divBankName").hide();
+    $("#divCreditCardNo").hide();
+
     $("#btnGiftVoucherSave").click(function () {
         if ($("#frmGiftVoucher").valid()) {
             //alert(("#hdnVendorContact_Id"));
@@ -22,7 +24,7 @@
         $("#frmGiftVoucher").submit();           
     });
 
-    if ($('#hdn_GiftVoucherId').val() != "") {
+    if ( $('#hdn_GiftVoucherId').val() != 0) {
         $("#btnCancel").attr('disabled', true);//Added by vinod mane on 10/10/2016
         if ($('#mode').val() == 2) {
            
@@ -64,4 +66,12 @@
     });
    
     //End
+
+    $("#btnCancel").click(function () {
+        if ($("#frmGiftVoucher").valid()) {
+          
+            $("#divBankName").hide();
+            $("#divCreditCardNo").hide();
+        }
+    });
 });
