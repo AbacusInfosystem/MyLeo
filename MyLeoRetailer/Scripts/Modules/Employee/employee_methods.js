@@ -14,14 +14,3 @@ function ResetForm() {
 
 
 
-//function checkDate() {
-  
-//    var EnterDOB = document.getElementById("txt_DOB").value; 
-//    var date = new Date(Date.parse(EnterDOB.replace(" -", "")));
-//    alert(new Date(Date.now(Date())));
-//    if (date >= new Date(Date.now())) {
-//        alert("Entered date is greater than today's date");       
-//    }
-//}
-
-

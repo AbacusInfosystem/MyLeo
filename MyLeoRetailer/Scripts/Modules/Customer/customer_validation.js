@@ -50,7 +50,31 @@
                 checkemailid: true,
             },
             
-           
+            //Added by vinod mane on 17/10/2016
+            "Customer.Customer_DOB": {
+               
+                chkdate: true
+            },
+            
+            "Customer.Customer_Spouse_DOB": {
+               
+                chkSpousebirth: true
+            },
+
+            "Customer.Customer_Wedding_Anniversary": {
+
+                chk_Wedding_Anniversary: true
+            },
+            
+            "Customer.Customer_Child1_DOB": {
+
+                     chk_Child1_DOB: true
+             },
+            "Customer.Customer_Child2_DOB": {
+
+                chk_Child2_DOB: true
+            },
+            //end
 
 
         },
@@ -106,9 +130,10 @@
             //Added By Vinod Mane on 23/09/2016
             "Customer.Customer_Email2": {
               email: "Invalide e-mail"
-             }
+             },
             //end
 
+           
         }
     });
 
@@ -216,5 +241,131 @@
         return result;
 
     }, "You can not enter same email id.");
+
+    //Added by vinod mane on 17/10/2016
+    $.validator.addMethod('chkdate', function (value) {
+
+        var result = true;
+
+        var DOB_Date = $("#txt_DOB").val();
+        
+        if (DOB_Date != '') {
+
+            var ServiceUrl = "/Customer/Compare_Dates";
+            $.ajax({
+                data: { DOB_Date: DOB_Date },
+                url: ServiceUrl,
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;                    
+                }
+            });
+        }
+        return result;
+
+    }, 'Please Select valid Birth Date');
+
+   
+    $.validator.addMethod('chkSpousebirth', function (value) {
+
+        var result = true;
+
+        var DOB_Date = $("#dtp_Spousebirth").val();
+
+        if (DOB_Date != '') {
+
+            var ServiceUrl = "/Customer/Compare_Dates";
+            $.ajax({
+                data: { DOB_Date: DOB_Date },
+                url: ServiceUrl,
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                }
+            });
+        }
+        return result;
+
+    }, 'Please Select valid Spouse Birth Date');
+
+   
+    $.validator.addMethod('chk_Wedding_Anniversary', function (value) {
+
+        var result = true;
+
+        var DOB_Date = $("#dtp_Weddingannniv").val();
+
+        if (DOB_Date != '') {
+
+            var ServiceUrl = "/Customer/Compare_Dates";
+            $.ajax({
+                data: { DOB_Date: DOB_Date },
+                url: ServiceUrl,
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                }
+            });
+        }
+        return result;
+
+    }, 'Please Select valid Wedding annniversary date');
+
+    $.validator.addMethod('chk_Child1_DOB', function (value) {
+
+        var result = true;
+
+        var DOB_Date = $("#dtp_Child1_DOB").val();
+
+        if (DOB_Date != '') {
+
+            var ServiceUrl = "/Customer/Compare_Dates";
+            $.ajax({
+                data: { DOB_Date: DOB_Date },
+                url: ServiceUrl,
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                }
+            });
+        }
+        return result;
+
+    }, 'Please Select valid Child 1 Birth Date');
+
+   $.validator.addMethod('chk_Child2_DOB', function (value) {
+
+        var result = true;
+
+        var DOB_Date = $("#dtp_Child2_DOB").val();
+
+        if (DOB_Date != '') {
+
+            var ServiceUrl = "/Customer/Compare_Dates";
+            $.ajax({
+                data: { DOB_Date: DOB_Date },
+                url: ServiceUrl,
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                }
+            });
+        }
+        return result;
+
+   }, 'Please Select valid  Child 2 Birth Date');
+
+    //End
+
 });
 //End
