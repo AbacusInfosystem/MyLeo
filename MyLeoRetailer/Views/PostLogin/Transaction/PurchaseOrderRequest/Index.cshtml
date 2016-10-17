@@ -4,6 +4,12 @@
 <script src="~/Scripts/Modules/PurchaseOrderRequest/purchaseorderrequest_methods.js"></script>
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/PurchaseOrderRequest/purchaseorderrequest_validation.js"></script>
+<style>
+    .input-group-addon {
+        background-color: #33414e !important;
+        color: #fff !important;
+    }
+    </style>
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -35,54 +41,54 @@
         <div class="row">
             @*Added by vinod Mane on 03/10/2016*@
             <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
-                <div class="block">
-                    <h4 style="margin-top: 0px;">Branch Details.</h4>
+            <div class="block">
+                <h4 style="margin-top: 0px;">Branch Details.</h4>
 
-                    <div class="form-group auto-complete">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch Name.</span>
-                        <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text" id="textBrand" name="Branch" placeholder="Branch name" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branches" data-param="hdnCookiesBranches" data-field="Branch_ID" />
-                            <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                            <input type="hidden" id="hdnBranch_Id" value="" name="PurchaseOrderRequest.Branch_Id" class="auto-complete-value" />
-                            <input type="hidden" id="hdnBranch_Name" value="" name="PurchaseOrderRequest.Branch_Name" class="auto-complete-label" />
-                        </div>
+                <div class="form-group auto-complete">
+                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch Name.</span>
+                    <div class="input-group">
+                        <input type="text" class="form-control autocomplete-text" id="textBrand" name="Branch" placeholder="Branch name" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branches" data-param="hdnCookiesBranches" data-field="Branch_ID" />
+                        <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                        <input type="hidden" id="hdnBranch_Id" value="" name="PurchaseOrderRequest.Branch_Id" class="auto-complete-value" />
+                        <input type="hidden" id="hdnBranch_Name" value="" name="PurchaseOrderRequest.Branch_Name" class="auto-complete-label" />
                     </div>
-
                 </div>
+
+            </div>
             </div>
             @*End*@
 
             <div class="col-md-8" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
                 <div class="block">
-                    <input type="hidden" class="form-control input-sm" name="PurchaseOrderRequest.Purchase_Order_Request_Id" id="hdf_Purchase_Order_Request_Id" value="@Model.PurchaseOrderRequest.Purchase_Order_Request_Id" />
+                <input type="hidden" class="form-control input-sm" name="PurchaseOrderRequest.Purchase_Order_Request_Id" id="hdf_Purchase_Order_Request_Id" value="@Model.PurchaseOrderRequest.Purchase_Order_Request_Id" />
 
-                    <h4 style="margin-top: 0px;">Vendor details.</h4>
+                <h4 style="margin-top: 0px;">Vendor details.</h4>
 
-                    <input type="hidden" id="hdf_Vendor_Id" />
+                <input type="hidden" id="hdf_Vendor_Id" />
 
+               
 
-
-                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
-                    <div class="form-group col-md-4">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor name.</span>
-                        <select class="form-control select" name="PurchaseOrderRequest.Vendor_Id" onchange="Set_Vendor_Id(this.value)">
-                            <option value="">Select Vendor</option>
-                            @foreach (var item in Model.PurchaseOrderRequest.Vendors)
+                <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                <div class="form-group col-md-4">
+                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor name.</span>
+                    <select class="form-control select" name="PurchaseOrderRequest.Vendor_Id" onchange="Set_Vendor_Id(this.value)">
+                        <option value="">Select Vendor</option>
+                        @foreach (var item in Model.PurchaseOrderRequest.Vendors)
+                        {
+                            if (Model.PurchaseOrderRequest.Vendor_Id == item.Vendor_Id)
                             {
-                                if (Model.PurchaseOrderRequest.Vendor_Id == item.Vendor_Id)
-                                {
-                                    <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
-                                }
-                                else
-                                {
-                                    <option value="@item.Vendor_Id">@item.Vendor_Name</option>
-                                }
+                                <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
                             }
-                        </select>
-                    </div>
-
+                            else
+                            {
+                                <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                            }
+                        }
+                    </select>
                 </div>
+
             </div>
+        </div>
         </div>
 
         <div class="row">
@@ -161,12 +167,12 @@
                         </select>
                     </div>
 
-                </div>
+                    </div>
 
-            </div>
+                </div>
                        
 
-        </div>
+            </div>
 
         <div class="row Details">
 

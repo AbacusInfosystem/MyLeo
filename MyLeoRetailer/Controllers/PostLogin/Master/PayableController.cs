@@ -65,17 +65,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             //End
             return View("Index", pViewModel);
-        }
-
-        //public ActionResult Get_Payable(PayableViewModel pViewModel)
-        
-        //{
-        //    PayableRepo pRepo = new PayableRepo();
-
-        //    pViewModel.Payable.PurchaseInvoice_Details = pRepo.Get_PurchaseInvoice(pViewModel.Payable);
-
-        //    return Index(pViewModel);
-        //}
+        } 
 
         public JsonResult Get_Payable(PayableViewModel pViewModel)
         {
@@ -115,21 +105,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         [AuthorizeUserAttribute(AppFunction.Payable_Management_View)]
         public ActionResult Get_Payable_Details_By_Id(PayableViewModel pViewModel)
         {
-          
-
-            try
-
-            {
- 
-
+           
+            try 
+            {  
                 pViewModel.CreditNote = pRepo.Get_Credit_Note_Details_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 
                 pViewModel.Payable = pRepo.Get_Payable_Details_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 
-                pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id);
-
-               
-              
+                pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id); 
             }
             catch (Exception ex)
             {
@@ -162,14 +145,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         [AuthorizeUserAttribute(AppFunction.Payable_Management_Create)]
         public JsonResult Insert_Payable(PayableViewModel pViewModel)
         {
-            pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-            pViewModel.Payable.Created_By = pViewModel.Cookies.User_Id;
-
-            pViewModel.Payable.Created_On = DateTime.Now;
+            pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");  
 
             try
             {
+                Set_Date_Session(pViewModel.Payable);
 
                 pViewModel.Payable.Payable_Id = pRepo.Insert_Payable(pViewModel.Payable);
 
@@ -197,46 +177,46 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return Json(JsonConvert.SerializeObject(pViewModel));
         }
 
-        [AuthorizeUserAttribute(AppFunction.Payable_Management_Edit)]
-        public JsonResult Update_Payable(PayableViewModel pViewModel)
-        {
-            pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+        //[AuthorizeUserAttribute(AppFunction.Payable_Management_Edit)]
+        //public JsonResult Update_Payable(PayableViewModel pViewModel)
+        //{
+        //    pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-            pViewModel.Payable.Updated_By = pViewModel.Cookies.User_Id;
+        //    pViewModel.Payable.Updated_By = pViewModel.Cookies.User_Id;
 
-            pViewModel.Payable.Updated_On = DateTime.Now;
+        //    pViewModel.Payable.Updated_On = DateTime.Now;
 
-            try
-            {
-                int Purchase_Invoice_Id = pViewModel.Payable.Purchase_Invoice_Id;
+        //    try
+        //    {
+        //        int Purchase_Invoice_Id = pViewModel.Payable.Purchase_Invoice_Id;
 
-               // pViewModel.Payable.Purchase_Invoice_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
+        //       // pViewModel.Payable.Purchase_Invoice_Id = pRepo.Update_Payable_Items_Data(pViewModel.Payable);
 
-                pRepo.Insert_Payable(pViewModel.Payable);
+        //        pRepo.Insert_Payable(pViewModel.Payable);
 
-                pRepo.Update_Payable_Items_Data(pViewModel.Payable);
+        //        pRepo.Update_Payable_Items_Data(pViewModel.Payable);
 
-                pViewModel.Payable.Purchase_Invoice_Id = Purchase_Invoice_Id;
+        //        pViewModel.Payable.Purchase_Invoice_Id = Purchase_Invoice_Id;
 
-                pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id);
+        //        pViewModel.Payables = pRepo.Get_Payable_Items_By_Id(pViewModel.Payable.Payable_Id);
 
-                pViewModel.Payable = pRepo.Get_Payable_Data_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
+        //        pViewModel.Payable = pRepo.Get_Payable_Data_By_Id(pViewModel.Payable.Purchase_Invoice_Id);
 
-                pViewModel.FriendlyMessages.Add(MessageStore.Get("PYND02"));
+        //        pViewModel.FriendlyMessages.Add(MessageStore.Get("PYND02"));
 
-            }
+        //    }
 
-            catch (Exception ex)
-            {
-                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                Logger.Error("Payable Controller - Update_Payable  " + ex.Message);//Added by vinod mane on 06/10/2016
+        //    catch (Exception ex)
+        //    {
+        //        pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //        Logger.Error("Payable Controller - Update_Payable  " + ex.Message);//Added by vinod mane on 06/10/2016
 
-            }
+        //    }
 
-            //TempData["pViewModel"] = pViewModel;
+        //    //TempData["pViewModel"] = pViewModel;
 
-            return Json(JsonConvert.SerializeObject(pViewModel));
-        }
+        //    return Json(JsonConvert.SerializeObject(pViewModel));
+        //}
 
 
     }
