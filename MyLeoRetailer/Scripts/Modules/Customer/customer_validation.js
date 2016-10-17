@@ -23,26 +23,35 @@
 
             "Customer.Customer_Mobile1": {
                 digits: true,
+                checkmobileno: true,
             },
 
             "Customer.Customer_Mobile2": {
                 digits: true,
+                checkmobileno: true,
             },
 
             "Customer.Customer_Landline1": {
                 digits: true,
+                checklandlineno: true,
             },
 
             "Customer.Customer_Landline2": {
                 digits: true,
+                checklandlineno: true,
             },
 
             "Customer.Customer_Email1": {
                 email: true,
+                checkemailid: true,
             },
             "Customer.Customer_Email2": {
                 email: true,
-            }
+                checkemailid: true,
+            },
+            
+           
+
 
         },
         messages: {
@@ -147,5 +156,65 @@
         return result;
 
     }, "Customer is already exists.");
+
+    jQuery.validator.addMethod("checkmobileno", function (value, element) {
+
+        var result = true;
+        var mobile1 = parseFloat($("#txtCustomer_Mobile1").val());
+        var mobile2 = parseFloat($("#txtCustomer_Mobile2").val());
+
+        if (mobile1 != "" && mobile1 != 0 && mobile2 != "" && mobile2 != 0) {
+
+            if (mobile1 == mobile2) {
+                result = false;
+                //calculate(element);
+            }
+            else {
+                result = true;
+            }
+        }
+        return result;
+
+    }, "You can not enter same mobile no.");
+
+    jQuery.validator.addMethod("checklandlineno", function (value, element) {
+
+        var result = true;
+        var Landline1 = parseFloat($("#txtCustomer_Landline1").val());
+        var Landline2 = parseFloat($("#txtCustomer_Landline2").val());
+
+        if (Landline1 != "" && Landline1 != 0 && Landline2 != "" && Landline2 != 0) {
+
+            if (Landline1 == Landline2) {
+                result = false;
+                //calculate(element);
+            }
+            else {
+                result = true;
+            }
+        }
+        return result;
+
+    }, "You can not enter same land-line no.");
+
+    jQuery.validator.addMethod("checkemailid", function (value, element) {
+
+        var result = true;
+        var Email1 = ($("#txtCustomer_Email1").val());
+        var Email2 = ($("#txtCustomer_Email2").val());
+
+        if (Email1 != ""  && Email2 != "" ) {
+
+            if (Email1 == Email2) {
+                result = false;
+                //calculate(element);
+            }
+            else {
+                result = true;
+            }
+        }
+        return result;
+
+    }, "You can not enter same email id.");
 });
 //End

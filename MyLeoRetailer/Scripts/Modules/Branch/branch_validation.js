@@ -59,7 +59,11 @@ $(document).ready(function () {
 
             "Branch.Branch_Landline2": {digits: true },
 
-            "Branch.Branch_Pincode": {digits: true},
+            "Branch.Branch_Pincode": { digits: true },
+
+            "Branch.Branch_Landline2": { checkmobileno: true },
+
+            "Branch.Branch_Landline1": { checkmobileno: true },
         },
         messages: {
 
@@ -89,6 +93,26 @@ $(document).ready(function () {
         return result;
 
     }, "Branch Name is already exists.");
+
+    jQuery.validator.addMethod("checkmobileno", function (value, element) {
+
+        var result = true;
+        var Landline1 = parseFloat($("#txtBranch_Landline1").val());
+        var Landline2 = parseFloat($("#txtBranch_Landline2").val());
+
+        if (Landline1 != "" && Landline1 != 0 && Landline2 != "" && Landline2 != 0) {
+
+            if (Landline1 == Landline2) {
+                result = false;
+                //calculate(element);
+            }
+            else {
+                result = true;
+            }
+        }
+        return result;
+
+    }, "You can not enter same mobile no.");
 
 });
 //End

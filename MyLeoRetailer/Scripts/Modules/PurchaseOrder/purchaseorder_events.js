@@ -65,12 +65,19 @@
         }
     });    
 
-    $("#btnAddSizesPurchaseOrder").click(function () {               
-        Get_Sizes();
+    $("#btnAddSizesPurchaseOrder").click(function () {
 
-        document.getElementById("btnAddSizesPurchaseOrder").disabled = true;
+        if ($("#frmPurchaseOrder").valid()) {
 
-        $(".Details").show();
+            Get_Sizes();
+
+            Disable_AddDetalis_Button();
+
+            document.getElementById("btnAddSizesPurchaseOrder").disabled = true;
+
+            $(".Details").show();
+
+        }
     });
 
     $("#btnAddDetailsPurchaseOrder").click(function () {
