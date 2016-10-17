@@ -561,13 +561,13 @@ namespace MyLeoRetailerRepo
             return Vendors;
         }
 
-        public List<ColorInfo> Get_Color_By_Vendor_Id(int Vendor_Id)
+        public List<ColorInfo> Get_Color_By_Article_No(string Article_No)
         {
             List<SqlParameter> parameters = new List<SqlParameter>();
-            parameters.Add(new SqlParameter("@Vendor_Id", Vendor_Id));
+            parameters.Add(new SqlParameter("@Article_No", Article_No));
 
             List<ColorInfo> Colors = new List<ColorInfo>();
-            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Color_By_Vendor_Id.ToString(), CommandType.StoredProcedure);
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Color_By_Article_No.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {
                 ColorInfo Color = new ColorInfo();

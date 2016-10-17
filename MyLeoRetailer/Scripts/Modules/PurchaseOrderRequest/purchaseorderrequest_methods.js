@@ -48,27 +48,7 @@
             }
 
 
-            $("#drpColor").html("");
-
-            $("#drpColor").append("<option value=''>Select Color</option>");
-
-            $("#drpColor").parents('.form-group').find('ul').html("");
-
-            $("#drpColor").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Color</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-            if (obj.PurchaseOrderRequest.Colors.length > 0) {
-
-                for (var j = 0; j < obj.PurchaseOrderRequest.Colors.length; j++) {
-                    debugger;
-
-                    var i = j + 1;
-
-                    $("#drpColor").append("<option value='" + obj.PurchaseOrderRequest.Colors[j].Colour_Id + "'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</option>");
-
-                    $("#drpColor").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-                }
-            }
+           
         }
     });
 
@@ -158,6 +138,28 @@ function Set_Article_No(value) {
                     $("#drpCategory").append("<option value='" + obj.PurchaseOrderRequest.Categories[j].Category_Id + "'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</option>");
 
                     $("#drpCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
+
+            $("#drpColor").html("");
+
+            $("#drpColor").append("<option value=''>Select Color</option>");
+
+            $("#drpColor").parents('.form-group').find('ul').html("");
+
+            $("#drpColor").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Color</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+            if (obj.PurchaseOrderRequest.Colors.length > 0) {
+
+                for (var j = 0; j < obj.PurchaseOrderRequest.Colors.length; j++) {
+                    debugger;
+
+                    var i = j + 1;
+
+                    $("#drpColor").append("<option value='" + obj.PurchaseOrderRequest.Colors[j].Colour_Id + "'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</option>");
+
+                    $("#drpColor").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                 }
             }

@@ -46,6 +46,8 @@
 
                                 <input type="hidden" class="form-control input-sm" name="PurchaseReturn.hdn_Tax_Percentage" id="hdf_hdn_Tax_Percentage" value="@Model.PurchaseReturn.hdn_Tax_Percentage">
 
+                              
+
                                 <h4 style="margin-top: 0px;">Primary information.</h4>
 
                                 @*<div class="form-group">
@@ -55,10 +57,20 @@
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Retirn Date.</span>
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                                        <input type="text" class="form-control datepicker" name="PurchaseReturn.Purchase_Return_Date" id="txtPurchase_Return_Date" value="@((Model.PurchaseReturn.Purchase_Return_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseReturn.Purchase_Return_Date.ToString("MM-dd-yyyy")))" />
-                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
+                                    @if (Model.PurchaseReturn.Purchase_Return_Date != DateTime.MinValue)
+                                    {
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="PurchaseReturn.Purchase_Return_Date" id="txtPurchase_Return_Date" value="@Model.PurchaseReturn.Purchase_Return_Date.ToShortDateString()" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="PurchaseReturn.Purchase_Return_Date" id="txtPurchase_Return_Date" value="@DateTime.Now.ToShortDateString()" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    }                                   
                                 </div>
                             </div>
                         </div>
@@ -162,12 +174,13 @@
                                         <td>                                            
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);" placeholder="Enter SKU to search" value="" data-table="Purchase_Invoice_Item" data-col="Purchase_Order_Id,SKU_Code" data-headernames="SKU Code" data-param="hdf_Purchase_Invoice_Id" data-field="Purchase_Invoice_Id" />
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);" placeholder="Enter SKU to search" value="" data-table="Purchase_Invoice_Item" data-col="Quantity,SKU_Code" data-headernames="SKU Code" data-param="hdf_Purchase_Invoice_Id" data-field="Purchase_Invoice_Id" />
                                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                                    <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseReturn.PurchaseReturns[0].Purchase_Order_Id" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnQuantity_0" value="" class="auto-complete-value" />
                                                     <input type="hidden" id="hdnSKU_No_0" value="" name="PurchaseReturn.PurchaseReturns[0].SKU_Code" class="auto-complete-label" />
                                                 </div>
                                             </div>
+                                            <input type="hidden" id="hdnPurchase_Order_Id_0" value="" name="PurchaseReturn.PurchaseReturns[0].Purchase_Order_Id" />
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Article_No" id="textArticle_No_0" readonly />
@@ -198,7 +211,7 @@
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" maxlength="10" />
-                                            <input class="form-control input-sm" type="hidden" name="" id="hdnQuantity_0" value="" /> 
+                                            @*<input class="form-control input-sm" type="hidden" name="" id="hdnQuantity_0" value="" />*@ 
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].WSR_Price" id="textWSR_Price_0" readonly />
@@ -390,10 +403,20 @@
 
                                 <div class="form-group col-md-3">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">LR Date.</span>
-                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                                        <input type="text" class="form-control datepicker" name="PurchaseReturn.Lr_Date" id="txtLr_Date" value="@((Model.PurchaseReturn.Lr_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.PurchaseReturn.Lr_Date.ToString("MM-dd-yyyy")))" />
-                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                    </div>
+                                    @if (Model.PurchaseReturn.Lr_Date != DateTime.MinValue)
+                                    {
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="PurchaseReturn.Lr_Date" id="txtLr_Date" value="@Model.PurchaseReturn.Lr_Date.ToShortDateString()" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="PurchaseReturn.Lr_Date" id="txtLr_Date" value="@DateTime.Now.ToShortDateString()" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    } 
                                 </div>
 
 

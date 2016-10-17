@@ -74,19 +74,50 @@ namespace MyLeoRetailerRepo
                 if (table_Name == "Product_SKU_Mapping")
                 {
                     if (fieldName == "Purchase_Order_Id")
-                    {
-                        strquery = "select distinct Sum(POIS.Quantity) as Quantity, PSM.SKU_Code ";
-                        strquery += "from Product_SKU_Mapping PSM, Purchase_Order PO, Purchase_Order_Item POI,Purchase_Order_Item_Sizes POIS, Product P ";
-                        strquery += "where ";
-                        strquery += "PO.Purchase_Order_Id=POI.Purchase_Order_Id ";
-                        strquery += "AND POIS.Purchase_Order_Id = POI.Purchase_Order_Id  ";
-                        strquery += "AND POI.Article_No=P.Article_No  ";
-                        strquery += "AND POIS.Purchase_Order_Item_Id =POI.Purchase_Order_Item_Id ";
-                        strquery += "AND POI.Colour_Id=PSM.Colour_Id ";
-                        strquery += "AND POIS.Size_Id=PSM.Size_Id ";
-                        strquery += "AND P.Product_Id=PSM.Product_Id  ";                        
-                        strquery += "AND PO.Purchase_Order_Id= @Purchase_Order_Id ";
-                        strquery += "group by PO.Purchase_Order_Id, PSM.SKU_Code ";
+                    {                       
+                        strquery = "IF OBJECT_ID('tempdb..#Temp1') IS NOT NULL " +
+                                    "DROP TABLE #Temp1 " +
+
+                                    "IF OBJECT_ID('tempdb..#Temp2') IS NOT NULL " +
+                                    "DROP TABLE #Temp2 " +
+
+                                    "IF OBJECT_ID('tempdb..#Temp3') IS NOT NULL " +
+                                    "DROP TABLE #Temp3 " +
+
+                                    "create table #Temp1(    POI int,     SKU Varchar(50),     Qty int ) " +
+                                    "create table #Temp2(    POI int,     SKU Varchar(50),     Qty int ) " +
+                                    "create table #Temp3(    POI int,     SKU Varchar(50),     Qty int ) " +
+
+                                    "insert into #Temp1 " +
+
+                                    "select distinct PO.Purchase_Order_Id, PSM.SKU_Code,Sum(POIS.Quantity) as Quantity " +
+                                    "from Product_SKU_Mapping PSM, Purchase_Order PO, Purchase_Order_Item POI,Purchase_Order_Item_Sizes POIS, Product P " +
+                                    "where PO.Purchase_Order_Id=POI.Purchase_Order_Id " +
+                                    "AND POIS.Purchase_Order_Id = POI.Purchase_Order_Id " +
+                                    "AND POI.Article_No=P.Article_No " +
+                                    "AND POIS.Purchase_Order_Item_Id =POI.Purchase_Order_Item_Id " +
+                                    "AND POI.Colour_Id=PSM.Colour_Id " +
+                                    "AND POIS.Size_Id=PSM.Size_Id " +
+                                    "AND P.Product_Id=PSM.Product_Id " +
+                                    "AND PO.Purchase_Order_Id= @Purchase_Order_Id " +
+                                    "group by PSM.SKU_Code, PO.Purchase_Order_Id " +
+
+                                    "insert into #Temp2  " +
+                                    "select t.POI,t.SKU,t.Qty-poi.Quantity as Qty from  Purchase_Invoice_Item poi,#temp1 t " +
+                                    "where t.POI=poi.Purchase_Order_Id and   t.SKU=poi.SKU_Code " +
+                                    
+                                    "insert into #Temp3 " +
+                                    "SELECT t1.POI,t1.SKU, " +
+                                    "case " +
+                                    "when t2.Qty is not null then t2.Qty " +
+                                    "when t2.Qty is null then t1.Qty " +
+                                    "end " +
+                                    "as Qty " +
+                                    "FROM #Temp1 t1 " +
+                                    "LEFT JOIN #Temp2 t2 " +
+                                    "ON t1.POI=t2.POI and t1.SKU=t2.SKU " +
+                                    "ORDER BY t1.SKU; " +
+                                    "select Qty as Quantity, SKU as SKU_Code from #Temp3 where Qty!=0 ";
                         paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));                       
                     }
                 }
@@ -95,9 +126,67 @@ namespace MyLeoRetailerRepo
                 {
                     if (fieldName == "Purchase_Invoice_Id")
                     {
-                        strquery = " Select Purchase_Invoice_Item.Purchase_Order_Id, Purchase_Invoice_Item.SKU_Code ";
-                        strquery += "from Purchase_Invoice_Item ";
-                        strquery += "where Purchase_Invoice_Item.Purchase_Invoice_Id = @Purchase_Invoice_Id";
+                        //strquery = " Select Purchase_Invoice_Item.Purchase_Order_Id, Purchase_Invoice_Item.SKU_Code ";
+                        //strquery += "from Purchase_Invoice_Item ";
+                        //strquery += "where Purchase_Invoice_Item.Purchase_Invoice_Id = @Purchase_Invoice_Id";
+                        strquery = "IF OBJECT_ID('tempdb..#Temp1') IS NOT NULL " +
+                                    "DROP TABLE #Temp1 " +
+                                    "IF OBJECT_ID('tempdb..#Temp2') IS NOT NULL " +
+                                    "DROP TABLE #Temp2 " +
+                                    "IF OBJECT_ID('tempdb..#Temp3') IS NOT NULL " +
+                                    "DROP TABLE #Temp3 " +
+
+                                    "CREATE TABLE #Temp1(    invoice_Id int,    SKU Varchar(50),     Qty int ) " +
+                                    "CREATE TABLE #Temp2(    invoice_Id int,    SKU Varchar(50),     Qty int ) " +
+                                    "CREATE TABLE #Temp3(    SKU_Code Varchar(50),     Quantity int ) " +
+
+                                    "INSERT INTO #Temp1 " +
+
+                                    "SELECT PII.Purchase_Invoice_Id, PII.SKU_Code, SUM(PRRI.Quantity) AS bal  " +
+                                    "FROM Purchase_Invoice_Item PII " +
+                                    "JOIN Purchase_Return PRR ON PII.Purchase_Invoice_Id=PRR.Purchase_Invoice_Id " +
+                                    "JOIN Purchase_Return_Item PRRI ON PRR.Purchase_Return_Id=PRRI.Purchase_Return_Id " +
+                                    "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id " +
+                                    "GROUP BY PII.Purchase_Invoice_Id,PII.SKU_Code,PII.Quantity " +
+
+                                    "INSERT  INTO #Temp2 " +
+                                    "SELECT PII.Purchase_Invoice_Id,PII.SKU_Code, SUM(PRRI.Quantity) AS bal " +
+                                    "FROM Purchase_Invoice_Item PII " +
+                                    "JOIN Purchase_Return_Request PRR ON PII.Purchase_Invoice_Id=PRR.Purchase_Invoice_Id " +
+                                    "JOIN Purchase_Return_Request_Item PRRI ON PRR.Purchase_Return_Request_Id=PRRI.Purchase_Return_Request_Id " +
+                                    "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id " +
+                                    "GROUP BY PII.Purchase_Invoice_Id,PII.SKU_Code,PII.Quantity " +
+
+
+                                    "INSERT INTO #Temp3 " +
+                                    "SELECT t1.SKU,PII.Quantity-(t1.Qty+t2.Qty)AS Qty  " +
+                                    "FROM #Temp1 t1,#Temp2 t2,Purchase_Invoice_Item PII " +
+                                    "WHERE PII.Purchase_Invoice_Id=t1.invoice_Id and " +
+                                    "t2.invoice_Id=t1.invoice_Id and PII.Purchase_Invoice_Id=t1.invoice_Id " +
+
+
+                                    "IF ((SELECT count(*) FROM #Temp3)>0) " +
+                                    "BEGIN " +
+                                    "SELECT Quantity, SKU_Code FROM #Temp3 " +
+                                    "END " +
+
+
+                                    "IF @@ROWCOUNT=0 and (SELECT COUNT(*) FROM Purchase_Return WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )=0 and  ( SELECT COUNT(*) FROM Purchase_Return_Request WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )=0 " +
+                                    "BEGIN " +
+                                    "SELECT Quantity, SKU_Code FROM Purchase_Invoice_Item WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id " +
+                                    "END " +
+                                    "ELSE IF ((SELECT count(*) FROM #Temp1)!=0) " +
+                                    "BEGIN " +
+                                    "SELECT Quantity, SKU_Code FROM #Temp1 " +
+                                    "END "+
+                                    "ELSE IF ((SELECT count(*) FROM #Temp2) !=0) " +
+                                    "BEGIN " +
+                                    "SELECT Quantity, SKU_Code FROM #Temp2 " +
+                                    "END "+
+                                    "ELSE IF ((SELECT count(*) FROM #Temp3)=0) " +
+                                    "BEGIN " +
+                                    "SELECT Quantity, SKU_Code FROM #Temp3 " +
+                                    "END ";
                         paramList.Add(new SqlParameter("@Purchase_Invoice_Id", fieldValue));
                     }
                 }
