@@ -158,7 +158,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
-                            <select class="form-control" id="drpPayment_Mode" name="Payable.Payment_Mode" value="@Model.Payable.Payment_Mode">
+                            <select class="form-control" id="drpPayment_Mode" name="Payable.Payment_Mode" >
                                 <option value="0">Select Payment mode</option>
 
                                 @foreach (var item in LookupInfo.Get_Payable_Payment_Mode())
