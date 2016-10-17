@@ -246,5 +246,27 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
         //End
 
+        //Added by vinod mane on 17/10/2016
+        public JsonResult Compare_Dates(DateTime DOB_Date)
+        {
+            bool check = true;
+            CustomerViewModel cViewModel = new CustomerViewModel();
+            try
+            {
+                DateTime Today_Date = DateTime.Now.Date;
+
+                if (Today_Date <= DOB_Date)
+                {
+                    check = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                cViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Customer Controller - Compare_Dates " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+        // END
     }
 }

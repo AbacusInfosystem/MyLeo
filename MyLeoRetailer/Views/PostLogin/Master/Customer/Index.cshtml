@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy" >
-                            <input type="text" class="form-control datepicker" name="Customer.Customer_DOB" value="@((Model.Customer.Customer_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Customer date of birth" />  
+                            <input type="text" class="form-control datepicker" id="txt_DOB" name="Customer.Customer_DOB" value="@((Model.Customer.Customer_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Customer date of birth" />  
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div> 
@@ -185,32 +185,32 @@
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no1.</span>
-                <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1" maxlength="12" />
+                <input type="text" class="form-control" placeholder="Enter mobile number 1." id="txtCustomer_Mobile1" name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1" maxlength="12" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no2.</span>
-                <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2" maxlength="12" />
+                <input type="text" class="form-control" placeholder="Enter mobile number 2." id="txtCustomer_Mobile2" name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2" maxlength="12" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
-                <input type="text" class="form-control" placeholder="Enter landline number 1." name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1" maxlength="12" />
+                <input type="text" class="form-control" placeholder="Enter landline number 1." id="txtCustomer_Landline1" name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1" maxlength="12" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
-                <input type="text" class="form-control" placeholder="Enter landline number 2." name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2" maxlength="12" />
+                <input type="text" class="form-control" placeholder="Enter landline number 2." id="txtCustomer_Landline2" name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2" maxlength="12" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 1.</span>
-                <input type="text" class="form-control" placeholder="Enter email address 1." name="Customer.Customer_Email1" value="@Model.Customer.Customer_Email1" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter email address 1." id="txtCustomer_Email1" name="Customer.Customer_Email1" value="@Model.Customer.Customer_Email1" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 2.</span>
-                <input type="text" class="form-control" placeholder="Enter email address 2." name="Customer.Customer_Email2" value="@Model.Customer.Customer_Email2" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter email address 2." id="txtCustomer_Email2" name="Customer.Customer_Email2" value="@Model.Customer.Customer_Email2" maxlength="50" />
             </div>
         </div>
 
@@ -231,7 +231,7 @@
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Spouse date of birth.</span>
                 <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
-                <input type="text" class="form-control datepicker" name="Customer.Customer_Spouse_DOB" value="@((Model.Customer.Customer_Spouse_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Spouse_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Spouse date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                <input type="text" class="form-control datepicker" id="dtp_Spousebirth" name="Customer.Customer_Spouse_DOB" value="@((Model.Customer.Customer_Spouse_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Spouse_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Spouse date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
             </div>
                     </div>
@@ -239,7 +239,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Wedding annniversary date.</span>
                         <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
-                        <input type="text" class="form-control datepicker" name="Customer.Customer_Wedding_Anniversary" value="@((Model.Customer.Customer_Wedding_Anniversary == DateTime.MinValue ? "" : Model.Customer.Customer_Wedding_Anniversary.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Wedding Anniversary date" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                        <input type="text" class="form-control datepicker" id="dtp_Weddingannniv" name="Customer.Customer_Wedding_Anniversary" value="@((Model.Customer.Customer_Wedding_Anniversary == DateTime.MinValue ? "" : Model.Customer.Customer_Wedding_Anniversary.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Wedding Anniversary date" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                     </div>
@@ -252,7 +252,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 1 date of birth.</span>
                         <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
-                        <input type="text" class="form-control datepicker" name="Customer.Customer_Child1_DOB" value="@((Model.Customer.Customer_Child1_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child1_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Child 1 date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                        <input type="text" class="form-control datepicker" id="dtp_Child1_DOB" name="Customer.Customer_Child1_DOB" value="@((Model.Customer.Customer_Child1_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child1_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Child 1 date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                     </div>
@@ -265,7 +265,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 2 date of birth.</span>
                         <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
-                            <input type="text" class="form-control datepicker" name="Customer.Customer_Child2_DOB" value="@((Model.Customer.Customer_Child2_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child2_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Child 2 date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                            <input type="text" class="form-control datepicker" id="dtp_Child2_DOB" name="Customer.Customer_Child2_DOB" value="@((Model.Customer.Customer_Child2_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child2_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Child 2 date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>

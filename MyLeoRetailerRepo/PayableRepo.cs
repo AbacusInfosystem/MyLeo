@@ -40,7 +40,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
             sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
 
-            sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
+            sqlParams.Add(new SqlParameter("@Employee_Id", Payable.Employee_Id));
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
             sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
             sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
@@ -101,9 +101,9 @@ namespace MyLeoRetailerRepo
             }
 
             sqlParams.Add(new SqlParameter("@Created_By", Payable.Created_By));
-            sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Created_On", Payable.Created_Date));
             sqlParams.Add(new SqlParameter("@Updated_By", Payable.Updated_By));
-            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Updated_On", Payable.Updated_Date));
 
             return sqlParams;
         }
@@ -129,7 +129,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Discount_Amount", Payable.Discount_Amount));
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
             sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
-            sqlParams.Add(new SqlParameter("@Person_Name", Payable.Person_Name));
+            sqlParams.Add(new SqlParameter("@Employee_Id", Payable.Employee_Id));
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
             sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
             sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount));
@@ -258,50 +258,54 @@ namespace MyLeoRetailerRepo
 
             sqlParams.Add(new SqlParameter("@Total_Amount ", Payable.Total_Amount));
 
-            if (Payable.Payable_Item_Id != 0)
-            {
-                decimal Balance_Amount1 = Get_Balance_Amount(Payable.Purchase_Invoice_Id);
+            //if (Payable.Payable_Item_Id != 0)
+            //{
+            //    decimal Balance_Amount1 = Get_Balance_Amount(Payable.Purchase_Invoice_Id);
 
-                decimal Paid_Amount1 = Get_Paid_Amount(Payable.Payable_Id);
+            //    decimal Paid_Amount1 = Get_Paid_Amount(Payable.Payable_Id);
 
-                Balance_Amount = Balance_Amount1 + Paid_Amount1;
-            }
-            else
-            {
-                Balance_Amount = Get_Balance_Amount(Payable.Purchase_Invoice_Id);
-            }
+            //    Balance_Amount = Balance_Amount1 + Paid_Amount1;
+            //}
+            //else
+            //{
+            //    Balance_Amount = Get_Balance_Amount(Payable.Purchase_Invoice_Id);
+            //}
 
-            if (Balance_Amount > 0)
-            {
+            //if (Balance_Amount > 0)
+            //{
 
-                Total_Balance_Amount = Balance_Amount - Payable.Paid_Amount;
+            //    Total_Balance_Amount = Balance_Amount - Payable.Paid_Amount;
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
 
-                Total_Balance_Amount = Payable.Total_Amount - Payable.Paid_Amount;
-            }
+            //    Total_Balance_Amount = Payable.Total_Amount - Payable.Paid_Amount;
+            //}
 
 
-            Payable.Balance_Amount = Total_Balance_Amount;
+            //Payable.Balance_Amount = Total_Balance_Amount;
 
-            sqlParams.Add(new SqlParameter("@Balance_Amount", Payable.Balance_Amount));
+            sqlParams.Add(new SqlParameter("@Balance_Amount", Payable.Final_Amount));
 
-            if (Total_Balance_Amount - Payable.Discount_Amount- Payable.Credit_Note_Amount != 0)
+            if (Payable.Final_Amount != 0 && Payable.Final_Amount != Payable.Total_Amount)
             {
                 sqlParams.Add(new SqlParameter("@Payble_Status", "3"));
+            }
+            else if (Payable.Final_Amount == Payable.Total_Amount && Payable.Final_Amount != 0)
+            {
+                sqlParams.Add(new SqlParameter("@Payble_Status", "2"));
             }
             else
             {
                 sqlParams.Add(new SqlParameter("@Payble_Status", "1"));
             }
 
-            sqlParams.Add(new SqlParameter("@Created_On", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Created_On", Payable.Created_Date));
 
             sqlParams.Add(new SqlParameter("@Created_By", Payable.Created_By));
 
-            sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
+            sqlParams.Add(new SqlParameter("@Updated_On", Payable.Updated_Date));
 
             sqlParams.Add(new SqlParameter("@Updated_By", Payable.Updated_By));
 
@@ -445,9 +449,13 @@ namespace MyLeoRetailerRepo
 
                 payable.Bank_Name = Convert.ToString(dr["Bank_Name"]);
 
-            if (!dr.IsNull("Person_Name"))
+            if (!dr.IsNull("Employee_Id"))
 
-                payable.Person_Name = Convert.ToString(dr["Person_Name"]);
+                payable.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+
+            if (!dr.IsNull("Employee_Name"))
+
+                payable.Employee = Convert.ToString(dr["Employee_Name"]);
 
             if (!dr.IsNull("Remark"))
 
@@ -476,7 +484,7 @@ namespace MyLeoRetailerRepo
 
             if (!dr.IsNull("Created_On"))
 
-                payable.Created_On = Convert.ToDateTime(dr["Created_On"]);
+                payable.Created_Date = Convert.ToDateTime(dr["Created_On"]);
 
             if (!dr.IsNull("Created_By"))
 

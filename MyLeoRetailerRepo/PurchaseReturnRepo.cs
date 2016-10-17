@@ -128,7 +128,7 @@ namespace MyLeoRetailerRepo
 
             sqlParams.Add(new SqlParameter("@Purchase_Return_Id", PurchaseReturn.Purchase_Return_Id));
 
-            sqlParams.Add(new SqlParameter("@Status", 0));
+            sqlParams.Add(new SqlParameter("@Status", PurchaseReturn.Status));
 
             sqlParams.Add(new SqlParameter("@Credit_Note_No", PurchaseReturn.GR_No));
 

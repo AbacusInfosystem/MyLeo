@@ -96,7 +96,7 @@
 
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
-                            <select class="form-control select" placeholder="Select payment mode." id="mode" name="GiftVoucher.Payment_Mode" value="@Model.GiftVoucher.Payment_Mode">
+                            <select class="form-control " placeholder="Select payment mode." id="mode" name="GiftVoucher.Payment_Mode" value="@Model.GiftVoucher.Payment_Mode">
                                 @foreach (var item in LookupInfo.Get_GiftVoucher_Payment_Mode())
                                 {
                                     if (Model.GiftVoucher.Payment_Mode == item.Key)

@@ -16,12 +16,13 @@ $(function ()
 		        Designation: true
 		    },
 		    "Employee.Employee_Mobile2": {
-		        // digits: true
-		        number: true
+		        digits: true
+		        //number: true
 		    },
 		    "Employee.Employee_DOB": {
 		        // digits: true
-		        required: true
+		        required: true,
+		        chkdate: true  //Added by vinod mane on 17/10/2016
 		    },
             //End
 
@@ -32,8 +33,8 @@ $(function ()
 		    },
             		   
 		    "Employee.Employee_Mobile1": {		       
-		        // digits: true
-		        number: true
+		         digits: true
+		        //number: true
 		    },
 
 		    "Employee.Employee_EmailId": {
@@ -151,6 +152,40 @@ $(function ()
 
 
     //end
+   
+    //Added by vinod mane on 17/10/2016
+    $.validator.addMethod('chkdate', function (value) {
+
+        var result = true;
+       
+        var DOB_Date = $("#txt_DOB").val();
+     
+        if (DOB_Date != '') {
+
+            var ServiceUrl = "/Employee/Compare_Dates";
+            $.ajax({
+                data: { DOB_Date: DOB_Date },
+                url: ServiceUrl,
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;                    
+                }
+            });
+        }
+
+        return result;
+        
+
+    }, 'Please Select valid Birth Date');
+
+    //End
+
+    //$("#btnCancel").click(function () {
+    //    location.reload(true)
+    //})
+      
 
 });
 
