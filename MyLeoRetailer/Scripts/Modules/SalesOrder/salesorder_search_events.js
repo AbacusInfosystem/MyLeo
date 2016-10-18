@@ -1,19 +1,9 @@
-﻿//$(document).ready(function () {
-   
-  
-    
-//});
-
-
+﻿
 $(function () {
-
-    //$("#btnPrint").hide();
 
     document.getElementById('btnPrint').disabled = true;
 
     document.getElementById('btnView').disabled = true;
-
-    //$("#btnView").hide();
 
     Get_SalesOrders();
 
@@ -46,13 +36,8 @@ $(function () {
 
         if ($(this).prop('checked'))
         {
-            alert(this.value);
 
             $("#hdnSalesInvoiceID").val(this.value);
-
-            //$('#btnPrint').show();
-
-            //$('#btnView').show();
 
             document.getElementById('btnPrint').disabled = false;
 

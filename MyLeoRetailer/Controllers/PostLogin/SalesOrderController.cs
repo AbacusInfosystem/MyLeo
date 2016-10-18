@@ -25,7 +25,6 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ReceivableRepo rRepo;
 
-
         public SalesOrderController()
         {
             siRepo = new SalesOrderRepo();
@@ -197,7 +196,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
                 pager = siViewModel.Grid_Detail.Pager;
 
-                siViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount", "Sales_Invoice_Id,Branch_Id"); // Set grid info for front end listing
+                siViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Branch_Name,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount", "Sales_Invoice_Id,Branch_Id"); // Set grid info for front end listing
 
                 siViewModel.Grid_Detail.Records = siRepo.Get_Sales_Order_Search_Details(siViewModel.SalesInvoice, siViewModel.Cookies.Branch_Ids, siViewModel.Filter.Sales_Invoice_No); // Call repo method 
 

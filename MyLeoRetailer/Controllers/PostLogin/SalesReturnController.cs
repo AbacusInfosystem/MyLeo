@@ -114,7 +114,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {              
                 pager = srViewModel.Grid_Detail.Pager;
 
-                srViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Return_No,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note", "Sales_Return_Id,Branch_Id"); // Set grid info for front end listing
+                srViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Return_No,Branch_Name,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note", "Sales_Return_Id,Branch_Id"); // Set grid info for front end listing
 
                 srViewModel.Grid_Detail.Records = srRepo.Get_Sales_Return_Search_Details(srViewModel.SalesReturn, srViewModel.Cookies.Branch_Ids,srViewModel.Filter.Sales_Return_No); // Call repo method 
                 

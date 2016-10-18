@@ -317,8 +317,6 @@ function CalculatePaidAmt() {
 
     debugger;
 
-    alert();
-
     var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
 
     var chequeamount = parseFloat($("#txtCheque_Amount").val());
@@ -417,8 +415,3 @@ function calculate() {
 
 }
 
-
-//$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
-//{
-//    Get_Sales_Order_Items_By_SKU_Code();
-//});
