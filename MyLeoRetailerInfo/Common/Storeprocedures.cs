@@ -339,6 +339,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Credit_Note_Details_By_Customer_Id,
             sp_Get_Gift_Voucher,
             sp_Check_Quantity,
+            Get_Sales_Order_Search_Details,
 
             //Sales_Report
 
@@ -353,6 +354,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Sales_Return_Details_By_Sales_Return_Id,
             sp_Get_Sales_Return_Items_By_Sales_Return_Id,
             sp_Get_Sales_Return_Items_By_SKU_Code,
+            Get_Sales_Return_Search_Details,
 
 
        

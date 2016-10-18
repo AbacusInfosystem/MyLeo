@@ -6,10 +6,7 @@
 
             rules:
                 {
-                    //"SalesReturn.Sales_Return_No":
-                    //   {
-                    //       required: true,
-                    //   },
+                   
                     "SalesReturn.SalesReturn_Date":
                         {
                             required: true,
@@ -43,10 +40,7 @@
 
             messages: {
 
-                "SalesReturn.Sales_Return_No":
-                {
-                    required: "Sales Return No is required."
-                },
+               
                 "SalesReturn.SalesReturn_Date":
                     {
                         required: "Sales Return Date is required"
@@ -127,8 +121,6 @@ jQuery.validator.addMethod("MobileNo", function (value, element) {
 jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
     debugger;
-
-    alert(this.id);
 
     var result = true;
 

@@ -52,19 +52,7 @@ $(function () {
 
     $("#btnCustomer").click(function () {
 
-       
-
         $("#hdnCreateCustomerFlag").val(true);
-
-      
-
-        //$("#hdnInvoiceDate").val();
-
-        //alert($("#hdnInvoiceDate").val());
-
-        //$("#hdnMobileNo").val();
-
-        //alert($("#hdnMobileNo").val());
 
         $('#txtReturn_No').removeClass("login-error");
         $('#txtReturn_No').rules("remove");
@@ -97,13 +85,13 @@ function CalculateTotal()
 
     var tr = $("#tblSalesReturnItems").find('[id^="SalesReturnItemRow_"]');
 
-
     if (tr.size() > 0)
     {
         for (var i = 0; i < tr.size() ; i++)
         {
             //var Qty = parseFloat($("#tblSalesReturnItems").find('[id="textQuantity_' + i + '"]').val());
             //Added by vinod mane on 12/10/2016
+
             var Qty = $("#tblSalesReturnItems").find('[id="textQuantity_' + i + '"]').val();
             if (Qty == "" || Qty == "NaN") {
                 Qty = 1;
@@ -175,12 +163,3 @@ function CalculateCreditNoteAmt()
 
 
 }
-
-
-
-
-//$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
-//{
-//    Get_Sales_Order_Items_By_SKU_Code();
-//});
-
