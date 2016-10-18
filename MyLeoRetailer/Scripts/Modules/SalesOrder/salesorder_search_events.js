@@ -46,6 +46,8 @@ $(function () {
 
         if ($(this).prop('checked'))
         {
+            alert(this.value);
+
             $("#hdnSalesInvoiceID").val(this.value);
 
             //$('#btnPrint').show();

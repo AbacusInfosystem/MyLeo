@@ -296,7 +296,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
         }
 
-
         public ActionResult Get_Purchase_Order_Details(PurchaseOrderViewModel poViewModel)
         {
             try
