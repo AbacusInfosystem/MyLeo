@@ -52,11 +52,11 @@ $(function () {
 
     $("#btnCustomer").click(function () {
 
-        debugger;
+       
 
         $("#hdnCreateCustomerFlag").val(true);
 
-        alert($("#hdnCreateCustomerFlag").val());
+      
 
         //$("#hdnInvoiceDate").val();
 

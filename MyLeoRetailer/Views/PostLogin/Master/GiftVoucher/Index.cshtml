@@ -66,16 +66,16 @@
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher date.</span>
                             <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                                <input type="text" class="form-control datepicker" placeholder="Voucher date." name="GiftVoucher.Gift_Voucher_Date" value="@((Model.GiftVoucher.Gift_Voucher_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Date.ToString("MM-dd-yyyy")))" reado readonly />
+                                <input type="text" class="form-control datepicker" placeholder="Voucher date." name="GiftVoucher.Gift_Voucher_Date" value="@((Model.GiftVoucher.Gift_Voucher_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Date.ToString("MM-dd-yyyy")))"  readonly /> @*reado*@
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
-                        </div>  
-
+                        </div>
+                     
 
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher expiry date</span>
                             <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                                <input type="text" class="form-control datepicker" placeholder="Voucher expiry date." name="GiftVoucher.Gift_Voucher_Expiry_Date" value="@((Model.GiftVoucher.Gift_Voucher_Expiry_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Expiry_Date.ToString("MM-dd-yyyy")))" reado readonly />
+                                <input type="text" class="form-control datepicker" placeholder="Voucher expiry date." name="GiftVoucher.Gift_Voucher_Expiry_Date" value="@((Model.GiftVoucher.Gift_Voucher_Expiry_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Expiry_Date.ToString("MM-dd-yyyy")))" readonly />@*reado*@
                                 <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                             </div>
                         </div>  
@@ -128,8 +128,8 @@
 
                 <div class="btn-group">
                     <button class="btn btn-success active" type="button" id="btnGiftVoucherSave">Save</button>
-                    <button type="reset" class="btn btn-danger active" id="btnCancel">Cancel</button>
-                    <button class="btn btn-twitter active" role="button" id="btnGiftVoucherPrint">Print</button>
+                    <button type="reset"  class="btn btn-danger active" id="btnCancel">Cancel</button>
+                    <button class="btn btn-twitter active" type="button" id="btnGiftVoucherPrint">Print</button>
 
                 </div>
 

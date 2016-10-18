@@ -22,9 +22,7 @@
 
 function Get_Sales_Return_Items_By_SKU_Code(i) {
 
-    debugger;
-
-    alert();
+  
 
         $.ajax({
 
