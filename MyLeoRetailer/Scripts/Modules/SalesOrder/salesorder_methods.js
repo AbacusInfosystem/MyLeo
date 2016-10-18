@@ -549,5 +549,3 @@ function Add_Validation(i) {
     $("#textDiscount_Percentage_" + i).rules("add", { required: true, digits: true, messages: { required: "Discount", digits: "Invalid Discount." } });
 
 }
-
-  

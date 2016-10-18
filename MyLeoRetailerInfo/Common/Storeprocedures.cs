@@ -242,6 +242,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Category_By_Article_no,
         sp_Get_Sub_Category_By_Article_no,
 
+            sp_Get_Color_By_Article_No,
+
         //*****//
         #endregion
 

@@ -62,6 +62,11 @@
         background: #e34724;
         border-radius: 50%;
     }
+
+    .input-group-addon {
+        background-color: #33414e !important;
+        color: #fff !important;
+    }
 </style>
 
 @{
@@ -85,7 +90,7 @@
             </div>
             <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "SalesReturn")'"><i class="fa fa-angle-double-left"></i> BACK</button>
         </div>
-        </div>
+    </div>
 
 </div>
 <!-- END CONTENT FRAME -->
@@ -136,11 +141,11 @@
                                 <input type="hidden" class="form-control input-sm" name="SalesReturn.Sales_Return_Id" id="hdf_SalesReturn_Id">
 
                                 @*<div class="col-md-3">
-                                    <div class="form-group">
-                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
-                                        <input type="text" class="form-control input-sm" name="SalesReturn.Sales_Return_No" id="txtReturn_No" placeholder="Enter GR No" />
-                                    </div>
-                                </div>*@
+                                        <div class="form-group">
+                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
+                                            <input type="text" class="form-control input-sm" name="SalesReturn.Sales_Return_No" id="txtReturn_No" placeholder="Enter GR No" />
+                                        </div>
+                                    </div>*@
 
 
                                 <div class="col-md-3">
@@ -154,21 +159,37 @@
 
                                     <div class="form-group auto-complete">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                                        @*<div class="input-group">
+                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesReturn.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
+                                            <span class="input-group-addon">
+                                                <a href="#" class="text-muted" id="hrefDealer" role="button">
+                                                    <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
+                                            <input type="hidden" id="hdnBranchID" value="@Model.SalesReturn.Branch_Id" name="SalesReturn.Branch_Id" class="auto-complete-value" />
+                                            <input type="hidden" id="hdnBranchName" value="" name="SalesReturn.Branch_Name" class="auto-complete-label" />
+                                        </div>*@
+
                                         <div class="input-group">
                                             <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesReturn.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
-                                            <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                            <span class="input-group-addon">
+                                                <a href="#" class="text-muted" id="hrefDealer" role="button">
+                                                    <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
                                             <input type="hidden" id="hdnBranchID" value="@Model.SalesReturn.Branch_Id" name="SalesReturn.Branch_Id" class="auto-complete-value" />
                                             <input type="hidden" id="hdnBranchName" value="" name="SalesReturn.Branch_Name" class="auto-complete-label" />
                                         </div>
+
                                     </div>
                                 </div>
 
                                 @*<div class="col-md-3">
-                                    <div class="form-group">
-                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">GR Date.</span>
-                                        <input type="text" class="form-control input-sm" name="SalesReturn.SalesReturn_Date" id="dtpReturn_Date" placeholder="Enter GR Date" />
-                                    </div>
-                                </div>*@
+                                        <div class="form-group">
+                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">GR Date.</span>
+                                            <input type="text" class="form-control input-sm" name="SalesReturn.SalesReturn_Date" id="dtpReturn_Date" placeholder="Enter GR Date" />
+                                        </div>
+                                    </div>*@
 
 
                                 <div class="col-md-3">
@@ -205,7 +226,7 @@
 
 
                     <div class="row">
-                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
+                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px; margin-left:1435px">
                             <div class="block">
                                 <div class="block" style="margin-top:0px; ">
                                     <div class="btn-group">
@@ -247,9 +268,9 @@
                                     <tr id="SalesReturnItemRow_0">
 
                                         @*<td>
-                                            <input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].Sales_Invoice_No" id="textInvoice_No_0" placeholder="Invoice No">
-                                            <input type="hidden" name="SalesReturn.Sales_Invoice_Id" value="@Model.SalesReturn.Sales_Invoice_Id" id="hdnSalesInvoice_ID" />
-                                        </td>*@
+                                                <input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].Sales_Invoice_No" id="textInvoice_No_0" placeholder="Invoice No">
+                                                <input type="hidden" name="SalesReturn.Sales_Invoice_Id" value="@Model.SalesReturn.Sales_Invoice_Id" id="hdnSalesInvoice_ID" />
+                                            </td>*@
 
                                         <td>
                                             <div class="form-group auto-complete">
@@ -306,7 +327,7 @@
                                         <td>
                                             <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Quantity" id="textQuantity_0" value="" placeholder="Quantity" onblur="javascript: CalculateTotal();" maxlength="10">
                                             <input type="hidden" id="hdnQuantity" value="@Model.SalesReturn.Quantity1" name="SalesInvoice.Quantity1">
-                                         </td>
+                                        </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" style="width:50px" name="SaleReturnItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
                                         </td>

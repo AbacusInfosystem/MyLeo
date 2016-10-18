@@ -5,9 +5,7 @@ $(function () {
 
     if ($("#hdnPayament_Status1").val() == 1) {
 
-        $("#btnSavePay").hide();
-        //$(".btn_edit").hide();
-        //$("#edit-payable-details").parents('tr').find(".btn_edit").hide();
+        $("#btnSavePay").hide(); 
         $("#btnResetPay").hide();
 
     }
@@ -96,7 +94,7 @@ $(function () {
     // $(element).is(":visible");
 
     $("#btnSavePay").click(function () {
-        alert();
+        
         if ($("#frmPay").valid()) {
             if ($("#lblPaidPriceError").is(":visible") || $("#lblFinalPriceError").is(":visible")) {
             }

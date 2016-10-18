@@ -50,10 +50,30 @@ namespace MyLeoRetailerRepo
            sqlParam.Add(new SqlParameter("@Gift_Voucher_No", GiftVoucher.Gift_Voucher_No));
 
            sqlParam.Add(new SqlParameter("@Person_Name", GiftVoucher.Person_Name));
-   
-           sqlParam.Add(new SqlParameter("@Gift_Voucher_Date", GiftVoucher.Gift_Voucher_Date));
 
-           sqlParam.Add(new SqlParameter("@Gift_Voucher_Expiry_Date", GiftVoucher.Gift_Voucher_Expiry_Date));
+           // sqlParam.Add(new SqlParameter("@Gift_Voucher_Date", GiftVoucher.Gift_Voucher_Date));
+           // sqlParam.Add(new SqlParameter("@Gift_Voucher_Expiry_Date", GiftVoucher.Gift_Voucher_Expiry_Date));
+
+           //Added by Vinod mane on 17/10/2016
+           if (GiftVoucher.Gift_Voucher_Date != DateTime.MinValue)
+           {
+               sqlParam.Add(new SqlParameter("@Gift_Voucher_Date", GiftVoucher.Gift_Voucher_Date));
+           }
+           else
+           {
+               sqlParam.Add(new SqlParameter("@Gift_Voucher_Date", null));
+           }         
+
+
+           if (GiftVoucher.Gift_Voucher_Expiry_Date != DateTime.MinValue)
+           {
+               sqlParam.Add(new SqlParameter("@Gift_Voucher_Expiry_Date", GiftVoucher.Gift_Voucher_Expiry_Date));
+           }
+           else
+           {
+               sqlParam.Add(new SqlParameter("@Gift_Voucher_Expiry_Date", null));
+           }
+         //End
 
            sqlParam.Add(new SqlParameter("@Gift_Voucher_Amount", GiftVoucher.Gift_Voucher_Amount));
 

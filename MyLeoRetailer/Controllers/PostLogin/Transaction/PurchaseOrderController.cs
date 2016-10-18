@@ -191,7 +191,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             {
                 poViewModel.PurchaseOrder.Vendors = _purchaseorderRepo.Get_Article_No_By_Vendor_Id(Vendor_Id);
 
-                poViewModel.PurchaseOrder.Colors = _purchaseorderRepo.Get_Color_By_Vendor_Id(Vendor_Id);
 
             }
             catch (Exception ex)
@@ -215,6 +214,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 poViewModel.PurchaseOrder.Brands = _purchaseorderRepo.Get_Brand_By_Article_No(Article_No);
 
                 poViewModel.PurchaseOrder.Categories = _purchaseorderRepo.Get_Category_By_Article_No(Article_No);
+
+                poViewModel.PurchaseOrder.Colors = _purchaseorderRepo.Get_Color_By_Article_No(Article_No);
 
             }
             catch (Exception ex)
