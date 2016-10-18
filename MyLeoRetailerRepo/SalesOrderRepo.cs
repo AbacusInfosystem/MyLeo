@@ -244,9 +244,21 @@ namespace MyLeoRetailerRepo
             return SalesOrderItems;
         }
 
-        public DataTable Get_SalesOrder(QueryInfo query_Details)
+        public DataTable Get_Sales_Order_Search_Details(SalesInvoiceInfo salesInvoice, string Branch_ID, string Sales_Invoice_No) //.... 
         {
-            return sqlHelper.Get_Table_With_Where(query_Details);
+            DataTable dt = new DataTable();
+
+            List<SalesInvoiceInfo> salesInvoices = new List<SalesInvoiceInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Branch_ID", Branch_ID));
+
+            sqlParams.Add(new SqlParameter("@Sales_Invoice_No", Sales_Invoice_No));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.Get_Sales_Order_Search_Details.ToString(), CommandType.StoredProcedure);
+
+            return dt;
         }
 
         public DataTable Get_Sales_Report(SalesOrderFilter filter)

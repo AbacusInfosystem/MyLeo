@@ -108,28 +108,16 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             CommonManager cMan = new CommonManager();
 
-            string filter = "";
-
-            string dataOperator = "";
-
             Pagination_Info pager = new Pagination_Info();
 
             try
-            {
-                filter = srViewModel.Cookies.Branch_Ids + "," + srViewModel.Filter.Sales_Return_No; // Set filter comma seprated
-
-                dataOperator = DataOperator.In.ToString() + "," + DataOperator.Like.ToString(); // set operator for where clause as comma seprated
-
-                srViewModel.Query_Detail = Set_Query_Details(false, "Sales_Return_No,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note,Sales_Return_Id", "", "Sales_Return", "Branch_ID,Sales_Return_No", filter, dataOperator); // Set query for grid
-
+            {              
                 pager = srViewModel.Grid_Detail.Pager;
 
-                //srViewModel.Query_Detail.Input_Params.Add(new WhereInfo() { Key = "Branch_ID", Value = filter, DataOperator = DataOperator.In.ToString() });
+                srViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Return_No,Branch_Name,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note", "Sales_Return_Id,Branch_Id"); // Set grid info for front end listing
 
-                srViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Return_No,Total_Quantity,Gross_Amount,Total_Amount_Return_By_Cash,Total_Amount_Return_By_Credit_Note", "Sales_Return_Id"); // Set grid info for front end listing
-
-                srViewModel.Grid_Detail.Records = srRepo.Get_SalesOrder(srViewModel.Query_Detail); // Call repo method 
-
+                srViewModel.Grid_Detail.Records = srRepo.Get_Sales_Return_Search_Details(srViewModel.SalesReturn, srViewModel.Cookies.Branch_Ids,srViewModel.Filter.Sales_Return_No); // Call repo method 
+                
                 Set_Pagination(pager, srViewModel.Grid_Detail); // set pagination for grid
 
                 srViewModel.Grid_Detail.Pager = pager;
@@ -137,6 +125,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
             catch (Exception ex)
             {
                 srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                
                 Logger.Error("SalesReturn Controller - Get_SalesReturn  " + ex.Message); //Added by vinod mane on 06/10/2016
             }
 

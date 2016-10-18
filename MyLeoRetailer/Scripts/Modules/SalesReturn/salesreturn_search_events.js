@@ -1,8 +1,6 @@
 ﻿$(function () {
 
 
-    //$("#btnView").hide();
-
     document.getElementById('btnView').disabled = true;
 
     Get_SalesReturns();
@@ -19,8 +17,6 @@
         if ($(this).prop('checked'))
         {
             $("#hdnSalesReturnID").val(this.value);
-
-           // $('#btnView').show();
 
             document.getElementById('btnView').disabled = false;
         }
