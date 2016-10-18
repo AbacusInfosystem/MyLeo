@@ -61,6 +61,28 @@ function Set_Article_No(value) {
     $(".Details").hide();
 
     $("#hdf_Article_No").val(value);
+
+    $("#drpSize_Group").val('');
+
+    $("#drpBrand").html("");
+    $("#drpBrand").append("<option value=''>Select Brand</option>");
+    $("#drpBrand").parents('.form-group').find('ul').html("");
+
+    $("#drpCategory").html("");
+    $("#drpCategory").append("<option value=''>Select Category</option>");
+    $("#drpCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpSubCategory").html("");
+    $("#drpSubCategory").append("<option value=''>Select SubCategory.</option>");
+    $("#drpSubCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpCenter_Size").html("");
+    $("#drpCenter_Size").append("<option value=''>Select Center Size.</option>");
+    $("#drpCenter_Size").parents('.form-group').find('ul').html("");
+
+    $("#textPurchase_Price").val('');
+
+    $("#textSize_Difference").val('');
     
     $.ajax({
 
