@@ -154,15 +154,39 @@ namespace MyLeoRetailerRepo
                                     "FROM Purchase_Invoice_Item PII " +
                                     "JOIN Purchase_Return_Request PRR ON PII.Purchase_Invoice_Id=PRR.Purchase_Invoice_Id " +
                                     "JOIN Purchase_Return_Request_Item PRRI ON PRR.Purchase_Return_Request_Id=PRRI.Purchase_Return_Request_Id " +
-                                    "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id " +
+                                    "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id  AND PRRI.Status=0 " +
                                     "GROUP BY PII.Purchase_Invoice_Id,PII.SKU_Code,PII.Quantity " +
 
+                                    "declare @table1 int, @table2 int "+
 
-                                    "INSERT INTO #Temp3 " +
-                                    "SELECT t1.SKU,PII.Quantity-(t1.Qty+t2.Qty)AS Qty  " +
-                                    "FROM #Temp1 t1,#Temp2 t2,Purchase_Invoice_Item PII " +
-                                    "WHERE PII.Purchase_Invoice_Id=t1.invoice_Id and " +
-                                    "t2.invoice_Id=t1.invoice_Id and PII.Purchase_Invoice_Id=t1.invoice_Id " +
+
+                                    "set @table1=(select case when exists (select 1 from #Temp1) then 1 else 0 end) "+
+
+                                    "set @table2=(select case when exists (select 1 from #Temp2) then 1 else 0 end) "+
+
+
+                                    " IF(@table1=1 and @table2=0 ) "+
+                                    "BEGIN "+
+                                    "INSERT INTO #Temp3 "+
+                                    "SELECT t1.SKU,PII.Quantity-t1.Qty AS Qty "+
+                                    "FROM #Temp1 t1,Purchase_Invoice_Item PII WHERE PII.Purchase_Invoice_Id=t1.invoice_Id "+
+                                    "END "+
+
+
+                                    "IF(@table1=0 and @table2=1 ) "+
+                                    "BEGIN "+
+                                    "INSERT INTO #Temp3 "+
+                                    "SELECT t2.SKU,PII.Quantity-t2.Qty AS Qty "+
+                                    "FROM #Temp2 t2,Purchase_Invoice_Item PII WHERE PII.Purchase_Invoice_Id=t2.invoice_Id  "+
+                                    "END "+
+
+
+                                    "IF(@table1=1 and @table2=1 ) "+
+                                    "BEGIN "+
+                                    "INSERT INTO #Temp3 "+
+                                    "SELECT t1.SKU,PII.Quantity-(t1.Qty+t2.Qty)AS Qty "+
+                                    "FROM #Temp1 t1,#Temp2 t2,Purchase_Invoice_Item PII WHERE PII.Purchase_Invoice_Id=t1.invoice_Id and t2.invoice_Id=t1.invoice_Id "+
+                                    "END "+
 
 
                                     "IF ((SELECT count(*) FROM #Temp3)>0) " +
