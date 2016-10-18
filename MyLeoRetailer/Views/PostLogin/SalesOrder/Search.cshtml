@@ -1,5 +1,6 @@
 ﻿@model MyLeoRetailer.Models.SalesInvoiceViewModel
-
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
 
 @{
         ViewBag.Title = "Search";
@@ -43,21 +44,36 @@
 
                     <input type="hidden" id="hdnFlag" name="SalesInvoice.Flag" @*value="@Model.SalesInvoice.Flag"*@>
 
-                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+                    <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
                         <div class="row">
 
-                            <div class="col-md-10">
+                            <div class="col-md-3">
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="Filter.Sales_Invoice_No" placeholder="Enter SalesInvoice Number to search." />
-                                    <input type="hidden" name="Filter.Sales_Invoice_Id" id="hdnSalesInvoiceID">
-                                    @*<input type="hidden" id="hdnVendorId" value="@Model.Vendor.Vendor_Id" name="VendorFilter.Vendor_Id" class="auto-complete-value" />*@
+                                @{
+                                    LoginInfo Cookies = new LoginInfo();
+                                    Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                }
+
+                                <div class="form-group auto-complete">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Sales invoice no</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control invoice-filter autocomplete-text" name="Filter.Sales_Invoice_No" id="txtSalesInvoiceNo" placeholder="Enter Sales Invoice no to search" value="" data-table="Sales_Invoice" data-col="Branch_ID,Sales_Invoice_No" data-param="hdnBranchIDs" data-field="Branch_Id" data-headernames="Sales Invoice No">
+                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                        <input type="hidden" id="hdnSalesInvoiceID" name="Filter.Sales_Invoice_Id" class="auto-complete-label" />
+                                        <input type="hidden" id="hdnSalesInvoiceNo" name="Filter.Sales_Invoice_No" class="auto-complete-value" />
+
+                                    </div>
+
                                 </div>
 
+                            
+            
                             </div>
 
-                            <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                            <div class="col-md-9" style="text-align: right; padding-top: 20px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                                 <div class="btn-group">
                                     @*<button type="button" id="btnCreate" class="btn btn-success active">Create</button>*@

@@ -307,7 +307,7 @@ function AddSalesOrderDetails(i)
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:80px' name='SaleOrderItemList[" + i + "].SalesMan' id='textSalesMan_" + i + "' placeholder='Enter SalesMan' value='' data-table='Employee' data-col='Employee_Id,Employee_Name' data-headernames='Employee' data-param='hdnEmployee_Id' data-field='Role_Id'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:80px' name='SaleOrderItemList[" + i + "].SalesMan' id='textSalesMan_" + i + "' placeholder='Enter SalesMan' value='' data-table='Employee' data-col='Employee_Id,Employee_Name' data-headernames='Employee' data-param='hdnEmployee_Id' data-field='Sales_Invoice'>";
     tblHtml += "<span class='input-group-addon'> <a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnSalesManId_" + i + "' value='' name='SaleOrderItemList[" + i + "].SalesMan_Id' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSalesMan_" + i + "' value='' name='SaleOrderItemList[" + i + "].SalesMan' class='auto-complete-label' />";

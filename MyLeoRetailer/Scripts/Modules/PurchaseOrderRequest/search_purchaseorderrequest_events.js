@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    document.getElementById("btnEditPurchaseOrderRequest").disabled = true;
+    //document.getElementById("btnEditPurchaseOrderRequest").disabled = true;
     
     Get_Purchase_Order_Requests();
 
