@@ -96,7 +96,7 @@ $(function () {
     // $(element).is(":visible");
 
     $("#btnSavePay").click(function () {
-        alert();
+        
         if ($("#frmPay").valid()) {
             if ($("#lblPaidPriceError").is(":visible") || $("#lblFinalPriceError").is(":visible")) {
             }

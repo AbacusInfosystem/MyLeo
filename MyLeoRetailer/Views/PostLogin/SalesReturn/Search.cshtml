@@ -46,15 +46,25 @@
                         <div class="row">
 
                             <div class="col-md-3">
+                                <div class="form-group auto-complete">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Sales return no</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control invoice-filter autocomplete-text" name="Filter.Sales_Return_No" id="txtSalesReturnNo" placeholder="Enter Sales Return no to search" value="" data-table="Sales_Return" data-col=" Sales_Return_Id,Sales_Return_No" data-headernames="Sales Return No">
+                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                        <input type="hidden" id="hdnSalesReturnID" name="Filter.Sales_Return_Id" class="auto-complete-label" />
+                                        <input type="hidden" id="hdnSalesReturnNo" name="Filter.Sales_Return_No" class="auto-complete-value" />
 
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="Filter.Sales_Return_No" placeholder="Enter SalesReturn Number to search." />
-                                    <input type="hidden" name="Filter.Sales_Return_Id" id="hdnSalesReturnID">                               
+                                    </div>
+
+                                    </div>
+                                    @*<div class="form-group">
+                <input type="text" class="form-control" name="Filter.Sales_Return_No" placeholder="Enter SalesReturn Number to search." />
+                <input type="hidden" name="Filter.Sales_Return_Id" id="hdnSalesReturnID">
+            </div>*@
+
                                 </div>
 
-                            </div>
-
-                            <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 50px; padding-left: 0px;">
+                            <div class="col-md-2" style="text-align: right; padding-top: 27px; padding-bottom: 0px; padding-right: 50px; padding-left: 0px;">
 
                                 <div class="btn-group">                                   
                                     <a class="btn btn-success active" role="button" href="@Url.Action("Index", "SalesReturn")">Create </a>

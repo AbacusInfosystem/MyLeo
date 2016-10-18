@@ -22,6 +22,7 @@ $(function () {
         if ($(this).prop('checked')) {
             $("#hdn_GiftVoucherId").val(this.value);
             $("#btnGiftVoucher").show();
+            $("#btncreateGV").hide();
         }
     });
 

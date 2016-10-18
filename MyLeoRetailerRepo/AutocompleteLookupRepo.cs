@@ -153,6 +153,28 @@ namespace MyLeoRetailerRepo
                         //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
                     }
                 }
+
+                if (table_Name == "Inventorys")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Inventory.Branch_Id, Inventory.Product_SKU ";
+                        strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID where Inventory.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
+                    }
+                }
+
+                //if (table_Name == "Purchase_Invoice")
+                //{
+                //    if (fieldName == "Purchase_Invoice_Id")
+                //    {
+                //        strquery = " Select distinct Purchase_Invoice.Vendor_Id,Vendor.Vendor_Name ";
+                //        strquery += "from Purchase_Invoice inner join Vendor on Purchase_Invoice.Vendor_Id=Vendor.Vendor_Id";
+
+                      
+
+                //    }
+                //}
                
                               
             }
