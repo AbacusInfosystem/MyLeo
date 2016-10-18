@@ -22,10 +22,6 @@
 
 function Get_Sales_Return_Items_By_SKU_Code(i) {
 
-    debugger;
-
-    alert();
-
         $.ajax({
 
             url: "/SalesReturn/Get_Sales_Return_Items_By_SKU_Code",
@@ -97,11 +93,6 @@ function AddSalesReturnDetails(i)
     tblHtml += "</div>";
     tblHtml += "</td>";
                                             
-    //tblHtml += "<td>";
-    //tblHtml += "<input type='text' class='form-control input-sm' style='width:150px' placeholder='SKU Code' onchange='javascript: Get_Sales_Return_Items_By_SKU_Code(" + i + ");' name='SaleReturnItemList[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
-    //tblHtml += "</td>";
-
-
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
@@ -218,12 +209,6 @@ function ReArrangeSalesReturnDetailsData()
                 $(newTR).find("[id^='hdnSalesInvoiceNo_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_No");
                 
             }
-
-            //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
-            //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-            //    $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code");
-            //    $(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ")");
-            //}
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;

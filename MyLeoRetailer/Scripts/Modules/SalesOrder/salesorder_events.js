@@ -417,8 +417,3 @@ function calculate() {
 
 }
 
-
-//$("[name='SalesInvoice[0].SKU_Code']").focusout(function ()
-//{
-//    Get_Sales_Order_Items_By_SKU_Code();
-//});

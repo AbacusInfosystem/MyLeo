@@ -65,52 +65,10 @@ function Get_Sales_Order_Items_By_SKU_Code(i) {
 
 function Get_Credit_Note_Data_By_Id(id) {
 
-    //debugger;
-
-    //var dd = $("#drpCredit_Note_No");
-
-    //var siViewModel =
-    //    {
-    //        SalesInvoice: {
-
-    //            Customer_Id: id
-    //        }
-    //    }
-
-    //$.ajax({
-
-    //    url: "/SalesOrder/Get_Credit_Note_Data_By_Id",
-
-    //    data: JSON.stringify(siViewModel),
-
-    //    dataType: 'json',
-
-    //    type: 'POST',
-
-    //    contentType: 'application/json',
-
-    //    success: function (data) {
-
-    //        if (data != null) {
-    //            for (var i = 0; i < data.length; i++) {
-    //                dd.append('<option value="' + data[i].Credit_Note_Id + '" >' + data[i].Credit_Note_No + '</option>');
-    //            }
-    //        }
-    //    }
-    //});
-
 
     var dd = $("#drpCredit_Note_No");
 
     var cust_Id = id;
-
-   // var siViewModel = 
-        //{
-        //    SalesInvoice: {
-
-        //        Customer_Id: id
-        //    }
-    //}
 
     var urls = "/SalesOrder/Get_Credit_Note_Details_By_Id_abc?cust_Id=" + cust_Id;
 
@@ -213,6 +171,7 @@ function Get_Credit_Note_Amount_By_Id(id) {
                 //$('#dtpCreditNoteDate').val(data[0].Credit_Note_Date);
 
                 var dd1 = new Date(parseInt(data[0].Credit_Note_Date.replace('/Date(', '')));
+
                 $('#dtpCreditNoteDate').val(dd1.getDate().toString() + '-' + (dd1.getMonth() + 1).toString() + '-' + dd1.getFullYear().toString());
 
                 $("[name='SalesInvoice.Credit_Note_Amount']").focus();
@@ -266,7 +225,6 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
 
 function AddSalesOrderDetails(i) 
 {
-    //alert(i);
 
     var html = '';
     
@@ -349,7 +307,7 @@ function AddSalesOrderDetails(i)
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:80px' name='SaleOrderItemList[" + i + "].SalesMan' id='textSalesMan_" + i + "' placeholder='Enter SalesMan' value='' data-table='Employee' data-col='Employee_Id,Employee_Name' data-headernames='Employee' data-param='hdnEmployee_Id' data-field='Role_Id'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:80px' name='SaleOrderItemList[" + i + "].SalesMan' id='textSalesMan_" + i + "' placeholder='Enter SalesMan' value='' data-table='Employee' data-col='Employee_Id,Employee_Name' data-headernames='Employee' data-param='hdnEmployee_Id' data-field='Sales_Invoice'>";
     tblHtml += "<span class='input-group-addon'> <a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnSalesManId_" + i + "' value='' name='SaleOrderItemList[" + i + "].SalesMan_Id' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSalesMan_" + i + "' value='' name='SaleOrderItemList[" + i + "].SalesMan' class='auto-complete-label' />";
@@ -373,36 +331,15 @@ function AddSalesOrderDetails(i)
 
 function DeleteSalesOrderDetailsData(i) {
 
-    //if ($('#tblSalesOrderItems tbody tr').length == 1)
-    //{
-    //    $("#lblError").text("Atleast one required.");
-    //}
-    //else
-    //{
-    //    $("#lblError").text("");
 
-    //    $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
+    //Added by vinod mane on 14/10/2016
 
-    //    ReArrangeSalesOrderDetailsData();
-
-    //    Add_Validation(i);
-
-    //    CalculateTotal();
-
-    //    CalculateTax()
-
-    //}
-
-
-
-//Added by vinod mane on 14/10/2016
         $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
 
         ReArrangeSalesOrderDetailsData();
 
-
-
-    if (i == 0) {
+        if (i == 0)
+        {
         AddSalesOrderDetails(i);
 
       //  $("#textDiscountPercentage_0").val(0);
@@ -411,7 +348,8 @@ function DeleteSalesOrderDetailsData(i) {
 
         CalculateTax();
     }
-    else {
+        else
+        {
 
         Add_Validation(i);
 

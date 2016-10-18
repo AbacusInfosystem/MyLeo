@@ -48,13 +48,26 @@
 
                     <input type="hidden" class="form-control input-sm" name="Payable.Purchase_Invoice_Id" id="hdf_Purchase_Invoice_Id" value="@Model.Payable.Purchase_Invoice_Id">
 
+                    <input type="hidden" value="0" id="hdf_temp">
+
                     <div class="row" style="padding-top: 10px; margin-top: 10px; border-bottom: 1px solid #DDD; border-top: 1px solid #DDD; background: rgba(0, 0, 0, 0.04); ">
 
                         <div class="col-md-3">
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
                                 <input type="text" class="form-control input-sm" name="Payable.Vendor_Name" id="txtVnedor_Name" value="@Model.Payable.Vendor_Name" placeholder="Enter Vendor Name" />
-                            </div>
+                            </div>*@
+
+                                <div class="form-group auto-complete">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor name</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control invoice-filter autocomplete-text" name="Payable.Vendor_Name" id="text_Vendor_Name" placeholder="Enter Vendor name to search" value="" data-table="Vendor" data-col=" Vendor_Id,Vendor_Name" data-headernames="Vendor">
+                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                        <input type="hidden" id="hdnVendorName" name="Payable.Vendor_Name" class="auto-complete-value" />
+                                        <input type="hidden" id="hdnVendorId" name="Payable.Vendor_Id" class="auto-complete-label" />
+
+                                    </div>
+                                </div>
                         </div>
 
                         <div class="col-md-2">
