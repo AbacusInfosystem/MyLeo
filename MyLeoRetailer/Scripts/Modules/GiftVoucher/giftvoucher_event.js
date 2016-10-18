@@ -68,10 +68,10 @@
     //End
 
     $("#btnCancel").click(function () {
-        if ($("#frmGiftVoucher").valid()) {
+      //  if ($("#frmGiftVoucher").valid()) {
           
             $("#divBankName").hide();
             $("#divCreditCardNo").hide();
-        }
+       // }
     });
 });
