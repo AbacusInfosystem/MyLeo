@@ -67,11 +67,12 @@
    
     //End
 
+    //Added by sukanya on 18/10/2016
     $("#btnCancel").click(function () {
-        if ($("#frmGiftVoucher").valid()) {
-          
+        //if ($("#frmGiftVoucher").valid()) {
+
             $("#divBankName").hide();
             $("#divCreditCardNo").hide();
-        }
+        //}
     });
 });

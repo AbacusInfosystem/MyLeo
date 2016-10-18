@@ -5,6 +5,7 @@
     ViewBag.Title = "Index";
 }
 
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Branch/Branch_events.js"></script>
 <script src="~/Scripts/Modules/Branch/Branch_methods.js"></script>
@@ -59,12 +60,12 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
-                        <input type="text" class="form-control" placeholder="Enter landline number 1." id="txtBranch_Landline1" name="Branch.Branch_Landline1" value="@Model.Branch.Branch_Landline1" maxlength="12" />
+                        <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 1." id="txtBranch_Landline1" name="Branch.Branch_Landline1" value="@Model.Branch.Branch_Landline1" />
                     </div>
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
-                        <input type="text" class="form-control" placeholder="Enter landline number 2." id="txtBranch_Landline2" name="Branch.Branch_Landline2" value="@Model.Branch.Branch_Landline2" maxlength="12" />
+                        <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 2." id="txtBranch_Landline2" name="Branch.Branch_Landline2" value="@Model.Branch.Branch_Landline2"  />
                     </div>
                 </div>
 
@@ -249,22 +250,26 @@
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-success active" id="btnSaveBranch">Save</button>
-                    <button type="reset" class="btn btn-danger active" id="btnCancleBranch">Cancel</button>
+                    <button type="reset" class="btn btn-danger active" id="btnCancleBranch">Reset</button>
                 </div>
                 
                 <div class="form-group" style="margin-bottom: 5px; float: right; padding-right:20px;">                   
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>@* Added by Vinod mane on 23/09/2016*@                   
                     <label class="switch">
-                        @if (Model.Branch.IsActive == 0)
+                        @if (Model.Branch.IsActive == 1)
                         {
-                            <input value="@Model.Branch.IsActive" name="Branch.IsActive" type="checkbox" id="Flag">
+                            <input value="@Model.Branch.IsActive" name="Branch.IsActive" checked="checked" type="checkbox" id="Flag">
+
                         }
                         else
                         {
-                            <input value="@Model.Branch.IsActive" name="Branch.IsActive" checked="checked" type="checkbox" id="Flag">
+                            <input value="@Model.Branch.IsActive" name="Branch.IsActive" type="checkbox" id="Flag">
                         }
+                       
+                           
                         <span></span>
                     </label>
+
                 </div>
             </div>
 
