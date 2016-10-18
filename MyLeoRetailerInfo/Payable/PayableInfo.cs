@@ -191,7 +191,7 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
 
-       public DateTime Created_On
+       public DateTime Created_Date
        {
            get;
            set;
@@ -203,7 +203,7 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
 
-       public DateTime Updated_On
+       public DateTime Updated_Date
        {
            get;
            set;

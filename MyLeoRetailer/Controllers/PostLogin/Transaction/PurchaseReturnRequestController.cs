@@ -219,6 +219,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 {
                     _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
 
+                    prViewModel = new PurchaseReturnRequestViewModel();
+
                     prViewModel.FriendlyMessages.Add(MessageStore.Get("PRR01"));
                 }
                 else
@@ -231,14 +233,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             catch (Exception ex)
             {
+                prViewModel = new PurchaseReturnRequestViewModel();
+
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseReturnRequestController - Save_Purchase_Return_Request : " + ex.ToString());
             }
+                       
 
-            TempData["prViewModel"] = (PurchaseReturnRequestViewModel)prViewModel;
-
-            return RedirectToAction("Search", prViewModel);
+            return View("Search", prViewModel);
         }
 
     }

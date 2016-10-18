@@ -165,10 +165,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             try
             {
-            prViewModel.PurchaseReturn.Purchase_Order_Id = _purchaseorderRepo.Get_Purchase_Order_Invoice_By_Id(Purchase_Invoice_Id, SKU_Code);
+                prViewModel.PurchaseReturn.Purchase_Order_Id = _purchaseorderRepo.Get_Purchase_Order_Invoice_By_Id(Purchase_Invoice_Id, SKU_Code);
             }
             //Added by vinod mane on 06/10/2016
-           
+
             catch (Exception ex)
             {
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
@@ -217,19 +217,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult Get_Quantity_By_SKU_Code(string SKU_Code, int Purchase_Invoice_Id, int Quantity)
-        {
-            bool check = false;
-            try
-            {
-                check = _purchaseReturnRequestRepo.Get_Quantity_By_SKU_Code(SKU_Code, Purchase_Invoice_Id, Quantity);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("PurchaseReturnController - Get_Quantity_By_SKU_Code : " + ex.ToString());
-            }
-            return Json(check, JsonRequestBehavior.AllowGet);
-        }
+       
 
 
         public PartialViewResult Update_GR_No(int Id)
@@ -287,9 +275,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 Logger.Error("PurchaseReturnController - Insert_Purchase_Return : " + ex.ToString());
             }
 
-            TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
+            
 
-            return RedirectToAction("Search", prViewModel);
+            return View("Search", prViewModel);
         }
 
          [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Edit)]

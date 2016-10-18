@@ -383,8 +383,9 @@ namespace MyLeoRetailerRepo
 
        private List<SqlParameter> Set_Values_In_Receivable(ReceivableInfo Receivable)
        {
-           decimal Total_Balance_Amount = 0;
-           decimal Balance_Amount = 0;
+          // decimal Total_Balance_Amount = 0;
+
+           //decimal Balance_Amount = 0;
 
            //decimal Balance_Amount = Get_Balance_Amount(Receivable.Sales_Invoice_Id);
 
@@ -443,16 +444,32 @@ namespace MyLeoRetailerRepo
 
            sqlParams.Add(new SqlParameter("@Balance_Amount", Receivable.Balance_Amount));
 
-           if (Receivable.Balance_Amount != 0)
+           //changes done by sushant 17th oct 2016
+
+           if (Receivable.Balance_Amount == Receivable.Net_Amount)
+           {
+               sqlParams.Add(new SqlParameter("@Payment_Status", "2"));
+           }
+           else if (Receivable.Balance_Amount == 0)
+           {
+               sqlParams.Add(new SqlParameter("@Payment_Status", "1"));
+           }
+           else if (Receivable.Balance_Amount != Receivable.Net_Amount)
            {
                sqlParams.Add(new SqlParameter("@Payment_Status", "3"));
            }
 
-           else
-           {
-               sqlParams.Add(new SqlParameter("@Payment_Status", "1"));
-           }
+           //End of Changes
 
+           //if (Receivable.Balance_Amount != 0)
+           //{
+           //    sqlParams.Add(new SqlParameter("@Payment_Status", "3"));
+           //}
+
+           //else
+           //{
+           //    sqlParams.Add(new SqlParameter("@Payment_Status", "1"));
+           //}
 
            //sqlParams.Add(new SqlParameter("@Balance_Amount ", Receivable.Balance_Amount));
 
