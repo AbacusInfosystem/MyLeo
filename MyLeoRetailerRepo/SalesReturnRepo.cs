@@ -167,6 +167,24 @@ namespace MyLeoRetailerRepo
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
+        public DataTable Get_Sales_Return_Search_Details(SalesReturnInfo salesReturn, string Branch_ID, string Sales_Return_No) //.... 
+        {
+            DataTable dt = new DataTable();
+
+            List<SalesReturnInfo> salesReturns = new List<SalesReturnInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Branch_ID", Branch_ID));
+
+            sqlParams.Add(new SqlParameter("@Sales_Return_No", Sales_Return_No));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.Get_Sales_Return_Search_Details.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
+
+
         public int Insert_SalesReturn(SalesReturnInfo salesReturn, List<SaleReturnItems> salesReturnItems)
         {
 

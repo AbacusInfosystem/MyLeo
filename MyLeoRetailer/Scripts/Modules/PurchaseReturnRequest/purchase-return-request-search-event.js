@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
 
-    document.getElementById('btnView').disabled = true;
+    //document.getElementById('btnView').disabled = true;
 
     Get_Purchase_Return_Requests();
 

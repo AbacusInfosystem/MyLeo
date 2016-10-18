@@ -48,27 +48,7 @@
             }
 
 
-            $("#drpColor").html("");
-
-            $("#drpColor").append("<option value=''>Select Color</option>");
-
-            $("#drpColor").parents('.form-group').find('ul').html("");
-
-            $("#drpColor").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Color</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-            if (obj.PurchaseOrderRequest.Colors.length > 0) {
-
-                for (var j = 0; j < obj.PurchaseOrderRequest.Colors.length; j++) {
-                    debugger;
-
-                    var i = j + 1;
-
-                    $("#drpColor").append("<option value='" + obj.PurchaseOrderRequest.Colors[j].Colour_Id + "'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</option>");
-
-                    $("#drpColor").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
-
-                }
-            }
+           
         }
     });
 
@@ -81,6 +61,28 @@ function Set_Article_No(value) {
     $(".Details").hide();
 
     $("#hdf_Article_No").val(value);
+
+    $("#drpSize_Group").val('');
+
+    $("#drpBrand").html("");
+    $("#drpBrand").append("<option value=''>Select Brand</option>");
+    $("#drpBrand").parents('.form-group').find('ul').html("");
+
+    $("#drpCategory").html("");
+    $("#drpCategory").append("<option value=''>Select Category</option>");
+    $("#drpCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpSubCategory").html("");
+    $("#drpSubCategory").append("<option value=''>Select SubCategory.</option>");
+    $("#drpSubCategory").parents('.form-group').find('ul').html("");
+
+    $("#drpCenter_Size").html("");
+    $("#drpCenter_Size").append("<option value=''>Select Center Size.</option>");
+    $("#drpCenter_Size").parents('.form-group').find('ul').html("");
+
+    $("#textPurchase_Price").val('');
+
+    $("#textSize_Difference").val('');
     
     $.ajax({
 
@@ -158,6 +160,28 @@ function Set_Article_No(value) {
                     $("#drpCategory").append("<option value='" + obj.PurchaseOrderRequest.Categories[j].Category_Id + "'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</option>");
 
                     $("#drpCategory").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+                }
+            }
+
+            $("#drpColor").html("");
+
+            $("#drpColor").append("<option value=''>Select Color</option>");
+
+            $("#drpColor").parents('.form-group').find('ul').html("");
+
+            $("#drpColor").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Color</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
+
+            if (obj.PurchaseOrderRequest.Colors.length > 0) {
+
+                for (var j = 0; j < obj.PurchaseOrderRequest.Colors.length; j++) {
+                    debugger;
+
+                    var i = j + 1;
+
+                    $("#drpColor").append("<option value='" + obj.PurchaseOrderRequest.Colors[j].Colour_Id + "'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</option>");
+
+                    $("#drpColor").parents('.form-group').find('ul').append("<li rel='" + i + "' class=''><a style='' class='' tabindex='0'><span class='text'>" + obj.PurchaseOrderRequest.Colors[j].Colour + "</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                 }
             }
@@ -972,6 +996,9 @@ function CalculateRowQuantity(i) {
     for (var j = 0; j < count ; j++) {
 
         var Qty = parseFloat($("#tblPurchaseOrderRequestItems").find('[id="textSize_Quantity_' + (j + 1) + '-' + i + '"]').val());
+
+        if (isNaN(Qty))
+            Qty = 0;
 
         var WSR = parseFloat($("#tblPurchaseOrderRequestItems").find('[id="hdnAmount_' + (j + 1) + '-' + i + '"]').val());
 

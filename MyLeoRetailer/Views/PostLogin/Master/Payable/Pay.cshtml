@@ -17,7 +17,7 @@
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
     <li><a href="#">Masters</a></li>
-    <li class="active">Pay</li>
+    <li class="active">Payable</li>
 </ul>
 <!-- END BREADCRUMB -->
 <!-- START CONTENT FRAME -->
@@ -27,7 +27,7 @@
     <div class="content-frame-top">
         <div class="col-md-12">
             <div class="page-title">
-                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Pay</h2>
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Payable</h2>
             </div>
             <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Index", "Payable")'"><i class="fa fa-angle-double-left"></i>BACK</button>
         </div>
@@ -164,7 +164,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
-                            <select class="form-control" id="drpPayment_Mode" name="Payable.Payment_Mode" value="@Model.Payable.Payment_Mode">
+                            <select class="form-control" id="drpPayment_Mode" name="Payable.Payment_Mode" >
                                 <option value="0">Select Payment mode</option>
 
                                 @foreach (var item in LookupInfo.Get_Payable_Payment_Mode())

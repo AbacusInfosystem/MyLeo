@@ -10,9 +10,9 @@
     //});
 
 
-    document.getElementById('btnEditPurchaseReturn').disabled = true;
+    //document.getElementById('btnEditPurchaseReturn').disabled = true;
 
-    document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+    //document.getElementById('btnUpdatePurchaseReturn').disabled = true;
    
     Get_Purchase_Returns();
 

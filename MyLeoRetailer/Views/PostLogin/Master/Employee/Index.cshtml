@@ -70,10 +70,11 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                            <input type="text" class="form-control datepicker" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("MM-dd-yyyy")))" readonly />
+                            <input type="text" class="form-control datepicker" id="txt_DOB" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("MM-dd-yyyy")))" readonly />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
+                                     
 
                     <div class="form-group">
                         <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">

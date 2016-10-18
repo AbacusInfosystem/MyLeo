@@ -3,9 +3,16 @@
 $(function () {
     $("#frmPay").validate({
         rules: {
+
+
+            "Receivable.Branch_Name": {
+                required: true
+            },
+
             "Receivable.Payament_Date": {
                 required: true
             },
+
 
             "Receivable.Cheque_Amount": {
                 digits: true
@@ -42,6 +49,11 @@ $(function () {
             
         },
         messages: {
+
+            "Receivable.Branch_Name": {
+                required: "Branch Name is required."
+
+            },
 
             "Receivable.Payament_Date": {
               required: "Payament Date is required."

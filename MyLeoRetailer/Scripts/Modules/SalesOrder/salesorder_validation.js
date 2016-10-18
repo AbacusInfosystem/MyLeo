@@ -2,7 +2,6 @@
 
     $("#frmSalesOrder").validate(
         {
-            //errorClass: 'login-error',
 
             rules:
                 {
@@ -20,19 +19,13 @@
                             number: true,
                             MobileNo : true
                         },
-                    //"SalesInvoice.Customer_Name":
-                    //    {
-                    //        required: true,
-                    //    },
+                  
                     "SalesInvoice.Tax_Percentage":
                         {
                             required: true,
                             number: true
                         },
-                    //"SaleOrderItemList[0].SKU_Code":
-                    //    {
-                    //        required: true,
-                    //    },
+                   
                     "SaleOrderItemList[0].Quantity":
                         {
                             required: true,
@@ -41,7 +34,6 @@
                         },
                     "SaleOrderItemList[0].Discount_Percentage":
                         {
-                            //required: true,
                             number: true
                         },
                     "SalesInvoice.Payament_Date": {
@@ -86,14 +78,6 @@
                     {
                         required: "Mobile No is required",
                         number: "Only numbers"
-                    },
-                "SalesInvoice.Customer_Name":
-                    {
-                        required: "Customer Name is required",
-                    },
-                "Vendor.Vendor_City":
-                    {
-                        required: "City is required",
                     },
                 "SalesInvoice.Tax_Percentage":
                     {
@@ -188,7 +172,7 @@ jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
     debugger;
 
-    alert(this.id);
+   // alert(this.id);
 
     var result = true;
 
