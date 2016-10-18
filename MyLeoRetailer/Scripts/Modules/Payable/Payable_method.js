@@ -81,7 +81,7 @@ function Calculate_Fianl_Amount_Using_Credit_Note_Amount() {
 
         var newfinalamount = finalamount - CNamount;
 
-        if (newfinalamount <= 0)
+        if (newfinalamount < 0)
             $("#lblFinalPriceError").show();
         else 
         $("#txtFinal_amount").val(newfinalamount.toFixed(2)); 
@@ -105,7 +105,7 @@ function Calculate_Fianl_Amount_Using_Discount() {
 
         var newfinalamount = finalamount - discountAmt;
 
-        if (newfinalamount <= 0)
+        if (newfinalamount < 0)
             $("#lblFinalPriceError").show(); 
         else
             $("#txtFinal_amount").val(newfinalamount.toFixed(2));
