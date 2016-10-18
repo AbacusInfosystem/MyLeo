@@ -316,7 +316,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 eViewModel.Cookies.Page_URL = url;
 
-                var split = url.Substring(23);
+               
+                var split = url.Replace("http://", "");//Added by vinod mane 18/10/2016
+
+               // var split = url.Substring(23); 
+               
 
                 if (split == "")
                 {
@@ -329,14 +333,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 foreach (var item in temp)
                 {
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 1; i < 2; i++)
                     {
-                        if (i == 0)
+                        if (i == 1)
                         {
                             controller = temp[i];
                             break;
                         }
-                        else if (i == 1)
+                        else if (i == 2)
                         {
                             method = temp[i];
                         }
@@ -344,6 +348,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     }
 
                 }
+
+                //foreach (var item in temp)
+                //{
+                //    for (int i = 0; i < 2; i++)
+                //    {
+                //        if (i == 0)
+                //        {
+                //            controller = temp[i];
+                //            break;
+                //        }
+                //        else if (i == 1)
+                //        {
+                //            method = temp[i];
+                //        }
+
+                //    }
+
+                //}
 
 
                 if (controller == "")

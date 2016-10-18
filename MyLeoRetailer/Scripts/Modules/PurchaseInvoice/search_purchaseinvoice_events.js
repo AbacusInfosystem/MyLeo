@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
-    document.getElementById("btnViewPurchaseInvoice").disabled = true;
+
+    //document.getElementById("btnViewPurchaseInvoice").disabled = true;
 
     Get_Purchase_Invoices();
 
