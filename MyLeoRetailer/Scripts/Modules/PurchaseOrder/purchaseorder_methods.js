@@ -82,7 +82,11 @@ function Set_Article_No(value) {
     $("#drpCenter_Size").html("");
     $("#drpCenter_Size").append("<option value=''>Select Center Size.</option>");
     $("#drpCenter_Size").parents('.form-group').find('ul').html("");
-       
+    
+    $("#textPurchase_Price").val('');
+
+    $("#textSize_Difference").val('');
+    
     $.ajax({
 
         url: "/PurchaseOrder/Get_Details_By_Article_No",
@@ -1461,6 +1465,9 @@ function CalculateRowQuantity(i) {
 
             var Qty = parseFloat($("#tblPurchaseOrderItems").find('[id="textSize_Quantity_' + (j + 1) + '-' + i + '"]').val());
 
+            if (isNaN(Qty))
+                Qty = 0;
+
             var WSR = parseFloat($("#tblPurchaseOrderItems").find('[id="hdnAmount_' + (j + 1) + '-' + i + '"]').val());
 
             var Amount = parseFloat(WSR * Qty);
@@ -2158,6 +2165,17 @@ function ReArrangePurchaseOrderSizeData() {
 
 }
 
+//function ReArrangePurchaseOrderSize() {
+
+//    debugger;
+
+//    $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderSizeRow_']").each(function (i, row) {
+
+//        alert($(this).next("tr").children("td").find("[id^='PurchaseOrderItemRow_']"));
+//            });
+
+//}
+
 //added by vinod mane on 10/10/2016
 function ClearAllDropdownlist()
 {
@@ -2199,3 +2217,4 @@ function Clear_Br_Cat_SubCat() {
 
 }
 //End
+

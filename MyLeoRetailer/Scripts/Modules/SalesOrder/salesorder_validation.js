@@ -33,7 +33,7 @@
                             QuantityCheck : true
                         },
                     "SaleOrderItemList[0].Discount_Percentage":
-                        {  
+                        {
                             number: true
                         },
                     "SalesInvoice.Payament_Date": {
@@ -78,7 +78,7 @@
                     {
                         required: "Mobile No is required",
                         number: "Only numbers"
-                    },             
+                    },
                 "SalesInvoice.Tax_Percentage":
                     {
                         required: "",
@@ -172,7 +172,7 @@ jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
     debugger;
 
-    //alert(this.id);
+   // alert(this.id);
 
     var result = true;
 

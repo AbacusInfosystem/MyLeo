@@ -45,7 +45,7 @@ jQuery.validator.addMethod("validate_Quantity", function (value, element){
     {
 
         var balance_Qty = $("#txtBalance_Quantitya").val()
-        if (value > balance_Qty)
+        if (parseInt(value) > parseInt(balance_Qty))
         {
             result = false;
 

@@ -316,7 +316,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 eViewModel.Cookies.Page_URL = url;
 
-                var split = url.Substring(23);
+                //var split = url.Substring(23); commented by vinod mane on 18/10/2016
+                var split = url.Substring(19);//added by vinod mane by vinod mane on 18/10/2016
 
                 if (split == "")
                 {
