@@ -123,6 +123,7 @@ namespace MyLeoRetailerRepo
                 {
                     Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
                 }
+               
                 //end
                 Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
                 Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);

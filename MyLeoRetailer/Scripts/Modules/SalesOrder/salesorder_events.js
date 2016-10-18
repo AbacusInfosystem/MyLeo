@@ -317,6 +317,8 @@ function CalculatePaidAmt() {
 
     debugger;
 
+   // alert();
+
     var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
 
     var chequeamount = parseFloat($("#txtCheque_Amount").val());
