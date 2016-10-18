@@ -188,7 +188,7 @@ jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
     debugger;
 
-    alert(this.id);
+   // alert(this.id);
 
     var result = true;
 
