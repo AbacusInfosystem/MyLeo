@@ -1455,6 +1455,9 @@ function CalculateRowQuantity(i) {
 
             var Qty = parseFloat($("#tblPurchaseOrderItems").find('[id="textSize_Quantity_' + (j + 1) + '-' + i + '"]').val());
 
+            if (isNaN(Qty))
+                Qty = 0;
+
             var WSR = parseFloat($("#tblPurchaseOrderItems").find('[id="hdnAmount_' + (j + 1) + '-' + i + '"]').val());
 
             var Amount = parseFloat(WSR * Qty);
