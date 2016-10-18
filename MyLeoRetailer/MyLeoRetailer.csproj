@@ -1230,11 +1230,11 @@
     <Content Include="Views\PostLogin\Master\ProductDispatch\Dispatched_Product_Listing.cshtml" />
     <Content Include="Views\PostLogin\Report\Inventory\Search.cshtml" />
     <Content Include="Views\PostLogin\Report\Sales\Search.cshtml" />
-    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Print.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\_Warehouse_Notifiation.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
