@@ -1,5 +1,12 @@
 ﻿$(document).ready(function () {
 
+    if ($("#hdf_Vendor_Id").val() == 0) {
+
+        $("[name='Brand.IsActive']").val(1);
+        document.getElementById('Flag').checked = true;
+    }
+
+
   //Added by vinod mane on 13/10/2016
     if ($("#hdf_Vendor_Id").val() != 0) {
 
