@@ -692,6 +692,11 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
 
     var i = temptablecount;
 
+    if (i > 0) {
+        document.getElementById("continue-order-details" + (i - 1)).disabled = true;
+    }
+
+
     tblHtml += "<tr id='PurchaseOrderRequestItemRow_" + i + "' class='item-data-row'>";
 
     //tblHtml += "<td>";
@@ -1163,7 +1168,7 @@ function Reset_Detalis_After_Delete() {
 
     debugger;
 
-    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
+    var temptablecount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestItemRow_"]').size();
 
     j = temptablecount;
 
@@ -1221,15 +1226,19 @@ function DeletePurchaseOrderRequestDetailsData(i) {
 
     //*************//
 
+    Reset_Detalis_After_Delete();
+
+    //*************//
+
     ReArrangePurchaseOrderRequestSize();
 
     //*************//
 
     ReArrangePurchaseOrderRequestSizeData();
 
-    //*************//
+ 
 
-    Reset_Detalis_After_Delete();
+   
         
 }
 
