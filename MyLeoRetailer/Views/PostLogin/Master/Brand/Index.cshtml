@@ -51,17 +51,31 @@
                         <input type="text" class="form-control" placeholder="Enter brand code." name="Brand.Brand_Code" />
                     </div>
 
+                   
+
                     <div class="form-group" style="margin-bottom: 5px; width:1110px; float: right;">
+                        @*<span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>*@@* Added by Vinod mane on 23/09/2016*@
                         <label class="switch">
-                            <input checked="" name="Brand.IsActive" value="0" type="checkbox" id="Flag">
+                            @if (Model.Brand.IsActive == 1)
+                            {
+                                <input value="@Model.Brand.IsActive" name="Brand.IsActive" checked="checked" type="checkbox" id="Flag">
+
+                            }
+                            else
+                            {
+                                <input value="@Model.Brand.IsActive" name="Brand.IsActive" type="checkbox" id="Flag">
+                            }
+
+
                             <span></span>
                         </label>
+
                     </div>
 
                     <div style="padding-left: 0px; padding-top: 0px; padding-bottom: 20px; margin-bottom: 15px; border-bottom: 1px solid #DDD;">
                         <div class="btn-group">
                             <button type="button" class="btn btn-success active" id="btnSaveBrand">Save</button>
-                            <button type="reset" class="btn btn-danger active">Cancel</button>
+                            <button type="reset" class="btn btn-danger active">Reset</button>
                         </div>
                     </div>
 

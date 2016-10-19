@@ -9,9 +9,9 @@
                 required: true, validation_LastName: true
             },
 
-            "Customer.Mobile": {
-                digits: true
-            },
+            //"Customer.Mobile": {
+            //    digits: true
+            //},
 
             "Customer.Customer_Billing_Pincode": {
                 digits: true,
@@ -22,22 +22,22 @@
             },
 
             "Customer.Customer_Mobile1": {
-                digits: true,
+                
                 checkmobileno: true,
             },
 
             "Customer.Customer_Mobile2": {
-                digits: true,
+                
                 checkmobileno: true,
             },
 
             "Customer.Customer_Landline1": {
-                digits: true,
+                
                 checklandlineno: true,
             },
 
             "Customer.Customer_Landline2": {
-                digits: true,
+                
                 checklandlineno: true,
             },
 
@@ -88,9 +88,9 @@
                 required: "Last Name is required."
             },
 
-            "Customer.Mobile": {
-                digits: "Enter only digits"
-            },
+            //"Customer.Mobile": {
+            //    digits: "Enter only digits"
+            //},
 
             "Customer.Customer_Billing_Pincode": {
                 digits: "Enter only digits"
@@ -185,8 +185,8 @@
     jQuery.validator.addMethod("checkmobileno", function (value, element) {
 
         var result = true;
-        var mobile1 = parseFloat($("#txtCustomer_Mobile1").val());
-        var mobile2 = parseFloat($("#txtCustomer_Mobile2").val());
+        var mobile1 = $("#txtCustomer_Mobile1").val();
+        var mobile2 = $("#txtCustomer_Mobile2").val();
 
         if (mobile1 != "" && mobile1 != 0 && mobile2 != "" && mobile2 != 0) {
 
@@ -205,8 +205,8 @@
     jQuery.validator.addMethod("checklandlineno", function (value, element) {
 
         var result = true;
-        var Landline1 = parseFloat($("#txtCustomer_Landline1").val());
-        var Landline2 = parseFloat($("#txtCustomer_Landline2").val());
+        var Landline1 = $("#txtCustomer_Landline1").val();
+        var Landline2 = $("#txtCustomer_Landline2").val();
 
         if (Landline1 != "" && Landline1 != 0 && Landline2 != "" && Landline2 != 0) {
 

@@ -10,12 +10,23 @@
     //end
 
     // Added by Vinod Mane on 13/10/2016
-    if ($("#hdn_CustomerID").val() != 0) {
+    //if ($("#hdn_CustomerID").val() != 0) {
         
-        $("#btnCancel").attr('disabled', true);
+    //    $("#btnCancel").attr('disabled', true);
        
-    }
+    //}
     //End
+
+  
+
+
+    if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0) {
+        $("[name='Customer.IsActive']").val(1);
+        document.getElementById('Flag').checked = true;
+    }
+
+    $("input.mask_phone_no").mask('(999) 9999-9999');
+    $("input.mask_mobile_no").mask('(99) 99999-99999');
 
     $("#btnSaveCustomer").click(function () {
 

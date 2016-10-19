@@ -33,6 +33,17 @@
             Reset_SizeGroup();
 
             $("#divSizeGroupPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            var fix = $("[name='SizeGroup.IsActive']").val(true);
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
+
+
         }
     });
 }
@@ -70,6 +81,15 @@ function Get_Sizes(Size_Group_Id) {
                     $("#txtSize" + (i + 1)).val(obj.SizeList[i].Size_Name);
 
                 }
+
+                //var fix = $("[name='SizeGroup.IsActive']").val(true);
+
+                //if (fix == "0") {
+                //    document.getElementById('Flag').checked = false;
+                //}
+                //else {
+                //    document.getElementById('Flag').checked = true;
+                //}
             }
         }
     });
@@ -125,6 +145,15 @@ function Save_SizeGroup()
             Get_SizeGroups();
 
             Friendly_Messages(obj);
+
+            var fix = $("[name='SizeGroup.IsActive']").val(true);
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
 
         }
     });

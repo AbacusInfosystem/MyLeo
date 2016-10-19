@@ -42,6 +42,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 {
                     bViewModel = (BrandViewModel)TempData["bViewModel"];
                 }
+
+                bViewModel.Brand.Is_Active = true;
+                bViewModel.Brand.IsActive = 1;
             }
             catch (Exception ex)
             {
@@ -95,6 +98,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Barnds(BrandViewModel bViewModel)
 		{
+            bViewModel.Brand.Is_Active = true;
+            bViewModel.Brand.IsActive = 1;
+
 			string filter = "";
 
 			string dataOperator = "";

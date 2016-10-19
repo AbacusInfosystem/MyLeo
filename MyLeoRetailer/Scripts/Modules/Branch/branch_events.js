@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    $("input.mask_phone_no").mask('(999) 9999-9999');
+    $("input.mask_phone_no").mask('(9999) 9999-9999');
     //if ($("[name='Branch.Branch_ID']").val() == "" || $("[name='Branch.Branch_ID']").val() == 0) {
     //    document.getElementById("btnCancleBranch").disabled = false;
     //}
