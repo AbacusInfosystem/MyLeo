@@ -82,6 +82,11 @@ function AddSalesReturnDetails(i)
 
     tblHtml += "<tr id='SalesReturnItemRow_" + i + "' class='item-data-row'>";
 
+
+    tblHtml += "<td>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleReturnItemList[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "</td>";
+
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
@@ -198,6 +203,11 @@ function ReArrangeSalesReturnDetailsData()
             $(row)[0].id = 'SalesReturnItemRow_' + i;
 
             var newTR = "#" + $(row)[0].id + " td";
+
+            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
+                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
+                $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleReturnItemList[" + i + "].Barcode");
+            }
 
 
             if ($(newTR).find("[id^='textSales_Invoice_No_']").length > 0) {

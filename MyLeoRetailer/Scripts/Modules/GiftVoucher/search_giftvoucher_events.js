@@ -2,7 +2,11 @@
 
 $(function () {
 
+    //document.getElementById("btnViewPurchaseInvoice").disabled = true;
+
     Get_Gift_Vouchers();
+
+
 
     $("[name='Filter.Gift_Voucher_No']").focusout(function () {
         Get_Gift_Vouchers();
@@ -21,8 +25,10 @@ $(function () {
     $(document).on('change', '[name="Gift_Voucher_List"]', function (event) {
         if ($(this).prop('checked')) {
             $("#hdn_GiftVoucherId").val(this.value);
-            $("#btnGiftVoucher").show();
-            $("#btncreateGV").hide();
+
+            document.getElementById("btnGiftVoucher").disabled = false;
+            //$("#btnGiftVoucher").show();
+            //$("#btncreateGV").hide();
         }
     });
 

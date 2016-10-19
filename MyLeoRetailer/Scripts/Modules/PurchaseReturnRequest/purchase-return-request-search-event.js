@@ -9,7 +9,7 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchase_Return_Request_Id").val(this.value);
             document.getElementById('btnView').disabled = false;
-            document.getElementById('btnCreate').disabled = true;
+            //document.getElementById('btnCreate').disabled = true;
         }
     });
 
@@ -23,6 +23,9 @@
     $("#drpVendor_Id").change(function () {
 
         Get_Purchase_Return_Requests();
+        $('.edit').each(function () {
+            $(this).attr('disabled', 'disabled');
+        });
 
     });
 

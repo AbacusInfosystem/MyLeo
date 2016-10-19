@@ -58,11 +58,15 @@
                     </div>
                     <div class="row">
                         <div class="block">
-                            <div class="col-md-10" style="padding-top: 20px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;"> 
+                            <div class="col-md-6" style="padding-top: 20px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;"> 
                                 <div class="btn-group"> 
                                     <a type="button" class="btn btn-success active" role="button" href="@Url.Action("Index", "Product")">Create </a>
-                                    <button type="button" class="btn btn-danger active" id="btnEdit" style="display:none">Edit</button> 
-                                    <button type="button" class="btn btn-success active" id="btnProductMRP" style="display:none">Add Product MRP</button>
+                                    @*<button type="button" class="btn btn-danger active" id="btnEdit" style="display:none">Edit</button> 
+                                    <button type="button" class="btn btn-success active" id="btnProductMRP" style="display:none">Add Product MRP</button>*@
+
+                                    <button role="button" class="btn btn-danger active edit" id="btnEdit">Edit</button>
+                                    <button role="button" class="btn btn-success active edit" id="btnProductMRP">Add Product MRP</button>
+
                                 </div>
 
                             </div>
