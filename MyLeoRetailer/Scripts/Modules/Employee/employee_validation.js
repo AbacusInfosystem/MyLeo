@@ -10,15 +10,12 @@ $(function ()
 
 		    //Addition by swapnali | Date:19/09/2016
 		    "Employee.Employee_Gender": {
-		        Employee_Gender: true
+		        EmployeeGender: true
 		    },
 		    "Employee.Designation_Id": {
 		        Designation: true
 		    },
-		    "Employee.Employee_Mobile2": {
-		        digits: true
-		        //number: true
-		    },
+		    
 		    "Employee.Employee_DOB": {
 		        // digits: true
 		        required: true,
@@ -33,7 +30,12 @@ $(function ()
 		    },
             		   
 		    "Employee.Employee_Mobile1": {		       
-		         digits: true
+		        checkmobileno: true
+		        //number: true
+		    },
+
+		    "Employee.Employee_Mobile2": {
+		        checkmobileno: true
 		        //number: true
 		    },
 
@@ -79,7 +81,7 @@ $(function ()
     });
 
     //Addition by swapnali | Date:19/09/2016
-    jQuery.validator.addMethod("Employee_Gender", function (value, element) {
+    jQuery.validator.addMethod("EmployeeGender", function (value, element) {
         var result = true;
         if (($(element).val()) == "0") {
             result = false;
@@ -148,43 +150,28 @@ $(function ()
         }
         return result;
 
-    }, "Colour is already exists.");
+    }, "Employee is already exists.");
 
 
-    //end
-   
-    //Added by vinod mane on 17/10/2016
-    $.validator.addMethod('chkdate', function (value) {
+    jQuery.validator.addMethod("checkmobileno", function (value, element) {
 
         var result = true;
-       
-        var DOB_Date = $("#txt_DOB").val();
-     
-        if (DOB_Date != '') {
+        var mobile1 = $("#txtEmployeeMobile1").val();
+        var mobile2 = $("#txtEmployeeMobile2").val();
 
-            var ServiceUrl = "/Employee/Compare_Dates";
-            $.ajax({
-                data: { DOB_Date: DOB_Date },
-                url: ServiceUrl,
-                type: "POST",
-                dataType: "json",
-                async: false,
-                success: function (data) {
-                    result = data;                    
-                }
-            });
+        if (mobile1 != "" && mobile1 != 0 && mobile2 != "" && mobile2 != 0) {
+
+            if (mobile1 == mobile2) {
+                result = false;
+                //calculate(element);
+            }
+            else {
+                result = true;
+            }
         }
-
         return result;
-        
 
-    }, 'Please Select valid Birth Date');
-
-    //End
-
-    //$("#btnCancel").click(function () {
-    //    location.reload(true)
-    //})
+    }, "You can not enter same mobile no.");
       
 
 });

@@ -1,11 +1,30 @@
 ﻿$(document).ready(function () {
 
-  //Added by vinod mane on 13/10/2016
-    if ($("#hdf_Vendor_Id").val() != 0) {
+    if ($("#hdf_Vendor_Id").val() == 0) {
 
-        $("#btnCancel").attr('disabled', true);
+        $("[name='Brand.IsActive']").val(1);
+        document.getElementById('Flag').checked = true;
     }
+
+
+  //Added by vinod mane on 13/10/2016
+    //if ($("#hdf_Vendor_Id").val() != 0) {
+
+    //    $("#btnCancel").attr('disabled', true);
+    //}
     //end
+
+
+   
+
+    if ($("#hdf_Vendor_Id").val() == 0) {
+
+        $("[name='Brand.IsActive']").val(1);
+        document.getElementById('Flag').checked = true;
+    }
+    
+   
+    $("input.mask_mobile_no").mask('(99) 99999-99999');
 
     $('#dtpVendor_Vat_Effective_Date').datepicker({});
 

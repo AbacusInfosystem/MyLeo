@@ -226,11 +226,11 @@
 
 
                     <div class="row">
-                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px; margin-left:1435px">
+                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
                             <div class="block">
                                 <div class="block" style="margin-top:0px; ">
-                                    <div class="btn-group">
-                                        <a href="javascript:AddSalesReturnDetails();" id="btnAddInputRow" class="btn btn-success active">
+                                    <div class="btn-group pull-right">
+                                        <a href="javascript:AddSalesReturnDetails();" id="btnAddInputRow" class="btn btn-success active ">
                                             <i class="mdi mdi-plus"></i>
                                             Add New Row
                                         </a>
@@ -247,6 +247,7 @@
                             <table class="table table-bordered table-hover" id="tblSalesReturnItems">
                                 <thead>
                                     <tr>
+                                        <th>Barcode No.</th>
                                         <th>Invoice No.</th>
                                         <th>SKU No</th>
                                         <th>Article No</th>
@@ -266,7 +267,9 @@
                                 </thead>
                                 <tbody>
                                     <tr id="SalesReturnItemRow_0">
-
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].Barcode" id="textBarcode_No_0" placeholder="Barcode No">
+                                        </td>
                                         @*<td>
                                                 <input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].Sales_Invoice_No" id="textInvoice_No_0" placeholder="Invoice No">
                                                 <input type="hidden" name="SalesReturn.Sales_Invoice_Id" value="@Model.SalesReturn.Sales_Invoice_Id" id="hdnSalesInvoice_ID" />
@@ -424,7 +427,7 @@
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
                                 <button type="button" id="btnSaveSalesReturn" class="btn btn-success active">Save</button>
-                                <a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesReturn")">Cancel </a>
+                                <a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesReturn")">Reset </a>
                             </div>
                         </div>
 

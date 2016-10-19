@@ -8,12 +8,15 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseInvoiceId").val(this.value);
             document.getElementById('btnViewPurchaseInvoice').disabled = false;
-            document.getElementById('btnCreatePurchaseInvoice').disabled = true;
+            //document.getElementById('btnCreatePurchaseInvoice').disabled = true;
         }
     });
 
     $("[name='Filter.Purchase_Invoice_No']").focusout(function () {
         Get_Purchase_Invoices();
+        $('.edit').each(function () {
+            $(this).attr('disabled', 'disabled');
+        });
     });
 
 

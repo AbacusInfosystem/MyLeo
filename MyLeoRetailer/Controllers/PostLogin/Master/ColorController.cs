@@ -43,6 +43,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 Logger.Error("Color Controller - Index " + ex.Message);
             }
 
+            cViewModel.Color.IsActive = 1;
+
             return View("Index",cViewModel);
         }
 

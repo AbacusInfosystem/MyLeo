@@ -30,6 +30,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 {
                     tViewModel = (TaxViewModel)TempData["tViewModel"];
                 }
+
+                tViewModel.Tax.IsActive = 1;
             }
             catch (Exception ex)
             {

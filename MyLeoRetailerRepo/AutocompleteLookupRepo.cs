@@ -390,16 +390,20 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
-                //if (table_Name == "Sales_Invoice")
-                //{
-                //    if (fieldName == "Branch_Id")
-                //    {
-                //        strquery = " Select distinct Sales_Invoice.Branch_Id, Sales_Invoice.Sales_Invoice_No ";
-                //        strquery += "from Sales_Invoice inner join Branch on Sales_Invoice.Branch_Id=Branch.Branch_ID where Sales_Invoice.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
-                //        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
-                //    }
-                //}
+               
 
+                if (table_Name == "Sales_Invoices")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " select Sales_Invoice.Sales_Invoice_Id,Sales_Invoice.Sales_Invoice_No  ";
+                        strquery += "from Sales_Invoice left JOIN Receivable  ON Receivable.Sales_Invoice_Id=Sales_Invoice.Sales_Invoice_Id";
+                        strquery += " left join Branch  on Branch.Branch_Id=Receivable.Branch_ID  where Receivable.Branch_ID in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
+                    }
+                }
+
+               
                 //if (table_Name == "Purchase_Invoice")
                 //{
                 //    if (fieldName == "Purchase_Invoice_Id")

@@ -33,7 +33,11 @@
         if ($(this).prop('checked')) {
             //$("#hdf_ProductId").val(this.value);
             //$("#hdf_SizeGroupId").val($('[name="Size_Group_Id"]').val());
-            $("#btnPay").show();
+
+
+            //$("#btnPay").show();
+            document.getElementById("btnPay").disabled = false;
+
             //$("#btnEdit").show();
         }
     });

@@ -184,9 +184,9 @@
                                     foreach (var itm in Model.SaleReturnItemList)
                                     {
 
-                                        decimal mrpamt = 0;
+                                        //decimal mrpamt = 0;
 
-                                        mrpamt = itm.MRP_Price * itm.Quantity;
+                                        //mrpamt = itm.MRP_Price * itm.Quantity;
 
                                         amt = itm.MRP_Price * itm.Quantity * itm.Discount_Percentage / 100;                                   
 
@@ -199,7 +199,8 @@
                                             <td>@itm.SubCategory</td>
                                             <td>@itm.Size_Name</td>
                                             <td>@itm.Colour_Name</td>
-                                            <td style="background: rgba(74,77,67,0.09);">@mrpamt</td>
+                                            <td>@itm.MRP_Price</td>
+                                            @*<td style="background: rgba(74,77,67,0.09);">@mrpamt</td>*@
                                             <td>@itm.Quantity</td>
                                             <td>@itm.Discount_Percentage</td>
                                             <td>@amt</td>

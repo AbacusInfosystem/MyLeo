@@ -24,7 +24,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public VendorRepo _vendorRepo;
 
-
         public PurchaseInvoiceController()
         {
             _purchaseinvoiceRepo = new PurchaseInvoiceRepo();
@@ -33,7 +32,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             _vendorRepo = new VendorRepo();
         }
-
 
         public ActionResult Index(PurchaseInvoiceViewModel piViewModel)
         {
@@ -97,7 +95,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("View", piViewModel);
         }
        
-
         public JsonResult Get_Purchase_Invoices(PurchaseInvoiceViewModel piViewModel)
         {
             try
@@ -149,7 +146,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                
             return Json(JsonConvert.SerializeObject(piViewModel));
             }
-
 
         public ActionResult Get_Purchase_Invoice_Details(PurchaseInvoiceViewModel piViewModel)
             {
@@ -227,7 +223,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("View", piViewModel);
         }
 
-
         public ActionResult Insert_Purchase_Invoice(PurchaseInvoiceViewModel piViewModel)
         {
             try
@@ -290,7 +285,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             return RedirectToAction("Search", piViewModel);
         }
-
 
         //public JsonResult Get_Purchase_Invoices(PurchaseInvoiceViewModel piViewModel)
         //{

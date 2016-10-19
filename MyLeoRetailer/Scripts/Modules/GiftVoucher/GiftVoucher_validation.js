@@ -15,10 +15,12 @@ $(function () {
             },
             //Added by vinod mane on 28/09/2016
             "GiftVoucher.Gift_Voucher_Date": {
-                required: true
+                required: true,
+                chkdate:true
             },
             "GiftVoucher.Gift_Voucher_Expiry_Date": {
-                required: true
+                required: true,
+                chkdate:true
             }
             //end
         },
@@ -49,4 +51,32 @@ $(function () {
 
         }
     });
+
+    //Added by vinod mane on 17/10/2016
+    $.validator.addMethod('chkdate', function (value) {
+
+        var result = true;
+
+        var VoucherExpiryDate = $("#txtVoucherExpiryDate").val();
+        var VoucherDate = $("#txtVoucherDate").val();
+
+        if (VoucherExpiryDate != "" && VoucherDate != "") {
+
+            if (VoucherExpiryDate > VoucherDate) {
+                result = true;
+               
+            }
+            else {
+
+                result = false;
+               
+            }
+        }
+       
+
+        return result;
+
+
+    }, 'Please Select valid date');
+
 });
