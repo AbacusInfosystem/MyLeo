@@ -260,12 +260,14 @@ function Get_Consolidate_Purchase_Orders(value) {
 
             if (obj.PurchaseOrder.PurchaseOrders.length > 0) {
 
+            
+
                 var qty = 0;
 
                 var amt = 0;
 
                 for (var i = 0; i < obj.PurchaseOrder.PurchaseOrders.length; i++) {
-
+                                       
                     var html = '';
 
                     var tblHtml = '';
@@ -414,7 +416,7 @@ function Get_Consolidate_Purchase_Orders(value) {
                     //**************************************************************************************//
 
 
-                    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
+                    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row POI_Row_" + i + "'>";
 
                     tblHtml += "<td>";
                     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textArticle_No_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "</span>";
@@ -1639,15 +1641,16 @@ function Reset_Detalis_After_Delete() {
 
     j = temptablecount;
 
+    var total_qty = 0;
+
+    var total_amt = 0;
+
     for (var i = 0; i < j; i++) {
 
         var qty = $("#hdnTotal_Quantity_" + i).val();
 
         var amt = $("#hdnTotal_Amount_" + i).val();
-
-        var total_qty = 0;
-
-        var total_amt = 0;
+             
 
         if (qty != 0 || qty != null) {
 
