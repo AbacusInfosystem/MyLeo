@@ -87,7 +87,7 @@ namespace MyLeoRetailerHelper
 
             #region Next Button
 
-            if (flagNextBatchExists)
+            if (flagNextBatchExists && pages > 3)
             {
                 pagerStr.Append("<a href=\"javascript: MoveQuick('Next','"+grid_div+"',"+callback+");\" class='paginate_button next' tabindex='0'>Next</a>");
             }
@@ -96,7 +96,7 @@ namespace MyLeoRetailerHelper
 
             #region Last Button
 
-            if (flagNextBatchExists)
+            if (flagNextBatchExists && pages > 3)
             {
                 pagerStr.Append("<a href=\"javascript: MoveQuick('Last','"+grid_div+"',"+callback+");\"  class='paginate_button next' tabindex='0'>Last</a>");
             }
