@@ -4,6 +4,10 @@ $(document).ready(function () {
 
     $("#btnOK").click(function () {
 
+        $('.edit').each(function () {
+            $(this).attr('disabled', 'disabled');
+        });
+
         var hiddenTextValue = $("#hdnValue").val();
 
         var id = $("#hdnId").val();

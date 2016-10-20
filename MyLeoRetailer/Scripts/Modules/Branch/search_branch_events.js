@@ -1,14 +1,14 @@
 ﻿$(function () {
    
-    //document.getElementById("btnEditBranch").disabled = true; //Change By Vinod Mane on 23/09/2016
+    document.getElementById('btnEditBranch').disabled = true;
 
     Get_Branchs();
 
     $(document).on('change', '[name="Branch_List"]', function (event) {        
         if ($(this).prop('checked')) {
             $("#hdnBranch_ID").val(this.value);
-            //document.getElementById("btnEditBranch").disabled = false;
-            $("#btnEditBranch").show();
+            document.getElementById('btnEditBranch').disabled = false;
+            //$("#btnEditBranch").show();
         }
     });
 

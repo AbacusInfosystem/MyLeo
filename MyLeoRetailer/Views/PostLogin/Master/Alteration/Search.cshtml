@@ -80,7 +80,8 @@
                             <div class="btn-group">
                                
                                 <button role="button" class="btn btn-success active" value="Create" id="btncreateA" @*onclick="location.href='@Url.Action("Index", "VendorContact")'"*@>Create</button>
-                                <button class="btn btn-danger active" role="button" style="display:none;"  value="Edit" id="btnEditAlteration">Edit</button>
+                                @*<button class="btn btn-danger active" role="button" style="display:none;"  value="Edit" id="btnEditAlteration">Edit</button>*@
+                                <button role="button" disabled class="btn btn-danger active edit" id="btnEditAlteration">Edit</button>
                             </div>
 
                         </div>

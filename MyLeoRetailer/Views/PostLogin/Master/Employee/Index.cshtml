@@ -67,16 +67,22 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                             <input type="text" class="form-control datepicker" id="txt_DOB" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("MM-dd-yyyy")))" readonly />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </div>
+                    </div>*@
                                      
-
-         
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                            <input type="text" class="form-control datepicker" id="txt_DOB" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Employee date of birth" />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                          
 
                     <div class="form-group">
                         <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
@@ -84,17 +90,17 @@
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
                            <label class="switch">
-                                @* @if (Model.Employee.IsActive == false)
-                                {
-                                    <input value="0" name="Employee.IsActive" type="checkbox">
-                                }
-                                else
-                                {
-                                    
-                                *@
-                                <input value="1" name="Employee.IsActive" checked="checked" type="checkbox">
-                              @*  }*@
-                                <span></span>
+                               @if (Model.Employee.IsActive == true)
+                               {
+                                <input value="@Model.Employee.IsActive" name="Employee.IsActive" type="checkbox" id="Flag">
+                               }
+                               else
+                               {
+                                <input value="@Model.Employee.IsActive" name="Employee.IsActive" checked="checked" type="checkbox" id="Flag">
+                               }
+                               @*<input checked="" id="Flag" value="0" type="checkbox">*@
+                               <span></span>
+                               
                             </label>
                         </div>
                     </div>

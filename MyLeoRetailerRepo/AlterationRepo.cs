@@ -101,9 +101,21 @@ namespace MyLeoRetailerRepo
             sqlHelper.ExecuteNonQuery(Set_Values_In_Alteration(Alteration), Storeprocedures.sp_Update_Alteration.ToString(), CommandType.StoredProcedure);
         }
 
-        public DataTable Get_Alterations(QueryInfo query_Details)
+        public DataTable Get_Alterations(Filter_Alteration Alteration)
         {
-            return sqlHelper.Get_Table_With_Where(query_Details);
+            //return sqlHelper.Get_Table_With_Where(query_Details);
+
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Customer_Mobile_No", Alteration.Customer_Mobile_No));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Alterations.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+
         }
 
         public AlterationInfo Get_Alteration_By_Id(int Alteration_ID)

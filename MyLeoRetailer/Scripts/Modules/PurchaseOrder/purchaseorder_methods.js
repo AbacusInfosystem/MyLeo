@@ -1,4 +1,5 @@
 ﻿function Set_Vendor_Id(value) {
+     
 
     $(".Details").hide();
 
@@ -8,9 +9,11 @@
     document.getElementById('tdNetAmount').innerText = 0;
     $('#hdf_Vendor_Id').val(value);
 
-    ClearAllDropdownlist();
+     ClearAllDropdownlist();
 
     //End
+
+     Reset_Detalis_After_Delete();
 
     $.ajax({
 
@@ -257,12 +260,14 @@ function Get_Consolidate_Purchase_Orders(value) {
 
             if (obj.PurchaseOrder.PurchaseOrders.length > 0) {
 
+            
+
                 var qty = 0;
 
                 var amt = 0;
 
                 for (var i = 0; i < obj.PurchaseOrder.PurchaseOrders.length; i++) {
-
+                                       
                     var html = '';
 
                     var tblHtml = '';
@@ -411,7 +416,7 @@ function Get_Consolidate_Purchase_Orders(value) {
                     //**************************************************************************************//
 
 
-                    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
+                    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row POI_Row_" + i + "'>";
 
                     tblHtml += "<td>";
                     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textArticle_No_" + i + "'>" + obj.PurchaseOrder.PurchaseOrders[i].Article_No + "</span>";
@@ -786,9 +791,7 @@ function Get_Sizes() {
 }
 
 function AddPurchaseOrderDetails() {
-
-
-
+    
     var tdSizeCount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
 
     var x = tdSizeCount;
@@ -1062,7 +1065,7 @@ function AddPurchaseOrderDetails() {
 
     myTable.append(newRow);
 
-    //$("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
+    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
 
     var $options = $("#drpTemp_Center_Size > option").clone();
 
@@ -1084,6 +1087,12 @@ function AddPurchaseOrderDetails() {
 
 
     Add_Validation(i);
+
+    //********//
+
+    $("#hdnrecords_Validation").hide();
+
+    //********//
 
 }
 
@@ -1348,7 +1357,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     myTable.append(newRow);
 
-    //$("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
+    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
 
     var $options = $("#drpTemp_Center_Size > option").clone();
 
@@ -1374,9 +1383,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 }
 
 function CalculateRowAmount(i) {
-
-
-
+    
     var index = document.getElementById("drpCenter_Size").selectedIndex;
 
     var count = document.getElementById("drpCenter_Size").length;
@@ -1477,6 +1484,11 @@ function CalculateRowQuantity(i) {
             $("#tblPurchaseOrderItems").find('[id="hdnTotal_Quantity_' + i + '"]').val(sum_row_quantity);
 
             $("#tblPurchaseOrderItems").find('[id="hdnTotal_Amount_' + i + '"]').val(sum_row_amount);
+
+            if (sum_row_quantity > 0) {
+
+                $("#hdnrecords_Validation").hide();
+            }
         }
 
     }
@@ -1629,15 +1641,16 @@ function Reset_Detalis_After_Delete() {
 
     j = temptablecount;
 
+    var total_qty = 0;
+
+    var total_amt = 0;
+
     for (var i = 0; i < j; i++) {
 
         var qty = $("#hdnTotal_Quantity_" + i).val();
 
         var amt = $("#hdnTotal_Amount_" + i).val();
-
-        var total_qty = 0;
-
-        var total_amt = 0;
+             
 
         if (qty != 0 || qty != null) {
 
@@ -1667,15 +1680,11 @@ function Reset_Detalis_After_Delete() {
         $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
 
         $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
+               
     }
 }
 
 function DeletePurchaseOrderDetailsData(i) {
-
-
-
-    //*************//
-
 
 
     var id = $("#hdnItem_Ids_" + i).val();
@@ -1687,9 +1696,7 @@ function DeletePurchaseOrderDetailsData(i) {
     $("#tblPurchaseOrderItems").find("[id='PurchaseOrderItemRow_" + i + "']").remove();
 
 
-    //*************//
-
-
+    //*************//    
 
     ReArrangePurchaseOrderSizeData();
 
@@ -1698,30 +1705,9 @@ function DeletePurchaseOrderDetailsData(i) {
 
     //*************//
 
-
-    //var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
-
-    //k = temptablecount;
-
-    //for (var x = 0; x < k; x++) {
-
-    //    var count = $("#PurchaseOrderItemRow_" + i).find(".POI_Row_" + x).size();
-
-    //    if (count == 0) {
-    //        $("#tblPurchaseOrderItems").find("[id='PurchaseOrderSizeRow_" + x + "']").remove();
-    //    }
-    //}
-
-    //*************//
-
     Reset_Detalis_After_Delete();
 
-    //*************//
-    //if ($("#tblPurchaseOrderItems")[0].children[1].rows.length == 1) {
-    //    $("#tblPurchaseOrderItems")[0].children[1].rows[0].remove();
-    //}
-
-    //*************//
+   
 
 }
 
@@ -2156,17 +2142,6 @@ function ReArrangePurchaseOrderSizeData() {
 
 }
 
-//function ReArrangePurchaseOrderSize() {
-
-//    
-
-//    $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderSizeRow_']").each(function (i, row) {
-
-//        alert($(this).next("tr").children("td").find("[id^='PurchaseOrderItemRow_']"));
-//            });
-
-//}
-
 //added by vinod mane on 10/10/2016
 function ClearAllDropdownlist() {
     //$("#drpArticle_No").val('');
@@ -2250,4 +2225,42 @@ function ValidateColor($this) {
         }
         i++;
     });
+}
+
+function ValidateArticleSizeGroup() {
+
+    var size_group_id = $("#drpSize_Group").val();
+
+    var artical_no = $("#drpArticle_No").val();
+
+    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
+
+    var x = temptablecount;
+
+    if (x > 0) {
+        x = x - 1;
+    }
+
+    for (var i = 0; i <= x; i++) {
+
+        var ArticleNo = $("#hdnArticle_No_" + i).val();
+
+        var SizeGroupId = $("#hdnSize_Group_Id_" + i).val();
+
+        $("#drpSize_Group").rules("add", { ArticleSizeGroupExist: true, messages: {} });
+
+        jQuery.validator.addMethod("ArticleSizeGroupExist", function (value, element) {
+
+            var result = true;
+            if (ArticleNo == artical_no && SizeGroupId == size_group_id) {
+                result = false;
+                $("#drpSize_Group").rules("add", "ArticleSizeGroupExist");
+
+
+            }
+            return result;
+
+        }, "Same article and size group already exist.");
+
+    }
 }

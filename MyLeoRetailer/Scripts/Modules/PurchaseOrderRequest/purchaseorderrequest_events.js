@@ -49,8 +49,10 @@
     
     $("#btnAddSizesPurchaseOrderRequest").click(function () {
 
-        $('#drpSize_Group').rules("remove");
-        $('#drpArticle_No').rules("remove");
+        ValidateArticleSizeGroup();
+
+        //$('#drpSize_Group').rules("remove");
+        //$('#drpArticle_No').rules("remove");
         $('#drpCenter_Size').rules("remove");
         $('#drpBrand').rules("remove");
         $('#textPurchase_Price').rules("remove");

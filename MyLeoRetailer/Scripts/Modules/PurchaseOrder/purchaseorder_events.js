@@ -76,6 +76,8 @@
         $('#textSize_Difference').rules("remove");
         $('#drpSubCategory').rules("remove");
 
+        ValidateArticleSizeGroup();
+
         if ($("#frmPurchaseOrder").valid()) {
 
             Get_Sizes();

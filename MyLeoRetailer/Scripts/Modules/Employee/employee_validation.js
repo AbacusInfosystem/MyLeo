@@ -10,7 +10,7 @@ $(function ()
 
 		    //Addition by swapnali | Date:19/09/2016
 		    "Employee.Employee_Gender": {
-		        EmployeeGender: true
+		        Employee_Gender: true
 		    },
 		    "Employee.Designation_Id": {
 		        Designation: true
@@ -19,7 +19,7 @@ $(function ()
 		    "Employee.Employee_DOB": {
 		        // digits: true
 		        required: true,
-		        chkdate: true  //Added by vinod mane on 17/10/2016
+		        //chkdate: true  //Added by vinod mane on 17/10/2016
 		    },
             //End
 
@@ -75,7 +75,7 @@ $(function ()
             //End
 		    "Employee.Employee_EmailId": {
 		        email: "Invalid Email"
-		        
+		         
 		    },
 
 
@@ -175,7 +175,7 @@ $(function ()
         return result;
         
 
-    }, 'Please Select valid Birth Date');
+    }, 'You can not enter same mobile no');
 
     
 

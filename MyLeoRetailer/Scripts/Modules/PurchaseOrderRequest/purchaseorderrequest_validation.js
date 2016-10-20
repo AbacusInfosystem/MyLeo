@@ -11,7 +11,8 @@
             },
 
             "PurchaseOrderRequest.Size_Group_Id": {
-                required: true
+                required: true,
+                //ArticleSizeGroupExist: true
             }//,
 
             //"PurchaseOrderRequest.Article_No": {

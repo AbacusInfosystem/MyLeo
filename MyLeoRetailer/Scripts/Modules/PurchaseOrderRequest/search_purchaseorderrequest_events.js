@@ -8,7 +8,7 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseOrderRequestId").val(this.value);
             document.getElementById("btnEditPurchaseOrderRequest").disabled = false;
-            document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
+            //document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
         }
     });
 
