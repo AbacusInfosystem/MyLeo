@@ -160,17 +160,17 @@ function CalculateQuantityMRP()
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++)
         {
-           // var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+            //var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
 
             //Added by vinod mane on 12/10/2016
             var Qty = $("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val();
 
             if (Qty == "" || Qty == "NaN") {
-                Qty = 1;
-                $('#textQuantity_' + i).val(1);
+                Qty = 0;
+                $('#textQuantity_' + i).val(0);
             }
             //End
-            //var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
 
             //Added by vinod mane on 12/10/2016
             var MRP = $("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val();
@@ -183,8 +183,9 @@ function CalculateQuantityMRP()
             //$("#textMRP_Price_" + i).val(mrpAmt);
 
             //mrpAmt = Qty * MRP
-            sumQuantity = sumQuantity + parseFloat(Qty);
-            sumMRPAmount = parseFloat(MRP) * Qty + sumMRPAmount;
+
+            sumQuantity = parseFloat(sumQuantity) + parseFloat(Qty);
+            sumMRPAmount = parseFloat(MRP) + parseFloat(sumMRPAmount);
            
         }
         //$("#textMRP_Price_" + i).val(mrpAmt);
@@ -209,13 +210,13 @@ function CalculateTotal()
     {
         for (var i = 0; i < tr.size() ; i++)
         {
-            //var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
 
             //Added by vinod mane on 12/10/2016
             var Qty = $("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val();
             if (Qty == "" || Qty == "NaN") {
-                Qty = 1;
-                $('#textQuantity_' + i).val(1);
+                Qty = 0;
+                $('#textQuantity_' + i).val(0);
             }
             //End
             var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
@@ -234,8 +235,8 @@ function CalculateTotal()
             var Amount = parseFloat(MRP * Qty - DiscountAmt);
             $("#tblSalesOrderItems").find('[id="textAmount_' + i + '"]').val(Amount);
           
-            sumQuantity = sumQuantity + Qty;
-            sumMRPAmount = MRP * Qty + sumMRPAmount;
+            sumQuantity = parseFloat(sumQuantity) + parseFloat(Qty);
+            sumMRPAmount = MRP + sumMRPAmount;
             sumDiscountAmount = sumDiscountAmount + DiscountAmt;
             sumGrossAmount = sumGrossAmount + Amount;
 

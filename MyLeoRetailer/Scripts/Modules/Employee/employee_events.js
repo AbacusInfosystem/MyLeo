@@ -1,23 +1,23 @@
 ﻿
 
-$(document).ready(function () {
+//$(document).ready(function () {
 
-    //Added by vinod mane on 13/10/2016
-    if ($("#hdn_EmployeeId").val() != 0) {
+//    //Added by vinod mane on 13/10/2016
+//    if ($("#hdn_EmployeeId").val() != 0) {
 
-        $("#btnCancel").attr('disabled', true);
+//        $("#btnCancel").attr('disabled', true);
 
-    }
-    //End
+//    }
+//    //End
 
-});
+//});
 
 $(function ()
 {
  //addition by swapnali | Date:19/09/2016
    // $("#Employee_Home_Lindline").mask("(999) 999-9999");
     $("input.mask_phone_no").mask('(999) 9999-9999');
-    $(".mask_Mobile_no").mask('(99) 99999-99999');
+    $("input.mask_mobile_no").mask('(99) 99999-99999');
     //alert($('[name="Employee.IsActive"]').val());
 
     if ($('[name = "Employee.Employee_Id"]').val() == 0)
