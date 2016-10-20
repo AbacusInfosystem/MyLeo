@@ -119,12 +119,15 @@ namespace MyLeoRetailerRepo
                 Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
                 Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
                 //Modification
-                if ((dr["Employee_DOB"]!=DBNull.Value))
+                if ((dr["Employee_DOB"] != DBNull.Value))
                 {
                     Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
                 }
                
                 //end
+
+               
+
                 Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
                 Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
                 Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
