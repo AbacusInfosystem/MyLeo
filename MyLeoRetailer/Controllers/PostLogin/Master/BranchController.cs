@@ -29,12 +29,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public ActionResult Index(BranchViewModel bViewModel)
         {
+            
             try
             {
                 if (TempData["bViewModel"] != null)
                 {
                     bViewModel = (BranchViewModel)TempData["bViewModel"];
                 }
+                bViewModel.Branch.IsActive = 1;
             }
             catch (Exception ex)
             {

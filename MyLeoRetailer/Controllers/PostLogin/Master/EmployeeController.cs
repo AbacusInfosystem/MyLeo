@@ -316,7 +316,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 eViewModel.Cookies.Page_URL = url;
 
-                var split = url.Substring(23);
+               
+                var split = url.Replace("http://", "");//Added by vinod mane 18/10/2016
+
+               // var split = url.Substring(23); 
+               
 
                 if (split == "")
                 {
@@ -329,14 +333,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 foreach (var item in temp)
                 {
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 1; i < 2; i++)
                     {
-                        if (i == 0)
+                        if (i == 1)
                         {
                             controller = temp[i];
                             break;
                         }
-                        else if (i == 1)
+                        else if (i == 2)
                         {
                             method = temp[i];
                         }
@@ -344,6 +348,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                     }
 
                 }
+
+                //foreach (var item in temp)
+                //{
+                //    for (int i = 0; i < 2; i++)
+                //    {
+                //        if (i == 0)
+                //        {
+                //            controller = temp[i];
+                //            break;
+                //        }
+                //        else if (i == 1)
+                //        {
+                //            method = temp[i];
+                //        }
+
+                //    }
+
+                //}
 
 
                 if (controller == "")
@@ -467,7 +489,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
-        //End
+
+        //Added By Vinod Mane on 18/10/2016
+        public JsonResult Check_Existing_Email_ID(string Email_ID)
+        {
+            bool check = false;
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
+            try
+            {
+                check = eRepo.Check_Existing_Email_ID(Email_ID);
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Employee Controller - Check_Existing_Email_ID " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
         //Added by vinod mane on 17/10/2016
         public JsonResult Compare_Dates(DateTime DOB_Date)
         {

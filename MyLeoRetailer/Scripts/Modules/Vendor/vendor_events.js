@@ -7,9 +7,9 @@
     }
     //end
 
-    $('#dtpVendor_Vat_Effective_Date').datepicker({});
+    //$('#dtpVendor_Vat_Effective_Date').datepicker({});
 
-    $('#dtpVendor_CST_Effective_Date').datepicker({});
+    //$('#dtpVendor_CST_Effective_Date').datepicker({});
    
 
     $("#btnAdd").click(function () {
