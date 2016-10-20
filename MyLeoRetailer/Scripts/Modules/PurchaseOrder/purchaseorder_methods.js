@@ -1,4 +1,5 @@
 ﻿function Set_Vendor_Id(value) {
+     
 
     $(".Details").hide();
 
@@ -8,9 +9,11 @@
     document.getElementById('tdNetAmount').innerText = 0;
     $('#hdf_Vendor_Id').val(value);
 
-    ClearAllDropdownlist();
+     ClearAllDropdownlist();
 
     //End
+
+     Reset_Detalis_After_Delete();
 
     $.ajax({
 
@@ -1681,11 +1684,6 @@ function Reset_Detalis_After_Delete() {
 function DeletePurchaseOrderDetailsData(i) {
 
 
-
-    //*************//
-
-
-
     var id = $("#hdnItem_Ids_" + i).val();
 
     if (id != 0 || id != '') {
@@ -1695,9 +1693,7 @@ function DeletePurchaseOrderDetailsData(i) {
     $("#tblPurchaseOrderItems").find("[id='PurchaseOrderItemRow_" + i + "']").remove();
 
 
-    //*************//
-
-
+    //*************//    
 
     ReArrangePurchaseOrderSizeData();
 
@@ -1706,30 +1702,9 @@ function DeletePurchaseOrderDetailsData(i) {
 
     //*************//
 
-
-    //var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
-
-    //k = temptablecount;
-
-    //for (var x = 0; x < k; x++) {
-
-    //    var count = $("#PurchaseOrderItemRow_" + i).find(".POI_Row_" + x).size();
-
-    //    if (count == 0) {
-    //        $("#tblPurchaseOrderItems").find("[id='PurchaseOrderSizeRow_" + x + "']").remove();
-    //    }
-    //}
-
-    //*************//
-
     Reset_Detalis_After_Delete();
 
-    //*************//
-    //if ($("#tblPurchaseOrderItems")[0].children[1].rows.length == 1) {
-    //    $("#tblPurchaseOrderItems")[0].children[1].rows[0].remove();
-    //}
-
-    //*************//
+   
 
 }
 

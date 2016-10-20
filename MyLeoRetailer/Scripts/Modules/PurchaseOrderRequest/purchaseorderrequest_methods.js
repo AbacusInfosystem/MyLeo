@@ -187,8 +187,7 @@ function Set_Article_No(value) {
             }
         }
     });
-
-    //Reset_Detalis_After_Delete();
+       
 }
 
 function Set_Sub_Category_Drp_Id(value) {
@@ -1175,7 +1174,7 @@ function Reset_Detalis_After_Delete() {
 
     debugger;
 
-    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
+    var temptablecount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestItemRow_"]').size();
 
     j = temptablecount;
 
