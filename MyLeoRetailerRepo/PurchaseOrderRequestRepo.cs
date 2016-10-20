@@ -131,11 +131,6 @@ namespace MyLeoRetailerRepo
 
                     sqlParam.Add(new SqlParameter("@Total_Quantity", item.Item_Quantity));
 
-                    if (item.Comment == null)
-                    {
-                        item.Comment = "no";
-                    }
-
                     sqlParam.Add(new SqlParameter("@Comment", item.Comment));
 
                     sqlParam.Add(new SqlParameter("@Status", PurchaseOrderRequest.Status));

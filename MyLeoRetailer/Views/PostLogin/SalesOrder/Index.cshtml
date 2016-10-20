@@ -167,7 +167,7 @@
                                     LoginInfo Cookies = new LoginInfo();
                                     Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
                                     
-                                        <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids"/>
                                     }
                                     <div class="form-group auto-complete">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
@@ -497,7 +497,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
-                                    <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" @*onchange="javascript: CalculatePaidAmt();"*@ maxlength="10" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@Model.SalesInvoice.Cash_Amount" placeholder="Cash Amount" @*onchange="javascript: CalculatePaidAmt();"*@ maxlength="10"/>
                                     </div>
                                 </div>
 
@@ -603,7 +603,7 @@
                                 <div id="divDebitcardno" class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Card No </span>
-                                    <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Card_No" id="txtCredit_Card_No" value="@Model.SalesInvoice.Credit_Card_No" placeholder="Enter card no" maxlength="30" />
+                                        <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Card_No" id="txtCredit_Card_No" value="@Model.SalesInvoice.Credit_Card_No" placeholder="Enter card no" maxlength="30"/>
                                     </div>
                                 </div>
 
@@ -691,7 +691,7 @@
                                     <button type="button" id="btnSaveSalesOrder" class="btn btn-success">Save</button> @*<i class="fa fa-check"></i>*@
                                   
                                     @*<a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesOrder")">Cancel </a>*@ @*<i class="fa fa-times"></i>*@
-                                    <button type="reset" class="btn btn-danger active" id="btnCancleSalesOrder">Reset</button>
+                                    <button type="reset" class="btn btn-danger active" id="btnCancleSalesOrder">Cancel</button>
                                 </div>
                             </div>
 

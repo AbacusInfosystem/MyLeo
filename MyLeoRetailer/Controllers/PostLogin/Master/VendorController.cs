@@ -58,8 +58,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 vViewModel.VATS = _taxRepo.drp_Get_VAT();
 
                 vViewModel.CSTS = _taxRepo.drp_Get_CST();
-
-                vViewModel.Vendor.IsActive = 1;
             }
             catch (Exception ex)
             {

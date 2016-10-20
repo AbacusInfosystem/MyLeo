@@ -189,6 +189,5 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", gvViewModel);
         }
 
-       
     }
 }

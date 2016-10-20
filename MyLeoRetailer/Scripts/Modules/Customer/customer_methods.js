@@ -6,11 +6,9 @@ function Get_Customer_By_mobile() {
 		{
 		    Customer: {
 
-		        Mobile: $("#txtMobileNo").val()
+		        Mobile: $("[name='Customer.Mobile']").val()
 		    }
 		}
-
-    alert($("#txtMobileNo").val());
 
     $.ajax({
 
@@ -92,59 +90,51 @@ function Set_Customer_Values(obj) {
 
     $("[name='Customer.Customer_Spouse_Name']").val(obj.Customer.Customer_Spouse_Name);
 
-    $("[name='Customer.Customer_DOB']").val(obj.Customer.Customer_DOB.substring(0, 10));
 
-    $("[name='Customer.Customer_Child1_DOB']").val(obj.Customer.Customer_Child1_DOB.substring(0, 10));
+    // $("[name='Customer.Customer_DOB']").val(obj.Customer.Customer_DOB);  //Commented by Vinod Mane on 23/09/2016
 
-    $("[name='Customer.Customer_Child2_DOB']").val(obj.Customer.Customer_Child2_DOB.substring(0, 10));
+    //var showChequeDate = new Date(parseInt(obj.Customer.Customer_DOB))//.replace('/Date(', '')));    
 
-    $("[name='Customer.Customer_Wedding_Anniversary']").val(obj.Customer.Customer_Wedding_Anniversary.substring(0, 10));
+    // showChequeDate = (showChequeDate.getMonth() + 1).toString() + "/" + (showChequeDate.getDate().toString() + "/" + showChequeDate.getFullYear());
+    //End
 
-    $("[name='Customer.Customer_Spouse_DOB']").val(obj.Customer.Customer_Spouse_DOB.substring(0, 10));
-
-    
-
-    //Commented By Gauravi 19-10-2016
-
-    ////Added By Vinod Mane on 23/09/2016
-    //var Customer_DOB = new Date(obj.Customer.Customer_DOB);
-    //Customer_DOB = (Customer_DOB.getDate().toString() + "-" + (Customer_DOB.getMonth()).toString() + "-" + Customer_DOB.getFullYear());  
-    //$("[name='Customer.Customer_DOB']").val(Customer_DOB);
-    ////End
+    //Added By Vinod Mane on 23/09/2016
+    var Customer_DOB = new Date(obj.Customer.Customer_DOB);
+    Customer_DOB = (Customer_DOB.getDate().toString() + "-" + (Customer_DOB.getMonth() + 1).toString() + "-" + Customer_DOB.getFullYear());  
+    $("[name='Customer.Customer_DOB']").val(Customer_DOB);
+    //End
         
-    //// $("[name='Customer.Customer_Child1_DOB']").val(obj.Customer.Customer_Child1_DOB);
+    // $("[name='Customer.Customer_Child1_DOB']").val(obj.Customer.Customer_Child1_DOB);
 
-    ////Added By Vinod Mane on 23/09/2016
-    //var Child1_DOB = new Date(obj.Customer.Customer_Child1_DOB);
-    //Child1_DOB = (Child1_DOB.getDate().toString() + "-" + (Child1_DOB.getMonth()).toString() + "-" + Child1_DOB.getFullYear());
-    //$("[name='Customer.Customer_Child1_DOB']").val(Child1_DOB);
-    ////End
+    //Added By Vinod Mane on 23/09/2016
+    var Child1_DOB = new Date(obj.Customer.Customer_Child1_DOB);
+    Child1_DOB = (Child1_DOB.getDate().toString() + "-" + (Child1_DOB.getMonth() + 1).toString() + "-" + Child1_DOB.getFullYear());
+    $("[name='Customer.Customer_Child1_DOB']").val(Child1_DOB);
+    //End
 
-    ////$("[name='Customer.Customer_Child2_DOB']").val(obj.Customer.Customer_Child2_DOB);
+    //$("[name='Customer.Customer_Child2_DOB']").val(obj.Customer.Customer_Child2_DOB);
 
-    ////Added By Vinod Mane on 23/09/2016
-    //var Child2_DOB = new Date(obj.Customer.Customer_Child2_DOB);
-    //Child2_DOB = (Child2_DOB.getDate().toString() + "-" + (Child2_DOB.getMonth()).toString() + "-" + Child2_DOB.getFullYear());
-    //$("[name='Customer.Customer_Child2_DOB']").val(Child2_DOB);
-    ////End
+    //Added By Vinod Mane on 23/09/2016
+    var Child2_DOB = new Date(obj.Customer.Customer_Child2_DOB);
+    Child2_DOB = (Child2_DOB.getDate().toString() + "-" + (Child2_DOB.getMonth() + 1).toString() + "-" + Child2_DOB.getFullYear());
+    $("[name='Customer.Customer_Child2_DOB']").val(Child2_DOB);
+    //End
 
-    ////$("[name='Customer.Customer_Wedding_Anniversary']").val(obj.Customer.Customer_Wedding_Anniversary);
+    //$("[name='Customer.Customer_Wedding_Anniversary']").val(obj.Customer.Customer_Wedding_Anniversary);
 
-    ////Added By Vinod Mane on 23/09/2016
-    //var Cus_Wed_Annisry = new Date(obj.Customer.Customer_Wedding_Anniversary);
-    //Cus_Wed_Annisry = (Cus_Wed_Annisry.getDate().toString() + "-" + (Cus_Wed_Annisry.getMonth()).toString() + "-" + Cus_Wed_Annisry.getFullYear());
-    //$("[name='Customer.Customer_Wedding_Anniversary']").val(Cus_Wed_Annisry);
-    ////End
+    //Added By Vinod Mane on 23/09/2016
+    var Cus_Wed_Annisry = new Date(obj.Customer.Customer_Wedding_Anniversary);
+    Cus_Wed_Annisry = (Cus_Wed_Annisry.getDate().toString() + "-" + (Cus_Wed_Annisry.getMonth() + 1).toString() + "-" + Cus_Wed_Annisry.getFullYear());
+    $("[name='Customer.Customer_Wedding_Anniversary']").val(Cus_Wed_Annisry);
+    //End
 
-    ////$("[name='Customer.Customer_Spouse_DOB']").val(obj.Customer.Customer_Spouse_DOB);
+    //$("[name='Customer.Customer_Spouse_DOB']").val(obj.Customer.Customer_Spouse_DOB);
 
-    ////Added By Vinod Mane on 23/09/2016
-    //var Cus_Spouse_DOB = new Date(obj.Customer.Customer_Spouse_DOB);
-    //Cus_Spouse_DOB = (Cus_Spouse_DOB.getDate().toString() + "-" + (Cus_Spouse_DOB.getMonth()).toString() + "-" + Cus_Spouse_DOB.getFullYear());
-    //$("[name='Customer.Customer_Spouse_DOB']").val(Cus_Spouse_DOB);
-    ////End
-
-    //END
+    //Added By Vinod Mane on 23/09/2016
+    var Cus_Spouse_DOB = new Date(obj.Customer.Customer_Spouse_DOB);
+    Cus_Spouse_DOB = (Cus_Spouse_DOB.getDate().toString() + "-" + (Cus_Spouse_DOB.getMonth() + 1).toString() + "-" + Cus_Spouse_DOB.getFullYear());
+    $("[name='Customer.Customer_Spouse_DOB']").val(Cus_Spouse_DOB);
+    //End
 
     $("[name='Customer.IsActive']").val(obj.Customer.IsActive);
 

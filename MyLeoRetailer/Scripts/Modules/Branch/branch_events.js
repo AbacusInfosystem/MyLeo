@@ -1,12 +1,11 @@
 ﻿$(function () {
 
-    $("input.mask_phone_no").mask('(9999) 9999-9999');
-    //if ($("[name='Branch.Branch_ID']").val() == "" || $("[name='Branch.Branch_ID']").val() == 0) {
-    //    document.getElementById("btnCancleBranch").disabled = false;
-    //}
-    //else {
-    //    document.getElementById('btnCancleBranch').disabled = true;
-    //}
+    if ($("[name='Branch.Branch_ID']").val() == "" || $("[name='Branch.Branch_ID']").val() == 0) {
+        document.getElementById("btnCancleBranch").disabled = false;
+    }
+    else {
+        document.getElementById('btnCancleBranch').disabled = true;
+    }
 
     $("#btnSaveBranch").click(function () {
         if ($("#frmBranch").valid())

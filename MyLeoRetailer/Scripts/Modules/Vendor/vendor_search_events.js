@@ -2,9 +2,6 @@
 
 $(function () {
 
-    document.getElementById('btnedit').disabled = true;
-
-
     Get_Vendors();
 
     $(document).on('change', '[name="Vendor_List"]', function (event) {
@@ -12,10 +9,7 @@ $(function () {
         if ($(this).prop('checked'))
         {
             $("#hdnVendorID").val(this.value);
-
-            //$("#btnedit").show(); //Added by Vinod Mane on 19/09/2016
-
-            document.getElementById('btnedit').disabled = false;
+            $("#btnedit").show(); //Added by Vinod Mane on 19/09/2016
         }
     });
 

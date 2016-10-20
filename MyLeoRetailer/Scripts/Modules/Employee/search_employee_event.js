@@ -3,10 +3,6 @@ $(function () {
 
     Get_Employees();
 
-    document.getElementById('btnEditEmployee').disabled = true;
-
-    document.getElementById('btnMapBranchEmployee').disabled = true;
-
     
 
     $("[name='Filter.Employee']").focusout(function () {
@@ -30,13 +26,9 @@ $(function () {
             $("#hdf_EmployeeId").val(this.value);
             //Modification
             //$("#btnEdit").show();   
-            //$("#btnEditEmployee").show();
-            ////End
-            //$("#btnMapBranchEmployee").show();
-
-            document.getElementById('btnEditEmployee').disabled = false;
-
-            document.getElementById('btnMapBranchEmployee').disabled = false;
+            $("#btnEditEmployee").show();
+            //End
+            $("#btnMapBranchEmployee").show();
 
         }
     });

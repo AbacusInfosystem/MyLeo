@@ -489,7 +489,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
-        //End
+
+        //Added By Vinod Mane on 18/10/2016
+        public JsonResult Check_Existing_Email_ID(string Email_ID)
+        {
+            bool check = false;
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
+            try
+            {
+                check = eRepo.Check_Existing_Email_ID(Email_ID);
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Employee Controller - Check_Existing_Email_ID " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
         //Added by vinod mane on 17/10/2016
         public JsonResult Compare_Dates(DateTime DOB_Date)
         {
