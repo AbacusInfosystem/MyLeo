@@ -1,12 +1,5 @@
 ﻿$(document).ready(function () {
 
-    if ($("#hdf_Vendor_Id").val() == 0) {
-
-        $("[name='Brand.IsActive']").val(1);
-        document.getElementById('Flag').checked = true;
-    }
-
-
   //Added by vinod mane on 13/10/2016
     if ($("#hdf_Vendor_Id").val() != 0) {
 
@@ -14,9 +7,9 @@
     }
     //end
 
-    $('#dtpVendor_Vat_Effective_Date').datepicker({});
+    //$('#dtpVendor_Vat_Effective_Date').datepicker({});
 
-    $('#dtpVendor_CST_Effective_Date').datepicker({});
+    //$('#dtpVendor_CST_Effective_Date').datepicker({});
    
 
     $("#btnAdd").click(function () {

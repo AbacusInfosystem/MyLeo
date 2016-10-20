@@ -8,16 +8,13 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseOrderRequestId").val(this.value);
             document.getElementById("btnEditPurchaseOrderRequest").disabled = false;
-            //document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
+            document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
         }
     });
 
     $("#drpVendor_Id").change(function () {
 
         Get_Purchase_Order_Requests();
-        $('.edit').each(function () {
-            $(this).attr('disabled', 'disabled');
-        });
 
     });
      

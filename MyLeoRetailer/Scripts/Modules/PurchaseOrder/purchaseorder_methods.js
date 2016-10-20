@@ -36,7 +36,7 @@
             if (obj.PurchaseOrder.Vendors.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrder.Vendors.length; j++) {
-                    debugger;
+
 
                     var i = j + 1;
 
@@ -55,7 +55,7 @@
 
     Get_Consolidate_Purchase_Orders(value);
 
-    debugger;
+
 
 }
 
@@ -110,7 +110,7 @@ function Set_Article_No(value) {
             if (obj.PurchaseOrder.SizeGroups.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrder.SizeGroups.length; j++) {
-                    debugger;
+
 
                     var i = j + 1;
 
@@ -132,7 +132,7 @@ function Set_Article_No(value) {
             if (obj.PurchaseOrder.Brands.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrder.Brands.length; j++) {
-                    debugger;
+
 
                     var i = j + 1;
 
@@ -156,7 +156,7 @@ function Set_Article_No(value) {
                 if (obj.PurchaseOrder.Categories.length > 0) {
 
                     for (var j = 0; j < obj.PurchaseOrder.Categories.length; j++) {
-                        debugger;
+
                         var i = j + 1;
 
                         $("#drpCategory").append("<option value='" + obj.PurchaseOrder.Categories[j].Category_Id + "'>" + obj.PurchaseOrder.Categories[j].Category + "</option>");
@@ -178,7 +178,7 @@ function Set_Article_No(value) {
             if (obj.PurchaseOrder.Colors.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrder.Colors.length; j++) {
-                    debugger;
+
 
                     var i = j + 1;
 
@@ -194,7 +194,7 @@ function Set_Article_No(value) {
 }
 
 function Set_Sub_Category_Drp_Id(value) {
-    debugger;
+
 
     var Article_No = $("#hdf_Article_No").val();
 
@@ -222,7 +222,7 @@ function Set_Sub_Category_Drp_Id(value) {
             if (obj.PurchaseOrder.SubCategories.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrder.SubCategories.length; j++) {
-                    debugger;
+
                     var i = j + 1;
 
                     $("#drpSubCategory").append("<option value='" + obj.PurchaseOrder.SubCategories[j].Sub_Category_Id + "'>" + obj.PurchaseOrder.SubCategories[j].Sub_Category + "</option>");
@@ -253,7 +253,7 @@ function Get_Consolidate_Purchase_Orders(value) {
 
             var obj = $.parseJSON(response);
 
-            debugger;
+
 
             if (obj.PurchaseOrder.PurchaseOrders.length > 0) {
 
@@ -286,7 +286,7 @@ function Get_Consolidate_Purchase_Orders(value) {
 
                         if (j < obj.PurchaseOrder.PurchaseOrders[i].Sizes.length) {
 
-                            debugger;
+
 
                             if ((j + 1) == 1 && obj.PurchaseOrder.PurchaseOrders[i].Sizes[j].Size_Id1 != 0) {
                                 tblHtml += "<td>";
@@ -460,7 +460,7 @@ function Get_Consolidate_Purchase_Orders(value) {
 
                     ////***************************************************************************////                                       
 
-                    debugger;
+
 
                     for (var j = 0; j < 15; j++) {
 
@@ -738,7 +738,7 @@ function Get_Sizes() {
                         tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrder.SizeGroups[j].Size_Id + "' name='PurchaseOrder.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                         tblHtml += "</td>";
 
-                        debugger;
+
 
                         var K = j + 1;
 
@@ -839,7 +839,7 @@ function AddPurchaseOrderDetails() {
 
     i = temptablecount;
 
-    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
+    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row " + size_group_name + "_" + artical_no + "'>";
 
     //tblHtml += "<td>";
     //tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' value='' id='textArticle_No_" + i + "' />";
@@ -847,7 +847,7 @@ function AddPurchaseOrderDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textArticle_No_" + i + "'>" + artical_no + "</span>";
-    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm ArticleNo' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Branch_Ids' id='hdnBranch_Ids_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Ids' id='hdnRequest_Ids_" + i + "' />";
@@ -862,8 +862,9 @@ function AddPurchaseOrderDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group'>";
-    tblHtml += "<select class='form-control select' id='textColour_Id_" + i + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id'>";
+    tblHtml += "<select class='form-control select Color' id='textColour_Id_" + i + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' onchange ='ValidateColor(this)'>";
     tblHtml += " </select>";
+    //tblHtml += "<label style='color: #b64645; display:none;' class='help-block pull-left' id='lblPOColorError'>Quantity Assigned for same criteria.</label>"
     tblHtml += " </div>";
     tblHtml += "</td>";
 
@@ -884,7 +885,7 @@ function AddPurchaseOrderDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;'  id='textSize_Group_Name" + i + "'>" + size_group_name + "</span>";
-    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size_group_id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm SizeGroupId' value='" + size_group_id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
     tblHtml += "</td>";
 
     //tblHtml += "<td>";
@@ -909,7 +910,7 @@ function AddPurchaseOrderDetails() {
     //tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].End_Size' value='' id='textEnd_Size_" + i + "' />";
     //tblHtml += "</td>";
 
-    debugger;
+
 
 
     var size1 = $("#hdnSize1-" + x).val();
@@ -1061,7 +1062,7 @@ function AddPurchaseOrderDetails() {
 
     myTable.append(newRow);
 
-    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
+    //$("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
 
     var $options = $("#drpTemp_Center_Size > option").clone();
 
@@ -1088,7 +1089,7 @@ function AddPurchaseOrderDetails() {
 
 function ContinuePurchaseOrderDetailsData(j) {
 
-    debugger;
+
 
     var tdSizeCount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
 
@@ -1141,7 +1142,7 @@ function ContinuePurchaseOrderDetailsData(j) {
         document.getElementById("continue-order-details" + (i - 1)).disabled = true;
     }
 
-    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row'>";
+    tblHtml += "<tr id='PurchaseOrderItemRow_" + i + "' class='item-data-row " + size_group_name + "_" + artical_no + "'>";
 
     //tblHtml += "<td>";
     //tblHtml += "<input type='text' class='form-control' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' value='' id='textArticle_No_" + i + "' />";
@@ -1149,7 +1150,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     tblHtml += "<td>";
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;' id='textArticle_No_" + i + "'>" + artical_no + "</span>";
-    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm ArticleNo' value='" + artical_no + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Article_No' id='hdnArticle_No_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Branch_Ids' id='hdnBranch_Ids_" + i + "' />";
     tblHtml += "<input type='hidden' class='form-control input-sm' value='' name='PurchaseOrder.PurchaseOrders[" + i + "].Request_Ids' id='hdnRequest_Ids_" + i + "' />";
@@ -1163,8 +1164,9 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group'>";
-    tblHtml += "<select class='form-control select' id='textColour_Id_" + i + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id'>";
+    tblHtml += "<select class='form-control select Color' id='textColour_Id_" + i + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Colour_Id' onchange ='ValidateColor(this)'>";
     tblHtml += " </select>";
+    tblHtml += "<label style='color: #b64645; display:none;' class='help-block pull-left' id='lblPOColorError'>Quantity Assigned for same criteria.</label>"
     tblHtml += " </div>";
     tblHtml += "</td>";
 
@@ -1185,7 +1187,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     tblHtml += "<td>";
     tblHtml += "<span class='label label-primary label-form' style='margin-bottom: 1px;'  id='textSize_Group_Name" + i + "'>" + size_group_name + "</span>";
-    tblHtml += "<input type='hidden' class='form-control input-sm' value='" + size_group_id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
+    tblHtml += "<input type='hidden' class='form-control input-sm SizeGroupId' value='" + size_group_id + "' name='PurchaseOrder.PurchaseOrders[" + i + "].Size_Group_Id' id='hdnSize_Group_Id_" + i + "' />";
     tblHtml += "</td>";
 
     //tblHtml += "<td>";
@@ -1346,7 +1348,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     myTable.append(newRow);
 
-    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
+    //$("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
 
     var $options = $("#drpTemp_Center_Size > option").clone();
 
@@ -1373,7 +1375,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
 function CalculateRowAmount(i) {
 
-    debugger;
+
 
     var index = document.getElementById("drpCenter_Size").selectedIndex;
 
@@ -1439,7 +1441,7 @@ function CalculateRowQuantity(i) {
 
     CalculateRowAmount(i);
 
-    debugger;
+
 
     /// Row ///   
 
@@ -1519,7 +1521,7 @@ function CalculateRowQuantity(i) {
 
 function Enable_Size_Quantity(i) {
 
-    debugger;
+
 
     var start = document.getElementById("textStart_Size_" + i).selectedIndex;
 
@@ -1578,7 +1580,7 @@ function Show_Button() {
 
 function Reset_Details() {
 
-    debugger;
+
 
     $("#textPurchase_Price").val(0);
 
@@ -1621,21 +1623,21 @@ function Delete_Size_Row() {
 
 function Reset_Detalis_After_Delete() {
 
-    debugger;
+
 
     var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
 
     j = temptablecount;
 
-    var total_qty = 0;
-
-    var total_amt = 0;
-
     for (var i = 0; i < j; i++) {
 
         var qty = $("#hdnTotal_Quantity_" + i).val();
 
-        var amt = $("#hdnTotal_Amount_" + i).val();       
+        var amt = $("#hdnTotal_Amount_" + i).val();
+
+        var total_qty = 0;
+
+        var total_amt = 0;
 
         if (qty != 0 || qty != null) {
 
@@ -1670,9 +1672,11 @@ function Reset_Detalis_After_Delete() {
 
 function DeletePurchaseOrderDetailsData(i) {
 
-    debugger;
+
 
     //*************//
+
+
 
     var id = $("#hdnItem_Ids_" + i).val();
 
@@ -1681,15 +1685,19 @@ function DeletePurchaseOrderDetailsData(i) {
     }
 
     $("#tblPurchaseOrderItems").find("[id='PurchaseOrderItemRow_" + i + "']").remove();
-    
-   
+
+
     //*************//
+
+
 
     ReArrangePurchaseOrderSizeData();
 
     ReArrangePurchaseOrderDetailsData();
 
+
     //*************//
+
 
     //var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
 
@@ -1706,24 +1714,20 @@ function DeletePurchaseOrderDetailsData(i) {
 
     //*************//
 
-    Reset_Detalis_After_Delete(); 
-
- 
-    //*************//
-
-    ReArrangePurchaseOrderSize();
+    Reset_Detalis_After_Delete();
 
     //*************//
+    //if ($("#tblPurchaseOrderItems")[0].children[1].rows.length == 1) {
+    //    $("#tblPurchaseOrderItems")[0].children[1].rows[0].remove();
+    //}
 
-    ReArrangePurchaseOrderSizeData();
-
-    ReArrangePurchaseOrderDetailsData();
+    //*************//
 
 }
 
 function ReArrangePurchaseOrderDetailsData() {
 
-    debugger;
+
 
     $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderItemRow_']").each(function (i, row) {
         if ($(row)[0].id != 'tblHeading') {
@@ -1796,7 +1800,7 @@ function ReArrangePurchaseOrderDetailsData() {
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            debugger;
+
 
             if ($(newTR).find("[id^='textSize_Quantity_1-']").length > 0) {
                 $(newTR).find("[id^='textSize_Quantity_1-']")[0].id = "textSize_Quantity_1-" + i;
@@ -1994,7 +1998,7 @@ function ReArrangePurchaseOrderDetailsData() {
                 $(newTR).find("[id^='hdnAmount_15-']").attr("name", "PurchaseOrder.Sizes[" + i + "].Amount15");
             }
 
-            debugger;
+
 
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2049,7 +2053,7 @@ function ReArrangePurchaseOrderDetailsData() {
 
 function ReArrangePurchaseOrderSizeData() {
 
-    debugger;
+
 
     $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderSizeRow_']").each(function (i, row) {
         if ($(row)[0].id != 'tblHeading') {
@@ -2152,31 +2156,16 @@ function ReArrangePurchaseOrderSizeData() {
 
 }
 
-function ReArrangePurchaseOrderSize() {
+//function ReArrangePurchaseOrderSize() {
 
-    debugger;
+//    
 
-    $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderSizeRow_']").each(function (i, row) {
+//    $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderSizeRow_']").each(function (i, row) {
 
-        // alert($(this).closest("tr").closest("tr")[0].id);
+//        alert($(this).next("tr").children("td").find("[id^='PurchaseOrderItemRow_']"));
+//            });
 
-        var ID = $(this).closest("tr").closest("tr")[0].id;
-
-        ID = $('#' + ID).next("tr").attr("id");
-
-        ID = (ID === undefined) ? "" : ID
-
-        if (ID.length > 0) {
-            ID = ID.substring(0, ID.length - 1);
-        }
-            if (ID != "PurchaseOrderItemRow_" || ID=="") {
-                $(this).closest("tr").remove();
-            }
-
-        
-    });
-
-}
+//}
 
 //added by vinod mane on 10/10/2016
 function ClearAllDropdownlist() {
@@ -2219,3 +2208,46 @@ function Clear_Br_Cat_SubCat() {
 }
 //End
 
+function ValidateColor($this) {
+    var i = 0;
+    var ArticleNo = []; var SizeGroupId = []; var ColorId = [];
+    var $row = $($this).closest('tr')[0].className;
+    var classname = $row.split(" ");
+    var classname1 = classname[1];
+    $(".PurchaseOrder").find('.' + classname1).each(function () {
+
+        var id = $(".PurchaseOrder").find('.' + classname1)[i].children[1].children[0].firstChild.id
+
+        if ($this.id != id) {
+
+            ArticleNo.push($(this).find('.ArticleNo').val());
+            SizeGroupId.push($(this).find('.SizeGroupId').val());
+            ColorId.push($(this).find('.Color').val());
+
+            var ArticleNo1 = $($this).closest('.' + classname1).find('.ArticleNo').val();
+            var SizeGroup1 = $($this).closest('.' + classname1).find(".SizeGroupId").val();
+            var ColorId1 = $($this).closest('.' + classname1).find('.Color').val();
+
+            $("#" + $this.id).rules("add", { ColorExist: true, messages: {} });
+            $("#" + id).rules("add", { ColorExist: false, messages: {} });
+
+            jQuery.validator.addMethod("ColorExist", function (value, element) {
+
+                var result = true;
+                if ($.inArray(ArticleNo1, ArticleNo) > -1 && $.inArray(SizeGroup1, SizeGroupId) > -1) {
+                    if ($.inArray(ColorId1, ColorId) > -1) {
+                        result = false;
+                    }
+                    else {
+                        result = true;
+                    }
+                } else {
+                    result = true;
+                } 
+                return result;
+
+            }, "Colour repeated for same article and size group.");
+        }
+        i++;
+    });
+}

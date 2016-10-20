@@ -177,6 +177,14 @@ namespace MyLeoRetailer
            namespaces: new string[] { "MyLeoRetailer.Controllers" });
             //End
 
+            //Added By Vinod Mane on 18/10/2016
+            routes.MapRoute(
+           name: "employee-3",
+           url: "employee/check-Email_ID/{Email_ID}",
+           defaults: new { controller = "Employee", action = "Check_Existing_Email_ID", Email_ID = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
 
             #region Role

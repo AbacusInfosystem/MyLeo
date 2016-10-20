@@ -29,6 +29,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public BranchRepo _branchRepo;
 
+
         public PurchaseOrderController()
         {
             _purchaseorderRepo = new PurchaseOrderRepo();
@@ -40,6 +41,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             _branchRepo = new BranchRepo();
 
         }
+
 
         public ActionResult Index(PurchaseOrderViewModel poViewModel)
         {
@@ -88,6 +90,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             return View("Search", poViewModel);
         }
+
 
         public JsonResult Get_Purchase_Orders(PurchaseOrderViewModel poViewModel)
         {
@@ -160,6 +163,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             return Json(JsonConvert.SerializeObject(poViewModel));
         }
+
 
         public JsonResult Get_Sizes(int size_group_Id)
         {

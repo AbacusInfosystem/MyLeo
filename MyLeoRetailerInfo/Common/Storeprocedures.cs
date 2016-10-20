@@ -98,7 +98,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Branch_By_EmployeeId,
         //End
             sp_Check_Existing_Employee_Name, //added by vinod mane on 27/09/2016
-
+            sp_Check_Existing_Email_ID,//added by vinod mane on 18/10/2016
 
             #endregion
 
