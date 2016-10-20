@@ -10,7 +10,7 @@ $(function ()
 
 		    //Addition by swapnali | Date:19/09/2016
 		    "Employee.Employee_Gender": {
-		        EmployeeGender: true
+		        Employee_Gender: true
 		    },
 		    "Employee.Designation_Id": {
 		        Designation: true
@@ -175,7 +175,7 @@ $(function ()
         return result;
         
 
-    }, 'Please Select valid Birth Date');
+    }, 'You can not enter same mobile no');
 
     
 
