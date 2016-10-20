@@ -183,8 +183,8 @@ function CalculateQuantityMRP()
             //$("#textMRP_Price_" + i).val(mrpAmt);
 
             //mrpAmt = Qty * MRP
-            sumQuantity = sumQuantity + Qty;
-            sumMRPAmount = MRP * Qty + sumMRPAmount;
+            sumQuantity = sumQuantity + parseFloat(Qty);
+            sumMRPAmount = parseFloat(MRP) * Qty + sumMRPAmount;
            
         }
         //$("#textMRP_Price_" + i).val(mrpAmt);

@@ -407,5 +407,33 @@ namespace MyLeoRetailerRepo
             return check;
         }
         //End
+
+        //Added By Vinod Mane on 18/10/2016
+        public bool Check_Existing_Email_ID(string Email_ID)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Employee_EmailId", Email_ID));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Email_ID.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_Employee_EmailId"]);
+                }
+            }
+
+            return check;
+        }
+        //End
+
     }
 }

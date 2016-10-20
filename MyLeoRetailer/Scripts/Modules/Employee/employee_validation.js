@@ -15,9 +15,13 @@ $(function ()
 		    "Employee.Designation_Id": {
 		        Designation: true
 		    },
+		    "Employee.Employee_Mobile1": {
+		        digits: true,
+		       // checkmobileno: true
+		    },
 		    "Employee.Employee_Mobile2": {
-		        digits: true
-		        //number: true
+		        digits: true,
+		        //checkmobileno: true
 		    },
 		    "Employee.Employee_DOB": {
 		        // digits: true
@@ -30,15 +34,11 @@ $(function ()
 		        
 		        // digits: true
 		        number: true
-		    },
-            		   
-		    "Employee.Employee_Mobile1": {		       
-		         digits: true
-		        //number: true
-		    },
+		    },    
 
 		    "Employee.Employee_EmailId": {
-		        email: true
+		        email: true,
+		        Chkemail: true
 		    },
 
             
@@ -62,9 +62,9 @@ $(function ()
 		    //    digits: "Enter only Digits"
 		    //},
             		    
-		    //"Employee.Employee_Mobile1": {
-		    //    digits: "Enter only Digits"
-		    //},
+		    "Employee.Employee_Mobile1": {
+		        digits: "Enter only Digits"
+		    },
 
 		    "Employee.Employee_DOB": {
 		        required: "Employee DOB is required."
@@ -72,6 +72,7 @@ $(function ()
             //End
 		    "Employee.Employee_EmailId": {
 		        email: "Invalid Email"
+		        
 		    },
 
 
@@ -148,7 +149,7 @@ $(function ()
         }
         return result;
 
-    }, "Colour is already exists.");
+    }, "Employee is already exists.");
 
 
     //end
@@ -182,9 +183,32 @@ $(function ()
 
     //End
 
-    //$("#btnCancel").click(function () {
-    //    location.reload(true)
-    //})
+    jQuery.validator.addMethod("Chkemail", function (value, element) {
+        var result = true;
+
+        if ($("#txt_Emailid").val() != "" && $("#hdnEmp_Emailid").val() != $("#txt_Emailid").val()) {
+            $.ajax({
+                url: '/employee/check-Email_ID',
+                data: { Email_ID: $("#txt_Emailid").val() },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == true) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Email is already exists.");
+
+
+
+    
+   
+
+ 
       
 
 });

@@ -35,6 +35,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 {
                     bViewModel = (BranchViewModel)TempData["bViewModel"];
                 }
+               
             }
             catch (Exception ex)
             {
