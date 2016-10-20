@@ -16,6 +16,8 @@
 
 $(function () {
 
+    $("input.mask_mobile_no").mask('(99) 99999-99999');
+
     $("#btnSaveAlteration").click(function () {
         if ($("#frmAlteration1").valid()) {
             

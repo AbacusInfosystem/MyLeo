@@ -87,7 +87,7 @@ namespace MyLeoRetailerHelper
 
             #region Next Button
 
-            if (flagNextBatchExists)
+            if (flagNextBatchExists && pages > 3)
             {
                 pagerStr.Append("<a href=\"javascript: MoveQuick('Next','"+grid_div+"',"+callback+");\" class='paginate_button next' tabindex='0'>Next</a>");
             }
@@ -96,7 +96,7 @@ namespace MyLeoRetailerHelper
 
             #region Last Button
 
-            if (flagNextBatchExists)
+            if (flagNextBatchExists && pages > 3)
             {
                 pagerStr.Append("<a href=\"javascript: MoveQuick('Last','"+grid_div+"',"+callback+");\"  class='paginate_button next' tabindex='0'>Last</a>");
             }
@@ -405,7 +405,7 @@ namespace MyLeoRetailerHelper
 
             #region First Button
 
-            if (startPage > 1)
+            if (startPage > 1 && pages > 3)
             {
                 pagerStr.Append("<a href=\"javascript: MoveQuick('First','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>First</a>");
             }
@@ -414,7 +414,7 @@ namespace MyLeoRetailerHelper
 
             #region Previous Button
 
-            if (startPage > 1)
+            if (startPage > 1 && pages > 3)
             {
                 //pagerStr.Append("<a href=\"javascript: MoveQuick('Previoust','"+grid_div+"',"+callback+");\" class='paginate_button previous' tabindex='0'>Previous1</a>");
                 //Added by vinod mane on 04/10/2016

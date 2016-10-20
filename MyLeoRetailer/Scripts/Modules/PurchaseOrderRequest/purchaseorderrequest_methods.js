@@ -1178,16 +1178,17 @@ function Reset_Detalis_After_Delete() {
 
     j = temptablecount;
 
+    var total_qty = 0;
+
+    var total_amt = 0;
+
     for (var i = 0; i < j; i++) {
 
         var qty = $("#hdnTotal_Quantity_" + i).val();
 
         var amt = $("#hdnTotal_Amount_" + i).val();
 
-        var total_qty = 0;
-
-        var total_amt = 0;
-
+      
         if (qty != 0 || qty != null) {
 
             total_qty = parseInt(total_qty) + parseInt(qty);

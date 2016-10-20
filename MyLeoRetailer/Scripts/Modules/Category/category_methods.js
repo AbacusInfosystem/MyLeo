@@ -36,6 +36,18 @@ function Get_Categories()
 			Reset_Category();
 
 			$("#divCategoryPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+			$("[name='Category.IsActive']").val(1);
+
+		    //Set IsActive Button Status
+			var fix = $("[name='Category.IsActive']").val();
+
+			if (fix == 0) {
+			    document.getElementById('Flag').checked = false;
+			}
+			else {
+			    document.getElementById('Flag').checked = true;
+			}
 		}
 	});
 }
