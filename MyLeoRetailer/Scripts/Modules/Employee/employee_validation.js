@@ -75,7 +75,7 @@ $(function ()
             //End
 		    "Employee.Employee_EmailId": {
 		        email: "Invalid Email"
-		        
+		         
 		    },
 
 
