@@ -40,4 +40,21 @@ namespace MyLeoRetailerInfo.Alteration
         // public string Branch_Name { get; set; }
 
     }
+
+
+
+    public class Filter_Alteration
+    {
+        //public string Invoice_No
+        //{
+        //    get;
+        //    set;
+        //}
+
+        public string Customer_Mobile_No
+        {
+            get;
+            set;
+        }
+    }
 }

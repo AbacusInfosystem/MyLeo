@@ -35,6 +35,21 @@ function Get_Colors()
 			Reset_Color();
 
 			$("#divColorPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+		    //*************//
+			$("[name='Color.IsActive']").val(1);
+
+		    //Set IsActive Button Status
+			var fix = $("[name='Color.IsActive']").val();
+
+			if (fix == 0) {
+			    document.getElementById('Flag').checked = false;
+			}
+			else {
+			    document.getElementById('Flag').checked = true;
+			}
+		    //End
+		    //*************//
 		}
 	});
 }

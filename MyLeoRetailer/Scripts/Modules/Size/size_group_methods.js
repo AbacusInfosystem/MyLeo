@@ -33,6 +33,15 @@
             Reset_SizeGroup();
 
             $("#divSizeGroupPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            var fix = $("[name='SizeGroup.IsActive']").val(1);
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
         }
     });
 }

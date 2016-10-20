@@ -19,7 +19,7 @@ $(function ()
 		    "Employee.Employee_DOB": {
 		        // digits: true
 		        required: true,
-		        chkdate: true  //Added by vinod mane on 17/10/2016
+		        //chkdate: true  //Added by vinod mane on 17/10/2016
 		    },
             //End
 

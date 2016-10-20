@@ -42,7 +42,7 @@ $(function () {
 
     $(document).on("click", "[name='Alteration_List']", function () {
 
-        Get_Alteration_By_Id(this);
+        //Get_Alteration_By_Id(this);
 
     });
 
