@@ -1,10 +1,6 @@
 ﻿
 $(function () {
 
-    document.getElementById('btnEdit').disabled = true;
-
-    document.getElementById('btnProductMRP').disabled = true;
-
     Get_Products();
 
         $("[name='Filter.Article_No']").focusout(function () {
@@ -35,12 +31,8 @@ $(function () {
             if ($(this).prop('checked')) {
                 $("#hdf_ProductId").val(this.value);
                 $("#hdf_SizeGroupId").val($('[name="Size_Group_Id"]').val());
-                //$("#btnProductMRP").show();
-                //$("#btnEdit").show();
-
-                document.getElementById('btnEdit').disabled = false;
-
-                document.getElementById('btnProductMRP').disabled = false;
+                $("#btnProductMRP").show();
+                $("#btnEdit").show();
             }
         });
 

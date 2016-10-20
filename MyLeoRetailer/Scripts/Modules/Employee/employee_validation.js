@@ -40,7 +40,8 @@ $(function ()
 		    },
 
 		    "Employee.Employee_EmailId": {
-		        email: true
+		        email: true,
+		        Chkemail: true
 		    },
 
             
@@ -64,9 +65,9 @@ $(function ()
 		    //    digits: "Enter only Digits"
 		    //},
             		    
-		    //"Employee.Employee_Mobile1": {
-		    //    digits: "Enter only Digits"
-		    //},
+		    "Employee.Employee_Mobile1": {
+		        digits: "Enter only Digits"
+		    },
 
 		    "Employee.Employee_DOB": {
 		        required: "Employee DOB is required."
@@ -74,6 +75,7 @@ $(function ()
             //End
 		    "Employee.Employee_EmailId": {
 		        email: "Invalid Email"
+		        
 		    },
 
 
@@ -154,24 +156,54 @@ $(function ()
 
 
     jQuery.validator.addMethod("checkmobileno", function (value, element) {
-
+   
         var result = true;
         var mobile1 = $("#txtEmployeeMobile1").val();
         var mobile2 = $("#txtEmployeeMobile2").val();
-
+       
         if (mobile1 != "" && mobile1 != 0 && mobile2 != "" && mobile2 != 0) {
-
+     
             if (mobile1 == mobile2) {
                 result = false;
                 //calculate(element);
             }
             else {
                 result = true;
-            }
+                }
+        }
+        return result;
+        
+
+    }, 'Please Select valid Birth Date');
+
+    //End
+
+    jQuery.validator.addMethod("Chkemail", function (value, element) {
+        var result = true;
+
+        if ($("#txt_Emailid").val() != "" && $("#hdnEmp_Emailid").val() != $("#txt_Emailid").val()) {
+            $.ajax({
+                url: '/employee/check-Email_ID',
+                data: { Email_ID: $("#txt_Emailid").val() },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == true) {
+                        result = false;
+                    }
+                }
+            });
         }
         return result;
 
-    }, "You can not enter same mobile no.");
+    }, "Email is already exists.");
+
+
+
+    
+   
+
+ 
       
 
 });

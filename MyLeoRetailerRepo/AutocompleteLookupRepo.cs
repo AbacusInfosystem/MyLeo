@@ -154,39 +154,15 @@ namespace MyLeoRetailerRepo
                                     "FROM Purchase_Invoice_Item PII " +
                                     "JOIN Purchase_Return_Request PRR ON PII.Purchase_Invoice_Id=PRR.Purchase_Invoice_Id " +
                                     "JOIN Purchase_Return_Request_Item PRRI ON PRR.Purchase_Return_Request_Id=PRRI.Purchase_Return_Request_Id " +
-                                    "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id  AND PRRI.Status=0 " +
+                                    "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id " +
                                     "GROUP BY PII.Purchase_Invoice_Id,PII.SKU_Code,PII.Quantity " +
 
-                                    "declare @table1 int, @table2 int "+
 
-
-                                    "set @table1=(select case when exists (select 1 from #Temp1) then 1 else 0 end) "+
-
-                                    "set @table2=(select case when exists (select 1 from #Temp2) then 1 else 0 end) "+
-
-
-                                    " IF(@table1=1 and @table2=0 ) "+
-                                    "BEGIN "+
-                                    "INSERT INTO #Temp3 "+
-                                    "SELECT t1.SKU,PII.Quantity-t1.Qty AS Qty "+
-                                    "FROM #Temp1 t1,Purchase_Invoice_Item PII WHERE PII.Purchase_Invoice_Id=t1.invoice_Id "+
-                                    "END "+
-
-
-                                    "IF(@table1=0 and @table2=1 ) "+
-                                    "BEGIN "+
-                                    "INSERT INTO #Temp3 "+
-                                    "SELECT t2.SKU,PII.Quantity-t2.Qty AS Qty "+
-                                    "FROM #Temp2 t2,Purchase_Invoice_Item PII WHERE PII.Purchase_Invoice_Id=t2.invoice_Id  "+
-                                    "END "+
-
-
-                                    "IF(@table1=1 and @table2=1 ) "+
-                                    "BEGIN "+
-                                    "INSERT INTO #Temp3 "+
-                                    "SELECT t1.SKU,PII.Quantity-(t1.Qty+t2.Qty)AS Qty "+
-                                    "FROM #Temp1 t1,#Temp2 t2,Purchase_Invoice_Item PII WHERE PII.Purchase_Invoice_Id=t1.invoice_Id and t2.invoice_Id=t1.invoice_Id "+
-                                    "END "+
+                                    "INSERT INTO #Temp3 " +
+                                    "SELECT t1.SKU,PII.Quantity-(t1.Qty+t2.Qty)AS Qty  " +
+                                    "FROM #Temp1 t1,#Temp2 t2,Purchase_Invoice_Item PII " +
+                                    "WHERE PII.Purchase_Invoice_Id=t1.invoice_Id and " +
+                                    "t2.invoice_Id=t1.invoice_Id and PII.Purchase_Invoice_Id=t1.invoice_Id " +
 
 
                                     "IF ((SELECT count(*) FROM #Temp3)>0) " +
@@ -297,20 +273,16 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
-               
+                //if (table_Name == "Sales_Invoice")
+                //{
+                //    if (fieldName == "Branch_Id")
+                //    {
+                //        strquery = " Select distinct Sales_Invoice.Branch_Id, Sales_Invoice.Sales_Invoice_No ";
+                //        strquery += "from Sales_Invoice inner join Branch on Sales_Invoice.Branch_Id=Branch.Branch_ID where Sales_Invoice.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                //        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
+                //    }
+                //}
 
-                if (table_Name == "Sales_Invoices")
-                {
-                    if (fieldName == "Branch_Id")
-                    {
-                        strquery = " select Sales_Invoice.Sales_Invoice_Id,Sales_Invoice.Sales_Invoice_No  ";
-                        strquery += "from Sales_Invoice left JOIN Receivable  ON Receivable.Sales_Invoice_Id=Sales_Invoice.Sales_Invoice_Id";
-                        strquery += " left join Branch  on Branch.Branch_Id=Receivable.Branch_ID  where Receivable.Branch_ID in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
-                        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
-                    }
-                }
-
-               
                 //if (table_Name == "Purchase_Invoice")
                 //{
                 //    if (fieldName == "Purchase_Invoice_Id")

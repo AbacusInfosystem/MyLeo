@@ -17,14 +17,12 @@
                     "Vendor.Vendor_Email1":
                         {
                             required: true,
-                            email: true,
-                            checkemailid:true
+                            email: true
                         },
                     "Vendor.Vendor_Email2":
                         {
                             //  required: true, Change by vinod mane on 20/09/2016
-                            email: true,
-                            checkemailid: true
+                            email: true
                         },
                     "Vendor.Vendor_Address":
                         {
@@ -51,13 +49,14 @@
                     "Vendor.Vendor_Phone1":
                        {
                            required: true,
-                           checkmobileno:true,
+                           number: true,
+                           maxlength: 12,
                        },
                     "Vendor.Vendor_Phone2":
                        {
                            //required: true, Change by vinod mane on 20/09/2016
-                           checkmobileno:true,
-                           
+                           number: true,
+                           maxlength: 12,
                        },
                     "Vendor.Vendor_Vat_No":
                        {
@@ -125,14 +124,14 @@
                     },
                 "Vendor.Vendor_Phone1":
                       {
-                          required: "Phone No is required"
-                          
+                          required: "Phone No is required",
+                          required: "Enter Digits"
                       },
-                //"Vendor.Vendor_Phone2":
-                //   {
-                //       //required: "Phone No is required", Change by vinod mane on 20/09/2016
-                //       required: "Enter Digits"
-                //   },
+                "Vendor.Vendor_Phone2":
+                   {
+                       //required: "Phone No is required", Change by vinod mane on 20/09/2016
+                       required: "Enter Digits"
+                   },
                 "Vendor.Vendor_Vat_No":
                    {
                        required: "Vendor Vat No is required",
@@ -157,45 +156,6 @@
 });
 
 
-jQuery.validator.addMethod("checkmobileno", function (value, element) {
-
-    var result = true;
-    var mobile1 = $("#txtVendor_Phone1").val();
-    var mobile2 = $("#txtVendor_Phone2").val();
-
-    if (mobile1 != "" && mobile1 != 0 && mobile2 != "" && mobile2 != 0) {
-
-        if (mobile1 == mobile2) {
-            result = false;
-            //calculate(element);
-        }
-        else {
-            result = true;
-        }
-    }
-    return result;
-
-}, "You can not enter same Phone no.");
-
-jQuery.validator.addMethod("checkemailid", function (value, element) {
-
-    var result = true;
-    var Email1 = ($("#txtVendor_Email1").val());
-    var Email2 = ($("#txtVendor_Email2").val());
-
-    if (Email1 != "" && Email2 != "") {
-
-        if (Email1 == Email2) {
-            result = false;
-            //calculate(element);
-        }
-        else {
-            result = true;
-        }
-    }
-    return result;
-
-}, "You can not enter same email id.");
 
 jQuery.validator.addMethod("VendorVatRate", function (value, element) {
     var result = true;

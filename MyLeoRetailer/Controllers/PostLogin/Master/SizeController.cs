@@ -31,7 +31,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         [AuthorizeUserAttribute(AppFunction.Size_Management_Access)]
         public ActionResult Index(SizeGroupViewModel sgViewModel)
         {
-            sgViewModel.SizeGroup.IsActive = 1;
             return View("Index", sgViewModel);
         }
 
@@ -97,9 +96,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         }
 
         public JsonResult Get_SizeGroups(SizeGroupViewModel sgViewModel)
-        {
-
-            
+        {        
 
             CommonManager cMan = new CommonManager();
 

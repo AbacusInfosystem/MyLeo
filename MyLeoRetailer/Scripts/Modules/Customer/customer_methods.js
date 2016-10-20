@@ -6,11 +6,9 @@ function Get_Customer_By_mobile() {
 		{
 		    Customer: {
 
-		        Mobile: $("#txtMobileNo").val()
+		        Mobile: $("[name='Customer.Mobile']").val()
 		    }
 		}
-
-    alert($("#txtMobileNo").val());
 
     $.ajax({
 

@@ -1,5 +1,6 @@
 ﻿function Get_Receivable() {
 
+
     var rViewModel =
         {
             Receivable: {

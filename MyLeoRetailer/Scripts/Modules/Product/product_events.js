@@ -17,7 +17,7 @@ $(function () {
     }
     if ($("#hdn_ProductId").val() != 0) {
         $("#txtArticle_No").attr('readonly', true);
-        //$("#btnCancel").attr('disabled', true);
+        $("#btnCancel").attr('disabled', true);
         $("#btnProductMRP").show(); 
     }
 

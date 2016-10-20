@@ -64,19 +64,13 @@ $(document).ready(function () {
             "Branch.Branch_Landline2": { checkmobileno: true },
 
             "Branch.Branch_Landline1": { checkmobileno: true },
-             
-            "Branch.Branch_Landline1": { required: true },
-
-            "Branch.Branch_Address": { required: true }
         },
         messages: {
 
             "Branch.Branch_Name": { required: "Branch Name is required." },
             "Branch.Branch_Landline1": {digits: "Enter only digits"},
             "Branch.Branch_Landline2": { digits: "Enter only digits"},
-            "Branch.Branch_Pincode": { digits: "Enter only digits" },
-            "Branch.Branch_Landline1": { required: "Landline1 no is required." },
-            "Branch.Branch_Address": { required: "Address is required." }
+            "Branch.Branch_Pincode": {digits: "Enter only digits"},
         }
     });
 

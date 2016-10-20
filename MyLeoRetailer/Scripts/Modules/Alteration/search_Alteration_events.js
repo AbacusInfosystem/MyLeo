@@ -20,8 +20,7 @@ $(function () {
 
         if ($(this).prop('checked')) {
             $("#hdnAlteration_ID").val(this.value);
-            // $("#btnEditAlteration").show();
-            document.getElementById("btnEditAlteration").disabled = false;
+            $("#btnEditAlteration").show();
         }
     });
 

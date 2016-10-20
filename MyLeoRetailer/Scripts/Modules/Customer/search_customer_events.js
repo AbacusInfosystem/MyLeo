@@ -1,13 +1,13 @@
 ﻿$(function () {
-   document.getElementById("btnEditCustomer").disabled = true;
+   // document.getElementById("btnEditCustomer").disabled = true;
 
     Get_Customers();
     
     $(document).on('change', '[name="Customer_List"]', function (event) {        
         if ($(this).prop('checked')) {
             $("#hdnCustomer_Id").val(this.value);
-            //$("#btnEditCustomer").show();//added by Vinod Mane on 22/09/2016
-          document.getElementById('btnEditCustomer').disabled = false;
+            $("#btnEditCustomer").show();//added by Vinod Mane on 22/09/2016
+          //  document.getElementById('btnEditCustomer').disabled = false;
             
         }
     });

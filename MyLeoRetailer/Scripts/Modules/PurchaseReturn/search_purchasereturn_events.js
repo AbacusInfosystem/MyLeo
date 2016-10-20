@@ -20,16 +20,13 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseReturnId").val(this.value);
             document.getElementById('btnEditPurchaseReturn').disabled = false;
-            //document.getElementById('btnCreatePurchaseReturn').disabled = true;
+            document.getElementById('btnCreatePurchaseReturn').disabled = true;
             document.getElementById('btnUpdatePurchaseReturn').disabled = false;
         }
     });
 
     $("[name='Filter.Debit_Note_No']").focusout(function () {
         Get_Purchase_Returns();
-        $('.edit').each(function () {
-            $(this).attr('disabled', 'disabled');
-        });
     });
 
 

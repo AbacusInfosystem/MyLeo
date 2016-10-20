@@ -33,16 +33,6 @@ function Get_Taxes() {
             Reset_Tax();
 
             $("#divTaxPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
-
-            var fix = $("[name='Tax.IsActive']").val(1);
-
-            if (fix == "0") {
-                document.getElementById('Flag').checked = false;
-            }
-            else {
-                document.getElementById('Flag').checked = true;
-            }
-
         }
     });
 }

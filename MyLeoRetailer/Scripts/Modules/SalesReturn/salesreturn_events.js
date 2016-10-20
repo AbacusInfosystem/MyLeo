@@ -94,8 +94,8 @@ function CalculateTotal()
 
             var Qty = $("#tblSalesReturnItems").find('[id="textQuantity_' + i + '"]').val();
             if (Qty == "" || Qty == "NaN") {
-                Qty = 0;
-                $('#textQuantity_' + i).val(0);
+                Qty = 1;
+                $('#textQuantity_' + i).val(1);
             }
             //End
 
@@ -123,7 +123,7 @@ function CalculateTotal()
             var Amount = parseFloat(MRP * Qty - DiscountAmt);
             $("#tblSalesReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
            
-            sumQuantity = parseFloat(sumQuantity) + parseFloat(Qty);
+            sumQuantity = sumQuantity + Qty;
             sumGrossAmount = sumGrossAmount + Amount;
           
         }
