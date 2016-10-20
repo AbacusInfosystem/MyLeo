@@ -11,11 +11,12 @@
     $(document).ready(function () {
         $('#btnPrint').click(function () {
 
-            $("#div_Non_Printable").hide();
+            $("#div_non_printable").hide();
 
             window.print();
 
-            $("#div_Non_Printable").show();
+            $("#div_non_printable").show();
+
 
         });
 
@@ -39,6 +40,9 @@
             <section class="content">
                 <div class="row">
                     <div id="divScrollContainer" class="col-md-12">
+                        <br />
+                        <br />
+
                         <h2>Purchase Order Invoice</h2>
 
                         <div class="box box-default" id="Div_Print">
