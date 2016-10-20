@@ -39,7 +39,9 @@
 
             //Referd to Gauravi print code..just a single line written below..
 
-            window.print();
+            //window.print();
+
+            $('#Div_Print').printThis();
 
             //newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
 
@@ -75,9 +77,9 @@ img{
                         @*@{Html.RenderPartial("_ServerMessage");}*@
                         <br />
                         <br />
-                        <h3 class="view_invoice_body_header">
+                        @*<h3 class="view_invoice_body_header">
                             Sales Invoice
-                        </h3>
+                        </h3>*@
 
                         <div class="box box-default" id="Div_Print">
                             <div class="box-body">
