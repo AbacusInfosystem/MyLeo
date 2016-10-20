@@ -75,7 +75,7 @@ $(function ()
             //End
 		    "Employee.Employee_EmailId": {
 		        email: "Invalid Email"
-		        
+		         
 		    },
 
 
@@ -175,7 +175,7 @@ $(function ()
         return result;
         
 
-    }, 'Please Select valid Birth Date');
+    }, 'You can not enter same mobile no');
 
     
 
