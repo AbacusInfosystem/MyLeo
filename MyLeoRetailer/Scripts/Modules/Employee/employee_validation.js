@@ -82,8 +82,9 @@ $(function ()
 		}
     });
 
+   
     //Addition by swapnali | Date:19/09/2016
-    jQuery.validator.addMethod("EmployeeGender", function (value, element) {
+    jQuery.validator.addMethod("Employee_Gender", function (value, element) {
         var result = true;
         if (($(element).val()) == "0") {
             result = false;
@@ -100,7 +101,7 @@ $(function ()
 
         return result;
     }, 'Employee Designation is required');
-//End
+    //End
 
     jQuery.validator.addMethod("validate_username", function (value, element) {
         var result = true;
@@ -153,7 +154,7 @@ $(function ()
         return result;
 
     }, "Employee is already exists.");
-
+    //End
 
     jQuery.validator.addMethod("checkmobileno", function (value, element) {
    
@@ -176,8 +177,38 @@ $(function ()
 
     }, 'Please Select valid Birth Date');
 
+    
+
+    //Added by vinod mane on 17/10/2016
+    $.validator.addMethod('chkdate', function (value) {
+
+        var result = true;
+
+        var DOB_Date = $("#txt_DOB").val();
+
+        if (DOB_Date != '') {
+
+            var ServiceUrl = "/Employee/Compare_Dates";
+            $.ajax({
+                data: { DOB_Date: DOB_Date },
+                url: ServiceUrl,
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                }
+            });
+        }
+
+        return result;
+
+
+    }, 'Please Select valid Birth Date');
+
     //End
 
+    //Added by vinod mane on 18/10/2016
     jQuery.validator.addMethod("Chkemail", function (value, element) {
         var result = true;
 
@@ -197,7 +228,7 @@ $(function ()
         return result;
 
     }, "Email is already exists.");
-
+//End
 
 
     
