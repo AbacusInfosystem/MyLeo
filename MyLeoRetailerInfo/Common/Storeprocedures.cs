@@ -302,6 +302,7 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Product_Color_Exist_By_ProductId,
             sp_Insert_Update_Product_SKU_Map,
             sp_Check_Existing_Article_No,
+            sp_Get_Barcodes_On_Product_Id,
 
              #region Pyable
         Get_Credit_Note_Details_By_Id_Sp,
