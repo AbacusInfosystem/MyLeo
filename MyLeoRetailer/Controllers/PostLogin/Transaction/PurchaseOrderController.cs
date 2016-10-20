@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Transactions;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 
@@ -319,7 +320,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 Logger.Error("PurchaseOrderController - Get_Purchase_Order_Details : " + ex.ToString());
             }
-            return View("Print", poViewModel);
+
+            return PrintPO(poViewModel);
+
+            //return View("Print", poViewModel);
         }
 
         public ActionResult Send_Purchase_Order_Invoice(PurchaseOrderViewModel poViewModel)
@@ -434,6 +438,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             return RedirectToAction("Search", poViewModel);
         }
+
+        public ActionResult PrintPO(PurchaseOrderViewModel poViewModel)
+        {
+
+            poViewModel.PurchaseOrder.Logo_Path = ConfigurationManager.AppSettings["LogoPath"].ToString();
+
+            return View("Print", poViewModel);
+        }
+
 
         ////***************************************************************************////
 

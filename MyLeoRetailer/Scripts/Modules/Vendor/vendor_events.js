@@ -16,9 +16,9 @@
 
     $("input.mask_mobile_no").mask('(99) 99999-99999');
 
-    $('#dtpVendor_Vat_Effective_Date').datepicker({});
+    //$('#dtpVendor_Vat_Effective_Date').datepicker({});
 
-    $('#dtpVendor_CST_Effective_Date').datepicker({});
+    //$('#dtpVendor_CST_Effective_Date').datepicker({});
    
 
     $("#btnAdd").click(function () {

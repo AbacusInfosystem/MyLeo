@@ -1,27 +1,40 @@
 ﻿
 
-//$(document).ready(function () {
+$(document).ready(function () {
 
-//    //Added by vinod mane on 13/10/2016
-//    if ($("#hdn_EmployeeId").val() != 0) {
+    //Added by vinod mane on 20/10/2016
+    if ($("#hdn_EmployeeId").val() != 0) {
 
-//        $("#btnCancel").attr('disabled', true);
+        // $("#btnCancel").attr('disabled', true);     
 
-//    }
-//    //End
 
-//});
+        if ($('[name="Employee.Is_Online"]').val() == "True") {
+            $("#txtUser_Name").attr('disabled', true);
+            $("#txtPassword").hide();
+            $("#txtConfirmPassword").hide();
+            $("#drpRole").attr('disabled', true);
+        } else {
 
-$(function ()
-{
+            $("#txtUser_Name").attr('enabled', true);
+            $("#txtPassword").show();
+            $("#txtConfirmPassword").show();
+            $("#drpRole").attr('enabled', true);
+        }
+
+
+    }
+    //End
+
+});
+
+$(function () {
  //addition by swapnali | Date:19/09/2016
    // $("#Employee_Home_Lindline").mask("(999) 999-9999");
     $("input.mask_phone_no").mask('(999) 9999-9999');
     $("input.mask_mobile_no").mask('(99) 99999-99999');
     //alert($('[name="Employee.IsActive"]').val());
 
-    if ($('[name = "Employee.Employee_Id"]').val() == 0)
-    {
+    if ($('[name = "Employee.Employee_Id"]').val() == 0) {
         $('[name="Employee.IsActive"]').val(1);
     }
 
@@ -54,8 +67,7 @@ $(function ()
        // //End
 
 
-	    if ($("#frmEmployee").valid())
-		{ 
+        if ($("#frmEmployee").valid()) {
 	            if ($("#hdn_EmployeeId").val() == 0) {
 	                $("#frmEmployee").attr("action", "/Employee/Insert_Employee/");
 	            }
@@ -73,6 +85,8 @@ $(function ()
 	 
     $("#chkSwitch").find('span').click(function () {
         $('[name="Employee.Is_Online"]').trigger("change");
+
+
     });
 
     $('[name = "Employee.Is_Online"]').change(function () {
@@ -104,8 +118,7 @@ $(function ()
         
     });
     
-    if($('[name = "Employee.Is_Online"]').val() == "True" || $('[name = "Employee.Is_Online"]').val() == 1)
-    {
+    if ($('[name = "Employee.Is_Online"]').val() == "True" || $('[name = "Employee.Is_Online"]').val() == 1) {
         
         $('#txtUser_Name').rules("add", { required: true, validate_username: true, messages: { required: "User name is required." } });
         $('#txtPassword').rules("add", { required: true, messages: { required: "Password is required." } });

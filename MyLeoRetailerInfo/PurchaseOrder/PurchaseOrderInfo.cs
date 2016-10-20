@@ -91,6 +91,10 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public int Vendor_Id { get; set; }
 
+        //Added by Sushant on 20 oct 2016..Related to Logo
+
+        public string Logo_Path { get; set; }
+
         public int Agent_Id { get; set; }
 
         public string Agent_Name { get; set; }
