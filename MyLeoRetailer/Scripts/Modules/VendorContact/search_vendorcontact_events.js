@@ -2,6 +2,8 @@
 
 $(function () {
 
+    document.getElementById('btnVendorContact').disabled = true;
+
     Get_Vendor_Contacts();
 
     $("[name='Filter.Vendor_Contact_Name']").focusout(function () {
@@ -21,7 +23,8 @@ $(function () {
         //alert(); Commented by Vinod Mane on 19/09/2016
         if ($(this).prop('checked')) {
             $("#hdnVendorContact_Id").val(this.value);
-            $("#btnVendorContact").show();
+            //$("#btnVendorContact").show();
+            document.getElementById('btnVendorContact').disabled = false;
         }
     });
 
