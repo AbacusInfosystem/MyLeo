@@ -1084,6 +1084,12 @@ function AddPurchaseOrderDetails() {
 
     Add_Validation(i);
 
+    //********//
+
+    $("#hdnrecords_Validation").hide();
+
+    //********//
+
 }
 
 function ContinuePurchaseOrderDetailsData(j) {
@@ -1475,6 +1481,11 @@ function CalculateRowQuantity(i) {
             $("#tblPurchaseOrderItems").find('[id="hdnTotal_Quantity_' + i + '"]').val(sum_row_quantity);
 
             $("#tblPurchaseOrderItems").find('[id="hdnTotal_Amount_' + i + '"]').val(sum_row_amount);
+
+            if (sum_row_quantity > 0) {
+
+                $("#hdnrecords_Validation").hide();
+            }
         }
 
     }
@@ -1665,6 +1676,12 @@ function Reset_Detalis_After_Delete() {
         $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
 
         $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
+
+         //***********//
+        $("#hdnrecords_Validation").show();
+
+        $("#records_Message").html("Minimum one Record  is Required");
+        //***********//
     }
 }
 

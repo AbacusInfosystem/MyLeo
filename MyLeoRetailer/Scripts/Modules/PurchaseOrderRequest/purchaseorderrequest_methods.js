@@ -636,8 +636,12 @@ function AddPurchaseOrderRequestDetails() {
 
 
     Add_Validation(i);
-    
 
+    //********//
+
+    $("#hdnrecords_Validation").hide();
+    
+    //********//
 }
 
 function ContinuePurchaseOrderRequestDetailsData(j) {
@@ -1022,7 +1026,11 @@ function CalculateRowQuantity(i) {
         $("#tblPurchaseOrderRequestItems").find('[id="hdnTotal_Quantity_' + i + '"]').val(sum_row_quantity);
 
         $("#tblPurchaseOrderRequestItems").find('[id="hdnTotal_Amount_' + i + '"]').val(sum_row_amount);
+       
+        if (sum_row_quantity > 0) {
 
+            $("#hdnrecords_Validation").hide();
+        }
     }
 
 
@@ -1043,6 +1051,7 @@ function CalculateRowQuantity(i) {
             sumWSRAmount = sumWSRAmount + Amount;
 
             sumQuantity = sumQuantity + Qty;
+           
         }
     }
 
@@ -1196,9 +1205,9 @@ function Reset_Detalis_After_Delete() {
 
         document.getElementById('tdNetAmount').innerText = total_amt;
 
-        $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(total_qty);
+        $("#tblPurchaseOrderRequestCalculation").find('[id="hdnTotalQuantity"]').val(total_qty);
 
-        $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(total_amt);
+        $("#tblPurchaseOrderRequestCalculation").find('[id="hdnNetAmount"]').val(total_amt);
     }
 
     if (j == 0) {
@@ -1207,9 +1216,15 @@ function Reset_Detalis_After_Delete() {
 
         document.getElementById('tdNetAmount').innerText = 0;
 
-        $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
+        $("#tblPurchaseOrderRequestCalculation").find('[id="hdnTotalQuantity"]').val(0);
 
-        $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
+        $("#tblPurchaseOrderRequestCalculation").find('[id="hdnNetAmount"]').val(0);
+
+        //***********//
+        $("#hdnrecords_Validation").show();
+
+        $("#records_Message").html("Minimum one Record  is Required");
+        //***********//
     }
 }
 
