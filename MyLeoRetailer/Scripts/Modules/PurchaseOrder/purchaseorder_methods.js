@@ -786,9 +786,7 @@ function Get_Sizes() {
 }
 
 function AddPurchaseOrderDetails() {
-
-
-
+    
     var tdSizeCount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderSizeRow_"]').size();
 
     var x = tdSizeCount;
@@ -1062,7 +1060,7 @@ function AddPurchaseOrderDetails() {
 
     myTable.append(newRow);
 
-    //$("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
+    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
 
     var $options = $("#drpTemp_Center_Size > option").clone();
 
@@ -1354,7 +1352,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     myTable.append(newRow);
 
-    //$("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
+    $("#PurchaseOrderItemRow_" + i).addClass("POI_Row_" + x);
 
     var $options = $("#drpTemp_Center_Size > option").clone();
 
@@ -1380,9 +1378,7 @@ function ContinuePurchaseOrderDetailsData(j) {
 }
 
 function CalculateRowAmount(i) {
-
-
-
+    
     var index = document.getElementById("drpCenter_Size").selectedIndex;
 
     var count = document.getElementById("drpCenter_Size").length;
@@ -1678,12 +1674,7 @@ function Reset_Detalis_After_Delete() {
         $("#tblPurchaseOrderCalculation").find('[id="hdnTotalQuantity"]').val(0);
 
         $("#tblPurchaseOrderCalculation").find('[id="hdnNetAmount"]').val(0);
-
-         //***********//
-        $("#hdnrecords_Validation").show();
-
-        $("#records_Message").html("Minimum one Record  is Required");
-        //***********//
+               
     }
 }
 
@@ -2173,17 +2164,6 @@ function ReArrangePurchaseOrderSizeData() {
 
 }
 
-//function ReArrangePurchaseOrderSize() {
-
-//    
-
-//    $("#tblPurchaseOrderItems").find("[id^='PurchaseOrderSizeRow_']").each(function (i, row) {
-
-//        alert($(this).next("tr").children("td").find("[id^='PurchaseOrderItemRow_']"));
-//            });
-
-//}
-
 //added by vinod mane on 10/10/2016
 function ClearAllDropdownlist() {
     //$("#drpArticle_No").val('');
@@ -2267,4 +2247,42 @@ function ValidateColor($this) {
         }
         i++;
     });
+}
+
+function ValidateArticleSizeGroup() {
+
+    var size_group_id = $("#drpSize_Group").val();
+
+    var artical_no = $("#drpArticle_No").val();
+
+    var temptablecount = $("#tblPurchaseOrderItems").find('[id^="PurchaseOrderItemRow_"]').size();
+
+    var x = temptablecount;
+
+    if (x > 0) {
+        x = x - 1;
+    }
+
+    for (var i = 0; i <= x; i++) {
+
+        var ArticleNo = $("#hdnArticle_No_" + i).val();
+
+        var SizeGroupId = $("#hdnSize_Group_Id_" + i).val();
+
+        $("#drpSize_Group").rules("add", { ArticleSizeGroupExist: true, messages: {} });
+
+        jQuery.validator.addMethod("ArticleSizeGroupExist", function (value, element) {
+
+            var result = true;
+            if (ArticleNo == artical_no && SizeGroupId == size_group_id) {
+                result = false;
+                $("#drpSize_Group").rules("add", "ArticleSizeGroupExist");
+
+
+            }
+            return result;
+
+        }, "Same article and size group already exist.");
+
+    }
 }
