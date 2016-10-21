@@ -307,9 +307,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
                 }
 
-                poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
+                poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.Filter.Purchase_Order_Id);
 
-                poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
+                poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.Filter.Purchase_Order_Id);
 
                 poViewModel.PurchaseOrder.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(poViewModel.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount));
 
@@ -382,29 +382,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_View)]
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
-        {
-            //poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
-
-            //poViewModel.PurchaseOrder.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
-
-            // poViewModel.PurchaseOrder.Vendors = _vendorRepo.Get_Vendors();
-
-            //poViewModel.PurchaseOrder.Agents = _vendorRepo.Get_Agents();
-
-            //poViewModel.PurchaseOrder.Transporters = _vendorRepo.Get_Transporters();
-
-            //poViewModel.PurchaseOrder.Branches = _branchRepo.Get_Branches();
+        {          
             try
              {
                 if (TempData["poViewModel"] != null)
                 {
                     poViewModel = (PurchaseOrderViewModel)TempData["poViewModel"];
                 }
+                                
+                poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.Filter.Purchase_Order_Id);
 
-                poViewModel.PurchaseOrder = _purchaseorderRepo.Get_Purchase_Order_Details_By_Id(poViewModel.PurchaseOrder.Purchase_Order_Id);
-
-                poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.PurchaseOrder.Purchase_Order_Id);
-                
+                poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.Filter.Purchase_Order_Id);
+                 
             }
             catch (Exception ex)
             {

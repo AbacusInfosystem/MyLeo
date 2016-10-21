@@ -189,7 +189,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                prrViewModel.PurchaseReturnRequest = _prRepo.Get_Purchase_Return_Request_Details_By_Id(prrViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id);
+                prrViewModel.PurchaseReturnRequest = _prRepo.Get_Purchase_Return_Request_Details_By_Id(prrViewModel.Filter.Purchase_Return_Request_Id);
             }
             catch (Exception ex)
             {

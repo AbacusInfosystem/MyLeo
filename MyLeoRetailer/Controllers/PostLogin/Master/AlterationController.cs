@@ -152,7 +152,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Alteration.Alteration_ID);
+                aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Filter.Alteration_ID);
 
                 //aViewModel.Employees = eRepo.Get_Employees();
                 aViewModel.Employees = bRepo.Get_Employees();//Added by vinod mane on 28/09/2016

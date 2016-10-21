@@ -49,13 +49,13 @@
 
                         </div>*@
 
-                        <div class="col-md-3">
+                        <div class="col-md-5">
                             <div class="form-group auto-complete">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order No.</span>
                                 <div class="input-group">
                                     <input type="text" class="form-control invoice-filter autocomplete-text" name="Filter.Purchase_Order_No" id="txtPurchaseOrderNo" placeholder="Enter Purchase Order No to search." value="" data-table="Purchase_Order" data-col="Purchase_Order_Id,Purchase_Order_No" data-headernames="Purchase Order No">
                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                    <input type="hidden" id="hdnPurchaseOrderId" name="PurchaseOrder.Purchase_Order_Id" class="auto-complete-label" />
+                                    <input type="hidden" id="hdnPurchaseOrderId" name="Filter.Purchase_Order_Id" class="auto-complete-label" />
                                     <input type="hidden" id="hdnPurchaseOrderNo" name="Filter.Purchase_Order_No" class="auto-complete-value" />
 
                                 </div>
@@ -65,12 +65,15 @@
                         </div>
 
 
-                        <div class="col-md-9" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-7" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseOrder">Create</button>
-                                <button type="button" class="btn btn-danger active" disabled value="Edit" id="btnEditPurchaseOrder">View</button>
-                                <button type="button" class="btn btn-info active" disabled value="View" id="btnViewPurchaseOrder">Print</button>
+                                @*<button type="button" class="btn btn-danger active" disabled value="Edit" id="btnEditPurchaseOrder">View</button>
+                                <button type="button" class="btn btn-info active" disabled value="View" id="btnViewPurchaseOrder">Print</button>*@
+
+                                <button type="button" class="btn btn-danger active edit" disabled value="Edit" id="btnEditPurchaseOrder">View</button>
+                                <button type="button" class="btn btn-info active edit" disabled value="View" id="btnViewPurchaseOrder">Print</button>
                             </div>
 
                         </div>

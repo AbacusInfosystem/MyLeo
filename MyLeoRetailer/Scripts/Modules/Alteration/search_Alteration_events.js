@@ -10,31 +10,38 @@ $(function () {
 
     });
 
-    $("#btnEditAlteration").click(function () {
-        $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id");
-        $("#frmAlteration").attr("method", "post");
-        $("#frmAlteration").submit();
-    });
+    //$("#btnEditAlteration").click(function () {
+    //    $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id/");
+    //    $("#frmAlteration").attr("method", "post");
+    //    $("#frmAlteration").submit();
+    //});
 
     $(document).on('change', '[name="Alteration_List"]', function (event) {
 
         if ($(this).prop('checked')) {
             $("#hdnAlteration_ID").val(this.value);
-            $("#btnEditAlteration").show();
+            //$("#btnEditAlteration").show();
+            document.getElementById("btnEditAlteration").disabled = false;
         }
     });
 
 
     $("#btncreateA").click(function () {
 
-        $("#frmAlteration").attr("action", "/Alteration/Index");
+        $("#frmAlteration").attr("action", "/Alteration/Index/");
+
+        $('#frmAlteration').attr("method", "POST");
+
         $("#frmAlteration").submit();
 
     });
 
 
     $("#btnEditAlteration").click(function () {
-        $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id");
+        $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id/");
+
+        $('#frmAlteration').attr("method", "POST");
+
         $("#frmAlteration").submit();
     });
 

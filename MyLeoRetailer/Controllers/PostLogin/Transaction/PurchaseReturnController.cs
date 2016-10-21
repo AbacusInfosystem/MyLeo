@@ -226,7 +226,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             try
             {
-                prViewModel.PurchaseReturn.Purchase_Return_Id = Id;
+                prViewModel.Filter.Purchase_Return_Id = Id;
             }
             catch (Exception ex)
             {
@@ -345,9 +345,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             {
                 CheckFlag = prViewModel.PurchaseReturn.Flag;
 
-                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_By_Purchase_Return_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_By_Purchase_Return_Id(prViewModel.Filter.Purchase_Return_Id);
 
-                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.Filter.Purchase_Return_Id);
                 if (prViewModel.PurchaseReturn.PurchaseReturns.Count > 0)
                 {
                     CheckFlag = true;

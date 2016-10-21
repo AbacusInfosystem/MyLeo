@@ -215,7 +215,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_Details_By_Id(piViewModel.PurchaseInvoice.Purchase_Invoice_Id);
+                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_Details_By_Id(piViewModel.Filter.Purchase_Invoice_Id);
             }
             catch (Exception ex)
             {

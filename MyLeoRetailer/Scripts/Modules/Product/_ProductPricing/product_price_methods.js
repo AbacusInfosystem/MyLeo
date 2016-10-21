@@ -57,6 +57,8 @@ function showMRPByProductColor_New(Product_Id, obj) {
 
             var Id = $(obj).text().replace(/ /g, '');
 
+            $("#hdn_Colour_Id").val($(obj).attr("data-identity"));
+
             if ($("#" + Id).length == 0) {
 
                 var i = 0;
@@ -65,12 +67,10 @@ function showMRPByProductColor_New(Product_Id, obj) {
             }
 
             $(".Product").each(function () {
-                if (this.id != Id) {
-                    //$("#" + this.id).hide();
+                if (this.id != Id) { 
                     $('[id="' + this.id + '"]').hide();
                 }
-                else {
-                    //$('["#" + Id]').show();
+                else { 
                     $('[id="' + Id + '"]').show();
                 }
             });
@@ -80,9 +80,9 @@ function showMRPByProductColor_New(Product_Id, obj) {
                 var fix = data.ProductDescription[i].Status;
 
                 if (fix == false) {
-                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false;
+                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false; 
                 }
-                else {
+                else { 
                     document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = true;
                 }
             }
@@ -252,7 +252,7 @@ function Bind_Product_MRP_New_Color(data, obj, i) {
 
             htmlText += "<div class='block' style='margin-left:685px;'>"
 
-            htmlText += "<button type='button' class='btn btn-success active'>Print all barcodes.</button>"
+            //htmlText += "<button type='button' class='btn btn-success active'>Print all barcodes.</button>"
 
             htmlText += "<button type='button' class='btn btn-success active' id='btnSale'>Sale.</button>"
 
@@ -315,17 +315,17 @@ function showMRPByProductColor_Exist(ColorId, Color, ProductId, index, Vendor_Co
 
             }
 
-            for (var i = 0 ; i < data.ProductDescription.length; i++) {
+            //for (var i = 0 ; i < data.ProductDescription.length; i++) {
 
-                var fix = data.ProductDescription[i].Status;
+            //    var fix = data.ProductDescription[i].Status;
 
-                if (fix == false) {
-                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false;
-                }
-                else {
-                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = true;
-                }
-            }
+            //    if (fix == false) {
+            //        document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false;
+            //    }
+            //    else {
+            //        document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = true;
+            //    }
+            //}
         }
     });
 }
@@ -440,7 +440,7 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
 
             htmlText += "<div class='block' style='margin-left:685px;'>";
 
-            htmlText += "<button type='button' class='btn btn-success active'>Print all barcodes.</button>";
+            htmlText += "<button type='button' id='btnPrintAllBarCodes' class='btn btn-success active'>Print all barcodes.</button>";
 
             htmlText += "<button type='button' class='btn btn-success active' id='btnSale'>Sale.</button>";
 
@@ -532,6 +532,66 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
     }
 
 }
+
+//function PrintAllBarCodes(Product_Id)
+//{
+//    var pViewModel =
+//		{
+//		    Product: {
+//		        Product_Id: ProductId, 
+//		    },
+//		}
+
+//    $.ajax({
+//        url: "/product/get-all-barcodes",
+
+//        data: JSON.stringify(pViewModel),
+
+//        dataType: 'json',
+
+//        type: 'POST',
+
+//        contentType: 'application/json',
+
+//        success: function (response) {
+
+//            var data = $.parseJSON(response);
+
+//            Bind_Barcodes(data);
+//        }
+//    });
+//}
+
+//function Bind_Barcodes(data)
+//{
+//    var htmlText = "";
+
+//    htmlText += "<div id='" + Color.replace(/ /g, '') + "' class='Product' style='padding: 10px;display:none;'>";
+
+//    htmlText += "<div class='block' style='margin-bottom:0px;'>";
+
+//    if (data.ProductMRPs.length > 0) {
+
+//        htmlText += "<tr>";
+
+//        for (n = 0; n < data.ProductMRPs.length; n++) {
+
+//            //if (n == 0) {
+//            //    htmlText += "<td>";
+//            //    htmlText += "<h5>Barcode:</h5>";
+//            //    htmlText += "</td>";
+//            //}
+
+//            htmlText += "<td>";
+//            htmlText += "<img src='" + (data.ProductMRPs[n].Barcode_Image_Url != null ? data.ProductMRPs[n].Barcode_Image_Url : "") + "' style='width:100%'/>";
+//            //htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + n + "].Product_Barcode' value='" + (data.ProductDescription[i].ProductMRPs[n].Product_Barcode == null ? '' : data.ProductDescription[i].ProductMRPs[n].Product_Barcode) + "' />";
+//            htmlText += "</td>";
+//        }
+
+//        htmlText += "</tr>";
+//    }
+
+//}
 
 function Bind_MRP_Sale_Grid(Color_Id, Color_Name, Vendor_Color_Code, Product_Id, Color_Index, DescLength) {
     var pViewModel =
