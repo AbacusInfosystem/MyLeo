@@ -51,6 +51,7 @@ $(function () {
     //End
 
     $("#btnEmployeeSave").click(function () {
+
         if ($('[name="Employee.Is_Online"]').val() == 1) {
             $('[name="Employee.Is_Online"]').val('True');
         }
