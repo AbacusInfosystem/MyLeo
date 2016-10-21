@@ -15,8 +15,7 @@
                         },
                     "SalesInvoice.Mobile":
                         {
-                            required: true,
-                            number: true,
+                            required: true,                          
                             MobileNo : true
                         },
                   
@@ -204,15 +203,36 @@ jQuery.validator.addMethod("checkBalanceamount", function (value, element) {
 
   
     var result = true;
-    var bal_amt = parseFloat($("#textTotalAmount").val());
+
+    var total_amt = parseFloat($("#textTotalAmount").val());
+     
     var paid_amt = parseFloat($("#txtPaid_Amount").val());
-    var total = parseInt($("#txtCash_amount").val()) + parseInt($("#txtCheque_Amount").val()) + parseInt($("#txtCredit_Note_Amount").val()) + parseInt($("#txtCard_Amount").val()) + parseInt($("#txtGift_Voucher_Amount").val());
+    var cashamt = parseInt($("#txtCash_amount").val());
+    var chequeamt = parseInt($("#txtCheque_Amount").val());
+    var crdnoteamt = parseInt($("#txtCredit_Note_Amount").val());
+    var cardamt = parseInt($("#txtCard_Amount").val());
+    var gift_amt = parseInt($("#txtGift_Voucher_Amount").val());
+
+    if (isNaN(paid_amt))
+        paid_amt = 0;
+    if (isNaN(cashamt))
+        cashamt = 0;
+    if (isNaN(chequeamt))
+        chequeamt = 0;
+    if (isNaN(crdnoteamt))
+        crdnoteamt = 0;
+    if (isNaN(cardamt))
+        cardamt = 0;
+    if (isNaN(gift_amt))
+        gift_amt = 0;
+
+    var total =  cashamt + chequeamt + crdnoteamt + cardamt + gift_amt;
 
 
 
-    if (bal_amt != "" && bal_amt != 0) {
+    if (total_amt != "" && total_amt != 0) {
 
-        if (bal_amt >= total) {
+        if (total_amt >= total) {
             result = true;
             calculate();
         }

@@ -30,12 +30,24 @@
 
             Bind_Grid(obj, "Purchase_Return_Request_List");
 
+            Reset_PurchaseReturnRequest();
+
             $("#divPurchaseReturnRequestPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
             
             Friendly_Messages(obj);
             
         }
     });
+}
+
+function Reset_PurchaseReturnRequest() {
+
+    $("[name='Filter.Vendor_Id']").val("");
+
+    $("[name='Filter.Purchase_Return_Request_Id']").val("");
+
+    document.getElementById('btnView').disabled = true;
+
 }
 
 

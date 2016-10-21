@@ -4,7 +4,7 @@
 
         url: "/SalesReturn/Get_Customer_Name_By_Mobile_No",
 
-        data: { MobileNo: $("[name='SalesReturn.Mobile']").val() },
+        data: { MobileNo: $("#txtMobileNo").val() },
 
         method: 'GET',
 
@@ -202,7 +202,7 @@ function ReArrangeSalesReturnDetailsData()
 
             if ($(newTR).find("[id^='textSales_Invoice_No_']").length > 0) {
                 $(newTR).find("[id^='textSales_Invoice_No_']")[0].id = "textSales_Invoice_No_" + i;
-                $(newTR).find("[id^='textSales_Invoice_No_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_Id");
+                $(newTR).find("[id^='textSales_Invoice_No_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_No");
                 $(newTR).find("[id^='hdnSalesInvoiceID_']")[0].id = "hdnSalesInvoiceID_" + i;
                 $(newTR).find("[id^='hdnSalesInvoiceID_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_Id");
                 $(newTR).find("[id^='hdnSalesInvoiceNo_']")[0].id = "hdnSalesInvoiceNo_" + i;

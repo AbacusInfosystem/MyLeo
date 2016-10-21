@@ -57,8 +57,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Name" style="color: #333" class="">Vendor Name</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" maxlength="100"/>
-                                        <input type="hidden" value="@Model.Vendor.Vendor_Name" id="hdnVendorName"/>@*Added by Vinod Mane on 28/09/2016*@
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" maxlength="100" />
+                                        <input type="hidden" value="@Model.Vendor.Vendor_Name" id="hdnVendorName" />@*Added by Vinod Mane on 28/09/2016*@
                                     </div>
 
                                 </div>
@@ -155,7 +155,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Phone1" style="color: #333" class="">Phone1</label>   
-                                        <input type="text" class="mask_mobile_no form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1"  placeholder="Enter Phone1" />
+                                        <input type="text" class="mask_mobile_no form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1" placeholder="Enter Phone1" />
                                     </div>
                                 </div>
 
@@ -177,7 +177,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Vat_No" style="color: #333" class="">Vendor Vat No.</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_No" id="txtVendor_Vat_No" value="@Model.Vendor.Vendor_Vat_No" placeholder="Enter Vat No." maxlength="20"/>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_No" id="txtVendor_Vat_No" value="@Model.Vendor.Vendor_Vat_No" placeholder="Enter Vat No." maxlength="20" />
                                     </div>
                                 </div>
 
@@ -332,7 +332,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpCategory" style="color: #333" class="">Category</label>
-                                        <select class="form-control" id="drpCategory" name="Vendor.Category_Id" onchange="Get_SubCategorylist(this.value)"> @* //Added By Vinod Mane on 21/09/2016*@
+                                        <select class="form-control" id="drpCategory" name="Vendor.Category_Id" onchange="Get_SubCategorylist(this.value)">
+                                            @* //Added By Vinod Mane on 21/09/2016*@
                                             <option value="0">Select Category</option>
 
                                             @foreach (var item in Model.Categories)
@@ -394,7 +395,7 @@
 
                             <div class="row">
 
-@if ( Model.Vendor.BrandDetailsList.Count() == 0)
+                                @if (Model.Vendor.BrandDetailsList.Count() == 0)
                             {
              <div class="col-md-4">
                                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
@@ -406,7 +407,6 @@
                                                     <th>Brand</th>
                                                     <th>Action</th>
                                                 </tr>
-
                                             </thead>
                                             <tbody></tbody>
                                         </table>
@@ -461,7 +461,7 @@
     
 }
 
-@if ( Model.Vendor.CategoryDetailsList.Count() == 0)
+                                @if (Model.Vendor.CategoryDetailsList.Count() == 0)
                             {
                                  <div class="col-md-4">
                                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
@@ -526,7 +526,7 @@
                                 </div>
 }
 
-@if ( Model.Vendor.SubCategoryDetailsList.Count() == 0)
+                                @if (Model.Vendor.SubCategoryDetailsList.Count() == 0)
                             {
                                  <div class="col-md-4">
                                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
@@ -602,7 +602,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="txtBank_Name" style="color: #333" class="">Bank Name</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" maxlength="50"/>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" maxlength="50" />
                                         </div>
                                     </div>
 
@@ -640,7 +640,7 @@
 
                         <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
-@if ( Model.Vendor.BankDetailsList.Count() == 0)
+                            @if (Model.Vendor.BankDetailsList.Count() == 0)
                             {
                         <div class="row">
                                 <div class="col-md-12">
@@ -794,4 +794,3 @@
         </form>
     </div>
 </div>
-

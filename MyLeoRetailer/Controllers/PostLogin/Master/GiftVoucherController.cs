@@ -70,7 +70,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.GiftVoucher.Gift_Voucher_Id);
+                gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.Filter.Gift_Voucher_Id);
             }
             catch (Exception ex)
             {
@@ -175,7 +175,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.GiftVoucher.Gift_Voucher_Id);
+                gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.Filter.Gift_Voucher_Id);
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)

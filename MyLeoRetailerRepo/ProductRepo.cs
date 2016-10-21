@@ -586,12 +586,13 @@ namespace MyLeoRetailerRepo
             return check;
         }
 
-        public List<ProductMRPInfo> Get_All_Barcodes_toPrint(int Product_Id)
+        public List<ProductMRPInfo> Get_All_Barcodes_toPrint(int Product_Id, int Colour_Id)
         {
             List<SqlParameter> sqlParamList1 = new List<SqlParameter>();
             List<ProductMRPInfo> ProductMRPs = new List<ProductMRPInfo>();
 
             sqlParamList1.Add(new SqlParameter("@Product_Id", Product_Id));
+            sqlParamList1.Add(new SqlParameter("@Colour_Id", Colour_Id));
             DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList1, Storeprocedures.sp_Get_Barcodes_On_Product_Id.ToString(), CommandType.StoredProcedure);
             foreach (DataRow dr in dt.Rows)
             {

@@ -65,7 +65,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             //End
             return View("Index", pViewModel);
-        } 
+        }
 
         public JsonResult Get_Payable(PayableViewModel pViewModel)
         {
@@ -73,23 +73,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-            PayableRepo pRepo = new PayableRepo();
+                PayableRepo pRepo = new PayableRepo();
 
-            Pagination_Info pager = new Pagination_Info();
+                Pagination_Info pager = new Pagination_Info();
 
-            pager = pViewModel.Grid_Detail.Pager;
+                pager = pViewModel.Grid_Detail.Pager;
 
-            pViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Vendor_Name,Purchase_Invoice_Date,Net_Amount,status", "Purchase_Invoice_Id,Vendor_ID"); // Set grid info for front end listing
+                pViewModel.Grid_Detail = Set_Grid_Details(false, "Purchase_Invoice_No,Vendor_Name,Purchase_Invoice_Date,Net_Amount,status", "Purchase_Invoice_Id,Vendor_ID"); // Set grid info for front end listing
 
-            pViewModel.Grid_Detail.Records = pRepo.Get_PurchaseInvoice(pViewModel.Payable); // Call repo method 
+                pViewModel.Grid_Detail.Records = pRepo.Get_PurchaseInvoice(pViewModel.Payable); // Call repo method 
 
-            Set_Pagination(pager, pViewModel.Grid_Detail); // set pagination for grid
+                Set_Pagination(pager, pViewModel.Grid_Detail); // set pagination for grid
 
-            pViewModel.Grid_Detail.Pager = pager;
+                pViewModel.Grid_Detail.Pager = pager;
 
             }
-           
-            
+
+
              //Added by vinod mane on 06/10/2016
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             //End
 
             return Json(JsonConvert.SerializeObject(pViewModel));
- 
+
         }
 
         [AuthorizeUserAttribute(AppFunction.Payable_Management_View)]

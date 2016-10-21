@@ -42,10 +42,24 @@ function Get_Payable() {
 
             Bind_Grid(obj, "Payable_List");
 
+            Reset_Payable();
+
             $("#divPayablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Friendly_Messages(obj);
 
         }
     });
+}
+
+function Reset_Payable() {
+    $("[name='Payable.From_Date']").val("");
+
+    $("[name='Payable.To_Date']").val("");
+
+    $("[name='Payable.Vendor_Name']").val("");
+
+    $("[name='Payable.Payament_Status']").val("");
+
+    document.getElementById("btnPay").disabled = true;
 }

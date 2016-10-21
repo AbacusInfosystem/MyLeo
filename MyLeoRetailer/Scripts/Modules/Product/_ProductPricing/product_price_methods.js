@@ -57,6 +57,8 @@ function showMRPByProductColor_New(Product_Id, obj) {
 
             var Id = $(obj).text().replace(/ /g, '');
 
+            $("#hdn_Colour_Id").val($(obj).attr("data-identity"));
+
             if ($("#" + Id).length == 0) {
 
                 var i = 0;
@@ -65,12 +67,10 @@ function showMRPByProductColor_New(Product_Id, obj) {
             }
 
             $(".Product").each(function () {
-                if (this.id != Id) {
-                    //$("#" + this.id).hide();
+                if (this.id != Id) { 
                     $('[id="' + this.id + '"]').hide();
                 }
-                else {
-                    //$('["#" + Id]').show();
+                else { 
                     $('[id="' + Id + '"]').show();
                 }
             });
@@ -80,9 +80,9 @@ function showMRPByProductColor_New(Product_Id, obj) {
                 var fix = data.ProductDescription[i].Status;
 
                 if (fix == false) {
-                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false;
+                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false; 
                 }
-                else {
+                else { 
                     document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = true;
                 }
             }
@@ -315,17 +315,17 @@ function showMRPByProductColor_Exist(ColorId, Color, ProductId, index, Vendor_Co
 
             }
 
-            for (var i = 0 ; i < data.ProductDescription.length; i++) {
+            //for (var i = 0 ; i < data.ProductDescription.length; i++) {
 
-                var fix = data.ProductDescription[i].Status;
+            //    var fix = data.ProductDescription[i].Status;
 
-                if (fix == false) {
-                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false;
-                }
-                else {
-                    document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = true;
-                }
-            }
+            //    if (fix == false) {
+            //        document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = false;
+            //    }
+            //    else {
+            //        document.getElementById('MrpStatus_' + data.ProductDescription[i].Description).checked = true;
+            //    }
+            //}
         }
     });
 }

@@ -22,7 +22,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public PurchaseOrderRequestRepo _purchaseorderrequestRepo;
 
         public PurchaseOrderRepo _purchaseorderRepo;
-        
+
         public SizeGroupRepo _sizeGroupRepo;
 
         public VendorRepo _vendorRepo;
@@ -48,12 +48,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public ActionResult Index(PurchaseOrderRequestViewModel poreqViewModel)
         {
             try
-            {                
+            {
                 if (TempData["poreqViewModel"] != null)
                 {
                     poreqViewModel = (PurchaseOrderRequestViewModel)TempData["poreqViewModel"];
                 }
-                
+
                 poreqViewModel.PurchaseOrderRequest.SizeGroups = _sizeGroupRepo.Get_All_SizeGroups();
 
                 poreqViewModel.PurchaseOrderRequest.Vendors = _vendorRepo.Get_Vendors();
@@ -66,7 +66,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 Logger.Error("PurchaseOrderRequestController - Index : " + ex.ToString());
             }
             return View("Index", poreqViewModel);
-        }        
+        }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Request_Management_Access)]
         public ActionResult Search(PurchaseOrderRequestViewModel poreqViewModel)
@@ -87,13 +87,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 Logger.Error("PurchaseOrderRequestController - Search : " + ex.ToString());
             }
             return View("Search", poreqViewModel);
-        }       
+        }
 
 
         public JsonResult Get_Purchase_Order_Requests(PurchaseOrderRequestViewModel poreqViewModel)
         {
             try
-            {                
+            {
                 poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 Pagination_Info pager = new Pagination_Info();
@@ -109,20 +109,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 poreqViewModel.Grid_Detail.Pager = pager;
             }
             catch (Exception ex)
-                {
+            {
                 poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseOrderRequestController - Get_Purchase_Order_Requests : " + ex.ToString());
-                }
+            }
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }
 
         public JsonResult Get_Purchase_Order_Request_List(PurchaseOrderRequestViewModel poreqViewModel)
-                {
+        {
             try
             {
-                    poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 Pagination_Info pager = new Pagination_Info();
 
@@ -133,17 +133,17 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 poreqViewModel.Pager = pager;
 
                 poreqViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(poreqViewModel.Pager.TotalRecords, poreqViewModel.Pager.CurrentPage, poreqViewModel.Pager.PageSize, poreqViewModel.Pager.PageLimit, poreqViewModel.Pager.StartPage, poreqViewModel.Pager.EndPage, poreqViewModel.Pager.IsFirst, poreqViewModel.Pager.IsPrevious, poreqViewModel.Pager.IsNext, poreqViewModel.Pager.IsLast, poreqViewModel.Pager.IsPageAndRecordLabel, poreqViewModel.Pager.DivObject, poreqViewModel.Pager.CallBackMethod);
-                }
+            }
             catch (Exception ex)
-                {
+            {
                 poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseOrderRequestController - Get_Purchase_Order_Request_List : " + ex.ToString());
-                }
+            }
 
             return Json(JsonConvert.SerializeObject(poreqViewModel));
         }
-               
+
 
         public JsonResult Get_Sizes(int size_group_Id)
         {
@@ -170,7 +170,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             try
             {
                 poreqViewModel.PurchaseOrderRequest.Vendors = _purchaseorderRepo.Get_Article_No_By_Vendor_Id(Vendor_Id);
-                
+
             }
             catch (Exception ex)
             {
@@ -227,7 +227,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Request_Management_View)]
         public ActionResult Get_Purchase_Order_Request_By_Id(PurchaseOrderRequestViewModel poreqViewModel)
-        {          
+        {
             try
             {
                 if (TempData["poreqViewModel"] != null)
@@ -274,7 +274,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 }
                 else
                 {
-
+                    poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
                 }
 
             }
@@ -287,9 +287,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 Logger.Error("PurchaseOrderRequestController - Insert_Purchase_Order_Request : " + ex.ToString());
             }
 
-            TempData["poreqViewModel"] = poreqViewModel;
 
-            return RedirectToAction("Search", poreqViewModel);
+
+            return View("Search", poreqViewModel);
         }
 
 

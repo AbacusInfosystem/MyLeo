@@ -340,7 +340,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                pViewModel.ProductMRPs = _ProductRepo.Get_All_Barcodes_toPrint(pViewModel.Product.Product_Id);
+                pViewModel.ProductMRPs = _ProductRepo.Get_All_Barcodes_toPrint(pViewModel.Product.Product_Id,pViewModel.Product.Colour_Id);
             }
             catch (Exception ex)
             {

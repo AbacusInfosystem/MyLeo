@@ -8,6 +8,9 @@ function Get_Payable(Purchase_Invoice_Id) {
     //$("#hdf_Purchase_Credit_Note_Id").val(Purchase_Credit_Note_Id);
 
     $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");
+
+    $('#frmPayable').attr("method", "POST");
+
     $("#frmPayable").submit();
 }
 

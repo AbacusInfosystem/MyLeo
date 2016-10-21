@@ -1,27 +1,24 @@
-﻿function Get_Customer_Name_By_Mobile_No()
-{
+﻿function Get_Customer_Name_By_Mobile_No() {
     debugger;
 
     $.ajax({
 
         url: "/SalesOrder/Get_Customer_Name_By_Mobile_No",
 
-        data: {MobileNo : $("[name='SalesInvoice.Mobile']").val()},
+        data: { MobileNo: $("#txtMobileNo").val() },
 
         method: 'GET',
 
         async: false,
 
-        success: function (data)
-        {
+        success: function (data) {
             $('#txtCustomer_Name').val(data.Customer_Name);
 
             $('#hdnCustomer_ID').val(data.Customer_Id);
 
-         
 
-            if (data.Customer_Name == null)
-            {
+
+            if (data.Customer_Name == null) {
                 $('#myModalAddCustomer').modal('show');
             }
 
@@ -42,22 +39,21 @@ function Get_Sales_Order_Items_By_SKU_Code(i) {
 
         async: false,
 
-        success: function (data)
-        {
+        success: function (data) {
 
-            $('#textArticle_No_'+i).val(data.Article_No);
+            $('#textArticle_No_' + i).val(data.Article_No);
 
-            $('#textBrand_'+i).val(data.Brand);
+            $('#textBrand_' + i).val(data.Brand);
 
-            $('#textCategory_'+i).val(data.Category);
+            $('#textCategory_' + i).val(data.Category);
 
-            $('#textSub_Category_'+i).val(data.SubCategory);
+            $('#textSub_Category_' + i).val(data.SubCategory);
 
             $('#textSize_Name_' + i).val(data.Size_Name);
 
             $('#textColour_Name_' + i).val(data.Colour_Name);
 
-            $('#textMRP_Price_'+i).val(data.MRP_Price);
+            $('#textMRP_Price_' + i).val(data.MRP_Price);
 
         }
     });
@@ -77,7 +73,7 @@ function Get_Credit_Note_Data_By_Id(id) {
 
         url: urls,
 
-       // data: parseInt(cust_Id),//JSON.stringify(siViewModel),
+        // data: parseInt(cust_Id),//JSON.stringify(siViewModel),
 
         dataType: 'json',
 
@@ -103,8 +99,7 @@ function Get_Credit_Note_Data_By_Id(id) {
 
 }
 
-function Get_Gift_Voucher_Details()
-{
+function Get_Gift_Voucher_Details() {
     debugger;
 
     var dd = $("#drpGift_Voucher_No");
@@ -223,22 +218,21 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
     });
 }
 
-function AddSalesOrderDetails(i) 
-{
+function AddSalesOrderDetails(i) {
 
     var html = '';
-    
+
     var tblHtml = '';
-    
+
     var myTable = $("#tblSalesOrderItems");
-    
+
     //var temptablecount = $("#tblSalesOrderItems tr").length;
 
     var temptablecount = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]').size();
 
     i = temptablecount;//-1;
 
-    tblHtml += "<tr id='SalesOrderItemRow_"+ i +"' class='item-data-row'>";
+    tblHtml += "<tr id='SalesOrderItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
     tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
@@ -332,148 +326,156 @@ function AddSalesOrderDetails(i)
 function DeleteSalesOrderDetailsData(i) {
 
 
-    //Added by vinod mane on 14/10/2016
-
-        $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
-
-        ReArrangeSalesOrderDetailsData();
-
-        if (i == 0)
-        {
+    //Added by vinod mane on 14/10/2016 //Updated by Kunal on 21/10/2016.
+    $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
+    if (i == 0) {
+        $('#textTaxPercentage_0').val(0);
         AddSalesOrderDetails(i);
-
-      //  $("#textDiscountPercentage_0").val(0);
-
-        CalculateTotal();       
-
-        CalculateTax();
-    }
-        else
-        {
-
-        Add_Validation(i);
-
+        CalculateQuantityMRP();
         CalculateTotal();
-
-       // CalculateDiscount();
-
+        CalculateTax();
+    } else { 
+        CalculateQuantityMRP();
+        CalculateTotal();
         CalculateTax();
     }
-//End
+
+    //ReArrangeSalesOrderDetailsData();
+
+    //if (i == 0) {
+    //    AddSalesOrderDetails(i);
+
+    //    //  $("#textDiscountPercentage_0").val(0);
+
+    //    CalculateTotal();
+
+    //    CalculateTax();
+    //}
+    //else {
+
+    //    Add_Validation(i);
+
+    //    CalculateTotal();
+
+    //    // CalculateDiscount();
+
+    //    CalculateTax();
+    //}
+    //End
+
 
 }
 
 function ReArrangeSalesOrderDetailsData() {
 
-        $("#tblSalesOrderItems").find("[id^='SalesOrderItemRow_']").each(function (i, row) {
+    $("#tblSalesOrderItems").find("[id^='SalesOrderItemRow_']").each(function (i, row) {
 
-            if ($(row)[0].id != 'tblHeading') {
+        if ($(row)[0].id != 'tblHeading') {
 
-                $(row)[0].id = 'SalesOrderItemRow_' + i;
+            $(row)[0].id = 'SalesOrderItemRow_' + i;
 
-                var newTR = "#" + $(row)[0].id + " td";
+            var newTR = "#" + $(row)[0].id + " td";
 
-                if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
-                    $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
-                    $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleOrderItemList[" + i + "].Barcode");
-                }
-
-                if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
-                    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                    $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code", "onblur", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
-                    $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;             
-                    $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
-                    $(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
-
-                }
-
-                if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
-                    $(newTR).find("[id^='textArticle_No_']")[0].id = "textArticle_No_" + i;
-                    $(newTR).find("[id^='textArticle_No_']").attr("name", "SaleOrderItemList[" + i + "].Article_No");
-                }
-
-                if ($(newTR).find("[id^='hdnBrand_Id_']").length > 0) {
-                    $(newTR).find("[id^='hdnBrand_Id_']")[0].id = "hdnBrand_Id_" + i;
-                    $(newTR).find("[id^='hdnBrand_Id_']").attr("name", "SaleOrderItemList[" + i + "].Brand_Id");
-                    $(newTR).find("[id^='textBrand_']")[0].id = "textBrand_" + i;
-                    $(newTR).find("[id^='textBrand_']").attr("name", "SaleOrderItemList[" + i + "].Brand");
-                }
-
-                if ($(newTR).find("[id^='hdnCategory_Id_']").length > 0) {
-                    $(newTR).find("[id^='hdnCategory_Id_']")[0].id = "hdnCategory_Id_" + i;
-                    $(newTR).find("[id^='hdnCategory_Id_']").attr("name", "SaleOrderItemList[" + i + "].Category_Id");
-                    $(newTR).find("[id^='textCategory_']")[0].id = "textCategory_" + i;
-                    $(newTR).find("[id^='textCategory_']").attr("name", "SaleOrderItemList[" + i + "].Category");
-                }
-
-                if ($(newTR).find("[id^='hdnSubCategory_Id_']").length > 0) {
-                    $(newTR).find("[id^='hdnSubCategory_Id_']")[0].id = "hdnSubCategory_Id_" + i;
-                    $(newTR).find("[id^='hdnSubCategory_Id_']").attr("name", "SaleOrderItemList[" + i + "].SubCategory_Id");
-                    $(newTR).find("[id^='textSub_Category_']")[0].id = "textSub_Category_" + i;
-                    $(newTR).find("[id^='textSub_Category_']").attr("name", "SaleOrderItemList[" + i + "].SubCategory");
-                }
-
-
-                if ($(newTR).find("[id^='hdnSize_Id_']").length > 0) {
-                    $(newTR).find("[id^='hdnSize_Id_']")[0].id = "hdnSize_Id_" + i;
-                    $(newTR).find("[id^='hdnSize_Id_']").attr("name", "SaleOrderItemList[" + i + "].Size_Id");
-                    $(newTR).find("[id^='textSize_Name_']")[0].id = "textSize_Name_" + i;
-                    $(newTR).find("[id^='textSize_Name_']").attr("name", "SaleOrderItemList[" + i + "].Size_Name");
-                }
-
-                if ($(newTR).find("[id^='hdnColour_Id_']").length > 0) {
-                    $(newTR).find("[id^='hdnColour_Id_']")[0].id = "hdnColour_Id_" + i;
-                    $(newTR).find("[id^='hdnColour_Id_']").attr("name", "SaleOrderItemList[" + i + "].Colour_Id");
-                    $(newTR).find("[id^='textColour_Name_']")[0].id = "textColour_Name_" + i;
-                    $(newTR).find("[id^='textColour_Name_']").attr("name", "SaleOrderItemList[" + i + "].Colour_Name");
-                }
-
-
-                if ($(newTR).find("[id^='textQuantity_']").length > 0) {
-                    $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
-                    $(newTR).find("[id^='textQuantity_']").attr("name", "SaleOrderItemList[" + i + "].Quantity");
-
-                }
-
-                if ($(newTR).find("[id^='textMRP_Price_']").length > 0) {
-                    $(newTR).find("[id^='textMRP_Price_']")[0].id = "textMRP_Price_" + i;
-                    $(newTR).find("[id^='textMRP_Price_']").attr("name", "SaleOrderItemList[" + i + "].MRP_Price");
-                }
-
-                if ($(newTR).find("[id^='textDiscount_Percentage_']").length > 0) {
-                    $(newTR).find("[id^='textDiscount_Percentage_']")[0].id = "textDiscount_Percentage_" + i;
-                    $(newTR).find("[id^='textDiscount_Percentage_']").attr("name", "SaleOrderItemList[" + i + "].Discount_Percentage");
-                }
-
-                if ($(newTR).find("[id^='textSalesOrder_Discount_Amount_']").length > 0) {
-                    $(newTR).find("[id^='textSalesOrder_Discount_Amount_']")[0].id = "textSalesOrder_Discount_Amount_" + i;
-                    $(newTR).find("[id^='textSalesOrder_Discount_Amount_']").attr("name", "SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount");
-                }
-
-
-                if ($(newTR).find("[id^='textAmount_']").length > 0) {
-                    $(newTR).find("[id^='textAmount_']")[0].id = "textAmount_" + i;
-                    $(newTR).find("[id^='textAmount_']").attr("name", "SaleOrderItemList[" + i + "].Amount");
-                }
-
-
-                if ($(newTR).find("[id^='textSalesMan_']").length > 0) {
-                    $(newTR).find("[id^='textSalesMan_']")[0].id = "textSalesMan_" + i;
-                    $(newTR).find("[id^='textSalesMan_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan_Id");
-                    $(newTR).find("[id^='hdnSalesManId_']")[0].id = "hdnSalesManId_" + i;
-                    $(newTR).find("[id^='hdnSalesManId_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan_Id");
-                    $(newTR).find("[id^='hdnSalesMan_']")[0].id = "hdnSalesMan_" + i;
-                    $(newTR).find("[id^='hdnSalesMan_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan");
-
-                }
-
-
-                if ($(newTR).find("[id='delete-salesorder-details']").length > 0) {
-                    $(newTR).find("[id='delete-salesorder-details']").attr("onclick", "DeleteSalesOrderDetailsData(" + i + ")");
-                }
+            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
+                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
+                $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleOrderItemList[" + i + "].Barcode");
             }
 
-        });
+            if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
+                $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code", "onblur", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
+                $(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
+
+            }
+
+            if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
+                $(newTR).find("[id^='textArticle_No_']")[0].id = "textArticle_No_" + i;
+                $(newTR).find("[id^='textArticle_No_']").attr("name", "SaleOrderItemList[" + i + "].Article_No");
+            }
+
+            if ($(newTR).find("[id^='hdnBrand_Id_']").length > 0) {
+                $(newTR).find("[id^='hdnBrand_Id_']")[0].id = "hdnBrand_Id_" + i;
+                $(newTR).find("[id^='hdnBrand_Id_']").attr("name", "SaleOrderItemList[" + i + "].Brand_Id");
+                $(newTR).find("[id^='textBrand_']")[0].id = "textBrand_" + i;
+                $(newTR).find("[id^='textBrand_']").attr("name", "SaleOrderItemList[" + i + "].Brand");
+            }
+
+            if ($(newTR).find("[id^='hdnCategory_Id_']").length > 0) {
+                $(newTR).find("[id^='hdnCategory_Id_']")[0].id = "hdnCategory_Id_" + i;
+                $(newTR).find("[id^='hdnCategory_Id_']").attr("name", "SaleOrderItemList[" + i + "].Category_Id");
+                $(newTR).find("[id^='textCategory_']")[0].id = "textCategory_" + i;
+                $(newTR).find("[id^='textCategory_']").attr("name", "SaleOrderItemList[" + i + "].Category");
+            }
+
+            if ($(newTR).find("[id^='hdnSubCategory_Id_']").length > 0) {
+                $(newTR).find("[id^='hdnSubCategory_Id_']")[0].id = "hdnSubCategory_Id_" + i;
+                $(newTR).find("[id^='hdnSubCategory_Id_']").attr("name", "SaleOrderItemList[" + i + "].SubCategory_Id");
+                $(newTR).find("[id^='textSub_Category_']")[0].id = "textSub_Category_" + i;
+                $(newTR).find("[id^='textSub_Category_']").attr("name", "SaleOrderItemList[" + i + "].SubCategory");
+            }
+
+
+            if ($(newTR).find("[id^='hdnSize_Id_']").length > 0) {
+                $(newTR).find("[id^='hdnSize_Id_']")[0].id = "hdnSize_Id_" + i;
+                $(newTR).find("[id^='hdnSize_Id_']").attr("name", "SaleOrderItemList[" + i + "].Size_Id");
+                $(newTR).find("[id^='textSize_Name_']")[0].id = "textSize_Name_" + i;
+                $(newTR).find("[id^='textSize_Name_']").attr("name", "SaleOrderItemList[" + i + "].Size_Name");
+            }
+
+            if ($(newTR).find("[id^='hdnColour_Id_']").length > 0) {
+                $(newTR).find("[id^='hdnColour_Id_']")[0].id = "hdnColour_Id_" + i;
+                $(newTR).find("[id^='hdnColour_Id_']").attr("name", "SaleOrderItemList[" + i + "].Colour_Id");
+                $(newTR).find("[id^='textColour_Name_']")[0].id = "textColour_Name_" + i;
+                $(newTR).find("[id^='textColour_Name_']").attr("name", "SaleOrderItemList[" + i + "].Colour_Name");
+            }
+
+
+            if ($(newTR).find("[id^='textQuantity_']").length > 0) {
+                $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
+                $(newTR).find("[id^='textQuantity_']").attr("name", "SaleOrderItemList[" + i + "].Quantity");
+
+            }
+
+            if ($(newTR).find("[id^='textMRP_Price_']").length > 0) {
+                $(newTR).find("[id^='textMRP_Price_']")[0].id = "textMRP_Price_" + i;
+                $(newTR).find("[id^='textMRP_Price_']").attr("name", "SaleOrderItemList[" + i + "].MRP_Price");
+            }
+
+            if ($(newTR).find("[id^='textDiscount_Percentage_']").length > 0) {
+                $(newTR).find("[id^='textDiscount_Percentage_']")[0].id = "textDiscount_Percentage_" + i;
+                $(newTR).find("[id^='textDiscount_Percentage_']").attr("name", "SaleOrderItemList[" + i + "].Discount_Percentage");
+            }
+
+            if ($(newTR).find("[id^='textSalesOrder_Discount_Amount_']").length > 0) {
+                $(newTR).find("[id^='textSalesOrder_Discount_Amount_']")[0].id = "textSalesOrder_Discount_Amount_" + i;
+                $(newTR).find("[id^='textSalesOrder_Discount_Amount_']").attr("name", "SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount");
+            }
+
+
+            if ($(newTR).find("[id^='textAmount_']").length > 0) {
+                $(newTR).find("[id^='textAmount_']")[0].id = "textAmount_" + i;
+                $(newTR).find("[id^='textAmount_']").attr("name", "SaleOrderItemList[" + i + "].Amount");
+            }
+
+
+            if ($(newTR).find("[id^='textSalesMan_']").length > 0) {
+                $(newTR).find("[id^='textSalesMan_']")[0].id = "textSalesMan_" + i;
+                $(newTR).find("[id^='textSalesMan_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan");
+                $(newTR).find("[id^='hdnSalesManId_']")[0].id = "hdnSalesManId_" + i;
+                $(newTR).find("[id^='hdnSalesManId_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan_Id");
+                $(newTR).find("[id^='hdnSalesMan_']")[0].id = "hdnSalesMan_" + i;
+                $(newTR).find("[id^='hdnSalesMan_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan");
+
+            }
+
+            if ($(newTR).find("[id='delete-salesorder-details']").length > 0) {
+                $(newTR).find("[id='delete-salesorder-details']").attr("onclick", "DeleteSalesOrderDetailsData(" + i + ")");
+            }
+        }
+
+    });
 }
 
 function Add_Validation(i) {
@@ -487,3 +489,286 @@ function Add_Validation(i) {
     $("#textDiscount_Percentage_" + i).rules("add", { required: true, digits: true, messages: { required: "Discount", digits: "Invalid Discount." } });
 
 }
+
+function CalculateQuantityMRP() {
+    debugger;
+
+    var sumQuantity = 0;
+    var sumMRPAmount = 0;
+    //var mrpAmt = 0;
+
+    var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
+
+    if (tr.size() > 0) {
+        for (var i = 0; i < tr.size() ; i++) {
+            
+            //Added by vinod mane on 12/10/2016
+            var Qty = $("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val();
+
+            if (Qty == "" || Qty == "NaN") {
+                Qty = 0;
+                $('#textQuantity_' + i).val(0);
+            }
+            //End
+            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var MRP = $("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val();
+
+            if (MRP == "" || MRP == "NaN") {
+                MRP = 0;
+                $('#textMRP_Price_' + i).val(0);
+            }
+            //End 
+
+            //mrpAmt = Qty * MRP
+
+            sumQuantity = parseFloat(sumQuantity) + parseFloat(Qty);
+            sumMRPAmount = parseFloat(MRP) + parseFloat(sumMRPAmount);
+
+        } 
+    } 
+    $("#textTotalQuantity_0").val(sumQuantity);
+    $("#textMRPAmount_0").val(sumMRPAmount.toFixed(2));
+    CalculateTotal();
+}
+
+function CalculateTotal() {
+
+    var sumQuantity = 0;
+    var sumMRPAmount = 0;
+    var sumDiscountAmount = 0;
+    var sumGrossAmount = 0;
+
+    var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
+
+
+    if (tr.size() > 0) {
+        for (var i = 0; i < tr.size() ; i++) {
+            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var Qty = $("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val();
+            if (Qty == "" || Qty == "NaN") {
+                Qty = 0;
+                $('#textQuantity_' + i).val(0);
+            }
+            //End
+            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+            //var Discount = parseFloat($("#tblSalesOrderItems").find('[id="textDiscount_Percentage_' + i + '"]').val());
+
+            //Added by vinod mane on 12/10/2016
+            var Discount = $("#tblSalesOrderItems").find('[id="textDiscount_Percentage_' + i + '"]').val();
+            if (Discount == "" || Discount == "NaN") {
+                Discount = 0;
+                $('#textDiscount_Percentage_' + i).val(0);
+            }
+            //End
+
+            var DiscountAmt = (Discount == "" || Discount == undefined) ? 0 : parseFloat((Qty * MRP * Discount) / 100);
+            $("#tblSalesOrderItems").find('[id="textSalesOrder_Discount_Amount_' + i + '"]').val(DiscountAmt);
+            var Amount = parseFloat(MRP * Qty - DiscountAmt);
+            $("#tblSalesOrderItems").find('[id="textAmount_' + i + '"]').val(Amount);
+
+            sumQuantity = parseFloat(sumQuantity) + parseFloat(Qty);
+            sumMRPAmount = MRP + sumMRPAmount;
+            sumDiscountAmount = sumDiscountAmount + DiscountAmt;
+            sumGrossAmount = sumGrossAmount + Amount;
+
+        }
+    }
+
+    $("#textTotalQuantity_0").val(sumQuantity);
+    $("#textMRPAmount_0").val(sumMRPAmount.toFixed(2));
+    $("#textDiscountAmount_0").val(sumDiscountAmount.toFixed(2));
+    $("#textGrossAmount_0").val(sumGrossAmount.toFixed(2));
+
+}
+
+function CalculateTax() {
+
+    var netAmt = 0; 
+
+    //Added by vinod mane on 12/10/2016
+    var tax = $("#textTaxPercentage_0").val();
+
+    if (tax == "" || tax == "NaN") {
+        tax = 0;
+        $('#textTaxPercentage_0').val(0);
+    }
+    //End
+    var sumGrossAmount = parseFloat($("#textGrossAmount_0").val());
+
+
+    var taxAmt = (tax == "" || tax == undefined) ? 0 : parseFloat((sumGrossAmount * tax) / 100);
+    $("#tblSalesOrderItems").find("textTaxAmount_0").val(taxAmt);
+
+    var netAmt_temp = taxAmt + sumGrossAmount;
+
+    var roundedDecimal = netAmt_temp.toFixed(2);
+
+    var intPart = Math.floor(roundedDecimal);
+
+    var fracPart = parseFloat((roundedDecimal - intPart), 2);
+    //Added by vinod mane on 12/10/2016
+    if (fracPart >= 0.50) {
+        netAmt_temp += 1;
+    }
+    //End
+    var roundOff = parseFloat(netAmt_temp.toString().split(".")[1]);
+
+    var netAmt = netAmt_temp - fracPart;
+
+    //var netAmt = Math.round(0.2);
+
+    $("#textTaxAmount_0").val(taxAmt.toFixed(2));
+    $("#textRoundOff_0").val(fracPart.toFixed(2));
+    $("#textNETAmount_0").val(Math.round(netAmt));
+    $("#textTotalAmount").val(Math.round(netAmt));
+
+
+}
+
+
+function CalculateDiscountAmount() {
+    var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
+
+    if (tr.size() > 0) {
+        for (var i = 0; i < tr.size() ; i++) {
+
+            var Qty = parseFloat($("#tblSalesOrderItems").find('[id="textQuantity_' + i + '"]').val());
+            var MRP = parseFloat($("#tblSalesOrderItems").find('[id="textMRP_Price_' + i + '"]').val());
+
+            var Discount = parseFloat($("#tblSalesOrderItems").find('[id="textDiscount_Percentage_' + i + '"]').val());
+            var DiscountAmt = (Discount == "" || Discount == undefined) ? 0 : parseFloat((Qty * MRP * Discount) / 100);
+            $("#tblSalesOrderItems").find('[id="textSalesOrder_Discount_Amount_' + i + '"]').val(DiscountAmt);
+
+        }
+    }
+}
+
+function CalculatePaidAmt() {
+
+    debugger;
+
+    // alert();
+
+    var oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
+
+    var chequeamount = parseFloat($("#txtCheque_Amount").val());
+
+    var cashamount = parseFloat($("#txtCash_amount").val());
+
+    var creditnoteamount = parseFloat($("#txtCredit_Note_Amount").val());
+
+    var giftvoucheramount = parseFloat($("#txtGift_Voucher_Amount").val());
+
+    var cardamount = parseFloat($("#txtCard_Amount").val());
+
+    if (cashamount == 0) {
+
+        paidamount = chequeamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    else if (chequeamount == 0) {
+        paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    else if (creditnoteamount == 0) {
+
+        paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
+    }
+
+    else if (giftvoucheramount == 0) {
+
+        paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
+    }
+
+    else {
+
+        paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount + cardamount;
+    }
+
+    // var paidamount = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+
+    //var newbalanceamount = oldbalanceamount - paidamount;
+
+    //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+
+}
+
+function CalculateBalAmt() {
+    var oldbalanceamount = parseFloat($("#textTotalAmount").val());
+
+    $("#txtPaid_Amount").val(paidamount.toFixed(2));
+
+    var newbalanceamount = oldbalanceamount - paidamount;
+
+    $("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+}
+
+function calculate() {
+
+    //var cash = 0;
+    //var credit = 0;
+    //var card = 0;
+    //var gift = 0;
+    //var check = 0;
+    var total_amt = parseInt($("#textTotalAmount").val());
+    var paid_amt = parseInt($("#txtPaid_Amount").val());
+    var cashamt = parseInt($("#txtCash_amount").val());
+    var chequeamt = parseInt($("#txtCheque_Amount").val());
+    var crdnoteamt = parseInt($("#txtCredit_Note_Amount").val());
+    var cardamt = parseInt($("#txtCard_Amount").val());
+    var gift_amt = parseInt($("#txtGift_Voucher_Amount").val());
+
+    if (isNaN(cashamt))
+        cashamt = 0;
+    if (isNaN(chequeamt))
+        chequeamt = 0;
+    if (isNaN(crdnoteamt))
+        crdnoteamt = 0;
+    if (isNaN(cardamt))
+        cardamt = 0;
+    if (isNaN(gift_amt))
+        gift_amt = 0;
+    if (isNaN(total_amt))
+        total_amt = 0;
+    if (isNaN(paid_amt))
+        paid_amt = 0;
+
+
+    //if ($("#txtCash_amount").val() != "") {
+    //    cash = $("#txtCash_amount").val()
+    //}
+
+    //if ($("#txtCheque_Amount").val() != "") {
+    //    credit = $("#txtCheque_Amount").val()
+    //}
+
+    //if ($("#txtCredit_Note_Amount").val() != "") {
+    //    card = $("#txtCredit_Note_Amount").val()
+    //}
+
+    //if ($("#txtCard_Amount").val() != "") {
+    //    gift = $("#txtCard_Amount").val()
+    //}
+
+    //if ($("#txtGift_Voucher_Amount").val() != "") {
+    //    check = $("#txtGift_Voucher_Amount").val()
+    //}
+
+
+    $("#txtPaid_Amount").val(cashamt + chequeamt + crdnoteamt + cardamt + gift_amt);
+    paid_amt = cashamt + chequeamt + crdnoteamt + cardamt + gift_amt;
+
+    $("#txtBalance_Amount").val(total_amt - paid_amt);
+    //$("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
+
+
+}
+
