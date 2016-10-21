@@ -184,6 +184,9 @@ function AddBrandDetails() {
         tr += "</tr>";
 
         $('#tblBrandDetails tr:last').after(tr)
+
+        $("#hdnBrand_Validation").hide();
+        $("#Brand_Message").html(" ");
     }
     else {
         $("#trBrandName" + rowID).text(brand_Name);
@@ -277,6 +280,9 @@ function AddCategoryDetails() {
             tr += "</tr>";
 
             $('#tblCategoryDetails tr:last').after(tr)
+
+            $("#hdnCategory_Validation").hide();
+            $("#Category_Message").html(" ");
         }
         else {
             $("#trCategoryName" + rowID).text(category_Name);
@@ -372,6 +378,9 @@ function AddSubCategoryDetails() {
             tr += "</tr>";
 
             $('#tblSubCategoryDetails tr:last').after(tr)
+
+            $("#hdnSubCategory_Validation").hide();
+            $("#SubCategory_Message").html(" ");
         }
         else {
             $("#trSubCategoryName" + rowID).text(subcategory_Name);
