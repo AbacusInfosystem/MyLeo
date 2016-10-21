@@ -107,13 +107,17 @@ namespace MyLeoRetailer.Controllers
 
 			prop.SetValue(obj, DateTime.Now);
 
+            //Change by Gauravi 21-10-2016//
+
 			prop = obj.GetType().GetProperty("Created_By");
 
-            prop.SetValue(obj, 1);
+            prop.SetValue(obj, Cookies.User_Id);
 
 			prop = obj.GetType().GetProperty("Updated_By");
 
-            prop.SetValue(obj, 1);
+            prop.SetValue(obj, Cookies.User_Id);
+
+            //END//
 		}
 
 		public void Set_Pagination(Pagination_Info pager, GridInfo grid)
