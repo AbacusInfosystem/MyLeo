@@ -3,7 +3,7 @@
 @using MyLeoRetailerInfo.Common;
 
 
-
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/SalesOrder/salesorder_validation.js"></script>
 <script src="~/Scripts/Modules/SalesOrder/salesorder_events.js"></script>
 <script src="~/Scripts/Modules/SalesOrder/salesorder_methods.js"></script>
@@ -198,7 +198,7 @@
 
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile No.</span>
 
-                                        <input type="text" class="form-control input-sm editor-field focus" name="SalesInvoice.Mobile" id="txtMobileNo" value="@Model.SalesInvoice.Mobile" placeholder="Enter Mobile No" maxlength="12" />
+                                        <input type="text" class="mask_mobile_no form-control input-sm editor-field focus" name="SalesInvoice.Mobile" id="txtMobileNo" value="@Model.SalesInvoice.Mobile" placeholder="Enter Mobile No"/>
                                         <input type="hidden" id="hdnMobileNo" value="@Model.SalesInvoice.Mobile1" name="SalesInvoice.Mobile1">
 
                                     </div>
