@@ -219,6 +219,7 @@ namespace MyLeoRetailerRepo
                     {
                         strquery = " Select distinct Inventory.Branch_Id, Branch.Branch_Name ";
                         strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID ";
+                        strquery += "where Inventory.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
                     }
                 }
 
@@ -282,6 +283,17 @@ namespace MyLeoRetailerRepo
                         strquery += "left join Branch on Purchase_Order_Request.Branch_Id = Branch.Branch_ID where Purchase_Order_Request.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
                     }
                 }
+
+                if (table_Name == "Inventory_SKU")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Inventory.Product_SKU Inventory_Id, Inventory.Product_SKU ";
+                        strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID ";
+                        strquery += "where Inventory.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                    }
+                }
+
 
                 //if (table_Name == "Sales_Invoice")
                 //{
