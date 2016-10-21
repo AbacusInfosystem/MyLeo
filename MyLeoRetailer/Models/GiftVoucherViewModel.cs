@@ -69,5 +69,11 @@ namespace MyLeoRetailer.Models
             get;
             set;
         }
+
+        public int Gift_Voucher_Id
+        {
+            get;
+            set;
+        }
     }
 }

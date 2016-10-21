@@ -141,6 +141,8 @@ namespace MyLeoRetailerInfo.PurchaseReturnRequest
     public class Request_Filter
     {
         public int Vendor_Id { get; set; }
+
+        public int Purchase_Return_Request_Id { get; set; }
     }
 
 }

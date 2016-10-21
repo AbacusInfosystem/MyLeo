@@ -531,7 +531,7 @@ function Bind_Purchase_Return_Items_Data(data)
             trHtml += "<div class='input-group'>";
             trHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU to search' value='" + data.PurchaseReturns[i].SKU_Code + "' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
             trHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
-            trHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>";
+            trHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='" + data.PurchaseReturns[i].Quantity + "' class='auto-complete-value'/>";
             trHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='" + data.PurchaseReturns[i].SKU_Code + "' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' class='auto-complete-label' />";
             trHtml += "</div>";
             trHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='" + data.PurchaseReturns[i].Purchase_Order_Id + "' name='PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id' />";

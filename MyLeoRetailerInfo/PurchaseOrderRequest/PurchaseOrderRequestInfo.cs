@@ -302,5 +302,11 @@ namespace MyLeoRetailerInfo.PurchaseOrderRequest
             get;
             set;
         }
+
+        public int Purchase_Order_Request_Id
+        {
+            get;
+            set;
+        }
     }
 }

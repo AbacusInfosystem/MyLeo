@@ -45,11 +45,11 @@ namespace MyLeoRetailerInfo.Alteration
 
     public class Filter_Alteration
     {
-        //public string Invoice_No
-        //{
-        //    get;
-        //    set;
-        //}
+        public int Alteration_ID
+        {
+            get;
+            set;
+        }
 
         public string Customer_Mobile_No
         {

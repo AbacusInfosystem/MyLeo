@@ -10,11 +10,11 @@ $(function () {
 
     });
 
-    $("#btnEditAlteration").click(function () {
-        $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id");
-        $("#frmAlteration").attr("method", "post");
-        $("#frmAlteration").submit();
-    });
+    //$("#btnEditAlteration").click(function () {
+    //    $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id/");
+    //    $("#frmAlteration").attr("method", "post");
+    //    $("#frmAlteration").submit();
+    //});
 
     $(document).on('change', '[name="Alteration_List"]', function (event) {
 
@@ -28,14 +28,20 @@ $(function () {
 
     $("#btncreateA").click(function () {
 
-        $("#frmAlteration").attr("action", "/Alteration/Index");
+        $("#frmAlteration").attr("action", "/Alteration/Index/");
+
+        $('#frmAlteration').attr("method", "POST");
+
         $("#frmAlteration").submit();
 
     });
 
 
     $("#btnEditAlteration").click(function () {
-        $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id");
+        $("#frmAlteration").attr("action", "/Alteration/Get_Alteration_By_Id/");
+
+        $('#frmAlteration').attr("method", "POST");
+
         $("#frmAlteration").submit();
     });
 

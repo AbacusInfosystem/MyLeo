@@ -36,6 +36,15 @@ function Get_Brands()
 			Reset_Brand();
             		   
 			$("#divBrandPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+			var fix = $("[name='Brand.IsActive']").val(1);
+
+			if (fix == 0) {
+			    document.getElementById('Flag').checked = false;
+			}
+			else {
+			    document.getElementById('Flag').checked = true;
+			}
 		}
 	});
 }
