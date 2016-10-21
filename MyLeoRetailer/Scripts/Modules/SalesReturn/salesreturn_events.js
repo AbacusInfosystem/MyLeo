@@ -123,7 +123,7 @@ function CalculateTotal()
             var Amount = parseFloat(MRP * Qty - DiscountAmt);
             $("#tblSalesReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
            
-            sumQuantity = sumQuantity + Qty;
+            sumQuantity = parseFloat(sumQuantity) + parseFloat(Qty);
             sumGrossAmount = sumGrossAmount + Amount;
           
         }

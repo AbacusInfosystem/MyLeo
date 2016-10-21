@@ -459,14 +459,13 @@ function ReArrangeSalesOrderDetailsData() {
 
                 if ($(newTR).find("[id^='textSalesMan_']").length > 0) {
                     $(newTR).find("[id^='textSalesMan_']")[0].id = "textSalesMan_" + i;
-                    $(newTR).find("[id^='textSalesMan_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan_Id");
+                    $(newTR).find("[id^='textSalesMan_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan");
                     $(newTR).find("[id^='hdnSalesManId_']")[0].id = "hdnSalesManId_" + i;
                     $(newTR).find("[id^='hdnSalesManId_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan_Id");
                     $(newTR).find("[id^='hdnSalesMan_']")[0].id = "hdnSalesMan_" + i;
                     $(newTR).find("[id^='hdnSalesMan_']").attr("name", "SaleOrderItemList[" + i + "].SalesMan");
 
                 }
-
 
                 if ($(newTR).find("[id='delete-salesorder-details']").length > 0) {
                     $(newTR).find("[id='delete-salesorder-details']").attr("onclick", "DeleteSalesOrderDetailsData(" + i + ")");

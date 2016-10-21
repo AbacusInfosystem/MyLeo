@@ -4,6 +4,7 @@
 
     $("#textSKU_No_0").rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
 
+    //$("#txtPayament_Date").rules("add", { required: true, messages: { required: "Payment is Required", } });
 
     //$("#textSales_Branch_Name_0").val($("#hdnBranchName" + id).val());
 
@@ -112,30 +113,26 @@ $(function ()
 
         $("#hdnCreateCustomerFlag").val(true);
 
-        //$("#frmSalesOrder").validate().cancelSubmit = false;
+        // alert($("#hdnCreateCustomerFlag").val());
 
-       // alert($("#hdnCreateCustomerFlag").val());
+        $("#frmSalesOrder").validate().cancelSubmit = true;
 
-        //$('#txtInvoice_No').removeClass("login-error");
-        //$('#txtInvoice_No').rules("remove");
+        //$('#textSKU_No_0').rules("remove");
 
-        $('#textSKU_No_0').rules("remove");
+        //$('#textQuantity_0').rules("remove");
 
-        $('#textQuantity_0').rules("remove");
+        ////$('#txtPayament_Date').rules("remove");
 
-        $('#dtpInvoice_Date').removeClass("login-error");
-        $('#dtpInvoice_Date').rules("remove");
+        //$('#dtpInvoice_Date').removeClass("login-error");
+        //$('#dtpInvoice_Date').rules("remove");
 
-        $('#txtMobileNo').removeClass("MobileNo");
-        $('#txtMobileNo').rules("remove");
+        //$('#txtMobileNo').removeClass("MobileNo");
+        //$('#txtMobileNo').rules("remove");
 
+        //$('#txtCustomer_Name').removeClass("login-error");
+        //$('#txtCustomer_Name').rules("remove");
 
-
-        $('#txtCustomer_Name').removeClass("login-error");
-        $('#txtCustomer_Name').rules("remove");
-
-        //$('#textTaxPercentage_0').removeClass("login-error");
-        $('#textTaxPercentage_0').rules("remove");
+        //$('#textTaxPercentage_0').rules("remove");
 
         $("#frmSalesOrder").attr("action", "/Customer/Index/");
 
