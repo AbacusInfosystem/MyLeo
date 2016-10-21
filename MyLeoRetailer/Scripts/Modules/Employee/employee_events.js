@@ -50,21 +50,21 @@ $(function () {
     //$('[name="Employee.IsActive"]').val('True');
     //End
 
-    $("#btnEmployeeSave").click(function () {
+    $("#btnEmployeeSave").click(function ()
+	{
+       // if ($('[name="Employee.Is_Online"]').val() == 1){
+       //     $('[name="Employee.Is_Online"]').val('True');
+       // }
 
-        if ($('[name="Employee.Is_Online"]').val() == 1) {
-            $('[name="Employee.Is_Online"]').val('True');
-        }
-
-        //Modifiction
-        if ($('[name="Employee.IsActive"]').val() == 1) {
-            $('[name="Employee.IsActive"]').val(true);
-        }
-        else {
-            $('[name="Employee.IsActive"]').val(false);
-        }
-        // alert($('[name="Employee.IsActive"]').val());
-        //End
+       // //Modifiction
+       // if ($('[name="Employee.IsActive"]').val() == 1 || $('[name="Employee.IsActive"]').val() == true) {
+       //     $('[name="Employee.IsActive"]').val(true);
+       // }
+       // else {
+       //     $('[name="Employee.IsActive"]').val(false);
+       // }
+       //// alert($('[name="Employee.IsActive"]').val());
+       // //End
 
 
         if ($("#frmEmployee").valid()) {

@@ -20,7 +20,7 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseReturnId").val(this.value);
             document.getElementById('btnEditPurchaseReturn').disabled = false;
-            document.getElementById('btnCreatePurchaseReturn').disabled = true;
+            //document.getElementById('btnCreatePurchaseReturn').disabled = true;
             document.getElementById('btnUpdatePurchaseReturn').disabled = false;
         }
     });

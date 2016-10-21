@@ -20,7 +20,8 @@ $(function () {
 
         if ($(this).prop('checked')) {
             $("#hdnAlteration_ID").val(this.value);
-            $("#btnEditAlteration").show();
+            //$("#btnEditAlteration").show();
+            document.getElementById("btnEditAlteration").disabled = false;
         }
     });
 
@@ -42,7 +43,7 @@ $(function () {
 
     $(document).on("click", "[name='Alteration_List']", function () {
 
-        Get_Alteration_By_Id(this);
+        //Get_Alteration_By_Id(this);
 
     });
 

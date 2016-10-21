@@ -103,11 +103,11 @@
                                 @*@if (Model.Color.IsActive == false)*@
                                 @if (Model.Color.IsActive == 0)
                                 {
-                                    <input value="@Model.Color.IsActive.ToString()" name="Color.IsActive" type="checkbox">
+                                    <input value="@Model.Color.IsActive.ToString()" name="Color.IsActive" type="checkbox" id="Flag">
                                 }
                                 else
                                 {
-                                    <input value="@Model.Color.IsActive.ToString()" name="Color.IsActive" checked="checked" type="checkbox">
+                                    <input value="@Model.Color.IsActive.ToString()" name="Color.IsActive" checked="checked" type="checkbox" id="Flag">
                                 }
                                 @*<input type="hidden" value="@Model.Color.IsActive" />*@
                                 <span></span>

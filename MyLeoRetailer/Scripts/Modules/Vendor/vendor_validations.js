@@ -17,12 +17,14 @@
                     "Vendor.Vendor_Email1":
                         {
                             required: true,
-                            email: true
+                            email: true,
+                            checkemailid:true,
                         },
                     "Vendor.Vendor_Email2":
                         {
                             //  required: true, Change by vinod mane on 20/09/2016
-                            email: true
+                            email: true,
+                            checkemailid: true,
                         },
                     "Vendor.Vendor_Address":
                         {
@@ -49,14 +51,13 @@
                     "Vendor.Vendor_Phone1":
                        {
                            required: true,
-                           number: true,
-                           maxlength: 12,
+                           checkmobileno:true,
                        },
                     "Vendor.Vendor_Phone2":
                        {
+                           checkmobileno: true,
                            //required: true, Change by vinod mane on 20/09/2016
-                           number: true,
-                           maxlength: 12,
+                          
                        },
                     "Vendor.Vendor_Vat_No":
                        {
@@ -155,6 +156,45 @@
         });
 });
 
+jQuery.validator.addMethod("checkmobileno", function (value, element) {
+
+    var result = true;
+    var mobile1 = $("#txtVendor_Phone1").val();
+    var mobile2 = $("#txtVendor_Phone2").val();
+
+    if (mobile1 != "" && mobile1 != 0 && mobile2 != "" && mobile2 != 0) {
+
+        if (mobile1 == mobile2) {
+            result = false;
+            //calculate(element);
+        }
+        else {
+            result = true;
+        }
+    }
+    return result;
+
+}, "You can not enter same Phone no.");
+
+jQuery.validator.addMethod("checkemailid", function (value, element) {
+
+    var result = true;
+    var Email1 = ($("#txtVendor_Email1").val());
+    var Email2 = ($("#txtVendor_Email2").val());
+
+    if (Email1 != "" && Email2 != "") {
+
+        if (Email1 == Email2) {
+            result = false;
+            //calculate(element);
+        }
+        else {
+            result = true;
+        }
+    }
+    return result;
+
+}, "You can not enter same email id.");
 
 
 jQuery.validator.addMethod("VendorVatRate", function (value, element) {

@@ -5,6 +5,7 @@
     ViewBag.Title = "Index";
 }
 
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Customer/customer_events.js"></script>
 <script src="~/Scripts/Modules/Customer/customer_methods.js"></script>
@@ -56,7 +57,7 @@
                     
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no.</span>
-                        <input class="form-control" placeholder="Enter mobile number." name="Customer.Mobile" id="txtMobileNo" value="@Model.Customer.Mobile" maxlength="12" data-toggle="modal" data-target="#myModalCustomer" />
+                        <input class="mask_mobile_no form-control" placeholder="Enter mobile number." name="Customer.Mobile" id="txtMobileNo" value="@Model.Customer.Mobile"  data-toggle="modal" data-target="#myModalCustomer" />
                         <input type="hidden" id="hdnMobileNo" value="@Model.Customer.Mobile">
                      </div>
 
@@ -185,22 +186,22 @@
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no1.</span>
-                <input type="text" class="form-control" placeholder="Enter mobile number 1." id="txtCustomer_Mobile1" name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1" maxlength="12" />
+                <input type="text" class="mask_mobile_no form-control" placeholder="Enter mobile number 1." id="txtCustomer_Mobile1" name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1"  />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no2.</span>
-                <input type="text" class="form-control" placeholder="Enter mobile number 2." id="txtCustomer_Mobile2" name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2" maxlength="12" />
+                <input type="text" class="mask_mobile_no form-control" placeholder="Enter mobile number 2." id="txtCustomer_Mobile2" name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2"  />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
-                <input type="text" class="form-control" placeholder="Enter landline number 1." id="txtCustomer_Landline1" name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1" maxlength="12" />
+                <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 1." id="txtCustomer_Landline1" name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1"  />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
-                <input type="text" class="form-control" placeholder="Enter landline number 2." id="txtCustomer_Landline2" name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2" maxlength="12" />
+                <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 2." id="txtCustomer_Landline2" name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2"  />
             </div>
 
             <div class="form-group">
