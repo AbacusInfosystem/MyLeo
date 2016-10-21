@@ -1198,7 +1198,6 @@
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Search.cshtml" />
-    <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
     <Content Include="Views\PreLogin\Home\AuthorizationError.cshtml" />
     <Content Include="Views\PreLogin\Home\Error.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Index.cshtml" />
