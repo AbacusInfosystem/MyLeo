@@ -263,16 +263,31 @@ namespace MyLeoRetailerRepo
 
         public DataTable Get_Sales_Report(SalesOrderFilter filter)
         {
-
             DataTable dt = new DataTable();
 
             List<SqlParameter> sqlParam = new List<SqlParameter>();
 
             sqlParam.Add(new SqlParameter("@Branch_Id", filter.Branch_Id));
 
-            sqlParam.Add(new SqlParameter("@From_Date", filter.From_Date));
+            if (filter.From_Date != DateTime.MinValue)
+            {
 
-            sqlParam.Add(new SqlParameter("@To_Date", filter.To_Date));
+                sqlParam.Add(new SqlParameter("@From_Date", filter.From_Date.ToString()));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@From_Date", null));
+            }
+
+            if (filter.To_Date != DateTime.MinValue)
+            {
+
+                sqlParam.Add(new SqlParameter("@To_Date", filter.To_Date.ToString()));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@To_Date", null));
+            }
 
             dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Sales_Report.ToString(), CommandType.StoredProcedure);
 
@@ -820,6 +835,40 @@ namespace MyLeoRetailerRepo
             return GiftVoucherDetails;
         }
         //End
+
+        public List<SaleOrderItems> Get_SalesReport_Items_By_Id(int Sales_Invoice_Id)
+        {
+            List<SaleOrderItems> SaleOrderItemList = new List<SaleOrderItems>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Details.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    SaleOrderItems list = new SaleOrderItems();
+
+                    if (!dr.IsNull("SKU_Code"))
+                        list.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+                    if (!dr.IsNull("Quantity"))
+                        list.Quantity = Convert.ToInt32(dr["Quantity"]);
+                    if (!dr.IsNull("MRP_Amount"))
+                        list.Total_MRP_Amount = Convert.ToInt32(dr["MRP_Amount"]);
+                    if (!dr.IsNull("Discount_Percentage"))
+                        list.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
+                    if (!dr.IsNull("Total_Amount"))
+                        list.Amount = Convert.ToInt32(dr["Total_Amount"]);
+                    if (!dr.IsNull("Salesman_Name"))
+                        list.SalesMan = Convert.ToString(dr["Salesman_Name"]);
+                    SaleOrderItemList.Add(list);
+                }
+            }
+            return SaleOrderItemList;
+        }
     }
 }
 

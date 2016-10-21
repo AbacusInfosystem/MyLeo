@@ -1,4 +1,6 @@
 ﻿@model MyLeoRetailer.Models.Report.InventoryViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
 
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
@@ -37,7 +39,14 @@
 
                     <div class="row">
 
-                        <input type="hidden" id="hdntemp" value="1" />
+                        @{
+                            LoginInfo Cookies = new LoginInfo();
+                            Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                            <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                        }
+
+                        <input type="hidden" id="hdntempId" />
 
                         <input type="hidden" id="hdnInventoryId" name="Filter.Inventory_Id" value="@Model.Inventory.Inventory_Id" />
 
@@ -48,14 +57,14 @@
                             <div class="form-group auto-complete">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch Name.</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control autocomplete-text" id="textBrand" name="Branch" placeholder="Branch name" value="" data-table="Inventory" data-col="Branch_Id,Branch_Name" data-headernames="Branches" data-param="hdntemp" data-field="Branch_Id" />
+                                    <input type="text" class="form-control autocomplete-text" id="textBrand" name="Branch" placeholder="Branch name" value="" data-table="Inventory" data-col="Branch_Id,Branch_Name" data-headernames="Branches" data-param="hdnBranchIDs" data-field="Branch_Id" />
                                     <span class="input-group-addon">
                                         <a href="#" class="text-muted" id="hrefDealer1" role="button">
                                             <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i>
                                         </a>
                                     </span>
                                     <input type="hidden" id="hdnBranch_Id" value="" name="Filter.Branch_Id" class="auto-complete-value" />
-                                    <input type="hidden" id="hdnBranch_Name" value="" name="" class="auto-complete-label" />
+                                    <input type="hidden" id="hdnBranch_Name" value="" name="" class="auto-complete-label" onchange="Set_Branch_Id();" />
                                 </div>
                             </div>
 
@@ -68,7 +77,7 @@
                             <div class="form-group auto-complete">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">SKU Code.</span>
                                 <div class="input-group">
-                                    <input type="text" class="form-control autocomplete-text" id="textSKU_Code" name="SKU" placeholder="SKU code" value="" data-table="Inventory" data-col="Inventory_Id,Product_SKU" data-headernames="Product SKU" />
+                                    <input type="text" class="form-control autocomplete-text" id="textSKU_Code" name="SKU" placeholder="SKU code" value="" data-table="Inventory_SKU" data-col="Inventory_Id,Product_SKU" data-headernames="Product SKU" data-param="hdntempId" data-field="Branch_Id" />
                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                     <input type="hidden" id="hdnInventory_Id" value="" name="" class="auto-complete-value" />
                                     <input type="hidden" id="hdnProduct_SKU" value="" name="Filter.Product_SKU" class="auto-complete-label" />
@@ -81,6 +90,7 @@
 
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success active" value="Search" id="btnSearchInventory">Search</button>
+                                <button type="reset" class="btn btn-danger active" value="Reset" id="btnResetInventory">Reset</button>
                             </div>
 
                         </div>
