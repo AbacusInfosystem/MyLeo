@@ -1098,6 +1098,8 @@
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesreport_search_events.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesreport_search_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_events.js" />
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />
@@ -1128,7 +1130,6 @@
     <Content Include="Log4Net.config" />
     <None Include="Properties\PublishProfiles\MYLEO.pubxml" />
     <None Include="Scripts\_references.js" />
-    <Content Include="UploadedFiles\1.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1236,6 +1237,10 @@
     <Content Include="Views\PostLogin\Master\ProductWarehouse\_Warehouse_Notifiation.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PostLogin\Master\Product\PrintBarcode.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\SalesReport.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\PostLogin\SalesOrder\_SalesDetailsReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1250,6 +1255,7 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
+    <Folder Include="UploadedFiles\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>

@@ -294,6 +294,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Purchase_Return_request")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Purchase_Return_Request.Vendor_Id, Vendor.Vendor_Name from Purchase_Return_Request ";
+                        strquery += "left join Vendor on Purchase_Return_Request.Vendor_Id = Vendor.Vendor_ID ";
+                        strquery += "where Purchase_Return_Request.Branch_Id in (SELECT * FROM dbo.CSVToTable('" + fieldValue + "'))";
+                    }
+                }
 
                 //if (table_Name == "Sales_Invoice")
                 //{
@@ -314,8 +323,6 @@ namespace MyLeoRetailerRepo
 
                       
 
-                //    }
-                //}
                
                               
             }

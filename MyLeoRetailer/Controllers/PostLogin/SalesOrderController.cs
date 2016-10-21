@@ -358,7 +358,6 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return Json(check, JsonRequestBehavior.AllowGet);
         }
 
-        //Added by vinod mane on 29/09/2016
         public ActionResult Report(SalesInvoiceViewModel siViewModel)
         {
 
@@ -375,35 +374,41 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 Logger.Error("SalesOrder Controller - Report  " + ex.Message);//Added by vinod mane on 06/10/2016
             }
 
-            return View("Search1", siViewModel);
+            return View("SalesReport", siViewModel);
         }
-        //End
 
         public JsonResult Get_Sales_Report(SalesInvoiceViewModel siViewModel)
         {
             try
             {
-                Pagination_Info pager = new Pagination_Info();
-
-                pager = siViewModel.Grid_Detail.Pager;
-
-                siViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount", "Sales_Invoice_Id"); // Set grid info for front end listing
+                siViewModel.Grid_Detail = Set_Grid_Details(false, "Branch_Name,Sales_Invoice_No,Customer_Name,Invoice_Date,Total_Item_Quantity,Total_Amount", "Sales_Invoice_Id"); // Set grid info for front end listing
 
                 siViewModel.Grid_Detail.Records = siRepo.Get_Sales_Report(siViewModel.Filter); // Call repo method 
 
-                Set_Pagination(pager, siViewModel.Grid_Detail); // set pagination for grid
-
-                siViewModel.Grid_Detail.Pager = pager;
             }
             catch (Exception ex)
             {
                 siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
-                Logger.Error("SalesOrder Controller - Get_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
+                Logger.Error("SalesOrder Controller - Get_SalesOrder  " + ex.Message);
             }
 
             return Json(JsonConvert.SerializeObject(siViewModel));
         }
 
+        public PartialViewResult View_Sales_Report(string InvoiceId)
+        {
+            SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
+            try
+            {
+                siViewModel.SaleOrderItemList = siRepo.Get_SalesReport_Items_By_Id(Convert.ToInt32(InvoiceId));
+            }
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - View_Sales_Report  " + ex.Message);
+            }
+            return PartialView("_SalesDetailsReport", siViewModel);
+        }
     }
 }
