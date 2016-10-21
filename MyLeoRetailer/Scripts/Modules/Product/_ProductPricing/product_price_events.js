@@ -147,7 +147,7 @@ $(function () {
         //if ($("#hdn_ProductId").val() != 0)
         //    PrintAllBarCodes($("#hdn_ProductId").val()); 
         if ($("#frmProductMRP").valid()) {
-            if ($("#hdn_ProductId").val() != 0) {
+            if ($("#hdn_ProductId").val() != 0 && $("#hdn_Colour_Id").val() != 0) {
                 $("#frmProductMRP").attr("action", "/product/get-all-barcodes/");
                 $('#frmProductMRP').attr("method", "POST");
                 $('#frmProductMRP').submit();
