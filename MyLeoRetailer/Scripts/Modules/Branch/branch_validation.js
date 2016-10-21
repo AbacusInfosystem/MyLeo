@@ -97,8 +97,8 @@ $(document).ready(function () {
     jQuery.validator.addMethod("checkmobileno", function (value, element) {
 
         var result = true;
-        var Landline1 = parseFloat($("#txtBranch_Landline1").val());
-        var Landline2 = parseFloat($("#txtBranch_Landline2").val());
+        var Landline1 = ($("#txtBranch_Landline1").val());
+        var Landline2 = ($("#txtBranch_Landline2").val());
 
         if (Landline1 != "" && Landline1 != 0 && Landline2 != "" && Landline2 != 0) {
 

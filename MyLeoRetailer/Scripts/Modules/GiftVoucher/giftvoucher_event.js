@@ -20,7 +20,8 @@
 
 
     $("#btnGiftVoucherPrint").click(function () {       
-        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Print");
+        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Print/");
+        $('#frmGiftVoucher').attr("method", "POST");
         $("#frmGiftVoucher").submit();           
     });
 

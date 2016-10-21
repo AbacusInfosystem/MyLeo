@@ -426,7 +426,13 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
-    }
+            #region Sales Report
+
+        sp_Get_Sales_Details,
+
+            #endregion
+
+        }
 
            
 }

@@ -22,7 +22,7 @@ $(function () {
     $("#btnSavePurchaseInvoice").click(function () {       
         if ($("#frmPurchaseInvoice").valid()) {
             if ($("[name='PurchaseInvoice.Purchase_Invoice_Id']").val() == "" || $("[name='PurchaseInvoice.Purchase_Invoice_Id']").val() == 0) {
-                $("#frmPurchaseInvoice").attr("action", "/PurchaseInvoice/Insert_Purchase_Invoice");
+                $("#frmPurchaseInvoice").attr("action", "/PurchaseInvoice/Insert_Purchase_Invoice/");
                 $('#frmPurchaseInvoice').attr("method", "POST");
                 $('#frmPurchaseInvoice').submit();
             } 

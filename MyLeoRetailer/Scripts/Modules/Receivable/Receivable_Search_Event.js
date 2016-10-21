@@ -10,6 +10,7 @@ $(document).ready(function () {
 
     $(document).on('change', '[name="Receivable_List"]', function (event) {
         if ($(this).prop('checked')) {
+            $("#btnPay").show();
             $("#hdf_Sales_Invoice_Id").val(this.value);
 
             document.getElementById('btnPay').disabled = false;

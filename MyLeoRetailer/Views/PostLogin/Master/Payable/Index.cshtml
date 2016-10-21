@@ -36,27 +36,30 @@
 
 <div class="page-content-wrap">
 
-        <form role="form" id="frmPayable" method="post">
+    <form role="form" id="frmPayable" method="post">
 
-            <div class="box box-default">
+        <div class="box box-default">
 
-                <div class="box-body">
+            <div class="box-body">
 
-                    <input type="hidden" class="form-control input-sm" name="Payable.Payable_Id" id="hdf_Payable_Id" value="Payable.Payable_Id">
-                  
-                    <input type="hidden" class="form-control input-sm" name="Payable.Purchase_Credit_Note_Id" id="hdf_Purchase_Credit_Note_Id">
+                <input type="hidden" class="form-control input-sm" name="Payable.Payable_Id" id="hdf_Payable_Id" value="Payable.Payable_Id">
 
-                    <input type="hidden" class="form-control input-sm" name="Payable.Purchase_Invoice_Id" id="hdf_Purchase_Invoice_Id" value="@Model.Payable.Purchase_Invoice_Id">
+                <input type="hidden" class="form-control input-sm" name="Payable.Purchase_Credit_Note_Id" id="hdf_Purchase_Credit_Note_Id">
 
-                    <input type="hidden" value="0" id="hdf_temp">
+                <input type="hidden" class="form-control input-sm" name="Payable.Purchase_Invoice_Id" id="hdf_Purchase_Invoice_Id" value="@Model.Payable.Purchase_Invoice_Id">
 
-                    <div class="row" style="padding-top: 10px; margin-top: 10px; border-bottom: 1px solid #DDD; border-top: 1px solid #DDD; background: rgba(0, 0, 0, 0.04); ">
+                <input type="hidden" value="0" id="hdf_temp">
 
-                        <div class="col-md-3">
-                            @*<div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
-                                <input type="text" class="form-control input-sm" name="Payable.Vendor_Name" id="txtVnedor_Name" value="@Model.Payable.Vendor_Name" placeholder="Enter Vendor Name" />
-                            </div>*@
+                <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
+
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                @*<div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
+                                        <input type="text" class="form-control input-sm" name="Payable.Vendor_Name" id="txtVnedor_Name" value="@Model.Payable.Vendor_Name" placeholder="Enter Vendor Name" />
+                                    </div>*@
 
                                 <div class="form-group auto-complete">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor name</span>
@@ -68,65 +71,74 @@
 
                                     </div>
                                 </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Payable status</span>
-                                <select class="form-control" id="drpPayble_Status" name="Payable.Payament_Status">
-                                    <option value="0">Select Payable Status</option>
-
-                                    @foreach (var item in LookupInfo.Get_Payment_Status())
-                                    {
-
-                                        if (Model.Payable.Payament_Status == item.Key)
-                                        {
-                                            <option value="@item.Key" selected="selected">@item.Value</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@item.Key">@item.Value</option>
-                                        }
-
-                                    }
-
-                                </select>
                             </div>
-                        </div>
 
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
-                                <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                                    <input type="text" class="form-control datepicker" name="Payable.From_Date" value="@((Model.Payable.From_Date == DateTime.MinValue ? "" : Model.Payable.From_Date.ToString("MM-dd-yyyy")))" reado readonly />
-                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Payable status</span>
+                                    <select class="form-control" id="drpPayble_Status" name="Payable.Payament_Status">
+                                        <option value="0">Select Payable Status</option>
+
+                                        @foreach (var item in LookupInfo.Get_Payment_Status())
+                                        {
+
+                                            if (Model.Payable.Payament_Status == item.Key)
+                                            {
+                                                <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Key">@item.Value</option>
+                                            }
+
+                                        }
+
+                                    </select>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
-                                <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                    <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("MM-dd-yyyy")))" reado readonly />
-                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">From date.</span>
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                        <input type="text" class="form-control datepicker" name="Payable.From_Date" value="@((Model.Payable.From_Date == DateTime.MinValue ? "" : Model.Payable.From_Date.ToString("MM-dd-yyyy")))" reado readonly />
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-2">
-                            <br />
-                            <br />
-                            <div class="btn-group" style="margin-top: -6px;">
-                                <button type="button" id="btnSearchPayable" class="btn btn-success active">Search</button>
-                                <button type="reset" id="btnResetPayable" class="btn btn-danger active">Reset</button>
-                                <button type="button" id="btnPay" class="btn btn-primary active" style="display:none">Pay</button>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
+                                    <div class="input-group date" id="txtTo_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                        <input type="text" class="form-control datepicker" name="Payable.To_Date" value="@((Model.Payable.To_Date == DateTime.MinValue ? "" : Model.Payable.To_Date.ToString("MM-dd-yyyy")))" reado readonly />
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="col-md-2">
+
+                                <div class="btn-group" style="margin-top: 30px;">
+                                    <button type="button" id="btnSearchPayable" class="btn btn-success active">Search</button>
+                                    <button type="reset" id="btnResetPayable" class="btn btn-danger active">Reset</button>
+                                    <button type="button" id="btnPay" class="btn btn-primary active">Pay</button>
+                                </div>
+                            </div>
+
                         </div>
 
-                   </div>
+                    </div>
+
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                        <div class="row">
 
 
+
+                        </div>
+
+                    </div>
 
                     <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
@@ -138,9 +150,11 @@
                     </div>
 
 
-               </div>
+                </div>
 
             </div>
-        </form>
+        </div>
+    </form>
 
 </div>
+

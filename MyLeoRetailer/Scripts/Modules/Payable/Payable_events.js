@@ -113,5 +113,8 @@ function Get_Payable(id) {
     $("#hdf_Purchase_Invoice_Id").val(id);
 
     $("#frmPayable").attr("action", "/Payable/Get_Payable_Details_By_Id");
+
+    $('#frmPayable').attr("method", "POST");
+
     $("#frmPayable").submit();
 }
