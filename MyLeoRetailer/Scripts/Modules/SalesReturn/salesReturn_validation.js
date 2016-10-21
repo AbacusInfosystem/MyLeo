@@ -48,7 +48,7 @@
                 "SalesReturn.Mobile":
                     {
                         required: "Mobile No is required",
-                        number: "Only numbers"
+                        //number: "Only numbers"
                     },
                             
                 "SalesReturn.Total_Amount_Return_By_Cash":
