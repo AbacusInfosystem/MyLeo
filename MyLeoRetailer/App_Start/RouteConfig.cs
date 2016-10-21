@@ -288,6 +288,13 @@ namespace MyLeoRetailer
         url: "product/check-article-no",
         defaults: new { controller = "Product", action = "Check_Existing_Article_No", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
         namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+             routes.MapRoute(
+        name: "Product-12",
+        url: "product/get-all-barcodes",
+        defaults: new { controller = "Product", action = "Get_All_Barcodes_toPrint", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+        namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            
             
             #endregion
 

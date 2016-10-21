@@ -4,7 +4,7 @@
 
         url: "/SalesReturn/Get_Customer_Name_By_Mobile_No",
 
-        data: { MobileNo: $("[name='SalesReturn.Mobile']").val() },
+        data: { MobileNo: $("#txtMobileNo").val() },
 
         method: 'GET',
 

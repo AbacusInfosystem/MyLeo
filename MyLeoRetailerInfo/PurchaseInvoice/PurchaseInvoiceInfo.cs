@@ -149,5 +149,11 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
             get;
             set;
         }
+
+        public int Purchase_Invoice_Id
+        {
+            get;
+            set;
+        }
     }
 }

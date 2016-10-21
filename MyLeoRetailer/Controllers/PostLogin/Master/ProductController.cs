@@ -335,5 +335,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Get_All_Barcodes_toPrint(ProductViewModel pViewModel)
+        {
+            try
+            {
+                pViewModel.ProductMRPs = _ProductRepo.Get_All_Barcodes_toPrint(pViewModel.Product.Product_Id,pViewModel.Product.Colour_Id);
+            }
+            catch (Exception ex)
+            {
+                pViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Product Product Prizing  " + ex.Message);
+            } 
+
+            return View("PrintBarcode", pViewModel);
+        }
     }
 }

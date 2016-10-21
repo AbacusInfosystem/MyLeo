@@ -1235,6 +1235,7 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\_Warehouse_Notifiation.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Product\PrintBarcode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

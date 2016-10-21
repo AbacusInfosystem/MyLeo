@@ -49,3 +49,15 @@ function Get_Payable() {
         }
     });
 }
+
+function Reset_Payable() {
+    $("[name='Payable.From_Date']").val("");
+
+    $("[name='Payable.To_Date']").val("");
+
+    $("[name='Payable.Vendor_Name']").val("");
+
+    $("[name='Payable.Payament_Status']").val("");
+
+    document.getElementById("btnEditAlteration").disabled = true;
+}

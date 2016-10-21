@@ -2,6 +2,11 @@
 $(document).ready(function () {
     Get_Brands();
 
+    if ($("[name='Brand.Brand_Id']").val() == "" || $("[name='Brand.Brand_Id']").val() == 0) {
+        $("[name='Brand.IsActive']").val(1);
+        document.getElementById('Flag').checked = true;
+    }
+
     $("#btnSaveBrand").click(function () {
         if ($("#frmBrand").valid()) {
             Save_Brand();

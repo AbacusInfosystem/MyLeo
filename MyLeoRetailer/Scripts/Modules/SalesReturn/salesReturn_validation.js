@@ -14,7 +14,7 @@
                     "SalesReturn.Mobile":
                         {
                             required: true,
-                            number: true,
+                           
                             MobileNo: true
                         },
                    
@@ -53,8 +53,8 @@
                             
                 "SalesReturn.Total_Amount_Return_By_Cash":
                     {
-                        required: "Cash Amount is required",
-                        number: "Only numbers"
+                        required: "Cash Amount is required"
+                        
                     },  
                 "SaleReturnItemList[0].Quantity":
                     {

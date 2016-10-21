@@ -14,16 +14,15 @@ $(function () {
     });
 
     $("#btnGiftVoucher").click(function () {
-        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Get_Gift_Voucher_By_Id");
+        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Get_Gift_Voucher_By_Id/");
+        $('#frmGiftVoucher').attr("method", "POST");
         $("#frmGiftVoucher").submit();
     });
 
     $(document).on('change', '[name="Gift_Voucher_List"]', function (event) {
         if ($(this).prop('checked')) {
             $("#hdn_GiftVoucherId").val(this.value);
-            //$("#btnGiftVoucher").show();
-            //$("#btncreateGV").hide();
-
+         
             document.getElementById("btnGiftVoucher").disabled = false;
         }
     });
@@ -31,7 +30,8 @@ $(function () {
 
     $("#btncreateGV").click(function () {
 
-        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Index");
+        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Index/");
+        $('#frmGiftVoucher').attr("method", "POST");
         $("#frmGiftVoucher").submit();
 
     });

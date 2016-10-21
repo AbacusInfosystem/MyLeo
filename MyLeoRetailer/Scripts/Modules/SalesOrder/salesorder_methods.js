@@ -6,7 +6,7 @@
 
         url: "/SalesOrder/Get_Customer_Name_By_Mobile_No",
 
-        data: {MobileNo : $("[name='SalesInvoice.Mobile']").val()},
+        data: { MobileNo: $("#txtMobileNo").val() },
 
         method: 'GET',
 
