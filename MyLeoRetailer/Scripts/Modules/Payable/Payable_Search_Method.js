@@ -42,6 +42,8 @@ function Get_Payable() {
 
             Bind_Grid(obj, "Payable_List");
 
+            Reset_Payable();
+
             $("#divPayablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Friendly_Messages(obj);
@@ -59,5 +61,5 @@ function Reset_Payable() {
 
     $("[name='Payable.Payament_Status']").val("");
 
-    document.getElementById("btnEditAlteration").disabled = true;
+    document.getElementById("btnPay").disabled = true;
 }

@@ -1,0 +1,37 @@
+﻿@model MyLeoRetailer.Models.SalesInvoiceViewModel 
+<form id="frmSalesDetails">
+    @*<script src="~/Scripts/Modules/SalesOrder/salesreport_search_events.js"></script>
+    <script src="~/Scripts/Modules/SalesOrder/salesreport_search_methods.js"></script>*@
+    <div class="block" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">       
+        <div class="table-responsive">
+            <table class="table table-hover" style="margin-bottom: 0;">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">SKU Code</th>
+                        <th style="width: 6%;">Quantity</th>
+                        <th style="width: 6%;">MRP Amount</th>
+                        <th style="width: 6%;">Discount %</th>
+                        <th style="width: 7%;">Total Amount</th>
+                        <th style="width: 6%;">Salesman Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var itm in Model.SaleOrderItemList)
+                        {
+                            <tr>
+                                <td>@itm.SKU_Code</td>
+                                <td>@itm.Quantity</td>
+                                <td>@itm.Total_MRP_Amount</td>
+                                <td>@itm.Discount_Percentage</td>
+                                <td>@itm.Amount</td>
+                                <td>@itm.SalesMan</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+</form>
