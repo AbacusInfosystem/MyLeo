@@ -69,7 +69,7 @@ $(function () {
 
         if ($("#frmEmployee").valid()) {
             if ($("#hdn_EmployeeId").val() == 0) {
-                $("#frmEmployee").attr("action", "/Employee/Insert_Employee/");
+               $("#frmEmployee").attr("action", "/Employee/Insert_Employee/");
             }
             else {
                 $("#frmEmployee").attr("action", "/Employee/Update_Employee/");
