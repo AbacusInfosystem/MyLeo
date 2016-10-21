@@ -39,7 +39,7 @@
             if ($("#records_Message")[0].innerText == " ") //added by aditya
             {
             if ($("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == "" || $("[name='PurchaseOrderRequest.Purchase_Order_Request_Id']").val() == 0) {
-                $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Insert_Purchase_Order_Request");
+                $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Insert_Purchase_Order_Request/");
                 $('#frmPurchaseOrderRequest').attr("method", "POST");
                 $('#frmPurchaseOrderRequest').submit();
             }
