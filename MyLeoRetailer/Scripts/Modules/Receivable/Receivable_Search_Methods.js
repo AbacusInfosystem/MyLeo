@@ -40,10 +40,27 @@
 
             Bind_Grid(obj, "Receivable_List");
 
+            Reset_Recevable();
+
             $("#divReceivablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Friendly_Messages(obj);
 
         }
     });
+}
+
+function Reset_Recevable()
+{
+    $("[name='Receivable.From_Date']").val("");
+
+    $("[name='Receivable.To_Date']").val("");
+
+    $("[name='Receivable.Sales_Invoice_No']").val("");
+
+    $("[name='Receivable.Customer_Name']").val("");
+
+    $("[name='Receivable.Payment_Status']").val("");
+
+    document.getElementById('btnPay').disabled = true;
 }
