@@ -283,28 +283,17 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
-                //if (table_Name == "Sales_Invoice")
-                //{
-                //    if (fieldName == "Branch_Id")
-                //    {
-                //        strquery = " Select distinct Sales_Invoice.Branch_Id, Sales_Invoice.Sales_Invoice_No ";
-                //        strquery += "from Sales_Invoice inner join Branch on Sales_Invoice.Branch_Id=Branch.Branch_ID where Sales_Invoice.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
-                //        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
-                //    }
-                //}
+                if (table_Name == "Purchase_Return_request")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Purchase_Return_Request.Vendor_Id, Vendor.Vendor_Name from Purchase_Return_Request ";
+                        strquery += "left join Vendor on Purchase_Return_Request.Vendor_Id = Vendor.Vendor_ID ";
+                        strquery += "where Purchase_Return_Request.Branch_Id in (SELECT * FROM dbo.CSVToTable('" + fieldValue + "'))";
+                    }
+                }
 
-                //if (table_Name == "Purchase_Invoice")
-                //{
-                //    if (fieldName == "Purchase_Invoice_Id")
-                //    {
-                //        strquery = " Select distinct Purchase_Invoice.Vendor_Id,Vendor.Vendor_Name ";
-                //        strquery += "from Purchase_Invoice inner join Vendor on Purchase_Invoice.Vendor_Id=Vendor.Vendor_Id";
-
-                      
-
-                //    }
-                //}
-               
+                
                               
             }
 
