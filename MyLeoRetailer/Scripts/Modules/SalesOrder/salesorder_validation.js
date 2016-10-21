@@ -15,8 +15,7 @@
                         },
                     "SalesInvoice.Mobile":
                         {
-                            required: true,
-                            number: true,
+                            required: true,                          
                             MobileNo : true
                         },
                   

@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
 
+    $("input.mask_mobile_no").mask('(99) 99999-99999');
 
     $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "SKU Required", digits: "Invalid quantity." } });
     $("#textSKU_No_0").rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });

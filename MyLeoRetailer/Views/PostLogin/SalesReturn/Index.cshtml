@@ -2,7 +2,7 @@
 @using MyLeoRetailer.Common;
 @using MyLeoRetailerInfo.Common;
 
-
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/SalesReturn/salesReturn_validation.js"></script>
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/SalesReturn/salesreturn_events.js"></script>
@@ -205,7 +205,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile No.</span>
-                                        <input type="text" class="form-control input-sm editor-field focus" name="SalesReturn.Mobile" id="txtMobileNo" value="@Model.SalesReturn.Mobile" placeholder="Enter Mobile No" maxlength="12" @*data-toggle="modal" data-target="#myModalAddCustomer"*@ />
+                                        <input type="text" class="mask_mobile_no form-control input-sm editor-field focus" name="SalesReturn.Mobile" id="txtMobileNo" value="@Model.SalesReturn.Mobile" placeholder="Enter Mobile No" @*data-toggle="modal" data-target="#myModalAddCustomer"*@ />
                                         <input type="hidden" id="hdnMobileNo" value="@Model.SalesReturn.Mobile1" name="SalesReturn.Mobile1">
                                     </div>
                                 </div>

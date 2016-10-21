@@ -273,6 +273,16 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Purchase_order_request")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Purchase_Order_Request.Vendor_Id, Vendor.Vendor_Name ";
+                        strquery += "from Purchase_Order_Request left join Vendor on Purchase_Order_Request.Vendor_Id = Vendor.Vendor_ID "; 
+                        strquery += "left join Branch on Purchase_Order_Request.Branch_Id = Branch.Branch_ID where Purchase_Order_Request.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                    }
+                }
+
                 //if (table_Name == "Sales_Invoice")
                 //{
                 //    if (fieldName == "Branch_Id")

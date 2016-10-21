@@ -1,5 +1,6 @@
 ﻿@model MyLeoRetailer.Models.PurchaseOrderRequestViewModel
-
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/PurchaseOrderRequest/search_purchaseorderRequest_events.js"></script>
@@ -49,7 +50,7 @@
 
                             <input type="hidden" class="form-control" name="Filter.Vendor_Id" />
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
                                 <select class="form-control select" name="PurchaseOrderRequest.Vendor_Id" id="drpVendor_Id">
                                     <option value="">Select Vendor</option>
@@ -65,9 +66,30 @@
                                         }
                                     }
                                 </select>
-                            </div>
+                            </div>*@
 
-                        </div>
+                           
+
+                                @{
+                                    LoginInfo Cookies = new LoginInfo();
+                                    Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                }
+
+                                <div class="form-group auto-complete">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control invoice-filter autocomplete-text" id="hdnVendor_Id" placeholder="Enter Vendor name to search" value="" data-table="Purchase_order_request" data-col="Vendor_Id,Vendor_Name" data-param="hdnBranchIDs" data-field="Branch_Id" data-headernames="Vendor name">
+                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                        <input type="hidden"  class="auto-complete-label" />
+                                        <input type="hidden" id="drpVendor_Id" name="PurchaseOrderRequest.Vendor_Id" class="auto-complete-value" />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
 
                         <div class="col-md-9" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
