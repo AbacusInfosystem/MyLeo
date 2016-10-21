@@ -29,14 +29,14 @@ function Get_Customer_By_mobile() {
             Set_Customer_Values(obj);
             
             //Set IsActive Button Status
-            var fix = $("[name='Customer.IsActive']").val();
+            //var fix = $("[name='Customer.IsActive']").val();
 
-            if (fix == "0") {
-                document.getElementById('Flag').checked = false;
-            }
-            else {
-                document.getElementById('Flag').checked = true;
-            }
+            //if (fix == "0") {
+            //    document.getElementById('Flag').checked = false;
+            //}
+            //else {
+            //    document.getElementById('Flag').checked = true;
+            //}
             //End
         }
     });

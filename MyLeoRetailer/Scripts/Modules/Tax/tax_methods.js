@@ -33,6 +33,16 @@ function Get_Taxes() {
             Reset_Tax();
 
             $("#divTaxPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            var fix = $("[name='Tax.IsActive']").val(1);
+
+            if (fix == "0") {
+                document.getElementById('Flag').checked = false;
+            }
+            else {
+                document.getElementById('Flag').checked = true;
+            }
+
         }
     });
 }
@@ -98,7 +108,7 @@ function Reset_Tax() {
 
     $("[name='Tax.TaxValue']").val("");
 
-    $("[name='Tax.IsActive']").val("");
+    $("[name='Tax.IsActive']").val(1);
     $("#hdnTaxName").val("");//Added By Vinod Mane on 27/09/2016
    
     $('#frmTax').trigger("reset");

@@ -8,7 +8,7 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseInvoiceId").val(this.value);
             document.getElementById('btnViewPurchaseInvoice').disabled = false;
-            document.getElementById('btnCreatePurchaseInvoice').disabled = true;
+            //document.getElementById('btnCreatePurchaseInvoice').disabled = true;
         }
     });
 

@@ -1,0 +1,26 @@
+﻿@model MyLeoRetailer.Models.ProductViewModel
+@using MyLeoRetailerInfo.Common
+
+@{
+    ViewBag.Title = "PrintBarcode";
+} 
+
+
+<div class="page-content-wrap">
+    <form role="form" id="frmProductBarcodes">
+        <div class="row">
+            <div id="Barcodes" class="col-md-9" style="padding: 10px;overflow:auto;height:480px;">
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        @foreach (var item in Model.ProductMRPs)
+                        {
+                            <td>
+                                <img src="~/UploadedFiles/@item.Barcode_Image_Url" style="width:100%" />
+                            </td>
+                        }
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>

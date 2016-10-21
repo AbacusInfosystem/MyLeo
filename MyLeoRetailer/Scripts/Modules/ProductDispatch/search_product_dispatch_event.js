@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
 
+    document.getElementById('btnDispatch').disabled = true;
+
+
     Get_Product_Dispatch();
 
     $("[id='txtBranch_Name']").focusout(function () {
@@ -25,7 +28,9 @@
 
             $("#hdnSKU").val(sku);
 
-            $('#btnDispatch').show();
+            //$('#btnDispatch').show();
+
+            document.getElementById('btnDispatch').disabled = false;
 
             //if (status == "Pending" || status == "Partially Dispatch")
             //{
