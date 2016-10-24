@@ -202,7 +202,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         public JsonResult Get_Purchase_Return_Items_By_Vendor_And_PO(int Vendor_Id, int Purchase_Invoice_Id)
         {
             PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
-             
+
             try
             {
                 prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Items_By_Vendor_And_PO(Vendor_Id, Purchase_Invoice_Id);
