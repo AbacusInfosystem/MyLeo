@@ -1,0 +1,112 @@
+﻿@model MyLeoRetailer.Models.EmployeeViewModel
+
+
+@{
+    ViewBag.Title = "Employee Branch Mapping";
+}
+
+<script src="~/Scripts/Modules/Employee/Employee_Branch_Mapping_Event.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Employee Branch Mapping</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+
+        <div class="page-title">
+            <h2><span class="fa fa-users"></span>&nbsp;&nbsp;Employee Branch Mapping &nbsp;&nbsp;</h2>
+            <i class="fa fa-angle-double-right fa-3x" aria-hidden="true"></i>
+        </div>
+
+        <div class="page-title">
+            <h4 style="margin-left: 20px;margin-top: 11px;">
+                <span class="fa fa-user"></span>&nbsp;&nbsp;@Model.Employee.Employee_Name
+            </h4>
+
+        </div>
+
+        <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "Employee")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+
+    </div>
+
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form id="frmEmployeeBranchMapping">
+        <input type="hidden" class="form-control" id="hdn_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id" />
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Branch</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @for (int i = 0; i < Model.List_Branch.Count; i++)
+                            {
+                                var map_Branch = Model.Map_Branches.Where(a => a.Branch_ID == Model.List_Branch[i].Branch_ID).SingleOrDefault();
+                                <tr>
+                                    <td>@Model.List_Branch[i].Branch_Name</td>
+                                    <td>
+                                        <input type="hidden" class="form-control" id="hdn_BranchId" name="List_Branch[@i].Branch_ID" value="@Model.List_Branch[i].Branch_ID" />
+
+                                        @if (map_Branch != null && map_Branch.Branch_ID == Model.List_Branch[i].Branch_ID)
+                                        {
+                                            if (map_Branch.IsActive == 1)
+                                            {
+                                                <label class="switch">
+                                                    <input checked name="List_Branch[@i].IsActive" value="1" type="checkbox" id="Flag">
+                                                    <span></span>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="switch">
+                                                    <input name="List_Branch[@i].IsActive" value="0" type="checkbox" id="Flag">
+                                                    <span></span>
+                                                </label>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <label class="switch">
+                                                <input name="List_Branch[@i].IsActive" value="0" type="checkbox" id="Flag">
+                                                <span></span>
+                                            </label>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-group">
+                    <button type="button" id="btnSave" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-danger active">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+
+    </form>
+</div>
+

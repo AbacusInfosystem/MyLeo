@@ -1,0 +1,205 @@
+﻿@model MyLeoRetailer.Models.GiftVoucherViewModel
+
+@{
+    ViewBag.Title = "Print";
+}
+
+<script src="~/Scripts/Modules/PrintThis.js"></script>
+<script src="~/Scripts/Modules/GiftVoucher/giftvoucher_event.js"></script>@*Added by vinod mane on 10/10/2016*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#btnPrint').click(function () {
+            $('#Div_Print').printThis();
+        //});
+    });
+</script>
+
+
+<div class="content-wrapper">
+
+    <div class="container-fluid">
+
+        <form id="frmGiftVoucherPrint">
+            <section class="content">
+                <div class="row">
+                    <div id="divScrollContainer" class="col-md-12">
+                        @*@{Html.RenderPartial("_ServerMessage");}*@
+
+                        @*<h3 class="view_invoice_body_header">
+                            Sales Invoice
+                        </h3>*@
+
+                        <div class="box box-default" id="Div_Print">
+                            <div class="box-body">
+                                <input type="hidden" id="hdn_GiftVoucherId" value="@Model.GiftVoucher.Gift_Voucher_Id" name="GiftVoucher.Gift_Voucher_Id" />
+                                
+
+                                <!-- title row -->
+                                <div class="row">
+
+                                    <div class="col-md-4 invoice-col">
+                                        <div class="form-group">
+                                            <label for="txtStore_Name" style="color: #333" class="">Store Name</label>
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-3 invoice-col">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-5 invoice-col" style="text-align:right">
+                                        <div class="form-group">
+                                            <label for="txtTel" style="color: #333" class="">Tel : 022 42778421</label>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div>
+
+
+                                @*<div class="row">
+
+                                    <div class="col-md-12 invoice-col" style="text-align:center; width:1200px;">
+                                        <div class="form-group">
+                                            <label for="txtStore_Address1" style="color: #333" class="">Store Address1</label>
+
+                                            <br />
+
+                                            <label for="txtStore_Address2" style="color: #333" class="">Store Address2</label>
+                                            <br />
+
+
+                                        </div>
+                                    </div>
+
+                                </div>*@
+
+                                <div class="row">
+                                    <div class="col-md-10 invoice-col" style="text-align:center; width:1200px;">
+                                        <h3 class="view_invoice_body_header">
+                                            Gift Voucher
+                                        </h3>
+                                        @*<label for="txtGift_Voucher" style="color: #333" class="">Gift Voucher</label>*@
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-md-4 invoice-col">
+                                        <div class="form-group">
+                                            <label for="txtGift_Voucher_No" style="color: #333" class="">Gift Voucher No : </label>
+                                            <label for="txtGift_Voucher_No" style="color: #333" class="">@Model.GiftVoucher.Gift_Voucher_No</label>
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-6 invoice-col">
+                                        <div class="form-group">
+                                           
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-sm-2 invoice-col" style="text-align:right">
+                                        <div class="form-group">
+                                            <label for="txtVoucher_Date" style="color: #333" class="">Voucher Date:</label>
+                                            <label for="txtVoucher_Date" style="color: #333" class="">@((Model.GiftVoucher.Gift_Voucher_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Date.ToString("MM-dd-yyyy")))</label>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-4 invoice-col">
+                                        <div class="form-group">
+
+                                            <label for="txtPerson_Name" style="color: #333" class="">Person Name:</label>
+                                            <label for="txtPerson_Name" style="color: #333" class="">@Model.GiftVoucher.Person_Name</label>
+                                            
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-6 invoice-col">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div><!-- /.col -->
+
+                                    <div class="col-md-2 invoice-col" style="text-align:right;">
+                                        <div class="form-group">
+                                            <label for="txtVoucher_Expiry_Date" style="color: #333" class="">Voucher Expiry Date:</label>
+                                            <label for="txtVoucher_Expiry_Date" style="color: #333" class="">@((Model.GiftVoucher.Gift_Voucher_Expiry_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Expiry_Date.ToString("MM-dd-yyyy")))</label>
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 invoice-col">
+                                        <div class="form-group">
+
+                                            <label for="txtVoucher_Amount" style="color: #333" class="">Voucher Amount:</label>
+                                            <label for="txtVoucher_Amount" style="color: #333" class="">@Model.GiftVoucher.Gift_Voucher_Amount</label>
+
+                                        </div>
+                                    </div><!-- /.col -->
+                                </div>
+
+                                @*<h2 class="page-header div-border-bottom"></h2>*@
+
+                                <!-- Table row -->
+                                @*<div class="row">
+                                    <div class="col-xs-12 table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th width="10%">Sr.No.</th>
+                                                    <th width="20%">Bracode</th>
+                                                    <th width="15%">Description</th>
+                                                    <th width="10%">Item Code</th>
+                                                    <th width="10%">Sixe</th>
+                                                    <th width="10%">Qty.</th>
+                                                    <th width="15%">Rate</th>
+                                                    <th width="20%">Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    <tr>
+                                                        <th colspan="7" style="text-align: right;"> Total : </th>
+                                                        <td style="text-align: right;"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th colspan="8" style="text-align: left;">Salesman Name : </th>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>*@
+                                <!-- this row will not appear when printing -->
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="col-md-2">
+                                    <button type="button" id="btnPrint" class="btn btn-default bg-orange">Print</button>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a class="btn btn-default bg-blue" role="button" id="btnBack" href="@Url.Action("Index", "GiftVoucher")">Back</a>
+                                    @*<button type="button" id="btnPrint" class="btn btn-default bg-orange">Print</button>*@
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+</div>
+
+
+

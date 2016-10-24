@@ -1,0 +1,443 @@
+﻿@model MyLeoRetailer.Models.SalesReturnViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
+
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
+<script src="~/Scripts/Modules/SalesReturn/salesReturn_validation.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/SalesReturn/salesreturn_events.js"></script>
+<script src="~/Scripts/Modules/SalesReturn/salesreturn_methods.js"></script>
+
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
+
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+
+    .input-group-addon {
+        background-color: #33414e !important;
+        color: #fff !important;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Sales Return</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="col-md-12">
+            <div class="page-title">
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Return</h2>
+            </div>
+            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "SalesReturn")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <form id="frmSalesReturn">
+
+
+            <input type="hidden" id="hdnCreateCustomerFlag" name="SalesReturn.CreateCustomerFlag">
+
+            <div class="modal fade" id="myModalAddCustomer" role="dialog" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="AddCustomerLabel">Add Customer Details</h4>
+                        </div>
+                        <div class="modal-body" id="div_Parent_Modal_Body">
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center ">
+                                    <h5 class="">Please Create Customer for Entered Mobile No.</h5>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12" style="text-align:center ">
+                                    <a class="btn btn-success active" role="button" id="btnCustomer" @*href="@Url.Action("Index", "Customer")"*@>Create Customer</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-default">
+
+                <div class="box-body">
+
+                    <div class="row">
+
+                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+
+                            <div class="block">
+
+                                <input type="hidden" class="form-control input-sm" name="SalesReturn.Sales_Return_Id" id="hdf_SalesReturn_Id">
+
+                                @*<div class="col-md-3">
+                                        <div class="form-group">
+                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">GR No.</span>
+                                            <input type="text" class="form-control input-sm" name="SalesReturn.Sales_Return_No" id="txtReturn_No" placeholder="Enter GR No" />
+                                        </div>
+                                    </div>*@
+
+
+                                <div class="col-md-3">
+
+                                    @{
+                                        LoginInfo Cookies = new LoginInfo();
+                                        Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                                        <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                    }
+
+                                    <div class="form-group auto-complete">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                                        @*<div class="input-group">
+                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesReturn.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
+                                            <span class="input-group-addon">
+                                                <a href="#" class="text-muted" id="hrefDealer" role="button">
+                                                    <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
+                                            <input type="hidden" id="hdnBranchID" value="@Model.SalesReturn.Branch_Id" name="SalesReturn.Branch_Id" class="auto-complete-value" />
+                                            <input type="hidden" id="hdnBranchName" value="" name="SalesReturn.Branch_Name" class="auto-complete-label" />
+                                        </div>*@
+
+                                        <div class="input-group">
+                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesReturn.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
+                                            <span class="input-group-addon">
+                                                <a href="#" class="text-muted" id="hrefDealer" role="button">
+                                                    <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
+                                            <input type="hidden" id="hdnBranchID" value="@Model.SalesReturn.Branch_Id" name="SalesReturn.Branch_Id" class="auto-complete-value" />
+                                            <input type="hidden" id="hdnBranchName" value="" name="SalesReturn.Branch_Name" class="auto-complete-label" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-3">
+                                        <div class="form-group">
+                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">GR Date.</span>
+                                            <input type="text" class="form-control input-sm" name="SalesReturn.SalesReturn_Date" id="dtpReturn_Date" placeholder="Enter GR Date" />
+                                        </div>
+                                    </div>*@
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">GR date</span>
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpReturn_Date" name="SalesReturn.Sales_Return_Date" value="@((Model.SalesReturn.Sales_Return_Date == DateTime.MinValue ? "" : Model.SalesReturn.Sales_Return_Date.ToString("MM-dd-yyyy")))" readonly />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile No.</span>
+                                        <input type="text" class="mask_mobile_no form-control input-sm editor-field focus" name="SalesReturn.Mobile" id="txtMobileNo" value="@Model.SalesReturn.Mobile" placeholder="Enter Mobile No" @*data-toggle="modal" data-target="#myModalAddCustomer"*@ />
+                                        <input type="hidden" id="hdnMobileNo" value="@Model.SalesReturn.Mobile1" name="SalesReturn.Mobile1">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Customer Name.</span>
+                                        <input type="text" class="form-control input-sm" readonly name="SalesReturn.Customer_Name" id="txtCustomer_Name" @*value="@Model.SalesReturn.Customer_Name"*@ placeholder="Customer Name" />
+                                        <input type="hidden" name="SalesReturn.Customer_Id" value="@Model.SalesReturn.Customer_Id" id="hdnCustomer_ID" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px; margin-left:1435px">
+                            <div class="block">
+                                <div class="block" style="margin-top:0px; ">
+                                    <div class="btn-group">
+                                        <a href="javascript:AddSalesReturnDetails();" id="btnAddInputRow" class="btn btn-success active">
+                                            <i class="mdi mdi-plus"></i>
+                                            Add New Row
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                            <input type="hidden" id="hdnRowIdspecific" value="0" />
+                            <table class="table table-bordered table-hover" id="tblSalesReturnItems">
+                                <thead>
+                                    <tr>
+                                        <th>Invoice No.</th>
+                                        <th>SKU No</th>
+                                        <th>Article No</th>
+                                        <th>Brand</th>
+                                        <th>Category</th>
+                                        <th>Sub Category</th>
+                                        <th>Size</th>
+                                        <th>Colour</th>
+                                        <th>Quantity</th>
+                                        <th>MRP</th>
+                                        <th>Discount Percentage</th>
+                                        <th>Discount Amount</th>
+                                        <th>Amount</th>
+                                        <th>Return Reason</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="SalesReturnItemRow_0">
+
+                                        @*<td>
+                                                <input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].Sales_Invoice_No" id="textInvoice_No_0" placeholder="Invoice No">
+                                                <input type="hidden" name="SalesReturn.Sales_Invoice_Id" value="@Model.SalesReturn.Sales_Invoice_Id" id="hdnSalesInvoice_ID" />
+                                            </td>*@
+
+                                        <td>
+                                            <div class="form-group auto-complete">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" name="SaleReturnItemList[0].Sales_Invoice_No" id="textSales_Invoice_No_0" placeholder="Enter invoice to search" value="" data-table="Sales_Invoice" data-col="Sales_Invoice_Id,Sales_Invoice_No" data-headernames="Sales Invoice">
+                                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                                    <input type="hidden" id="hdnSalesInvoiceID_0" value="" name="SaleReturnItemList[0].Sales_Invoice_Id" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnSalesInvoiceNo_0" value="" name="SaleReturnItemList[0].Sales_Invoice_No" class="auto-complete-label" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Return_Items_By_SKU_Code(0);">*@
+
+                                            <div class="form-group auto-complete">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Sales_Return_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Sales_Invoice_Item" data-col="Sales_Invoice_Id,SKU_Code" data-headernames="SKU Code" name="SKU_Code_0" data-param="hdnSalesInvoiceID_0" data-field="Sales_Invoice_Id" />
+                                                    <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                                    <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnSKU_No_0" value="" name="SaleReturnItemList[0].SKU_Code" class="auto-complete-label" />
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleReturnItemList[0].Article_No" id="textArticle_No_0" readonly placeholder="Article No">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].Brand" id="textBrand_0" readonly placeholder="Brand">
+
+                                            <input type="hidden" name="SaleReturnItemList[0].Brand_Id" id="hdnBrand_Id_0" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].Category" id="textCategory_0" readonly placeholder="Category">
+                                            <input type="hidden" name="SaleReturnItemList[0].Category_Id" id="hdnCategory_Id_0" />
+
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].SubCategory" id="textSub_Category_0" readonly placeholder="Sub Category">
+                                            <input type="hidden" name="SaleReturnItemList[0].SubCategory_Id" id="hdnSubCategory_Id_0" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:50px" name="SaleReturnItemList[0].Size_Name" id="textSize_Name_0" readonly placeholder="Size">
+                                            <input type="hidden" name="SaleReturnItemList[0].Size_Id" id="hdnSize_Id_0" />
+
+                                        </td>
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Colour_Name" id="textColour_Name_0" readonly placeholder="Colour">
+                                            <input type="hidden" name="SaleReturnItemList[0].Colour_Id" id="hdnColour_Id_0" />
+
+                                        </td>
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Quantity" id="textQuantity_0" value="" placeholder="Quantity" onblur="javascript: CalculateTotal();" maxlength="10">
+                                            <input type="hidden" id="hdnQuantity" value="@Model.SalesReturn.Quantity1" name="SalesInvoice.Quantity1">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:50px" name="SaleReturnItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:70px" name="SaleReturnItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %" maxlength="10">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:70px" name="SaleReturnItemList[0].SalesReturn_Discount_Amount" id="textSalesReturn_Discount_Amount_0" readonly placeholder="D Amt">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Amount" id="textAmount_0" readonly placeholder="Amt">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Return_Reason" id="textReturn_Reason_0" placeholder="Return Reason" maxlength="200">
+                                        </td>
+                                        <td>
+                                            <button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript: DeleteSalesReturnDetailsData(0)'>Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+
+
+                    <div class="row">
+                        <div class="col-xs-12 table-responsive">
+                            <table id="tblSalesReturnItems">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td width="150px"></td>
+                                        <td width="150px"></td>
+                                        <td width="70px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="80px"></td>
+                                        <td>
+                                            <label>Total Quantity</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Quantity" readonly id="textTotalQuantity_0">
+                                        </td>
+                                        <td width="40px"></td>
+                                        <td width="40px"></td>
+
+                                        <td>
+                                            <label>Sales Return Amount</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Gross_Amount" readonly id="textGrossAmount_0">
+                                        </td>
+
+                                        <td width="200px"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td width="150px"></td>
+                                        <td width="150px"></td>
+                                        <td width="70px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="80px"></td>
+                                        <td>
+                                            <label>Cash Paid Amount  </label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0" maxlength="10">
+                                        </td>
+                                        <td width="40px"></td>
+                                        <td width="40px"></td>
+
+                                        <td>
+                                            <label>Credit Note Amount</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Credit_Note" readonly id="textTotalAmountReturnByCreditNote_0" maxlength="10">
+                                        </td>
+
+                                        <td width="200px"></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!-- /.col -->
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+                            <div class="btn-group">
+                                <button type="button" id="btnSaveSalesReturn" class="btn btn-success active">Save</button>
+                                <a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesReturn")">Reset </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            @*End of Main Content*@
+
+        </form>
+    </div>
+</div>

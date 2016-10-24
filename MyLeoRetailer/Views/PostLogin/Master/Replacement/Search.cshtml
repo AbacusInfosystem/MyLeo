@@ -1,0 +1,78 @@
+﻿@model MyLeoRetailer.Models.ReplacementViewModel
+
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Replacement/search_Replacement_event.js"></script>
+<script src="~/Scripts/Modules/Replacement/search_Replacement_method.js"></script>
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Function Module</a></li>
+    <li class="active">Replacement</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Replacement</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmReplacement">
+
+                    <div class="row">
+
+                        <div class="col-md-5">
+
+                            <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Replacement No.</span>
+                                <input type="text" class="form-control" name="Filter.Replacement_No" placeholder="Enter Replacement No to search." />
+                                <input type="hidden" id="hdnReplacementId" name="Replacement.Replacement_Id" value="@Model.Replacement.Replacement_Id" />
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-7" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                            <div class="btn-group">
+                                <button role="button" class="btn btn-success active" value="Create" id="btnCreateReplacement">Create</button>
+                             @*   <button class="btn btn-danger active" value="Edit" id="btnEditPurchaseInvoice">Edit</button>*@
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divReplacementPager">
+
+
+        </div>
+
+    </div>
+
+</div>

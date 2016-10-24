@@ -1,0 +1,141 @@
+﻿@model MyLeoRetailer.Models.GiftVoucherViewModel
+@using MyLeoRetailerInfo.Common;
+
+<script src="~/Scripts/Modules/GiftVoucher/giftvoucher_event.js"></script>
+<script src="~/Scripts/Modules/GiftVoucher/giftvoucher_methode.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/GiftVoucher/GiftVoucher_validation.js"></script>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">GiftVoucher Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="col-md-12">
+            <div class="page-title">
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Gift Voucher Management</h2>
+            </div>
+            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "GiftVoucher")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+            </div>
+        </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+    <form role="form" id="frmGiftVoucher">
+        <div class="row">
+
+                <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 325px;">
+
+                    <div class="block">
+                        <h4 style="margin-top: 0px;">Voucher information.</h4>
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher no</span>
+                            <input type="text" class="form-control" placeholder="Enter Gift Voucher No." name="GiftVoucher.Gift_Voucher_No" value="@Model.GiftVoucher.Gift_Voucher_No" maxlength="20" />
+                            <input type="hidden" class="form-control" id="hdn_GiftVoucherId" name="GiftVoucher.Gift_Voucher_Id" value="@Model.GiftVoucher.Gift_Voucher_Id" />
+                        </div>
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Person name</span>
+                            <input type="text" class="form-control" placeholder="Enter person name." name="GiftVoucher.Person_Name" value="@Model.GiftVoucher.Person_Name" maxlength="100"/>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 325px;">
+
+                    <div class="block">
+                        <h4 style="margin-top: 0px;">Date detail.</h4>
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher date.</span>
+                            <div class="input-group date"  data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtVoucherDate" placeholder="Voucher date." name="GiftVoucher.Gift_Voucher_Date" value="@((Model.GiftVoucher.Gift_Voucher_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Date.ToString("MM-dd-yyyy")))" readonly /> @*reado*@
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                     
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher expiry date</span>
+                            <div class="input-group date"  data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" id="txtVoucherExpiryDate" placeholder="Voucher expiry date." name="GiftVoucher.Gift_Voucher_Expiry_Date" value="@((Model.GiftVoucher.Gift_Voucher_Expiry_Date == DateTime.MinValue ? "" : Model.GiftVoucher.Gift_Voucher_Expiry_Date.ToString("MM-dd-yyyy")))" readonly />@*reado*@
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>  
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 325px;">
+
+                    <div class="block">
+                        <h4 style="margin-top: 0px;">Amount detail.</h4>
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Voucher amount</span>
+                            <input type="text" class="form-control" placeholder="Enter voucher amount." name="GiftVoucher.Gift_Voucher_Amount" value="@(Model.GiftVoucher.Gift_Voucher_Amount == 0 ? "" : Model.GiftVoucher.Gift_Voucher_Amount.ToString())" maxlength="10" />
+                        </div>
+
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
+                            <select class="form-control " placeholder="Select payment mode." id="mode" name="GiftVoucher.Payment_Mode" value="@Model.GiftVoucher.Payment_Mode">
+                                @foreach (var item in LookupInfo.Get_GiftVoucher_Payment_Mode())
+                                {
+                                    if (Model.GiftVoucher.Payment_Mode == item.Key)
+                                    {
+                                        <option value="@item.Key" selected="selected">@item.Value</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Key">@item.Value</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="divBankName">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank name</span>
+                            <input type="text" class="form-control" placeholder="Enter bank name." id="bankname" name="GiftVoucher.Bank_Name" value="@Model.GiftVoucher.Bank_Name"  maxlength="50"/>
+                        </div>
+
+                        <div class="form-group" id="divCreditCardNo">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit-Card no</span>
+                            <input type="text" class="form-control" placeholder="Enter credit card number." id="creditcardno" name="GiftVoucher.Credit_Card_No" value="@Model.GiftVoucher.Credit_Card_No" maxlength="20" />
+                        </div>
+                    </div>
+
+                </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+                <div class="btn-group">
+                    <button class="btn btn-success active" type="button" id="btnGiftVoucherSave">Save</button>
+                    <button type="reset"  class="btn btn-danger active" id="btnCancel">Reset</button>
+                    <button class="btn btn-twitter active" type="button" id="btnGiftVoucherPrint">Print</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+
+</div>

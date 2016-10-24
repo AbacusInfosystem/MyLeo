@@ -1,0 +1,315 @@
+﻿@model MyLeoRetailer.Models.CustomerViewModel
+@using MyLeoRetailerInfo.Common;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Customer/customer_events.js"></script>
+<script src="~/Scripts/Modules/Customer/customer_methods.js"></script>
+<script src="~/Scripts/Modules/Customer/customer_validation.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Customer Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="col-md-12">
+            <div class="page-title">
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Customer Management</h2>
+            </div>
+            <br />
+            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "Customer")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+            </div>
+        </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form role="form" id="frmCustomer">
+
+        <input type="hidden" id="hdnCreateCustomerFlag" name="Customer.CreateCustomerFlag" value="@Model.Customer.CreateCustomerFlag.ToString()">
+
+
+
+        <input type="hidden" id="hdnMobile" name="Customer.Mobile">
+
+        <input type="hidden" id="hdnInvoiceDate" name="Customer.Invoice_Date">
+
+        <div class="row">
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
+
+                <div class="block" style="border-bottom: 1px solid #DDD; padding-bottom:20px;margin-bottom:0px; ">
+
+                    <h4 style="margin-top: 0px;">Search customer.</h4>
+                    
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no.</span>
+                        <input class="mask_mobile_no form-control" placeholder="Enter mobile number." name="Customer.Mobile" id="txtMobileNo" value="@Model.Customer.Mobile"  data-toggle="modal" data-target="#myModalCustomer" />
+                        <input type="hidden" id="hdnMobileNo" value="@Model.Customer.Mobile">
+                     </div>
+
+                </div>
+                <div class="block">
+
+                    <h4 style="margin-top: 15px;">Primary information.</h4>
+                    
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">First name.</span>
+                        <input type="text" class="form-control" placeholder="Enter customer first name." name="Customer.First_Name" value="@Model.Customer.First_Name" id="txtFirstName" maxlength="48" />
+                        <input type="hidden" id="hdn_CustomerID" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id" />
+                        <input type="hidden" name="Customer.Customer_Name" value="@Model.Customer.Customer_Name" />
+                        <input type="hidden" id="hdnFirstName" value="@Model.Customer.Customer_Name" />@*Added by vinod mane on 28/09/2016*@
+                        @*<input type="hidden" name="Customer.IsActive" value="@Model.Customer.IsActive" />*@ @*Commented By Vinod Mane on 23/09/2016*@
+
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Last name.</span>
+                        <input type="text" class="form-control" placeholder="Enter customer last name." name="Customer.Last_Name" value="@Model.Customer.Last_Name" id="txtLastName" maxlength="48" />
+                        <input type="hidden" id="hdnLast_Name" value="@Model.Customer.Last_Name"/> @*Added by vinod mane on 28/09/2016*@
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Gender.</span>
+                        <select class="form-control select" placeholder="Select gender." name="Customer.Customer_Gender" value="@Model.Customer.Customer_Gender">
+                            <option selected="0">Select Gender</option>
+                            @foreach (var item in LookupInfo.Get_Gender_Types())
+                            {
+                                if (Model.Customer.Customer_Gender == item.Key)
+                                {
+                                    <option value="@item.Key" selected="selected">@item.Value</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Key">@item.Value</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy" >
+                            <input type="text" class="form-control datepicker" id="txt_DOB" name="Customer.Customer_DOB" value="@((Model.Customer.Customer_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Customer date of birth" />  
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div> 
+        </div>
+    </div>
+
+    <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height:550px;">
+
+        <div class="block">
+            <h4 style="margin-top: 0px;">Billing address.</h4>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address.</span>
+                <textarea class="form-control" rows="5" placeholder="Billing address." name="Customer.Customer_Billing_Address" maxlength="250">@Model.Customer.Customer_Billing_Address</textarea>
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing city.</span>
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Billing_City" value="@Model.Customer.Customer_Billing_City" maxlength="50" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing state.</span>
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Billing_State" value="@Model.Customer.Customer_Billing_State" maxlength="50" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing country.</span>
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Billing_Country" value="@Model.Customer.Customer_Billing_Country" maxlength="50" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing pincode.</span>
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
+
+        <div class="block">
+            <h4 style="margin-top: 0px;">Shipping address.</h4>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping address.</span>
+                <textarea class="form-control" rows="5" placeholder="Shipping address." name="Customer.Customer_Shipping_Address" maxlength="250">@Model.Customer.Customer_Shipping_Address</textarea>
+
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping city.</span>
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Shipping_City" value="@Model.Customer.Customer_Shipping_City" maxlength="50" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping state.</span>
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Shipping_State" value="@Model.Customer.Customer_Shipping_State" maxlength="50" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping country.</span>
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Shipping_Country" value="@Model.Customer.Customer_Shipping_Country" maxlength="50" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping pincode.</span>
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Shipping_Pincode" value="@(Model.Customer.Customer_Shipping_Pincode == 0 ? "" : Model.Customer.Customer_Shipping_Pincode.ToString())" maxlength="6" />
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-2" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
+
+        <div class="block">
+            <h4 style="margin-top: 0px;">Communication detail.</h4>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no1.</span>
+                <input type="text" class="mask_mobile_no form-control" placeholder="Enter mobile number 1." id="txtCustomer_Mobile1" name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1"  />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no2.</span>
+                <input type="text" class="mask_mobile_no form-control" placeholder="Enter mobile number 2." id="txtCustomer_Mobile2" name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2"  />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
+                <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 1." id="txtCustomer_Landline1" name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1"  />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
+                <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 2." id="txtCustomer_Landline2" name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2"  />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 1.</span>
+                <input type="text" class="form-control" placeholder="Enter email address 1." id="txtCustomer_Email1" name="Customer.Customer_Email1" value="@Model.Customer.Customer_Email1" maxlength="50" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Email 2.</span>
+                <input type="text" class="form-control" placeholder="Enter email address 2." id="txtCustomer_Email2" name="Customer.Customer_Email2" value="@Model.Customer.Customer_Email2" maxlength="50" />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 550px;">
+
+        <div class="block">
+
+            <h4 style="margin-top: 0px;">Secondary information.</h4>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Spouse name.</span>
+                <input type="text" class="form-control" placeholder="Enter spouse name." name="Customer.Customer_Spouse_Name" value="@Model.Customer.Customer_Spouse_Name" maxlength="50"/>
+
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Spouse date of birth.</span>
+                <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
+                <input type="text" class="form-control datepicker" id="dtp_Spousebirth" name="Customer.Customer_Spouse_DOB" value="@((Model.Customer.Customer_Spouse_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Spouse_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Spouse date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Wedding annniversary date.</span>
+                        <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
+                        <input type="text" class="form-control datepicker" id="dtp_Weddingannniv" name="Customer.Customer_Wedding_Anniversary" value="@((Model.Customer.Customer_Wedding_Anniversary == DateTime.MinValue ? "" : Model.Customer.Customer_Wedding_Anniversary.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Wedding Anniversary date" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 1 name.</span>
+                        <input type="text" class="form-control" placeholder="Enter child 1 name." name="Customer.Customer_Child1_Name" value="@Model.Customer.Customer_Child1_Name" maxlength="50"/>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 1 date of birth.</span>
+                        <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
+                        <input type="text" class="form-control datepicker" id="dtp_Child1_DOB" name="Customer.Customer_Child1_DOB" value="@((Model.Customer.Customer_Child1_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child1_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Child 1 date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 2 name.</span>
+                        <input type="text" class="form-control" placeholder="Enter child 2 name." name="Customer.Customer_Child2_Name" value="@Model.Customer.Customer_Child2_Name" maxlength="50" />
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Child 2 date of birth.</span>
+                        <div class="input-group date" id="dp-2" data-date-format="MM-dd-yyyy">
+                            <input type="text" class="form-control datepicker" id="dtp_Child2_DOB" name="Customer.Customer_Child2_DOB" value="@((Model.Customer.Customer_Child2_DOB == DateTime.MinValue ? "" : Model.Customer.Customer_Child2_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Child 2 date of birth" />@*Change by Vinod Mane on 22/09/2016 "MM-dd-yyyy" -->"MM/dd/yyyy"*@
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success active" id="btnSaveCustomer">Save</button>
+                    <button type="reset" class="btn btn-danger active" id="btnCancel">Reset</button>
+                    
+                    @*<a class="btn btn-danger active" id="btnCancel" role="button">Cancel </a>*@@*Added by vinod Mane on 22/09/2016  href="@Url.Action("Search", "Customer")"*@
+                </div> 
+               
+                    
+               
+                <div class="form-group" style="margin-bottom: 5px; float: right; padding-right: 20px;">
+                    <div>
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>@* Added by Vinod mane on 19/09/2016*@
+                    </div>
+                    <label class="switch">
+                        @if (Model.Customer.IsActive == 0)
+                        {
+                            <input value="@Model.Customer.IsActive" name="Customer.IsActive" type="checkbox" id="Flag">
+                        }
+                        else
+                        {
+                            <input value="@Model.Customer.IsActive" name="Customer.IsActive" checked="checked" type="checkbox" id="Flag">
+                        }
+                        @*<input checked="" id="Flag" value="0" type="checkbox">*@
+                        <span></span>
+                    </label>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+    
+
+</div>
+

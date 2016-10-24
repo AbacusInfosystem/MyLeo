@@ -1,0 +1,123 @@
+﻿@model MyLeoRetailer.Models.SalesInvoiceViewModel
+
+
+@{
+    ViewBag.Title = "Search";
+}
+
+
+<script src="/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/SalesOrder/salesorder_search_events.js"></script>
+<script src="~/Scripts/Modules/SalesOrder/salesorder_search_methods.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li class="active">Sales Invoice Report</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Invoice Report</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+
+
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmSearchSalesOrderReport">
+
+                    <input type="hidden" id="hdnFlag" name="SalesInvoice.Flag" @*value="@Model.SalesInvoice.Flag"*@>
+
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+                        <div class="row">
+
+                            <div class="col-md-3" id="divBranch">
+
+                                <div class="form-group auto-complete">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesInvoice.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="@Model.SalesInvoice.Branch_Name" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branch">
+                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                        <input type="hidden" id="hdnBranchID" value="" name="Filter.Branch_Id" class="auto-complete-value" />
+                                        <input type="hidden" id="hdnBranchName" value="" name="" class="auto-complete-label" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">From date</span>
+
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                        <input type="text" class="form-control datepicker" id="dtpFrom_Date" name="Filter.From_Date" value="@((Model.Filter.From_Date == DateTime.MinValue ? "" : Model.Filter.From_Date.ToString("MM-dd-yyyy")))"  readonly />
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">To date</span>
+
+                                    <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                        <input type="text" class="form-control datepicker" id="dtpTo_Date" name="Filter.To_Date" value="@((Model.Filter.To_Date == DateTime.MinValue ? "" : Model.Filter.To_Date.ToString("MM-dd-yyyy")))" readonly />
+                                        <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success active" value="Search" id="btnSearchSales">Search</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+
+        </div>
+
+
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divSalesOrderPager">
+
+        </div>
+
+    </div>
+
+</div>

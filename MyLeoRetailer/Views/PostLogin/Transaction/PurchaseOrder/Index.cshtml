@@ -1,0 +1,491 @@
+﻿@model MyLeoRetailer.Models.PurchaseOrderViewModel
+
+<script src="~/Scripts/Modules/PurchaseOrder/purchaseorder_events.js"></script>
+<script src="~/Scripts/Modules/PurchaseOrder/purchaseorder_methods.js"></script>
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/PurchaseOrder/purchaseorder_validation.js"></script>
+<style>
+    .input-group-addon {
+        background-color: #33414e !important;
+        color: #fff !important;
+    }
+</style>
+
+
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Function Module</a></li>
+    <li class="active">Purchase Order Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="col-md-12">
+            <div class="page-title">
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purhase Order Management</h2>
+            </div>
+            <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "PurchaseOrder")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form role="form" id="frmPurchaseOrder">
+
+        <div class="row">
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
+
+                <div class="block">
+
+                    <input type="hidden" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_Id" id="hdf_Purchase_Order_Id" value="@Model.PurchaseOrder.Purchase_Order_Id" />
+
+                    <h4 style="margin-top: 0px;">Primary information.</h4>
+
+                    @*<div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order No.</span>
+                            <input type="text" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_No" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Purchase_Order_No" placeholder="Enter purchase order no." />
+                        </div>*@
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Order Date.</span>
+                        @if (Model.PurchaseOrder.Purchase_Order_Date != DateTime.MinValue)
+                        {
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@Model.PurchaseOrder.Purchase_Order_Date.ToShortDateString()" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@DateTime.Now.ToShortDateString()" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Supply time period.</h4>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Start supply date.</span>
+                        @if (Model.PurchaseOrder.Start_Supply_Date != DateTime.MinValue)
+                        {
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@Model.PurchaseOrder.Start_Supply_Date.ToShortDateString()" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Stop supply date.</span>
+                        @if (Model.PurchaseOrder.Stop_Supply_Date != DateTime.MinValue)
+                        {
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@Model.PurchaseOrder.Stop_Supply_Date.ToShortDateString()" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                <input type="text" class="form-control datepicker" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@DateTime.Now.ToShortDateString()" />
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Vendor / Transporter details.</h4>
+
+                    <input type="hidden" id="hdf_Vendor_Id" />
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor name.</span>
+                        <select class="form-control select" name="PurchaseOrder.Vendor_Id" onchange="Set_Vendor_Id(this.value)">
+                            <option value="">Select Vendor</option>
+                            @foreach (var item in Model.PurchaseOrder.Vendors)
+                            {
+                                if (Model.PurchaseOrder.Vendor_Id == item.Vendor_Id)
+                                {
+                                    <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Agent name.</span>
+                        <select class="form-control select" name="PurchaseOrder.Agent_Id">
+                            <option value="">Select Agent</option>
+                            @foreach (var item in Model.PurchaseOrder.Agents)
+                            {
+                                if (Model.PurchaseOrder.Agent_Id == item.Vendor_Id)
+                                {
+                                    <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Transporter name.</span>
+                        <select class="form-control select" name="PurchaseOrder.Transporter_Id">
+                            <option value="">Select Transporter</option>
+                            @foreach (var item in Model.PurchaseOrder.Transporters)
+                            {
+                                if (Model.PurchaseOrder.Transporter_Id == item.Vendor_Id)
+                                {
+                                    <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 310px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Shipping details.</h4>
+
+                    <div class="form-group">
+
+                        @*<textarea class="form-control" rows="5" placeholder="Shipping address."></textarea>*@
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping address.</span>
+                        <select class="form-control select" name="PurchaseOrder.Shipping_Address">
+                            <option value="">Select Location</option>
+                            @foreach (var item in Model.PurchaseOrder.Branches)
+                            {
+                                if (Model.PurchaseOrder.Shipping_Address == item.Branch_Name)
+                                {
+                                    <option value="@item.Branch_ID" selected="selected">@item.Branch_Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Branch_ID">@item.Branch_Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="block" style="margin-bottom: 0px; margin-top: 15px;">
+
+                    <h4 style="margin-top: 0px;">Add / Update Purchase order base details.</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
+                <input type="hidden" id="hdf_Article_No" />
+
+                <div class="block">
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Article No.</span>
+                        <select class="form-control" id="drpArticle_No" name="PurchaseOrder.Article_No" onchange="Set_Article_No(this.value)">
+                            <option value=" ">
+                                Select Article No.
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
+
+                <div class="block">
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Size group.</span>
+                        <select class="form-control " id="drpSize_Group" name="PurchaseOrder.Size_Group_Id" onchange="Show_Button()">
+                            <option value="">Select Size Group</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 90px;">
+
+                <div class="block" style="margin-top:26px;">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success active" id="btnAddSizesPurchaseOrder" disabled>Add Sizes</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3" hidden>
+
+                <div class="block">
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Color.</span>
+                        <select class="form-control select" id="drpColor" name="PurchaseOrder.Colour_Id">
+                            <option value="">Select Color</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3" hidden>
+
+                <div class="block">
+
+                    <div class="form-group">
+                        <select class="form-control " id="drpTemp_Center_Size">
+                            <option value="">Select Center Size</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+        <div class="row Details">
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
+
+                <div class="block">
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Brand.</span>
+                        <select class="form-control" id="drpBrand" name="PurchaseOrder.Brand_Id" @*onchange="clear_cat_subcat()"*@>
+                            <option value="">Select Brand</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Base rate.</span>
+                        @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Purchase_Price"  id="textPurchase_Price" placeholder="Enter base rate." />*@
+                        <input type="text" class="form-control" value="@(Model.PurchaseOrder.Purchase_Price == 0 ? "" : Model.PurchaseOrder.Purchase_Price.ToString())" maxlength="5" name="PurchaseOrder.Purchase_Price" id="textPurchase_Price" placeholder="Enter base rate." />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
+
+                <div class="block">
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Category.</span>
+                        <select class="form-control " id="drpCategory" name="PurchaseOrder.Category_Id" onchange="Set_Sub_Category_Drp_Id(this.value)">
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Size difference.</span>
+                        @*<input type="text" class="form-control" value="@Model.PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />*@
+                        <input type="text" class="form-control" maxlength="5" value="@(Model.PurchaseOrder.Size_Difference == 0 ? "" : Model.PurchaseOrder.Size_Difference.ToString())" name="PurchaseOrder.Size_Difference" id="textSize_Difference" placeholder="Enter size difference." />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
+
+                <div class="block">
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Subcategory.</span>
+                        <select class="form-control " id="drpSubCategory" name="PurchaseOrder.SubCategory_Id">
+                            <option value="">Select Sub Category</option>
+                        </select>
+                    </div>
+
+                    <div class="block" style="margin-top:20px;">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success active" id="btnAddDetailsPurchaseOrder">Add Details</button>
+                            <button type="button" class="btn btn-danger active" id="btnResetPurchaseOrder">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 180px;">
+
+                <div class="block">
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Center size.</span>
+                        <select class="form-control " id="drpCenter_Size" name="PurchaseOrder.Center_Size">
+                            <option value="">Select Center Size</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row PurchaseOrder scroll-bar">
+            <div class="col-md-12 table-responsive">
+
+                <table class="table table-bordered table-hover" style="width:3000px; max-width:none;" id="tblPurchaseOrderItems">
+                    <thead>
+                        <tr>
+                            <th style="width:100px;">Article No.</th>
+                            <th style="width:150px;">Color</th>
+                            <th style="width:150px;">Brand</th>
+                            <th style="width:150px;">Category</th>
+                            <th style="width:150px;">Subcategory</th>
+                            <th style="width:150px;">Size group</th>
+                            <th style="width:80px;">Start size</th>
+                            <th style="width:80px;">End size</th>
+                            <th style="width:80px;">1</th>
+                            <th style="width:80px;">2</th>
+                            <th style="width:80px;">3</th>
+                            <th style="width:80px;">4</th>
+                            <th style="width:80px;">5</th>
+                            <th style="width:80px;">6</th>
+                            <th style="width:80px;">7</th>
+                            <th style="width:80px;">8</th>
+                            <th style="width:80px;">9</th>
+                            <th style="width:80px;">10</th>
+                            <th style="width:80px;">11</th>
+                            <th style="width:80px;">12</th>
+                            <th style="width:80px;">13</th>
+                            <th style="width:80px;">14</th>
+                            <th style="width:80px;">15</th>
+                            <th style="width:100px;">Total qty.</th>
+                            <th style="width:100px;">Center size</th>
+                            <th style="width:100px;">Base rate</th>
+                            <th style="width:100px;">Size diff.</th>
+                            <th style="width:100px;">Total amt.</th>
+                            <th style="width:auto;">Comment</th>
+                            <th style="width:180px;">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+
+                <table class="table table-bordered table-hover" style="width:3000px; max-width:none;" id="tblPurchaseOrderCalculation">
+                    <tbody>
+                        <tr style="background: rgba(0, 0, 0, 0.02);">
+                            <td style="width:100px;"></td>
+                            <td style="width:150px;"></td>
+                            <td style="width:150px;"></td>
+                            <td style="width:150px;"></td>
+                            <td style="width:150px;"></td>
+                            <td style="width:150px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:80px;"></td>
+                            <td style="width:60px;"></td>
+                            <td style="text-align:right; width:100px;">Total quantity.</td>
+                            <td style="width:100px;">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;" id="tdTotalQuantity">0</span>
+                                <input type="hidden" id="hdnTotalQuantity" name="PurchaseOrder.Total_Quantity" />
+                            </td>
+                            <td style="width:100px;"></td>
+                            <td style="width:100px;"></td>
+                            <td style="text-align:right; width:100px;">Net Amount.</td>
+                            <td id="" style="width:100px;">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;" id="tdNetAmount">0</span>
+                                <input type="hidden" id="hdnNetAmount" name="PurchaseOrder.Net_Amount" />
+                            </td>
+                            <td style="width:auto;"></td>
+                            <td style="width:180px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <label id="hdnrecords_Validation" style="display:none"><span style="color:red" id="records_Message"></span></label>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); padding-left: 20px; padding-right: 0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success active" id="btnSavePurchaseOrder">Save</button>
+                    <button type="reset" class="btn btn-danger active" id="btnCanclePurchaseOrder">Reset</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,99 @@
+﻿@model MyLeoRetailer.Models.PreLogin.LoginViewModel
+@using MyLeoRetailerInfo.Common;
+
+@{
+    Layout = null;
+}
+
+<style>
+    .scroll-bar {
+        height: 142px;
+        overflow: auto;
+    }
+</style>
+
+<html class="body-full-height">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | MyLeo</title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link type="image/x-icon" href="favicon.ico" rel="icon">
+
+    <link rel="stylesheet" type="text/css" id="theme" href="../Content/Atlant/css/theme-default.css" />
+
+    <script type="text/javascript" src="../Content/Atlant/js/plugins/jquery/jquery.min.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/generic.custom.validation.js"></script>
+
+</head>
+
+<body>
+    <div class="login-container">
+        @{Html.RenderPartial("_Message");}
+        <div class="login-box animated fadeInDown" style="width: 700px;">
+            
+            <div class="login-logo"></div>
+            <div class="login-body">
+                <form id="frmLogin" method="post" class="form-horizontal">
+
+                    <div class="col-md-7">
+                        <div class="login-title" style="text-align: center;"><strong>Welcome</strong>, Please login</div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="text" id="txtUser_Name" name="Cookies.User_Name" placeholder="Username" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input type="password" id="txtPassword" name="Cookies.Password" placeholder="Password" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <a class="btn btn-link btn-block" href="#">Forgot your password?</a>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-info btn-block" type="button" id="btnLogin">Log In</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <div class="login-title">Select Branch</div>
+
+                        <div class="form-group scroll-bar"></div>
+
+                        <input type="hidden" id="hdnBranch_Ids" name="Cookies.Branch_Ids" value="" />
+                    </div>
+                    <label style="color: #b64645; display:none;" class="help-block pull-right" id="lblBranchError">User having no branches.</label>
+                    <label style="color: #b64645; display:none;" class="help-block pull-right" id="lblLoginError">Select at least one branche.</label>
+                </form>
+            </div>
+            <div class="login-footer">
+                <div class="pull-left">
+                    &copy; 2016 MyLeo
+                </div>
+                <div class="pull-right">
+                    <a href="#">About</a> |
+                    <a href="#">Privacy</a> |
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script src="~/Scripts/Modules/Login/login-event.js"></script>
+
+<script>
+
+</script>

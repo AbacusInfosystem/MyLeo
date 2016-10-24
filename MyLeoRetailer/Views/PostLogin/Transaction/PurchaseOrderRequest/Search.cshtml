@@ -1,0 +1,151 @@
+﻿@model MyLeoRetailer.Models.PurchaseOrderRequestViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/PurchaseOrderRequest/search_purchaseorderRequest_events.js"></script>
+<script src="~/Scripts/Modules/PurchaseOrderRequest/search_purchaseorderRequest_methods.js"></script>
+
+<!-- START BREADCRUMB -->
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Function Module</a></li>
+    <li class="active">Purchase Order Request Management</li>
+</ul>
+<!-- END BREADCRUMB -->
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Order Request Management</h2>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <div class="row">
+
+        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+
+            <div class="block">
+
+                <form role="form" id="frmPurchaseOrderRequest">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+
+                            <input type="hidden" id="hdnPurchaseOrderRequestId" name="Filter.Purchase_Order_Request_Id" value="@Model.Filter.Purchase_Order_Request_Id" />
+
+                            @*<div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
+                                <input type="text" class="form-control" name="Filter.Vendor_Id" placeholder="Select vendor name to search." />
+                                
+                            </div>*@
+
+                            <input type="hidden" class="form-control" name="Filter.Vendor_Id" />
+
+                            @*<div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
+                                <select class="form-control select" name="PurchaseOrderRequest.Vendor_Id" id="drpVendor_Id">
+                                    <option value="">Select Vendor</option>
+                                    @foreach (var item in Model.PurchaseOrderRequest.Vendors)
+                                    {
+                                        if (Model.Filter.Vendor_Id == item.Vendor_Id)
+                                        {
+                                            <option value="@item.Vendor_Id" selected="selected">@item.Vendor_Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.Vendor_Id">@item.Vendor_Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>*@
+
+                           
+
+                                @{
+                                    LoginInfo Cookies = new LoginInfo();
+                                    Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                }
+
+                                <div class="form-group auto-complete">
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control invoice-filter autocomplete-text" id="hdnVendor_Id" placeholder="Enter Vendor name to search" value="" data-table="Purchase_order_request" data-col="Vendor_Id,Vendor_Name" data-param="hdnBranchIDs" data-field="Branch_Id" data-headernames="Vendor name">
+                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                        <input type="hidden"  class="auto-complete-label" />
+                                        <input type="hidden" id="drpVendor_Id" name="Filter.Vendor_Id" class="auto-complete-value" />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        <div class="col-md-8" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+
+                            <div class="btn-group">
+                                <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseOrderRequest">Create</button>
+                                <button role="button" class="btn btn-danger active" disabled value="Edit" id="btnEditPurchaseOrderRequest">View</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+        </div>
+
+        <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseOrderRequestPager">
+
+
+        </div>
+
+        @*<div class="col-md-12" style="padding: 0px;" id="divTable">
+            <div class="row">
+                <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                    <table class="table table-bordered table-hover" id="tblPurchaseOrderRequest">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Branch</th>
+                                <th>Vendor</th>
+                                <th>Quantity</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>*@
+
+     
+
+        @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseOrderRequestPager">
+
+
+        </div>*@
+
+    </div>
+
+</div>

@@ -1,0 +1,298 @@
+﻿@model MyLeoRetailer.Models.PurchaseOrderViewModel
+
+
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
+
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="content-frame">
+
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purhase Order View</h2>
+        </div>
+        <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "PurchaseOrder")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+    </div>
+
+</div>
+<!-- END CONTENT FRAME -->
+
+<div class="page-content-wrap">
+
+    <form role="form" id="frmPurchaseOrder">
+
+        <div class="row">
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
+
+                <div class="block">
+
+                    <input type="hidden" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_Id" id="hdf_Purchase_Order_Id" value="@Model.PurchaseOrder.Purchase_Order_Id" />
+
+                    <h4 style="margin-top: 0px;">Primary information.</h4>
+
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e"> Purchase Order No.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Purchase_Order_No</span>
+
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_No" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Purchase_Order_No" />*@
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e"> Purchase Order Date.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Purchase_Order_Date.ToShortDateString()</span>
+
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Purchase_Order_Date" id="txtPurchase_Order_Date" value="@Model.PurchaseOrder.Purchase_Order_Date.ToShortDateString()" />*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Supply time period.</h4>
+
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e">Start Supply Date.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Start_Supply_Date.ToShortDateString()</span>
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Start_Supply_Date" id="txtStart_Supply_Date" value="@Model.PurchaseOrder.Start_Supply_Date.ToShortDateString()" />*@
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e">Stop Supply Date.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Stop_Supply_Date.ToShortDateString()</span>
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Stop_Supply_Date" id="txtStop_Supply_Date" value="@Model.PurchaseOrder.Stop_Supply_Date.ToShortDateString()" />*@
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Vendor / Transporter details.</h4>
+
+                    <input type="hidden" id="hdf_Vendor_Id" />
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e">Vendor Name.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Vendor_Name</span>
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Vendor_Name" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Vendor_Name" />*@
+                    </div>
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e">Agent Name.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Agent_Name</span>
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Agent_Name" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Agent_Name" />*@
+                    </div>
+
+                    <!-- This should be an auto complete field / lookup field like Krypton with search filter / dropdown field -->
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e">Transporter Name.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Transporter_Name</span>
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Transporter_Name" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Transporter_Name" />*@
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
+
+                <div class="block">
+                    <h4 style="margin-top: 0px;">Shipping details.</h4>
+
+                    <div class="form-group">
+                        <label class="control-label" style="color: #33414e">Shipping Address.</label>
+                        <span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Shipping_Address</span>
+                        @*<input type="text" class="form-control input-sm" name="PurchaseOrder.Shipping_Address" id="txtPurchase_Order_No" value="@Model.PurchaseOrder.Shipping_Address" />*@
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="block" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 10px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 18px;">Purchase Order Details</h4>
+
+                <div class="col-xs-12 table-responsive">
+                    <table class="table table-hover" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width:100px;">Article No.</th>
+                                <th style="width:150px;">Color</th>
+                                <th style="width:150px;">Brand</th>
+                                <th style="width:150px;">Category</th>
+                                <th style="width:150px;">Subcategory</th>
+                                <th style="width:150px;">Size Group</th>
+                                <th style="width:80px;">Start Size</th>
+                                <th style="width:80px;">End Size</th>
+                                <th style="width:80px;">1</th>
+                                <th style="width:80px;">2</th>
+                                <th style="width:80px;">3</th>
+                                <th style="width:80px;">4</th>
+                                <th style="width:80px;">5</th>
+                                <th style="width:80px;">6</th>
+                                <th style="width:80px;">7</th>
+                                <th style="width:80px;">8</th>
+                                <th style="width:80px;">9</th>
+                                <th style="width:80px;">10</th>
+                                <th style="width:80px;">11</th>
+                                <th style="width:80px;">12</th>
+                                <th style="width:80px;">13</th>
+                                <th style="width:80px;">14</th>
+                                <th style="width:80px;">15</th>
+                                <th style="width:100px;">Total Qty.</th>
+                                <th style="width:100px;">Center Size</th>
+                                <th style="width:100px;">Base Rate</th>
+                                <th style="width:100px;">Size Diff.</th>
+                                <th style="width:100px;">Total Amt.</th>
+                                <th style="width:auto;">Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                if (Model.PurchaseOrder.PurchaseOrderItems.Count > 0)
+                                {
+
+                                    foreach (var item in Model.PurchaseOrder.PurchaseOrderItems)
+                                    {
+                                        int colspan = 15;
+                                        if (item.sizes.Count > 0)
+                                        {
+                                            colspan = colspan - item.sizes.Count;
+                                            <tr style="background: rgba(74,77,67,0.09);">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                @foreach (var itm in item.sizes)
+                                                {
+                                                    <td>@itm.Size_Name</td>
+                                                }
+                                                <td colspan="@colspan"></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td>@item.Article_No</td>
+                                            <td>@item.Colour_Name</td>
+                                            <td>@item.Brand_Name</td>
+                                            <td>@item.Category</td>
+                                            <td>@item.Sub_Category</td>
+                                            <td>@item.Size_Group_Name</td>
+                                            <td>@item.Start_Size</td>
+                                            <td>@item.End_Size</td>
+
+
+                                            @if (item.sizes.Count > 0)
+                                            {
+                                                foreach (var itm in item.sizes)
+                                                {
+                                                    <td>@itm.Quantity1</td>
+                                                }
+                                            }
+
+                                            <td colspan="@colspan"></td>
+                                            <td style="background: rgba(74,77,67,0.09);">@item.Total_Quantity</td>
+                                            <td>@item.Center_Size</td>
+                                            <td>@item.Purchase_Price</td>
+                                            <td>@item.Size_Difference</td>
+                                            <td style="background: rgba(74,77,67,0.09);">@item.Total_Amount</td>
+                                            <td>@item.Comment</td>
+                                        </tr>
+                                    }
+                                }
+                                <tr></tr>
+                            }
+
+                            @{
+                                <tr>
+                                    <td colspan="23" style="text-align: right;"><span class="label label-primary label-form label-read" style="margin-bottom: 1px;">Total Quantity</span></td>
+                                    <td style="text-align: left;"><span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.Total_Quantity</span></td>
+
+                                    <td colspan="3" style="text-align: right;"><span class="label label-primary label-form label-read" style="margin-bottom: 1px;">Total Amount</span></td>
+                                    <td style="text-align: left;"><span class="label label-primary label-form label-read" style="margin-bottom: 1px;">@Model.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount)</span></td>
+                                    <td></td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div>
+
+    </form>
+
+</div>

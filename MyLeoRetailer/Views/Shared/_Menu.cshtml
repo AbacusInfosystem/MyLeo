@@ -1,0 +1,151 @@
+﻿@using MyLeoRetailer.Common
+@using MyLeoRetailerInfo.Common
+
+@*@model MyLeoRetailer.Models.EmployeeViewModel*@
+
+<script src="~/Scripts/Modules/Employee/change_branch_event.js"></script>
+<script src="~/Scripts/Modules/Employee/change_branch_method.js"></script>
+<script src="~/Scripts/Modules/ProductWarehouse/product_warehouse_notification.js"></script>
+
+<!-- START X-NAVIGATION VERTICAL -->
+<ul class="x-navigation x-navigation-horizontal">
+    <li class="xn-logo">
+        <a href="/Dashboard/Index">ATLANT</a>
+        <a href="#" class="x-navigation-control"></a>
+    </li>
+    <li class="xn-openable">
+        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Masters</span></a>
+        <ul class="animated zoomIn">
+            <li><a href="/Branch/Search"><span class="fa fa-users"></span> Branch Management</a></li>
+            <li><a href="/Employee/Search"><span class="fa fa-user"></span> Employee Management</a></li>
+            <li><a href="/Role/Index"><span class="fa fa-image"></span> Role Management</a></li>
+            <li><a href="/Brand/Index"><span class="fa fa-users"></span> Brand Management</a></li>
+            <li><a href="/Category/Index"><span class="fa fa-users"></span> Category Management</a></li>
+            <li><a href="/Color/Index"><span class="fa fa-users"></span> Color Management</a></li>
+            <li><a href="/Size/Index"><span class="fa fa-users"></span> Size Management</a></li>
+            <li><a href="/Tax/Index"><span class="fa fa-users"></span> Tax Management</a></li>
+            <li><a href="/Customer/Search"><span class="fa fa-users"></span> Customer Management</a></li>
+            <li><a href="/Vendor/Search"><span class="fa fa-users"></span> Vendor Management</a></li>
+            <li><a href="/VendorContact/Search"><span class="fa fa-users"></span> Vendor Contact Management</a></li>
+            <li><a href="/Product/Search"><span class="fa fa-users"></span> Product Management</a></li>
+            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Product Warehouse</a></li>
+            <li><a href="/ProductDispatch/Search"><span class="fa fa-users"></span> Product Dispatch</a></li>
+            <li><a href="/ProductDispatch/Dispatched_Product_Listing"><span class="fa fa-users"></span>Inward Product</a></li>
+            @*<li><a href="/Replacement/Search"><span class="fa fa-users"></span> Replacement</a></li>*@ @*commented bya aditya as pre sanket instruction 26092016*@
+        </ul>
+    </li>
+
+    <li class="xn-openable">
+        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Transactions</span></a>
+        <ul class="animated zoomIn">
+            <li><a href="/PurchaseOrderRequest/Search"><span class="fa fa-users"></span> Purchase Order Request </a></li>
+            <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order </a></li>   
+            <li><a href="/PurchaseInvoice/Search"><span class="fa fa-users"></span> Purchase Invoice </a></li>
+            <li><a href="/purchase-return-request/get-purchase-return-request"><span class="fa fa-users"></span> Purchase Return Request</a></li>        
+            <li><a href="/PurchaseReturn/Search"><span class="fa fa-users"></span> Purchase Return </a></li>
+            <li><a href="/Payable/Index"><span class="fa fa-users"></span> Payable </a></li>
+            <li><a href="/SalesOrder/Search"><span class="fa fa-users"></span> Sales Invoice</a></li>
+            <li><a href="/SalesReturn/Search"><span class="fa fa-users"></span> Sales Return </a></li> 
+            <li><a href="/Receivable/Index"><span class="fa fa-users"></span> Receivable </a></li>
+            <li><a href="/GiftVoucher/Search"><span class="fa fa-users"></span> Gift Voucher </a></li>
+            <li><a href="/Alteration/Search"><span class="fa fa-users"></span> Alteration </a></li>
+        </ul>
+    </li>
+
+    @*Added by Vinod Mane on 29/09/2016*@
+    <li class="xn-openable">
+        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Reports</span></a>
+        <ul class="animated zoomIn">
+            <li><a href="/SalesOrder/Report"><span class="fa fa-users"></span> Sales </a></li>
+            <li><a href="/Inventory/Search"><span class="fa fa-users"></span> Inventory </a></li>
+        </ul>
+    </li>
+    @*End*@
+
+    <!-- SIGN OUT -->
+    <li class="xn-icon-button pull-right">
+        <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>
+    </li>
+    <!-- END SIGN OUT -->
+    @{
+        LoginInfo Cookies = new LoginInfo();
+        Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+    <!-- TASKS -->
+        <li class="xn-icon-button pull-right">
+            <a href="#" data-toggle="tooltip panel" id="btnSaveChaneBranch" data-target="#div_Change_Branch" data-placement="bottom" title="Change Branch"><span class="fa fa-map-marker"></span></a>
+            <input type="hidden" value="@Cookies.Page_URL" name="Page_URL" id="hdnPage_URL" />
+
+            @* Gauravi: 05-10-2016 *@
+
+            <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Change_Branch" style="width: 220px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="fa fa-tasks"></span></h3>
+                </div>
+
+                <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
+                    <div class="page-content-wrap">
+
+                    </div>
+                </div>
+
+                <div class="panel-footer text-center">
+                    <div class="btn-group">
+                    </div>
+                </div>
+
+            </div>
+
+            @* End *@
+        </li>
+    <!-- END TASKS -->
+
+
+         <!--Added by aditya[07102016] Start-->
+        //Cookies = new LoginInfo();
+        Cookies.Warehouse_Notification_Count = Utility.Get_Warehouse_Notification_Count(Cookies.Branch_Ids);
+
+        <li class="xn-icon-button pull-right" id="btnNotification">
+            @* <a href="#"><span class="fa fa-tasks"></span></a>*@
+            @*<img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">*@
+            @if (Cookies.Warehouse_Notification_Count > 0)
+            {
+                <img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+            }
+            else
+            {
+                <img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+            }
+            @if (Cookies.Warehouse_Notification_Count > 0)
+            {
+                <div class="informer informer-warning">@Cookies.Warehouse_Notification_Count</div>
+            }
+            <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Warehouse_Notification" style="width: 220px;">
+
+                <div class="panel-body list-group scroll" style="width: 220px; height: 235px; overflow: auto;">
+                    <div class="page-content-wrap">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </li>
+       <!--Added by aditya[07102016] End-->
+
+    }
+
+
+
+</ul>
+<!-- END X-NAVIGATION VERTICAL -->
+
+<script>
+    $(document).ready(
+            function () {
+                setInterval(function () {
+                    var randomnumber = Math.floor(Math.random() * 100);
+                    $("#notification_Icon").attr("src", "../Images/notification.gif");
+                }, 3000);
+            });
+</script>

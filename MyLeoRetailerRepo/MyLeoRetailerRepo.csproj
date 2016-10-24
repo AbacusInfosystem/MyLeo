@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B31B810-2723-4309-8083-3CD7B3251355}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyLeoRetailerRepo</RootNamespace>
+    <AssemblyName>MyLeoRetailerRepo</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Libraries\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BarcodeLib.Barcode.ASP.NET, Version=5.0.0.30712, Culture=neutral, PublicKeyToken=f1ec954ce2c30e4e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\BarcodeLib.Barcode.ASP.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Barcode_Generator, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Barcode_Generator.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.2.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutocompleteLookupRepo.cs" />
+    <Compile Include="AutoGenerateNumberRepo.cs" />
+    <Compile Include="BranchRepo.cs" />
+    <Compile Include="AlterationRepo.cs" />
+    <Compile Include="BrandRepo.cs" />
+    <Compile Include="CategoryRepo.cs" />
+    <Compile Include="ColorRepo.cs" />
+    <Compile Include="Common\CommonMethods.cs" />
+    <Compile Include="CookiesRepo.cs" />
+    <Compile Include="EmployeeRepo.cs" />
+    <Compile Include="GiftVoucherRepo.cs" />
+    <Compile Include="CustomerRepo.cs" />
+    <Compile Include="InventoryRepo.cs" />
+    <Compile Include="LoginRepo.cs" />
+    <Compile Include="PayableRepo.cs" />
+    <Compile Include="ProductDispatchRepo.cs" />
+    <Compile Include="ProductRepo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseInvoiceRepo.cs" />
+    <Compile Include="PurchaseOrderRepo.cs" />
+    <Compile Include="PurchaseOrderRequestRepo.cs" />
+    <Compile Include="PurchaseReturnRepo.cs" />
+    <Compile Include="PurchaseReturnRequestRepo.cs" />
+    <Compile Include="ReceivableRepo.cs" />
+    <Compile Include="ReplacementRepo.cs" />
+    <Compile Include="RoleRepo.cs" />
+    <Compile Include="SalesOrderRepo.cs" />
+    <Compile Include="SalesReturnRepo.cs" />
+    <Compile Include="StateRepo.cs" />
+    <Compile Include="SubCategoryRepo.cs" />
+    <Compile Include="TaxRepo.cs" />
+    <Compile Include="SizeGroupRepo.cs" />
+    <Compile Include="Utility\SQL_Repo.cs" />
+    <Compile Include="VendorContactRepo.cs" />
+    <Compile Include="VendorRepo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyLeoRetailerInfo\MyLeoRetailerInfo.csproj">
+      <Project>{c3ccc3af-1d9b-4672-bb4f-1a81fe4c99a8}</Project>
+      <Name>MyLeoRetailerInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

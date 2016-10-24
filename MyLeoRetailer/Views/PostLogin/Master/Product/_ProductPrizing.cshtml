@@ -1,0 +1,124 @@
+﻿@model MyLeoRetailer.Models.ProductViewModel
+@using MyLeoRetailerInfo.Common
+
+
+<script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_events.js"></script>
+<script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_methods.js"></script>
+<script src="~/Scripts/Modules/Product/_ProductPricing/product_price_validation.js"></script>
+<style type="text/css">
+    .verticle {
+        /*max-height: 150px;*/
+        overflow-y: auto;
+        overflow-x:auto;
+    }
+    /*.commonProduct {
+        overflow-y: auto;
+    }*/
+</style>
+<ul class="breadcrumb" style="margin-bottom: 0px;">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Masters</a></li>
+    <li class="active">Product Price</li>
+</ul>
+
+<div class="content-frame">
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Product Price Management</h2>
+        </div>
+        <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "Product")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+    </div>
+</div>
+
+<div class="page-content-wrap">
+    <form role="form" id="frmProductColor">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="block">
+                    <div class="row">
+                        <div class="form-group auto-complete">
+                            <div class="input-group">
+                                <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Color" id="txtColourName" placeholder="Enter color" data-table="Colour" data-col="Colour_ID,Colour_Name" data-headernames="Colour">
+                                <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                <input type="hidden" id="hdnColourId" value="" name="Filter.Color" class="auto-complete-value" />
+                                <input type="hidden" id="hdnColourName" value="" name="Filter.Color" class="auto-complete-label" />
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-success active" type="button" id="btnAddColour">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="block">
+                    <div class="form-group">
+                        @*<label for="txtCenter_Size" style="color: #333" class="">Vendor Colour Code.</label>*@
+                        <input type="text" id="txtVendorColorCode" name="ProductMRP.Vendor_Color_Code" class="form-control" value="@Model.ProductMRP.Vendor_Color_Code" placeholder="vendor colour code." />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form role="form" id="frmProductMRP">
+        <div class="row">
+            <div class="col-md-12">
+                <label style="color: #b64645; display:none;" class="help-block pull-right" id="lblAddPriceError">Add Description,WSR and MRP Prices.</label>
+            </div>
+        </div>
+        <input type="hidden" id="hdn_ProductId" name="Product.Product_Id" class="auto-complete-value" value="@Model.Product.Product_Id" />
+        <input type="text" id="hdn_Colour_Id" name="Product.Colour_Id" class="auto-complete-value" value="@Model.Product.Colour_Id" />
+        @*<input type="hidden" name="PriceVerifications" />*@
+        <label style="color: #b64645; display:none;" class="help-block pull-right" id="lblColorPriceError">Select Colour to Pricing.</label> 
+
+        <div class="row">
+            <div class="col-md-3 verticle">
+                <label style="color: #b64645; display:none;" class="help-block pull-left" id="lblColorError">Select at least one Colour.</label>
+                <div class="block">
+                    <div class="row">
+                        <div class="list-group border-bottom push-down-20 color-expand" id="Color_Grid">
+                            @{
+                                int i = 0;
+                                if (Model.Colors.Count != 0)
+                                {
+                                    string Color_Ids = "", Colors = "", Vendor_Codes = "" ;//Descriptions = "";
+                                    foreach (var itm in Model.Colors)
+                                    {
+                                        <a name="Color_List" class="list-group-item" href="#" id="@i" data-identity="@itm.Colour_Id">@itm.Colour</a>
+                                        Color_Ids += itm.Colour_Id + ",";
+                                        Colors += itm.Colour + ",";
+                                        Vendor_Codes += itm.Vendor_Color_Code + ",";
+                                        //Descriptions += itm.Description + ",";
+                                        i++;
+                                    }
+                                    <input type="hidden" id="hdnColorIds" name="model.productmrps" value="@(Color_Ids.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">
+                                    <input type="hidden" id="hdnColors" name="Model.ProductMRPs" value="@(Colors.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                    <input type="hidden" id="hdnVendorCodes" name="Model.ProductMRPs" value="@(Vendor_Codes.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                    //<input type="hidden" id="hdn_Description" name="Model.ProductMRPs" value="@(Descriptions.TrimEnd(','))" placeholder="Enter vendor code." class="form-control">//
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div id="common_Product_MRP" class="col-md-9" style="padding: 10px;overflow:auto;height:480px;">
+
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <div class="row">
+            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
+                <div class="btn-group">
+                    <button class="btn btn-success active" id="btnProductSave" type="button">Save</button>
+                    <button type="button" class="btn btn-danger active" onclick="location.href='@Url.Action("Search", "Product")'">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
