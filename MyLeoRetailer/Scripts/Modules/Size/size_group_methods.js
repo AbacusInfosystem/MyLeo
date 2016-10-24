@@ -236,7 +236,6 @@ function Reset_SizeGroup() {
     $("[name='Size_Group_List']").removeClass("active");
 }
 
-
 function Get_SizeGroup_By_Id(obj) {
 
     $("[name='Size_Group_List']").removeClass("active");

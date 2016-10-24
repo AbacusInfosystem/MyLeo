@@ -31,7 +31,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         [AuthorizeUserAttribute(AppFunction.Size_Management_Access)]
         public ActionResult Index(SizeGroupViewModel sgViewModel)
         {
-            return View("Index", sgViewModel);
+            return View("Index", sgViewModel);            
         }
 
        

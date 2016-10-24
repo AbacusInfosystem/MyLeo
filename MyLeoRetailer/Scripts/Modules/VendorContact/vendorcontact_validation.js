@@ -21,6 +21,7 @@ $(function () {
             },
 
             "VendorContact.Mobile1": {
+                required:true,
                 checkmobileno: true,
             },
 
@@ -49,9 +50,9 @@ $(function () {
                 number: "Enter only digits"                
             },
 
-            //"VendorContact.Mobile1": {
-            //    digits: "Enter only digits"
-            //},
+            "VendorContact.Mobile1": {
+                required: "Mobile number is required."
+            },
 
             //"VendorContact.Mobile2": {
             //    digits: "Enter only digits"
