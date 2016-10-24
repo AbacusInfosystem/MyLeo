@@ -23,6 +23,8 @@ namespace MyLeoRetailer.Models.Report
             Inventories = new List<InventoryInfo>();
 
 			Filter = new Filter_Inventory();
+                      
+            Cookies = new LoginInfo();
 
 			FriendlyMessages = new List<FriendlyMessage>();
 
@@ -61,7 +63,17 @@ namespace MyLeoRetailer.Models.Report
 			set;
 		}
 
-        public List<InventoryInfo> Inventories { get; set; }
+        public List<InventoryInfo> Inventories
+        {
+            get;
+            set;
+        }
+
+        public LoginInfo Cookies
+        {
+            get;
+            set;
+        }
 
 	}
 
