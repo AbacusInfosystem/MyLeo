@@ -408,32 +408,7 @@ namespace MyLeoRetailerRepo
                     string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), ProductMRP.SKU_Code + ".png");
                     ProductMRP.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Code, path);//NK_TSHR_TSRN_b_RD
                     ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
-
-                    ////Code added by aditya START[19102016]  // Bind footer to barcode
-                    //string product_Barcode = Convert.ToBase64String(ProductMRP.Product_Barcode);
-
-                    //using (var streamBitmap = new MemoryStream(ProductMRP.Product_Barcode))
-                    //{
-                    //    using (var img = Image.FromStream(streamBitmap))
-                    //    {
-                    //        int footerHeight = 30;
-                    //        Bitmap bitmapImg = new Bitmap(img);// Original Image
-                    //        Bitmap bitmapComment = new Bitmap(img.Width, footerHeight);// Footer
-                    //        Bitmap bitmapNewImage = new Bitmap(img.Width, img.Height + footerHeight);//New Image
-                    //        Graphics graphicImage = Graphics.FromImage(bitmapNewImage);
-                    //        graphicImage.Clear(Color.White);
-                    //        graphicImage.DrawImage(bitmapImg, new Point(0, 0));
-                    //        graphicImage.DrawImage(bitmapComment, new Point(bitmapComment.Width, 0));
-                    //        graphicImage.DrawString("M.R.P. " + ProductMRP.MRP_Price, new Font("Arial", 10), new SolidBrush(Color.Black), 10, bitmapImg.Height + footerHeight / 6);
-                    //        bitmapNewImage.Save(path);
-                    //        bitmapImg.Dispose();
-                    //        bitmapComment.Dispose();
-                    //        bitmapNewImage.Dispose();
-                    //    }
-                    //}
-                    ////Code added by aditya END [19102016] 
-
-                    //ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
+                     
                 }
             }
             return ProductMRP;
