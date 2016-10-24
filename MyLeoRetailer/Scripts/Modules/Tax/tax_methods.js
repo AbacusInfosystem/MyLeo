@@ -110,6 +110,7 @@ function Reset_Tax() {
 
     $("[name='Tax.IsActive']").val(1);
     $("#hdnTaxName").val("");//Added By Vinod Mane on 27/09/2016
+    $("[name='Tax_List']").removeClass("active");//Added by vinod mane on 24/10/2016
    
     $('#frmTax').trigger("reset");
    

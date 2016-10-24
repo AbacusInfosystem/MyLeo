@@ -223,7 +223,7 @@ function Reset_SizeGroup() {
     $("[name='SizeGroup.Size_Group_Id']").val("");
     $("#hdnSizeGroupName").val("");//Added By Vinod Mane on 27/09/2016
     $("#divSize").hide();
-}
+   
 
 
 function Get_SizeGroup_By_Id(obj) {

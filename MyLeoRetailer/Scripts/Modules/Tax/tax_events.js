@@ -26,4 +26,9 @@
         Get_Taxes();
     });
 
+    $("#btnReset").click(function () {       
+
+        Reset_Tax();
+    });
+
 });
