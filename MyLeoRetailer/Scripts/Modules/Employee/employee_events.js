@@ -34,8 +34,8 @@ $(function () {
     $("input.mask_mobile_no").mask('(99) 99999-99999');
     //alert($('[name="Employee.IsActive"]').val());
 
-    if ($('[name = "Employee.Employee_Id"]').val() == 0) {
-        $('[name="Employee.IsActive"]').val(1);
+    if ($('[name = "Employee.Employee_Id"]').val() == 0 || $('[name="Employee.Employee_Id"]').val() == " ") {
+        $('[name="Employee.IsActive"]').val("True");
     }
 
 
@@ -58,7 +58,7 @@ $(function () {
 
     
         //Modifiction
-        if ($('[name="Employee.IsActive"]').val() == 1 || $('[name="Employee.IsActive"]').val() == "true") {
+        if ($('[name="Employee.IsActive"]').val() == 1 || $('[name="Employee.IsActive"]').val() == "True") {
             $('[name="Employee.IsActive"]').val(true);
         }
         else {

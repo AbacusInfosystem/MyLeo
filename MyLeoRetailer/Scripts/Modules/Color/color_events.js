@@ -34,6 +34,12 @@ $(function ()
 
 	    ResetForm();
 
-	}); 
+	});
+
+	//$("#btnReset").click(function () {
+
+	//    Reset_Color();
+
+	//});
 
 });

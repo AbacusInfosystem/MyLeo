@@ -54,8 +54,8 @@ $(function () {
     $('#drpTransaction').trigger('change');
 
     //Added By Vinod Mane on 22/09/2016
-    $(document).on("change", "#hdnGift_Voucher_No", function () {
-        Get_Gift_Vouchers();
-    });
+    //$(document).on("change", "#hdnGift_Voucher_No", function () {
+    //    Get_Gift_Vouchers();
+    //});
    
 });

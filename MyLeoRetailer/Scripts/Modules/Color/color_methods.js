@@ -121,6 +121,15 @@ function Reset_Color()
 
     $("[name='Color.Colour_Id']").val("");
     $("#hdnColour_Name").val("");
+
+    //var fix = $("[name='Color.IsActive']").val(1);
+
+    //if (fix == 0) {
+    //    document.getElementById('Flag').checked = false;
+    //}
+    //else {
+    //    document.getElementById('Flag').checked = true;
+    //}
 }
 
 function Get_Color_By_Id(obj)
