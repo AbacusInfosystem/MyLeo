@@ -112,7 +112,7 @@ $(document).ready(function () {
         }
         return result;
 
-    }, "You can not enter same mobile no.");
+    }, "You can not enter same landline no.");
 
 });
 //End

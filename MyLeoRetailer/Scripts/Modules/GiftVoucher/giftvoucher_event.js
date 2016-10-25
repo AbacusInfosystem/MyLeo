@@ -73,6 +73,7 @@
           
             $("#divBankName").hide();
             $("#divCreditCardNo").hide();
+            $("#hdn_GiftVoucherNo").val("");
        // }
     });
 });

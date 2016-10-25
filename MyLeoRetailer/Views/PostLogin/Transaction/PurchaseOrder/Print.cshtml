@@ -78,15 +78,16 @@
                                         <div class="form-group">
 
                                             <div class="form-group">
-                                                <label for="txtStore_Name" style="color: #333" class=""><b>MyLeo</b></label>
+                                                @*<label for="txtStore_Name" style="color: #333" class=""><b>MyLeo</b></label>*@
+                                                <h3>@Model.PurchaseOrder.Company_Name</h3>
 
-                                                <br />
-                                                <label for="txtStore_Address1" style="color: #333" class="">Company Address1</label>
+                                                @*<br />*@
+                                                @*<label for="txtStore_Address1" style="color: #333" class="">Company Address1</label>*@
+                                                <h5>@Model.PurchaseOrder.Company_Address</h5>
 
-                                                <br />
-
-                                                <label for="txtStore_Address2" style="color: #333" class="">Company Address2</label>
-                                                <br />
+                                                @*<br />*@
+                                                @*<label for="txtStore_Address2" style="color: #333" class="">Company Address2</label>*@
+                                                @*<br />*@
 
                                                 <h5> <b>PURCHASE ORDER</b></h5>
 
@@ -262,14 +263,17 @@
 
                                                     @{
                                                         <tr>
-                                                            <th colspan="16" style="text-align: left;"> Remark : @Model.PurchaseOrder.Comment </th>
-                                                            @*<th colspan="8" style="text-align: left;"> Total : @Model.PurchaseOrder.Net_Amount </th>*@
-                                                            <th colspan="5" style="text-align: left;"> Total : @Model.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount) </th>
+                                                            <th colspan="14" style="text-align: left;"> Remark : @Model.PurchaseOrder.Comment </th>
+                                                            <th colspan="2" style="text-align: left;"> Total : </th>
+                                                            <th colspan="1" style="text-align: left;"> @Model.PurchaseOrder.Total_Quantity </th>
+                                                            <th colspan="3" style="text-align: left;"></th>
+                                                            <th colspan="1" style="text-align: left;"> @Model.PurchaseOrder.Net_Amount </th>
+                                                            @*<th colspan="5" style="text-align: right;"> @Model.PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount) </th>*@
 
                                                         </tr>
 
                                                         <tr>
-                                                            <th colspan="26" style="text-align: left;">Amount(In words): @Model.PurchaseOrder.Total_Amount_In_Word </th>
+                                                            <th colspan="21" style="text-align: left;">Amount(In words): @Model.PurchaseOrder.Total_Amount_In_Word </th>
                                                         </tr>
                                                     }
                                                 </tbody>
@@ -283,17 +287,15 @@
                         </div>
 
                         <div class="row" id="div_Non_Printable">
-                            <div class="col-md-5">
-                                <div class="col-md-2">
+                            <div class="btn-group">
+                                
                                     <button type="button" id="btnPrint" class="btn btn-default bg-orange">Print</button>
-                                </div>
-                                <div class="col-md-2">
+                               
                                     @*<a class="btn btn-default bg-blue" role="button" id="btnSendEmail" href="@Url.Action("Send_Purchase_Order_Invoice", "PurchaseOrder")">Send Email</a>*@
                                     <button type="button" id="btnSendEmail" class="btn btn-default bg-orange">Send Email</button>
-                                </div>
-                                <div class="col-md-2">
+                              
                                     <a class="btn btn-default bg-blue" role="button" id="btnBack" href="@Url.Action("Search", "PurchaseOrder")">Back</a>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

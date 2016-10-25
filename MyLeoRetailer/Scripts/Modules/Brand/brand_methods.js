@@ -119,6 +119,8 @@ function Reset_Brand()
     $("[name='Brand_List']").removeClass("active");//Added by vinod mane on 25/10/2016
 
     document.getElementById('Flag').checked = false;
+
+   
 }
 
 function Get_Brand_By_Id(obj)
