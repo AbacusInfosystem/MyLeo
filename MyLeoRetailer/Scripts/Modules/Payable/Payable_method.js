@@ -90,6 +90,10 @@ function Calculate_Fianl_Amount_Using_Credit_Note_Amount() {
         $("#txtFinal_amount").val(newfinalamount.toFixed(2)); 
         
     }
+    else {
+        $("#txtCN_amount").val('');
+        $("#txtFinal_amount").val($("#txtAmount_due").val());
+    }
 }
 
 function Calculate_Fianl_Amount_Using_Discount() {
@@ -113,6 +117,11 @@ function Calculate_Fianl_Amount_Using_Discount() {
         else
             $("#txtFinal_amount").val(newfinalamount.toFixed(2));
          
+    }
+    else
+    {
+        $("#txtDiscount_amount").val('');
+        $("#txtFinal_amount").val($("#txtAmount_due").val());
     }
 }
 
