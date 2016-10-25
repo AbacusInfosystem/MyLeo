@@ -28,7 +28,7 @@ $(document).ready(function () {
     $("#frmTax").validate({
         rules: {
             "Tax.Tax_Name": { required: true, validate_Tax: true },
-            "Tax.Tax_Value": { required: true, number: true },
+            "Tax.Tax_Value": { required: true, number: true, positiveNumber: true },
         },
         messages: {
 
@@ -58,5 +58,14 @@ $(document).ready(function () {
         return result;
 
     }, "Tax Name is already exists.");
+
+    jQuery.validator.addMethod('positiveNumber',
+    function (value) {// /^-?\d{2}(\.\d+)?$/
+        var match = (/^\-?[0-9]*\.?[0-9]+$/).exec(value);
+        //alert(match);
+        var result = false;
+        if (match[0] > 0)
+            return true;
+    }, 'Enter a positive and greater than 0 number.');
 
 });
