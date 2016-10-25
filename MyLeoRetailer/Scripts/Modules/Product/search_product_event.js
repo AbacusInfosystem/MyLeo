@@ -8,7 +8,10 @@ $(function () {
 
     Get_Products();
 
-        $("[name='Filter.Article_No']").focusout(function () {
+    $("[name='Filter.Article_No']").focusout(function () {
+
+        document.getElementById('btnEdit').disabled = true;//Added by vinod mane on 25/10/2016
+        document.getElementById('btnProductMRP').disabled = true;//Added by vinod mane on 25/10/2016
             Get_Products();
         }); 
          
@@ -48,6 +51,9 @@ $(function () {
 
     //Added By Vinod Mane on 14/10/2016
         $(document).on("change", "#hdnArticle_No", function () {
+
+            document.getElementById('btnEdit').disabled = true;//Added by vinod mane on 25/10/2016
+            document.getElementById('btnProductMRP').disabled = true;//Added by vinod mane on 25/10/2016
             Get_Products();
         });
 });

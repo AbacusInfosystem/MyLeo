@@ -10,6 +10,10 @@ $(function () {
     
 
     $("[name='Filter.Employee']").focusout(function () {
+        ////Added by vinod mane on 25/10/2016
+        //document.getElementById('btnEditEmployee').disabled = true;
+        //document.getElementById('btnMapBranchEmployee').disabled = true;
+        ////End
         Get_Employees();
     });
 
@@ -62,6 +66,10 @@ $(function () {
     
     //Added By Vinod Mane on 28/09/2016
     $(document).on("change", "#hdnEmployeeName", function () {
+        ////Added by vinod mane on 25/10/2016
+        //document.getElementById('btnEditEmployee').disabled = true;
+        //document.getElementById('btnMapBranchEmployee').disabled = true;
+        ////End
         Get_Employees();
     });
 

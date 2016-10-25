@@ -14,6 +14,7 @@
 
 
     $("[name='Filter.Branch_Name']").focusout(function () {
+        document.getElementById('btnEditBranch').disabled = true;//Added By Vinod Mane on 25/10/2016
         Get_Branchs();
     });
        
@@ -40,6 +41,7 @@
 
     //Added By Vinod Mane on 23/09/2016
     $(document).on("change", "#hdnBranchID", function () {
+        document.getElementById('btnEditBranch').disabled = true;  //Added By Vinod Mane on 25/10/2016
         Get_Branchs();
     });
 });
