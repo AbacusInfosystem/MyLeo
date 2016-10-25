@@ -138,7 +138,11 @@ $(function () {
 
     })
 
-
+    //Added By Vinod Mane on 25/10/2016
+    $("#btnCancel").click(function () {
+        ResetVendor();
+    });
+    //End
 });
 
 
