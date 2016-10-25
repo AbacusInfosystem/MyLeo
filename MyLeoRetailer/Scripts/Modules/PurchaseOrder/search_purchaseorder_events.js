@@ -37,4 +37,9 @@
         $("#frmPurchaseOrder").submit();
     });
 
+    $(document).on("change", "#hdnPurchaseOrderNo", function () {
+        Get_Purchase_Orders();
+    });
+
+
 });
