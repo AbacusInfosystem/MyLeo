@@ -116,6 +116,7 @@ function Reset_Brand()
     $("[name='Brand.IsActive']").val(1);
 
     $("#hdnBrand_Name").val("");
+    $("[name='Brand_List']").removeClass("active");//Added by vinod mane on 25/10/2016
 
     document.getElementById('Flag').checked = false;
 }

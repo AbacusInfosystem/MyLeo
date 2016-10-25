@@ -35,13 +35,14 @@ $(function () {
 
 
     $("[name='Filter.Vendor_Name']").focusout(function () {
-
+        document.getElementById('btnedit').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendors();
 
     });
 
     //Added By Vinod Mane on 22/09/2016
     $(document).on("change", "#hdnVendor_ID", function () {
+        document.getElementById('btnedit').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendors();
     });
     //End
