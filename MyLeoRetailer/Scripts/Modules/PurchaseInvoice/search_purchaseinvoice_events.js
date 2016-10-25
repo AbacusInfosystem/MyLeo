@@ -33,6 +33,8 @@
         $("#frmPurchaseInvoice").submit();
     });
 
-
+    $(document).on("change", "#hdnPurchaseInvoiceNo", function () {
+        Get_Purchase_Invoices();
+    });
    
 });

@@ -361,6 +361,37 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Purchase_order_request")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Purchase_Order_Request.Vendor_Id, Vendor.Vendor_Name ";
+                        strquery += "from Purchase_Order_Request left join Vendor on Purchase_Order_Request.Vendor_Id = Vendor.Vendor_ID ";
+                        strquery += "left join Branch on Purchase_Order_Request.Branch_Id = Branch.Branch_ID where Purchase_Order_Request.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                    }
+                }
+
+                if (table_Name == "Inventory_SKU")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Inventory.Product_SKU Inventory_Id, Inventory.Product_SKU ";
+                        strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID ";
+                        strquery += "where Inventory.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                    }
+                }
+
+                if (table_Name == "Purchase_Return_request")
+                {
+                    if (fieldName == "Branch_Id")
+                    {
+                        strquery = " Select distinct Purchase_Return_Request.Vendor_Id, Vendor.Vendor_Name from Purchase_Return_Request ";
+                        strquery += "left join Vendor on Purchase_Return_Request.Vendor_Id = Vendor.Vendor_ID ";
+                        strquery += "where Purchase_Return_Request.Branch_Id in (SELECT * FROM dbo.CSVToTable('" + fieldValue + "'))";
+                    }
+                }
+
+
                 //if (table_Name == "Sales_Invoice")
                 //{
                 //    if (fieldName == "Branch_Id")
