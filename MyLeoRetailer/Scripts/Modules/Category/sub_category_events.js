@@ -21,4 +21,8 @@ $(function ()
 		Get_Sub_Categories();
 	});
 
+	$("#btnResetSubCategory").click(function () {
+	    Reset_Sub_Category();
+	});
+
 });

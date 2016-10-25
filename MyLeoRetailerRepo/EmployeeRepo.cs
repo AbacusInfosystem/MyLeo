@@ -140,6 +140,17 @@ namespace MyLeoRetailerRepo
                 Employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
                 Employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
                 Employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
+
+                //if (dr["IsActive"] == true)
+                //{
+                //    Employee.IsActive == 1;
+                //}
+
+                //else
+                //{
+                //    Employee.IsActive == 0;
+                //}
+
                 Employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
                 Employee.Created_By = Convert.ToInt32(dr["Created_By"]);
                 Employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);

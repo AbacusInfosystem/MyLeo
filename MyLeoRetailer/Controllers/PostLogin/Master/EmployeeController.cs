@@ -35,10 +35,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 {
                     eViewModel = (EmployeeViewModel)TempData["eViewModel"];
                 }
+                else
+                {
+                    eViewModel.Employee.IsActive = true;
+                }
                 RoleRepo _rRepo = new RoleRepo();
 
                 eViewModel.Role_List = _rRepo.Get_Role_List();
 
+               
             }
             catch (Exception ex)
             {
@@ -142,12 +147,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             Pagination_Info pager = new Pagination_Info();
 
-            int IsActive = 1;
+           // int IsActive = 1;
 
             try
             {
-                 
-                filter = eViewModel.Filter.Employee + "," + IsActive.ToString(); // Set filter comma seprated 
+
+                filter = eViewModel.Filter.Employee; //+ "," + IsActive.ToString(); // Set filter comma seprated 
 
                 dataOperator = DataOperator.Like.ToString() + "," + DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
 

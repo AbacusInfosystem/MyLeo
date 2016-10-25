@@ -30,4 +30,8 @@ $(document).ready(function () {
         Get_Brands();
     });
     //End
+
+    $("#btnResetBrand").click(function () {
+        Reset_Brand();
+    });
 });
