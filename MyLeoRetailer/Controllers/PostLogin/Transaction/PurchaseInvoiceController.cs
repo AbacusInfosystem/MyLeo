@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -230,43 +231,48 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public ActionResult Insert_Purchase_Invoice(PurchaseInvoiceViewModel piViewModel)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(piViewModel.PurchaseInvoice);
-
-                foreach (var item in piViewModel.PurchaseInvoice.PurchaseInvoices)
+                try
                 {
-                    Set_Date_Session(item);
+                    Set_Date_Session(piViewModel.PurchaseInvoice);
+
+                    foreach (var item in piViewModel.PurchaseInvoice.PurchaseInvoices)
+                    {
+                        Set_Date_Session(item);
+                    }
+
+                    if (piViewModel.PurchaseInvoice.Purchase_Invoice_Id == 0)
+                    {
+                        piViewModel.PurchaseInvoice.Purchase_Invoice_No = Utility.Generate_Ref_No("PI-", "Purchase_Invoice_No", "4", "15", "Purchase_Invoice");
+
+                        _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+
+                        piViewModel = new PurchaseInvoiceViewModel();
+
+                        piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
+                    }
+                    else
+                    {
+                        piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                    }
+                    scope.Complete();
                 }
-
-                if (piViewModel.PurchaseInvoice.Purchase_Invoice_Id == 0)
+                catch (Exception ex)
                 {
-                    piViewModel.PurchaseInvoice.Purchase_Invoice_No = Utility.Generate_Ref_No("PI-", "Purchase_Invoice_No", "4", "15", "Purchase_Invoice");
-
-                    _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
-
                     piViewModel = new PurchaseInvoiceViewModel();
 
-                    piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
-                }
-                else
-                {
                     piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+
+                    Logger.Error("PurchaseInvoiceController - Insert_Purchase_Invoice : " + ex.ToString());
+
+                    scope.Dispose();
                 }
 
+                TempData["piViewModel"] = (PurchaseInvoiceViewModel)piViewModel;
+
+                return RedirectToAction("Search", piViewModel);
             }
-            catch (Exception ex)
-            {
-                piViewModel = new PurchaseInvoiceViewModel();
-
-                piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
-
-                Logger.Error("PurchaseInvoiceController - Insert_Purchase_Invoice : " + ex.ToString());
-            }
-
-
-
-            return View("Search", piViewModel);
         }
 
         public ActionResult Update_Purchase_Invoice(PurchaseInvoiceViewModel piViewModel)

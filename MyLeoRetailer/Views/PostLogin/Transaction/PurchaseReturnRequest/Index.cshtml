@@ -1,4 +1,6 @@
 ﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnRequestViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
 
 <script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-validation.js"></script>
 <script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-event.js"></script>
@@ -91,7 +93,7 @@
                             <div class="block">
                                 <h4 style="margin-top: 0px;">Purchase Invoice details.</h4>
 
-                                <input type="hidden" class="form-control input-sm" name="Invoice" id="hdf_Purchase_Invoice_Id">
+                                <input type="hidden" class="form-control input-sm" name="Invoice" id="hdf_Purchase_Invoice_Id" value="x">
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
@@ -177,7 +179,7 @@
                                             <input type="hidden" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" maxlength="10" />
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Quantity" id="textQuantity_0" value="1" onchange="Add_Validation(0);" onblur="javascript: CalculateTotal();" maxlength="10" />
                                             @*<input class="form-control input-sm" type="hidden" name="" id="hdnQuantity_0" value="" />*@ 
                                         </td>
                                         <td>
