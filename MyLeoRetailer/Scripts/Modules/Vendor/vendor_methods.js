@@ -662,5 +662,14 @@ function ResetVendor() {
     $("#tblSubCategoryDetails").find("tr:gt(0)").remove();
     $("#tblBankDetails").find("tr:gt(0)").remove();
    
+    $("#hdnChk_Duplicate_Brand").hide
+    $("#Duplicate_Brand_Message").html(" ")
+
+    $("#hdnChk_Duplicate_Category").hide();
+    $("#Duplicate_Category_Message").html("");
+
+    $("#hdnChk_Duplicate_SubCategorys").hide();
+    $("#Duplicate_SubCategorys_Message").html("");
+
 }
 //End
