@@ -221,10 +221,20 @@ function Reset_SizeGroup() {
     $("[name='SizeGroup.Size_Group_Name']").val("");
 
     $("[name='SizeGroup.Size_Group_Id']").val("");
+
     $("#hdnSizeGroupName").val("");//Added By Vinod Mane on 27/09/2016
     $("#divSize").hide();
-}
 
+    var fix = $("[name='SizeGroup.IsActive']").val(1);
+
+    if (fix == "0") {
+        document.getElementById('Flag').checked = false;
+    }
+    else {
+        document.getElementById('Flag').checked = true;
+    }
+    $("[name='Size_Group_List']").removeClass("active");
+}
 
 function Get_SizeGroup_By_Id(obj) {
 

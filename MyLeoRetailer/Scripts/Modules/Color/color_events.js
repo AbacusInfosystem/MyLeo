@@ -30,10 +30,18 @@ $(function ()
 	    Get_Colors();
 	});
 
-	$("#btnReset").click(function () {
+	$("#btnReset").click(function () {	 
 
-	    ResetForm();
+	     ResetForm();
+	    Reset_Color();
+	    
 
-	}); 
+	});
+
+	//$("#btnReset").click(function () {
+
+	//    Reset_Color();
+
+	//});
 
 });
