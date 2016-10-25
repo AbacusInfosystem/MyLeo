@@ -113,7 +113,7 @@ function Reset_Brand()
 
     $("[name='Brand.Brand_Id']").val("");
 
-    $("[name='Brand.IsActive']").val("");
+    $("[name='Brand.IsActive']").val(1);
 
     $("#hdnBrand_Name").val("");
 

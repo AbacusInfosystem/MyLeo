@@ -13,28 +13,30 @@ namespace MyLeoRetailerRepo
 {
     public class InventoryRepo
     {
-         SQL_Repo sqlHelper = null;
+        SQL_Repo sqlHelper = null;
 
-         public InventoryRepo()
+        public InventoryRepo()
         {
             sqlHelper = new SQL_Repo();
         }
 
 
-         public DataTable Get_Inventories(Filter_Inventory filter)
-         {
+        public DataTable Get_Inventories(Filter_Inventory filter, string Branch_Ids)
+        {
 
-             DataTable dt = new DataTable();
+            DataTable dt = new DataTable();
 
-             List<SqlParameter> sqlParam = new List<SqlParameter>();
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
 
-             sqlParam.Add(new SqlParameter("@Branch_Id", filter.Branch_Id));
+            sqlParam.Add(new SqlParameter("@Branch_Ids", Branch_Ids));
 
-             sqlParam.Add(new SqlParameter("@Product_SKU", filter.Product_SKU));
+            sqlParam.Add(new SqlParameter("@Branch_Id", filter.Branch_Id));
 
-             dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Inventories.ToString(), CommandType.StoredProcedure);
+            sqlParam.Add(new SqlParameter("@Product_SKU", filter.Product_SKU));
 
-             return dt;
-         }
+            dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Inventories.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
     }
 }

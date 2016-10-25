@@ -24,8 +24,7 @@
         $('#drpSubCategory').rules("remove");
 
 
-        if ($("#hdnTotalQuantity").val() == 0)
-        {
+        if ($("#hdnTotalQuantity").val() == 0) {
             $("#hdnrecords_Validation").show();
             $("#records_Message").html("Minimum one Record  is Required");
             
@@ -35,8 +34,7 @@
             $("#records_Message").html(" ");
         }
 
-        $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function ()
-        {
+        $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function () {
             
             if ($(this).text() == 0) {
                 $("#records_Message").html("Size quantity can not be Zero.");

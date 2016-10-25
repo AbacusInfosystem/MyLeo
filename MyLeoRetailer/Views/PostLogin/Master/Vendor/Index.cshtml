@@ -29,8 +29,8 @@
                 <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Vendor Management</h2>
             </div>
             <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "Vendor")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+            </div>
         </div>
-    </div>
 
 </div>
 <!-- END CONTENT FRAME -->
@@ -154,7 +154,7 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="txtVendor_Phone1" style="color: #333" class="">Phone1</label>
+                                        <label for="txtVendor_Phone1" style="color: #333" class="">Phone1</label>   
                                         <input type="text" class="mask_mobile_no form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1" placeholder="Enter Phone1" />
                                     </div>
                                 </div>
@@ -165,7 +165,7 @@
                                         <input type="text" class="mask_mobile_no form-control input-sm" name="Vendor.Vendor_Phone2" id="txtVendor_Phone2" value="@Model.Vendor.Vendor_Phone2" placeholder="Enter Phone2" />
                                     </div>
                                 </div>
-
+                            
                             </div>
 
                         </div>
@@ -204,21 +204,21 @@
                                 </div>
 
                                 @*<div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="dtpVendor_Vat_Effective_Date" style="color: #333" class="">Vat Effective Date</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_Effective_Date" id="dtpVendor_Vat_Effective_Date" value="@(Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("dd/MM/yyyy"))" placeholder="Enter Vat Effective Date" />
-                                        </div>
-                                    </div>*@
+                                    <div class="form-group">
+                                        <label for="dtpVendor_Vat_Effective_Date" style="color: #333" class="">Vat Effective Date</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_Effective_Date" id="dtpVendor_Vat_Effective_Date" value="@(Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("dd/MM/yyyy"))" placeholder="Enter Vat Effective Date" />
+                                    </div>
+                                </div>*@
 
 
                                 <div class="col-md-3">
                                     @*<div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat Effective Date</span>
-                                            <div class="input-group date" id="dtpVendor_Vat_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                                <input type="text" class="form-control datepicker" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter Vat Effective Date" />
-                                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>*@
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat Effective Date</span>
+                                        <div class="input-group date" id="dtpVendor_Vat_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter Vat Effective Date" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>*@
 
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat Effective Date</span>
@@ -269,21 +269,21 @@
                                 </div>
 
                                 @*<div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="dtpVendor_CST_Effective_Date" style="color: #333" class="">CST Effective Date</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_Effective_Date" id="dtpVendor_CST_Effective_Date" value="@(Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("dd/MM/yyyy"))" placeholder="Enter CST Effective Date" />
-                                        </div>
-                                    </div>*@
+                                    <div class="form-group">
+                                        <label for="dtpVendor_CST_Effective_Date" style="color: #333" class="">CST Effective Date</label>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_CST_Effective_Date" id="dtpVendor_CST_Effective_Date" value="@(Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("dd/MM/yyyy"))" placeholder="Enter CST Effective Date" />
+                                    </div>
+                                </div>*@
 
 
                                 <div class="col-md-3">
                                     @*<div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">CST Effective Date</span>
-                                            <div class="input-group date" id="dtpVendor_CST_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                                <input type="text" class="form-control datepicker" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter CST Effective Date" />
-                                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                                            </div>
-                                        </div>*@
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">CST Effective Date</span>
+                                        <div class="input-group date" id="dtpVendor_CST_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter CST Effective Date" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>*@
 
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">CST Effective Date</span>
@@ -310,15 +310,18 @@
                                             {
                                                 if (Model.Vendor.Brand_Id == item.Brand_Id)
                                                 {
-                                                    <option value="@item.Brand_Id" selected="selected">@item.Brand_Name</option>
+                                            <option value="@item.Brand_Id" selected="selected">@item.Brand_Name</option>
                                                 }
                                                 else
                                                 {
-                                                    <option value="@item.Brand_Id">@item.Brand_Name</option>
+                                            <option value="@item.Brand_Id">@item.Brand_Name</option>
                                                 }
                                             }
 
                                         </select>
+                                        @*Added by vinod mane on 25/10/2016*@
+                                        <label id="hdnChk_Duplicate_Brand" style="display:none"><span style="color:red" id="Duplicate_Brand_Message"></span></label>
+                                        @*End*@
                                     </div>
                                 </div>
 
@@ -349,7 +352,11 @@
                                             }
 
                                         </select>
+                                        @*Added by vinod mane on 25/10/2016*@
+                                        <label id="hdnChk_Duplicate_Category" style="display:none"><span style="color:red" id="Duplicate_Category_Message"></span></label>
+                                        @*End*@
                                     </div>
+
                                 </div>
 
                                 <div class="col-md-1">
@@ -377,6 +384,9 @@
                                                 }
                                             }
                                         </select>
+                                        @*Added by vinod mane on 25/10/2016*@
+                                        <label id="hdnChk_Duplicate_SubCategorys" style="display:none"><span style="color:red" id="Duplicate_SubCategorys_Message"></span></label>
+                                        @*End*@
                                     </div>
                                 </div>
 
@@ -396,191 +406,201 @@
                             <div class="row">
 
                                 @if (Model.Vendor.BrandDetailsList.Count() == 0)
-                                {
-                                    <div class="col-md-4">
-                                        <div class="table-responsive" style="width:100%; margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditBrandDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblBrandDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Brand</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
+                            {
+             <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBrandDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblBrandDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Brand</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <label id="hdnBrand_Validation" style="display:none"><span style="color:red" id="Brand_Message"></span></label>
+                                    
                                     </div>
-                                }
-                                else
-                                {
+                                </div>
+                            }
+                            else
+                            {
 
 
 
-                                    <div class="col-md-4">
-                                        <div class="table-responsive" style="width:100%; margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditBrandDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered validateTblBrand" id="tblBrandDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Brand</th>
-                                                        <th>Action</th>
-                                                    </tr>
+                                <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBrandDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered validateTblBrand" id="tblBrandDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Brand</th>
+                                                    <th>Action</th>
+                                                </tr>
 
-                                                    @if (Model.Vendor.BrandDetailsList != null && Model.Vendor.BrandDetailsList.Count() > 0)
+                                                @if (Model.Vendor.BrandDetailsList != null && Model.Vendor.BrandDetailsList.Count() > 0)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var itm in Model.Vendor.BrandDetailsList)
                                                     {
-                                                        int i = 1;
-                                                        foreach (var itm in Model.Vendor.BrandDetailsList)
-                                                        {
-                                                            <tr id="tr@(i)">
-                                                                <td>
-                                                                    <span id="trBrandName@(i)"> @itm.Brand</span>
-                                                                    <input type="hidden" id="hdnbrand_Name@(i)" name="Vendor.BrandDetailsList[@(i-1)].Brand_Detail_Id" value="@itm.Brand_Detail_Id">
-                                                                </td>
+                                                        <tr id="tr@(i)">
+                                                            <td>
+                                                                <span id="trBrandName@(i)"> @itm.Brand</span>
+                                                                <input type="hidden" id="hdnbrand_Name@(i)" name="Vendor.BrandDetailsList[@(i-1)].Brand_Detail_Id" value="@itm.Brand_Detail_Id">
+                                                            </td>
 
-                                                                <td class='edit'>
-                                                                    <button type='button' id='edit-brand-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBrandDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
-                                                                    <button type='button' id='delete-brand-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBrandDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
+                                                            <td class='edit'>
+                                                                <button type='button' id='edit-brand-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBrandDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
+                                                                <button type='button' id='delete-brand-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBrandDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
 
-                                                            </tr>
-                                                            i = i + 1;
-                                                        }
+                                                        </tr>
+                                                        i = i + 1;
                                                     }
+                                                }
 
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <label id="hdnBrand_Validation" style="display:none"><span style="color:red" id="Brand_Message"></span></label>
+
                                     </div>
-
-                                }
+                                </div>
+    
+}
 
                                 @if (Model.Vendor.CategoryDetailsList.Count() == 0)
-                                {
-                                    <div class="col-md-4">
-                                        <div class="table-responsive" style="width:100%; margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditCategoryDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblCategoryDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Category</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
+                            {
+                                 <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Category</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <label id="hdnCategory_Validation" style="display:none"><span style="color:red" id="Category_Message"></span></label>
+                                       
                                     </div>
-                                }
-                                else
-                                {
+                                </div>
+                            }
+                            else
+                            {
 
 
 
-                                    <div class="col-md-4">
-                                        <div class="table-responsive" style="width:100%; margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditCategoryDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblCategoryDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Category</th>
-                                                        <th>Action</th>
-                                                    </tr>
+                                <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Category</th>
+                                                    <th>Action</th>
+                                                </tr>
 
-                                                    @if (Model.Vendor.CategoryDetailsList != null && Model.Vendor.CategoryDetailsList.Count() > 0)
+                                                @if (Model.Vendor.CategoryDetailsList != null && Model.Vendor.CategoryDetailsList.Count() > 0)
+                                                {
+                                                    int i = 1;
+                                                    foreach (var itm in Model.Vendor.CategoryDetailsList)
                                                     {
-                                                        int i = 1;
-                                                        foreach (var itm in Model.Vendor.CategoryDetailsList)
-                                                        {
-                                                            <tr id="tr@(i)">
-                                                                <td>
-                                                                    <span id="trCategoryName@(i)"> @itm.Category</span>
-                                                                    <input type="hidden" id="hdncategory_Name@(i)" name="Vendor.CategoryDetailsList[@(i-1)].Category_Detail_Id" value="@itm.Category_Detail_Id">
-                                                                </td>
+                                                        <tr id="tr@(i)">
+                                                            <td>
+                                                                <span id="trCategoryName@(i)"> @itm.Category</span>
+                                                                <input type="hidden" id="hdncategory_Name@(i)" name="Vendor.CategoryDetailsList[@(i-1)].Category_Detail_Id" value="@itm.Category_Detail_Id">
+                                                            </td>
 
-                                                                <td class='edit'>
-                                                                    <button type='button' id='edit-category-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
-                                                                    <button type='button' id='delete-category-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
-
-                                                            </tr>
-                                                            i = i + 1;
-                                                        }
+                                                            <td class='edit'>
+                                                                <button type='button' id='edit-category-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
+                                                                <button type='button' id='delete-category-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
+                                                            
+                                                        </tr>
+                                                        i = i + 1;
                                                     }
+                                                }
 
 
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <label id="hdnCategory_Validation" style="display:none"><span style="color:red" id="Category_Message"></span></label>
                                     </div>
-                                }
+                                </div>
+}
 
                                 @if (Model.Vendor.SubCategoryDetailsList.Count() == 0)
-                                {
-                                    <div class="col-md-4">
-                                        <div class="table-responsive" style="width:100%; margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditSubCategoryDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblSubCategoryDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Sub Category</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
+                            {
+                                 <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditSubCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblSubCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Sub Category</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>     
+                                            <tbody></tbody>                                      
+                                        </table>
+                                        <label id="hdnSubCategory_Validation" style="display:none"><span style="color:red" id="SubCategory_Message"></span></label>
+                                       
                                     </div>
-                                }
-                                else
-                                {
+                                </div>
+                            }
+                            else
+                            {
 
 
-                                    <div class="col-md-4">
-                                        <div class="table-responsive" style="width:100%; margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditSubCategoryDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblSubCategoryDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Sub Category</th>
-                                                        <th>Action</th>
-                                                    </tr>
+                                <div class="col-md-4">
+                                    <div class="table-responsive" style="width:100%; margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditSubCategoryDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblSubCategoryDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Sub Category</th>
+                                                    <th>Action</th>
+                                                </tr>
 
-                                                    @if (Model.Vendor.SubCategoryDetailsList != null && Model.Vendor.SubCategoryDetailsList.Count() > 0)
+                                                @if (Model.Vendor.SubCategoryDetailsList != null && Model.Vendor.SubCategoryDetailsList.Count() > 0)
+                                                {
+                                                    int i = 1;
+                                                    
+                                                    foreach (var itm in Model.Vendor.SubCategoryDetailsList)
                                                     {
-                                                        int i = 1;
+                                                        <tr id="tr@(i)">
+                                                            <td>
+                                                                <span id="trSubCategoryName@(i)"> @itm.SubCategory</span>
+                                                                <input type="hidden" id="hdnsubcategory_Name@(i)" name="Vendor.SubCategoryDetailsList[@(i-1)].SubCategory_Id" value="@itm.SubCategory_Id">
+                                                            </td>
 
-                                                        foreach (var itm in Model.Vendor.SubCategoryDetailsList)
-                                                        {
-                                                            <tr id="tr@(i)">
-                                                                <td>
-                                                                    <span id="trSubCategoryName@(i)"> @itm.SubCategory</span>
-                                                                    <input type="hidden" id="hdnsubcategory_Name@(i)" name="Vendor.SubCategoryDetailsList[@(i-1)].SubCategory_Id" value="@itm.SubCategory_Id">
-                                                                </td>
-
-                                                                <td class='edit'>
-                                                                    <button type='button' id='edit-subcategory-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditSubCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
-                                                                    <button type='button' id='delete-subcategory-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteSubCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
-
-                                                            </tr>
-                                                            i = i + 1;
-                                                        }
+                                                            <td class='edit'>
+                                                                <button type='button' id='edit-subcategory-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript:EditSubCategoryDetailsData(@(i))'><i class='fa fa-pencil'></i></button>
+                                                                <button type='button' id='delete-subcategory-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript:DeleteSubCategoryDetailsData(@(i))'><i class='fa fa-times'></i></button>@*Change by vinod on 20/09/2016*@
+                                                           
+                                                        </tr>
+                                                                i = i + 1;
                                                     }
+                                                }
 
 
-                                                </thead>
-                                                <tbody></tbody>
-                                            </table>
-                                        </div>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                        <label id="hdnSubCategory_Validation" style="display:none"><span style="color:red" id="SubCategory_Message"></span></label>
                                     </div>
+                                </div>
 
-                                }
+}
 
                             </div>
 
@@ -588,154 +608,154 @@
 
                         <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
 
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="txtBank_Name" style="color: #333" class="">Bank Name</label>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtBank_Name" style="color: #333" class="">Bank Name</label>
                                         <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" maxlength="50" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="txtAccount_No" style="color: #333" class="">Account No.</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Account_No" id="txtAccount_No" value="@Model.Vendor.Account_No" placeholder="Enter Account No" maxlength="30" />
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtAccount_No" style="color: #333" class="">Account No.</label>
+                                            <input type="text" class="form-control input-sm" name="Vendor.Account_No" id="txtAccount_No" value="@Model.Vendor.Account_No" placeholder="Enter Account No" maxlength="30" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="txtBranch_Name" style="color: #333" class="">Branch Name</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Branch_Name" id="txtBranch_Name" value="@Model.Vendor.Branch_Name" placeholder="Enter Branch Name" maxlength="30" />
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtBranch_Name" style="color: #333" class="">Branch Name</label>
+                                            <input type="text" class="form-control input-sm" name="Vendor.Branch_Name" id="txtBranch_Name" value="@Model.Vendor.Branch_Name" placeholder="Enter Branch Name" maxlength="30" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="txtIFSC_Code" style="color: #333" class="">IFSC Code</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Ifsc_Code" id="txtIFSC_Code" value="@Model.Vendor.Ifsc_Code" placeholder="Enter IFSC Code" maxlength="30" />
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtIFSC_Code" style="color: #333" class="">IFSC Code</label>
+                                            <input type="text" class="form-control input-sm" name="Vendor.Ifsc_Code" id="txtIFSC_Code" value="@Model.Vendor.Ifsc_Code" placeholder="Enter IFSC Code" maxlength="30" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <br>
-                                        <button type="button" id="btnAdd" class="btn btn-default bg-blue">+</button>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <br>
+                                            <button type="button" id="btnAdd" class="btn btn-default bg-blue">+</button>
+                                        </div>
                                     </div>
+
                                 </div>
 
                             </div>
-
-                        </div>
 
                         <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
                             @if (Model.Vendor.BankDetailsList.Count() == 0)
                             {
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive" style="margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditBankDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblBankDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Bank Name</th>
-                                                        <th>Account No.</th>
-                                                        <th>Branch Name</th>
-                                                        <th>IFSC Code</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody></tbody>
+                        <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBankDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblBankDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Bank Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Branch Name</th>
+                                                    <th>IFSC Code</th>
+                                                    <th>Action</th>                                                  
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
 
 
 
-                                            </table>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
+                            </div>
                             }
                             else
                             {
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive" style="margin: 50px 0;">
-                                            <input type="hidden" id="hdnIsEditBankDetails" value="false" />
-                                            <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                            <table class="table table-bordered" id="tblBankDetails">
-                                                <thead>
-                                                    <tr id="subhead">
-                                                        <th>Bank Name</th>
-                                                        <th>Account No.</th>
-                                                        <th>Branch Name</th>
-                                                        <th>IFSC Code</th>
-                                                        @*<th>Status</th>*@
-                                                        <th>Action</th>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive" style="margin: 50px 0;">
+                                        <input type="hidden" id="hdnIsEditBankDetails" value="false" />
+                                        <input type="hidden" id="hdnRowIdspecific" value="0" />
+                                        <table class="table table-bordered" id="tblBankDetails">
+                                            <thead>
+                                                <tr id="subhead">
+                                                    <th>Bank Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Branch Name</th>
+                                                    <th>IFSC Code</th>
+                                                    @*<th>Status</th>*@
+                                                    <th>Action</th>
+                                                   
+                                                </tr>
 
-                                                    </tr>
+                                                @if (Model.Vendor.BankDetailsList != null && Model.Vendor.BankDetailsList.Count() > 0)
+                                            {
+                                                int i = 1;
+                                                foreach (var itm in Model.Vendor.BankDetailsList)
+                                                {
+                                                    <tr id="tr@(i)">
+                                                        <td>
+                                                            <span id="trBankName@(i)"> @itm.Bank_Name</span>
+                                                            <input type="hidden" id="hdnbank_Name@(i)" name="Vendor.BankDetailsList[@(i-1)].Bank_Name" value="@itm.Bank_Name">
+                                                        </td>
+                                                        <td>
+                                                            <span id="trAccount_No@(i)"> @itm.Account_No</span>
+                                                            <input type="hidden" id="hdnaccount_No@(i)" name="Vendor.BankDetailsList[@(i-1)].Account_No" value="@itm.Account_No">
+                                                        </td>
 
-                                                    @if (Model.Vendor.BankDetailsList != null && Model.Vendor.BankDetailsList.Count() > 0)
-                                                    {
-                                                        int i = 1;
-                                                        foreach (var itm in Model.Vendor.BankDetailsList)
-                                                        {
-                                                            <tr id="tr@(i)">
-                                                                <td>
-                                                                    <span id="trBankName@(i)"> @itm.Bank_Name</span>
-                                                                    <input type="hidden" id="hdnbank_Name@(i)" name="Vendor.BankDetailsList[@(i-1)].Bank_Name" value="@itm.Bank_Name">
-                                                                </td>
-                                                                <td>
-                                                                    <span id="trAccount_No@(i)"> @itm.Account_No</span>
-                                                                    <input type="hidden" id="hdnaccount_No@(i)" name="Vendor.BankDetailsList[@(i-1)].Account_No" value="@itm.Account_No">
-                                                                </td>
+                                                        <td>
+                                                            <span id="trBranch_Name@(i)"> @itm.Branch_Name</span>
+                                                            <input type="hidden" id="hdnbranch_Name@(i)" name="Vendor.BankDetailsList[@(i-1)].Branch_Name" value="@itm.Branch_Name">
+                                                        </td>
+                                                        <td>
+                                                            <span id="trIfsc_Code@(i)"> @itm.Ifsc_Code</span>
+                                                            <input type="hidden" id="hdnifsc_Code@(i)" name="Vendor.BankDetailsList[@(i-1)].Ifsc_Code" value="@itm.Ifsc_Code">
+                                                        </td>
+                                                        @*<td>
+                                                            @if (itm.Status.ToString() == "True")
+                                                            {
+                                                                <span id="trStatus@(i)"> Active</span>
+                                                                <input type="hidden" id="hdnstatus@(i)" name="Vendor.BankDetailsList[@(i-1)].Status" value="true">
+                                                            }
+                                                            else
+                                                            {
+                                                                <span id="trStatus@(i)"> InActive</span>
+                                                                <input type="hidden" id="hdnstatus@(i)" name="Vendor.BankDetailsList[@(i-1)].Status" value="false">
+                                                            }
 
-                                                                <td>
-                                                                    <span id="trBranch_Name@(i)"> @itm.Branch_Name</span>
-                                                                    <input type="hidden" id="hdnbranch_Name@(i)" name="Vendor.BankDetailsList[@(i-1)].Branch_Name" value="@itm.Branch_Name">
-                                                                </td>
-                                                                <td>
-                                                                    <span id="trIfsc_Code@(i)"> @itm.Ifsc_Code</span>
-                                                                    <input type="hidden" id="hdnifsc_Code@(i)" name="Vendor.BankDetailsList[@(i-1)].Ifsc_Code" value="@itm.Ifsc_Code">
-                                                                </td>
-                                                                @*<td>
-                                                                        @if (itm.Status.ToString() == "True")
-                                                                        {
-                                                                            <span id="trStatus@(i)"> Active</span>
-                                                                            <input type="hidden" id="hdnstatus@(i)" name="Vendor.BankDetailsList[@(i-1)].Status" value="true">
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <span id="trStatus@(i)"> InActive</span>
-                                                                            <input type="hidden" id="hdnstatus@(i)" name="Vendor.BankDetailsList[@(i-1)].Status" value="false">
-                                                                        }
+                                                        </td>*@
 
-                                                                    </td>*@
+                                                        <td class='edit'>
+                                                            <button type='button' id='edit-bank-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBankDetailsData(@(i))'><i class='fa fa-pencil'></i></button> @*(" + trrow + ") Change by vinod mane on 19/09/2016*@
+                                                            <button type='button' id='delete-bank-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBankDetailsData(@(i))'><i class='fa fa-times'></i></button> @*(" + trrow + ")*@
 
-                                                                <td class='edit'>
-                                                                    <button type='button' id='edit-bank-details' class='btn btn-box-tool btn-tel-edit' onclick='javascript: EditBankDetailsData(@(i))'><i class='fa fa-pencil'></i></button> @*(" + trrow + ") Change by vinod mane on 19/09/2016*@
-                                                                    <button type='button' id='delete-bank-details' class='btn btn-box-tool btn-tel-delete' onclick='javascript: DeleteBankDetailsData(@(i))'><i class='fa fa-times'></i></button> @*(" + trrow + ")*@
-
-                                                            </tr>
+                                                        </tr>
                                                             i = i + 1;
-                                                        }
-                                                    }
-                                                </thead>
-                                                <tbody></tbody>
+                                                }
+                                            }
+                                            </thead>
+                                            <tbody></tbody>
 
 
 
-                                            </table>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
-
-                            }
+                            </div>
+    
+}
 
                         </div>
 
-
+                       
                         <div class="form-group" style="margin-bottom: 5px; padding-left: 10px; float: left;">
                             <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Set active.</span>@* Added by Vinod mane on 19/09/2016*@
@@ -753,11 +773,11 @@
                                     @*<input checked="" id="Flag" value="0" type="checkbox">*@
                                     <span></span>
                                 </label>
-                            </div>
+                                </div>
                             @*<input type="hidden" value="@Model.Vendor.IsActive" />*@
-                        </div>
+                            </div>
 
-
+                     
 
                         @*<div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">*@
 
@@ -769,18 +789,18 @@
                                 @*<a class="btn btn-danger active" id="btnCancel" role="button" href="@Url.Action("Search", "Vendor")">Cancel </a>*@
                             </div>
 
-                        </div>
+                            </div>
 
                         <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
                         </div>
 
 
 
-                    </div>
+                        </div>
 
-                </div>
+               </div>
 
-            </div>
+           </div>
         </form>
     </div>
 </div>

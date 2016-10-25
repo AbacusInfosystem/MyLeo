@@ -156,6 +156,36 @@ function ReArrangeBankDetailsData() {
 
 function AddBrandDetails() {
 
+
+ //Added by vinod mane on 25/10/2016
+        var Brand_Table = document.getElementById("tblBrandDetails");
+        var LengthOftable = Brand_Table.rows.length;
+
+
+        var old_Brand_NM = "";
+        var new_Brand_NM = "";
+
+        var count = 0;    
+            if (LengthOftable > 1) {
+                for (var x = 1; x < LengthOftable; x++) {
+
+                    new_Brand_NM = $("#drpBrand").val();
+                    old_Brand_NM = Brand_Table.rows[x].cells[0].children[1].value;
+
+                    if (new_Brand_NM == old_Brand_NM) {
+                     
+                        $("#hdnChk_Duplicate_Brand").show();
+                        $("#Duplicate_Brand_Message").html("You can not add duplicate Brand");
+                        return false;    
+                    }
+
+                }
+            }
+   
+            $("#hdnChk_Duplicate_Brand").hide
+            $("#Duplicate_Brand_Message").html(" ")
+    //End
+
     var rowID = $("#hdnRowIdspecific").val();
     var isEdit = $("#hdnIsEditBrandDetails").val();
 
@@ -184,6 +214,9 @@ function AddBrandDetails() {
         tr += "</tr>";
 
         $('#tblBrandDetails tr:last').after(tr)
+
+        $("#hdnBrand_Validation").hide();
+        $("#Brand_Message").html(" ");
     }
     else {
         $("#trBrandName" + rowID).text(brand_Name);
@@ -251,6 +284,34 @@ function ReArrangeBrandDetailsData() {
 
 function AddCategoryDetails() {
 
+   //Added by vinod mane on 25/10/2016
+        var Category_Table = document.getElementById("tblCategoryDetails");
+        var LengthOftable = Category_Table.rows.length;
+
+
+        var old_Categoty_NM = "";
+        var new_Categoty_NM = "";
+
+        var count = 0;    
+            if (LengthOftable > 1) {
+                for (var x = 1; x < LengthOftable; x++) {
+
+                    new_Categoty_NM = $("#drpCategory").val();
+                    old_Categoty_NM = Category_Table.rows[x].cells[0].children[1].value;
+
+                    if (new_Categoty_NM == old_Categoty_NM) {
+                     
+                        $("#hdnChk_Duplicate_Category").show();
+                        $("#Duplicate_Category_Message").html("You can not add duplicate Category");
+                        return false;    
+                    }
+
+                }
+            }
+            $("#hdnChk_Duplicate_Category").hide();
+            $("#Duplicate_Category_Message").html("");
+//End
+
     var rowID = $("#hdnRowIdspecific").val();
     var isEdit = $("#hdnIsEditCategoryDetails").val();
 
@@ -277,6 +338,9 @@ function AddCategoryDetails() {
             tr += "</tr>";
 
             $('#tblCategoryDetails tr:last').after(tr)
+
+            $("#hdnCategory_Validation").hide();
+            $("#Category_Message").html(" ");
         }
         else {
             $("#trCategoryName" + rowID).text(category_Name);
@@ -346,6 +410,34 @@ function ReArrangeCategoryDetailsData() {
 
 function AddSubCategoryDetails() {
 
+    //Added by vinod mane on 25/10/2016
+    var SubCategory_Table = document.getElementById("tblSubCategoryDetails");
+    var LengthOftable = SubCategory_Table.rows.length;
+
+
+    var old_SubCategory_NM = "";
+    var new_SubCategory_NM = "";
+
+    var count = 0;
+    if (LengthOftable > 1) {
+        for (var x = 1; x < LengthOftable; x++) {
+
+            new_SubCategory_NM = $("#drpSubCategory").val();
+            old_SubCategory_NM = SubCategory_Table.rows[x].cells[0].children[1].value;
+
+            if (new_SubCategory_NM == old_SubCategory_NM) {
+
+                $("#hdnChk_Duplicate_SubCategorys").show();
+                $("#Duplicate_SubCategorys_Message").html("You can not add duplicate SubCategory");
+                return false;
+            }
+
+        }
+    }
+    $("#hdnChk_Duplicate_SubCategorys").hide();
+    $("#Duplicate_SubCategorys_Message").html("");
+    //End
+
     var rowID = $("#hdnRowIdspecific").val();
     var isEdit = $("#hdnIsEditSubCategoryDetails").val();
 
@@ -372,6 +464,9 @@ function AddSubCategoryDetails() {
             tr += "</tr>";
 
             $('#tblSubCategoryDetails tr:last').after(tr)
+
+            $("#hdnSubCategory_Validation").hide();
+            $("#SubCategory_Message").html(" ");
         }
         else {
             $("#trSubCategoryName" + rowID).text(subcategory_Name);
@@ -385,7 +480,7 @@ function ResetSubCategoryDetailsData() {
 
     $("#hdnRowIdspecific").val(0);
 
-    $("#drpSubCategory").val(0);
+    $("#drpSubCategory").val(0);    
 
     $("#hdnIsEditSubCategoryDetails").val(false);
 
@@ -549,7 +644,7 @@ function Get_SubCategorylist(Caterory_id)
                   for (var i = 0; i < result.length; i++) {
                       arr.push(result[i]);
                   }
-                  options += '<option value="' + "" + '">' + "Select Sub Category" + '</option>';
+                  options += '<option value="' + "0" + '">' + "Select Sub Category" + '</option>';
                   for (var i = 0; i < arr.length; i++) {
                       options += '<option  value="' + arr[i].SubCategory_Id + '">' + arr[i].SubCategory_Name + '</option>';
                   }
@@ -558,3 +653,25 @@ function Get_SubCategorylist(Caterory_id)
 
 }
 //end
+
+    //Added By Vinod Mane on 25/10/2016
+function ResetVendor() {
+   
+    if  ($("#hdf_Vendor_Id").val()==0)
+    {
+        $("#tblBrandDetails").find("tr:gt(0)").remove();
+        $("#tblCategoryDetails").find("tr:gt(0)").remove();
+        $("#tblSubCategoryDetails").find("tr:gt(0)").remove();
+        $("#tblBankDetails").find("tr:gt(0)").remove();
+   
+        $("#hdnChk_Duplicate_Brand").hide
+        $("#Duplicate_Brand_Message").html(" ")
+
+        $("#hdnChk_Duplicate_Category").hide();
+        $("#Duplicate_Category_Message").html("");
+
+        $("#hdnChk_Duplicate_SubCategorys").hide();
+        $("#Duplicate_SubCategorys_Message").html("");
+    }
+}
+//End

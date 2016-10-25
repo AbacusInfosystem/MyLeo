@@ -103,6 +103,8 @@ namespace MyLeoRetailerInfo.Vendor
         public List<Brand_Details> BrandDetailsList { get; set; }
 
         public List<SubCategory_Details> SubCategoryDetailsList { get; set; }
+
+       
      
 
         public VendorInfo()

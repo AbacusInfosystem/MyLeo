@@ -45,7 +45,9 @@ $(function () {
         Get_SizeGroups();
     });
 
-
+    $("#btnResetSizeGroup").click(function () {
+        Reset_SizeGroup();
+    });
 
 });
 

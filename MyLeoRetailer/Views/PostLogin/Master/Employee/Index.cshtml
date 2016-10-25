@@ -5,7 +5,7 @@
 <script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_validation.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_events.js"></script>
-<script src="~/Scripts/Modules/Employee/employee_methods.js"></script>
+@*<script src="~/Scripts/Modules/Employee/employee_methods.js"></script>*@
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -43,7 +43,7 @@
                     <h4 style="margin-top: 0px;">Basic information.</h4>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" id="txtEmployee_Name" maxlength="100"/>
+                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" id="txtEmployee_Name" maxlength="50" />
                         <input type="hidden" class="form-control" id="hdn_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id" />
                         @*Added by vinod mane on 27/09/2016*@
                         <input type="hidden" id="hdnEmployee_Name" value="@Model.Employee.Employee_Name" />
@@ -92,11 +92,11 @@
                            <label class="switch">
                                @if (Model.Employee.IsActive == true)
                                {
-                                <input value="@Model.Employee.IsActive" name="Employee.IsActive" type="checkbox" id="Flag">
+                                <input value="True" name="Employee.IsActive" checked="checked" type="checkbox" id="Flag">
                                }
                                else
                                {
-                                <input value="@Model.Employee.IsActive" name="Employee.IsActive" checked="checked" type="checkbox" id="Flag">
+                                <input value="False" name="Employee.IsActive"  type="checkbox" id="Flag">
                                }
                                @*<input checked="" id="Flag" value="0" type="checkbox">*@
                                <span></span>
