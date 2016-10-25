@@ -153,7 +153,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 pager = gvViewModel.Grid_Detail.Pager;
 
-                gvViewModel.Grid_Detail = Set_Grid_Details(false, "Gift_Voucher_No,Person_Name,Gift_Voucher_Date,Gift_Voucher_Expiry_Date,Gift_Voucher_Amount,Payment_Mode,Bank_Name,Credit_Card_No", "Gift_Voucher_Id"); // Set grid info for front end listing
+                gvViewModel.Grid_Detail = Set_Grid_Details(false, "Gift_Voucher_No,Person_Name,Gift_Voucher_Date,Gift_Voucher_Expiry_Date,Gift_Voucher_Amount,Bank_Name,Credit_Card_No", "Gift_Voucher_Id"); // Set grid info for front end listing
 
                 gvViewModel.Grid_Detail.Records = gvRepo.Get_Gift_Vouchers(gvViewModel.Query_Detail); // Call repo method 
 
@@ -189,5 +189,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return View("Index", gvViewModel);
         }
 
+        public JsonResult Check_Existing_Gift_Voucher_No(string Gift_Voucher_No)
+        {
+            bool check = false;
+            try
+            {
+                check = gvRepo.Check_Existing_Gift_Voucher_No(Gift_Voucher_No);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("GiftVoucher Controller - Check_Existing_Gift_Voucher_No : " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
     }
 }

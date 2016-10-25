@@ -3,7 +3,8 @@ $(function () {
     $("#frmGiftVoucher").validate({
         rules: {
             "GiftVoucher.Gift_Voucher_No": {
-                required: true
+                required: true,
+                Validate_Gift_Voucher: true
             },
 
             "GiftVoucher.Person_Name": {
@@ -77,5 +78,25 @@ $(function () {
 
 
     }, 'Please Select valid date');
+
+    jQuery.validator.addMethod("Validate_Gift_Voucher", function (value, element) {
+        var result = true;
+
+        if ($("#txtGiftVoucherNo").val() != "" && $("#hdn_GiftVoucherNo").val() != $("#txtGiftVoucherNo").val()) {
+            $.ajax({
+                url: '/GiftVoucher/check-gift-voucher-no',
+                data: { Gift_Voucher_No: $("#txtGiftVoucherNo").val() },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == true) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Gift voucher no is already exists.");
 
 });

@@ -118,6 +118,8 @@ function Reset_Brand()
     $("#hdnBrand_Name").val("");
 
     document.getElementById('Flag').checked = false;
+
+   
 }
 
 function Get_Brand_By_Id(obj)

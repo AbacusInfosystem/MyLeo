@@ -64,6 +64,16 @@ namespace MyLeoRetailer
             //End
             #endregion
 
+            #region GiftVoucher
+
+            routes.MapRoute(
+            name: "GiftVoucher-1",
+            url: "GiftVoucher/check-gift-voucher-no/{Gift_Voucher_No}",
+            defaults: new { controller = "GiftVoucher", action = "Check_Existing_Gift_Voucher_No", Gift_Voucher_No = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
+
             #region Category
 
             routes.MapRoute(

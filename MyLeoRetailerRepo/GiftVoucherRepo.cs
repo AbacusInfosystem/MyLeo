@@ -137,5 +137,29 @@ namespace MyLeoRetailerRepo
            return GiftVoucher;
        }
 
+       public bool Check_Existing_Gift_Voucher_No(string Gift_Voucher_No)
+       {
+           bool check = false;
+
+           List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+           sqlParam.Add(new SqlParameter("@Gift_Voucher_No", Gift_Voucher_No));
+
+           DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.Check_Existing_Gift_Voucher_No.ToString(), CommandType.StoredProcedure);
+
+           if (dt != null && dt.Rows.Count > 0)
+           {
+               List<DataRow> drList = new List<DataRow>();
+
+               drList = dt.AsEnumerable().ToList();
+
+               foreach (DataRow dr in drList)
+               {
+                   check = Convert.ToBoolean(dr["check_Gift_Voucher"]);
+               }
+           }
+
+           return check;
+       }
     }
 }

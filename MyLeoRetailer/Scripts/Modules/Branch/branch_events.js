@@ -42,5 +42,8 @@
         $("#txtFar_Location_Pincode").rules("remove");
     });
 
+    $("#btnCancleBranch").click(function () {
+        Reset_Branch();
+    });
 
 });
