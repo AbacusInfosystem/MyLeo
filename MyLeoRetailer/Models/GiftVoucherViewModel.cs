@@ -28,6 +28,7 @@ namespace MyLeoRetailer.Models
 
             Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
 
+
     }
 
         public GridInfo Grid_Detail
