@@ -156,7 +156,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 dataOperator = DataOperator.Like.ToString() + "," + DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
 
-                eViewModel.Query_Detail = Set_Query_Details(false, "Employee_Name,Employee_Address,Employee_City,Employee_EmailId,Employee_Id", "", "Employee", "Employee_Name,IsActive", filter, dataOperator); // Set query for grid
+                eViewModel.Query_Detail = Set_Query_Details(false, "Employee_Name,Employee_Address,Employee_City,Employee_EmailId,Employee_Id", "", "Employee", "Employee_Name", filter, dataOperator); // Set query for grid
 
                 pager = eViewModel.Grid_Detail.Pager;
 

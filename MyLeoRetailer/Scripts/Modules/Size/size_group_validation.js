@@ -19,59 +19,73 @@ $(function () {
         rules: {
             "SizeGroup.Size1":
                 {
-                    validate_Textbox_Empty: true
+                    validate_Textbox_Empty: true,
+                    positiveNumber: true
                 },
             "SizeGroup.Size2":
                {
-                   validate_Textbox_Empty2: true
+                   validate_Textbox_Empty2: true,
+                   positiveNumber: true
                },
             "SizeGroup.Size3":
               {
-                  validate_Textbox_Empty3: true
+                  validate_Textbox_Empty3: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size4":
               {
-                  validate_Textbox_Empty4: true
+                  validate_Textbox_Empty4: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size5":
               {
-                  validate_Textbox_Empty5: true
+                  validate_Textbox_Empty5: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size6":
               {
-                  validate_Textbox_Empty6: true
+                  validate_Textbox_Empty6: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size7":
               {
-                  validate_Textbox_Empty7: true
+                  validate_Textbox_Empty7: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size8":
               {
-                  validate_Textbox_Empty8: true
+                  validate_Textbox_Empty8: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size9":
               {
-                  validate_Textbox_Empty9: true
+                  validate_Textbox_Empty9: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size10":
               {
-                  validate_Textbox_Empty10: true
+                  validate_Textbox_Empty10: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size11":
               {
-                  validate_Textbox_Empty11: true
+                  validate_Textbox_Empty11: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size12":
               {
-                  validate_Textbox_Empty12: true
+                  validate_Textbox_Empty12: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size13":
               {
-                  validate_Textbox_Empty13: true
+                  validate_Textbox_Empty13: true,
+                  positiveNumber: true
               },
             "SizeGroup.Size14":
               {
-                  validate_Textbox_Empty14: true
+                  validate_Textbox_Empty14: true,
+                  positiveNumber: true
               },
         },
     });
@@ -81,12 +95,11 @@ $(function () {
 jQuery.validator.addMethod("validate_Textbox_Empty", function (value, element) {
 
     var result = true;
- {
+    {
 
-     if ($("#txtSize1").val() == '' && $("#txtSize2").val() != '')
-     {
-         result = false;
-     }
+        if ($("#txtSize1").val() == '' && $("#txtSize2").val() != '') {
+            result = false;
+        }
     }
     return result;
 
@@ -95,10 +108,9 @@ jQuery.validator.addMethod("validate_Textbox_Empty", function (value, element) {
 jQuery.validator.addMethod("validate_Textbox_Empty2", function (value, element) {
 
     var result = true;
-    {        
-        if ($("#txtSize2").val() == '' && $("#txtSize3").val() != '')
-        {
-            result = false;       
+    {
+        if ($("#txtSize2").val() == '' && $("#txtSize3").val() != '') {
+            result = false;
         }
     }
     return result;
@@ -109,8 +121,7 @@ jQuery.validator.addMethod("validate_Textbox_Empty3", function (value, element) 
 
     var result = true;
     {
-        if ($("#txtSize3").val() == '' && $("#txtSize4").val() != '')
-        {
+        if ($("#txtSize3").val() == '' && $("#txtSize4").val() != '') {
             result = false;
         }
     }
@@ -122,8 +133,7 @@ jQuery.validator.addMethod("validate_Textbox_Empty4", function (value, element) 
 
     var result = true;
     {
-        if ($("#txtSize4").val() == '' && $("#txtSize5").val() != '')
-        {
+        if ($("#txtSize4").val() == '' && $("#txtSize5").val() != '') {
             result = false;
         }
     }
@@ -135,8 +145,7 @@ jQuery.validator.addMethod("validate_Textbox_Empty5", function (value, element) 
 
     var result = true;
     {
-        if ($("#txtSize5").val() == '' && $("#txtSize6").val() != '')
-        {
+        if ($("#txtSize5").val() == '' && $("#txtSize6").val() != '') {
             result = false;
         }
     }
@@ -148,8 +157,7 @@ jQuery.validator.addMethod("validate_Textbox_Empty6", function (value, element) 
 
     var result = true;
     {
-        if ($("#txtSize6").val() == '' && $("#txtSize7").val() != '')
-        {
+        if ($("#txtSize6").val() == '' && $("#txtSize7").val() != '') {
             result = false;
         }
     }
@@ -161,8 +169,7 @@ jQuery.validator.addMethod("validate_Textbox_Empty7", function (value, element) 
 
     var result = true;
     {
-        if ($("#txtSize7").val() == '' && $("#txtSize8").val() != '')
-        {
+        if ($("#txtSize7").val() == '' && $("#txtSize8").val() != '') {
             result = false;
         }
     }
@@ -174,8 +181,7 @@ jQuery.validator.addMethod("validate_Textbox_Empty8", function (value, element) 
 
     var result = true;
     {
-        if ($("#txtSize8").val() == '' && $("#txtSize9").val() != '')
-        {
+        if ($("#txtSize8").val() == '' && $("#txtSize9").val() != '') {
             result = false;
         }
     }
@@ -187,8 +193,7 @@ jQuery.validator.addMethod("validate_Textbox_Empty9", function (value, element) 
 
     var result = true;
     {
-        if ($("#txtSize9").val() == '' && $("#txtSize10").val() != '')
-        {
+        if ($("#txtSize9").val() == '' && $("#txtSize10").val() != '') {
             result = false;
         }
     }
@@ -293,6 +298,23 @@ $(document).ready(function () {
         return result;
 
     }, "Size Group is already exists.");
+
+    jQuery.validator.addMethod('positiveNumber', function (value) {// /^-?\d{2}(\.\d+)?$/
+        var result = false;
+        var match = (/^\-?[0-9]*\.?[0-9]+$/).exec(value);
+        //alert(match);
+        var char = (/^[a-zA-Z0-9]+$/).exec(value);
+        //alert(char);
+        if (!isNaN(match)) {
+            if (match > 0)
+                return true;
+        }
+
+        if (char != null) { 
+            return true;
+        }
+
+    }, 'Enter a positive and greater than 0 number.');
 
 });
 //End
