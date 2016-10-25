@@ -30,7 +30,7 @@
 
             Bind_Grid(obj, "SalesOrder_List");
 
-            Reset_SalesOrder();
+           // Reset_SalesOrder();
 
             $('btnPrint').hide();
 

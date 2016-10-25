@@ -43,7 +43,7 @@
             Bind_Grid(obj, "SalesOrder_List");
 
 
-            Reset_SalesOrder();
+           Reset_SalesOrder();
             
         
             $("#divSalesReportPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
