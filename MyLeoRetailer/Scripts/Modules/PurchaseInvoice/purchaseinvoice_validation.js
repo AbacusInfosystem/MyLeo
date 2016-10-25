@@ -104,20 +104,6 @@
         }
     });
 
-    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
-        var result = true;
-        var id = $(element).attr('id')
-        id = id.replace("hdnSKU_No_", "");
-
-        $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
-
-            if (id != j && $(element).val() == $("#hdnSKU_No_" + j).val()) {
-                result = false;
-            }
-        });
-
-        return result;
-    }, "Already mapped.");
-
+   
    
 });

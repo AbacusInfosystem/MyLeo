@@ -162,7 +162,7 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onchange='Add_Validation(" + i + ");' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -300,6 +300,27 @@ function Add_Validation(i) {
 
     $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 
+    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
+        var result = true;
+        var id = $(element).attr('id')
+        id = id.replace("hdnSKU_No_", "");
+
+        //Changes Pending//
+
+        var PO_Id = $("#hdnPurchase_Order_Id_" + i).val();
+
+
+        $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#hdnSKU_No_" + j).val() && PO_Id == $("#hdnPurchase_Order_Id_" + j).val()) {
+
+                result = false;
+            }
+        });
+
+        return result;
+    }, "Already mapped.");
+
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
@@ -307,19 +328,29 @@ function Add_Validation(i) {
         var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
         var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (EnterQty != "" && EnterQty != 0) {
+        if (isNaN($("#hdnQuantity_" + i).val()) || $("#hdnQuantity_" + i).val() == "") {
+            result = true;
+        }
+        else {
 
-            if (OrgQty >= EnterQty) {
-                result = true;
+            if (EnterQty != "" || $('[id="textQuantity_' + i + '"]').val() != '0') {
+
+                if (OrgQty >= EnterQty) {
+
+                    result = true;
+                }
+                else {
+                    result = false;
+                }
+
             }
-            else
-            {
+            else {
                 result = false;
-            }          
+            }
         }
         return result;
 
-    }, "Quantity greater than PO Quantity.");
+    }, "Quantity greater than PO Quantity And Not Zero.");
 }
 
 function DeletePurchaseInvoiceDetailsData(i) {
@@ -422,7 +453,7 @@ function ReArrangePurchaseInvoiceDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity");
-                //$(newTR).find("[id^='textQuantity_']").attr("onchange", "javascript:textQuantity_(" + i + ")");
+                $(newTR).find("[id^='textQuantity_']").attr("onchange", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {

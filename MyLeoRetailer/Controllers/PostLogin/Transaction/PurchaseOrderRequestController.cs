@@ -235,9 +235,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     poreqViewModel = (PurchaseOrderRequestViewModel)TempData["poreqViewModel"];
                 }
 
-                poreqViewModel.PurchaseOrderRequest = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Details_By_Id(poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id);
+                poreqViewModel.PurchaseOrderRequest = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Details_By_Id(poreqViewModel.Filter.Purchase_Order_Request_Id);
 
-                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequestItems = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Items(poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id);
+                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequestItems = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Items(poreqViewModel.Filter.Purchase_Order_Request_Id);
 
             }
             catch (Exception ex)
@@ -287,9 +287,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 Logger.Error("PurchaseOrderRequestController - Insert_Purchase_Order_Request : " + ex.ToString());
             }
 
+            TempData["poreqViewModel"] = (PurchaseOrderRequestViewModel)poreqViewModel;
 
-
-            return View("Search", poreqViewModel);
+            return RedirectToAction("Search", poreqViewModel);
         }
 
 
