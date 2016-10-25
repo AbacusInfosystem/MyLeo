@@ -345,7 +345,7 @@
                                             <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" onchange="Add_Validation(0);" onblur="    javascript: CalculateTotal();" maxlength="10"/>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" @*onchange="Add_Validation(0);"*@ onfocusout="Add_Validation(0);" onblur="javascript: CalculateTotal();" maxlength="10" />
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].WSR_Price" value="0" id="textWSR_Price_0" readonly />

@@ -31,8 +31,7 @@ $(function () {
         }
 
     });
-
-
+     
 
     if ($("#hdnColorIds").val() != null && $("#hdnColors").val() != null && $("#hdn_ProductId").val() != 0 && $("#hdnVendorCodes").val() != null) {
         var ColorId = $("#hdnColorIds").val().split(",");
@@ -135,9 +134,9 @@ $(function () {
         $("#frmProductMRP").find(".Product:visible").find("[id^='hdnMrpStatus']").val(false);
         if ($(this).prop('checked')) {
             $(this).val(true);
-            var parentRow = $(this).closest('table');
+            var Row = $(this).closest('tr');
             //alert($(parentRow).html());
-            var hiddenField = $(parentRow).find("[id^='hdnMrpStatus']");
+            var hiddenField = $(Row).find("[id^='hdnMrpStatus']");
             $(hiddenField).val(this.value);
             //alert($(hiddenField).val(this.value));
         }
