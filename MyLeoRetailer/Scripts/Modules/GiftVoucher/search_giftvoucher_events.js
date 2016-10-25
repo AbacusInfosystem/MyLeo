@@ -9,7 +9,7 @@ $(function () {
     });
 
 
-    $(document).on("click", "[name='Gift_Voucher_List']", function () {
+    $(document).on("change", "[name='Gift_Voucher_List']", function () {
         Get_Gift_Voucher_By_Id(this);
     });
 
@@ -54,8 +54,8 @@ $(function () {
     $('#drpTransaction').trigger('change');
 
     //Added By Vinod Mane on 22/09/2016
-    $(document).on("change", "#hdnGift_Voucher_No", function () {
-        Get_Gift_Vouchers();
-    });
+    //$(document).on("change", "#hdnGift_Voucher_No", function () {
+    //    Get_Gift_Vouchers();
+    //});
    
 });
