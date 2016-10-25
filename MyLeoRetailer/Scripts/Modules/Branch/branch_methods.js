@@ -194,3 +194,14 @@ function ReArrangeFarDetailsData() {
 }
 //End
 
+function Reset_Branch() {
+    
+    //$('#tblPurchaseInvoiceItems tbody tr').remove();
+
+    //$('#tblPurchaseInvoiceItems tbody tr').remove();
+
+    $("#tblNearDetails").find('[id^="tr"]').remove();
+
+    $("#tblFarDetails").find('[id^="tr"]').remove();
+
+}

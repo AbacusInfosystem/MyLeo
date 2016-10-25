@@ -32,16 +32,16 @@ namespace MyLeoRetailerRepo
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            if (PurchaseInvoice.Purchase_Invoice_Id != 0)
-            {
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
-            }
-            else
-            {
+            //if (PurchaseInvoice.Purchase_Invoice_Id != 0)
+            //{
+            //    //sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+            //}
+            //else
+            //{
                 sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
 
                 sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
-            }
+           // }
 
             sqlParams.Add(new SqlParameter("@Purchase_Invoice_No", PurchaseInvoice.Purchase_Invoice_No));
 
@@ -271,42 +271,39 @@ namespace MyLeoRetailerRepo
 
         public int Insert_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
         {
-            using (TransactionScope scope = new TransactionScope())
-            {
+
             PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
 
             foreach (var item in PurchaseInvoice.PurchaseInvoices)
             {
                 List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-                    item.Purchase_Invoice_Id = PurchaseInvoice.Purchase_Invoice_Id;                    
+                item.Purchase_Invoice_Id = PurchaseInvoice.Purchase_Invoice_Id;
 
-                    sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice_Item(item), Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
-                
-                   
+                sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice_Item(item), Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
+
+
                 //--------Added by aditya 05102016 [start]------------------------------
-                   sqlParams = new List<SqlParameter>();
-                   
-                   sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
-                   
-                   sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
-                   
-                   sqlParams.Add(new SqlParameter("@Article_Number", item.Article_No));
-                   
-                   sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
-                   
-                   sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
-                   
-                   sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
-                   
-                   sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
-                   
-                   sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
-                   
-                   sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Product_Warehouse.ToString(), CommandType.StoredProcedure);
+                sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+
+                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+
+                sqlParams.Add(new SqlParameter("@Article_Number", item.Article_No));
+
+                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+
+                sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
+
+                sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
+
+                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
+
+                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
+
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Product_Warehouse.ToString(), CommandType.StoredProcedure);
                 //--------Added by aditya 05102016 [end]------------------------------
-                }
-                scope.Complete();
 
             }
 

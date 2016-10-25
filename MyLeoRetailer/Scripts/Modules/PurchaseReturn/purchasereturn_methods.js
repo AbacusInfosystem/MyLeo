@@ -202,7 +202,7 @@ function AddPurchaseReturnDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='1'  onchange='Add_Validation(" + i + ");' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
     //tblHtml += "<input class='form-control input-sm' type='hidden' name='' id='hdnQuantity_" + i + "' value='' /> ";
     tblHtml += "</td>";
 
@@ -323,9 +323,7 @@ function CalculateTotal() {
 }
 
 function Add_Validation(i) {
-
-    //$("#frmPurchaseReturn").validate();
-
+      
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
 
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
@@ -336,10 +334,21 @@ function Add_Validation(i) {
         var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
         var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (EnterQty != "" && EnterQty != 0) {
+        if (isNaN($("#hdnQuantity_" + i).val()) || $("#hdnQuantity_" + i).val() == "") {
+            result = true;
+        }
+        else {
 
-            if (OrgQty >= EnterQty) {
-                result = true;
+            if (EnterQty != "" || $('[id="textQuantity_' + i + '"]').val() != '0') {
+
+                if (OrgQty >= EnterQty) {
+
+                    result = true;
+                }
+                else {
+                    result = false;
+                }
+
             }
             else {
                 result = false;
@@ -347,7 +356,8 @@ function Add_Validation(i) {
         }
         return result;
 
-    }, "Quantity less than Invoice Quantity.");
+
+    }, "Quantity less than Invoice Quantity And Not Zero.");
 
 }
 
@@ -460,7 +470,7 @@ function ReArrangePurchaseReturnDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Quantity");
-                //$(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
+                $(newTR).find("[id^='textQuantity_']").attr("onchange", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {
@@ -572,7 +582,7 @@ function Bind_Purchase_Return_Items_Data(data)
             trHtml += "</td>";
 
             trHtml += "<td>";
-            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='" + data.PurchaseReturns[i].Quantity + "' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+            trHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='" + data.PurchaseReturns[i].Quantity + "'  onchange='Add_Validation(" + i + ");' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
             trHtml += "</td>";
 
             trHtml += "<td>";

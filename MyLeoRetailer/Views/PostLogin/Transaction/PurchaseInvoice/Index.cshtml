@@ -1,4 +1,7 @@
 ﻿@model MyLeoRetailer.Models.PurchaseInvoiceViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
+
 
 <script src="~/Scripts/Modules/PurchaseInvoice/purchaseinvoice_validation.js"></script>
 <script src="~/Scripts/Modules/PurchaseInvoice/purchaseinvoice_events.js"></script>
@@ -127,7 +130,7 @@
                             <div class="block">
                                 <h4 style="margin-top: 0px;">Vendor Details.</h4>
 
-                                <input type="hidden" class="form-control input-sm" id="hdf_Vendor_Id">
+                                <input type="hidden" class="form-control input-sm" id="hdf_Vendor_Id" value="x">
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
@@ -342,7 +345,7 @@
                                             <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" maxlength="10"/>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" onchange="Add_Validation(0);" onblur="    javascript: CalculateTotal();" maxlength="10"/>
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].WSR_Price" value="0" id="textWSR_Price_0" readonly />

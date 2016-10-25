@@ -275,9 +275,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 Logger.Error("PurchaseReturnController - Insert_Purchase_Return : " + ex.ToString());
             }
 
+            TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
 
-
-            return View("Search", prViewModel);
+            return RedirectToAction("Search", prViewModel);
         }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Edit)]
