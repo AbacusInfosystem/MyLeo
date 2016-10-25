@@ -7,7 +7,7 @@ $(function () {
     Get_Vendor_Contacts();
 
     $("[name='Filter.Vendor_Contact_Name']").focusout(function () {
-
+        document.getElementById('btnVendorContact').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendor_Contacts();
     });
 
@@ -44,6 +44,7 @@ $(function () {
 
     //Added By Vinod Mane on 22/09/2016
     $(document).on("change", "#hdnVendorContactId", function () {
+        document.getElementById('btnVendorContact').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendor_Contacts();
     });
     //End

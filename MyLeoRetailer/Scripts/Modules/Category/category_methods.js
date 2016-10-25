@@ -126,6 +126,7 @@ function Reset_Category()
     //Added by Vinod Mane on 26/09/2016
 	$("#hdnCategory_Name").val("");
     //End
+	$("[name='Category_List']").removeClass("active");//Added by vinod mane on 25/10/2016
 }
 
 function Get_Category_By_Id(obj)

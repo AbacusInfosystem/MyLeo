@@ -6,14 +6,17 @@
     Get_Product_Dispatch();
 
     $("[id='txtBranch_Name']").focusout(function () {
+        document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Product_Dispatch();
     });
 
     $(document).on("change", "#hdnBranchName", function () {
+        document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Product_Dispatch();
     });
 
     $("#drpStatus").change(function () {
+        document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
        Get_Product_Dispatch();
     });
 
@@ -122,6 +125,7 @@ jQuery.validator.addMethod("validate_Date", function (value, element) {
         }
         else
         {
+            document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
             Get_Product_Dispatch();
         }
 
