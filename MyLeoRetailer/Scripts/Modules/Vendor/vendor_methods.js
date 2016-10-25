@@ -657,19 +657,21 @@ function Get_SubCategorylist(Caterory_id)
     //Added By Vinod Mane on 25/10/2016
 function ResetVendor() {
    
-    $("#tblBrandDetails").find("tr:gt(0)").remove();
-    $("#tblCategoryDetails").find("tr:gt(0)").remove();
-    $("#tblSubCategoryDetails").find("tr:gt(0)").remove();
-    $("#tblBankDetails").find("tr:gt(0)").remove();
+    if  ($("#hdf_Vendor_Id").val()==0)
+    {
+        $("#tblBrandDetails").find("tr:gt(0)").remove();
+        $("#tblCategoryDetails").find("tr:gt(0)").remove();
+        $("#tblSubCategoryDetails").find("tr:gt(0)").remove();
+        $("#tblBankDetails").find("tr:gt(0)").remove();
    
-    $("#hdnChk_Duplicate_Brand").hide
-    $("#Duplicate_Brand_Message").html(" ")
+        $("#hdnChk_Duplicate_Brand").hide
+        $("#Duplicate_Brand_Message").html(" ")
 
-    $("#hdnChk_Duplicate_Category").hide();
-    $("#Duplicate_Category_Message").html("");
+        $("#hdnChk_Duplicate_Category").hide();
+        $("#Duplicate_Category_Message").html("");
 
-    $("#hdnChk_Duplicate_SubCategorys").hide();
-    $("#Duplicate_SubCategorys_Message").html("");
-
+        $("#hdnChk_Duplicate_SubCategorys").hide();
+        $("#Duplicate_SubCategorys_Message").html("");
+    }
 }
 //End
