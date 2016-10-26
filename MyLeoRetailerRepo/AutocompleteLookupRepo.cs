@@ -361,7 +361,7 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
-                if (table_Name == "Purchase_order_request")
+                if (table_Name == "Purchase_Order_Request")
                 {
                     if (fieldName == "Branch_Id")
                     {

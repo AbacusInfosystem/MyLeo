@@ -15,9 +15,13 @@
         }
     });
 
-    //$("[name='Filter.Debit_Note_No']").onchange(function () {
-    //    Get_Purchase_Returns();
-    //});
+    $("[name='Filter.Debit_Note_No']").focusout(function () {
+        Get_Purchase_Returns();
+    });
+
+    $(document).on("change", "#hdnPurchaseReturnId", function () {
+        Get_Purchase_Returns();
+    });
 
 
     $("#btnCreatePurchaseReturn").click(function () {
