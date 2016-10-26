@@ -29,7 +29,7 @@
 
             Bind_Grid(obj, "Purchase_Return_List");
 
-           // Reset_PurchaseReturn();
+            //Reset_PurchaseReturn();
 
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 

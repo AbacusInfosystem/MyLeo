@@ -14,14 +14,17 @@
     });
 
     $("#btnSearchPayable").click(function () {
-
+        document.getElementById('btnPay').disabled = true;//Added by vinod mane on 26/10/2016
         Get_Payable();
     });
+    //commented by vinod mane on 26/10/2016
+    //$("#btnResetPayable").click(function () {
 
-    $("#btnResetPayable").click(function () {
+    //    Reset_Payable();//Added by vinod mane on 26/10/2016
+    //   // Get_Payable();//commented by vinod mane on 26/10/2016
+    //});
 
-        Get_Payable();
-    });
+    //End
 
     $("#btnPay").click(function () {
 
@@ -41,7 +44,11 @@
     //    }
     //});
 
-   
-
+    //Added By Vinod Mane on 26/10/2016
+    $(document).on("change", "#hdnVendorName", function () {
+        document.getElementById('btnPay').disabled = true;
+        Get_Payable();
+    });
+    //End
 
 });

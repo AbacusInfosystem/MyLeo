@@ -42,7 +42,7 @@ function Get_Payable() {
 
             Bind_Grid(obj, "Payable_List");
 
-            Reset_Payable();
+           // Reset_Payable();
 
             $("#divPayablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -51,15 +51,23 @@ function Get_Payable() {
         }
     });
 }
+//commented by vinod mane on 26/10/2016
 
-function Reset_Payable() {
-    $("[name='Payable.From_Date']").val("");
+//function Reset_Payable() {
 
-    $("[name='Payable.To_Date']").val("");
+//    $("[name='Payable.From_Date']").val("");
 
-    $("[name='Payable.Vendor_Name']").val("");
+//    $("[name='Payable.To_Date']").val("");
 
-    $("[name='Payable.Payament_Status']").val("");
+//    $("[name='Payable.Vendor_Name']").val("");
 
-    document.getElementById("btnPay").disabled = true;
-}
+//    $("[name='Payable.Payament_Status']").val("");
+
+//    document.getElementById("btnPay").disabled = true;
+//    $("#lookupUlLookup").val("");
+   
+
+//    Get_Payable();
+//}
+
+//End
