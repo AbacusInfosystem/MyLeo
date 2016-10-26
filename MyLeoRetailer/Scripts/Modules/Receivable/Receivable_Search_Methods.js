@@ -40,7 +40,7 @@
 
             Bind_Grid(obj, "Receivable_List");
 
-            Reset_Recevable();
+            //Reset_Recevable();
 
             $("#divReceivablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -50,17 +50,21 @@
     });
 }
 
-function Reset_Recevable()
-{
-    $("[name='Receivable.From_Date']").val("");
+// commented by vinod mane on 26/10/2016
+//function Reset_Recevable()
+//{
+//    $("[name='Receivable.From_Date']").val("");
 
-    $("[name='Receivable.To_Date']").val("");
+//    $("[name='Receivable.To_Date']").val("");
 
-    $("[name='Receivable.Sales_Invoice_No']").val("");
+//    $("[name='Receivable.Sales_Invoice_No']").val("");
 
-    $("[name='Receivable.Customer_Name']").val("");
+//    $("[name='Receivable.Customer_Name']").val("");
 
-    $("[name='Receivable.Payment_Status']").val("");
+//    $("[name='Receivable.Payment_Status']").val("");
 
-    document.getElementById('btnPay').disabled = true;
-}
+//    document.getElementById('btnPay').disabled = true;
+//    Get_Receivable();//Added by vinod mane on 26/10/2016
+//    $("#list-group border-bottom").remove();
+//}
+//End
