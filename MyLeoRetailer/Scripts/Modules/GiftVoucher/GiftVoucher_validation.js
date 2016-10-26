@@ -12,7 +12,8 @@ $(function () {
             },
 
             "GiftVoucher.Gift_Voucher_Amount": {
-                digits: true
+                digits: true,
+                required: true
             },
             //Added by vinod mane on 28/09/2016
             "GiftVoucher.Gift_Voucher_Date": {
@@ -36,7 +37,8 @@ $(function () {
             },
 
             "GiftVoucher.Gift_Voucher_Amount": {
-                digits: "Enter only Digits"
+                digits: "Enter only Digits",
+                required:"Amount is required."
             },
 
             //Added by vinod mane on 28/09/2016
