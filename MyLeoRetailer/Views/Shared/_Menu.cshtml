@@ -121,11 +121,11 @@
             @*<img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">*@
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
-                <img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+                <img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">
             }
             else
             {
-                <img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+                <img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">
             }
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
@@ -157,7 +157,7 @@
             function () {
                 setInterval(function () {
                     var randomnumber = Math.floor(Math.random() * 100);
-                    $("#notification_Icon").attr("src", "../Images/notification.gif");
+                    $("#notification_Icon").attr("src", "../../Images/notification.gif");
                 }, 3000);
             });
 </script>
