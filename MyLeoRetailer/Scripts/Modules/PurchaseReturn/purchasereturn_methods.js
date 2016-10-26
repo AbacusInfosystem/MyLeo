@@ -1,5 +1,5 @@
 ﻿function Get_Vendor_Tax_Details_By_Id(value) {
-
+        
     $('#tblPurchaseReturnItems tbody tr').remove();
 
     AddPurchaseReturnDetails();
@@ -324,7 +324,7 @@ function CalculateTotal() {
 
 function Add_Validation(i) {
 
-    $("#tblPurchaseReturnItems").find(".validate").rules("add", { QuantityCheck: false });
+    //$("#tblPurchaseReturnItems").find(".validate").rules("add", { QuantityCheck: false });
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
 
@@ -335,15 +335,23 @@ function Add_Validation(i) {
         debugger;
 
         var result = true;
-        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
-        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (isNaN($("#hdnQuantity_" + i).val()) || $("#hdnQuantity_" + i).val() == "") {
+        var id = $(element).attr('id')
+
+        j = id.replace("textQuantity_", "");
+        
+
+        var EnterQty = parseInt($('[id="textQuantity_' + j + '"]').val());
+
+        var OrgQty = parseInt($("#hdnQuantity_" + j).val());
+
+
+        if (isNaN($("#hdnQuantity_" + j).val()) || $("#hdnQuantity_" + j).val() == "") {
             result = true;
         }
         else {
 
-            if (EnterQty != "" || $('[id="textQuantity_' + i + '"]').val() != '0') {
+            if (EnterQty != "" || $('[id="textQuantity_' + j + '"]').val() != '0') {
 
                 if (OrgQty >= EnterQty) {
 
@@ -358,8 +366,8 @@ function Add_Validation(i) {
                 result = false;
             }
         }
-        return result;
 
+        return result;    
 
     }, "Quantity less than Invoice Quantity And Not Zero.");
 
@@ -378,6 +386,7 @@ function DeletePurchaseReturnDetailsData(i) {
     x = temptablecount;       
 
     if (x == 0) {
+       
         AddPurchaseReturnDetails();
     }
     
@@ -530,8 +539,8 @@ function Bind_Purchase_Return_Items_Data(data)
     var trHtml = "";
 
     if (data.PurchaseReturns.length > 0)
-    {
-        //$("#tblPurchaseReturnItems").find("[id='PurchaseReturnItemRow_" + i + "']").remove();
+    {       
+
         $('#tblPurchaseReturnItems tbody tr').remove();
        
         for (i = 0; i < data.PurchaseReturns.length; i++) {

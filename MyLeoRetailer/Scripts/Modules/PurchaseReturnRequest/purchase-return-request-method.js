@@ -107,7 +107,7 @@ function AddPurchaseReturnRequestDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity' value='1' onchange='Add_Validation(" + i + ");' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm validate' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity' value='1'  onblur='Add_Validation(" + i + "); CalculateTotal()' id='textQuantity_" + i + "'>";
     //tblHtml += "<input class='form-control input-sm' type='hidden' name='' id='hdnQuantity_" + i + "' value='' /> ";
     tblHtml += "</td>";
 
@@ -246,7 +246,7 @@ function ReArrangePurchaseReturnRequestDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity");
-                $(newTR).find("[id^='textQuantity_']").attr("onchange", "Add_Validation(" + i + ");");
+                $(newTR).find("[id^='textQuantity_']").attr("onblur", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {
@@ -276,37 +276,38 @@ function CalculateTotal() {
 
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++) {
-           
+
             if ($('[id="textQuantity_' + i + '"]').val() != 0 && $('[id="textQuantity_' + i + '"]').val() != '') {
-                
-                    var Qty = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val());
 
-            //Added by vinod mane on 12/10/2016
-            var Qty = $("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val();
+                var Qty = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val());
 
-            if (Qty == "" || Qty == "NaN")
-            {
-                Qty = 1;
-                $('#textQuantity_' + i).val(1);
+                //Added by vinod mane on 12/10/2016
+                var Qty = $("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val();
+
+                if (Qty == "" || Qty == "NaN") {
+                    Qty = 1;
+                    $('#textQuantity_' + i).val(1);
+                }
+                //End
+
+
+                var WSR = ""
+                if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
+                    WSR = 0;
+                }
+                else {
+                    WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
+                }
+
+                var Amount = parseFloat(WSR * Qty);
+                $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
+
+                sumQuantity = sumQuantity + Qty;
+                sumWSRAmount = sumWSRAmount + Amount;
+
             }
-//End
-            var WSR = ""
-            if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
-                WSR = 0;
-            }
-            else {
-                WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
-            }
-
-            var Amount = parseFloat(WSR * Qty);
-            $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
-
-            sumQuantity = sumQuantity + Qty;
-            sumWSRAmount = sumWSRAmount + Amount;
 
         }
-
-    }
     }
 
     $("#textTotalQuantity_0").val(sumQuantity);
@@ -447,8 +448,10 @@ function Set_Purchase_Invoice_Id(value) {
 
 function Add_Validation(i)
 {
+    //$("#tblPurchaseReturnRequestItems").find(".validate").rules("add", { QuantityCheck: false });
 
     $("#textQuantity_" + i).rules("add", { required: true, digits: true, QuantityCheck:true, messages: { required: "Required field", digits: "Invalid quantity." } });
+
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
   
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
@@ -456,16 +459,23 @@ function Add_Validation(i)
         debugger;
 
         var result = true;
-        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
-        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
+
+        var id = $(element).attr('id')
+
+        j = id.replace("textQuantity_", "");
 
 
-        if (isNaN($("#hdnQuantity_" + i).val()) || $("#hdnQuantity_" + i).val() == "") {
+        var EnterQty = parseInt($('[id="textQuantity_' + j + '"]').val());
+
+        var OrgQty = parseInt($("#hdnQuantity_" + j).val());
+
+
+        if (isNaN($("#hdnQuantity_" + j).val()) || $("#hdnQuantity_" + j).val() == "") {
             result = true;
         }
         else {
 
-            if (EnterQty != "" || $('[id="textQuantity_' + i + '"]').val() != '0') {
+            if (EnterQty != "" || $('[id="textQuantity_' + j + '"]').val() != '0') {
 
                 if (OrgQty >= EnterQty) {
 
@@ -480,9 +490,10 @@ function Add_Validation(i)
                 result = false;
             }
         }
+
         return result;
 
-
     }, "Quantity less than Invoice Quantity And Not Zero.");
+
 
 }
