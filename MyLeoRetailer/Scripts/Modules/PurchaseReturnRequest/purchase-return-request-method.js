@@ -136,46 +136,40 @@ function AddPurchaseReturnRequestDetails() {
 }
 
 function DeletePurchaseReturnRequestDetailsData(i) {
-    
-    //if ($('#tblPurchaseReturnRequestItems tbody tr').length == 1)
-    //{
-    //    $("#lblError").text("Atleast one required.");
-    //}
-    //else
-    //{
-        //$("#lblError").text("");
 
-        $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
-        ReArrangePurchaseReturnRequestDetailsData();
+    $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
-      
+    ReArrangePurchaseReturnRequestDetailsData();
 
-       
 
-        if (i == 0) {
-            AddPurchaseReturnRequestDetails();
+    var temptablecount = $("#tblPurchaseReturnRequestItems").find('[id^="PurchaseReturnRequestItemRow_"]').size();
 
-            $("#textDiscountPercentage_0").val(0);
+    x = temptablecount;
 
-            CalculateTotal();
 
-            CalculateDiscount();
+    if (x == 0) {
+        AddPurchaseReturnRequestDetails();
 
-            CalculateTax();
-        }
-        else {
+        $("#textDiscountPercentage_0").val(0);
 
-            Add_Validation(i);
+        CalculateTotal();
 
-            CalculateTotal();
+        CalculateDiscount();
 
-            CalculateDiscount();
+        CalculateTax();
+    }
+    else {
 
-            CalculateTax();
-        }
+        Add_Validation(i);
 
-    //}
+        CalculateTotal();
+
+        CalculateDiscount();
+
+        CalculateTax();
+    }
+
 
 }
 
@@ -458,6 +452,8 @@ function Add_Validation(i)
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
   
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
+
+        debugger;
 
         var result = true;
         var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());

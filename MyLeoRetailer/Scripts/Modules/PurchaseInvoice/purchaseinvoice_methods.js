@@ -6,7 +6,7 @@
 
     CalculateTotal();
 
-    debugger;
+    
 
     $.ajax({
 
@@ -36,7 +36,7 @@
 
 function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
 
-    debugger;
+    
 
     $.ajax({
 
@@ -120,10 +120,10 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU Code to search' value=''  data-table='Product_SKU_Mapping' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdnPurchase_Order_Id_" + i + "' data-field='Purchase_Order_Id' />";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' placeholder='Enter SKU Code to search' value=''  data-table='Product_SKU_Mapping' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdnPurchase_Order_Id_" + i + "' data-field='Purchase_Order_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>";
-    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
 
@@ -260,7 +260,7 @@ function CalculateDiscount() {
 
 function CalculateTotal() {
 
-    debugger;
+    
 
     var sumQuantity = 0;
     var sumWSRAmount = 0;
@@ -291,6 +291,8 @@ function CalculateTotal() {
 }
 
 function Add_Validation(i) {
+
+    //$("#tblPurchaseInvoiceItems").find(".Validate").rules("add", { QuantityCheck: false });
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
 
@@ -324,6 +326,8 @@ function Add_Validation(i) {
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
+        debugger;
+
         var result = true;
         var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
         var OrgQty = parseInt($("#hdnQuantity_" + i).val());
@@ -355,13 +359,17 @@ function Add_Validation(i) {
 
 function DeletePurchaseInvoiceDetailsData(i) {
 
-    debugger;
-      
+    
+           
     $("#tblPurchaseInvoiceItems").find("[id='PurchaseInvoiceItemRow_" + i + "']").remove();  
 
-    ReArrangePurchaseInvoiceDetailsData();   
+    ReArrangePurchaseInvoiceDetailsData();
 
-    if (i == 0) {
+    var temptablecount = $("#tblPurchaseInvoiceItems").find('[id^="PurchaseInvoiceItemRow_"]').size();
+
+    x = temptablecount;
+   
+    if (x == 0) {
         AddPurchaseInvoiceDetails();
     }
 
@@ -373,8 +381,7 @@ function DeletePurchaseInvoiceDetailsData(i) {
 }
 
 function ReArrangePurchaseInvoiceDetailsData() {
-
-    debugger;
+       
 
     $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (i, row) {
         if ($(row)[0].id != 'tblHeading') {
@@ -396,7 +403,7 @@ function ReArrangePurchaseInvoiceDetailsData() {
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnQuantity_']").attr("onchange", "javascript: Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
