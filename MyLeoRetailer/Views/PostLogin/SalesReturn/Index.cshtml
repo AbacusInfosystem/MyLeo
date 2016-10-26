@@ -154,21 +154,21 @@
                                         LoginInfo Cookies = new LoginInfo();
                                         Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                                        <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
                                     }
 
                                     <div class="form-group auto-complete">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
                                         @*<div class="input-group">
-                                            <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesReturn.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
-                                            <span class="input-group-addon">
-                                                <a href="#" class="text-muted" id="hrefDealer" role="button">
-                                                    <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i>
-                                                </a>
-                                            </span>
-                                            <input type="hidden" id="hdnBranchID" value="@Model.SalesReturn.Branch_Id" name="SalesReturn.Branch_Id" class="auto-complete-value" />
-                                            <input type="hidden" id="hdnBranchName" value="" name="SalesReturn.Branch_Name" class="auto-complete-label" />
-                                        </div>*@
+                                                <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesReturn.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
+                                                <span class="input-group-addon">
+                                                    <a href="#" class="text-muted" id="hrefDealer" role="button">
+                                                        <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i>
+                                                    </a>
+                                                </span>
+                                                <input type="hidden" id="hdnBranchID" value="@Model.SalesReturn.Branch_Id" name="SalesReturn.Branch_Id" class="auto-complete-value" />
+                                                <input type="hidden" id="hdnBranchName" value="" name="SalesReturn.Branch_Name" class="auto-complete-label" />
+                                            </div>*@
 
                                         <div class="input-group">
                                             <input type="text" class="form-control invoice-filter autocomplete-text" name="SalesReturn.Branch_Name" id="textSales_Branch_Name" placeholder="Enter Branch to search" value="" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
@@ -226,10 +226,10 @@
 
 
                     <div class="row">
-                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px; margin-left:1435px">
+                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px">
                             <div class="block">
                                 <div class="block" style="margin-top:0px; ">
-                                    <div class="btn-group">
+                                    <div class="btn-group pull-right">
                                         <a href="javascript:AddSalesReturnDetails();" id="btnAddInputRow" class="btn btn-success active">
                                             <i class="mdi mdi-plus"></i>
                                             Add New Row
@@ -354,82 +354,86 @@
 
 
                     <div class="row">
-                        <div class="col-xs-12 table-responsive">
-                            <table id="tblSalesReturnItems">
-                                <thead>
-                                    <tr></tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td>
-                                            <label>Total Quantity</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Quantity" readonly id="textTotalQuantity_0">
-                                        </td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
+                       
+                            <div class="col-xs-12 table-responsive">
+                                <table id="tblSalesReturnItems">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td width="150px"></td>
+                                            <td width="150px"></td>
+                                            <td width="70px"></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="80px"></td>
+                                            <td>
+                                                <label>Total Quantity</label>
+                                            </td>
+                                            <td>
+                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Quantity" readonly id="textTotalQuantity_0">
+                                            </td>
+                                            <td width="40px"></td>
+                                            <td width="40px"></td>
 
-                                        <td>
-                                            <label>Sales Return Amount</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Gross_Amount" readonly id="textGrossAmount_0">
-                                        </td>
+                                            <td>
+                                                <label>Sales Return Amount</label>
+                                            </td>
+                                            <td>
+                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Gross_Amount" readonly id="textGrossAmount_0">
+                                            </td>
 
-                                        <td width="200px"></td>
+                                            <td width="200px"></td>
 
-                                    </tr>
-                                    <tr>
-                                        <td width="150px"></td>
-                                        <td width="150px"></td>
-                                        <td width="70px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="100px"></td>
-                                        <td width="80px"></td>
-                                        <td>
-                                            <label>Cash Paid Amount  </label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0" maxlength="10">
-                                        </td>
-                                        <td width="40px"></td>
-                                        <td width="40px"></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="150px"></td>
+                                            <td width="150px"></td>
+                                            <td width="70px"></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="80px"></td>
+                                            <td>
+                                                <label>Cash Paid Amount  </label>
+                                            </td>
+                                            <td>
+                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0" maxlength="10">
+                                            </td>
+                                            <td width="40px"></td>
+                                            <td width="40px"></td>
 
-                                        <td>
-                                            <label>Credit Note Amount</label>
-                                        </td>
-                                        <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Credit_Note" readonly id="textTotalAmountReturnByCreditNote_0" maxlength="10">
-                                        </td>
+                                            <td>
+                                                <label>Credit Note Amount</label>
+                                            </td>
+                                            <td>
+                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Credit_Note" readonly id="textTotalAmountReturnByCreditNote_0" maxlength="10">
+                                            </td>
 
-                                        <td width="200px"></td>
+                                            <td width="200px"></td>
 
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- /.col -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.col -->
+
+
                     </div>
 
 
                     <div class="row">
+
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
+
                             <div class="btn-group">
                                 <button type="button" id="btnSaveSalesReturn" class="btn btn-success active">Save</button>
                                 <a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesReturn")">Reset </a>
                             </div>
+
                         </div>
 
-                        <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
-                        </div>
                     </div>
 
                 </div>

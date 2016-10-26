@@ -31,7 +31,7 @@ function Get_Alterations() {
 
             Bind_Grid(obj, "Alteration_List");
 
-            Reset_Alteration();
+            //Reset_Alteration();
 
             $("#divAlterationPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }

@@ -15,9 +15,32 @@
         }
     });
 
-    //$("[name='Filter.Debit_Note_No']").onchange(function () {
+    $("#txtDebit_Note_No").focusout(function () {
+        Get_Purchase_Returns();
+
+        $("[name='Filter.Debit_Note_No']").val('');
+
+        $("[name='Filter.Purchase_Return_Id']").val('');
+    });
+
+  
+    $(document).on('change', '#txtDebit_Note_No', function (event) {
+
+        var dbono = $("#txtDebit_Note_No").val();      
+
+        $("[name='Filter.Debit_Note_No']").val(dbono);
+
+        Get_Purchase_Returns();
+
+       
+
+
+    });
+
+    //$(document).on('change', '[name="Filter.Debit_Note_No"]', function (event) {
     //    Get_Purchase_Returns();
     //});
+
 
 
     $("#btnCreatePurchaseReturn").click(function () {
@@ -53,4 +76,10 @@ $(function () {
 
     });
 
+    //Added By Vinod Mane on 26/10/2016
+    $(document).on("change", "#hdnPurchaseReturnId", function () {
+       
+        Get_Purchase_Returns();
+    });
+    //End
 });
