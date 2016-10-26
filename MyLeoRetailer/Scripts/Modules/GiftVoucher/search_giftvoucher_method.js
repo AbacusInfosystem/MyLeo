@@ -30,7 +30,7 @@ function Get_Gift_Vouchers() {
 
             Bind_Grid(obj, "Gift_Voucher_List");
 
-            Reset_GiftVoucher();
+            //Reset_GiftVoucher();
             
             $("#divGiftVoucherPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
