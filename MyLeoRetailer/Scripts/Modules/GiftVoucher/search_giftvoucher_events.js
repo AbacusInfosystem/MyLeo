@@ -8,8 +8,9 @@ $(function () {
         Get_Gift_Vouchers();
     });
 
+   
 
-    $(document).on("click", "[name='Gift_Voucher_List']", function () {
+    $(document).on("change", "[name='Gift_Voucher_List']", function () {
         Get_Gift_Voucher_By_Id(this);
     });
 
@@ -27,6 +28,9 @@ $(function () {
         }
     });
 
+    $(document).on("change", "#hdn_GiftVoucherId", function () {
+        Get_Gift_Vouchers();
+    });
 
     $("#btncreateGV").click(function () {
 

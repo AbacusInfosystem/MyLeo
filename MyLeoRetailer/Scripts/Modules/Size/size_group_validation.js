@@ -310,7 +310,7 @@ $(document).ready(function () {
                 return true;
         }
 
-        if (char != null) { 
+        if (char != null && char != 0) {
             return true;
         }
 

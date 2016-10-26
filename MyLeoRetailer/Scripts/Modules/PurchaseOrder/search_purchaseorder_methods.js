@@ -30,7 +30,7 @@ function Get_Purchase_Orders() {
 
             Bind_Grid(obj, "Purchase_Order_List");
 
-            Reset_PurchaseOrder();
+            //Reset_PurchaseOrder();
 
             $("#divPurchaseOrderPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 

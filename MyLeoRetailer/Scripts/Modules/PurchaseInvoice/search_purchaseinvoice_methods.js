@@ -29,7 +29,7 @@
 
             Bind_Grid(obj, "Purchase_Invoice_List");
 
-            Reset_PurchaseInvoice();
+            //Reset_PurchaseInvoice();
 
             $("#divPurchaseInvoicePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 

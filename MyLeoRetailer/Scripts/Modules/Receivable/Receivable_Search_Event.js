@@ -19,14 +19,16 @@ $(document).ready(function () {
     });
 
     $("#btnSearchReceivable").click(function () {
-
+        document.getElementById('btnPay').disabled = true;//Added by vinod mane on 26/10/2016
         Get_Receivable();
     });
 
-    $("#btnResetReceivable").click(function () {
-
-        Get_Receivable();
-    });
+   // commented by vinod mane on 26/10/2016
+    //$("#btnResetReceivable").click(function () {
+    //    Reset_Recevable();//Added By Vinod Mane on 26/10/2016
+    //    //Get_Receivable();
+    //});
+    //End
 
     $("#btnPay").click(function () {
 
@@ -38,6 +40,11 @@ $(document).ready(function () {
 
     });
 
+    //Added By Vinod Mane on 26/10/2016
+    $(document).on("change", "#hdnSalesInvoiceNo", function () {
+        document.getElementById('btnPay').disabled = true;
+        Get_Receivable();
+    });
 
-
+    //End
 });

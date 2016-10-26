@@ -66,18 +66,20 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control invoice-filter autocomplete-text" name="Payable.Vendor_Name" id="text_Vendor_Name" placeholder="Enter Vendor name to search" value="" data-table="Vendor" data-col=" Vendor_Id,Vendor_Name" data-headernames="Vendor">
                                         <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                        <input type="hidden" id="hdnVendorName" name="Payable.Vendor_Name" class="auto-complete-value" />
-                                        <input type="hidden" id="hdnVendorId" name="Payable.Vendor_Id" class="auto-complete-label" />
-                                        @*<input type="hidden" id="hdnVendorId" name="Payable.Vendor_Id" />
+                                        @*<input type="hidden" id="hdnVendorId" name="Payable.Vendor_Id" class="auto-complete-label" />
                                         <input type="hidden" id="hdnVendorName" name="Payable.Vendor_Name" class="auto-complete-value" />*@
-                                        
+                                      
+                                          @*Added by vinod mane on 26/10/2016*@
+                                        <input type="hidden" id="hdnVendorId" name="Payable.Vendor_Id" />
+                                        <input type="hidden" id="hdnVendorName" name="Payable.Vendor_Name" class="auto-complete-value" />
+                                        @*End*@
 
                                     </div>
                                  
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Payable status</span>
                                     <select class="form-control" id="drpPayble_Status" name="Payable.Payament_Status">
@@ -121,12 +123,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="text-align: right; margin-top: 25px;">
 
-                                <div class="btn-group" style="margin-top: 30px;">
+                                <div class="btn-group">
                                     <button type="button" id="btnSearchPayable" class="btn btn-success active">Search</button>
-                                    <button type="reset" id="btnResetPayable" class="btn btn-danger active">Reset</button>
-                                    <button type="button" id="btnPay" class="btn btn-primary active">Pay</button>
+                                    @*<button type="reset" id="btnResetPayable" class="btn btn-danger active">Reset</button>*@
+                                    <button type="button" id="btnPay" class="btn btn-danger active">Pay</button>
                                 </div>
                             </div>
 

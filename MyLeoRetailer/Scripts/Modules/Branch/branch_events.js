@@ -8,7 +8,9 @@
     //    document.getElementById('btnCancleBranch').disabled = true;
     //}
 
+  
     $("#btnSaveBranch").click(function () {
+       
         if ($("#frmBranch").valid())
         {
             if ($('#hdnBranch_Id').val() == "" || $('#hdnBranch_Id').val() == 0) {  //Added by Sushant on 07/10/2016
