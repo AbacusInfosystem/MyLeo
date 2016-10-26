@@ -76,4 +76,10 @@ $(function () {
 
     });
 
+    //Added By Vinod Mane on 26/10/2016
+    $(document).on("change", "#hdnPurchaseReturnId", function () {
+       
+        Get_Purchase_Returns();
+    });
+    //End
 });
