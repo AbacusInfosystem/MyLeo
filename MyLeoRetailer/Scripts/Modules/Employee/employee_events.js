@@ -111,8 +111,10 @@ $(function () {
 
             $(".online-field").show();
 
+            //changes done by Sushant in txtPassword on 26th Oct 2016
+
             $('#txtUser_Name').rules("add", { required: true, validate_username: true, messages: { required: "User name is required." } });
-            $('#txtPassword').rules("add", { required: true, messages: { required: "Password is required." } });
+            $('#txtPassword').rules("add", { required: true, pwdcheck: true, minlength: 6, messages: { required: "Password is required.", pwdcheck: "Please enter atleast one Uppercase, Lowercase, Special character and Number", minlength: "Please enter a value greater than or equal to {6}." } });
             $('#txtConfirmPassword').rules("add", { match_password: true });
             $('#drpRole').rules("add", { required: true, messages: { required: "Role is required." } });
 
@@ -122,8 +124,10 @@ $(function () {
 
     if ($('[name = "Employee.Is_Online"]').val() == "True" || $('[name = "Employee.Is_Online"]').val() == 1) {
 
+        //changes done by Sushant in txtPassword on 26th Oct 2016
+
         $('#txtUser_Name').rules("add", { required: true, validate_username: true, messages: { required: "User name is required." } });
-        $('#txtPassword').rules("add", { required: true, messages: { required: "Password is required." } });
+        $('#txtPassword').rules("add", { required: true, pwdcheck: true, minlength: 6, messages: { required: "Password is required.", pwdcheck: "Please enter atleast one Uppercase, Lowercase, Special character and Number", minlength: "Please enter a value greater than or equal to {6}." } });
         $('#txtConfirmPassword').rules("add", { match_password: true });
         $('#drpRole').rules("add", { required: true, messages: { required: "Role is required." } });
     }

@@ -41,13 +41,39 @@
 
         <div class="row">
 
-            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+            <div class="row">
+
+                <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
                 <input type="hidden" id="hdnPayament_Status1" value="@Model.Payable.Payament_Status">
 
                 <div class="block">
 
-                    <div class="col-md-3">
+                        <h4 style="margin-top: 0px;">Primary details.</h4>
+
+                        <div class="col-md-3">
+                            <div class="form-group auto-complete">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Employee</span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-sm invoice-filter autocomplete-text" value="@Model.Payable.Employee" name="Payable.Employee" id="textEmployee" placeholder="Enter Employee" value="" data-table="Employee" data-col="Employee_Id,Employee_Name" data-headernames="Employee">
+                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                    <input type="hidden" id="hdnEmpId" value="@Model.Payable.Employee_Id" name="Payable.Employee_Id" class="auto-complete-value" />
+                                    <input type="hidden" id="hdnEmp" value="@Model.Payable.Employee" name="Payable.Employee" class="auto-complete-label" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
                         <div class="form-group">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
+                                <div class="input-group date" data-date="" data-date-format="MM-dd-yyyy">
+                                    <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("MM-dd-yyyy")))" readonly />
+                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Total Amount</span>
                             <input type="text" readonly class="form-control input-sm" name="Payable.Total_Amount" id="txtTotal_Amount" value="@(Model.Payable.Total_Amount == 0 ? "" : Model.Payable.Total_Amount.ToString())" placeholder="Total_Amount" />
                             <input type="hidden" id="hdnPurchase_Invoice_Id" name="Payable.Purchase_Invoice_Id" value="@Model.Payable.Purchase_Invoice_Id">
@@ -58,7 +84,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Amount due</span>
                             <input type="text" readonly class="form-control input-sm" name="Payable.Balance_Amount" id="txtAmount_due" value="@(Model.Payable.Balance_Amount == 0 ? "" : Model.Payable.Balance_Amount.ToString())" placeholder="Due Amount" />
@@ -68,27 +94,23 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
-                        <div class="form-group auto-complete">
-                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Employee</span>
-                            <div class="input-group">
-                                <input type="text" class="form-control input-sm invoice-filter autocomplete-text" value="@Model.Payable.Employee" name="Payable.Employee" id="textEmployee" placeholder="Enter Employee" value="" data-table="Employee" data-col="Employee_Id,Employee_Name" data-headernames="Employee">
-                                <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                <input type="hidden" id="hdnEmpId" value="@Model.Payable.Employee_Id" name="Payable.Employee_Id" class="auto-complete-value" />
-                                <input type="hidden" id="hdnEmp" value="@Model.Payable.Employee" name="Payable.Employee" class="auto-complete-label" />
-                            </div>
+
+                </div>
                         </div>
                     </div>
 
-                </div>
+            </div>
 
             </div>
 
-            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+            <div class="row">
+                <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
 
                 <div class="block">
 
-                    <div class="col-md-3">
+                        <h4 style="margin-top: 0px;">Secondary details.</h4>
+
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">CN no</span>
                             <select class="form-control" id="drpCredit_Note_No" name="Payable.Purchase_Credit_Note_Id">
@@ -111,7 +133,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">CN amount</span>
                             <input type="text" class="form-control input-sm" name="Payable.Credit_Note_Amount" id="txtCN_amount" value="@(Model.Payable.Credit_Note_Amount == 0 ? "" : Model.Payable.Credit_Note_Amount.ToString())" @*onfocusout="javascript: Calculate_Fianl_Amount_Using_Credit_Note_Amount();"*@ placeholder="Credit Note Amount" readonly />
@@ -119,44 +141,39 @@
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount%</span>
                             <input type="text" class="form-control input-sm" name="Payable.Discount_Percentage" id="txtDiscount" onfocusout="javascript: Calculate_Fianl_Amount_Using_Discount();" value="@(Model.Payable.Discount_Percentage == 0 ? "" : Model.Payable.Discount_Percentage.ToString())" placeholder="Discount" />
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Discount amount</span>
                             <input type="text" class="form-control input-sm" name="Payable.Discount_Amount" id="txtDiscount_amount" value="@(Model.Payable.Discount_Amount == 0 ? "" : Model.Payable.Discount_Amount.ToString())" placeholder="Discount Amount" />
                         </div>
-                    </div>
-                    
+                        </div>
+
+                                    </div>
+
                 </div>
 
             </div>
 
-           
+
+            <div class="row">
 
             <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
 
                 <div class="block">
 
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
-                            <div class="input-group date" data-date="" data-date-format="MM-dd-yyyy">
-                                <input type="text" class="form-control datepicker" id="txtPayament_Date" name="Payable.Payament_Date" value="@((Model.Payable.Payament_Date == DateTime.MinValue ? "" : Model.Payable.Payament_Date.ToString("MM-dd-yyyy")))" readonly />
-                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                        </div>
-                    </div>
+                        <h4 style="margin-top: 0px;">Payment Mode details.</h4>
 
-                    <div class="col-md-3">
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment mode</span>
-                            <select class="form-control" id="drpPayment_Mode" name="Payable.Payment_Mode" >
+                                <select class="form-control" id="drpPayment_Mode" name="Payable.Payment_Mode">
                                 <option value="0">Select Payment mode</option>
 
                                 @foreach (var item in LookupInfo.Get_Payable_Payment_Mode())
@@ -178,7 +195,7 @@
                         </div>
                     </div>
 
-                    <div id="divPaidAmount" style="display:none" class="col-md-3">
+                        <div id="divPaidAmount" style="display:none" class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount</span>
                             <input type="text" class="form-control input-sm" name="Payable.Paid_Amount" id="txtPaid_Amount" value="@(Model.Payable.Paid_Amount == 0 ? "" : Model.Payable.Paid_Amount.ToString())" onfocusout="javascript: FinalAmount();" placeholder=" Enter Paid amount" />
@@ -186,20 +203,23 @@
                         </div>
                     </div>
                 </div>
+                </div>
+
             </div>
 
-            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 70px;">
+            <div class="row">
+                <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 100px;">
 
                 <div class="block">
 
-                    <div id="divCreditcardno" style="display:none" class="col-md-3">
+                        <div id="divCreditcardno" style="display:none" class="col-md-3  ">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit card no</span>
                             <input type="text" class="form-control input-sm" name="Payable.Credit_Card_No" id="txtCredit_card_no" value="@Model.Payable.Credit_Card_No" placeholder="Enter Credit card no" />
                         </div>
                     </div>
 
-                    <div id="divDebitcardno" style="display:none" class="col-md-3">
+                        <div id="divDebitcardno" style="display:none" class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Debit card no</span>
                             <input type="text" class="form-control input-sm" name="Payable.Debit_Card_No" id="txtDebit_card_no" value="@Model.Payable.Debit_Card_No" placeholder="Enter Debit card no" />
@@ -207,7 +227,7 @@
                     </div>
 
 
-                    <div id="divChequedate" style="display:none" class="col-md-3">
+                        <div id="divChequedate" style="display:none" class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque date</span>
                             <div class="input-group date" data-date="" data-date-format="MM-dd-yyyy">
@@ -217,14 +237,14 @@
                         </div>
                     </div>
 
-                    <div id="divChequeno" style="display:none" class="col-md-3">
+                        <div id="divChequeno" style="display:none" class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque no</span>
                             <input type="text" class="form-control input-sm" name="Payable.Cheque_No" id="txtCheque_no" value="@Model.Payable.Cheque_No" maxlength="20" placeholder="Enter Cheque no" />
                         </div>
                     </div>
 
-                    <div id="divBankName" style="display:none" class="col-md-3">
+                        <div id="divBankName" style="display:none" class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank Name</span>
                             <input type="text" class="form-control input-sm" name="Payable.Bank_Name" id="txtBank_Name" value="@Model.Payable.Bank_Name" placeholder="Enter Bank Name" />
@@ -232,26 +252,30 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-right: 1px solid #DDD; padding: 10px; height: 100px;">
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
                 <div class="block">
-                    <div class="col-md-3">
+
+                        <h4 style="margin-top: 0px;">Payment details.</h4>
+
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Final amount</span>
                             <input type="text" class="form-control input-sm" name="Payable.Final_Amount" id="txtFinal_amount" @*onclick="javascript: CalculateDiscount();"*@ value="@(Model.Payable.Balance_Amount == 0 ? "" : Model.Payable.Balance_Amount.ToString())" placeholder="Final amount" readonly />
                             <label style="color: #b64645; display:none;" class="help-block pull-left" id="lblFinalPriceError">Final amount should not 0 or less.</label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+
+                        <div class="col-md-3">
                         <div class="form-group">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Remark</span>
                             <input type="text" class="form-control input-sm" name="Payable.Remark" id="txtRemark" value="@Model.Payable.Remark" placeholder="Enter remark" />
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
-
+                        <div class="col-md-6" style="text-align: right; margin-top:20px;">
                 <div class="btn-group">
                     <button type="button" class="btn btn-success active" id="btnSavePay">Save</button>
 
@@ -259,7 +283,10 @@
                 </div>
 
             </div>
+                    </div>
+                </div>
 
+            </div>
 
             <div class="row">
                 <div class="col-md-12">
