@@ -5,7 +5,7 @@
 
     $("#div_Change_Branch").find(".panel-footer").hide();
 
-    $("#btnSaveBranch").click(function (event) {
+    $("#btnSaveBranch_Comm").click(function (event) {
 
         //$('#div_Change_Branch').panel('hide');
 
