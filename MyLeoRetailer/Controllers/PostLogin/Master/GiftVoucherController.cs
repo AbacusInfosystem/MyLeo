@@ -70,7 +70,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             try
             {
-                gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.Filter.Gift_Voucher_Id);
+                gvViewModel.GiftVoucher = gvRepo.Get_Gift_Voucher_By_Id(gvViewModel.GiftVoucher.Gift_Voucher_Id);
             }
             catch (Exception ex)
             {
