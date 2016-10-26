@@ -21,7 +21,6 @@ namespace MyLeoRetailerRepo
 			sqlHelper = new SQL_Repo();
 		}
 
-
        public List<ReceivableInfo> Get_Receivables(ReceivableInfo Receivable) //.... 
        {
            List<ReceivableInfo> Receivables = new List<ReceivableInfo>();
@@ -803,8 +802,5 @@ namespace MyLeoRetailerRepo
            return Receivable;
        }
 
-      
-
-     
     }
 }
