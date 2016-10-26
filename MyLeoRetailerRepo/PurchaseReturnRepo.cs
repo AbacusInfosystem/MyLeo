@@ -304,27 +304,21 @@ namespace MyLeoRetailerRepo
 
             return PurchaseReturn;
         }
-               
+
         public int Insert_Purchase_Return(PurchaseReturnInfo PurchaseReturn)
         {
-            using (TransactionScope scope = new TransactionScope())
+            PurchaseReturn.Purchase_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Return(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Return.ToString(), CommandType.StoredProcedure));
+
+            foreach (var item in PurchaseReturn.PurchaseReturns)
             {
-                PurchaseReturn.Purchase_Return_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Return(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Return.ToString(), CommandType.StoredProcedure));
+                item.Purchase_Return_Id = PurchaseReturn.Purchase_Return_Id;
 
-                foreach (var item in PurchaseReturn.PurchaseReturns)
-                {
-                    item.Purchase_Return_Id = PurchaseReturn.Purchase_Return_Id;
+                item.Purchase_Invoice_Id = PurchaseReturn.Purchase_Invoice_Id;
 
-                    item.Purchase_Invoice_Id = PurchaseReturn.Purchase_Invoice_Id;
-
-                    sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Return_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Item.ToString(), CommandType.StoredProcedure);
-                }
-
-                //sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Credit_Note(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Credit_Note.ToString(), CommandType.StoredProcedure);
-               
-                scope.Complete();
-
+                sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Return_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Item.ToString(), CommandType.StoredProcedure);
             }
+
+            //sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Credit_Note(PurchaseReturn), Storeprocedures.sp_Insert_Purchase_Credit_Note.ToString(), CommandType.StoredProcedure);
             
             return PurchaseReturn.Purchase_Return_Id;
 
