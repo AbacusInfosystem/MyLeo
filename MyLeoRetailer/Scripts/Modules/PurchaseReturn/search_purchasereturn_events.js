@@ -22,7 +22,8 @@
     $(document).on("change", "#hdnPurchaseReturnId", function () {
         Get_Purchase_Returns();
     });
-
+      
+    
 
     $("#btnCreatePurchaseReturn").click(function () {
         $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Index/");
