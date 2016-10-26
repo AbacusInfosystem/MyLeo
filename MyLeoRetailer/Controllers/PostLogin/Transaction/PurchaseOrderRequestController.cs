@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -235,9 +236,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     poreqViewModel = (PurchaseOrderRequestViewModel)TempData["poreqViewModel"];
                 }
 
-                poreqViewModel.PurchaseOrderRequest = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Details_By_Id(poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id);
+                poreqViewModel.PurchaseOrderRequest = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Details_By_Id(poreqViewModel.Filter.Purchase_Order_Request_Id);
 
-                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequestItems = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Items(poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id);
+                poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequestItems = _purchaseorderrequestRepo.Get_Purchase_Order_Request_Items(poreqViewModel.Filter.Purchase_Order_Request_Id);
 
             }
             catch (Exception ex)
@@ -253,45 +254,50 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Request_Management_Create)]
         public ActionResult Insert_Purchase_Order_Request(PurchaseOrderRequestViewModel poreqViewModel)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(poreqViewModel.PurchaseOrderRequest);
-
-                foreach (var item in poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequests)
+                try
                 {
-                    Set_Date_Session(item);
+                    Set_Date_Session(poreqViewModel.PurchaseOrderRequest);
+
+                    foreach (var item in poreqViewModel.PurchaseOrderRequest.PurchaseOrderRequests)
+                    {
+                        Set_Date_Session(item);
+                    }
+
+                    if (poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id == 0)
+                    {
+                        poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                        poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id = _purchaseorderrequestRepo.Insert_Purchase_Order_Request(poreqViewModel.PurchaseOrderRequest);
+
+                        poreqViewModel = new PurchaseOrderRequestViewModel();
+
+                        poreqViewModel.FriendlyMessages.Add(MessageStore.Get("POREQ01"));
+                    }
+                    else
+                    {
+                        poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                    }
+
+                    scope.Complete();
                 }
-
-                if (poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id == 0)
+                catch (Exception ex)
                 {
-                    poreqViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-
-                    poreqViewModel.PurchaseOrderRequest.Purchase_Order_Request_Id = _purchaseorderrequestRepo.Insert_Purchase_Order_Request(poreqViewModel.PurchaseOrderRequest);
-
                     poreqViewModel = new PurchaseOrderRequestViewModel();
 
-                    poreqViewModel.FriendlyMessages.Add(MessageStore.Get("POREQ01"));
+                    poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                    Logger.Error("PurchaseOrderRequestController - Insert_Purchase_Order_Request : " + ex.ToString());
+
+                    scope.Dispose();
                 }
-                else
-                {
-                    poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
-                }
 
+                TempData["poreqViewModel"] = (PurchaseOrderRequestViewModel)poreqViewModel;
+
+                return RedirectToAction("Search", poreqViewModel);
             }
-            catch (Exception ex)
-            {
-                poreqViewModel = new PurchaseOrderRequestViewModel();
-
-                poreqViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
-                Logger.Error("PurchaseOrderRequestController - Insert_Purchase_Order_Request : " + ex.ToString());
-            }
-
-
-
-            return View("Search", poreqViewModel);
         }
-
 
         //public JsonResult Get_Purchase_Order_Requests(PurchaseOrderRequestViewModel poreqViewModel)
         //{

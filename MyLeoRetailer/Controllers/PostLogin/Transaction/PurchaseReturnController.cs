@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -241,43 +242,49 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Create)]
         public ActionResult Insert_Purchase_Return(PurchaseReturnViewModel prViewModel)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(prViewModel.PurchaseReturn);
-
-                foreach (var item in prViewModel.PurchaseReturn.PurchaseReturns)
+                try
                 {
-                    Set_Date_Session(item);
+                    Set_Date_Session(prViewModel.PurchaseReturn);
+
+                    foreach (var item in prViewModel.PurchaseReturn.PurchaseReturns)
+                    {
+                        Set_Date_Session(item);
+                    }
+
+                    if (prViewModel.PurchaseReturn.Purchase_Return_Id == 0)
+                    {
+                        prViewModel.PurchaseReturn.Debit_Note_No = Utility.Generate_Ref_No("DBN-", "Debit_Note_No", "5", "15", "Purchase_Return");
+
+                        _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+
+                        prViewModel = new PurchaseReturnViewModel();
+
+                        prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
+                    }
+                    else
+                    {
+                        prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                    }
+
+                    scope.Complete();
                 }
-
-                if (prViewModel.PurchaseReturn.Purchase_Return_Id == 0)
+                catch (Exception ex)
                 {
-                    prViewModel.PurchaseReturn.Debit_Note_No = Utility.Generate_Ref_No("DBN-", "Debit_Note_No", "5", "15", "Purchase_Return");
-
-                    _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
-
                     prViewModel = new PurchaseReturnViewModel();
 
-                    prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
-                }
-                else
-                {
                     prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+
+                    Logger.Error("PurchaseReturnController - Insert_Purchase_Return : " + ex.ToString());
+
+                    scope.Dispose();
                 }
 
+                TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
+
+                return RedirectToAction("Search", prViewModel);
             }
-            catch (Exception ex)
-            {
-                prViewModel = new PurchaseReturnViewModel();
-
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
-
-                Logger.Error("PurchaseReturnController - Insert_Purchase_Return : " + ex.ToString());
-            }
-
-
-
-            return View("Search", prViewModel);
         }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Edit)]

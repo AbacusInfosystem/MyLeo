@@ -164,6 +164,11 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public string Comment { get; set; }
 
 
+        public string Company_Name { get; set; }
+
+        public string Company_Address { get; set; }
+
+
         public int Size_Id { get; set; }
 
         public int Quantity { get; set; }

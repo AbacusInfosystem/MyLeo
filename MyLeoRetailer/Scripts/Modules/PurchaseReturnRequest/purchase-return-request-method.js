@@ -107,7 +107,7 @@ function AddPurchaseReturnRequestDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity' value='1' onchange='Add_Validation(" + i + ");' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
     //tblHtml += "<input class='form-control input-sm' type='hidden' name='' id='hdnQuantity_" + i + "' value='' /> ";
     tblHtml += "</td>";
 
@@ -136,46 +136,40 @@ function AddPurchaseReturnRequestDetails() {
 }
 
 function DeletePurchaseReturnRequestDetailsData(i) {
-    
-    //if ($('#tblPurchaseReturnRequestItems tbody tr').length == 1)
-    //{
-    //    $("#lblError").text("Atleast one required.");
-    //}
-    //else
-    //{
-        //$("#lblError").text("");
 
-        $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
-        ReArrangePurchaseReturnRequestDetailsData();
+    $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
-      
+    ReArrangePurchaseReturnRequestDetailsData();
 
-       
 
-        if (i == 0) {
-            AddPurchaseReturnRequestDetails();
+    var temptablecount = $("#tblPurchaseReturnRequestItems").find('[id^="PurchaseReturnRequestItemRow_"]').size();
 
-            $("#textDiscountPercentage_0").val(0);
+    x = temptablecount;
 
-            CalculateTotal();
 
-            CalculateDiscount();
+    if (x == 0) {
+        AddPurchaseReturnRequestDetails();
 
-            CalculateTax();
-        }
-        else {
+        $("#textDiscountPercentage_0").val(0);
 
-            Add_Validation(i);
+        CalculateTotal();
 
-            CalculateTotal();
+        CalculateDiscount();
 
-            CalculateDiscount();
+        CalculateTax();
+    }
+    else {
 
-            CalculateTax();
-        }
+        Add_Validation(i);
 
-    //}
+        CalculateTotal();
+
+        CalculateDiscount();
+
+        CalculateTax();
+    }
+
 
 }
 
@@ -252,7 +246,7 @@ function ReArrangePurchaseReturnRequestDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity");
-               // $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
+                $(newTR).find("[id^='textQuantity_']").attr("onchange", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {
@@ -459,14 +453,28 @@ function Add_Validation(i)
   
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
+        debugger;
+
         var result = true;
         var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
         var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (EnterQty != "" && EnterQty != 0) {
 
-            if (OrgQty >= EnterQty) {
-                result = true;
+        if (isNaN($("#hdnQuantity_" + i).val()) || $("#hdnQuantity_" + i).val() == "") {
+            result = true;
+        }
+        else {
+
+            if (EnterQty != "" || $('[id="textQuantity_' + i + '"]').val() != '0') {
+
+                if (OrgQty >= EnterQty) {
+
+                    result = true;
+                }
+                else {
+                    result = false;
+                }
+
             }
             else {
                 result = false;
@@ -474,5 +482,7 @@ function Add_Validation(i)
         }
         return result;
 
-    }, "Qty. less than Invoice Quantity.");
+
+    }, "Quantity less than Invoice Quantity And Not Zero.");
+
 }

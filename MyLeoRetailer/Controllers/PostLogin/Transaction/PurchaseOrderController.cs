@@ -291,8 +291,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                     scope.Dispose();
                 }
 
+                TempData["poViewModel"] = (PurchaseOrderViewModel)poViewModel;
 
-                return View("Search", poViewModel);
+                return RedirectToAction("Search", poViewModel);
 
             }
         }
@@ -376,7 +377,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             TempData["poViewModel"] = (PurchaseOrderViewModel)poViewModel;
 
-            return RedirectToAction("Get_Purchase_Order_Details");
+            return RedirectToAction("Search", poViewModel);
         }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_View)]

@@ -57,13 +57,17 @@
 
                             <div class="form-group auto-complete">
                                 <div class="input-group">
-                                    
+
                                     <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Gift_Voucher_No" id="txtGift_Voucher_No" placeholder="Enter Voucher no to search." data-table="Gift_Voucher" data-col="Gift_Voucher_Id,Gift_Voucher_No" data-headernames="Gift Voucher No.">
                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                     @*<input type="hidden" name="Filter.Vendor_Id" id="hdnVendorID">*@
-                                    <input type="hidden" id="hdnGift_Voucher_No" value="" name="Filter.Gift_Voucher_No" class="auto-complete-value" />
-                                    <input type="hidden" id="hdn_GiftVoucherId" name="Filter.Gift_Voucher_Id" class="auto-complete-label" value="@Model.Filter.Gift_Voucher_Id">@*value="@Model.Filter.Gift_Voucher_Id"*@
-                                    
+                                    @*<input type="hidden" id="hdnGift_Voucher_No" value="" name="Filter.Gift_Voucher_No" class="auto-complete-value" />
+                                    <input type="hidden" id="hdn_GiftVoucherId" name="Filter.Gift_Voucher_Id" class="auto-complete-label" value="@Model.Filter.Gift_Voucher_Id">*@@*value="@Model.Filter.Gift_Voucher_Id"*@
+
+                                    <input type="hidden" id="hdnGift_Voucher_No" value="" name="Filter.Gift_Voucher_No"  />
+                                    <input type="hidden" id="hdn_GiftVoucherId" name="Filter.Gift_Voucher_Id" class="auto-complete-value">
+
+
                                 </div>
                             </div>
                             @*End*@

@@ -26,20 +26,14 @@ namespace MyLeoRetailerRepo
 
         public void Insert_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
         {
-            using (TransactionScope scope = new TransactionScope())
+            int ID = Convert.ToInt32(_sqlRepo.ExecuteScalerObj(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Insert_Purchase_Return_Request.ToString(), CommandType.StoredProcedure));
+
+            foreach (var item in purchasereturnrequest.PurchaseReturnRequestItems)
             {
-                int ID = Convert.ToInt32(_sqlRepo.ExecuteScalerObj(Set_Values_In_Purchase_Return_Request(purchasereturnrequest), Storeprocedures.sp_Insert_Purchase_Return_Request.ToString(), CommandType.StoredProcedure));
-
-                foreach (var item in purchasereturnrequest.PurchaseReturnRequestItems)
-                {
-                    item.Purchase_Return_Request_Id = ID;
-                    _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Request_Item.ToString(), CommandType.StoredProcedure);
-                }
-
-                scope.Complete();
-
+                item.Purchase_Return_Request_Id = ID;
+                _sqlRepo.ExecuteNonQuery(Set_Values_In_Purchase_Return_Request_Item(item), Storeprocedures.sp_Insert_Purchase_Return_Request_Item.ToString(), CommandType.StoredProcedure);
             }
-            
+
         }
 
         //public void Update_Purchase_Return_Request(PurchaseReturnRequestInfo purchasereturnrequest)
