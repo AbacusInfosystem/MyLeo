@@ -19,8 +19,7 @@ $(document).ready(function () {
             $("#txtPassword").show();
             $("#txtConfirmPassword").show();
             $("#drpRole").attr('enabled', true);
-        }
-
+        }      
 
     }
     //End
@@ -58,7 +57,7 @@ $(function () {
 
     
         //Modifiction
-        if ($('[name="Employee.IsActive"]').val() == 1 || $('[name="Employee.IsActive"]').val() == "True") {
+        if ($('[name="Employee.IsActive"]').val() == 1 || $('[name="Employee.IsActive"]').val() == "true" || $('[name="Employee.IsActive"]').val() == "True") {
             $('[name="Employee.IsActive"]').val(true);
         }
         else {
@@ -73,6 +72,8 @@ $(function () {
                $("#frmEmployee").attr("action", "/Employee/Insert_Employee/");
             }
             else {
+                $("#txtUser_Name").attr('disabled', false);
+                $('#drpRole').attr("disabled", false);
                 $("#frmEmployee").attr("action", "/Employee/Update_Employee/");
             }
             $('#frmEmployee').attr("method", "POST");
