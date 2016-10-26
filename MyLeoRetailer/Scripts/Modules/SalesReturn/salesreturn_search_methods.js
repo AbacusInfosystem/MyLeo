@@ -30,7 +30,7 @@
 
             Bind_Grid(obj, "SalesReturn_List");
 
-            Reset_SalesReturn();
+           // Reset_SalesReturn();
 
             $("#divSalesReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }

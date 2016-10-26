@@ -233,7 +233,7 @@ namespace MyLeoRetailerRepo
                                    "FROM #Temp1 t1,Purchase_Invoice_Item PII " +
                                    "WHERE PII.Purchase_Invoice_Id=t1.invoice_Id " +
                                    "group by PII.Purchase_Invoice_Id,t1.SKU ,PII.Quantity,t1.Qty " +
-                                   "end" +
+                                   "end " +
 
                                    "if(@table1=0 and @table2=1 ) " +
                                    "begin " +
@@ -257,23 +257,23 @@ namespace MyLeoRetailerRepo
 
                                    "IF ((SELECT count(*) FROM #Temp3 where  Quantity!=0)>0) " +
                                    "BEGIN " +
-                                   "SELECT * FROM #Temp3 " +
+                                   "SELECT Quantity, SKU_Code FROM #Temp3 " +
                                    "END " +
 
                                    "IF @@ROWCOUNT=0 and (SELECT COUNT(*) FROM Purchase_Return WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )=0 and  ( SELECT COUNT(*) FROM Purchase_Return_Request WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )=0 " +
                                    "BEGIN " +
-                                   "SELECT SKU_Code, Quantity FROM Purchase_Invoice_Item WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id " +
+                                   "SELECT Quantity, SKU_Code FROM Purchase_Invoice_Item WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id " +
                                    "END " +
 
-                                   "ELSE IF (( SELECT COUNT(*) FROM Purchase_Return_Request WHERE Purchase_Invoice_Id=1 )>0) " +
+                                   "ELSE IF (( SELECT COUNT(*) FROM Purchase_Return_Request WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )>0) " +
                                    "BEGIN " +
-                                   "SELECT PII.SKU_Code, PII.Quantity FROM Purchase_Invoice_Item PII,#Temp3 t3 WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id and " +
+                                   "SELECT  PII.Quantity, PII.SKU_Code FROM Purchase_Invoice_Item PII,#Temp3 t3 WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id and " +
                                    "PII.Purchase_Invoice_Id=t3.invoice_Id and  PII.SKU_Code!=t3.SKU_Code " +
                                    "END " +
 
                                    "ELSE IF ((SELECT count(*) FROM #Temp3)=0) " +
                                    "BEGIN " +
-                                   "SELECT * FROM #Temp3 " +
+                                   "SELECT Quantity, SKU_Code FROM #Temp3 " +
                                    "END";
                         paramList.Add(new SqlParameter("@Purchase_Invoice_Id", fieldValue));
                     }
@@ -331,15 +331,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
-                if (table_Name == "Inventorys")
-                {
-                    if (fieldName == "Branch_Id")
-                    {
-                        strquery = " Select distinct Inventory.Branch_Id, Inventory.Product_SKU ";
-                        strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID where Inventory.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
-                        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
-                    }
-                }
+                //if (table_Name == "Inventorys")
+                //{
+                //    if (fieldName == "Branch_Id")
+                //    {
+                //        strquery = " Select distinct Inventory.Branch_Id, Inventory.Product_SKU ";
+                //        strquery += "from Inventory inner join Branch on Inventory.Branch_Id=Branch.Branch_ID where Inventory.Branch_Id in (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "'))";
+                //        //strquery += "AND Product_SKU NOT IN (Select Distinct SKU_Code from Sales_Invoice_Item, Sales_Invoice WHERE Sales_Invoice.Sales_Invoice_Id = Sales_Invoice_Item.Sales_Invoice_Id AND Sales_Invoice.Branch_ID IN (SELECT * FROM dbo.CSVToTable( '" + fieldValue + "')))";
+                //    }
+                //}
 
                 if (table_Name == "Sales_Invoice")
                 {

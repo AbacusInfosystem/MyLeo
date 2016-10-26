@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -206,41 +207,48 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Request_Management_Create)]
         public ActionResult Save_Purchase_Return_Request(PurchaseReturnRequestViewModel prViewModel)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(prViewModel.PurchaseReturnRequest);
-
-                foreach (var item in prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItems)
+                try
                 {
-                    Set_Date_Session(item);
+                    Set_Date_Session(prViewModel.PurchaseReturnRequest);
+
+                    foreach (var item in prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItems)
+                    {
+                        Set_Date_Session(item);
+                    }
+
+                    if (prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id == 0)
+                    {
+                        _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
+
+                        prViewModel = new PurchaseReturnRequestViewModel();
+
+                        prViewModel.FriendlyMessages.Add(MessageStore.Get("PRR01"));
+                    }
+                    else
+                    {
+                        prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                    }
+
+                    scope.Complete();
+
                 }
-
-                if (prViewModel.PurchaseReturnRequest.Purchase_Return_Request_Id == 0)
+                catch (Exception ex)
                 {
-                    _prRepo.Insert_Purchase_Return_Request(prViewModel.PurchaseReturnRequest);
-
                     prViewModel = new PurchaseReturnRequestViewModel();
 
-                    prViewModel.FriendlyMessages.Add(MessageStore.Get("PRR01"));
+                    prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                    Logger.Error("PurchaseReturnRequestController - Save_Purchase_Return_Request : " + ex.ToString());
+
+                    scope.Dispose();
                 }
-                else
-                {
-                    prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
-                }
 
+                TempData["prViewModel"] = (PurchaseReturnRequestViewModel)prViewModel;
+
+                return RedirectToAction("Search", prViewModel);
             }
-            catch (Exception ex)
-            {
-                prViewModel = new PurchaseReturnRequestViewModel();
-
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
-                Logger.Error("PurchaseReturnRequestController - Save_Purchase_Return_Request : " + ex.ToString());
-            }
-
-            TempData["prViewModel"] = (PurchaseReturnRequestViewModel)prViewModel;
-
-            return RedirectToAction("Search", prViewModel);
         }
 
     }
