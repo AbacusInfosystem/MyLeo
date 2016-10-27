@@ -124,7 +124,7 @@ function Set_Article_No(value) {
 
                 $("#drpBrand").html("");
 
-                $("#drpBrand").append("<option value='0'>Select Brand</option>");
+                $("#drpBrand").append("<option value=''>Select Brand</option>");
 
                 $("#drpBrand").parents('.form-group').find('ul').html("");
 
@@ -147,7 +147,7 @@ function Set_Article_No(value) {
 
                 $("#drpCategory").html("");
 
-                $("#drpCategory").append("<option value='0'>Select Category</option>");
+                $("#drpCategory").append("<option value=''>Select Category</option>");
 
                 $("#drpCategory").parents('.form-group').find('ul').html("");
 
