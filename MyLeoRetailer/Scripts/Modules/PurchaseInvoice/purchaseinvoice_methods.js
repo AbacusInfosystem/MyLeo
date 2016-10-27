@@ -84,6 +84,60 @@ function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
     CalculateTotal();
 }
 
+
+function Get_Purchase_Invoice_Items_By_Barcode(i) {
+
+    debugger;
+
+    var barcode = $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+    $.ajax({
+
+        url: "/PurchaseInvoice/Get_Purchase_Invoice_Items_By_SKU_Code",
+
+        data: { SKU_Code: barcode },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#hdnBrand_Id_' + i).val(data.Brand_Id);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#hdnCategory_Id_' + i).val(data.Category_Id);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#hdnSubCategory_Id_' + i).val(data.SubCategory_Id);
+
+            $('#textSize_Group_Name_' + i).val(data.Size_Group_Name);
+
+            $('#hdnSize_Group_Id_' + i).val(data.Size_Group_Id);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#hdnSize_Id_' + i).val(data.Size_Id);
+
+            $('#textWSR_Price_' + i).val(data.WSR_Price);
+
+        }
+    });
+
+    CalculateTotal();
+}
+
+
 function AddPurchaseInvoiceDetails() {
 
     var html = '';
@@ -98,9 +152,6 @@ function AddPurchaseInvoiceDetails() {
 
     tblHtml += "<tr id='PurchaseInvoiceItemRow_" + i + "' class='item-data-row'>";
 
-    tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
-    tblHtml += "</td>";
 
     //tblHtml += "<td>";
     //tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
@@ -116,6 +167,10 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No' class='auto-complete-label' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
+
+    tblHtml += "<td>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Invoice_Items_By_Barcode(" + i + ");' id='textBarcode_No_" + i + "'>";
+    tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
@@ -301,6 +356,7 @@ function Add_Validation(i) {
 
     $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
@@ -378,11 +434,6 @@ function ReArrangePurchaseInvoiceDetailsData() {
 
             var newTR = "#" + $(row)[0].id + " td";
 
-            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
-                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
-                $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
-            }
-
             //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
             //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
             //    $(newTR).find("[id^='textSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
@@ -395,6 +446,11 @@ function ReArrangePurchaseInvoiceDetailsData() {
                 $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
+            }
+
+            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
+                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
+                $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
             }
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {

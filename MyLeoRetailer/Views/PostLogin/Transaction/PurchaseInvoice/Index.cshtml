@@ -272,9 +272,9 @@
                             <input type="hidden" id="hdnRowIdspecific" value="0" />
                             <table class="table table-bordered table-hover" id="tblPurchaseInvoiceItems">
                                 <thead>
-                                    <tr>
-                                        <th Style="width:150px">Barcode No.</th>
+                                    <tr>                                      
                                         <th style="width:150px">PO No.</th>
+                                        <th style="width:150px">Barcode No.</th>
                                         <th Style="width:150px">SKU No.</th>
                                         <th Style="width:70px">Article No.</th>
                                         <th style="width:100px">Color</th>
@@ -291,10 +291,7 @@
                                 </thead>
                                 <tbody>
                                     <tr id="PurchaseInvoiceItemRow_0">
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Barcode" id="textBarcode_No_0">
-                                        </td>
-                                        @*<td>
+                                                                               @*<td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);">
                                         </td>*@
                                         <td>
@@ -307,6 +304,12 @@
                                                 </div>
                                             </div>
                                         </td>
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Barcode" id="textBarcode_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_Barcode(0);" placeholder="Barcode No">
+                                        </td>
+
+
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
