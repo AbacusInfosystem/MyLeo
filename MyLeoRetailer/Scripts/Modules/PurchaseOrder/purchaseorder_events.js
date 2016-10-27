@@ -108,5 +108,9 @@
         //CalculateRowAmount();
 
     });
+
+    $("#btnResetPurchaseOrder").click(function () {
+        Reset_Details();
+    });
        
 });

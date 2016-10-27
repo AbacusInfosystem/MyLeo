@@ -7,67 +7,67 @@
 <input type="hidden" id="hdnValue" name="Value">
 <input type="hidden" id="hdnEditValue" name="" value="@Model.EditLookupValue">
 
-<div class="row">
-    <div class="col-md-12">
+<div class="">
+    <div class="">
         <div class="">
             <div class="table-responsive">
                 @*<div class="scroll" style="height: 300px; overflow: auto;">*@
-                <div class="panel-body list-group scroll" style="height: 300px; overflow: auto;">
-                    <table class="table table-hover" style="margin-bottom: 0;">
-                        <thead>
-                            <tr id="subhead">
-                                @foreach (string item in Model.HeaderNames)
-                                {
-                                    <th></th>
-                                    <th>@item</th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model.PartialDt != null && Model.PartialDt.Rows.Count > 0)
+
+                <table class="table table-hover" style="background: rgba(0, 0, 0, 0.02); border-top: 1px solid #DDD; border-bottom: 1px solid #DDD; padding-top: 0px; margin-bottom: 0;">
+                    <thead>
+                        <tr id="subhead">
+                            @foreach (string item in Model.HeaderNames)
                             {
-                                foreach (DataRow row in Model.PartialDt.Rows)
-                                {
-                                    <tr>
-                                        <td style="width:10%">
-                                            @if (row[1].ToString() == Model.EditLookupValue)
-                                            {
-                                                <label class="switch switch-small" style="margin: 0;">
-                                                    <input type='radio' checked name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
-                                                    <span></span>
-                                                </label>
-                                                //<input type='radio' checked name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
-
-                                            }
-                                            else
-                                            {
-                                                <label class="switch switch-small" style="margin: 0;">
-                                                    <input type='radio' name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
-                                                    <span></span>
-                                                </label>
-                                                // <input type='radio' name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
-                                            }
-
-                                        </td>
-                                        <td>
-                                            @row[1]
-                                            <input type='hidden' name='v1' value='@row[1]' class="v1" />
-                                        </td>
-                                    </tr>
-                                }
+                                <th></th>
+                                <th>@item</th>
                             }
-                            else
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.PartialDt != null && Model.PartialDt.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in Model.PartialDt.Rows)
                             {
                                 <tr>
-                                    <td></td>
-                                    <td align="center" colspan="2">
-                                        No record found.
+                                    <td style="width:10%">
+                                        @if (row[1].ToString() == Model.EditLookupValue)
+                                        {
+                                            <label class="switch switch-small" style="margin: 0;">
+                                                <input type='radio' checked name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
+                                                <span></span>
+                                            </label>
+                                            //<input type='radio' checked name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
+
+                                        }
+                                        else
+                                        {
+                                            <label class="switch switch-small" style="margin: 0;">
+                                                <input type='radio' name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
+                                                <span></span>
+                                            </label>
+                                            // <input type='radio' name='r1_Lookup' id='r1_Lookup_@row[0]' onchange="javascript: RadioChanged(this);" class='lookup-iradio-list' />
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @row[1]
+                                        <input type='hidden' name='v1' value='@row[1]' class="v1" />
                                     </td>
                                 </tr>
                             }
-                        </tbody>
-                    </table>
-                </div>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td></td>
+                                <td align="center" colspan="2">
+                                    No record found.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
                 <div id="divLookupGridOverlay" class="overlay">
                     <i class="fa fa-refresh fa-spin"></i>
                 </div>
@@ -83,6 +83,12 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
 
 <script>
     $(function () {
