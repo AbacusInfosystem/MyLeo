@@ -4,7 +4,18 @@
 @{
     ViewBag.Title = "PrintBarcode";
 } 
+<script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_events.js"></script>
+<script src="~/Scripts/Modules/Product/_ProductPricing/Product_price_methods.js"></script>
 
+<div class="content-frame">
+    <!-- START CONTENT FRAME TOP -->
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Product Barcode Printing</h2>
+        </div>
+        <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "Product")'"><i class="fa fa-angle-double-left"></i> BACK</button>
+    </div>
+</div>
 
 <div class="page-content-wrap">
     <form role="form" id="frmProductBarcodes">
@@ -18,7 +29,7 @@
                                 <img src="~/UploadedFiles/@item.Barcode_Image_Url" style="width:100%" />
                             </td>
                         }
-                    </tr>
+                    </tr> 
                 </table>
             </div>
         </div>
