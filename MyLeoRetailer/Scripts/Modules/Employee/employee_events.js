@@ -21,13 +21,13 @@ $(document).ready(function () {
             $("#drpRole").attr('enabled', true);
         }
 
-
     }
     //End
 
 });
 
 $(function () {
+ 
     //addition by swapnali | Date:19/09/2016
     // $("#Employee_Home_Lindline").mask("(999) 999-9999");
     $("input.mask_phone_no").mask('(999) 9999-9999');
@@ -35,12 +35,12 @@ $(function () {
     //alert($('[name="Employee.IsActive"]').val());
 
     if ($('[name = "Employee.Employee_Id"]').val() == 0 || $('[name="Employee.Employee_Id"]').val() == " ") {
-        $('[name="Employee.IsActive"]').val("True");
+        $('[name="Employee.IsActive"]').val("true");
     }
 
 
     $('[name = "Employee.IsActive"]').change(function () {
-        if ($('[name="Employee.IsActive"]').val() == "True") {
+        if ($('[name="Employee.IsActive"]').val() == "true") {
             $('[name="Employee.IsActive"]').val(1);
         }
         //else {
@@ -58,7 +58,7 @@ $(function () {
 
     
         //Modifiction
-        if ($('[name="Employee.IsActive"]').val() == 1 || $('[name="Employee.IsActive"]').val() == "True") {
+        if ($('[name="Employee.IsActive"]').val() == 1 || $('[name="Employee.IsActive"]').val() == "true" || $('[name="Employee.IsActive"]').val() == "True") {
             $('[name="Employee.IsActive"]').val(true);
         }
         else {
@@ -73,6 +73,8 @@ $(function () {
                $("#frmEmployee").attr("action", "/Employee/Insert_Employee/");
             }
             else {
+                $("#txtUser_Name").attr('disabled', false);
+                $('#drpRole').attr("disabled", false);
                 $("#frmEmployee").attr("action", "/Employee/Update_Employee/");
             }
             $('#frmEmployee').attr("method", "POST");

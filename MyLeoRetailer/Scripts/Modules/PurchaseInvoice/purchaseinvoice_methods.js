@@ -162,7 +162,7 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onchange='Add_Validation(" + i + ");' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm validate' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='Add_Validation(" + i + "); CalculateTotal()' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -290,38 +290,16 @@ function CalculateTotal() {
 
 }
 
+
 function Add_Validation(i) {
 
-    //$("#tblPurchaseInvoiceItems").find(".Validate").rules("add", { QuantityCheck: false });
+    //$("#tblPurchaseInvoiceItems").find(".validate").rules("add", { QuantityCheck: false });
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
 
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
-    
-    //$("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
 
     $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
-
-    jQuery.validator.addMethod("checkSKUExist", function (value, element) {
-        var result = true;
-        var id = $(element).attr('id')
-        id = id.replace("hdnSKU_No_", "");
-
-        //Changes Pending//
-
-        var PO_Id = $("#hdnPurchase_Order_Id_" + i).val();
-
-
-        $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
-
-            if (id != j && $(element).val() == $("#hdnSKU_No_" + j).val() && PO_Id == $("#hdnPurchase_Order_Id_" + j).val()) {
-
-                result = false;
-            }
-        });
-
-        return result;
-    }, "Already mapped.");
 
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
@@ -329,15 +307,23 @@ function Add_Validation(i) {
         debugger;
 
         var result = true;
-        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
-        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (isNaN($("#hdnQuantity_" + i).val()) || $("#hdnQuantity_" + i).val() == "") {
+        var id = $(element).attr('id')
+
+        j = id.replace("textQuantity_", "");
+
+
+        var EnterQty = parseInt($('[id="textQuantity_' + j + '"]').val());
+
+        var OrgQty = parseInt($("#hdnQuantity_" + j).val());
+
+
+        if (isNaN($("#hdnQuantity_" + j).val()) || $("#hdnQuantity_" + j).val() == "") {
             result = true;
         }
         else {
 
-            if (EnterQty != "" || $('[id="textQuantity_' + i + '"]').val() != '0') {
+            if (EnterQty != "" || $('[id="textQuantity_' + j + '"]').val() != '0') {
 
                 if (OrgQty >= EnterQty) {
 
@@ -352,9 +338,11 @@ function Add_Validation(i) {
                 result = false;
             }
         }
+
         return result;
 
-    }, "Quantity greater than PO Quantity And Not Zero.");
+    }, "Quantity less than Invoice Quantity And Not Zero.");
+
 }
 
 function DeletePurchaseInvoiceDetailsData(i) {
@@ -460,7 +448,7 @@ function ReArrangePurchaseInvoiceDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity");
-                $(newTR).find("[id^='textQuantity_']").attr("onchange", "Add_Validation(" + i + ");");
+                $(newTR).find("[id^='textQuantity_']").attr("onblur", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {

@@ -63,7 +63,7 @@
                             <div class="form-group auto-complete">
                                 <div class="input-group">
 
-                                    <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Customer_Mobile_No" id="txtCustomer_Mobile_No" placeholder="Enter customer mobile number to search." data-table="Alteration" data-col="Alteration_ID,Customer_Mobile_No" data-headernames="Alteration No..">
+                                    <input type="text" class="form-control color-filter autocomplete-text" name="Filter.Customer_Mobile_No" id="txtCustomer_Mobile_No" placeholder="Enter customer mobile number to search." data-table="Alteration" data-col="Alteration_ID,Customer_Mobile_No" data-headernames="Mobile No.">
                                     <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                     @*<input type="hidden" name="Filter.Vendor_Id" id="hdnVendorID">*@
                                     <input type="hidden" id="hdnAlteration_ID" name="Filter.Alteration_ID" value="@Model.Filter.Alteration_ID">
@@ -95,9 +95,10 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+        @*<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">*@
+            <div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
 
-        </div>
+            </div>
 
         <div class="col-md-12" style="padding: 0px;text-align:center;" id="divAlterationPager">
 

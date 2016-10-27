@@ -301,19 +301,22 @@ $(document).ready(function () {
 
     jQuery.validator.addMethod('positiveNumber', function (value) {// /^-?\d{2}(\.\d+)?$/
         var result = false;
-        var match = (/^\-?[0-9]*\.?[0-9]+$/).exec(value);
-        //alert(match);
-        var char = (/^[a-zA-Z0-9]+$/).exec(value);
-        //alert(char);
-        if (!isNaN(match)) {
-            if (match > 0)
-                return true;
-        }
+        if (!isNaN(value) && value != '') { 
+            var match = (/^\-?[0-9]*\.?[0-9]+$/).exec(value);
+            var char = (/^[a-zA-Z0-9]+$/).exec(value);
+            if (!isNaN(match)) {
+                if (match > 0)
+                    return true;
+            }
 
-        if (char != null) { 
+            if (char != null && char != 0) {
+                return true;
+            }
+        }
+        else {
             return true;
         }
-
+        
     }, 'Enter a positive and greater than 0 number.');
 
 });

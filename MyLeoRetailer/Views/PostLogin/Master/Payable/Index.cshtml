@@ -50,9 +50,9 @@
 
                 <input type="hidden" value="0" id="hdf_temp">
 
-                <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
+                <div class="col-md-12" style="padding-top: 0px; padding-left: 0px; padding-right: 0px;">
 
-                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 0px; padding-right: 0px;">
 
                         <div class="row">
                             <div class="col-md-3">
@@ -79,7 +79,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Payable status</span>
                                     <select class="form-control" id="drpPayble_Status" name="Payable.Payament_Status">
@@ -123,12 +123,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="text-align: right; margin-top: 25px;">
 
-                                <div class="btn-group" style="margin-top: 30px;">
+                                <div class="btn-group">
                                     <button type="button" id="btnSearchPayable" class="btn btn-success active">Search</button>
                                     @*<button type="reset" id="btnResetPayable" class="btn btn-danger active">Reset</button>*@
-                                    <button type="button" id="btnPay" class="btn btn-primary active">Pay</button>
+                                    <button type="button" id="btnPay" class="btn btn-danger active">Pay</button>
                                 </div>
                             </div>
 
@@ -136,7 +136,7 @@
 
                     </div>
 
-                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+                    <div class="col-md-12" style="padding-top: 20px; padding-left: 0px; padding-right: 0px;">
 
                         <div class="row">
 
@@ -146,7 +146,9 @@
 
                     </div>
 
-                    <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+                    @*<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">*@
+                    <div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+
 
                     </div>
 
