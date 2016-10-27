@@ -32,35 +32,31 @@
 
     <div class="row">
 
-        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
-
-            <div class="block">
-
-                <form role="form" id="frmInwardProduct">
-
-                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
-
-                        <div class="row">
-
-                            <input type="hidden" id="hdnRequestId" value="" name="product_Dispatch.Request_Id" />
-
-                            <input type="hidden" id="hdnSKU" value="" name="product_Dispatch.SKU" />
+        <div class="col-md-12" style="padding-top: 20px; padding-left: 0px; padding-right: 0px; padding-bottom: 20px;">
 
 
-                            <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-                            </div>
+            <form role="form" id="frmInwardProduct">
 
-                            <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
 
-                            </div>
 
-                        </div>
+                <input type="hidden" id="hdnRequestId" value="" name="product_Dispatch.Request_Id" />
 
-                    </div>
-                </form>
+                <input type="hidden" id="hdnSKU" value="" name="product_Dispatch.SKU" />
 
-            </div>
+
+                <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+
+                </div>
+
+                @*<div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">*@
+                <div class="col-md-12" id="divProductDispatchPager" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                </div>
+
+
+            </form>
+
+
 
         </div>
 
@@ -69,21 +65,21 @@
     <div class="row">
         <div class="col-md-6" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
-            <div class="btn-group pull-right">
-                <a class="btn btn-danger" role="button" id="btnRejected">Reject Dispatch </a>
-
-            </div>
-            <div class="btn-group pull-right">
-                <a class="btn btn-success active" role="button" id="btnAccept">Accept Dispatch </a>
+            <div class="btn-group">
+                <a class=" btn btn-danger" role="button" id="btnRejected">Reject Dispatch</a>
+                    
                 
+
+                <a class="btn btn-success active" role="button" id="btnAccept">Accept Dispatch </a>
+
             </div>
 
         </div>
 
     </div>
-   
 
-    </div>
+
+</div>
 
 
 
