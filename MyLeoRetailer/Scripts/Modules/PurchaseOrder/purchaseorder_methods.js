@@ -635,8 +635,8 @@ function Get_Consolidate_Purchase_Orders(value) {
 
                     tblHtml += "<td>";
                     tblHtml += "<div class='btn-group'>";
-                    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
-                    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
+                    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>+</button>";
+                    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>x</button>";
                     tblHtml += "</div>";
                     tblHtml += "</td>";
 
@@ -1053,8 +1053,8 @@ function AddPurchaseOrderDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details" + i + "' class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")' disabled>Continue</button>";
-    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")' disabled>+</button>";
+    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 
@@ -1345,8 +1345,8 @@ function ContinuePurchaseOrderDetailsData(j) {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>Continue</button>";
-    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderDetailsData(" + i + ")'>+</button>";
+    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderDetailsData(" + i + ")'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 
@@ -1591,13 +1591,18 @@ function Show_Button() {
 }
 
 function Reset_Details() {
+    
+    document.getElementById("drpBrand").selectedIndex = 0;
 
+    document.getElementById("drpCategory").selectedIndex = 0;
 
+    document.getElementById("drpSubCategory").selectedIndex = 0;
 
-    $("#textPurchase_Price").val(0);
+    document.getElementById("drpCenter_Size").selectedIndex = 0;
 
-    $("#textSize_Difference").val(0);
-    //document.getElementById("drpCenter_Size").selectedIndex = 0;
+    $("#textPurchase_Price").val('');
+
+    $("#textSize_Difference").val('');
 }
 
 function Disable_AddDetalis_Button() {

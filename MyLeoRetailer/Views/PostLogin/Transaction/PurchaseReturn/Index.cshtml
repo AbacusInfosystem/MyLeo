@@ -128,7 +128,7 @@
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
                                     <select class="form-control select" id="drpPurchase_Invoice_Id" name="PurchaseReturn.Purchase_Invoice_Id" onchange="Set_Purchase_Invoice_Id(this.value)">
-                                        <option value="0">Select Invoice No.</option>
+                                        <option value="">Select Invoice No.</option>
                                     </select>
                                 </div>
 
@@ -154,9 +154,9 @@
 
 
                     <div class="row">
-                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                        <div class="table-responsive" style="width:100%; background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
                             <input type="hidden" id="hdnRowIdspecific" value="0" />
-                            <table class="table table-bordered table-hover" id="tblPurchaseReturnItems">
+                            <table class="table table-hover" id="tblPurchaseReturnItems">
                                 <thead>
                                     <tr>
                                         <th style="width:150px;">Barcode No.</th>
@@ -171,15 +171,22 @@
                                         <th style="width:60px;">Quantity</th>
                                         <th style="width:60px;">WSR</th>
                                         <th style="width:60px;">Total Amount</th>
-                                        <th style="width:165px;">Action</th>
+                                        <th style="width:80px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr id="PurchaseReturnItemRow_0">
-                                        <td>
+                                        @*<td>
                                             <input type="hidden" name="PurchaseReturn.PurchaseReturns[0].Item_Ids" id="hdnItem_Ids_0" />
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0">
+                                        </td>*@
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0" onchange="javascript: Get_Purchase_Return_Items_By_Barcode(0);" placeholder="Barcode No">
                                         </td>
+
+
+
                                         @*<td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
                                         </td>*@
@@ -233,8 +240,8 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>Add Row</button>
-                                                <button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript: DeletePurchaseReturnDetailsData(0);'>Delete</button>                                                
+                                                <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>+</button>
+                                                <button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript: DeletePurchaseReturnDetailsData(0);'>x</button>                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -245,45 +252,30 @@
 
 
                     <div class="row">
-                        <div class="table-responsive" style="width:100%;">
-                            <table class="table table-bordered" id="tblPurchaseReturn">
+                        <div class="table-responsive" style="width:100%; background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                            <table class="table" id="tblPurchaseReturn">
                                 <thead>
                                     <tr></tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td style="width:150px;"></td>
-                                        <td style="width:150px;"></td>
-                                        <td style="width:70px;"></td>
-                                        <td style="width:70px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:100px;"></td>
-                                        <td style="width:60px;">
+                                        <td colspan="8"></td>
+                                        <td style="width:80px;">
                                             <label>Total Qty</label>
                                         </td>
-                                        <td style="width:60px;">
+                                        <td style="width:80px;">
                                             <input class="form-control input-sm" type="text" value="1" name="PurchaseReturn.Total_Quantity" readonly id="textTotalQuantity_0">
                                         </td>
-                                        <td style="width:60px;">
+                                        <td style="width:80px;">
                                             <label>Total Amt</label>
                                         </td>
-                                        <td style="width:60px;">
+                                        <td style="width:80px;">
                                             <input class="form-control input-sm" type="text" value="0" name="PurchaseReturn.Total_Amount" readonly id="textTotalAmount_0">
                                         </td>
-                                        <td style="width:140px;"></td>
+                                        <td style="width:90px;"></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="9"></td>
                                         <td>
                                             <label>Discount</label>
                                         </td>
@@ -296,16 +288,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="10"></td>
                                         <td>
                                             <label>Gross Amt</label>
                                         </td>
@@ -315,15 +298,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="9"></td>
                                         <td>
                                             <label>Tax</label>
                                         </td>
@@ -336,16 +311,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="10"></td>
                                         <td>
                                             <label>Round Off</label>
                                         </td>
@@ -355,16 +321,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td colspan="10"></td>
                                         <td>
                                             <label>NET Amt</label>
                                         </td>

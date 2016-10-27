@@ -142,7 +142,7 @@ function AddSalesReturnDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleReturnItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Return_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Barcode No' name='SaleReturnItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Return_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
                                             
     tblHtml += "<td>";
@@ -156,52 +156,52 @@ function AddSalesReturnDetails(i)
     tblHtml += "</div>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Article No' name='SaleReturnItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Article No' name='SaleReturnItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Brand' name='SaleReturnItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Brand' name='SaleReturnItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Category' name='SaleReturnItemList[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Category' name='SaleReturnItemList[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Category_Id' id='hdnCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='SubCategory' name='SaleReturnItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='SubCategory' name='SaleReturnItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].SubCategory_Id' id='hdnSubCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:50px' placeholder='Size' name='SaleReturnItemList[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Size' name='SaleReturnItemList[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Size_Id' id='hdnSize_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Colour' name='SaleReturnItemList[" + i + "].Colour_Name' readonly value='' id='textColour_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Colour' name='SaleReturnItemList[" + i + "].Colour_Name' readonly value='' id='textColour_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Colour_Id' id='hdnColour_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Quantity' name='SaleReturnItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Quantity' name='SaleReturnItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:50px' placeholder='MRP' name='SaleReturnItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='MRP' name='SaleReturnItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='Discount %' name='SaleReturnItemList[" + i + "].Discount_Percentage' value='0'  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Discount %' name='SaleReturnItemList[" + i + "].Discount_Percentage' value='0'  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='D Amt' name='SaleReturnItemList[" + i + "].SalesReturn_Discount_Amount' readonly value='' id='textSalesReturn_Discount_Amount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='D Amt' name='SaleReturnItemList[" + i + "].SalesReturn_Discount_Amount' readonly value='' id='textSalesReturn_Discount_Amount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -209,7 +209,10 @@ function AddSalesReturnDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript:DeleteSalesReturnDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<div class='btn-group'>";
+    tblHtml += "<button type='button' id='btnAddInputRow' class='btn btn-success active' onclick='javascript:AddSalesReturnDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript:DeleteSalesReturnDetailsData(" + i + ")'>x</button>";
+    tblHtml += "</div>";
     tblHtml += "</td>";
 
 

@@ -570,7 +570,12 @@ namespace MyLeoRetailerRepo
            
             PurchaseReturn.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
            
-            PurchaseReturn.Purchase_Return_Date = Convert.ToDateTime(dr["Purchase_Return_Date"]);            
+            //PurchaseReturn.Purchase_Return_Date = Convert.ToDateTime(dr["Purchase_Return_Date"]);
+
+            if (!dr.IsNull("Purchase_Return_Date"))
+            {
+                PurchaseReturn.Purchase_Return_Date = Convert.ToDateTime(dr["Purchase_Return_Date"]);
+            }
 
             PurchaseReturn.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
 

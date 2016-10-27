@@ -937,29 +937,17 @@ namespace MyLeoRetailerRepo
 
             PurchaseOrder.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
 
-            if (dr.IsNull("Purchase_Order_Date"))
-            {
-                PurchaseOrder.Purchase_Order_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Purchase_Order_Date"))
             {
                 PurchaseOrder.Purchase_Order_Date = Convert.ToDateTime(dr["Purchase_Order_Date"]);
             }
-
-            if (dr.IsNull("Start_Supply_Date"))
-            {
-                PurchaseOrder.Start_Supply_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Start_Supply_Date"))
             {
                 PurchaseOrder.Start_Supply_Date = Convert.ToDateTime(dr["Start_Supply_Date"]);
             }
-
-            if (dr.IsNull("Stop_Supply_Date"))
-            {
-                PurchaseOrder.Stop_Supply_Date = DateTime.MinValue;
-            }
-            else
+            
+            if (!dr.IsNull("Stop_Supply_Date"))
             {
                 PurchaseOrder.Stop_Supply_Date = Convert.ToDateTime(dr["Stop_Supply_Date"]);
             }
