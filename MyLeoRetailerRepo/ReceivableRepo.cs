@@ -775,8 +775,13 @@ namespace MyLeoRetailerRepo
            Receivable.Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
            Receivable.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
            Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
-           Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
-           Receivable.Credit_Note_Date.ToShortDateString();
+           //Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+           if (!dr.IsNull("Created_Date"))
+           {
+               Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+               Receivable.Credit_Note_Date.ToShortDateString();
+           }
+          
 
            return Receivable;
        }
@@ -796,8 +801,14 @@ namespace MyLeoRetailerRepo
            {
                Receivable.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
 
-               Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
-               Receivable.Credit_Note_Date.ToShortDateString();
+               //Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+               if (!dr.IsNull("Created_Date"))
+               {
+                   Receivable.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+                   Receivable.Credit_Note_Date.ToShortDateString();
+               }
+
+             
            }
            return Receivable;
        }

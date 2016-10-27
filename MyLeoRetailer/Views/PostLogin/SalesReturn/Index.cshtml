@@ -225,7 +225,7 @@
                     </div>
 
 
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px">
                             <div class="block">
                                 <div class="block" style="margin-top:0px; ">
@@ -238,37 +238,35 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
 
 
                     <div class="row">
-                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                        <div class="table-responsive" style="width:100%; margin: 0px 0; background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
                             <input type="hidden" id="hdnRowIdspecific" value="0" />
-                            <table class="table table-bordered table-hover" id="tblSalesReturnItems">
+                            <table class="table table-hover" id="tblSalesReturnItems">
                                 <thead>
                                     <tr>
-
-                                        <th>Invoice No.</th>
-                                        <th>Barcode No.</th>
-                                        <th>SKU No</th>
-                                        <th>Article No</th>
-                                        <th>Brand</th>
-                                        <th>Category</th>
-                                        <th>Sub Category</th>
-                                        <th>Size</th>
-                                        <th>Colour</th>
-                                        <th>Quantity</th>
-                                        <th>MRP</th>
-                                        <th>Discount Percentage</th>
-                                        <th>Discount Amount</th>
-                                        <th>Amount</th>
-                                        <th>Return Reason</th>
-                                        <th>Delete</th>
+                                        <th style="width:100px;">Invoice No.</th>
+                                        <th style="width:100px;">Barcode No.</th>
+                                        <th style="width:100px;">SKU No</th>
+                                        <th style="width:70px;">Article No</th>
+                                        <th style="width:70px;">Colour</th>
+                                        <th style="width:100px;">Brand</th>
+                                        <th style="width:100px;">Category</th>
+                                        <th style="width:100px;">Sub Category</th>
+                                        <th style="width:100px;">Size</th>
+                                        <th style="width:60px;">MRP</th>
+                                        <th style="width:60px;">Quantity</th>
+                                        <th style="width:60px;">Discount Percentage</th>
+                                        <th style="width:60px;">Discount Amount</th>
+                                        <th style="width:60px;">Amount</th>
+                                        <th style="width:100px;">Salesman Name</th>
+                                        <th style="width:100px;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr id="SalesReturnItemRow_0">
-
 
                                         <td>
                                             <div class="form-group auto-complete">
@@ -282,7 +280,7 @@
                                         </td>
 
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Return_Items_By_Barcode(0);" placeholder="Barcode No">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Return_Items_By_Barcode(0);" placeholder="Barcode No">
                                         </td>
 
                                         <td>
@@ -299,55 +297,58 @@
 
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleReturnItemList[0].Article_No" id="textArticle_No_0" readonly placeholder="Article No">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Article_No" id="textArticle_No_0" readonly placeholder="Article No">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].Brand" id="textBrand_0" readonly placeholder="Brand">
+                                            <input class="form-control input-sm" type="text"name="SaleReturnItemList[0].Brand" id="textBrand_0" readonly placeholder="Brand">
 
                                             <input type="hidden" name="SaleReturnItemList[0].Brand_Id" id="hdnBrand_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].Category" id="textCategory_0" readonly placeholder="Category">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Category" id="textCategory_0" readonly placeholder="Category">
                                             <input type="hidden" name="SaleReturnItemList[0].Category_Id" id="hdnCategory_Id_0" />
 
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].SubCategory" id="textSub_Category_0" readonly placeholder="Sub Category">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].SubCategory" id="textSub_Category_0" readonly placeholder="Sub Category">
                                             <input type="hidden" name="SaleReturnItemList[0].SubCategory_Id" id="hdnSubCategory_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:50px" name="SaleReturnItemList[0].Size_Name" id="textSize_Name_0" readonly placeholder="Size">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Size_Name" id="textSize_Name_0" readonly placeholder="Size">
                                             <input type="hidden" name="SaleReturnItemList[0].Size_Id" id="hdnSize_Id_0" />
 
                                         </td>
 
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Colour_Name" id="textColour_Name_0" readonly placeholder="Colour">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Colour_Name" id="textColour_Name_0" readonly placeholder="Colour">
                                             <input type="hidden" name="SaleReturnItemList[0].Colour_Id" id="hdnColour_Id_0" />
 
                                         </td>
 
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Quantity" id="textQuantity_0" value="" placeholder="Quantity" onblur="javascript: CalculateTotal();" maxlength="10">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Quantity" id="textQuantity_0" value="" placeholder="Quantity" onblur="javascript: CalculateTotal();" maxlength="10">
                                             <input type="hidden" id="hdnQuantity" value="@Model.SalesReturn.Quantity1" name="SalesInvoice.Quantity1">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:50px" name="SaleReturnItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:70px" name="SaleReturnItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %" maxlength="10">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="0" onblur="javascript: CalculateTotal();" placeholder=" discount %" maxlength="10">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:70px" name="SaleReturnItemList[0].SalesReturn_Discount_Amount" id="textSalesReturn_Discount_Amount_0" readonly placeholder="D Amt">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].SalesReturn_Discount_Amount" id="textSalesReturn_Discount_Amount_0" readonly placeholder="D Amt">
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleReturnItemList[0].Amount" id="textAmount_0" readonly placeholder="Amt">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Amount" id="textAmount_0" readonly placeholder="Amt">
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Return_Reason" id="textReturn_Reason_0" placeholder="Return Reason" maxlength="200">
                                         </td>
                                         <td>
-                                            <button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript: DeleteSalesReturnDetailsData(0)'>Delete</button>
+                                            <div class="btn-group">
+                                                <button type='button' id='btnAddInputRow' class='btn btn-success active' onclick='javascript: AddSalesReturnDetails();'>+</button>
+                                                <button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript: DeleteSalesReturnDetailsData(0)'>x</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

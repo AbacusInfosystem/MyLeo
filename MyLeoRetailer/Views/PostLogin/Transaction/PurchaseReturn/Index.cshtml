@@ -176,10 +176,17 @@
                                 </thead>
                                 <tbody>
                                     <tr id="PurchaseReturnItemRow_0">
-                                        <td>
+                                        @*<td>
                                             <input type="hidden" name="PurchaseReturn.PurchaseReturns[0].Item_Ids" id="hdnItem_Ids_0" />
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0">
+                                        </td>*@
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].Barcode" id="textBarcode_No_0" onchange="javascript: Get_Purchase_Return_Items_By_Barcode(0);" placeholder="Barcode No">
                                         </td>
+
+
+
                                         @*<td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturn.PurchaseReturns[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
                                         </td>*@
