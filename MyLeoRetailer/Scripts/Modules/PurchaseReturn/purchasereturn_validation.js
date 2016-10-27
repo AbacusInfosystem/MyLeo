@@ -10,6 +10,10 @@
                 required: true
             },
 
+            "PurchaseReturn.Purchase_Invoice_Id": {
+                required: true
+            },
+
             "PurchaseReturn.Transporter_Id": {
                 required: true
             },
@@ -25,7 +29,7 @@
             "PurchaseReturn.Discount_Percentage": {
                 required: true,
                 number: true
-            }//,
+            },
 
             //"PurchaseReturn.PurchaseReturns[0].Quantity": {
             //    required: true,
@@ -62,7 +66,12 @@
             "PurchaseReturn.Discount_Percentage": {
                 required: "Discount % is required.",
                 number: "Enter only numbers"
-            }//,
+            },
+
+            "PurchaseReturn.Purchase_Invoice_Id": {
+                required: "Purchase invoice no is required."
+            },
+
 
             //"PurchaseReturn.PurchaseReturns[0].Quantity": {
             //    required: "Quantity is required.",
