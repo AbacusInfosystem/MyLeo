@@ -65,6 +65,54 @@ function Get_Sales_Return_Items_By_SKU_Code(i) {
     
 }
 
+function Get_Sales_Return_Items_By_Barcode(i) {
+
+
+    var barcode = $("[name='SaleReturnItemList[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+    $.ajax({
+
+        url: "/SalesReturn/Get_Sales_Return_Items_By_SKU_Code",
+
+        data: {
+
+            Sales_Invoice_Id: $("[name='SaleReturnItemList[" + i + "].Sales_Invoice_Id']").val(),
+
+            SKU_Code: barcode
+
+        },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#textColour_Name_' + i).val(data.Colour_Name);
+
+            $('#textMRP_Price_' + i).val(data.MRP_Price);
+
+            $('#textQuantity_' + i).val(data.Quantity);
+
+            $('#textDiscount_Percentage_' + i).val(data.Discount_Percentage);
+
+            CalculateTotal();
+
+        }
+    });
+
+}
+
 function AddSalesReturnDetails(i)
 {
 
@@ -91,6 +139,10 @@ function AddSalesReturnDetails(i)
     tblHtml += "<input type='hidden' id='hdnSalesInvoiceNo_" + i + "' value='' name='SaleReturnItemList[" + i + "].Sales_Invoice_No' class='auto-complete-label' />";
     tblHtml += "</div>";                                               
     tblHtml += "</div>";
+    tblHtml += "</td>";
+
+    tblHtml += "<td>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleReturnItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Return_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
                                             
     tblHtml += "<td>";
@@ -210,6 +262,12 @@ function ReArrangeSalesReturnDetailsData()
                 
             }
 
+            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
+                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
+                $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleReturnItemList[" + i + "].Barcode");
+            }
+
+
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
                 $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code", "onblur", "javascript: Get_Sales_Return_Items_By_SKU_Code(" + i + ")");
@@ -306,5 +364,7 @@ function Add_Validation(i) {
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
 
     $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Required", } });
+
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
 
 }

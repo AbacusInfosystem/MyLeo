@@ -89,6 +89,27 @@
 
     }, "Already mapped.");
 
+    jQuery.validator.addMethod("checkBarcodeExist", function (value, element) {
+
+        debugger;
+
+        var result = true;
+
+        var id = $(element).attr('id');
+
+        id = id.replace("textBarcode_No_", "");
+
+        $("#tblSalesReturnItems").find("[id^='SalesReturnItemRow_']").each(function (j, row) {
+
+            if (id != j && $(element).val() == $("#textBarcode_No_" + j).val()) {
+                result = false;
+            }
+        });
+
+        return result;
+
+    }, "Already mapped.");
+
 
 });
 
