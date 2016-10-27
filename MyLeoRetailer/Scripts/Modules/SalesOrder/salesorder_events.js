@@ -6,6 +6,8 @@
 
     $("#textSKU_No_0").rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
 
+    $("#textBarcode_No_0").rules("add", { checkBarcodeExist: true });
+
     //$("#txtPayament_Date").rules("add", { required: true, messages: { required: "Payment is Required", } });
 
     //$("#textSales_Branch_Name_0").val($("#hdnBranchName" + id).val());

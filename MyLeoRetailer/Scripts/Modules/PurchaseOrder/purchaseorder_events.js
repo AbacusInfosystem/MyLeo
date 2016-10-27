@@ -96,9 +96,9 @@
         $("#drpArticle_No").rules("add", "required");
         $('#drpCenter_Size').rules("add", "required");
         $('#drpBrand').rules("add", "required");
-        $('#textPurchase_Price').rules("add", "required");
+        $('#textPurchase_Price').rules("add", { required: true, digits: true });
         $('#drpCategory').rules("add", "required");
-        $('#textSize_Difference').rules("add", "required");
+        $('#textSize_Difference').rules("add", { required: true, digits: true });
         $('#drpSubCategory').rules("add", "required");
         //Added by aditya [10102016] END
 
