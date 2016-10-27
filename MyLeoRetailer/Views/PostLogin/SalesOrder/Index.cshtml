@@ -111,7 +111,7 @@
 
             <input type="hidden" id="hdnCreateCustomerFlag" name="SalesInvoice.CreateCustomerFlag">
 
-            <div class="modal fade" id="myModalAddCustomer" role="dialog" aria-hidden="true">
+                   <div class="modal fade" id="myModalAddCustomer" role="dialog" aria-hidden="true">
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -164,9 +164,9 @@
 
                                 <div class="col-md-3" id="divBranch">
                                     @{
-                                    LoginInfo Cookies = new LoginInfo();
-                                    Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
-                                    
+                                        LoginInfo Cookies = new LoginInfo();
+                                        Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
                                         <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
                                     }
                                     <div class="form-group auto-complete">
@@ -176,7 +176,7 @@
                                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                             <input type="hidden" id="hdnBranchID" value="@Model.SalesInvoice.Branch_Id" name="SalesInvoice.Branch_Id" class="auto-complete-value" />
                                             <input type="hidden" id="hdnBranchName" value="" name="SalesInvoice.Branch_Name" class="auto-complete-label" />
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -220,129 +220,129 @@
 
                     </div>
 
-                        <div class="row">
-                            <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
-                                <div class="block">
-                                    <div class="block" style="margin-top:0px; ">
-                                        <div class="btn-group pull-right">
-                                            <a href="javascript:AddSalesOrderDetails();" id="btnAddInputRow" class="btn btn-success active ">
-                                                <i class="mdi mdi-plus"></i>
-                                                Add New Row
-                                            </a>
-                                        </div>
+                    <div class="row">
+                        <div class="col-md-12" style="border-bottom: 1px solid #DDD; padding: 0px 10px 10px 10px; height: 50px;">
+                            <div class="block">
+                                <div class="block" style="margin-top:0px; ">
+                                    <div class="btn-group pull-right">
+                                        <a href="javascript:AddSalesOrderDetails();" id="btnAddInputRow" class="btn btn-success active ">
+                                            <i class="mdi mdi-plus"></i>
+                                            Add New Row
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="block" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 10px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
-                            <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 18px;">Sales Invoice Details.</h4>
-                            <div class="table-responsive">
-                                <input type="hidden" id="hdnRowIdspecific" value="0" />
-                                <table class="table table-hover" style="margin-bottom: 0;" id="tblSalesOrderItems">
-                                    <thead>
-                                        <tr>
-                                            <th>Barcode No.</th>
-                                            <th>SKU No</th>
-                                            <th>Article No</th>
-                                            <th>Brand</th>
-                                            <th>Category</th>
-                                            <th>Sub Category</th>
-                                            <th>Size</th>
-                                            <th>Colour</th>
-                                            <th>MRP</th>
-                                            <th>Quantity</th>
-                                            <th>Discount Percentage</th>
-                                            <th>Discount Amount</th>
-                                            <th>Amount</th>
-                                            <th>Salesman Name</th>
-                                            <th>Delete</th>
+                    <div class="block" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 10px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                        <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 18px;">Sales Invoice Details.</h4>
+                        <div class="table-responsive">
+                            <input type="hidden" id="hdnRowIdspecific" value="0" />
+                            <table class="table table-hover" style="margin-bottom: 0;" id="tblSalesOrderItems">
+                                <thead>
+                                    <tr>
+                                        <th>Barcode No.</th>
+                                        <th>SKU No</th>
+                                        <th>Article No</th>
+                                        <th>Brand</th>
+                                        <th>Category</th>
+                                        <th>Sub Category</th>
+                                        <th>Size</th>
+                                        <th>Colour</th>
+                                        <th>MRP</th>
+                                        <th>Quantity</th>
+                                        <th>Discount Percentage</th>
+                                        <th>Discount Amount</th>
+                                        <th>Amount</th>
+                                        <th>Salesman Name</th>
+                                        <th>Delete</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                        <tr id="SalesOrderItemRow_0">
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" placeholder="Barcode No">
-                                            </td>
-                                            <td>
-                                                @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleOrderItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Order_Items_By_SKU_Code(0);">*@
-                                                <div class="form-group auto-complete">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control invoice-filter autocomplete-text" style="width:150px" id="textSKU_No_0" onblur="javascript: Get_Sales_Order_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Inventorys" data-col="Branch_Id,Product_SKU" data-headernames="SKU Code" name="SKU_Code_0" data-param="hdnBranchID" data-field="Branch_Id" />
-                                                        <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                                        <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
-                                                        <input type="hidden" id="hdnSKU_No_0" value="" name="SaleOrderItemList[0].SKU_Code" class="auto-complete-label" />
-                                                    </div>
+                                    <tr id="SalesOrderItemRow_0">
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Order_Items_By_Barcode(0);" placeholder="Barcode No">
+                                        </td>
+                                        <td>
+                                            @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleOrderItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Order_Items_By_SKU_Code(0);">*@
+                                            <div class="form-group auto-complete">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" style="width:150px" id="textSKU_No_0" onblur="javascript: Get_Sales_Order_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Inventorys" data-col="Branch_Id,Product_SKU" data-headernames="SKU Code" name="SKU_Code_0" data-param="hdnBranchID" data-field="Branch_Id" />
+                                                    <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                                    <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnSKU_No_0" value="" name="SaleOrderItemList[0].SKU_Code" class="auto-complete-label" />
                                                 </div>
+                                            </div>
 
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Article_No" id="textArticle_No_0" readonly placeholder="Article No">
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Brand" id="textBrand_0" readonly placeholder="Brand">
-                                                <input type="hidden" name="SaleOrderItemList[0].Brand_Id" id="hdnBrand_Id_0" />
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Category" id="textCategory_0" readonly placeholder="Category">
-                                                <input type="hidden" name="SaleOrderItemList[0].Category_Id" id="hdnCategory_Id_0" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Article_No" id="textArticle_No_0" readonly placeholder="Article No">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Brand" id="textBrand_0" readonly placeholder="Brand">
+                                            <input type="hidden" name="SaleOrderItemList[0].Brand_Id" id="hdnBrand_Id_0" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Category" id="textCategory_0" readonly placeholder="Category">
+                                            <input type="hidden" name="SaleOrderItemList[0].Category_Id" id="hdnCategory_Id_0" />
 
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].SubCategory" id="textSub_Category_0" readonly placeholder="Sub Category">
-                                                <input type="hidden" name="SaleOrderItemList[0].SubCategory_Id" id="hdnSubCategory_Id_0" />
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:50px" name="SaleOrderItemList[0].Size_Name" id="textSize_Name_0" readonly placeholder="Size">
-                                                <input type="hidden" name="SaleOrderItemList[0].Size_Id" id="hdnSize_Id_0" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].SubCategory" id="textSub_Category_0" readonly placeholder="Sub Category">
+                                            <input type="hidden" name="SaleOrderItemList[0].SubCategory_Id" id="hdnSubCategory_Id_0" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:50px" name="SaleOrderItemList[0].Size_Name" id="textSize_Name_0" readonly placeholder="Size">
+                                            <input type="hidden" name="SaleOrderItemList[0].Size_Id" id="hdnSize_Id_0" />
 
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Colour_Name" id="textColour_Name_0" readonly placeholder="Colour">
-                                                <input type="hidden" name="SaleOrderItemList[0].Colour_Id" id="hdnColour_Id_0" />
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SaleOrderItemList[0].Colour_Name" id="textColour_Name_0" readonly placeholder="Colour">
+                                            <input type="hidden" name="SaleOrderItemList[0].Colour_Id" id="hdnColour_Id_0" />
 
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="" placeholder="Quantity" onblur="javascript: CalculateQuantityMRP();" maxlength="10">
-                                                <input type="hidden" id="hdnQuantity" value="@Model.SalesInvoice.Quantity1" name="SalesInvoice.Quantity1">
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="" onblur="javascript: CalculateTotal();" placeholder="Disc %" maxlength="5">
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].SalesOrder_Discount_Amount" id="textSalesOrder_Discount_Amount_0" readonly placeholder="D Amt">
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Amount" id="textAmount_0" readonly placeholder="Amt">
-                                            </td>
-                                            <td>
-                                                @*<input class="form-control input-sm" type="text" name="SaleOrderItemList[0].SalesMan" id="textSalesMan_0" placeholder="SalesMan">*@
-                                                <div class="form-group auto-complete">  
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control invoice-filter autocomplete-text" name="SaleOrderItemList[0].SalesMan" style="width:80px" id="textSalesMan_0" placeholder="Enter SalesMan" value="" data-table="Employee" data-col="Employee_Id,Employee_Name" data-headernames="Employee" data-param="hdnEmployee_Id" data-field="Sales_Invoice">
-                                                        <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                                        <input type="hidden" id="hdnSalesManId_0" value="" name="SaleOrderItemList[0].SalesMan_Id" class="auto-complete-value" />
-                                                        <input type="hidden" id="hdnSalesMan_0" value="" name="SaleOrderItemList[0].SalesMan" class="auto-complete-label" />
-                                                    </div>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].MRP_Price" id="textMRP_Price_0" readonly placeholder="MRP">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Quantity" id="textQuantity_0" value="" placeholder="Quantity" onblur="javascript: CalculateQuantityMRP();" maxlength="10">
+                                            <input type="hidden" id="hdnQuantity" value="@Model.SalesInvoice.Quantity1" name="SalesInvoice.Quantity1">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:70px" name="SaleOrderItemList[0].Discount_Percentage" id="textDiscount_Percentage_0" value="" onblur="javascript: CalculateTotal();" placeholder="Disc %" maxlength="5">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].SalesOrder_Discount_Amount" id="textSalesOrder_Discount_Amount_0" readonly placeholder="D Amt">
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:80px" name="SaleOrderItemList[0].Amount" id="textAmount_0" readonly placeholder="Amt">
+                                        </td>
+                                        <td>
+                                            @*<input class="form-control input-sm" type="text" name="SaleOrderItemList[0].SalesMan" id="textSalesMan_0" placeholder="SalesMan">*@
+                                            <div class="form-group auto-complete">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text" name="SaleOrderItemList[0].SalesMan" style="width:80px" id="textSalesMan_0" placeholder="Enter SalesMan" value="" data-table="Employee" data-col="Employee_Id,Employee_Name" data-headernames="Employee" data-param="hdnEmployee_Id" data-field="Sales_Invoice">
+                                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                                    <input type="hidden" id="hdnSalesManId_0" value="" name="SaleOrderItemList[0].SalesMan_Id" class="auto-complete-value" />
+                                                    <input type="hidden" id="hdnSalesMan_0" value="" name="SaleOrderItemList[0].SalesMan" class="auto-complete-label" />
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(0)'><i class="fa fa-times"></i>Delete</button>
-                                            </td>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(0)'><i class="fa fa-times"></i>Delete</button>
+                                        </td>
 
-                                        </tr>
+                                    </tr>
 
-                                    </tbody>
-                                </table>
-                            </div><!-- /.col -->
-                        </div><!-- /.row -->
+                                </tbody>
+                            </table>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
 
-                        <div class="row">
+                    <div class="row">
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 170px;">
 
                             <div class="col-xs-12 table-responsive">
@@ -487,7 +487,7 @@
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
-                                </div>
+                        </div>
 
                                 <div class="col-md-3">
                                 <div>
@@ -498,11 +498,11 @@
                                 </div>
                             </div>
 
-                            </div>
-
                         </div>
 
-                        <div class="row">
+                    </div>
+
+                    <div class="row">
 
                         <div class="col-md-3" style="border-right:1px solid #DDD; height:332px">
 
@@ -576,9 +576,9 @@
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
-                            </div>
+                                </div>
 
-                        </div>
+                            </div>
 
                         <div class="col-md-3" style="border-right: 1px solid #DDD; height: 332px">
                             <div class="block">
@@ -597,9 +597,9 @@
                                     </div>
                                 </div>
 
-                                </div>
                             </div>
                         </div>
+                    </div>
 
                         <div class="col-md-3">
 
@@ -637,9 +637,9 @@
 
                             </div>
 
-                            </div>
-
                         </div>
+
+                    </div>
 
                     <div class="row" style="border-top:1px solid #DDD">
 
@@ -661,28 +661,28 @@
                                     </div>
                                 </div>
 
-                                </div>
-
                             </div>
 
                         </div>
 
+                    </div>
 
 
-                        <div class="row">
+
+                    <div class="row">
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 30px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
-                                <div class="btn-group">
+                            <div class="btn-group">
                                 <button type="button" id="btnSaveSalesOrder" class="btn btn-success">Save</button>
-                                    <button type="reset" class="btn btn-danger active" id="btnCancleSalesOrder">Reset</button>
-                                </div>
+                                <button type="reset" class="btn btn-danger active" id="btnCancleSalesOrder">Reset</button>
                             </div>
+                        </div>
 
                         <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
                         </div>
-                        </div>
-
-
                     </div>
+
+
+                </div>
 
             </div>
 

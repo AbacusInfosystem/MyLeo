@@ -59,6 +59,45 @@ function Get_Sales_Order_Items_By_SKU_Code(i) {
     });
 }
 
+
+function Get_Sales_Order_Items_By_Barcode(i) {
+
+    debugger;
+
+    var Skucode = $("[name='SaleOrderItemList[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+
+    $.ajax({
+
+        url: "/SalesOrder/Get_Sales_Order_Items_By_SKU_Code",
+
+        data: { SKU_Code: Skucode },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#textColour_Name_' + i).val(data.Colour_Name);
+
+            $('#textMRP_Price_' + i).val(data.MRP_Price);
+
+        }
+    });
+}
+
+
 function Get_Credit_Note_Data_By_Id(id) {
 
 
@@ -235,7 +274,7 @@ function AddSalesOrderDetails(i) {
     tblHtml += "<tr id='SalesOrderItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Order_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -480,9 +519,13 @@ function ReArrangeSalesOrderDetailsData() {
 
 function Add_Validation(i) {
 
+    alert(i);
+
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
-    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required", } });
+    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required" } });
+
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: {checkBarcodeExist:"Already Mapped"}});
 
     $("#textSalesMan_" + i).rules("add", { required: true, messages: { required: "SalesMan" } });
 
