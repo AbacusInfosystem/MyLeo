@@ -635,41 +635,26 @@ namespace MyLeoRetailerRepo
             PurchaseInvoice.Challan_No = Convert.ToString(dr["Challan_No"]);
 
 
-            if (dr.IsNull("Purchase_Invoice_Date"))
-            {
-                PurchaseInvoice.Purchase_Invoice_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Purchase_Invoice_Date"))
             {
                 PurchaseInvoice.Purchase_Invoice_Date = Convert.ToDateTime(dr["Purchase_Invoice_Date"]);
             }
-
-            if (dr.IsNull("Against_Form_Date"))
-            {
-                PurchaseInvoice.Against_Form_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Against_Form_Date"))
             {
                 PurchaseInvoice.Against_Form_Date = Convert.ToDateTime(dr["Against_Form_Date"]);
             }
-
-            if (dr.IsNull("Purchase_Packing_Date"))
-            {
-                PurchaseInvoice.Purchase_Packing_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Purchase_Packing_Date"))
             {
                 PurchaseInvoice.Purchase_Packing_Date = Convert.ToDateTime(dr["Purchase_Packing_Date"]);
             }
-
-            if (dr.IsNull("Challan_Date"))
-            {
-                PurchaseInvoice.Challan_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Challan_Date"))
             {
                 PurchaseInvoice.Challan_Date = Convert.ToDateTime(dr["Challan_Date"]);
             }
+           
 
             PurchaseInvoice.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
 
@@ -685,11 +670,7 @@ namespace MyLeoRetailerRepo
 
             PurchaseInvoice.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
 
-            if (dr.IsNull("Payment_Due_Date"))
-            {
-                PurchaseInvoice.Payment_Due_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Payment_Due_Date"))
             {
                 PurchaseInvoice.Payment_Due_Date = Convert.ToDateTime(dr["Payment_Due_Date"]);
             }
@@ -700,15 +681,11 @@ namespace MyLeoRetailerRepo
 
             PurchaseInvoice.Lr_No = Convert.ToString(dr["Lr_No"]);
 
-            if (dr.IsNull("Lr_Date"))
-            {
-                PurchaseInvoice.Lr_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Lr_Date"))
             {
                 PurchaseInvoice.Lr_Date = Convert.ToDateTime(dr["Lr_Date"]);
             }
-
+           
             PurchaseInvoice.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
 
             PurchaseInvoice.Created_By = Convert.ToInt32(dr["Created_By"]);
