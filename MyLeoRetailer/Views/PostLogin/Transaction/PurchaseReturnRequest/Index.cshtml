@@ -131,8 +131,12 @@
                                 <tbody>
                                     @*<span generated="true" style="color: #b64645;" class="help-block pull-right" id="lblError"></span>*@
                                     <tr id="PurchaseReturnRequestItemRow_0">
-                                        <td>
+                                        @*<td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Barcode" id="textBarcode_No_0" maxlength="30">
+                                        </td>*@
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Barcode" id="textBarcode_No_0" onchange="javascript: Get_Purchase_Return_Items_By_Barcode(0);" placeholder="Barcode No">
                                         </td>
 
                                         @*<td>
