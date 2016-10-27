@@ -100,27 +100,36 @@ function Calculate_Fianl_Amount_Using_Discount() {
     debugger
     if ($("#txtDiscount").val() != 0 && $("#txtDiscount").val() != '') {
 
+        //$('#txtDiscount_amount').attr('readonly', true);
+        //$('#txtDiscount').attr('readonly', true);
+        $("#txtDiscount_amount").attr("disabled", "disabled");
+        $("#txtDiscount").attr("disabled", "disabled");
         $("#hdnChangebleFAmt").val(0);
 
         var finalamount = parseFloat($("#txtFinal_amount").val());
+        var amountdue = parseFloat($("#txtAmount_due").val());
 
         var discount = parseFloat($("#txtDiscount").val());
 
-        var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((finalamount * discount) / 100);
+        if (finalamount != amountdue) {
+            var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((finalamount * discount) / 100);
+            var newfinalamount = finalamount - discountAmt;
+        } else {
+            var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((amountdue * discount) / 100);
+            newfinalamount = amountdue - discountAmt;
+        }
 
         $("#txtDiscount_amount").val(discountAmt.toFixed(2));
 
-        var newfinalamount = finalamount - discountAmt;
 
         if (newfinalamount < 0)
             $("#lblFinalPriceError").show(); 
         else
-            $("#txtFinal_amount").val(newfinalamount.toFixed(2));
-         
+            $("#txtFinal_amount").val(newfinalamount.toFixed(2)); 
     }
     else
     {
-        $("#txtDiscount_amount").val('');
+        $("#txtDiscount_amount").val(''); 
         $("#txtFinal_amount").val($("#txtAmount_due").val());
     }
 }
@@ -129,15 +138,33 @@ function FinalAmount() {
     debugger
     if ($("#txtFinal_amount").val() != 0 && $("#txtFinal_amount").val() != '') {
         var FinalAmount = parseFloat($("#txtFinal_amount").val());
+        var amountdue = parseFloat($("#txtAmount_due").val());
 
-        var PaidAmount = parseFloat($("#txtPaid_Amount").val());
+        var PaidAmount = parseFloat($("#txtPaid_Amount").val()); 
 
-        if (FinalAmount >= PaidAmount) {
-            var abcamount = FinalAmount - PaidAmount;
-            $("#txtFinal_amount").val(abcamount.toFixed(2));
-        }
-        else { 
-            $("#lblPaidPriceError").show();
+        if (!isNaN(PaidAmount)) {
+
+            $("#txtPaid_Amount").attr("disabled", "disabled");
+            $("#drpPayment_Mode").attr("disabled", "disabled");
+
+            if (FinalAmount != amountdue) {
+                if (FinalAmount >= PaidAmount) {
+                    var abcamount = FinalAmount - PaidAmount;
+                    $("#txtFinal_amount").val(abcamount.toFixed(2));
+                }
+                else {
+                    $("#lblPaidPriceError").show();
+                }
+            }
+            else {
+                if (amountdue >= PaidAmount) {
+                    var abcamount = amountdue - PaidAmount;
+                    $("#txtFinal_amount").val(abcamount.toFixed(2));
+                }
+                else {
+                    $("#lblPaidPriceError").show();
+                }
+            }
         }
         //document.getElementById("txtPaid_Amount").disabled = true;
     }
@@ -146,6 +173,11 @@ function FinalAmount() {
 function Cancle() {
 
     document.getElementById("txtPaid_Amount").disabled = false;
+    document.getElementById("drpPayment_Mode").disabled = false;
+    document.getElementById("txtDiscount").disabled = false;
+    document.getElementById("txtDiscount_amount").disabled = false;
+    //document.getElementById("txtPaid_Amount").disabled = false;
+    //document.getElementById("txtPaid_Amount").disabled = false;
 
 }
 
@@ -245,8 +277,12 @@ function Save_Payable_Data() {
 
             document.getElementById("txtPaid_Amount").disabled = false;
 
-            document.getElementById("btnResetPay").disabled = false;
+            document.getElementById("btnResetPay").disabled = false; 
+            document.getElementById("drpPayment_Mode").disabled = false;
+            document.getElementById("txtDiscount").disabled = false;
+            document.getElementById("txtDiscount_amount").disabled = false;
 
+            $("#drpPayment_Mode").trigger("change");
 
         }
     });
@@ -568,30 +604,4 @@ function ClearPayableData() {
     $("#txtPayament_Date").val('');
 
 
-}
-
-
-//function CalculateDiscount() {
-
-//    debugger;
-
-
-//    var Amountdue = parseFloat($("#txtAmount_due").val());
-
-//    var CNamount = parseFloat($("#txtCN_amount").val());
-
-//    var paidamount = parseFloat($("#txtPaid_Amount").val());
-
-//    var abcamount = Amountdue - CNamount;
-
-//    var discount = parseFloat($("#txtDiscount").val());
-
-//    var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((abcamount * discount) / 100);
-
-//    $("#txtDiscount_amount").val(discountAmt.toFixed(2));
-
-//    var finalamount = abcamount - discountAmt;
-
-//    $("#txtFinal_amount").val(finalamount.toFixed(2));
-
-//}
+} 
