@@ -4,6 +4,8 @@
 
     AddPurchaseReturnDetails();
 
+    CalculateTotal();
+
     $.ajax({
 
         url: "/PurchaseReturn/Get_Vendor_Details_By_Id",
@@ -216,8 +218,8 @@ function AddPurchaseReturnDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>Add Row</button>";
-    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>Delete</button>";
+    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 
@@ -611,8 +613,8 @@ function Bind_Purchase_Return_Items_Data(data)
 
             trHtml += "<td>";
             trHtml += "<div class='btn-group'>";
-            trHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>Add Row</button>";
-            trHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>Delete</button>";
+            trHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>+</button>";
+            trHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>x</button>";
             trHtml += "</div>";
             trHtml += "</td>";
 

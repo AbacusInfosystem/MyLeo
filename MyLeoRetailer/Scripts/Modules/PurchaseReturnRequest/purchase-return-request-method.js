@@ -121,8 +121,8 @@ function AddPurchaseReturnRequestDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript:AddPurchaseReturnRequestDetails();'>Add Row</button>";
-    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnRequestDetailsData(" + i + ");'>Delete</button>";
+    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript:AddPurchaseReturnRequestDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnRequestDetailsData(" + i + ");'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 

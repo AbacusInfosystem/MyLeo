@@ -70,6 +70,8 @@ namespace MyLeoRetailerInfo.SalesReturn
 
         //Start Sales Return Item
 
+        public string Barcode { get; set; }
+
         public string Sales_Invoice_No { get; set; }
 
         public string SKU_Code { get; set; }
@@ -124,6 +126,8 @@ namespace MyLeoRetailerInfo.SalesReturn
 
     public class SaleReturnItems
     {
+        public string Barcode { get; set; }
+
         public int Sales_Invoice_Id { get; set; }
 
         public string Sales_Invoice_No { get; set; }

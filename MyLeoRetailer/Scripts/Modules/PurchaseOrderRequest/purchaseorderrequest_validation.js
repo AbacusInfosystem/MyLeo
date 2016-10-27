@@ -13,7 +13,17 @@
             "PurchaseOrderRequest.Size_Group_Id": {
                 required: true,
                 //ArticleSizeGroupExist: true
-            }//,
+            },
+
+            "PurchaseOrderRequest.Purchase_Price": {
+                digits: true,
+                required: true
+            },
+
+            "PurchaseOrderRequest.Size_Difference": {
+                digits: true,
+                required: true
+            }
 
             //"PurchaseOrderRequest.Article_No": {
             //    required: true
@@ -35,15 +45,8 @@
             //    required: true
             //},
 
-            //"PurchaseOrderRequest.Purchase_Price": {
-            //    digits: true,
-            //    required: true
-            //},
+           
 
-            //"PurchaseOrderRequest.Size_Difference": {
-            //    digits: true,
-            //    required: true
-            //}
         },
         messages: {
 

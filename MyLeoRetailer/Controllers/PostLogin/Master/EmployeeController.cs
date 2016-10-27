@@ -335,35 +335,28 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 var temp = split.Split('/');
 
-
-                foreach (var item in temp)
+                if (temp.Length==2)
                 {
-                    for (int i = 1; i < 2; i++)
-                    {
-                        if (i == 1)
-                        {
-                            controller = temp[i];
-                            break;
-                        }
-                        else if (i == 2)
-                        {
-                            method = temp[i];
-                        }
-
-                    }
-
+                    controller = temp[1];
+                    method = "Index";
                 }
+                else
+                {
+                    controller = temp[1];
+                    method = temp[2];
+                }
+
 
                 //foreach (var item in temp)
                 //{
-                //    for (int i = 0; i < 2; i++)
+                //    for (int i = 1; i < 2; i++)
                 //    {
-                //        if (i == 0)
+                //        if (i == 1)
                 //        {
                 //            controller = temp[i];
                 //            break;
                 //        }
-                //        else if (i == 1)
+                //        else if (i == 2)
                 //        {
                 //            method = temp[i];
                 //        }
@@ -372,23 +365,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 //}
 
+                //if (controller == "")
+                //{
+                //    controller = "Dashboard";
+                //    method = "Index";
+                //}
 
-                if (controller == "")
-                {
-                    controller = "Dashboard";
-                    method = "Index";
-                }
+                //if (controller == "dashboard")
+                //{
+                //    method = "Index";
+                //}
 
-                if (controller == "dashboard")
-                {
-                    method = "Index";
-                }
-
-
-                if (method == "")
-                {
-                    method = "Search";
-                }
+                //if (method == "")
+                //{
+                //    method = "Search";
+                //}
 
             }
             //Added by vinod mane on 06/10/2016
