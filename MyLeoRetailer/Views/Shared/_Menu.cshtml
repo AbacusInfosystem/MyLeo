@@ -39,13 +39,13 @@
         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Transactions</span></a>
         <ul class="animated zoomIn">
             <li><a href="/PurchaseOrderRequest/Search"><span class="fa fa-users"></span> Purchase Order Request </a></li>
-            <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order </a></li>   
+            <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order </a></li>
             <li><a href="/PurchaseInvoice/Search"><span class="fa fa-users"></span> Purchase Invoice </a></li>
-            <li><a href="/purchase-return-request/get-purchase-return-request"><span class="fa fa-users"></span> Purchase Return Request</a></li>        
+            <li><a href="/purchase-return-request/get-purchase-return-request"><span class="fa fa-users"></span> Purchase Return Request</a></li>
             <li><a href="/PurchaseReturn/Search"><span class="fa fa-users"></span> Purchase Return </a></li>
             <li><a href="/Payable/Index"><span class="fa fa-users"></span> Payable </a></li>
             <li><a href="/SalesOrder/Search"><span class="fa fa-users"></span> Sales Invoice</a></li>
-            <li><a href="/SalesReturn/Search"><span class="fa fa-users"></span> Sales Return </a></li> 
+            <li><a href="/SalesReturn/Search"><span class="fa fa-users"></span> Sales Return </a></li>
             <li><a href="/Receivable/Index"><span class="fa fa-users"></span> Receivable </a></li>
             <li><a href="/GiftVoucher/Search"><span class="fa fa-users"></span> Gift Voucher </a></li>
             <li><a href="/Alteration/Search"><span class="fa fa-users"></span> Alteration </a></li>
@@ -90,9 +90,9 @@
 
                 @*commented by vinod mane on 24/10/2016*@
                 @*<div class="panel-footer text-center">
-                    <div class="btn-group">
-                    </div>
-                </div>*@
+                        <div class="btn-group">
+                        </div>
+                    </div>*@
                 @*End*@
 
                 @*Added by vinod mane on 24/10/2016*@
@@ -117,15 +117,17 @@
         Cookies.Warehouse_Notification_Count = Utility.Get_Warehouse_Notification_Count(Cookies.Branch_Ids);
 
         <li class="xn-icon-button pull-right" id="btnNotification">
-            @* <a href="#"><span class="fa fa-tasks"></span></a>*@
-            @*<img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">*@
+            @*<a href="#"><span class="fa fa-tasks"></span></a>
+                <img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">*@
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
-                <img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+                <a href="#"><img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif"></a>
+                @*<img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">*@
             }
             else
             {
-                <img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+                 <a href="#"><img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif"></a>
+                @*<img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">*@
             }
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
@@ -157,7 +159,13 @@
             function () {
                 setInterval(function () {
                     var randomnumber = Math.floor(Math.random() * 100);
-                    $("#notification_Icon").attr("src", "../Images/notification.gif");
+                    $("#notification_Icon").attr("src", "../../Images/notification.gif");
                 }, 3000);
             });
 </script>
+
+<style>
+    .branch_header {
+        background-image: url("../../Images/notification.gif");
+    }
+</style>

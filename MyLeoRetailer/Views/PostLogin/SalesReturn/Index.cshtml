@@ -154,7 +154,7 @@
                                         LoginInfo Cookies = new LoginInfo();
                                         Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                        <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
                                     }
 
                                     <div class="form-group auto-complete">
@@ -247,7 +247,9 @@
                             <table class="table table-bordered table-hover" id="tblSalesReturnItems">
                                 <thead>
                                     <tr>
+
                                         <th>Invoice No.</th>
+                                        <th>Barcode No.</th>
                                         <th>SKU No</th>
                                         <th>Article No</th>
                                         <th>Brand</th>
@@ -267,10 +269,6 @@
                                 <tbody>
                                     <tr id="SalesReturnItemRow_0">
 
-                                        @*<td>
-                                                <input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].Sales_Invoice_No" id="textInvoice_No_0" placeholder="Invoice No">
-                                                <input type="hidden" name="SalesReturn.Sales_Invoice_Id" value="@Model.SalesReturn.Sales_Invoice_Id" id="hdnSalesInvoice_ID" />
-                                            </td>*@
 
                                         <td>
                                             <div class="form-group auto-complete">
@@ -282,6 +280,11 @@
                                                 </div>
                                             </div>
                                         </td>
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleReturnItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Return_Items_By_Barcode(0);" placeholder="Barcode No">
+                                        </td>
+
                                         <td>
                                             @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Return_Items_By_SKU_Code(0);">*@
 
@@ -354,70 +357,70 @@
 
 
                     <div class="row">
-                       
-                            <div class="col-xs-12 table-responsive">
-                                <table id="tblSalesReturnItems">
-                                    <thead>
-                                        <tr></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td width="150px"></td>
-                                            <td width="150px"></td>
-                                            <td width="70px"></td>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
-                                            <td width="80px"></td>
-                                            <td>
-                                                <label>Total Quantity</label>
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Quantity" readonly id="textTotalQuantity_0">
-                                            </td>
-                                            <td width="40px"></td>
-                                            <td width="40px"></td>
 
-                                            <td>
-                                                <label>Sales Return Amount</label>
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Gross_Amount" readonly id="textGrossAmount_0">
-                                            </td>
+                        <div class="col-xs-12 table-responsive">
+                            <table id="tblSalesReturnItems">
+                                <thead>
+                                    <tr></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td width="150px"></td>
+                                        <td width="150px"></td>
+                                        <td width="70px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="80px"></td>
+                                        <td>
+                                            <label>Total Quantity</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Quantity" readonly id="textTotalQuantity_0">
+                                        </td>
+                                        <td width="40px"></td>
+                                        <td width="40px"></td>
 
-                                            <td width="200px"></td>
+                                        <td>
+                                            <label>Sales Return Amount</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Gross_Amount" readonly id="textGrossAmount_0">
+                                        </td>
 
-                                        </tr>
-                                        <tr>
-                                            <td width="150px"></td>
-                                            <td width="150px"></td>
-                                            <td width="70px"></td>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
-                                            <td width="80px"></td>
-                                            <td>
-                                                <label>Cash Paid Amount  </label>
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0" maxlength="10">
-                                            </td>
-                                            <td width="40px"></td>
-                                            <td width="40px"></td>
+                                        <td width="200px"></td>
 
-                                            <td>
-                                                <label>Credit Note Amount</label>
-                                            </td>
-                                            <td>
-                                                <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Credit_Note" readonly id="textTotalAmountReturnByCreditNote_0" maxlength="10">
-                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="150px"></td>
+                                        <td width="150px"></td>
+                                        <td width="70px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="80px"></td>
+                                        <td>
+                                            <label>Cash Paid Amount  </label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Cash" value="0" onblur="javascript: CalculateCreditNoteAmt();" id="textTotalAmountReturnByCash_0" maxlength="10">
+                                        </td>
+                                        <td width="40px"></td>
+                                        <td width="40px"></td>
 
-                                            <td width="200px"></td>
+                                        <td>
+                                            <label>Credit Note Amount</label>
+                                        </td>
+                                        <td>
+                                            <input class="form-control input-sm" type="text" style="width:60px" name="SalesReturn.Total_Amount_Return_By_Credit_Note" readonly id="textTotalAmountReturnByCreditNote_0" maxlength="10">
+                                        </td>
 
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div><!-- /.col -->
+                                        <td width="200px"></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div><!-- /.col -->
 
 
                     </div>

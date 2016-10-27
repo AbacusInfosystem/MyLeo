@@ -264,7 +264,7 @@
 
                                     <tr id="SalesOrderItemRow_0">
                                         <td>
-                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" placeholder="Barcode No">
+                                            <input class="form-control input-sm" type="text" style="width:100px" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Order_Items_By_Barcode(0);" placeholder="Barcode No">
                                         </td>
                                         <td>
                                             @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleOrderItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Order_Items_By_SKU_Code(0);">*@
@@ -453,9 +453,8 @@
                             </div>
                         </div>
 
-                    @*Pay*@
 
-                    <div class="row">
+                    <div class="row" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
 
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
 
@@ -488,57 +487,40 @@
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
-                                </div>
-
-                            </div>
-
                         </div>
 
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
-
-                            <div class="block">
-
-                                <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 12px;"><b>Cash details.</b></h4>
-
                                 <div class="col-md-3">
+                                <div>
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cash Amount</span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Cash_Amount" id="txtCash_amount" value="@(Model.SalesInvoice.Cash_Amount == 0 ? "" : Model.SalesInvoice.Cash_Amount.ToString())" placeholder="Cash Amount" @*onchange="javascript: CalculatePaidAmt();"*@ maxlength="10" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
 
                     </div>
 
                     <div class="row">
 
-                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
+                        <div class="col-md-3" style="border-right:1px solid #DDD; height:332px">
 
                             <div class="block">
+                                <h4 style="margin-top: 0px;">Cheque information.</h4>
 
-                                <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 12px;"><b>Cheque details.</b></h4>
-
-                                <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque No</span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_No" id="txtCheque_No" value="@Model.SalesInvoice.Cheque_No" placeholder="Enter Cheque No" maxlength="20" />
                                     </div>
-                                </div>
 
-                                <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Amount</span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Cheque_Amount" id="txtCheque_Amount" value="@(Model.SalesInvoice.Cheque_Amount == 0 ? "" : Model.SalesInvoice.Cheque_Amount.ToString())" @*onchange="javascript: CalculatePaidAmt();"*@ placeholder="Enter Cheque Amount " maxlength="10" />
                                     </div>
-                                </div>
 
-                                <div class="col-md-3">
+
+
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
                                         <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="MM-dd-yyyy">
@@ -546,31 +528,19 @@
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Bank Name</span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Bank_Name" id="txtBank_Name" value="@Model.SalesInvoice.Bank_Name" placeholder="Enter Bank Name" maxlength="50" />
                                     </div>
-                                </div>
 
                             </div>
 
                         </div>
 
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
-
+                        <div class="col-md-3" style="border-right: 1px solid #DDD; height: 332px">
                             <div class="block">
-
-                                <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 12px;"><b>Credit note details.</b></h4>
-
-
-                                <div class="col-md-3">
+                                <h4 style="margin-top: 0px;">Credit Not detail.</h4>
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note no</span>
                                         <select class="form-control" id="drpCredit_Note_No" name="SalesInvoice.Sales_Credit_Note_Id">
@@ -590,9 +560,8 @@
 
                                         </select>
                                     </div>
-                                </div>
 
-                                <div id="divPaidAmount" class="col-md-3">
+                                <div id="divPaidAmount">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Amount</span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Note_Amount" id="txtCredit_Note_Amount" value="@(Model.SalesInvoice.Credit_Note_Amount == 0 ? "" : Model.SalesInvoice.Credit_Note_Amount.ToString())" @*onchange="javascript: CalculatePaidAmt();"*@ placeholder=" Enter Paid amount" maxlength="20" />
@@ -600,8 +569,6 @@
                                 </div>
 
 
-
-                                <div class="col-md-3">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
                                         <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="MM-dd-yyyy">
@@ -613,26 +580,17 @@
 
                             </div>
 
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
-
+                        <div class="col-md-3" style="border-right: 1px solid #DDD; height: 332px">
                             <div class="block">
-
-                                <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 12px;"><b>Card details.</b></h4>
-
-                                <div id="divDebitcardno" class="col-md-3">
+                                <h4 style="margin-top: 0px;">Card information.</h4>
+                                <div id="divDebitcardno">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Card No </span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Credit_Card_No" id="txtCredit_Card_No" value="@Model.SalesInvoice.Credit_Card_No" placeholder="Enter card no" maxlength="30" />
                                     </div>
                                 </div>
 
-                                <div id="divCreditcardno" class="col-md-3">
+                                <div id="divCreditcardno">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Card Amount</span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Card_Amount" id="txtCard_Amount" value="@(Model.SalesInvoice.Card_Amount == 0 ? "" : Model.SalesInvoice.Card_Amount.ToString())" @*onchange="javascript: CalculatePaidAmt();"*@ placeholder="Card Amount" maxlength="10" />
@@ -640,20 +598,15 @@
                                 </div>
 
                             </div>
-
                         </div>
-
                     </div>
 
-                    <div class="row">
+                        <div class="col-md-3">
 
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
 
                             <div class="block">
-
-                                <h4 style="border-bottom: 1px; width: 190px; line-height: 24px; margin-left: 12px;"><b>Gift voucher details.</b></h4>
-
-                                <div class="col-md-3">
+                                <h4 style="margin-top: 0px;">Gift Voucher information.</h4>
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher No</span>
                                         <select class="form-control" id="drpGift_Voucher_No" name="SalesInvoice.Gift_Voucher_Id">
@@ -673,12 +626,9 @@
 
                                         </select>
 
-
-
                                     </div>
-                                </div>
 
-                                <div id="divDebitcardno" class="col-md-3">
+                                <div id="divDebitcardno">
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
                                         <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" @*onblur="javascript: CalculatePaidAmt();"*@ value="@(Model.SalesInvoice.Gift_Voucher_Amount == 0 ? "" : Model.SalesInvoice.Gift_Voucher_Amount.ToString())" placeholder="Enter Gift Voucher Amount" maxlength="20" />
@@ -691,7 +641,7 @@
 
                     </div>
 
-                    <div class="row">
+                    <div class="row" style="border-top:1px solid #DDD">
 
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 140px;">
 
@@ -717,21 +667,18 @@
 
                     </div>
 
-                    @*Pay End*@
+
 
                     <div class="row">
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 30px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
-                                <button type="button" id="btnSaveSalesOrder" class="btn btn-success">Save</button> @*<i class="fa fa-check"></i>*@
-
-                                @*<a class="btn btn-danger active" role="button" href="@Url.Action("Index", "SalesOrder")">Cancel </a>*@ @*<i class="fa fa-times"></i>*@
+                                <button type="button" id="btnSaveSalesOrder" class="btn btn-success">Save</button>
                                 <button type="reset" class="btn btn-danger active" id="btnCancleSalesOrder">Reset</button>
                             </div>
                         </div>
 
-
-                        @*<div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
-                        </div>*@
+                        <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">
+                        </div>
                     </div>
 
 
