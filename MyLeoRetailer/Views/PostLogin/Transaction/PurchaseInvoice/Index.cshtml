@@ -268,25 +268,25 @@
 
 
                     <div class="row">
-                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                        <div class="table-responsive" style="width:100%; background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
                             <input type="hidden" id="hdnRowIdspecific" value="0" />
-                            <table class="table table-bordered table-hover" id="tblPurchaseInvoiceItems">
+                            <table class="table table-hover" id="tblPurchaseInvoiceItems">
                                 <thead>
                                     <tr>
-                                        <th Style="width:150px">Barcode No.</th>
+                                        <th style="width:150px">Barcode No.</th>
                                         <th style="width:150px">PO No.</th>
-                                        <th Style="width:150px">SKU No.</th>
-                                        <th Style="width:70px">Article No.</th>
+                                        <th style="width:150px">SKU No.</th>
+                                        <th style="width:70px">Article No.</th>
                                         <th style="width:100px">Color</th>
-                                        <th Style="width:100px">Brand</th>
-                                        <th Style="width:100px">Category</th>
-                                        <th Style="width:100px">Sub Category</th>
-                                        <th Style="width:100px">Size Group</th>
-                                        <th Style="width:60px">Size</th>
-                                        <th Style="width:60px">Quantity</th>
-                                        <th Style="width:60px">WSR</th>
-                                        <th Style="width:60px">Total Amount</th>                                       
-                                        <th Style="width:165px">Action</th>
+                                        <th style="width:100px">Brand</th>
+                                        <th style="width:100px">Category</th>
+                                        <th style="width:100px">Sub Category</th>
+                                        <th style="width:100px">Size Group</th>
+                                        <th style="width:60px">Size</th>
+                                        <th style="width:60px">Quantity</th>
+                                        <th style="width:60px">WSR</th>
+                                        <th style="width:60px">Total Amount</th>
+                                        <th style="width:90px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -295,8 +295,8 @@
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Barcode" id="textBarcode_No_0">
                                         </td>
                                         @*<td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);">
-                                        </td>*@
+                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);">
+                        </td>*@
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
@@ -345,19 +345,19 @@
                                             <input type="hidden" name="PurchaseInvoice.PurchaseInvoices[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm validate" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1"  onblur="Add_Validation(0); CalculateTotal()" maxlength="10" />
+                                            <input class="form-control input-sm validate" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Quantity" id="textQuantity_0" value="1" onblur="Add_Validation(0); CalculateTotal()" maxlength="10" />
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].WSR_Price" value="0" id="textWSR_Price_0" readonly />
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Amount" value="0" id="textAmount_0" readonly />
-                                        </td>                                     
+                                        </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>Add Row</button>
-                                                <button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>Delete</button>
-                                            </div>                                            
+                                                <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>+</button>
+                                                <button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>x</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -367,35 +367,35 @@
 
 
                     <div class="row">
-                        <div class="table-responsive" style="width:100%;">
-                            <table class="table table-bordered" id="tblPurchaseInvoice">
+                        <div class="table-responsive" style="width:100%; background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                            <table class="table" id="tblPurchaseInvoice">
                                 <thead>
                                     <tr></tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td Style="width:150px"></td>
-                                        <td Style="width:150px"></td>
-                                        <td Style="width:70px"></td>
+                                        <td style="width:150px"></td>
+                                        <td style="width:150px"></td>
+                                        <td style="width:150px"></td>
+                                        <td style="width:70px"></td>
                                         <td style="width:110px"></td>
-                                        <td Style="width:110px"></td>
-                                        <td Style="width:100px"></td>
-                                        <td Style="width:100px"></td>
-                                        <td Style="width:100px"></td>
-                                        <td Style="width:60px">
+                                        <td style="width:110px"></td>
+                                        <td style="width:100px"></td>
+                                        <td style="width:100px"></td>
+                                        <td style="width:100px"></td>
+                                        <td style="width:60px">
                                             <label>Total Qty</label>
                                         </td>
-                                        <td Style="width:60px">
+                                        <td style="width:60px">
                                             <input class="form-control input-sm" type="text" value="1" name="PurchaseInvoice.Total_Quantity" readonly id="textTotalQuantity_0">
                                         </td>
-                                        <td Style="width:60px">
+                                        <td style="width:60px">
                                             <label>WSR Amount</label>
                                         </td>
-                                        <td Style="width:60px">
+                                        <td style="width:60px">
                                             <input class="form-control input-sm" type="text" value="0" name="PurchaseInvoice.Total_Amount" readonly id="textTotalAmount_0">
                                         </td>
-                                        <td Style="width:150px"></td>
-                                        <td Style="width:160px"></td>
+                                        <td style="width:90px"></td>
                                     </tr>
                                     <tr>
                                         <td></td>

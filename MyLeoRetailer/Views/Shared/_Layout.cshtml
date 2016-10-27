@@ -92,13 +92,8 @@
         <script src="/Scripts/generic.lookup.js"></script>
 
         <script src="/Scripts/generic.autocomplete.js"></script>
-        
 
-        <!-- END THIS PAGE PLUGINS-->        
-
-       
-    <!-- END SCRIPTS -->         
-
+        @* Added By Gauravi on 27-10-2016 *@
 
         <style>
             .form-group {
@@ -156,6 +151,16 @@
             }
         </style>
 
+        @* END *@
+        
+
+        <!-- END THIS PAGE PLUGINS-->        
+
+       
+    <!-- END SCRIPTS -->         
+
+           
+
 
     </head>
     <body>
@@ -198,14 +203,17 @@
         <input type="hidden" id="hdnLookupHiddenValue" name="Hidden" />
         <input type="hidden" id="hdnEditLookupValue" name="EditLookupValue">
 
-        <div class="modal fade" id="div_Parent_Modal_Fade" role="dialog" aria-hidden="true">
-            <div class="modal-dialog ">
-                <div class="modal-content" style="background: #f5f5f5 url('../Content/Atlant/img/bg.png') left top repeat; ">
+        @* Change by Gauravi on 27-10-2016 *@
+
+        <div class="modal fade" id="div_Parent_Modal_Fade" role="dialog" aria-hidden="true" tabindex="-1" aria-labelledby="myModalLabel">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content edit_modal_content" style="background: #f5f5f5 url('../Content/Atlant/img/bg.png') left top repeat; ">
                     <div class="modal-header" id="div_Parent_Modal_Header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:#fff;">x</button>
-                        <h4 class="modal-title">&nbsp;</h4>
+                        <h4 class="modal-title" style="width: 190px; line-height: 24px; margin-left: 18px;">&nbsp;</h4>
+                        @*<h4 class="modal-title">&nbsp;</h4>*@
                     </div>
-                    <div class="modal-body" id="div_Parent_Modal_Body">
+                    <div class="modal-body scroll" style="height: 300px;overflow: auto;" id="div_Parent_Modal_Body">
 
                     </div>
                     <div class="modal-footer">
@@ -214,8 +222,8 @@
                 </div>
             </div>
         </div>
-
-
+        
+        @* END *@
 
         <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
             <div class="mb-container">
@@ -235,9 +243,7 @@
             </div>
         </div>
 
-
-       
-                      
+                 
     </body>
 </html>
 

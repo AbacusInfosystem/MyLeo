@@ -1,5 +1,5 @@
 ﻿function Set_Vendor_Id(value) {
-    debugger;
+    
 
     $("#tblPurchaseOrderRequestItems").find("tr:gt(0)").remove();
 
@@ -36,7 +36,7 @@
             if (obj.PurchaseOrderRequest.Vendors.length > 0) {
               
                 for (var j = 0; j < obj.PurchaseOrderRequest.Vendors.length; j++) {
-                    debugger;
+                    
 
                     var i = j + 1;
 
@@ -56,7 +56,7 @@
 }
 
 function Set_Article_No(value) {
-    debugger;
+    
    
     $(".Details").hide();
 
@@ -108,7 +108,7 @@ function Set_Article_No(value) {
             if (obj.PurchaseOrderRequest.SizeGroups.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.SizeGroups.length; j++) {
-                    debugger;
+                    
 
                     var i = j + 1;
 
@@ -132,7 +132,7 @@ function Set_Article_No(value) {
 
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.Brands.length; j++) {
-                    debugger;
+                    
 
                     var i = j + 1;
 
@@ -154,7 +154,7 @@ function Set_Article_No(value) {
                 $("#drpCategory").parents('.form-group').find('ul').append("<li rel='0' class=''><a style='' class='' tabindex='0'><span class='text'>Select Category</span><i class='glyphicon glyphicon-ok icon-ok check-mark'></i></a></li>");
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.Categories.length; j++) {
-                    debugger;
+                    
                     var i = j + 1;
 
                     $("#drpCategory").append("<option value='" + obj.PurchaseOrderRequest.Categories[j].Category_Id + "'>" + obj.PurchaseOrderRequest.Categories[j].Category + "</option>");
@@ -175,7 +175,7 @@ function Set_Article_No(value) {
             if (obj.PurchaseOrderRequest.Colors.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.Colors.length; j++) {
-                    debugger;
+                    
 
                     var i = j + 1;
 
@@ -191,7 +191,7 @@ function Set_Article_No(value) {
 }
 
 function Set_Sub_Category_Drp_Id(value) {
-    debugger;
+    
 
     var Article_No = $("#hdf_Article_No").val();
 
@@ -219,7 +219,7 @@ function Set_Sub_Category_Drp_Id(value) {
             if (obj.PurchaseOrderRequest.SubCategories.length > 0) {
 
                 for (var j = 0; j < obj.PurchaseOrderRequest.SubCategories.length; j++) {
-                    debugger;
+                    
 
                     var i = j + 1;
 
@@ -301,7 +301,7 @@ function Get_Sizes() {
                         tblHtml += "<input type='hidden' class='form-control input-sm' value='" + obj.PurchaseOrderRequest.SizeGroups[j].Size_Id + "' name='PurchaseOrderRequest.Sizes[" + i + "].Size_Id" + (j + 1) + "' id='hdnSize" + (j + 1) + "-" + i + "' />";
                         tblHtml += "</td>";
 
-                        debugger;
+                        
 
                         var K = j + 1;
 
@@ -599,8 +599,8 @@ function AddPurchaseOrderRequestDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>Continue</button>";
-    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderRequestDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>+</button>";
+    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderRequestDetailsData(" + i + ")'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 
@@ -611,7 +611,7 @@ function AddPurchaseOrderRequestDetails() {
 
     myTable.append(newRow);   
 
-    debugger;
+    
 
     $("#PurchaseOrderRequestItemRow_" + i).addClass("PORI_Row_" + x);
 
@@ -645,7 +645,7 @@ function AddPurchaseOrderRequestDetails() {
 
 function ContinuePurchaseOrderRequestDetailsData(j) {
 
-    debugger;
+    
 
     var tdSizeCount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestSizeRow_"]').size();
     
@@ -694,6 +694,10 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
     var temptablecount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestItemRow_"]').size();
 
     var i = temptablecount;
+
+    if (i > 0) {
+        document.getElementById("continue-order-details" + (i - 1)).disabled = true;
+    }
 
     tblHtml += "<tr id='PurchaseOrderRequestItemRow_" + i + "' class='item-data-row " + size_group_name + "_" + artical_no + "'>";
 
@@ -886,8 +890,8 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>Continue</button>";
-    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderRequestDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<button type='button' id='continue-order-details" + i + "' disabled class='btn btn-success active' onclick='ContinuePurchaseOrderRequestDetailsData(" + i + ")'>+</button>";
+    tblHtml += "<button type='button' id='delete-order-details' class='btn btn-danger active' onclick='DeletePurchaseOrderRequestDetailsData(" + i + ")'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 
@@ -925,7 +929,7 @@ function ContinuePurchaseOrderRequestDetailsData(j) {
 
 function CalculateRowAmount(i) {
 
-    debugger;
+    
 
     var index = document.getElementById("drpCenter_Size").selectedIndex;
 
@@ -986,7 +990,7 @@ function CalculateRowQuantity(i) {
 
     CalculateRowAmount(i);
 
-    debugger;
+    
 
     /// Row ///   
 
@@ -1068,7 +1072,7 @@ function CalculateRowQuantity(i) {
 
 function Enable_Size_Quantity(i) {
 
-    debugger;
+    
 
     var start = document.getElementById("textStart_Size_" + i).selectedIndex;
 
@@ -1129,12 +1133,20 @@ function Show_Button() {
 
 function Reset_Details() {
 
-    debugger;
+    
 
-    $("#textPurchase_Price").val(0);
+    document.getElementById("drpBrand").selectedIndex = 0;
+
+    document.getElementById("drpCategory").selectedIndex = 0;
+
+    document.getElementById("drpSubCategory").selectedIndex = 0;
+
+    document.getElementById("drpCenter_Size").selectedIndex = 0;
+
+    $("#textPurchase_Price").val('');
    
-    $("#textSize_Difference").val(0);
-    //document.getElementById("drpCenter_Size").selectedIndex = 0;
+    $("#textSize_Difference").val('');
+   
 }
 
 function Delete_Size_Row() {
@@ -1172,7 +1184,7 @@ function Disable_AddDetalis_Button() {
 
 function Reset_Detalis_After_Delete() {
 
-    debugger;
+    
 
     var temptablecount = $("#tblPurchaseOrderRequestItems").find('[id^="PurchaseOrderRequestItemRow_"]').size();
 
@@ -1224,7 +1236,7 @@ function Reset_Detalis_After_Delete() {
 
 function DeletePurchaseOrderRequestDetailsData(i) {
 
-    debugger;
+    
 
     $("#tblPurchaseOrderRequestItems").find("[id='PurchaseOrderRequestItemRow_" + i + "']").remove();
 
@@ -1236,7 +1248,7 @@ function DeletePurchaseOrderRequestDetailsData(i) {
 
 function ReArrangePurchaseOrderRequestDetailsData() {
 
-    debugger;
+    
 
     $("#tblPurchaseOrderRequestItems").find("[id^='PurchaseOrderRequestItemRow_']").each(function (i, row) {
         if ($(row)[0].id != 'tblHeading') {
@@ -1301,7 +1313,7 @@ function ReArrangePurchaseOrderRequestDetailsData() {
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            debugger;
+            
 
 
 
@@ -1501,7 +1513,7 @@ function ReArrangePurchaseOrderRequestDetailsData() {
                 $(newTR).find("[id^='hdnAmount_15-']").attr("name", "PurchaseOrderRequest.Sizes[" + i + "].Amount15");
             }
 
-            debugger;
+            
 
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////

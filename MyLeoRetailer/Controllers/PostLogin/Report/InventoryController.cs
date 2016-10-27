@@ -51,17 +51,17 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
 			{
                 iViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                Pagination_Info pager = new Pagination_Info();
+                //Pagination_Info pager = new Pagination_Info();
 
-                pager = iViewModel.Grid_Detail.Pager;
+                //pager = iViewModel.Grid_Detail.Pager;
 
                 iViewModel.Grid_Detail = Set_Grid_Details(false, "Product_SKU,Branch_Name,Product_Quantity", "Inventory_Id");
 
                 iViewModel.Grid_Detail.Records = _inventoryRepo.Get_Inventories(iViewModel.Filter, iViewModel.Cookies.Branch_Ids); 
 
-                Set_Pagination(pager, iViewModel.Grid_Detail); 
+                //Set_Pagination(pager, iViewModel.Grid_Detail); 
 
-                iViewModel.Grid_Detail.Pager = pager;
+                //iViewModel.Grid_Detail.Pager = pager;
 			}
 			catch(Exception ex)
 			{
