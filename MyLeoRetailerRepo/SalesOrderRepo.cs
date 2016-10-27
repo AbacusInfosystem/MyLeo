@@ -141,7 +141,11 @@ namespace MyLeoRetailerRepo
             CreditNoteDetails.Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
             CreditNoteDetails.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
             CreditNoteDetails.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
-            CreditNoteDetails.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+            if (!dr.IsNull("Created_Date"))
+            {
+                CreditNoteDetails.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+            }
+            //CreditNoteDetails.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
 
             return CreditNoteDetails;
         }

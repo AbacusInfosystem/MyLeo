@@ -70,7 +70,19 @@ namespace MyLeoRetailerRepo
 
             Alteration.Product_Name = Convert.ToString(dr["Product_Name"]);
 
-            Alteration.Alteration_Date = Convert.ToDateTime(dr["Alteration_Date"]);
+
+            if (!dr.IsNull("Alteration_Date"))
+            {
+                Alteration.Alteration_Date = Convert.ToDateTime(dr["Alteration_Date"]);
+            }
+
+            //Alteration.Alteration_Date = Convert.ToDateTime(dr["Alteration_Date"]);
+
+
+            if (!dr.IsNull("Delivery_Date"))
+            {
+                Alteration.Alteration_Date = Convert.ToDateTime(dr["Delivery_Date"]);
+            }
 
             Alteration.Delivery_Date = Convert.ToDateTime(dr["Delivery_Date"]);
 

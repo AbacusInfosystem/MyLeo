@@ -273,10 +273,10 @@
                             <table class="table table-hover" id="tblPurchaseInvoiceItems">
                                 <thead>
                                     <tr>
-                                        <th style="width:150px">Barcode No.</th>
                                         <th style="width:150px">PO No.</th>
-                                        <th style="width:150px">SKU No.</th>
-                                        <th style="width:70px">Article No.</th>
+                                        <th style="width:150px">Barcode No.</th>
+                                        <th Style="width:150px">SKU No.</th>
+                                        <th Style="width:70px">Article No.</th>
                                         <th style="width:100px">Color</th>
                                         <th style="width:100px">Brand</th>
                                         <th style="width:100px">Category</th>
@@ -291,12 +291,9 @@
                                 </thead>
                                 <tbody>
                                     <tr id="PurchaseInvoiceItemRow_0">
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Barcode" id="textBarcode_No_0">
-                                        </td>
                                         @*<td>
-                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);">
-                        </td>*@
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_SKU_Code(0);">
+                                        </td>*@
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
@@ -307,6 +304,12 @@
                                                 </div>
                                             </div>
                                         </td>
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Barcode" id="textBarcode_No_0" onchange="javascript: Get_Purchase_Invoice_Items_By_Barcode(0);" placeholder="Barcode No">
+                                        </td>
+
+
                                         <td>
                                             <div class="form-group auto-complete">
                                                 <div class="input-group">
@@ -352,12 +355,12 @@
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseInvoice.PurchaseInvoices[0].Amount" value="0" id="textAmount_0" readonly />
-                                        </td>
+                                        </td>                                     
                                         <td>
                                             <div class="btn-group">
                                                 <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>+</button>
                                                 <button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(0)'>x</button>
-                                            </div>
+                                            </div>                                            
                                         </td>
                                     </tr>
                                 </tbody>
