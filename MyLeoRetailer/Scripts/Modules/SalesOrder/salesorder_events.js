@@ -39,7 +39,7 @@
 
         debugger;
 
-        $('#btnAddInputRow').attr("disabled", "disabled");
+        //$('#btnAddInputRow').attr("disabled", "disabled");
 
         $('#btnSaveSalesOrder').attr("disabled", "disabled");
 
