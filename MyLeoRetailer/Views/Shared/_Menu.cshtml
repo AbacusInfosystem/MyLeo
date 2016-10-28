@@ -23,20 +23,17 @@
             <li><a href="/Category/Index"><span class="fa fa-users"></span> Category Management</a></li>
             <li><a href="/Color/Index"><span class="fa fa-users"></span> Color Management</a></li>
             <li><a href="/Size/Index"><span class="fa fa-users"></span> Size Management</a></li>
+            <li><a href="/Product/Search"><span class="fa fa-users"></span> Product Management</a></li> 
             <li><a href="/Tax/Index"><span class="fa fa-users"></span> Tax Management</a></li>
             <li><a href="/Customer/Search"><span class="fa fa-users"></span> Customer Management</a></li>
             <li><a href="/Vendor/Search"><span class="fa fa-users"></span> Vendor Management</a></li>
-            <li><a href="/VendorContact/Search"><span class="fa fa-users"></span> Vendor Contact Management</a></li>
-            <li><a href="/Product/Search"><span class="fa fa-users"></span> Product Management</a></li>
-            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Product Warehouse</a></li>
-            <li><a href="/ProductDispatch/Search"><span class="fa fa-users"></span> Product Dispatch</a></li>
-            <li><a href="/ProductDispatch/Dispatched_Product_Listing"><span class="fa fa-users"></span>Inward Product</a></li>
+            <li><a href="/VendorContact/Search"><span class="fa fa-users"></span> Vendor Contact Management</a></li>                     
             @*<li><a href="/Replacement/Search"><span class="fa fa-users"></span> Replacement</a></li>*@ @*commented bya aditya as pre sanket instruction 26092016*@
         </ul>
     </li>
 
     <li class="xn-openable">
-        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Transactions</span></a>
+        <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Transactions</span></a>
         <ul class="animated zoomIn">
             <li><a href="/PurchaseOrderRequest/Search"><span class="fa fa-users"></span> Purchase Order Request </a></li>
             <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order </a></li>
@@ -49,6 +46,15 @@
             <li><a href="/Receivable/Index"><span class="fa fa-users"></span> Receivable </a></li>
             <li><a href="/GiftVoucher/Search"><span class="fa fa-users"></span> Gift Voucher </a></li>
             <li><a href="/Alteration/Search"><span class="fa fa-users"></span> Alteration </a></li>
+        </ul>
+    </li>
+
+    <li class="xn-openable">
+        <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Dispatch</span></a>
+        <ul class="animated zoomIn">
+            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Product Warehouse</a></li>
+            <li><a href="/ProductDispatch/Search"><span class="fa fa-users"></span> Product Dispatch</a></li>
+            <li><a href="/ProductDispatch/Dispatched_Product_Listing"><span class="fa fa-users"></span>Inward Product</a></li>
         </ul>
     </li>
 
@@ -122,13 +128,13 @@
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
                 
-                <a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>
-                @*<img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">*@
+                @*<a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>*@
+                <a href="#" style="height:50px"><img id="notification_Icon" alt="" role="presentation" width="30" height="30" src="../../Images/notification.gif"></a>
             }
             else
             {
-                 <a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>
-                @*<img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">*@
+                 @*<a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>*@
+                <a href="#" style="height:50px"><img alt="" role="presentation" width="30" height="30" src="../../Images/notification.gif"></a>
             }
             @if (Cookies.Warehouse_Notification_Count > 0)
             {

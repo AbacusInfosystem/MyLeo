@@ -1,10 +1,9 @@
 ﻿@model MyLeoRetailer.Models.ProductDispatchViewModel
 
-
-
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/ProductDispatch/product_dispatch_event.js"></script>
 <script src="~/Scripts/Modules/ProductDispatch/product_dispatch_method.js"></script>
+<script src="~/Scripts/Modules/ProductDispatch/product_dispatch_validation.js"></script>
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -74,14 +73,14 @@
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Date</span>
                                     <div class="input-group date" id="dp-2" data-date="" data-date-format="mm-dd-yyyy">
-                                        <input type="text" class="form-control datepicker" id="txtDispatch_Date" placeholder="Enter Dispatch Date." />
+                                        <input type="text" class="form-control datepicker" name="product_Dispatch.Dispatch_Date" id="txtDispatch_Date" placeholder="Enter Dispatch Date." />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Quantity</span>
-                                    <input type="text" class="form-control input-sm" name="product_Dispatch.Quantity" id="txtDispatch_Quantity" placeholder="Enter Dispatch Quantity."  />
+                                    <input type="text" class="form-control input-sm" name="Quantity" id="txtDispatch_Quantity" placeholder="Enter Dispatch Quantity."  />
                                 </div>
                             </div>
 
@@ -94,10 +93,12 @@
                             <div class="block">
                                 <div class="block" style="margin-top:0px; ">
                                     <div class="btn-group">
-                                        <a href="javascript:AddProductDispatch();" id="btnProductDispatch" class="btn btn-success active">
+                                        @*<a href="javascript:AddProductDispatch();" id="btnProductDispatch" class="btn btn-success active">
                                             <i class="mdi mdi-plus"></i>
                                             Add
-                                        </a>
+                                        </a>*@
+
+                                        <button type="button" id="btnProductDispatch" class="btn btn-success active">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +162,7 @@
                     <div class="row">
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
-                                <button type="button" id="btnSaveDispatch" class="btn btn-success active">Save</button>
+                                <button type="button" value="Save" id="btnSaveDispatch" class="btn btn-success active">Save</button>
                                 <button type="reset" id="btnCancelDispatch" class="btn btn-danger active">Reset</button>
                             </div>
                         </div>

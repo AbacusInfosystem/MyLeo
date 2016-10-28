@@ -19,7 +19,7 @@ $(function () {
 
     $("#btnSearchSales").click(function () {
 
-        Get_Sales_Report();
+        Get_Sales_Report();        
     }
 
     );

@@ -39,7 +39,7 @@
 
         debugger;
 
-        $('#btnAddInputRow').attr("disabled", "disabled");
+        //$('#btnAddInputRow').attr("disabled", "disabled");
 
         $('#btnSaveSalesOrder').attr("disabled", "disabled");
 
@@ -94,6 +94,17 @@ $(function ()
         {
             Add_Validation(i);
         });
+
+        //$('.barcode').each(function () {
+
+        //    alert(this.id);
+        //    //$(this).rules("remove");
+        //    $("#'"+ this.id + "'").rules("remove");
+        //});
+
+
+
+        //$('#textBarcode_No_0').rules("remove");
 
         if ($("#frmSalesOrder").valid()) {
 

@@ -274,13 +274,13 @@ function AddSalesOrderDetails(i) {
     tblHtml += "<tr id='SalesOrderItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Order_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm barcode' placeholder='' name='SaleOrderItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Order_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:150px' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SKU_Code_" + i + "' data-param='hdnBranchID' data-field='Branch_Id'/>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SKU_Code_" + i + "' data-param='hdnBranchID' data-field='Branch_Id'/>";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
     //tblHtml += "<input type='hidden' id='hdnBranchID_" + i + "' value='' name='SalesInvoice.Branch_Id' />";
@@ -289,58 +289,58 @@ function AddSalesOrderDetails(i) {
     tblHtml += "</div>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Article No' name='SaleOrderItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm'  placeholder='Article No' name='SaleOrderItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Brand' name='SaleOrderItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Brand' name='SaleOrderItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleOrderItemList[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Category' name='SaleOrderItemList[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Category' name='SaleOrderItemList[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleOrderItemList[" + i + "].Category_Id' id='hdnCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='SubCategory' name='SaleOrderItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='SubCategory' name='SaleOrderItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleOrderItemList[" + i + "].SubCategory_Id' id='hdnSubCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:50px' placeholder='Size' name='SaleOrderItemList[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Size' name='SaleOrderItemList[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleOrderItemList[" + i + "].Size_Id' id='hdnSize_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Colour' name='SaleOrderItemList[" + i + "].Colour_Name' readonly value='' id='textColour_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Colour' name='SaleOrderItemList[" + i + "].Colour_Name' readonly value='' id='textColour_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleOrderItemList[" + i + "].Colour_Id' id='hdnColour_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='MRP' name='SaleOrderItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='MRP' name='SaleOrderItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='Disc %' name='SaleOrderItemList[" + i + "].Discount_Percentage' value=''  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Disc %' name='SaleOrderItemList[" + i + "].Discount_Percentage' value=''  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='D Amt' name='SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount' readonly value='' id='textSalesOrder_Discount_Amount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='D Amt' name='SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount' readonly value='' id='textSalesOrder_Discount_Amount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Amt' name='SaleOrderItemList[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Amt' name='SaleOrderItemList[" + i + "].Amount' readonly value='' id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' style='width:80px' name='SaleOrderItemList[" + i + "].SalesMan' id='textSalesMan_" + i + "' placeholder='Enter SalesMan' value='' data-table='Employee' data-col='Employee_Id,Employee_Name' data-headernames='Employee' data-param='hdnEmployee_Id' data-field='Sales_Invoice'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' name='SaleOrderItemList[" + i + "].SalesMan' id='textSalesMan_" + i + "' placeholder='Enter SalesMan' value='' data-table='Employee' data-col='Employee_Id,Employee_Name' data-headernames='Employee' data-param='hdnEmployee_Id' data-field='Sales_Invoice'>";
     tblHtml += "<span class='input-group-addon'> <a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnSalesManId_" + i + "' value='' name='SaleOrderItemList[" + i + "].SalesMan_Id' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSalesMan_" + i + "' value='' name='SaleOrderItemList[" + i + "].SalesMan' class='auto-complete-label' />";
@@ -349,7 +349,10 @@ function AddSalesOrderDetails(i) {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(" + i + ")'><i class='fa fa-times'></i>Delete</button>";
+    tblHtml += "<div class='btn-group'>";
+    tblHtml += "<button type='button' id='btnAddInputRow' class='btn btn-success active' onclick='javascript:AddSalesOrderDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-salesorder-details' class='btn btn-danger active' onclick='javascript:DeleteSalesOrderDetailsData(" + i + ")'>x</button>";
+    tblHtml += "</div>";
     tblHtml += "</td>";
 
     tblHtml += "</tr>";
@@ -519,7 +522,7 @@ function ReArrangeSalesOrderDetailsData() {
 
 function Add_Validation(i) {
 
-    alert(i);
+   // alert(i);
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
