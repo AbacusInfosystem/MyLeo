@@ -29,7 +29,7 @@
 
             Bind_Grid(obj, "Purchase_Return_List");
 
-            //Reset_PurchaseReturn();
+            Reset_PurchaseReturn();
 
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -40,9 +40,9 @@
 
 function Reset_PurchaseReturn() {
 
-    $("[name='Filter.Debit_Note_No']").val("");
+    //$("[name='Filter.Debit_Note_No']").val("");
 
-    $("[name='Filter.Purchase_Return_Id']").val("");
+    //$("[name='Filter.Purchase_Return_Id']").val("");
 
     document.getElementById('btnEditPurchaseReturn').disabled = true;
 

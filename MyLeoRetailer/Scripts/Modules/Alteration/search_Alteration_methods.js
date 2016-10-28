@@ -31,7 +31,7 @@ function Get_Alterations() {
 
             Bind_Grid(obj, "Alteration_List");
 
-            //Reset_Alteration();
+            Reset_Alteration();
 
             $("#divAlterationPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
@@ -40,9 +40,9 @@ function Get_Alterations() {
 
 function Reset_Alteration()
 {
-    $("[name='Filter.Customer_Mobile_No']").val("");
+    //$("[name='Filter.Customer_Mobile_No']").val("");
 
-    $("[name='Filter.Alteration_ID']").val("");
+    //$("[name='Filter.Alteration_ID']").val("");
 
     document.getElementById("btnEditAlteration").disabled = true;
 }

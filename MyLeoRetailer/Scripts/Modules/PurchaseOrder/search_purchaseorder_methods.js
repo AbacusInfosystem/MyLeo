@@ -30,7 +30,7 @@ function Get_Purchase_Orders() {
 
             Bind_Grid(obj, "Purchase_Order_List");
 
-            //Reset_PurchaseOrder();
+            Reset_PurchaseOrder();
 
             $("#divPurchaseOrderPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -42,9 +42,9 @@ function Get_Purchase_Orders() {
 
 function Reset_PurchaseOrder() {
 
-    $("[name='Filter.Purchase_Order_No']").val("");
+    //$("[name='Filter.Purchase_Order_No']").val("");
 
-    $("[name='Filter.Purchase_Order_Id']").val("");
+    //$("[name='Filter.Purchase_Order_Id']").val("");
 
     document.getElementById("btnEditPurchaseOrder").disabled = true;
     

@@ -29,7 +29,7 @@
 
             Bind_Grid(obj, "Purchase_Invoice_List");
 
-            //Reset_PurchaseInvoice();
+            Reset_PurchaseInvoice();
 
             $("#divPurchaseInvoicePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -41,9 +41,9 @@
 
 function Reset_PurchaseInvoice() {
 
-    $("[name='Filter.Purchase_Invoice_No']").val("");
+    //$("[name='Filter.Purchase_Invoice_No']").val("");
 
-    $("[name='Filter.Purchase_Invoice_Id']").val("");
+    //$("[name='Filter.Purchase_Invoice_Id']").val("");
 
     document.getElementById("btnViewPurchaseInvoice").disabled = true;
 
