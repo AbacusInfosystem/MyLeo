@@ -81,10 +81,10 @@ namespace MyLeoRetailerRepo
 
             if (!dr.IsNull("Delivery_Date"))
             {
-                Alteration.Alteration_Date = Convert.ToDateTime(dr["Delivery_Date"]);
+                Alteration.Delivery_Date = Convert.ToDateTime(dr["Delivery_Date"]);
             }
 
-            Alteration.Delivery_Date = Convert.ToDateTime(dr["Delivery_Date"]);
+            //Alteration.Delivery_Date = Convert.ToDateTime(dr["Delivery_Date"]);
 
             Alteration.Customer_Mobile_No = Convert.ToString(dr["Customer_Mobile_No"]);
 
