@@ -95,6 +95,17 @@ $(function ()
             Add_Validation(i);
         });
 
+        //$('.barcode').each(function () {
+
+        //    alert(this.id);
+        //    //$(this).rules("remove");
+        //    $("#'"+ this.id + "'").rules("remove");
+        //});
+
+
+
+        //$('#textBarcode_No_0').rules("remove");
+
         if ($("#frmSalesOrder").valid()) {
 
             if ($('#tblSalesOrderItems tbody tr').length > 0) {
