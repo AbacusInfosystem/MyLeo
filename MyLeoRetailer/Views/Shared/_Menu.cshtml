@@ -128,13 +128,13 @@
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
                 
-                <a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>
-                @*<img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">*@
+                @*<a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>*@
+                <a href="#" style="height:50px"><img id="notification_Icon" alt="" role="presentation" width="30" height="30" src="../../Images/notification.gif"></a>
             }
             else
             {
-                 <a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>
-                @*<img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../../Images/notification.gif">*@
+                 @*<a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>*@
+                <a href="#" style="height:50px"><img alt="" role="presentation" width="30" height="30" src="../../Images/notification.gif"></a>
             }
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
@@ -168,7 +168,7 @@
 <script>
     $(document).ready(
             function () {
-                setInterval(function () {
+                setInterval(function () { 
                     var randomnumber = Math.floor(Math.random() * 100);
                     $("#notification_Icon").attr("src", "../../Images/notification.gif");
                 }, 3000);

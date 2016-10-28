@@ -38,9 +38,7 @@ $(document).ready(function () {
 
     });
 
-    $("#btnSavePay").click(function () {
-
-        alert();
+    $("#btnSavePay").click(function () { 
         if ($("#frmPay").valid()) {
             Save_Receivable_Data();
         }
