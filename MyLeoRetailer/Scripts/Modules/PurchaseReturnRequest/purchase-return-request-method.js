@@ -54,8 +54,9 @@ function AddPurchaseReturnRequestDetails() {
     tblHtml += "<tr id='PurchaseReturnRequestItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Return_Items_By_Barcode(" + i + ");' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
+
 
     //tblHtml += "<td>";
     //tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
@@ -440,6 +441,63 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
     
 }
 
+function Get_Purchase_Return_Items_By_Barcode(i) {
+
+    debugger;
+
+    var barcode = $("[name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+    $.ajax({
+
+        url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
+
+        data: { SKU_Code: barcode, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
+
+        method: 'POST',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#hdnBrand_Id_' + i).val(data.Brand_Id);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#hdnCategory_Id_' + i).val(data.Category_Id);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#hdnSubCategory_Id_' + i).val(data.SubCategory_Id);
+
+            $('#textSize_Group_Name_' + i).val(data.Size_Group_Name);
+
+            $('#hdnSize_Group_Id_' + i).val(data.Size_Group_Id);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#hdnSize_Id_' + i).val(data.Size_Id);
+
+            $('#textWSR_Price_' + i).val(data.WSR_Price);
+
+            $('#textQuantity_' + i).val(1);
+        }
+
+    });
+
+    $("#textDiscountPercentage_0").val(0);
+
+    CalculateTotal();
+
+}
+
 function Set_Purchase_Invoice_Id(value) {
 
     $('#hdf_Purchase_Invoice_Id').val(value);
@@ -454,6 +512,8 @@ function Add_Validation(i)
 
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
   
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
+
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
         debugger;
