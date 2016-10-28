@@ -130,10 +130,16 @@
 
         id = id.replace("textBarcode_No_", "");
 
+       
+
         $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (j, row) {
 
-            if (id != j && $(element).val() == $("#textBarcode_No_" + j).val()) {
-                result = false;
+            if ($(element).val() != "" && $("#textBarcode_No_" + j).val() != "") {
+
+                if (id != j && $(element).val() == $("#textBarcode_No_" + j).val()) {
+                    result = false;
+                }
+
             }
         });
 

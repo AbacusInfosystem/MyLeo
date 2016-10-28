@@ -29,7 +29,7 @@
 
             Bind_Grid(obj, "Purchase_Order_Request_List");
 
-            //Reset_PurchaseOrderRequest();
+            Reset_PurchaseOrderRequest();
 
             $("#divPurchaseOrderRequestPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -39,9 +39,9 @@
 }
 
 function Reset_PurchaseOrderRequest() {
-    $("[name='Filter.Vendor_Id']").val("");
+    //$("[name='Filter.Vendor_Id']").val("");
 
-    $("[name='Filter.Purchase_Order_Request_Id']").val("");
+    //$("[name='Filter.Purchase_Order_Request_Id']").val("");
 
     document.getElementById("btnEditPurchaseOrderRequest").disabled = true;
 }

@@ -264,7 +264,7 @@
 
                                     <tr id="SalesOrderItemRow_0">
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Order_Items_By_Barcode(0);" placeholder="Barcode No">
+                                            <input class="form-control input-sm barcode"  type="text" name="SaleOrderItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Order_Items_By_Barcode(0);" placeholder="">
                                         </td>
                                         <td>
                                             @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleOrderItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Order_Items_By_SKU_Code(0);">*@
@@ -630,7 +630,7 @@
 
                                     <div id="divDebitcardno">
                                         <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Gift Voucher Amount </span>
+                                            <span class="label label-primary label-form" style="margin-bottom: 2px;">Gift Voucher Amount </span>
                                             <input type="text" class="form-control input-sm" name="SalesInvoice.Gift_Voucher_Amount" id="txtGift_Voucher_Amount" @*onblur="javascript: CalculatePaidAmt();"*@ value="@(Model.SalesInvoice.Gift_Voucher_Amount == 0 ? "" : Model.SalesInvoice.Gift_Voucher_Amount.ToString())" placeholder="Enter Gift Voucher Amount" maxlength="20" />
                                         </div>
                                     </div>
@@ -649,14 +649,14 @@
 
                                     <div id="divDebitcardno" class="col-md-3">
                                         <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Paid Amount </span>
+                                            <span class="label label-primary label-form" style="margin-bottom: 1px;margin-top:30px;">Paid Amount </span>
                                             <input type="text" class="form-control input-sm" name="SalesInvoice.Paid_Amount" id="txtPaid_Amount" onchange="javascript: CalculateBalAmt();" value="@(Model.SalesInvoice.Paid_Amount == 0 ? "" : Model.SalesInvoice.Paid_Amount.ToString())" placeholder="Paid Amount" maxlength="10" />
                                         </div>
                                     </div>
 
                                     <div id="divCreditcardno" class="col-md-3">
                                         <div class="form-group">
-                                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Balance Amount</span>
+                                            <span class="label label-primary label-form" style="margin-bottom: 1px;margin-top:30px;">Balance Amount</span>
                                             <input type="text" class="form-control input-sm" name="SalesInvoice.Balance_Amount" id="txtBalance_Amount" value="@(Model.SalesInvoice.Balance_Amount == 0 ? "" : Model.SalesInvoice.Balance_Amount.ToString())" placeholder="Balance Amount" maxlength="10" />
                                         </div>
                                     </div>

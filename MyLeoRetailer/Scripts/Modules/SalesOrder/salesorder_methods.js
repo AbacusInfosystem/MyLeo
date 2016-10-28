@@ -274,7 +274,7 @@ function AddSalesOrderDetails(i) {
     tblHtml += "<tr id='SalesOrderItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Barcode No' name='SaleOrderItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Order_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm barcode' placeholder='' name='SaleOrderItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Order_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -522,7 +522,7 @@ function ReArrangeSalesOrderDetailsData() {
 
 function Add_Validation(i) {
 
-    alert(i);
+   // alert(i);
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
