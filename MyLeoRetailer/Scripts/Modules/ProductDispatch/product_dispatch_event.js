@@ -2,6 +2,10 @@
 
     $("#btnSaveDispatch").click(function () {
 
+        $('#txtDispatch_Date').rules("add", { required: false, digits: true });
+
+        $('#txtDispatch_Quantity').rules("add", { required: false, number: true, validate_Quantity: true });
+
            var row_Count=document.getElementById("tblProduct_Dispatch").children[1].rows.length;
 
            if (row_Count > 0) {
@@ -18,21 +22,37 @@
            }
     });
 
-    $("#frmProductDispatch").validate({
 
-        rules: {
-            "product_Dispatch.Quantity":
-            {
-                
-                number:true,
-                validate_Quantity: true
-            }
+    $("#btnProductDispatch").click(function () {
 
-        },
-        messages: {
-           
+        $('#txtDispatch_Date').rules("add", { required: true, digits: true });
+
+        $('#txtDispatch_Quantity').rules("add", { required: true, number: true, validate_Quantity:true });
+
+        if ($("#frmProductDispatch").valid()) {
+            AddProductDispatch();
         }
     });
+
+
+    //$("#frmProductDispatch").validate({
+
+    //    rules: {
+    //        "product_Dispatch.Quantity":
+    //        {
+                
+    //            number:true,
+    //            validate_Quantity: true
+    //        }
+
+    //    },
+    //    messages: {
+    //        "product_Dispatch.Quantity": {
+             
+    //        },
+           
+    //    }
+    //});
 
 
 });

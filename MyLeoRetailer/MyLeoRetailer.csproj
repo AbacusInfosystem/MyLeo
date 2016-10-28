@@ -1049,6 +1049,7 @@
     <Content Include="Scripts\Modules\ProductDispatch\dispatched_product_listing_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_method.js" />
     <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_event.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_validation.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_method.js" />
     <Content Include="Scripts\Modules\ProductWarehouse\product_warehouse_notification.js" />
