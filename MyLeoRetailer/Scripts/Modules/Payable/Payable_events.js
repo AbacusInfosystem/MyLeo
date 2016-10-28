@@ -108,7 +108,7 @@ $(function () {
 
 function Get_Payable(id) {
 
-    alert(id);
+   // alert(id);
 
     $("#hdf_Purchase_Invoice_Id").val(id);
 
