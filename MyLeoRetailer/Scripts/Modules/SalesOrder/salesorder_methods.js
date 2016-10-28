@@ -522,7 +522,7 @@ function ReArrangeSalesOrderDetailsData() {
 
 function Add_Validation(i) {
 
-    alert(i);
+   // alert(i);
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
