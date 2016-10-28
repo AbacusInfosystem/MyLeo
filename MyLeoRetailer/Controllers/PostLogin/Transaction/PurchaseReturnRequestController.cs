@@ -53,6 +53,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Request_Management_Access)]
+
         public ActionResult Search(PurchaseReturnRequestViewModel prViewModel)
         {
             try
@@ -73,7 +74,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             return View("Search", prViewModel);
         }
-
 
         public JsonResult Get_Purchase_Return_Requests(PurchaseReturnRequestViewModel prViewModel)
         {
