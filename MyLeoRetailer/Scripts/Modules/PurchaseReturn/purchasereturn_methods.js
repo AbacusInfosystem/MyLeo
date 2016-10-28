@@ -384,7 +384,7 @@ function Add_Validation(i) {
 
     //$("#tblPurchaseReturnItems").find(".validate").rules("add", { QuantityCheck: false });
 
-    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid quantity." } });
 
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
 
