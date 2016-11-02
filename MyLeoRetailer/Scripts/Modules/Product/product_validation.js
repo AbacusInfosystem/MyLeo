@@ -20,7 +20,7 @@ $(function () {
 
             "Product.Center_Size": { required: true, digits: true },
 
-            "Product.Size_Difference": { required: true },//digits: true
+            "Product.Size_Difference": { required: true, positiveNumber: true },//digits: true
 
             "Product.Purchase_Price": { required: true, digits: true },
 

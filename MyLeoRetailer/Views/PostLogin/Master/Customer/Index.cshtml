@@ -11,6 +11,13 @@
 <script src="~/Scripts/Modules/Customer/customer_methods.js"></script>
 <script src="~/Scripts/Modules/Customer/customer_validation.js"></script>
 
+@*<style>
+    input:checked {
+        height: 20px;
+        width: 20px;
+    }
+</style>*@
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -117,28 +124,39 @@
             <h4 style="margin-top: 0px;">Billing address.</h4>
 
             <div class="form-group">
+                @*<span class="label label-primary label-form" style="margin-bottom: 1px; margin-right:15px;">Address same as billing address</span>*@
+                @*<input type="checkbox" name="checkbox" value="" id="txtcheckbox"  onclick='handleClick();'>*@
+                <label class="switch">
+                    <input type="checkbox" class="switch" checked="" id="txtcheckbox" name="customercheckbox" value="">
+
+                    <span></span>
+                </label>
+                @*<input type="hidden" id="hdncheckbox" value="">*@
+            </div>
+
+            <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address.</span>
-                <textarea class="form-control" rows="5" placeholder="Billing address." name="Customer.Customer_Billing_Address" maxlength="250">@Model.Customer.Customer_Billing_Address</textarea>
+                <textarea class="form-control" rows="5" placeholder="Billing address." name="Customer.Customer_Billing_Address" id="txtCustomerBillingAddress" maxlength="250">@Model.Customer.Customer_Billing_Address</textarea>
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing city.</span>
-                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Billing_City" value="@Model.Customer.Customer_Billing_City" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Billing_City" id="txtCustomerBillingCity" value="@Model.Customer.Customer_Billing_City" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing state.</span>
-                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Billing_State" value="@Model.Customer.Customer_Billing_State" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Billing_State" id="txtCustomerBillingState" value="@Model.Customer.Customer_Billing_State" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing country.</span>
-                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Billing_Country" value="@Model.Customer.Customer_Billing_Country" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Billing_Country" id="txtCustomerBillingCountry" value="@Model.Customer.Customer_Billing_Country" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing pincode.</span>
-                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" id="txtCustomerBillingPincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
             </div>
 
         </div>
@@ -152,28 +170,28 @@
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping address.</span>
-                <textarea class="form-control" rows="5" placeholder="Shipping address." name="Customer.Customer_Shipping_Address" maxlength="250">@Model.Customer.Customer_Shipping_Address</textarea>
+                <textarea class="form-control" rows="5" placeholder="Shipping address." name="Customer.Customer_Shipping_Address" id="txtCustomerShippingAddress" maxlength="250">@Model.Customer.Customer_Shipping_Address</textarea>
 
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping city.</span>
-                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Shipping_City" value="@Model.Customer.Customer_Shipping_City" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Shipping_City" id="txtCustomerShippingCity" value="@Model.Customer.Customer_Shipping_City" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping state.</span>
-                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Shipping_State" value="@Model.Customer.Customer_Shipping_State" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Shipping_State" id="txtCustomerShippingState" value="@Model.Customer.Customer_Shipping_State" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping country.</span>
-                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Shipping_Country" value="@Model.Customer.Customer_Shipping_Country" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Shipping_Country" id="txtCustomerShippingCountry" value="@Model.Customer.Customer_Shipping_Country" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping pincode.</span>
-                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Shipping_Pincode" value="@(Model.Customer.Customer_Shipping_Pincode == 0 ? "" : Model.Customer.Customer_Shipping_Pincode.ToString())" maxlength="6" />
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Shipping_Pincode" id="txtCustomerShippingPincode" value="@(Model.Customer.Customer_Shipping_Pincode == 0 ? "" : Model.Customer.Customer_Shipping_Pincode.ToString())" maxlength="6" />
             </div>
 
         </div>

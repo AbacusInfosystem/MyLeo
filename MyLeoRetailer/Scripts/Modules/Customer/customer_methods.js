@@ -143,4 +143,52 @@ function Set_Customer_Values(obj) {
    
 }
 
+function handleClick() {
 
+    var address = null;
+    var city = null;
+    var state = null;
+    var country = null;
+    var pincode = null;
+
+     address = $("#txtCustomerBillingAddress").val();
+
+     city = $("#txtCustomerBillingCity").val();
+
+     state = $("#txtCustomerBillingState").val();
+
+     country = $("#txtCustomerBillingCountry").val();
+
+     pincode = $("#txtCustomerBillingPincode").val();
+
+     if ($("#txtcheckbox").val() == 0) {
+
+         $("#txtCustomerShippingAddress").val(address);
+
+         $("#txtCustomerShippingCity").val(city);
+
+         $("#txtCustomerShippingState").val(state);
+
+         $("#txtCustomerShippingCountry").val(country);
+
+         $("#txtCustomerShippingPincode").val(pincode);
+
+     }
+
+     else
+    {
+        $("#txtCustomerShippingAddress").val("");
+
+        $("#txtCustomerShippingCity").val("");
+
+        $("#txtCustomerShippingState").val("");
+
+        $("#txtCustomerShippingCountry").val("");
+
+        $("#txtCustomerShippingPincode").val("");
+    }
+       
+  
+   
+   
+}

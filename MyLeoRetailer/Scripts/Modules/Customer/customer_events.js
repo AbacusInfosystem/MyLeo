@@ -1,4 +1,8 @@
-﻿$(function () {
+﻿
+
+
+
+$(function () {
 
     //Commented by Vinod Mane on 22/09/2016
     //if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0) {
@@ -8,6 +12,17 @@
     //    document.getElementById('btnCancleCustomer').disabled = true;
     //}
     //end
+
+    //$(document).on('change', '[name="checkbox"]', function (event) {
+    //    if ($(this).prop('checked')) {
+    //        $("#hdncheckbox").val(this.value);
+    //        //$("#btnEditCustomer").show();//added by Vinod Mane on 22/09/2016
+    //        //document.getElementById('btnEditCustomer').disabled = false;
+
+    //    }
+    //});
+    
+
     
     $("input.mask_phone_no").mask('(999) 9999-9999');
     $("input.mask_mobile_no").mask('(99) 99999-99999');
@@ -23,8 +38,17 @@
     if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0) {
         $("[name='Customer.IsActive']").val(1);
         document.getElementById('Flag').checked = true;
+        $("[name='customercheckbox']").val(0);
+        document.getElementById('txtcheckbox').checked = false;
+
     }
 
+    $("#btnCancel").click(function () {
+
+        $("[name='customercheckbox']").val(0);
+        document.getElementById('txtcheckbox').checked = false;
+
+    });
    
 
     $("#btnSaveCustomer").click(function () {
@@ -51,6 +75,22 @@
            
         }
     });
+
+    //$("#txtcheckbox").click(function () {
+
+       
+    //    if ($("[name='customercheckbox']").val() == 1) {
+                
+    //        handleClick();
+
+    //        }
+
+    //});
+
+    $(document).on("change", "#txtcheckbox", function () {
+        handleClick();
+    });
+    
 
     $("[name='Customer.Mobile']").focusout(function ()
     {
