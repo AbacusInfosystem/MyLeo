@@ -81,6 +81,8 @@
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Quantity</span>
                                     <input type="text" class="form-control input-sm" name="Quantity" id="txtDispatch_Quantity" placeholder="Enter Dispatch Quantity."  />
+                                    <label id="lblWarehouseQty" style="display:none;"><span style="color:red;">Dispatch is Cancel as the Quantity of these product in Warehouse is not available.</span></label>
+                                    <label id="lblproductQty" style="display:none;"><span style="color:red;">Dispatch Quantity cannot be greater than Product Quantity.</span></label>
                                 </div>
                             </div>
 
@@ -129,6 +131,7 @@
 
                                                 <td>
                                                     @item.Quantity
+                                                    <input type='hidden' class='form-control input-sm quantity' name='List_product_Dispatch[0].Quantity' value="@item.Quantity" id="textQuantitya_0">
                                                 </td>
 
                                                 <td>
@@ -155,7 +158,7 @@
                                     }
                                 </tbody>
                             </table>
-                        <label id="lbl_Records_Required" style="display:none;"><span style="color:red;">Atleast One Record is required</span></label>
+                        <label id="lbl_Records_Required" style="display:none;"><span style="color:red;">Atleast One Record is required</span></label> 
                         </div><!-- /.col -->
                     </div><!-- /.row -->
 
