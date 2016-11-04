@@ -196,6 +196,7 @@ function Save_Payable_Data() {
 
 		        Purchase_Invoice_Id: $("[name='Payable.Purchase_Invoice_Id']").val(),
 
+
 		        Payment_Mode: $("[name='Payable.Payment_Mode']").val(),
 
 		        Paid_Amount: $("[name='Payable.Paid_Amount']").val(),
@@ -232,8 +233,9 @@ function Save_Payable_Data() {
 
 		        Debit_Card_No: $("[name='Payable.Debit_Card_No']").val(),
 
-		        Employee: $("[name='Payable.Employee']").val(),
-		        Employee_Id: $("[name='Payable.Employee_Id']").val(),
+		        Vendor_Employee_Name: $("[name='Payable.Vendor_Employee_Name']").val(),
+		        //Employee: $("[name='Payable.Employee']").val(),
+		        //Employee_Id: $("[name='Payable.Employee_Id']").val(),
 		        //Gift_Voucher_No: $("[name='Payable.Gift_Voucher_No']").val(),
 		    }
 		}
@@ -317,6 +319,8 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<th>Paid Amount</th>";
 
+        htmlText += "<th>Vendor Employee Name</th>";
+
         htmlText += "<th>Credit Card no</th>";
 
         htmlText += "<th>Debit Card no</th>";
@@ -357,6 +361,8 @@ function Bind_Payable_Grid_Items(data) {
 
         htmlText += "<input type='hidden' id='hdnPaid_Amount" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Paid_Amount + "'/>";
 
+        htmlText += "<input type='hidden' id='hdnVendor_Employee_Name" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Vendor_Employee_Name + "'/>";
+
         htmlText += "<input type='hidden' id='hdnCredit_Card_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Credit_Card_No + "'/>";
 
         htmlText += "<input type='hidden' id='hdnDebit_Card_No" + data.Payables[i].Payable_Item_Id + "' value='" + data.Payables[i].Debit_Card_No + "'/>";
@@ -387,6 +393,12 @@ function Bind_Payable_Grid_Items(data) {
         htmlText += "<td>";
 
         htmlText += data.Payables[i].Paid_Amount == null ? "" : data.Payables[i].Paid_Amount;
+
+        htmlText += "</td>";
+
+        htmlText += "<td>";
+
+        htmlText += data.Payables[i].Vendor_Employee_Name == null ? "NA" : data.Payables[i].Vendor_Employee_Name;
 
         htmlText += "</td>";
 
@@ -603,5 +615,5 @@ function ClearPayableData() {
 
     $("#txtPayament_Date").val('');
 
-
+    $("#txtVendoremployeename").val('');
 } 

@@ -167,13 +167,13 @@ function Get_Color_By_Id(obj)
 
 	        document.getElementById('iRGBColor').style.backgroundColor = obj.Color.Colour_Code; //"rgb(" + randR + ", " + randG + ", " + randB + ")";
 
-	        if (obj.Color.IsActive == true) {
+	        if (obj.Color.IsActive == 1) {
 	            $("[name='Color.IsActive']")[0].checked = true;
-	            $("[name='Color.IsActive']").val(true);
+	            $("[name='Color.IsActive']").val(1);
 	        }
 	        else {
 	            $("[name='Color.IsActive']")[0].checked = false;
-	            $("[name='Color.IsActive']").val(false);
+	            $("[name='Color.IsActive']").val(0);
 	        }
 	        
 	        $("[name='Color.Colour']").val(obj.Color.Colour);

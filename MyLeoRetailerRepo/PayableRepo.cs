@@ -40,7 +40,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Discount_Percentage", Payable.Discount_Percentage));
             sqlParams.Add(new SqlParameter("@Payament_Date", Payable.Payament_Date));
 
-            sqlParams.Add(new SqlParameter("@Employee_Id", Payable.Employee_Id));
+            
             sqlParams.Add(new SqlParameter("@Remark", Payable.Remark));
             sqlParams.Add(new SqlParameter("@Credit_Note_No", Payable.Credit_Note_No));
             sqlParams.Add(new SqlParameter("@Credit_Note_Amount", Payable.Credit_Note_Amount)); 
@@ -48,6 +48,7 @@ namespace MyLeoRetailerRepo
             if (Payable.Payment_Mode == 1)
             {
                 sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Vendor_Employee_Name", Payable.Vendor_Employee_Name));
                 sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
@@ -58,6 +59,7 @@ namespace MyLeoRetailerRepo
             {
                 sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
                 sqlParams.Add(new SqlParameter("@Credit_Card_No", Payable.Credit_Card_No));
+                sqlParams.Add(new SqlParameter("@Vendor_Employee_Name", "NA"));
                 sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Cheque_Date", "01/01/1999"));
@@ -66,6 +68,7 @@ namespace MyLeoRetailerRepo
             else if (Payable.Payment_Mode == 3)
             {
                 sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Vendor_Employee_Name", "NA"));
                 sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Debit_Card_No", Payable.Debit_Card_No));
                 sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
@@ -75,6 +78,7 @@ namespace MyLeoRetailerRepo
             else if(Payable.Payment_Mode == 4)
             {
                 sqlParams.Add(new SqlParameter("@Paid_Amount", Payable.Paid_Amount));
+                sqlParams.Add(new SqlParameter("@Vendor_Employee_Name", "NA"));
                 sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Cheque_No", Payable.Cheque_No));
@@ -84,6 +88,7 @@ namespace MyLeoRetailerRepo
             else
             {
                 sqlParams.Add(new SqlParameter("@Paid_Amount", "0"));
+                sqlParams.Add(new SqlParameter("@Vendor_Employee_Name", "NA"));
                 sqlParams.Add(new SqlParameter("@Credit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Debit_Card_No", "NA"));
                 sqlParams.Add(new SqlParameter("@Cheque_No", "NA"));
@@ -440,13 +445,13 @@ namespace MyLeoRetailerRepo
 
                 payable.Bank_Name = Convert.ToString(dr["Bank_Name"]);
 
-            if (!dr.IsNull("Employee_Id"))
+            //if (!dr.IsNull("Employee_Id"))
 
-                payable.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
+            //    payable.Employee_Id = Convert.ToInt32(dr["Employee_Id"]);
 
-            if (!dr.IsNull("Employee_Name"))
+            if (!dr.IsNull("Vendor_Employee_Name"))
 
-                payable.Employee = Convert.ToString(dr["Employee_Name"]);
+                payable.Vendor_Employee_Name = Convert.ToString(dr["Vendor_Employee_Name"]);
 
             if (!dr.IsNull("Remark"))
 

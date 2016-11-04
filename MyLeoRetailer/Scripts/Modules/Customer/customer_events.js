@@ -38,17 +38,17 @@ $(function () {
     if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0) {
         $("[name='Customer.IsActive']").val(1);
         document.getElementById('Flag').checked = true;
-        $("[name='customercheckbox']").val(0);
-        document.getElementById('txtcheckbox').checked = false;
+        //$("[name='customercheckbox']").val(0);
+        //document.getElementById('txtcheckbox').checked = false;
 
     }
 
-    $("#btnCancel").click(function () {
+    //$("#btnCancel").click(function () {
 
-        $("[name='customercheckbox']").val(0);
-        document.getElementById('txtcheckbox').checked = false;
+    //    $("[name='customercheckbox']").val(0);
+    //    document.getElementById('txtcheckbox').checked = false;
 
-    });
+    //});
    
 
     $("#btnSaveCustomer").click(function () {

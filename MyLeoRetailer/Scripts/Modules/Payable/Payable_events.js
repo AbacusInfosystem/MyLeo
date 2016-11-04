@@ -15,6 +15,7 @@ $(function () {
        
         if ($(this).val() == 0) {
             $("#divCreditcardno").hide();
+            $("#divVendoremployeename").hide();
             $("#divDebitcardno").hide();
             $("#divChequedate").hide();
             $("#divPaidAmount").hide();
@@ -28,6 +29,7 @@ $(function () {
         else if ($(this).val() == 1) {
 
             $("#divPaidAmount").show();
+            $("#divVendoremployeename").show();
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
             $("#divChequedate").hide();
@@ -41,6 +43,7 @@ $(function () {
         else if ($(this).val() == 2) {
             
             $("#divCreditcardno").show();
+            $("#divVendoremployeename").hide();
             $("#divPaidAmount").show();
             $("#divDebitcardno").hide();
             $("#divChequedate").hide();
@@ -54,6 +57,7 @@ $(function () {
         else if ($(this).val() == 3) {
             $("#divDebitcardno").show();
             $("#divPaidAmount").show();
+            $("#divVendoremployeename").hide();
             $("#divCreditcardno").hide();
              $("#divChequedate").hide();
             $("#divChequeno").hide();
@@ -67,6 +71,7 @@ $(function () {
             $("#divChequeno").show();
             $("#divBankName").show();
             $("#divPaidAmount").show();
+            $("#divVendoremployeename").hide();
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
             //$("#divCreditnoteno").hide();
@@ -75,6 +80,7 @@ $(function () {
 
         else {
             //$("#divGiftvoucherno").hide();
+            $("#divVendoremployeename").hide();
             $("#divCreditcardno").hide();
             $("#divDebitcardno").hide();
             $("#divPaidAmount").hide();

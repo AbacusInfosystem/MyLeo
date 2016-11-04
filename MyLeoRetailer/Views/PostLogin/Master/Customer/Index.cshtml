@@ -123,16 +123,7 @@
         <div class="block">
             <h4 style="margin-top: 0px;">Billing address.</h4>
 
-            <div class="form-group">
-                @*<span class="label label-primary label-form" style="margin-bottom: 1px; margin-right:15px;">Address same as billing address</span>*@
-                @*<input type="checkbox" name="checkbox" value="" id="txtcheckbox"  onclick='handleClick();'>*@
-                <label class="switch">
-                    <input type="checkbox" class="switch" checked="" id="txtcheckbox" name="customercheckbox" value="">
-
-                    <span></span>
-                </label>
-                @*<input type="hidden" id="hdncheckbox" value="">*@
-            </div>
+            
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address.</span>
@@ -157,6 +148,14 @@
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing pincode.</span>
                 <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" id="txtCustomerBillingPincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address same as shipping address.</span>
+                <label class="switch">
+                    <input type="checkbox" class="switch" id="txtcheckbox" name="customercheckbox" value="0">
+                    <span></span>
+                </label>
             </div>
 
         </div>
