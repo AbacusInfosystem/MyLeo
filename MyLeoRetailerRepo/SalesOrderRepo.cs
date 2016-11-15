@@ -276,7 +276,7 @@ namespace MyLeoRetailerRepo
             if (filter.From_Date != DateTime.MinValue)
             {
 
-                sqlParam.Add(new SqlParameter("@From_Date", filter.From_Date.ToString()));
+                sqlParam.Add(new SqlParameter("@From_Date", filter.From_Date));
             }
             else
             {
@@ -286,7 +286,7 @@ namespace MyLeoRetailerRepo
             if (filter.To_Date != DateTime.MinValue)
             {
 
-                sqlParam.Add(new SqlParameter("@To_Date", filter.To_Date.ToString()));
+                sqlParam.Add(new SqlParameter("@To_Date", filter.To_Date));
             }
             else
             {
