@@ -70,6 +70,10 @@ function Reset_SalesOrder() {
 
     $("[name='Filter.Sales_Invoice_Id']").val("");
 
+    $("[name='Filter.From_Date']").val("");
+
+    $("[name='Filter.To_Date']").val("");
+
     document.getElementById('btnDetails').disabled = true;
 
 }

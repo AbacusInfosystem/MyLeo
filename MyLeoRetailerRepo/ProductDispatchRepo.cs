@@ -29,10 +29,26 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@branch_Name", filter.Branch_Name));
 
-            sqlParam.Add(new SqlParameter("@from_Request_Date", filter.From_Request_Date == DateTime.MinValue ? null : filter.From_Request_Date.ToString("yyyy-MM-dd")));
+            if (filter.From_Request_Date != DateTime.MinValue)
+            {
 
-            sqlParam.Add(new SqlParameter("@to_Request_Date", filter.To_Request_Date == DateTime.MinValue ? null : filter.To_Request_Date.ToString("yyyy-MM-dd ")));
+                sqlParam.Add(new SqlParameter("@from_Request_Date", filter.From_Request_Date.ToString()));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@from_Request_Date", null));
+            }
 
+            if (filter.To_Request_Date != DateTime.MinValue)
+            {
+
+                sqlParam.Add(new SqlParameter("@to_Request_Date", filter.To_Request_Date.ToString()));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@to_Request_Date", null));
+            }
+           
             sqlParam.Add(new SqlParameter("@status", filter.Status));
 
             dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Product_To_Dispatch.ToString(), CommandType.StoredProcedure);
