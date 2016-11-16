@@ -354,7 +354,7 @@ function Add_Validation(i) {
 
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
 
-    //$("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
+   // $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 
     $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
 

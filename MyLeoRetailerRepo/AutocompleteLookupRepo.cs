@@ -20,7 +20,7 @@ namespace MyLeoRetailerRepo
         }
 
         public DataTable Get_Lookup_Data(string table_Name, string[] cols, ref Pagination_Info pager, string fieldValue, string fieldName, int entity_Id)
-        {
+         {
             string strquery = "";
 
             strquery = "select ";
@@ -425,6 +425,12 @@ namespace MyLeoRetailerRepo
                 //}
 
 
+            }
+
+            if (fieldValue == "" && table_Name == "Product_SKU_Mapping")
+            {
+                strquery = " Select Product_SKU_Map_Id,SKU_Code from Product_SKU_Mapping";
+  
             }
 
             DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
