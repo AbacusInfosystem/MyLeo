@@ -75,50 +75,60 @@ namespace MyLeoRetailerRepo
                 {
                     if (fieldName == "Purchase_Order_Id")
                     {
-                        strquery = "IF OBJECT_ID('tempdb..#Temp1') IS NOT NULL " +
-                                    "DROP TABLE #Temp1 " +
+                        if (fieldValue != "x")
+                        {
+                            strquery = "IF OBJECT_ID('tempdb..#Temp1') IS NOT NULL " +
+                                        "DROP TABLE #Temp1 " +
 
-                                    "IF OBJECT_ID('tempdb..#Temp2') IS NOT NULL " +
-                                    "DROP TABLE #Temp2 " +
+                                        "IF OBJECT_ID('tempdb..#Temp2') IS NOT NULL " +
+                                        "DROP TABLE #Temp2 " +
 
-                                    "IF OBJECT_ID('tempdb..#Temp3') IS NOT NULL " +
-                                    "DROP TABLE #Temp3 " +
+                                        "IF OBJECT_ID('tempdb..#Temp3') IS NOT NULL " +
+                                        "DROP TABLE #Temp3 " +
 
-                                    "create table #Temp1(    POI int,     SKU Varchar(50),     Qty int ) " +
-                                    "create table #Temp2(    POI int,     SKU Varchar(50),     Qty int ) " +
-                                    "create table #Temp3(    POI int,     SKU Varchar(50),     Qty int ) " +
+                                        "create table #Temp1(    POI int,     SKU Varchar(50),     Qty int ) " +
+                                        "create table #Temp2(    POI int,     SKU Varchar(50),     Qty int ) " +
+                                        "create table #Temp3(    POI int,     SKU Varchar(50),     Qty int ) " +
 
-                                    "insert into #Temp1 " +
+                                        "insert into #Temp1 " +
 
-                                    "select distinct PO.Purchase_Order_Id, PSM.SKU_Code,Sum(POIS.Quantity) as Quantity " +
-                                    "from Product_SKU_Mapping PSM, Purchase_Order PO, Purchase_Order_Item POI,Purchase_Order_Item_Sizes POIS, Product P " +
-                                    "where PO.Purchase_Order_Id=POI.Purchase_Order_Id " +
-                                    "AND POIS.Purchase_Order_Id = POI.Purchase_Order_Id " +
-                                    "AND POI.Article_No=P.Article_No " +
-                                    "AND POIS.Purchase_Order_Item_Id =POI.Purchase_Order_Item_Id " +
-                                    "AND POI.Colour_Id=PSM.Colour_Id " +
-                                    "AND POIS.Size_Id=PSM.Size_Id " +
-                                    "AND P.Product_Id=PSM.Product_Id " +
-                                    "AND PO.Purchase_Order_Id= @Purchase_Order_Id " +
-                                    "group by PSM.SKU_Code, PO.Purchase_Order_Id " +
+                                        "select distinct PO.Purchase_Order_Id, PSM.SKU_Code,Sum(POIS.Quantity) as Quantity " +
+                                        "from Product_SKU_Mapping PSM, Purchase_Order PO, Purchase_Order_Item POI,Purchase_Order_Item_Sizes POIS, Product P " +
+                                        "where PO.Purchase_Order_Id=POI.Purchase_Order_Id " +
+                                        "AND POIS.Purchase_Order_Id = POI.Purchase_Order_Id " +
+                                        "AND POI.Article_No=P.Article_No " +
+                                        "AND POIS.Purchase_Order_Item_Id =POI.Purchase_Order_Item_Id " +
+                                        "AND POI.Colour_Id=PSM.Colour_Id " +
+                                        "AND POIS.Size_Id=PSM.Size_Id " +
+                                        "AND P.Product_Id=PSM.Product_Id " +
+                                        "AND PO.Purchase_Order_Id= @Purchase_Order_Id " +
+                                        "group by PSM.SKU_Code, PO.Purchase_Order_Id " +
 
-                                    "insert into #Temp2  " +
-                                    "select t.POI,t.SKU,t.Qty-poi.Quantity as Qty from  Purchase_Invoice_Item poi,#temp1 t " +
-                                    "where t.POI=poi.Purchase_Order_Id and   t.SKU=poi.SKU_Code " +
+                                        "insert into #Temp2  " +
+                                        "select t.POI,t.SKU,t.Qty-poi.Quantity as Qty from  Purchase_Invoice_Item poi,#temp1 t " +
+                                        "where t.POI=poi.Purchase_Order_Id and   t.SKU=poi.SKU_Code " +
 
-                                    "insert into #Temp3 " +
-                                    "SELECT t1.POI,t1.SKU, " +
-                                    "case " +
-                                    "when t2.Qty is not null then t2.Qty " +
-                                    "when t2.Qty is null then t1.Qty " +
-                                    "end " +
-                                    "as Qty " +
-                                    "FROM #Temp1 t1 " +
-                                    "LEFT JOIN #Temp2 t2 " +
-                                    "ON t1.POI=t2.POI and t1.SKU=t2.SKU " +
-                                    "ORDER BY t1.SKU; " +
-                                    "select Qty as Quantity, SKU as SKU_Code from #Temp3 where Qty!=0 ";
-                        paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));
+                                        "insert into #Temp3 " +
+                                        "SELECT t1.POI,t1.SKU, " +
+                                        "case " +
+                                        "when t2.Qty is not null then t2.Qty " +
+                                        "when t2.Qty is null then t1.Qty " +
+                                        "end " +
+                                        "as Qty " +
+                                        "FROM #Temp1 t1 " +
+                                        "LEFT JOIN #Temp2 t2 " +
+                                        "ON t1.POI=t2.POI and t1.SKU=t2.SKU " +
+                                        "ORDER BY t1.SKU; " +
+                                        "select Qty as Quantity, SKU as SKU_Code from #Temp3 where Qty!=0 ";
+                            paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));
+                        }
+
+                        else
+                        {
+                            strquery = " declare @Qunatity int =1000000 ";
+                            strquery += "select @Qunatity as Qunatity, SKU_Code from dbo.Product_SKU_Mapping ";
+                            paramList.Add(new SqlParameter("@Purchase_Order_Id", fieldValue));
+                        }
                     }
                 }
 

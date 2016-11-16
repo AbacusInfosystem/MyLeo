@@ -163,13 +163,13 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "<div class='input-group'>";
     tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textInvoice_No_" + i + "' placeholder='Enter PO no. to search' value=''  data-table='Purchase_Order' data-col='Purchase_Order_Id,Purchase_Order_No' data-headernames='Purchase Order' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
     tblHtml += "<span class='input-group-addon'> <a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
-    tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='x' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No' class='auto-complete-label' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Invoice_Items_By_Barcode(" + i + ");' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Invoice_Items_By_Barcode(" + i + ");' placeholder='Barcode No' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
