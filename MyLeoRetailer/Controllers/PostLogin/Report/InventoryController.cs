@@ -27,7 +27,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
             _inventoryRepo = new InventoryRepo();
         }
 
-		
+
         public ActionResult Search(InventoryViewModel iViewModel)
         {
             try
@@ -46,32 +46,32 @@ namespace MyLeoRetailer.Controllers.PostLogin.Report
         }
 
         public JsonResult Get_Inventories(InventoryViewModel iViewModel)
-		{	
-			try
-			{
+        {
+            try
+            {
                 iViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
                 //Pagination_Info pager = new Pagination_Info();
 
                 //pager = iViewModel.Grid_Detail.Pager;
 
-                iViewModel.Grid_Detail = Set_Grid_Details(false, "Product_SKU,Branch_Name,Product_Quantity", "Inventory_Id");
+                iViewModel.Grid_Detail = Set_Grid_Details(false, "Branch_Name,Product_SKU,Brand_Name,Category,Product_Quantity", "Inventory_Id");
 
-                iViewModel.Grid_Detail.Records = _inventoryRepo.Get_Inventories(iViewModel.Filter, iViewModel.Cookies.Branch_Ids); 
+                iViewModel.Grid_Detail.Records = _inventoryRepo.Get_Inventories(iViewModel.Filter, iViewModel.Cookies.Branch_Ids);
 
                 //Set_Pagination(pager, iViewModel.Grid_Detail); 
 
                 //iViewModel.Grid_Detail.Pager = pager;
-			}
-			catch(Exception ex)
-			{
-				iViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+            }
+            catch (Exception ex)
+            {
+                iViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
                 Logger.Error("Inventory Controller - Get_Inventories  " + ex.Message);//Added by vinod mane on 06/10/2016
-			}
+            }
 
-			return Json(JsonConvert.SerializeObject(iViewModel));
-		}
+            return Json(JsonConvert.SerializeObject(iViewModel));
+        }
 
-       
+
     }
 }

@@ -34,6 +34,10 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Product_SKU", filter.Product_SKU));
 
+            sqlParam.Add(new SqlParameter("@Brand_Code", filter.Brand_Code));
+
+            sqlParam.Add(new SqlParameter("@Category_Code", filter.Category_Code));
+
             dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Inventories.ToString(), CommandType.StoredProcedure);
 
             return dt;
