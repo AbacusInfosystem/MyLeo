@@ -63,7 +63,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Date", null));
             }
 
             if (PurchaseInvoice.Against_Form_Date != DateTime.MinValue)
@@ -72,7 +72,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Against_Form_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Against_Form_Date", null));
             }
 
             if (PurchaseInvoice.Purchase_Packing_Date != DateTime.MinValue)
@@ -81,7 +81,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Purchase_Packing_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Purchase_Packing_Date", null));
             }
 
             if (PurchaseInvoice.Challan_Date != DateTime.MinValue)
@@ -90,7 +90,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Challan_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Challan_Date", null));
             }
 
             sqlParams.Add(new SqlParameter("@Total_Quantity", PurchaseInvoice.Total_Quantity));
@@ -116,7 +116,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Payment_Due_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Payment_Due_Date", null));
             }
 
             sqlParams.Add(new SqlParameter("@Discount_Percentage_Before_Due_Date", PurchaseInvoice.Discount_Percentage_Before_Due_Date));
@@ -131,7 +131,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Lr_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Lr_Date", null));
             }
 
             sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));

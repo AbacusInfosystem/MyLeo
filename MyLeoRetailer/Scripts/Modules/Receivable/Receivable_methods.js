@@ -121,6 +121,7 @@ function calculate(element)
     var card = 0;
     var gift = 0;
     var check = 0;
+    var discount = 0;
 
 
     if ($("#txtCash_amount").val() != "")
@@ -144,9 +145,12 @@ function calculate(element)
         check = $("#txtGift_Voucher_Amount").val()
     }
 
+    if ($("#txtDiscount_Amount").val() != "") {
+        discount = $("#txtDiscount_Amount").val()
+    }
 
     //$("#txtPaid_Amount").val(parseInt($("#txtCash_amount").val()) + parseInt($("#txtCheque_Amount").val()) + parseInt($("#txtCredit_Note_Amount").val()) + parseInt($("#txtCard_Amount").val()) + parseInt($("#txtGift_Voucher_Amount").val()));
-    $("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
+    $("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check) + parseInt(discount));
 
 
 
@@ -346,6 +350,10 @@ function Save_Receivable_Data() {
 		        Bank_Name: $("[name='Receivable.Bank_Name']").val(),
 
 		        Credit_Card_No: $("[name='Receivable.Credit_Card_No']").val(),
+
+		        Discount_Percentage: $("[name='Receivable.Discount_Percentage']").val(),
+
+		        Discount_Amount: $("[name='Receivable.Discount_Amount']").val(),
 		    }
 		}
 
@@ -447,6 +455,10 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "<th>Gift voucher amount</th>";
 
+        htmlText += "<th>Discount%</th>";
+
+        htmlText += "<th>Discount amount</th>";
+
         //htmlText += "<th>Action</th>"
       
 
@@ -496,6 +508,10 @@ function Bind_Receivable_Grid_Items(data) {
         htmlText += "<input type='hidden' id='hdnGift_Voucher_No" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_Id + "'/>";
 
         htmlText += "<input type='hidden' id='hdnGift_Voucher_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Gift_Voucher_Amount + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnDiscount_Percentage" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Discount_Percentage + "'/>";
+
+        htmlText += "<input type='hidden' id='hdnDiscount_Amount" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Discount_Amount + "'/>";
 
         htmlText += "<input type='hidden' id='hdnReceivable_Item_Id" + data.Receivables[i].Receivable_Item_Id + "' value='" + data.Receivables[i].Receivable_Item_Id + "'/>";
 
@@ -590,6 +606,18 @@ function Bind_Receivable_Grid_Items(data) {
 
         htmlText += "</td>";
 
+        htmlText += "<td>";
+
+        htmlText += data.Receivables[i].Discount_Percentage == 0 ? "NA" : data.Receivables[i].Discount_Percentage;
+
+        htmlText += "</td>";
+
+        htmlText += "<td>";
+
+        htmlText += data.Receivables[i].Discount_Amount == 0 ? "NA" : data.Receivables[i].Discount_Amount;
+
+        htmlText += "</td>";
+
         //htmlText += showPayableDate == null ? "" : showPayableDate;
 
              
@@ -649,6 +677,10 @@ function ClearReceivableData() {
     $("#txtGift_Voucher_Amount").val('');
 
     $("#text_Branch_Name").val('');
+
+    $("#txtDiscount_Percentage").val('');
+
+    $("#txtDiscount_Amount").val('');
 
 }
 
@@ -725,114 +757,37 @@ function EditReceivableData(id) {
 
 }
 
-function CalculateDiscount() {
+function CalculateDiscount()
+{
+    var cash = 0;
+    var credit = 0;
+    var card = 0;
+    var gift = 0;
+    var check = 0;
+    var paid_amount = 0;
+    var balance_amount = 0;
+    var discount = 0;
 
+    cash = $("#txtCash_amount").val();
+    credit = $("#txtCheque_Amount").val();
+    card = $("#txtCredit_Note_Amount").val();
+    gift = $("#txtCard_Amount").val();
+    check = $("#txtGift_Voucher_Amount").val();
+    paid_amount = $("#txtPaid_Amount").val();
+    balance_amount = $("#txtBalance_Amount").val();
+    discount = $("#txtDiscount_Percentage").val();
 
-    var oldbalanceamount = 0;
-    var chequeamount = 0;
-    var cashamount = 0;
-    var creditnoteamount = 0;
-    var giftvoucheramount = 0;
-    var cardamount = 0;
+    if (cash != "" || credit !== "" || card != "" || gift != "" || check != "") {
 
-    if ($("#txtBalance_Amount").val() != "") {
-        oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
+        final_amount = balance_amount - paid_amount;
+        var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((final_amount * discount) / 100);
+        $("#txtDiscount_Amount").val(discountAmt.toFixed(0));
     }
-
-    if ($("#txtCheque_Amount").val() != "") {
-        chequeamount = parseFloat($("#txtCheque_Amount").val());
+    else
+    {
+        var discountAmt = (discount == "" || discount == undefined) ? 0 : parseFloat((balance_amount * discount) / 100);
+        $("#txtDiscount_Amount").val(discountAmt.toFixed(0));
     }
-
-    if ($("#txtCash_amount").val() != "") {
-        cashamount = parseFloat($("#txtCash_amount").val());
-    }
-
-    if ($("#txtCredit_Note_Amount").val() != "") {
-        creditnoteamount = parseFloat($("#txtCredit_Note_Amount").val());
-    }
-
-    if ($("#txtGift_Voucher_Amount").val() != "") {
-        giftvoucheramount = parseFloat($("#txtGift_Voucher_Amount").val());
-    }
-
-    if ($("#txtCard_Amount").val() != "") {
-        cardamount = parseFloat($("#txtCard_Amount").val());
-    }
-
-    var total = 0;
-
-    var PaidAmount = 0;
-
-    total = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
-
-    if (total > oldbalanceamount) {
-        ClearReceivableData();
-    }
-    else {
-        $("#txtPaid_Amount").val(total.toFixed(2));
-
-        BalanceAmount();
-
-        document.getElementById("txtPaid_Amount").disabled = true;
-    }
-
-
-
-    //if (cashamount == 0) {
-
-    //    paidamount = chequeamount + creditnoteamount + giftvoucheramount + cardamount;
-
-    //    //var newbalanceamount = oldbalanceamount - paidamount
-    //}
-
-    //else if (chequeamount == 0)
-    //{
-    //    paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
-
-    //    //var newbalanceamount = oldbalanceamount - paidamount
-    //}
-
-    //else if (creditnoteamount == 0)
-    //{
-
-    //    paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
-
-    //    //var newbalanceamount = oldbalanceamount - paidamount
-    //}
-
-    //else if (giftvoucheramount == 0) {
-
-    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
-
-    //    //var newbalanceamount = oldbalanceamount - paidamount
-    //}
-
-    //else if (cardamount == 0)
-    //{
-
-    //    paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount;
-
-
-    //}
-
-    //else {
-
-    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount + giftvoucheramount;
-
-    //    var newbalanceamount = oldbalanceamount - paidamount
-
-    //    //var newbalanceamount = oldbalanceamount - paidamount
-    //}
-    // var paidamount = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
-
-
-
-    //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
-
-    //$("#txtPaid_Amount").enabled = false;
-
-
-
 
 }
 
@@ -858,6 +813,117 @@ function Cancle() {
     document.getElementById("txtCredit_Note_Amount").disabled = false;
 
 }
+
+//function CalculateDiscount() {
+
+
+//    var oldbalanceamount = 0;
+//    var chequeamount = 0;
+//    var cashamount = 0;
+//    var creditnoteamount = 0;
+//    var giftvoucheramount = 0;
+//    var cardamount = 0;
+
+//    if ($("#txtBalance_Amount").val() != "") {
+//        oldbalanceamount = parseFloat($("#txtBalance_Amount").val());
+//    }
+
+//    if ($("#txtCheque_Amount").val() != "") {
+//        chequeamount = parseFloat($("#txtCheque_Amount").val());
+//    }
+
+//    if ($("#txtCash_amount").val() != "") {
+//        cashamount = parseFloat($("#txtCash_amount").val());
+//    }
+
+//    if ($("#txtCredit_Note_Amount").val() != "") {
+//        creditnoteamount = parseFloat($("#txtCredit_Note_Amount").val());
+//    }
+
+//    if ($("#txtGift_Voucher_Amount").val() != "") {
+//        giftvoucheramount = parseFloat($("#txtGift_Voucher_Amount").val());
+//    }
+
+//    if ($("#txtCard_Amount").val() != "") {
+//        cardamount = parseFloat($("#txtCard_Amount").val());
+//    }
+
+//    var total = 0;
+
+//    var PaidAmount = 0;
+
+//    total = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+//    if (total > oldbalanceamount) {
+//        ClearReceivableData();
+//    }
+//    else {
+//        $("#txtPaid_Amount").val(total.toFixed(2));
+
+//        BalanceAmount();
+
+//        document.getElementById("txtPaid_Amount").disabled = true;
+//    }
+
+
+
+//    //if (cashamount == 0) {
+
+//    //    paidamount = chequeamount + creditnoteamount + giftvoucheramount + cardamount;
+
+//    //    //var newbalanceamount = oldbalanceamount - paidamount
+//    //}
+
+//    //else if (chequeamount == 0)
+//    //{
+//    //    paidamount = cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+//    //    //var newbalanceamount = oldbalanceamount - paidamount
+//    //}
+
+//    //else if (creditnoteamount == 0)
+//    //{
+
+//    //    paidamount = cashamount + chequeamount + giftvoucheramount + cardamount;
+
+//    //    //var newbalanceamount = oldbalanceamount - paidamount
+//    //}
+
+//    //else if (giftvoucheramount == 0) {
+
+//    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount;
+
+//    //    //var newbalanceamount = oldbalanceamount - paidamount
+//    //}
+
+//    //else if (cardamount == 0)
+//    //{
+
+//    //    paidamount = cashamount + chequeamount + creditnoteamount + giftvoucheramount;
+
+
+//    //}
+
+//    //else {
+
+//    //    paidamount = cashamount + chequeamount + creditnoteamount + cardamount + giftvoucheramount;
+
+//    //    var newbalanceamount = oldbalanceamount - paidamount
+
+//    //    //var newbalanceamount = oldbalanceamount - paidamount
+//    //}
+//    // var paidamount = chequeamount + cashamount + creditnoteamount + giftvoucheramount + cardamount;
+
+
+
+//    //$("#txtBalance_Amount").val(newbalanceamount.toFixed(2));
+
+//    //$("#txtPaid_Amount").enabled = false;
+
+
+
+
+//}
 
 //function add_Validation(elem)
 //{

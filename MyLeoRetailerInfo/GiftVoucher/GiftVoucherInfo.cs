@@ -49,6 +49,12 @@ namespace MyLeoRetailerInfo.GiftVoucher
            set;
        }
 
+       public int Status
+       {
+           get;
+           set;
+       }
+
        public int Payment_Mode
        {
            get;
