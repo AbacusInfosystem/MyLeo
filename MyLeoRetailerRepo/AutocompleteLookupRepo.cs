@@ -424,6 +424,15 @@ namespace MyLeoRetailerRepo
                 //    }
                 //}
 
+                if (table_Name == "Purchase_Return")
+                {
+                    if (fieldName == "Purchase_Return_Id")
+                    {
+                        strquery = " select GR_No as Purchase_Return_Id,GR_No from Purchase_Return ";
+                        strquery += "where GR_No is not null ";
+                    }
+                }
+
 
             }
 

@@ -209,6 +209,11 @@ namespace MyLeoRetailerInfo.Common
             sp_Get_Purchase_Return_Item_by_Purchase_Return_Id, //Added by vinod mane on 30/09/2016
             sp_Get_Purchase_Return_by_Purchase_Return_Id,//Added by vinod mane on 30/09/2016
 
+            //not created
+            sp_Get_Purchase_Return_Details_By_Id,
+
+            //end
+
         #endregion
 
 

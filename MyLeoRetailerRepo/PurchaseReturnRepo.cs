@@ -11,6 +11,9 @@ using MyLeoRetailerInfo;
 using MyLeoRetailerInfo.Common;
 using System.Transactions;
 using MyLeoRetailerRepo.Common;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace MyLeoRetailerRepo
 {
@@ -363,6 +366,8 @@ namespace MyLeoRetailerRepo
 
             sqlParams.Add(new SqlParameter("@Debit_Note_No", filter.Debit_Note_No));
 
+            sqlParams.Add(new SqlParameter("@GR_No", filter.GR_No));
+
             dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Purchase_Returns.ToString(), CommandType.StoredProcedure);
 
             return dt;
@@ -678,6 +683,280 @@ namespace MyLeoRetailerRepo
         }
 
         //End
+
+
+        /* Added by gauravi on 16-11-2016*/
+
+        public PurchaseReturnInfo Get_Purchase_Return_Details_By_Id(int Purchase_Return_Id)
+        {
+            PurchaseReturnInfo purchaseReturn = new PurchaseReturnInfo();
+
+            List<SqlParameter> parameters = new List<SqlParameter>();
+            parameters.Add(new SqlParameter("@Purchase_Return_Id", Purchase_Return_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Return_Details_By_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                purchaseReturn.Purchase_Return_Id = Convert.ToInt32(dr["Purchase_Return_Id"]);
+
+                if (!dr.IsNull("Debit_Note_No"))
+                    purchaseReturn.Debit_Note_No = Convert.ToString(dr["Debit_Note_No"]);
+
+                if (!dr.IsNull("GR_No"))
+                    purchaseReturn.GR_No = Convert.ToString(dr["GR_No"]);
+
+                if (!dr.IsNull("Vendor_Id"))
+                    purchaseReturn.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
+
+                if (!dr.IsNull("Purchase_Invoice_Id"))
+                    purchaseReturn.Purchase_Invoice_Id = Convert.ToInt32(dr["Purchase_Invoice_Id"]);
+
+                if (!dr.IsNull("Purchase_Invoice_No"))
+                    purchaseReturn.Purchase_Invoice_No = Convert.ToString(dr["Purchase_Invoice_No"]);
+
+                if (!dr.IsNull("Logistics_Person_Name"))
+                    purchaseReturn.Logistics_Person_Name = Convert.ToString(dr["Logistics_Person_Name"]);
+
+                if (!dr.IsNull("Lr_No"))
+                    purchaseReturn.Lr_No = Convert.ToString(dr["Lr_No"]);
+
+                if (!dr.IsNull("Transporter_Name"))
+                    purchaseReturn.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+                if (!dr.IsNull("Transporter_Id"))
+                    purchaseReturn.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
+
+                if (!dr.IsNull("Transporter_Name"))
+                    purchaseReturn.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
+
+                if (!dr.IsNull("Total_Quantity"))
+                    purchaseReturn.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+
+                if (!dr.IsNull("Net_Amount"))
+                    purchaseReturn.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
+
+                if (!dr.IsNull("Vendor_Name"))
+                    purchaseReturn.Vendor_Name = Convert.ToString(dr["Vendor_Name"]);
+
+                if (!dr.IsNull("Vendor_Address"))
+                    purchaseReturn.Vendor_Address = Convert.ToString(dr["Vendor_Address"]);
+
+                if (!dr.IsNull("Vendor_Email1"))
+                    purchaseReturn.Vendor_Email1 = Convert.ToString(dr["Vendor_Email1"]);
+
+                if (!dr.IsNull("Vendor_Phone1"))
+                    purchaseReturn.Vendor_Phone1 = Convert.ToString(dr["Vendor_Phone1"]);
+
+                if (!dr.IsNull("Vendor_Phone2"))
+                    purchaseReturn.Vendor_Phone2 = Convert.ToString(dr["Vendor_Phone2"]);
+
+                if (!dr.IsNull("Company_Name"))
+                    purchaseReturn.Company_Name = Convert.ToString(dr["Company_Name"]);
+
+                if (!dr.IsNull("Company_Address"))
+                    purchaseReturn.Company_Address = Convert.ToString(dr["Company_Address"]);
+
+            }
+
+            return purchaseReturn;
+        }
+
+        public MemoryStream Create_Purchase_Return_Invoice_PDf(PurchaseReturnInfo PurchaseReturn)
+        {
+            MemoryStream ms = new MemoryStream();
+
+            StringBuilder htmldiv = new StringBuilder();
+            StringBuilder htmltbl = new StringBuilder();
+            StringBuilder htmltblItem = new StringBuilder();
+
+            htmldiv.Append("<div style='text-align:center'>");
+            htmldiv.Append("<h2>" + PurchaseReturn.Company_Name + "</h2>");
+            //htmldiv.Append("<br />");
+            htmldiv.Append("<h5>" + PurchaseReturn.Company_Address + "</h5>");
+            //htmldiv.Append("<br />");
+            //htmldiv.Append("<label>Company Address2</label>");
+            htmldiv.Append("<h5> <b>PURCHASE ORDER</b></h5>");
+            htmldiv.Append("</div>");
+
+            htmltbl.Append("<table>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<td>");
+            htmltbl.Append("<div>");
+            htmltbl.Append("<label>" + PurchaseReturn.Vendor_Name + "</label>");
+            htmltbl.Append("<br />");
+            htmltbl.Append("<label>" + PurchaseReturn.Vendor_Address + "</label>");
+            htmltbl.Append("<br />");
+            htmltbl.Append("<label>" + PurchaseReturn.Vendor_Phone1 + "</label>");
+            htmltbl.Append("<br />");
+            htmltbl.Append("<label>" + PurchaseReturn.Vendor_Phone2 + "</label>");
+            htmltbl.Append("<br />");
+            htmltbl.Append("<label>" + PurchaseReturn.Vendor_Email1 + "</label>");
+            htmltbl.Append("</div>");
+            htmltbl.Append("</td>");
+            htmltbl.Append("<td>");
+            htmltbl.Append("<div>");
+            htmltbl.Append("<table border='1' style='width:500;'>");
+            htmltbl.Append("<thead>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Debit Note No.</th>");
+            htmltbl.Append("<td>" + PurchaseReturn.Debit_Note_No + "</td>");
+            htmltbl.Append("</tr>");//
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Purchase Invoice No.</th>");
+            htmltbl.Append("<td>" + PurchaseReturn.Purchase_Invoice_No + "</td>");
+            htmltbl.Append("</tr>");//
+            htmltbl.Append("<th>Date</th>");
+            htmltbl.Append("<td>" + PurchaseReturn.Purchase_Return_Date.ToShortDateString() + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Logistics Person</th>");
+            htmltbl.Append("<td>" + PurchaseReturn.Logistics_Person_Name + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Transport</th>");
+            htmltbl.Append("<td>" + PurchaseReturn.Transporter_Name + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("<tr>");
+            htmltbl.Append("<th>Lr No.</th>");
+            htmltbl.Append("<td>" + PurchaseReturn.Lr_No + "</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("</thead>");
+            htmltbl.Append("</table>");
+            htmltbl.Append("</div>");
+            htmltbl.Append("<br />");
+            htmltbl.Append("</td>");
+            htmltbl.Append("</tr>");
+            htmltbl.Append("</table>");
+
+            htmltblItem.Append("<div>");
+            htmltblItem.Append("<table border='1'>");
+            htmltblItem.Append("<tr>");
+            htmltblItem.Append("<th>SKU No.</th>");
+            htmltblItem.Append("<th>Article No.</th>");
+            htmltblItem.Append("<th>Color</th><th>Brand</th><th>Category</th><th>Sub Category</th><th>Size Group</th>");
+            htmltblItem.Append("<th>Size</th><th>QTY</th><th>WSR</th><th>Total Amount</th>");
+            htmltblItem.Append("</tr>");
+            if (PurchaseReturn.PurchaseReturns.Count > 0)
+            {
+                foreach (var item in PurchaseReturn.PurchaseReturns)
+                {
+                    
+                    htmltblItem.Append("<tr>");
+
+                    htmltblItem.Append("<td>" + item.SKU_Code + "</td>");
+                    htmltblItem.Append("<td>" + item.Article_No + "</td>");
+                    htmltblItem.Append("<td>" + item.Color + "</td>");
+                    htmltblItem.Append("<td>" + item.Brand + "</td>");
+                    htmltblItem.Append("<td>" + item.Category + "</td>");
+                    htmltblItem.Append("<td>" + item.SubCategory + "</td>");
+                    htmltblItem.Append("<td>" + item.Size_Group_Name + "</td>");
+                    htmltblItem.Append("<td>" + item.Size_Name + "</td>");
+                    htmltblItem.Append("<td>" + item.Quantity + "</td>");
+                    htmltblItem.Append("<td>" + item.WSR_Price + "</td>");
+                    htmltblItem.Append("<td>" + item.Amount + "</td>");
+
+                    htmltblItem.Append("</tr>");
+                }
+                htmltblItem.Append("<tr></tr>");
+            }
+            htmltblItem.Append("<tr>");
+            htmltblItem.Append("<td colspan='14'>Remark : </td>");
+            htmltblItem.Append("<td colspan='2' style='text-align: left;'>Total : </td>");
+            htmltblItem.Append("<td>" + PurchaseReturn.PurchaseReturns.Sum(a => a.Total_Quantity) + "</td>");
+            htmltblItem.Append("<td colspan='3'></td>");
+            htmltblItem.Append("<td>" + PurchaseReturn.PurchaseReturns.Sum(a => a.Total_Amount) + "</td>");
+            htmltblItem.Append("</tr>");
+
+            htmltblItem.Append("<tr>");
+            htmltblItem.Append("<td colspan='21'>Amount(In words) : " + PurchaseReturn.Total_Amount_In_Word + "</td>");
+            htmltblItem.Append("</tr>");
+            htmltblItem.Append("</table>");
+            htmltblItem.Append("</div>");
+            htmltblItem.Append("<br />");
+
+            using (ms = new MemoryStream())
+            {
+                iTextSharp.text.Font font = iTextSharp.text.FontFactory.GetFont("Courier", 1.4f, Font.NORMAL);
+                iTextSharp.text.Document document = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 25, 25, 30, 30);
+                PdfWriter writer = PdfWriter.GetInstance(document, ms);
+
+                document.Open();
+                iTextSharp.text.Paragraph pCompanyName = new iTextSharp.text.Paragraph("Invoice");
+                pCompanyName.Alignment = iTextSharp.text.Element.ALIGN_CENTER;
+
+                pCompanyName.Font = font;
+                document.Add(pCompanyName);
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                iTextSharp.text.Paragraph AddLine = new iTextSharp.text.Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                document.Add(AddLine);
+
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmldiv.ToString()), null))
+                {
+                    document.Add(element);
+                }
+
+                document.Add(new iTextSharp.text.Paragraph("\n"));
+
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltbl.ToString()), null))
+                {
+                    document.Add(new iTextSharp.text.Paragraph("\n"));
+                    document.Add(element);
+                }
+
+                foreach (IElement element in iTextSharp.text.html.simpleparser.HTMLWorker.ParseToList(new StringReader(htmltblItem.ToString()), null))
+                {
+                    document.Add(new iTextSharp.text.Paragraph("\n"));
+                    document.Add(element);
+                }
+
+                document.Close();
+                writer.Close();
+
+            }
+
+            return ms;
+        }
+
+        public void SendDemoEmail(PurchaseReturnInfo PurchaseReturn, string attachmentPath)
+        {
+
+            SendEmailInfo emailData = new SendEmailInfo();
+
+            emailData.ID = PurchaseReturn.Vendor_Id;
+            emailData.To_Email_Id = PurchaseReturn.Vendor_Email1;
+            emailData.Subject = "Purchase Order Invoice";
+
+            StringBuilder html = new StringBuilder();
+            html.Append("<table>");
+
+            html.Append("<tr>");
+            html.Append("<td>");
+            html.Append("Hi " + PurchaseReturn.Vendor_Name + " ,");
+            html.Append("</td>");
+            html.Append("</tr>");
+
+            html.Append("<tr>");
+            html.Append("<td>");
+            html.Append("Purchase Return Invoice attached here");
+            html.Append("</td>");
+            html.Append("</tr>");
+
+            html.Append("</table>");
+
+            emailData.Body = html.ToString();
+
+            emailData.AttachmentPath = new List<string>() { attachmentPath };
+
+            MyLeoRetailerRepo.Common.CommonMethods.SendMail(emailData);
+        }
+
+
+        /* End */
 
     }
 }

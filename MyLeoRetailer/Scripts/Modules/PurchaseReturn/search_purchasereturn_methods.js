@@ -3,7 +3,10 @@
     		{
     		    Filter: {
 
-    		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
+    		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val(),
+
+    		        GR_No: $("[name='Filter.GR_No']").val()
+
     		    },
     		    Grid_Detail: {
 
@@ -47,6 +50,8 @@ function Reset_PurchaseReturn() {
     document.getElementById('btnEditPurchaseReturn').disabled = true;
 
     document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+
+    document.getElementById('btnPrintPurchaseReturn').disabled = true;
 
 }
 

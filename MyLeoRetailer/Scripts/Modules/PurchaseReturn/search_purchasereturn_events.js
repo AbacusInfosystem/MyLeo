@@ -4,6 +4,9 @@
     document.getElementById('btnEditPurchaseReturn').disabled = true;
 
     document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+
+    document.getElementById('btnPrintPurchaseReturn').disabled = true;
+
    
     Get_Purchase_Returns();
 
@@ -11,6 +14,7 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseReturnId").val(this.value);
             document.getElementById('btnEditPurchaseReturn').disabled = false;
+            document.getElementById('btnPrintPurchaseReturn').disabled = false;
             document.getElementById('btnUpdatePurchaseReturn').disabled = false;
         }
     });
@@ -24,6 +28,13 @@
         //$("[name='Filter.Debit_Note_No']").val('');
 
         //$("[name='Filter.Purchase_Return_Id']").val('');
+    });
+
+    $("#txtGR_No").focusout(function () {
+
+        $("[name='Filter.GR_No']").val($("#txtGR_No").val());
+
+        Get_Purchase_Returns();
     });
 
   
@@ -55,6 +66,13 @@
 
     });
        
+    $("#btnPrintPurchaseReturn").click(function () {
+        $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Print/");
+
+        $('#frmPurchaseReturn').attr("method", "POST");
+
+        $("#frmPurchaseReturn").submit();
+    });
 
 });
 
@@ -73,6 +91,11 @@ $(function () {
     //Added By Vinod Mane on 26/10/2016
     $(document).on("change", "#hdnPurchaseReturnId", function () {
        
+        Get_Purchase_Returns();
+    });
+
+    $(document).on("change", "#hdnGRNoId", function () {
+
         Get_Purchase_Returns();
     });
     //End
