@@ -672,7 +672,15 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Cheque_Amount", salesInvoice.Cheque_Amount));
                 sqlParams.Add(new SqlParameter("@Card_Amount", salesInvoice.Card_Amount));
                 //sqlParams.Add(new SqlParameter("@Credit_Note_Amount", salesInvoice.Credit_Note_Amount));
-                
+
+                if (salesInvoice.Gift_Voucher_Id != 0)
+                {
+                    sqlParams.Add(new SqlParameter("@Status", "0"));
+                }
+                else
+                {
+                    sqlParams.Add(new SqlParameter("@Status", "1"));
+                }
 
                 if (salesInvoice.Cheque_Date == DateTime.MinValue)
                 {
@@ -700,7 +708,7 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
                 sqlParams.Add(new SqlParameter("@Updated_Date", DateTime.Now));
 
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Receivable_Item_Data.ToString(), CommandType.StoredProcedure);
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Receivable_Item_Data_For_Sales_Order.ToString(), CommandType.StoredProcedure);
             
         }
 

@@ -342,12 +342,13 @@ namespace MyLeoRetailerInfo.Common
         Sp_Delete_Sales_Order_Items_By_Sales_Invoice_Id,
 
         sp_Get_Sales_Invoice_Items_By_Sales_Invoice_Id,
-       sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
+        sp_Get_Sales_Invoice_Details_And_Branch_Details_By_Sales_Invoice_Id,
         sp_Check_Mobile_No,
-            sp_Get_Credit_Note_Details_By_Customer_Id,
-            sp_Get_Gift_Voucher,
-            sp_Check_Quantity,
-            Get_Sales_Order_Search_Details,
+        sp_Get_Credit_Note_Details_By_Customer_Id,
+        sp_Get_Gift_Voucher,
+        sp_Check_Quantity,
+        Get_Sales_Order_Search_Details,
+        sp_Insert_Receivable_Item_Data_For_Sales_Order,
 
             //Sales_Report
 

@@ -84,5 +84,17 @@ namespace MyLeoRetailerInfo.Inventory
             get;
             set;
         }
+
+        public string Brand_Code
+        {
+            get;
+            set;
+        }
+
+        public string Category_Code
+        {
+            get;
+            set;
+        }
     }
 }

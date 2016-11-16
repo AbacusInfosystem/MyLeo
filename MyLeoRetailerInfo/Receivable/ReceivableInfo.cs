@@ -170,6 +170,18 @@ namespace MyLeoRetailerInfo.Receivable
            set;
        }
 
+       public decimal Discount_Percentage
+       {
+           get;
+           set;
+       }
+
+       public decimal Discount_Amount
+       {
+           get;
+           set;
+       }
+
        public string Credit_Note_No
        {
            get;
