@@ -507,6 +507,8 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
            sqlParams.Add(new SqlParameter("@Card_Amount", Receivable.Card_Amount));
+           sqlParams.Add(new SqlParameter("@Discount_Percentage", Receivable.Discount_Percentage));
+           sqlParams.Add(new SqlParameter("@Discount_Amount", Receivable.Discount_Amount));
 
            if (Receivable.Cheque_Date == DateTime.MinValue)
            {
@@ -517,11 +519,20 @@ namespace MyLeoRetailerRepo
                sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
            }
 
-               sqlParams.Add(new SqlParameter("@CreditNote_Amount", Receivable.Credit_Note_Amount));
+           if (Receivable.Gift_Voucher_Id != 0)
+           {
+               sqlParams.Add(new SqlParameter("@Status", "0"));
+           }
+           else
+           {
+               sqlParams.Add(new SqlParameter("@Status", "1"));
+           }
 
-               decimal newcreditnoteamount = creditnoteamount - Receivable.Credit_Note_Amount;
+           sqlParams.Add(new SqlParameter("@CreditNote_Amount", Receivable.Credit_Note_Amount));
 
-               sqlParams.Add(new SqlParameter("@Credit_Note_Amount", newcreditnoteamount));
+           decimal newcreditnoteamount = creditnoteamount - Receivable.Credit_Note_Amount;
+
+           sqlParams.Add(new SqlParameter("@Credit_Note_Amount", newcreditnoteamount));
 
            sqlParams.Add(new SqlParameter("@Cheque_No", Receivable.Cheque_No));
            sqlParams.Add(new SqlParameter("@Bank_Name", Receivable.Bank_Name));
@@ -559,6 +570,8 @@ namespace MyLeoRetailerRepo
            sqlParams.Add(new SqlParameter("@Cash_Amount", Receivable.Cash_Amount));
            sqlParams.Add(new SqlParameter("@Cheque_Amount", Receivable.Cheque_Amount));
            sqlParams.Add(new SqlParameter("@Card_Amount", Receivable.Card_Amount));
+           sqlParams.Add(new SqlParameter("@Discount_Percentage", Receivable.Discount_Percentage));
+           sqlParams.Add(new SqlParameter("@Discount_Amount", Receivable.Discount_Amount));
            //sqlParams.Add(new SqlParameter("@Cheque_Date", Receivable.Cheque_Date));
            if (Receivable.Cheque_Date == DateTime.MinValue)
            {
@@ -638,6 +651,14 @@ namespace MyLeoRetailerRepo
            if (!dr.IsNull("Card_Amount"))
 
                Receivable.Card_Amount = Convert.ToDecimal(dr["Card_Amount"]);
+
+           if (!dr.IsNull("Discount_Percentage"))
+
+               Receivable.Discount_Percentage = Convert.ToDecimal(dr["Discount_Percentage"]);
+
+           if (!dr.IsNull("Discount_Amount"))
+
+               Receivable.Discount_Amount = Convert.ToDecimal(dr["Discount_Amount"]);
 
            if (!dr.IsNull("Gift_Voucher_Amount"))
 
@@ -739,6 +760,9 @@ namespace MyLeoRetailerRepo
 
                        Receivable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
                        Receivable.Payament_Date.ToShortDateString();
+
+                   if (!dr.IsNull("Net_Amount"))
+                     Receivable.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
                   // Receivable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
 
 

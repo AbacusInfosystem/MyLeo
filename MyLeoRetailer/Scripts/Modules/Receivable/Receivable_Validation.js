@@ -45,6 +45,10 @@ $(function () {
                 checkBalanceamount: true
 
             },
+            "Receivable.Discount_Amount": {
+                checkBalanceamount: true
+
+            },
 
             
         },
@@ -85,6 +89,7 @@ $(function () {
         var card = 0;
         var gift = 0;
         var check = 0;
+        var discount = 0;
 
 
         if ($("#txtCash_amount").val() != "") {
@@ -107,11 +112,15 @@ $(function () {
             check = $("#txtGift_Voucher_Amount").val()
         }
 
+        if ($("#txtDiscount_Amount").val() != "") {
+            discount = $("#txtDiscount_Amount").val()
+        }
+
         var bal_amt = parseFloat($("#txtBalance_Amount").val());
 
         var paid_amt = parseFloat($("#txtPaid_Amount").val());
 
-        var total = parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check);
+        var total = parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check) + parseInt(discount);
 
         //$("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
 
