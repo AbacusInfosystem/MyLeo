@@ -672,8 +672,7 @@ namespace MyLeoRetailerRepo
                     if (!dr.IsNull("Purchase_Price"))
                         list.WSR_Price = Convert.ToInt32(dr["Purchase_Price"]);                  
                     if (!dr.IsNull("Total_Amount"))
-                        list.Amount = Convert.ToInt32(dr["Total_Amount"]);
-                   
+                        list.Amount = Convert.ToInt32(dr["Total_Amount"]);                    
 
                     PurchaseReturnList.Add(list);
                 }
@@ -706,6 +705,9 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("GR_No"))
                     purchaseReturn.GR_No = Convert.ToString(dr["GR_No"]);
 
+                if (!dr.IsNull("Purchase_Return_Date"))
+                    purchaseReturn.Purchase_Return_Date = Convert.ToDateTime(dr["Purchase_Return_Date"]);
+
                 if (!dr.IsNull("Vendor_Id"))
                     purchaseReturn.Vendor_Id = Convert.ToInt32(dr["Vendor_Id"]);
 
@@ -720,10 +722,7 @@ namespace MyLeoRetailerRepo
 
                 if (!dr.IsNull("Lr_No"))
                     purchaseReturn.Lr_No = Convert.ToString(dr["Lr_No"]);
-
-                if (!dr.IsNull("Transporter_Name"))
-                    purchaseReturn.Transporter_Name = Convert.ToString(dr["Transporter_Name"]);
-
+                                
                 if (!dr.IsNull("Transporter_Id"))
                     purchaseReturn.Transporter_Id = Convert.ToInt32(dr["Transporter_Id"]);
 
@@ -776,7 +775,7 @@ namespace MyLeoRetailerRepo
             htmldiv.Append("<h5>" + PurchaseReturn.Company_Address + "</h5>");
             //htmldiv.Append("<br />");
             //htmldiv.Append("<label>Company Address2</label>");
-            htmldiv.Append("<h5> <b>PURCHASE ORDER</b></h5>");
+            htmldiv.Append("<h5> <b>PURCHASE RETURN</b></h5>");
             htmldiv.Append("</div>");
 
             htmltbl.Append("<table>");
@@ -862,15 +861,15 @@ namespace MyLeoRetailerRepo
                 htmltblItem.Append("<tr></tr>");
             }
             htmltblItem.Append("<tr>");
-            htmltblItem.Append("<td colspan='14'>Remark : </td>");
+            htmltblItem.Append("<td colspan='6'>Remark : </td>");
             htmltblItem.Append("<td colspan='2' style='text-align: left;'>Total : </td>");
-            htmltblItem.Append("<td>" + PurchaseReturn.PurchaseReturns.Sum(a => a.Total_Quantity) + "</td>");
-            htmltblItem.Append("<td colspan='3'></td>");
-            htmltblItem.Append("<td>" + PurchaseReturn.PurchaseReturns.Sum(a => a.Total_Amount) + "</td>");
+            htmltblItem.Append("<td>" + PurchaseReturn.Total_Quantity + "</td>");
+            htmltblItem.Append("<td colspan='1'></td>");
+            htmltblItem.Append("<td>" + PurchaseReturn.PurchaseReturns.Sum(a => a.Amount) + "</td>");
             htmltblItem.Append("</tr>");
 
             htmltblItem.Append("<tr>");
-            htmltblItem.Append("<td colspan='21'>Amount(In words) : " + PurchaseReturn.Total_Amount_In_Word + "</td>");
+            htmltblItem.Append("<td colspan='13'>Amount(In words) : " + PurchaseReturn.Total_Amount_In_Word + "</td>");
             htmltblItem.Append("</tr>");
             htmltblItem.Append("</table>");
             htmltblItem.Append("</div>");
@@ -929,7 +928,7 @@ namespace MyLeoRetailerRepo
 
             emailData.ID = PurchaseReturn.Vendor_Id;
             emailData.To_Email_Id = PurchaseReturn.Vendor_Email1;
-            emailData.Subject = "Purchase Order Invoice";
+            emailData.Subject = "Purchase Return Invoice";
 
             StringBuilder html = new StringBuilder();
             html.Append("<table>");

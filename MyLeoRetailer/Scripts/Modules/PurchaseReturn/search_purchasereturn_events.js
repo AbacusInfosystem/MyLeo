@@ -67,7 +67,7 @@
     });
        
     $("#btnPrintPurchaseReturn").click(function () {
-        $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Print/");
+        $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Get_Purchase_Return_Details/");
 
         $('#frmPurchaseReturn').attr("method", "POST");
 

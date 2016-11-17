@@ -182,17 +182,17 @@
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width:150px;">SKU No.</th>
-                                                        <th style="width:70px;">Article No.</th>
-                                                        <th style="width:70px;">Color</th>
-                                                        <th style="width:100px;">Brand</th>
-                                                        <th style="width:100px;">Category</th>
-                                                        <th style="width:100px;">Sub Category</th>
-                                                        <th style="width:100px;">Size Group</th>
-                                                        <th style="width:60px;">Size</th>
-                                                        <th style="width:60px;">Quantity</th>
-                                                        <th style="width:60px;">WSR</th>
-                                                        <th style="width:60px;">Total Amount</th>    
+                                                        <th style="">SKU No.</th>
+                                                        <th style="">Article No.</th>
+                                                        <th style="">Color</th>
+                                                        <th style="">Brand</th>
+                                                        <th style="">Category</th>
+                                                        <th style="">Sub Category</th>
+                                                        <th style="">Size Group</th>
+                                                        <th style="">Size</th>
+                                                        <th style="">Quantity</th>
+                                                        <th style="">WSR</th>
+                                                        <th style="">Total Amount</th>    
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -223,17 +223,17 @@
 
                                                     @{
                                                         <tr>
-                                                            <th colspan="14" style="text-align: left;"> Remark : @*@Model.PurchaseReturn.Comment*@ </th>
+                                                            <th colspan="6" style="text-align: left;"> Remark : @*@Model.PurchaseReturn.Comment*@ </th>
                                                             <th colspan="2" style="text-align: left;"> Total : </th>
                                                             <th colspan="1" style="text-align: left;"> @Model.PurchaseReturn.Total_Quantity </th>
-                                                            <th colspan="3" style="text-align: left;"></th>
-                                                            <th colspan="1" style="text-align: left;"> @Model.PurchaseReturn.Net_Amount </th>
+                                                            <th colspan="1" style="text-align: left;"></th>
+                                                            <th colspan="1" style="text-align: left;"> @Model.PurchaseReturn.PurchaseReturns.Sum(a => a.Amount) </th>
                                                             @*<th colspan="5" style="text-align: right;"> @Model.PurchaseReturn.PurchaseReturns.Sum(a => a.Total_Amount) </th>*@
 
                                                         </tr>
 
                                                         <tr>
-                                                            <th colspan="21" style="text-align: left;">Amount(In words): @Model.PurchaseReturn.Total_Amount_In_Word </th>
+                                                            <th colspan="13" style="text-align: left;">Amount(In words): @Model.PurchaseReturn.Total_Amount_In_Word </th>
                                                         </tr>
                                                     }
                                                 </tbody>

@@ -220,9 +220,6 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
         public PartialViewResult Update_GR_No(int Id)
         {
             PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
@@ -410,11 +407,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                if (prViewModel.PurchaseReturn.Purchase_Order_Id != 0)
+                if (prViewModel.PurchaseReturn.Purchase_Return_Id != 0)
                 {
                     prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
                     prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
-                    prViewModel.PurchaseReturn.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(prViewModel.PurchaseReturn.PurchaseReturns.Sum(a => a.Total_Amount));
+                    prViewModel.PurchaseReturn.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(prViewModel.PurchaseReturn.PurchaseReturns.Sum(a => a.Amount));
 
                     MemoryStream attachment = _purchaseReturnRepo.Create_Purchase_Return_Invoice_PDf(prViewModel.PurchaseReturn);
 
@@ -460,6 +457,35 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return RedirectToAction("Search", prViewModel);
         }
 
+        public ActionResult Get_Purchase_Return_Details(PurchaseReturnViewModel prViewModel)
+        {
+            try
+            {
+                if (TempData["prViewModel"] != null)
+                {
+                    prViewModel = (PurchaseReturnViewModel)TempData["prViewModel"];
+                }
+
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.Filter.Purchase_Return_Id);
+
+                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.Filter.Purchase_Return_Id);
+
+                prViewModel.PurchaseReturn.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(prViewModel.PurchaseReturn.PurchaseReturns.Sum(a => a.Amount));
+
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrderController - Get_Purchase_Order_Details : " + ex.ToString());
+            }
+
+            //return Print(prViewModel);
+
+            TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
+
+            return RedirectToAction("Print", prViewModel);
+        }
 
         /*END*/
 
