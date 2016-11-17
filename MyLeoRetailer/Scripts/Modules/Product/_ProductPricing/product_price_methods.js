@@ -132,25 +132,25 @@ function Bind_Product_MRP_New_Color(data, obj, i) {
 
             htmlText += "</tr>";
 
-            htmlText += "<tr>";
+            //htmlText += "<tr>";
 
-            for (m = index ; m < data.ProductDescription[p].ProductMRPs.length; m++) {
+            //for (m = index ; m < data.ProductDescription[p].ProductMRPs.length; m++) {
 
-                if (m == index) {
-                    htmlText += "<td>";
-                    htmlText += "<h5 >Barcode:</h5>";
-                    htmlText += "</td>";
-                }
-                htmlText += "<td>";
+            //    if (m == index) {
+            //        htmlText += "<td>";
+            //        htmlText += "<h5 >Barcode:</h5>";
+            //        htmlText += "</td>";
+            //    }
+            //    htmlText += "<td>";
 
-                //htmlText += "<i class='fa fa-barcode fa-3x'></i>";
-                htmlText += "<img src='" + (data.ProductDescription[p].ProductMRPs[m].Barcode_Image_Url != null ? data.ProductDescription[p].ProductMRPs[m].Barcode_Image_Url : "") + "' style='width:100%'/>";
-                htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + m + "].Product_Barcode' value='" + (data.ProductDescription[p].ProductMRPs[m].Product_Barcode == null ? '' : data.ProductDescription[p].ProductMRPs[m].Product_Barcode) + "' />";
+            //    //htmlText += "<i class='fa fa-barcode fa-3x'></i>";
+            //    htmlText += "<img src='" + (data.ProductDescription[p].ProductMRPs[m].Barcode_Image_Url != null ? data.ProductDescription[p].ProductMRPs[m].Barcode_Image_Url : "") + "' style='width:100%'/>";
+            //    htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + c + "].ProductDescription[" + p + "].ProductMRPs[" + m + "].Product_Barcode' value='" + (data.ProductDescription[p].ProductMRPs[m].Product_Barcode == null ? '' : data.ProductDescription[p].ProductMRPs[m].Product_Barcode) + "' />";
 
-                htmlText += "</td>";
-            }
+            //    htmlText += "</td>";
+            //}
 
-            htmlText += "</tr>";
+            //htmlText += "</tr>";
 
             htmlText += "<tr>";
 
@@ -369,19 +369,19 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
 
             htmlText += "<tr>";
 
-            for (n = 0; n < data.ProductDescription[i].ProductMRPs.length; n++) {
+            //for (n = 0; n < data.ProductDescription[i].ProductMRPs.length; n++) {
 
-                if (n == 0) {
-                    htmlText += "<td>";
-                    htmlText += "<h5>Barcode:</h5>";
-                    htmlText += "</td>";
-                }
+            //    if (n == 0) {
+            //        htmlText += "<td>";
+            //        htmlText += "<h5>Barcode:</h5>";
+            //        htmlText += "</td>";
+            //    }
 
-                htmlText += "<td>"; 
-                htmlText += "<img src='" + (data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url != null ? data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url : "") + "' style='width:100%'/>";
-                htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + n + "].Product_Barcode' value='" + (data.ProductDescription[i].ProductMRPs[n].Product_Barcode == null ? '' : data.ProductDescription[i].ProductMRPs[n].Product_Barcode) + "' />";
-                htmlText += "</td>";
-            }
+            //    htmlText += "<td>"; 
+            //    htmlText += "<img src='" + (data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url != null ? data.ProductDescription[i].ProductMRPs[n].Barcode_Image_Url : "") + "' style='width:100%'/>";
+            //    htmlText += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Colors[" + index + "].ProductDescription[" + i + "].ProductMRPs[" + n + "].Product_Barcode' value='" + (data.ProductDescription[i].ProductMRPs[n].Product_Barcode == null ? '' : data.ProductDescription[i].ProductMRPs[n].Product_Barcode) + "' />";
+            //    htmlText += "</td>";
+            //}
 
             htmlText += "</tr>";
 
@@ -437,7 +437,7 @@ function Bind_Product_MRP_Exist_Color(data, Color, index, Vendor_Code, ColorId) 
 
             htmlText += "<div class='block' style='margin-left:685px;'>";
 
-            htmlText += "<button type='button' id='btnPrintAllBarCodes' class='btn btn-success active'>Print all barcodes.</button>";
+            //htmlText += "<button type='button' id='btnPrintAllBarCodes' class='btn btn-success active'>Print all barcodes.</button>";
 
             htmlText += "<button type='button' class='btn btn-success active' id='btnSale'>Sale.</button>";
 

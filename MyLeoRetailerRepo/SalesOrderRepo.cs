@@ -881,6 +881,43 @@ namespace MyLeoRetailerRepo
             }
             return SaleOrderItemList;
         }
+
+        public DataTable Get_Sales_Summary_Report(SalesOrderFilter Filter)
+        {
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            if (Filter.From_Date == DateTime.MinValue)
+            {
+                DateTime? someDate = null;
+                sqlParams.Add(new SqlParameter("@From_Date", someDate));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@From_Date", Filter.From_Date));
+            }
+
+            if (Filter.To_Date == DateTime.MinValue)
+            {
+                DateTime? someDate = null;
+                sqlParams.Add(new SqlParameter("@To_Date", someDate));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@To_Date", Filter.To_Date));
+            }
+
+
+            sqlParams.Add(new SqlParameter("@Brand", Filter.Brand_Name));
+            sqlParams.Add(new SqlParameter("@Category", Filter.Category));
+            sqlParams.Add(new SqlParameter("@SalesMan_Id", Filter.SalesMan_Id.ToString()));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Summary_Report.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
     }
 }
 

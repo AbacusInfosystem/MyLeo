@@ -401,6 +401,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Employeetable")
+                {
+                    if (fieldName == "Employee_Id")
+                    {
+                        strquery = " select distinct e.Employee_Id,e.Employee_Name from Sales_Invoice_Item sii  ";
+                        strquery += " left join Employee e on e.Employee_Id=sii.Salesman_Id ";
+                    }
+                }
+
 
                 //if (table_Name == "Sales_Invoice")
                 //{
@@ -423,6 +432,15 @@ namespace MyLeoRetailerRepo
 
                 //    }
                 //}
+
+                if (table_Name == "Purchase_Return")
+                {
+                    if (fieldName == "Purchase_Return_Id")
+                    {
+                        strquery = " select GR_No as Purchase_Return_Id,GR_No from Purchase_Return ";
+                        strquery += "where GR_No is not null ";
+                    }
+                }
 
 
             }

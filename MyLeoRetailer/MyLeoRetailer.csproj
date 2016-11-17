@@ -1104,6 +1104,8 @@
     <Content Include="Scripts\Modules\Role\role-validation.js" />
     <Content Include="Scripts\Modules\SalesOrder\salesreport_search_events.js" />
     <Content Include="Scripts\Modules\SalesOrder\salesreport_search_methods.js" />
+    <Content Include="Scripts\Modules\SalesOrder\Sales_summary_report_event.js" />
+    <Content Include="Scripts\Modules\SalesOrder\Sales_summary_report_method.js" />
     <Content Include="Scripts\Modules\Size\size_group_events.js" />
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />
@@ -1245,6 +1247,7 @@
     </Content>
     <Content Include="Views\PostLogin\SalesOrder\_SalesDetailsReport.cshtml" />
     <Content Include="Views\PostLogin\Barcode\Barcode.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\SalesSummaryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
