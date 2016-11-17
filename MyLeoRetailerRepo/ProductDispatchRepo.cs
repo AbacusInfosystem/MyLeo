@@ -139,6 +139,8 @@ namespace MyLeoRetailerRepo
 
                 sqlparam.Add(new SqlParameter("@sku_Code", dispatch.SKU));
 
+                sqlparam.Add(new SqlParameter("@barcode", item.Barcode));
+
                 sqlparam.Add(new SqlParameter("@quantity", item.Quantity));
 
                 sqlparam.Add(new SqlParameter("@created_By", dispatch.Created_By));

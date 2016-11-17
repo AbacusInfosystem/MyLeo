@@ -61,6 +61,7 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Product Quantity</span>
 
                                     <input type="text" class="form-control input-sm" name="product_Dispatch.Balance_Quantitya" id="txtBalance_Quantitya" value="@Model.product_Dispatch.Balance_Quantitya" readonly />
+                                    <input type="text" class="form-control input-sm" name="product_Dispatch.Quantity" id="txtDispatch_Quantity" placeholder="Enter Dispatch Quantity." value="0" style="display:none" />
                                 </div>
 
                             </div>
@@ -71,17 +72,17 @@
                         <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
 
                             <div class="block">
-                                <div class="form-group">
+                                @*<div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Date</span>
                                     <div class="input-group date" id="dp-2" data-date="" data-date-format="mm-dd-yyyy">
                                         <input type="text" class="form-control datepicker" id="txtDispatch_Date" placeholder="Enter Dispatch Date." />
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
-                                </div>
+                                </div>*@
 
                                 <div class="form-group">
-                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Quantity</span>
-                                    <input type="text" class="form-control input-sm" name="product_Dispatch.Quantity" id="txtDispatch_Quantity" placeholder="Enter Dispatch Quantity."  />
+                                    <span class="label label-primary label-form" style="margin-bottom: 1px;">Barcode</span>
+                                    <input type="text" class="form-control input-sm" name="product_Dispatch.Barcode" id="txtBarcode" placeholder="Barcode"  autofocus />
                                 </div>
                             </div>
 
@@ -122,7 +123,7 @@
                                         {
                                             <tr>
                                                 <td>
-                                                    @Model.product_Dispatch.SKU
+                                                    @Model.product_Dispatch.Barcode
                                                     <input type="hidden" id="hdn_Dispatch_Item_Id" value="@item.Dispatch_Item_Id" />
                                                 </td>
 

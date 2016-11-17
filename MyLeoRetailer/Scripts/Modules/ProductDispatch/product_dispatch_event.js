@@ -18,6 +18,21 @@
            }
     });
 
+    var e = jQuery.Event("keypress");
+    e.which = 13; //choose the one you want
+    e.keyCode = 13;
+    $("#txtBarcode").trigger(e);
+
+    $('#txtBarcode').keypress(function (e) {
+        var key = e.which;
+        if (key == 13)  // the enter key code
+        {
+            AddProductDispatch();
+            return false;
+        }
+    });
+
+
     $("#frmProductDispatch").validate({
 
         rules: {
@@ -40,21 +55,30 @@
 var message = "";
 
 jQuery.validator.addMethod("validate_Quantity", function (value, element){
-    var result = true;
-    if ($("#txtDispatch_Quantity").val() != "")
+   
+    if ($("#txtDispatch_Quantity").val() > 0)
     {
+        var result = true;
 
         var balance_Qty = $("#txtBalance_Quantitya").val()
-        if (parseInt(value) > parseInt(balance_Qty))
+
+        if (parseInt(balance_Qty)==0) {
+            result = false;
+
+            $("#txtDispatch_Quantity").val(0);
+
+            message = "Cannot Dispatch as the Product quantity is 0.";
+        }
+
+        if (parseInt(value) > parseInt(balance_Qty) && parseInt(balance_Qty) > 0)
         {
             result = false;
 
-            $("#txtDispatch_Quantity").val("");
+            $("#txtDispatch_Quantity").val(0);
 
             message = "Dispatch Quantity cannot be greater than Product Quantity.";
         }
-        else 
-        {
+     
            
             $.ajax({
 
@@ -74,16 +98,12 @@ jQuery.validator.addMethod("validate_Quantity", function (value, element){
 
                         message ="Dispatch is Cancel as the Quantity of these product in Warehouse is " + data + ".";
                         
-                        $("#txtDispatch_Quantity").val("");
+                        $("#txtDispatch_Quantity").val(0);
                     }
-                    else
-                    {
-                        result = true;
-                    }
+                   
                 }
             });
-        }
-       
+    
     }
     return result;
 
