@@ -58,6 +58,31 @@ namespace MyLeoRetailer.Controllers.PostLogin
             return View("Index", siViewModel);
         }
 
+        public ActionResult SalesSummaryReport(SalesInvoiceViewModel siViewModel)
+        {
+            try
+            {
+                if (TempData["siViewModel"] != null)
+                {
+                    siViewModel = (SalesInvoiceViewModel)TempData["siViewModel"];
+                }
+                siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
+
+            }
+          
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrder Controller - SalesSummaryReport  " + ex.Message);
+            }
+            //end
+
+
+            return View("SalesSummaryReport", siViewModel);
+        }
+
         public JsonResult Get_Customer_Name_By_Mobile_No(string MobileNo)
         {
             //string Customer_Name;
@@ -409,6 +434,38 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 Logger.Error("SalesOrder Controller - View_Sales_Report  " + ex.Message);
             }
             return PartialView("_SalesDetailsReport", siViewModel);
+        }
+
+        public JsonResult Get_Sales_Summary_Report(SalesInvoiceViewModel siViewModel)
+        {
+            siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+            try
+            {
+                SalesOrderRepo siRepo = new SalesOrderRepo();
+
+                //Pagination_Info pager = new Pagination_Info();
+
+                //pager = siViewModel.Grid_Detail.Pager;
+
+                siViewModel.Grid_Detail = Set_Grid_Details(false, "SKU_Code,Sales_Invoice_No,Brand,Category,Sub_Category,Colour,Size,MRP_Amount,Discount,Total_Amount,SalesMan,Date", "Sales_Invoice_Id"); // Set grid info for front end listing
+
+                siViewModel.Grid_Detail.Records = siRepo.Get_Sales_Summary_Report(siViewModel.Filter); // Call repo method 
+
+                //Set_Pagination(pager, siViewModel.Grid_Detail); // set pagination for grid
+
+                //siViewModel.Grid_Detail.Pager = pager;
+
+            }
+
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("SalesOrde Controller - Get_Sales_Summary_Report  " + ex.Message);
+            }
+
+            return Json(JsonConvert.SerializeObject(siViewModel));
+           // return Json(JsonRequestBehavior.AllowGet);
         }
     }
 }

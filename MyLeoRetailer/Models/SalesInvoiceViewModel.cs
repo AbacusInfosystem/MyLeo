@@ -50,6 +50,8 @@ namespace MyLeoRetailer.Models
             Grid_Detail.Pager.DivObject = "divSalesOrderPager";
 
             Grid_Detail.Pager.CallBackMethod = "Get_SalesOrders";
+
+            Grid_Detail.Pager.CallBackMethod = "Get_Sales_Summary_Report";
         }
 
 

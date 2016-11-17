@@ -344,6 +344,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Check_Quantity,
         Get_Sales_Order_Search_Details,
         sp_Insert_Receivable_Item_Data_For_Sales_Order,
+        sp_Get_Sales_Summary_Report,
+
 
             //Sales_Report
 
