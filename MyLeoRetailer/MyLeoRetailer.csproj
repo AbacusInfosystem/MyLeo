@@ -180,6 +180,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostLogin\Barcode\BarcodeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductDispatchController.cs" />
     <Compile Include="Controllers\PostLogin\Report\InventoryController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderRequestController.cs" />
@@ -999,6 +1000,8 @@
     <Content Include="Scripts\Modules\Alteration\Alteration_validation.js" />
     <Content Include="Scripts\Modules\Alteration\search_Alteration_events.js" />
     <Content Include="Scripts\Modules\Alteration\search_Alteration_methods.js" />
+    <Content Include="Scripts\Modules\Barcode\barcode_event.js" />
+    <Content Include="Scripts\Modules\Barcode\barcode_method.js" />
     <Content Include="Scripts\Modules\Branch\branch_events.js" />
     <Content Include="Scripts\Modules\Branch\branch_methods.js" />
     <Content Include="Scripts\Modules\Branch\branch_validation.js" />
@@ -1243,6 +1246,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\PostLogin\SalesOrder\_SalesDetailsReport.cshtml" />
+    <Content Include="Views\PostLogin\Barcode\Barcode.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\SalesSummaryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>

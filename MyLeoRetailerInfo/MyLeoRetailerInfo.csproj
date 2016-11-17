@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alteration\AlterationInfo.cs" />
+    <Compile Include="Barcode\Barcode.cs" />
     <Compile Include="Branch\BranchInfo.cs" />
     <Compile Include="Brand\BrandInfo.cs" />
     <Compile Include="Category\CategoryInfo.cs" />
