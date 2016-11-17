@@ -10,7 +10,6 @@
             $("#hdnPurchaseOrderId").val(this.value);
             document.getElementById('btnEditPurchaseOrder').disabled = false;
             document.getElementById('btnViewPurchaseOrder').disabled = false;
-            document.getElementById('btnCreatePurchaseOrder').disabled = true;
 
         }
     });
@@ -21,18 +20,26 @@
 
 
     $("#btnCreatePurchaseOrder").click(function () {
-        $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Index");
+        $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Index/");
+        $('#frmPurchaseOrder').attr("method", "POST");
         $("#frmPurchaseOrder").submit();
     });
 
     $("#btnEditPurchaseOrder").click(function () {
-        $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Get_Purchase_Order_By_Id");
+        $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Get_Purchase_Order_By_Id/");
+        $('#frmPurchaseOrder').attr("method", "POST");
         $("#frmPurchaseOrder").submit();
     });
 
     $("#btnViewPurchaseOrder").click(function () {
         $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Get_Purchase_Order_Details");
+        $('#frmPurchaseOrder').attr("method", "POST");
         $("#frmPurchaseOrder").submit();
     });
+
+    $(document).on("change", "#hdnPurchaseOrderNo", function () {
+        Get_Purchase_Orders();
+    });
+
 
 });

@@ -17,7 +17,7 @@ $(function () {
     }
     if ($("#hdn_ProductId").val() != 0) {
         $("#txtArticle_No").attr('readonly', true);
-        $("#btnCancel").attr('disabled', true);
+        //$("#btnCancel").attr('disabled', true);
         $("#btnProductMRP").show(); 
     }
 
@@ -92,6 +92,8 @@ $(function () {
                     } else {
                         $("#img_" + i).attr("src", "/UploadedFiles/");
                         $('#rd_' + i).iCheck('uncheck');
+                        $("#hdn_Img_" + i).attr("value", data.Product.ProductImage.Product_Image[i]);
+                        $("#hdn_Img_Id_" + i).attr("value", data.Product.ProductImage.Product_Image_Id[i]);
                     } 
                 } 
             }
@@ -101,8 +103,7 @@ $(function () {
     $('.remove-image-src').click(function (event) {
         $(this).closest(".image").find(".ImgSrc").attr("src", "/UploadFiles/");
         $(this).closest(".image").find(".prod_img_src").val('');
-        $(this).closest(".image").find(".prod_img_name").val('');
-        //$("#img_" + i).attr("src", "/UploadedFiles/");
+        $(this).closest(".image").find(".prod_img_name").val(''); 
     });
 
 });

@@ -103,7 +103,7 @@ jQuery.validator.addMethod("validate_Quantity", function (value, element){
                    
                 }
             });
-    
+       
     }
     return result;
 

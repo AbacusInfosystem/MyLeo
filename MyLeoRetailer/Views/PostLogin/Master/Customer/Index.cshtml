@@ -5,10 +5,18 @@
     ViewBag.Title = "Index";
 }
 
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Customer/customer_events.js"></script>
 <script src="~/Scripts/Modules/Customer/customer_methods.js"></script>
 <script src="~/Scripts/Modules/Customer/customer_validation.js"></script>
+
+@*<style>
+    input:checked {
+        height: 20px;
+        width: 20px;
+    }
+</style>*@
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -27,6 +35,7 @@
             <div class="page-title">
                 <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Customer Management</h2>
             </div>
+            <br />
             <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "Customer")'"><i class="fa fa-angle-double-left"></i> BACK</button>
             </div>
         </div>
@@ -56,7 +65,7 @@
                     
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no.</span>
-                        <input class="form-control" placeholder="Enter mobile number." name="Customer.Mobile" id="txtMobileNo" value="@Model.Customer.Mobile" maxlength="12" data-toggle="modal" data-target="#myModalCustomer" />
+                        <input class="mask_mobile_no form-control" placeholder="Enter mobile number." name="Customer.Mobile" id="txtMobileNo" value="@Model.Customer.Mobile"  data-toggle="modal" data-target="#myModalCustomer" />
                         <input type="hidden" id="hdnMobileNo" value="@Model.Customer.Mobile">
                      </div>
 
@@ -67,7 +76,7 @@
                     
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">First name.</span>
-                        <input type="text" class="form-control" placeholder="Enter customer first name." name="Customer.First_Name" value="@Model.Customer.First_Name" id="txtFirstName" maxlength="48" />
+                        <input type="text" class="form-control" placeholder="Enter customer first name." name="Customer.First_Name" value="@Model.Customer.First_Name" id="txtFirstName" maxlength="20" />
                         <input type="hidden" id="hdn_CustomerID" name="Customer.Customer_Id" value="@Model.Customer.Customer_Id" />
                         <input type="hidden" name="Customer.Customer_Name" value="@Model.Customer.Customer_Name" />
                         <input type="hidden" id="hdnFirstName" value="@Model.Customer.Customer_Name" />@*Added by vinod mane on 28/09/2016*@
@@ -77,7 +86,7 @@
 
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Last name.</span>
-                        <input type="text" class="form-control" placeholder="Enter customer last name." name="Customer.Last_Name" value="@Model.Customer.Last_Name" id="txtLastName" maxlength="48" />
+                        <input type="text" class="form-control" placeholder="Enter customer last name." name="Customer.Last_Name" value="@Model.Customer.Last_Name" id="txtLastName" maxlength="20" />
                         <input type="hidden" id="hdnLast_Name" value="@Model.Customer.Last_Name"/> @*Added by vinod mane on 28/09/2016*@
                     </div>
 
@@ -114,29 +123,39 @@
         <div class="block">
             <h4 style="margin-top: 0px;">Billing address.</h4>
 
+            
+
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address.</span>
-                <textarea class="form-control" rows="5" placeholder="Billing address." name="Customer.Customer_Billing_Address" maxlength="250">@Model.Customer.Customer_Billing_Address</textarea>
+                <textarea class="form-control" rows="5" placeholder="Billing address." name="Customer.Customer_Billing_Address" id="txtCustomerBillingAddress" maxlength="250">@Model.Customer.Customer_Billing_Address</textarea>
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing city.</span>
-                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Billing_City" value="@Model.Customer.Customer_Billing_City" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Billing_City" id="txtCustomerBillingCity" value="@Model.Customer.Customer_Billing_City" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing state.</span>
-                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Billing_State" value="@Model.Customer.Customer_Billing_State" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Billing_State" id="txtCustomerBillingState" value="@Model.Customer.Customer_Billing_State" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing country.</span>
-                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Billing_Country" value="@Model.Customer.Customer_Billing_Country" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Billing_Country" id="txtCustomerBillingCountry" value="@Model.Customer.Customer_Billing_Country" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing pincode.</span>
-                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Billing_Pincode" id="txtCustomerBillingPincode" value="@(Model.Customer.Customer_Billing_Pincode == 0 ? "" : Model.Customer.Customer_Billing_Pincode.ToString())" maxlength="6" />
+            </div>
+
+            <div class="form-group">
+                <span class="label label-primary label-form" style="margin-bottom: 1px;">Billing address same as shipping address.</span>
+                <label class="switch">
+                    <input type="checkbox" class="switch" id="txtcheckbox" name="customercheckbox" value="0">
+                    <span></span>
+                </label>
             </div>
 
         </div>
@@ -150,28 +169,28 @@
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping address.</span>
-                <textarea class="form-control" rows="5" placeholder="Shipping address." name="Customer.Customer_Shipping_Address" maxlength="250">@Model.Customer.Customer_Shipping_Address</textarea>
+                <textarea class="form-control" rows="5" placeholder="Shipping address." name="Customer.Customer_Shipping_Address" id="txtCustomerShippingAddress" maxlength="250">@Model.Customer.Customer_Shipping_Address</textarea>
 
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping city.</span>
-                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Shipping_City" value="@Model.Customer.Customer_Shipping_City" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter city." name="Customer.Customer_Shipping_City" id="txtCustomerShippingCity" value="@Model.Customer.Customer_Shipping_City" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping state.</span>
-                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Shipping_State" value="@Model.Customer.Customer_Shipping_State" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter state." name="Customer.Customer_Shipping_State" id="txtCustomerShippingState" value="@Model.Customer.Customer_Shipping_State" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping country.</span>
-                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Shipping_Country" value="@Model.Customer.Customer_Shipping_Country" maxlength="50" />
+                <input type="text" class="form-control" placeholder="Enter country." name="Customer.Customer_Shipping_Country" id="txtCustomerShippingCountry" value="@Model.Customer.Customer_Shipping_Country" maxlength="50" />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping pincode.</span>
-                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Shipping_Pincode" value="@(Model.Customer.Customer_Shipping_Pincode == 0 ? "" : Model.Customer.Customer_Shipping_Pincode.ToString())" maxlength="6" />
+                <input type="text" class="form-control" placeholder="Enter pincode." name="Customer.Customer_Shipping_Pincode" id="txtCustomerShippingPincode" value="@(Model.Customer.Customer_Shipping_Pincode == 0 ? "" : Model.Customer.Customer_Shipping_Pincode.ToString())" maxlength="6" />
             </div>
 
         </div>
@@ -185,22 +204,22 @@
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no1.</span>
-                <input type="text" class="form-control" placeholder="Enter mobile number 1." id="txtCustomer_Mobile1" name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1" maxlength="12" />
+                <input type="text" class="mask_mobile_no form-control" placeholder="Enter mobile number 1." id="txtCustomer_Mobile1" name="Customer.Customer_Mobile1" value="@Model.Customer.Customer_Mobile1"  />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Mobile no2.</span>
-                <input type="text" class="form-control" placeholder="Enter mobile number 2." id="txtCustomer_Mobile2" name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2" maxlength="12" />
+                <input type="text" class="mask_mobile_no form-control" placeholder="Enter mobile number 2." id="txtCustomer_Mobile2" name="Customer.Customer_Mobile2" value="@Model.Customer.Customer_Mobile2"  />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no1.</span>
-                <input type="text" class="form-control" placeholder="Enter landline number 1." id="txtCustomer_Landline1" name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1" maxlength="12" />
+                <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 1." id="txtCustomer_Landline1" name="Customer.Customer_Landline1" value="@Model.Customer.Customer_Landline1"  />
             </div>
 
             <div class="form-group">
                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Landline no2.</span>
-                <input type="text" class="form-control" placeholder="Enter landline number 2." id="txtCustomer_Landline2" name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2" maxlength="12" />
+                <input type="text" class="mask_phone_no form-control" placeholder="Enter landline number 2." id="txtCustomer_Landline2" name="Customer.Customer_Landline2" value="@Model.Customer.Customer_Landline2"  />
             </div>
 
             <div class="form-group">
@@ -278,7 +297,7 @@
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-success active" id="btnSaveCustomer">Save</button>
-                    <button type="reset" class="btn btn-danger active" id="btnCancel">Cancel</button>
+                    <button type="reset" class="btn btn-danger active" id="btnCancel">Reset</button>
                     
                     @*<a class="btn btn-danger active" id="btnCancel" role="button">Cancel </a>*@@*Added by vinod Mane on 22/09/2016  href="@Url.Action("Search", "Customer")"*@
                 </div> 

@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -96,7 +97,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             return View("View", piViewModel);
         }
-       
+
 
         public JsonResult Get_Purchase_Invoices(PurchaseInvoiceViewModel piViewModel)
         {
@@ -115,7 +116,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 piViewModel.Grid_Detail.Pager = pager;
             }
             catch (Exception ex)
-        {
+            {
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
 
                 Logger.Error("PurchaseInvoiceController - Get_Purchase_Invoices : " + ex.ToString());
@@ -139,20 +140,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 piViewModel.Pager = pager;
 
                 piViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(piViewModel.Pager.TotalRecords, piViewModel.Pager.CurrentPage, piViewModel.Pager.PageSize, piViewModel.Pager.PageLimit, piViewModel.Pager.StartPage, piViewModel.Pager.EndPage, piViewModel.Pager.IsFirst, piViewModel.Pager.IsPrevious, piViewModel.Pager.IsNext, piViewModel.Pager.IsLast, piViewModel.Pager.IsPageAndRecordLabel, piViewModel.Pager.DivObject, piViewModel.Pager.CallBackMethod);
-                }
+            }
             catch (Exception ex)
-                {
+            {
                 piViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseOrder Controller - Get_Purchase_Invoices_List : " + ex.ToString());
-                }
-               
-            return Json(JsonConvert.SerializeObject(piViewModel));
             }
+
+            return Json(JsonConvert.SerializeObject(piViewModel));
+        }
 
 
         public ActionResult Get_Purchase_Invoice_Details(PurchaseInvoiceViewModel piViewModel)
-            {
+        {
             try
             {
                 Set_Date_Session(piViewModel.PurchaseInvoice);
@@ -215,7 +216,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_Details_By_Id(piViewModel.PurchaseInvoice.Purchase_Invoice_Id);
+                if (piViewModel.PurchaseInvoice.Purchase_Order_Id == 0 || piViewModel.PurchaseInvoice.Purchase_Order_Id == null )
+                {
+
+                }
+                else
+                {
+                    piViewModel.PurchaseInvoice.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_Details_By_Id(piViewModel.Filter.Purchase_Invoice_Id);
+                }
+                
+
             }
             catch (Exception ex)
             {
@@ -230,43 +240,48 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public ActionResult Insert_Purchase_Invoice(PurchaseInvoiceViewModel piViewModel)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(piViewModel.PurchaseInvoice);
-
-                foreach (var item in piViewModel.PurchaseInvoice.PurchaseInvoices)
+                try
                 {
-                    Set_Date_Session(item);
+                    Set_Date_Session(piViewModel.PurchaseInvoice);
+
+                    foreach (var item in piViewModel.PurchaseInvoice.PurchaseInvoices)
+                    {
+                        Set_Date_Session(item);
+                    }
+
+                    if (piViewModel.PurchaseInvoice.Purchase_Invoice_Id == 0)
+                    {
+                        piViewModel.PurchaseInvoice.Purchase_Invoice_No = Utility.Generate_Ref_No("PI-", "Purchase_Invoice_No", "4", "15", "Purchase_Invoice");
+
+                        _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
+
+                        piViewModel = new PurchaseInvoiceViewModel();
+
+                        piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
+                    }
+                    else
+                    {
+                        piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                    }
+                    scope.Complete();
                 }
-
-                if (piViewModel.PurchaseInvoice.Purchase_Invoice_Id == 0)
+                catch (Exception ex)
                 {
-                    piViewModel.PurchaseInvoice.Purchase_Invoice_No = Utility.Generate_Ref_No("PI-", "Purchase_Invoice_No", "4", "15", "Purchase_Invoice");
-
-                    _purchaseinvoiceRepo.Insert_Purchase_Invoice(piViewModel.PurchaseInvoice);
-
                     piViewModel = new PurchaseInvoiceViewModel();
 
-                piViewModel.FriendlyMessages.Add(MessageStore.Get("POI01"));
+                    piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+
+                    Logger.Error("PurchaseInvoiceController - Insert_Purchase_Invoice : " + ex.ToString());
+
+                    scope.Dispose();
+                }
+
+                TempData["piViewModel"] = (PurchaseInvoiceViewModel)piViewModel;
+
+                return RedirectToAction("Search", piViewModel);
             }
-                else
-            {
-
-            }
-
-        }
-            catch (Exception ex)
-        {
-                piViewModel = new PurchaseInvoiceViewModel();
-
-                piViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
-
-                Logger.Error("PurchaseInvoiceController - Insert_Purchase_Invoice : " + ex.ToString());
-            }
-
-            TempData["piViewModel"] = (PurchaseInvoiceViewModel)piViewModel;
-
-            return RedirectToAction("Search", piViewModel);
         }
 
         public ActionResult Update_Purchase_Invoice(PurchaseInvoiceViewModel piViewModel)

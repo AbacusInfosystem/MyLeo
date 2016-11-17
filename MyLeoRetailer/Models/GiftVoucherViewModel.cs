@@ -28,6 +28,7 @@ namespace MyLeoRetailer.Models
 
             Grid_Detail.Pager.CallBackMethod = "Get_Gift_Vouchers";
 
+
     }
 
         public GridInfo Grid_Detail
@@ -65,6 +66,12 @@ namespace MyLeoRetailer.Models
     public class Filter_Gift_Voucher
     {
         public string Gift_Voucher_No
+        {
+            get;
+            set;
+        }
+
+        public int Gift_Voucher_Id
         {
             get;
             set;

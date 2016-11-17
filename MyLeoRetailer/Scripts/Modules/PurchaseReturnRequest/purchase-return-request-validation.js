@@ -49,5 +49,31 @@
         return result;
     }, "Already mapped.");
 
+    jQuery.validator.addMethod("checkBarcodeExist", function (value, element) {
+
+        debugger;
+
+        var result = true;
+
+        var id = $(element).attr('id');
+
+        id = id.replace("textBarcode_No_", "");
+
+        $("#tblPurchaseReturnRequestItems").find("[id^='PurchaseReturnRequestItemRow_']").each(function (j, row) {
+
+            if ($(element).val() != "" && $("#textBarcode_No_" + j).val() != "") {
+
+                if (id != j && $(element).val() == $("#textBarcode_No_" + j).val()) {
+                    result = false;
+                }
+
+            }
+        });
+
+        return result;
+
+    }, "Already mapped.");
+
+
 
 });

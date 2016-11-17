@@ -2,7 +2,7 @@
 @using MyLeoRetailer.Common;
 @using MyLeoRetailerInfo.Common;
 
-
+<script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/Vendor/vendor_events.js"></script>
 <script src="~/Scripts/Modules/Vendor/vendor_methods.js"></script>
 <script src="~/Scripts/Modules/Vendor/vendor_validations.js"></script>
@@ -57,8 +57,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Name" style="color: #333" class="">Vendor Name</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" maxlength="100"/>
-                                        <input type="hidden" value="@Model.Vendor.Vendor_Name" id="hdnVendorName"/>@*Added by Vinod Mane on 28/09/2016*@
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Name" id="txtVendor_Name" value="@Model.Vendor.Vendor_Name" placeholder="Enter Vendor Name" maxlength="100" />
+                                        <input type="hidden" value="@Model.Vendor.Vendor_Name" id="hdnVendorName" />@*Added by Vinod Mane on 28/09/2016*@
                                     </div>
 
                                 </div>
@@ -155,14 +155,14 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Phone1" style="color: #333" class="">Phone1</label>   
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1" maxlength="12" placeholder="Enter Phone1" />
+                                        <input type="text" class="mask_mobile_no form-control input-sm" name="Vendor.Vendor_Phone1" id="txtVendor_Phone1" value="@Model.Vendor.Vendor_Phone1" placeholder="Enter Phone1" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Phone2" style="color: #333" class="">Phone2</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Phone2" id="txtVendor_Phone2" value="@Model.Vendor.Vendor_Phone2" maxlength="12" placeholder="Enter Phone2" />
+                                        <input type="text" class="mask_mobile_no form-control input-sm" name="Vendor.Vendor_Phone2" id="txtVendor_Phone2" value="@Model.Vendor.Vendor_Phone2" placeholder="Enter Phone2" />
                                     </div>
                                 </div>
                             
@@ -177,7 +177,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="txtVendor_Vat_No" style="color: #333" class="">Vendor Vat No.</label>
-                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_No" id="txtVendor_Vat_No" value="@Model.Vendor.Vendor_Vat_No" placeholder="Enter Vat No." maxlength="20"/>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Vendor_Vat_No" id="txtVendor_Vat_No" value="@Model.Vendor.Vendor_Vat_No" placeholder="Enter Vat No." maxlength="20" />
                                     </div>
                                 </div>
 
@@ -212,13 +212,22 @@
 
 
                                 <div class="col-md-3">
-                                    <div class="form-group">
+                                    @*<div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat Effective Date</span>
                                         <div class="input-group date" id="dtpVendor_Vat_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Vat Effective Date" />
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter Vat Effective Date" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Vat Effective Date</span>
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpVendor_Vat_Effective_Date" name="Vendor.Vendor_Vat_Effective_Date" value="@((Model.Vendor.Vendor_Vat_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_Vat_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter Vat Effective Date" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
+
                                 </div>
 
 
@@ -268,10 +277,18 @@
 
 
                                 <div class="col-md-3">
-                                    <div class="form-group">
+                                    @*<div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">CST Effective Date</span>
                                         <div class="input-group date" id="dtpVendor_CST_Effective_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM-dd-yyyy")))" readonly placeholder="Enter CST Effective Date" />
+                                            <input type="text" class="form-control datepicker" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter CST Effective Date" />
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="form-group">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">CST Effective Date</span>
+                                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                                            <input type="text" class="form-control datepicker" id="dtpVendor_CST_Effective_Date" name="Vendor.Vendor_CST_Effective_Date" value="@((Model.Vendor.Vendor_CST_Effective_Date == DateTime.MinValue ? "" : Model.Vendor.Vendor_CST_Effective_Date.ToString("MM-dd-yyyy")))" placeholder="Enter CST Effective Date" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -302,6 +319,9 @@
                                             }
 
                                         </select>
+                                        @*Added by vinod mane on 25/10/2016*@
+                                        <label id="hdnChk_Duplicate_Brand" style="display:none"><span style="color:red" id="Duplicate_Brand_Message"></span></label>
+                                        @*End*@
                                     </div>
                                 </div>
 
@@ -315,7 +335,8 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="drpCategory" style="color: #333" class="">Category</label>
-                                        <select class="form-control" id="drpCategory" name="Vendor.Category_Id" onchange="Get_SubCategorylist(this.value)"> @* //Added By Vinod Mane on 21/09/2016*@
+                                        <select class="form-control" id="drpCategory" name="Vendor.Category_Id" onchange="Get_SubCategorylist(this.value)">
+                                            @* //Added By Vinod Mane on 21/09/2016*@
                                             <option value="0">Select Category</option>
 
                                             @foreach (var item in Model.Categories)
@@ -331,7 +352,11 @@
                                             }
 
                                         </select>
+                                        @*Added by vinod mane on 25/10/2016*@
+                                        <label id="hdnChk_Duplicate_Category" style="display:none"><span style="color:red" id="Duplicate_Category_Message"></span></label>
+                                        @*End*@
                                     </div>
+
                                 </div>
 
                                 <div class="col-md-1">
@@ -359,6 +384,9 @@
                                                 }
                                             }
                                         </select>
+                                        @*Added by vinod mane on 25/10/2016*@
+                                        <label id="hdnChk_Duplicate_SubCategorys" style="display:none"><span style="color:red" id="Duplicate_SubCategorys_Message"></span></label>
+                                        @*End*@
                                     </div>
                                 </div>
 
@@ -377,7 +405,7 @@
 
                             <div class="row">
 
-@if ( Model.Vendor.BrandDetailsList.Count() == 0)
+                                @if (Model.Vendor.BrandDetailsList.Count() == 0)
                             {
              <div class="col-md-4">
                                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
@@ -389,10 +417,11 @@
                                                     <th>Brand</th>
                                                     <th>Action</th>
                                                 </tr>
-
                                             </thead>
                                             <tbody></tbody>
                                         </table>
+                                        <label id="hdnBrand_Validation" style="display:none"><span style="color:red" id="Brand_Message"></span></label>
+                                    
                                     </div>
                                 </div>
                             }
@@ -435,12 +464,14 @@
                                             </thead>
                                             <tbody></tbody>
                                         </table>
+                                        <label id="hdnBrand_Validation" style="display:none"><span style="color:red" id="Brand_Message"></span></label>
+
                                     </div>
                                 </div>
     
 }
 
-@if ( Model.Vendor.CategoryDetailsList.Count() == 0)
+                                @if (Model.Vendor.CategoryDetailsList.Count() == 0)
                             {
                                  <div class="col-md-4">
                                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
@@ -455,6 +486,8 @@
                                             </thead>
                                             <tbody></tbody>
                                         </table>
+                                        <label id="hdnCategory_Validation" style="display:none"><span style="color:red" id="Category_Message"></span></label>
+                                       
                                     </div>
                                 </div>
                             }
@@ -498,11 +531,12 @@
                                             </thead>
                                             <tbody></tbody>
                                         </table>
+                                        <label id="hdnCategory_Validation" style="display:none"><span style="color:red" id="Category_Message"></span></label>
                                     </div>
                                 </div>
 }
 
-@if ( Model.Vendor.SubCategoryDetailsList.Count() == 0)
+                                @if (Model.Vendor.SubCategoryDetailsList.Count() == 0)
                             {
                                  <div class="col-md-4">
                                     <div class="table-responsive" style="width:100%; margin: 50px 0;">
@@ -517,6 +551,8 @@
                                             </thead>     
                                             <tbody></tbody>                                      
                                         </table>
+                                        <label id="hdnSubCategory_Validation" style="display:none"><span style="color:red" id="SubCategory_Message"></span></label>
+                                       
                                     </div>
                                 </div>
                             }
@@ -560,6 +596,7 @@
                                             </thead>
                                             <tbody></tbody>
                                         </table>
+                                        <label id="hdnSubCategory_Validation" style="display:none"><span style="color:red" id="SubCategory_Message"></span></label>
                                     </div>
                                 </div>
 
@@ -575,7 +612,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="txtBank_Name" style="color: #333" class="">Bank Name</label>
-                                            <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" maxlength="50"/>
+                                        <input type="text" class="form-control input-sm" name="Vendor.Bank_Name" id="txtBank_Name" value="@Model.Vendor.Bank_Name" placeholder="Enter Bank Name" maxlength="50" />
                                         </div>
                                     </div>
 
@@ -613,7 +650,7 @@
 
                         <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
-@if ( Model.Vendor.BankDetailsList.Count() == 0)
+                            @if (Model.Vendor.BankDetailsList.Count() == 0)
                             {
                         <div class="row">
                                 <div class="col-md-12">
@@ -748,7 +785,7 @@
 
                             <div class="btn-group">
                                 <button type="button" id="btnSaveVendor" class="btn btn-success active">Save</button>
-                                <button type="reset" id="btnCancel" class="btn btn-danger active">Cancel</button>
+                                <button type="reset" id="btnCancel" class="btn btn-danger active">Reset</button>
                                 @*<a class="btn btn-danger active" id="btnCancel" role="button" href="@Url.Action("Search", "Vendor")">Cancel </a>*@
                             </div>
 
@@ -767,4 +804,3 @@
         </form>
     </div>
 </div>
-

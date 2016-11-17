@@ -101,7 +101,9 @@ namespace MyLeoRetailerInfo.Product
 
         public decimal? MRP_Price { get; set; }
 
-        public byte[] Product_Barcode { get; set; }
+        //public byte[] Product_Barcode { get; set; }
+
+        public string WSR_Code { get; set; }
 
         public string Barcode_Image_Url { get; set; }
 

@@ -35,10 +35,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 {
                     eViewModel = (EmployeeViewModel)TempData["eViewModel"];
                 }
+                else
+                {
+                    eViewModel.Employee.IsActive = true;
+                }
                 RoleRepo _rRepo = new RoleRepo();
 
                 eViewModel.Role_List = _rRepo.Get_Role_List();
 
+               
             }
             catch (Exception ex)
             {
@@ -142,16 +147,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
             Pagination_Info pager = new Pagination_Info();
 
-            int IsActive = 1;
+           // int IsActive = 1;
 
             try
             {
-                 
-                filter = eViewModel.Filter.Employee + "," + IsActive.ToString(); // Set filter comma seprated 
+
+                filter = eViewModel.Filter.Employee; //+ "," + IsActive.ToString(); // Set filter comma seprated 
 
                 dataOperator = DataOperator.Like.ToString() + "," + DataOperator.Equal.ToString(); // set operator for where clause as comma seprated
 
-                eViewModel.Query_Detail = Set_Query_Details(false, "Employee_Name,Employee_Address,Employee_City,Employee_EmailId,Employee_Id", "", "Employee", "Employee_Name,IsActive", filter, dataOperator); // Set query for grid
+                eViewModel.Query_Detail = Set_Query_Details(false, "Employee_Name,Employee_Address,Employee_City,Employee_EmailId,Employee_Id", "", "Employee", "Employee_Name", filter, dataOperator); // Set query for grid
 
                 pager = eViewModel.Grid_Detail.Pager;
 
@@ -330,35 +335,28 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 var temp = split.Split('/');
 
-
-                foreach (var item in temp)
+                if (temp.Length==2)
                 {
-                    for (int i = 1; i < 2; i++)
-                    {
-                        if (i == 1)
-                        {
-                            controller = temp[i];
-                            break;
-                        }
-                        else if (i == 2)
-                        {
-                            method = temp[i];
-                        }
-
-                    }
-
+                    controller = temp[1];
+                    method = "Index";
                 }
+                else
+                {
+                    controller = temp[1];
+                    method = temp[2];
+                }
+
 
                 //foreach (var item in temp)
                 //{
-                //    for (int i = 0; i < 2; i++)
+                //    for (int i = 1; i < 2; i++)
                 //    {
-                //        if (i == 0)
+                //        if (i == 1)
                 //        {
                 //            controller = temp[i];
                 //            break;
                 //        }
-                //        else if (i == 1)
+                //        else if (i == 2)
                 //        {
                 //            method = temp[i];
                 //        }
@@ -367,23 +365,21 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 //}
 
+                //if (controller == "")
+                //{
+                //    controller = "Dashboard";
+                //    method = "Index";
+                //}
 
-                if (controller == "")
-                {
-                    controller = "Dashboard";
-                    method = "Index";
-                }
+                //if (controller == "dashboard")
+                //{
+                //    method = "Index";
+                //}
 
-                if (controller == "dashboard")
-                {
-                    method = "Index";
-                }
-
-
-                if (method == "")
-                {
-                    method = "Search";
-                }
+                //if (method == "")
+                //{
+                //    method = "Search";
+                //}
 
             }
             //Added by vinod mane on 06/10/2016
@@ -489,7 +485,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
-        //End
+
+        //Added By Vinod Mane on 18/10/2016
+        public JsonResult Check_Existing_Email_ID(string Email_ID)
+        {
+            bool check = false;
+            EmployeeViewModel eViewModel = new EmployeeViewModel();
+            try
+            {
+                check = eRepo.Check_Existing_Email_ID(Email_ID);
+            }
+            catch (Exception ex)
+            {
+                eViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Employee Controller - Check_Existing_Email_ID " + ex.ToString());
+            }
+            return Json(check, JsonRequestBehavior.AllowGet);
+        }
+
         //Added by vinod mane on 17/10/2016
         public JsonResult Compare_Dates(DateTime DOB_Date)
         {

@@ -3,7 +3,10 @@
     		{
     		    Filter: {
 
-    		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val()
+    		        Debit_Note_No: $("[name='Filter.Debit_Note_No']").val(),
+
+    		        GR_No: $("[name='Filter.GR_No']").val()
+
     		    },
     		    Grid_Detail: {
 
@@ -29,11 +32,27 @@
 
             Bind_Grid(obj, "Purchase_Return_List");
 
+            Reset_PurchaseReturn();
+
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Friendly_Messages(obj);
         }
     });
+}
+
+function Reset_PurchaseReturn() {
+
+    //$("[name='Filter.Debit_Note_No']").val("");
+
+    //$("[name='Filter.Purchase_Return_Id']").val("");
+
+    document.getElementById('btnEditPurchaseReturn').disabled = true;
+
+    document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+
+    document.getElementById('btnPrintPurchaseReturn').disabled = true;
+
 }
 
 

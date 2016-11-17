@@ -3,7 +3,8 @@ $(function () {
     $("#frmGiftVoucher").validate({
         rules: {
             "GiftVoucher.Gift_Voucher_No": {
-                required: true
+                required: true,
+                Validate_Gift_Voucher: true
             },
 
             "GiftVoucher.Person_Name": {
@@ -11,7 +12,8 @@ $(function () {
             },
 
             "GiftVoucher.Gift_Voucher_Amount": {
-                digits: true
+                digits: true,
+                required: true
             },
             //Added by vinod mane on 28/09/2016
             "GiftVoucher.Gift_Voucher_Date": {
@@ -35,7 +37,8 @@ $(function () {
             },
 
             "GiftVoucher.Gift_Voucher_Amount": {
-                digits: "Enter only Digits"
+                digits: "Enter only Digits",
+                required:"Amount is required."
             },
 
             //Added by vinod mane on 28/09/2016
@@ -52,7 +55,6 @@ $(function () {
         }
     });
 
-    //Added by vinod mane on 17/10/2016
     $.validator.addMethod('chkdate', function (value) {
 
         var result = true;
@@ -78,5 +80,25 @@ $(function () {
 
 
     }, 'Please Select valid date');
+
+    jQuery.validator.addMethod("Validate_Gift_Voucher", function (value, element) {
+        var result = true;
+
+        if ($("#txtGiftVoucherNo").val() != "" && $("#hdn_GiftVoucherNo").val() != $("#txtGiftVoucherNo").val()) {
+            $.ajax({
+                url: '/GiftVoucher/check-gift-voucher-no',
+                data: { Gift_Voucher_No: $("#txtGiftVoucherNo").val() },
+                method: 'GET',
+                async: false,
+                success: function (data) {
+                    if (data == true) {
+                        result = false;
+                    }
+                }
+            });
+        }
+        return result;
+
+    }, "Gift voucher no is already exists.");
 
 });

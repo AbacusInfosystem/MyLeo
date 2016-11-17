@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    //document.getElementById("btnEditPurchaseOrderRequest").disabled = true;
+    document.getElementById("btnEditPurchaseOrderRequest").disabled = true;
     
     Get_Purchase_Order_Requests();
 
@@ -8,9 +8,11 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchaseOrderRequestId").val(this.value);
             document.getElementById("btnEditPurchaseOrderRequest").disabled = false;
-            document.getElementById("btnCreatePurchaseOrderRequest").disabled = true;
         }
     });
+
+    
+   
 
     $("#drpVendor_Id").change(function () {
 
@@ -19,13 +21,15 @@
     });
      
     $("#btnCreatePurchaseOrderRequest").click(function () {
-        $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Index");
+        $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Index/");
+        $('#frmPurchaseOrderRequest').attr("method", "POST");
         $("#frmPurchaseOrderRequest").submit();
     });
 
 
     $("#btnEditPurchaseOrderRequest").click(function () {
-        $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Get_Purchase_Order_Request_By_Id");
+        $("#frmPurchaseOrderRequest").attr("action", "/PurchaseOrderRequest/Get_Purchase_Order_Request_By_Id/");
+        $('#frmPurchaseOrderRequest').attr("method", "POST");
         $("#frmPurchaseOrderRequest").submit();
     });
 });

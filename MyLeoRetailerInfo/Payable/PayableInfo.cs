@@ -137,7 +137,7 @@ namespace MyLeoRetailerInfo.Payable
            set;
        }
 
-       public string Employee
+       public string Vendor_Employee_Name
        {
            get;
            set;

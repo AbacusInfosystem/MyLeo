@@ -1,6 +1,6 @@
 ﻿$(function () {
 
-    $("input.mask_phone_no").mask('(999) 9999-9999');
+    $("input.mask_phone_no").mask('(9999) 9999-9999');
     //if ($("[name='Branch.Branch_ID']").val() == "" || $("[name='Branch.Branch_ID']").val() == 0) {
     //    document.getElementById("btnCancleBranch").disabled = false;
     //}
@@ -8,7 +8,9 @@
     //    document.getElementById('btnCancleBranch').disabled = true;
     //}
 
+  
     $("#btnSaveBranch").click(function () {
+       
         if ($("#frmBranch").valid())
         {
             if ($('#hdnBranch_Id').val() == "" || $('#hdnBranch_Id').val() == 0) {  //Added by Sushant on 07/10/2016
@@ -42,5 +44,8 @@
         $("#txtFar_Location_Pincode").rules("remove");
     });
 
+    $("#btnCancleBranch").click(function () {
+        Reset_Branch();
+    });
 
 });

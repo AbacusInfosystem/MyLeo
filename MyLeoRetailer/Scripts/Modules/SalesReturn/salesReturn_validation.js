@@ -14,7 +14,7 @@
                     "SalesReturn.Mobile":
                         {
                             required: true,
-                            number: true,
+                           
                             MobileNo: true
                         },
                    
@@ -48,13 +48,13 @@
                 "SalesReturn.Mobile":
                     {
                         required: "Mobile No is required",
-                        number: "Only numbers"
+                        //number: "Only numbers"
                     },
                             
                 "SalesReturn.Total_Amount_Return_By_Cash":
                     {
-                        required: "Cash Amount is required",
-                        number: "Only numbers"
+                        required: "Cash Amount is required"
+                        
                     },  
                 "SaleReturnItemList[0].Quantity":
                     {
@@ -82,6 +82,30 @@
 
             if (id != j && $(element).val() == $("#textSKU_No_" + j).val()) {
                 result = false;
+            }
+        });
+
+        return result;
+
+    }, "Already mapped.");
+
+    jQuery.validator.addMethod("checkBarcodeExist", function (value, element) {
+
+        debugger;
+
+        var result = true;
+
+        var id = $(element).attr('id');
+
+        id = id.replace("textBarcode_No_", "");
+
+        $("#tblSalesReturnItems").find("[id^='SalesReturnItemRow_']").each(function (j, row) {
+
+            if ($(element).val() != "" && $("#textBarcode_No_" + j).val() != "") {
+
+                if (id != j && $(element).val() == $("#textBarcode_No_" + j).val()) {
+                    result = false;
+                }
             }
         });
 

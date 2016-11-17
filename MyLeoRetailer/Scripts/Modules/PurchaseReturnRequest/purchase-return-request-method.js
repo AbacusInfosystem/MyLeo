@@ -54,8 +54,9 @@ function AddPurchaseReturnRequestDetails() {
     tblHtml += "<tr id='PurchaseReturnRequestItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Return_Items_By_Barcode(" + i + ");' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
+
 
     //tblHtml += "<td>";
     //tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
@@ -107,7 +108,7 @@ function AddPurchaseReturnRequestDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm validate' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity' value='1'  onblur='Add_Validation(" + i + "); CalculateTotal()' id='textQuantity_" + i + "'>";
     //tblHtml += "<input class='form-control input-sm' type='hidden' name='' id='hdnQuantity_" + i + "' value='' /> ";
     tblHtml += "</td>";
 
@@ -121,8 +122,8 @@ function AddPurchaseReturnRequestDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript:AddPurchaseReturnRequestDetails();'>Add Row</button>";
-    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnRequestDetailsData(" + i + ");'>Delete</button>";
+    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript:AddPurchaseReturnRequestDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnRequestDetailsData(" + i + ");'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 
@@ -136,46 +137,40 @@ function AddPurchaseReturnRequestDetails() {
 }
 
 function DeletePurchaseReturnRequestDetailsData(i) {
-    
-    //if ($('#tblPurchaseReturnRequestItems tbody tr').length == 1)
-    //{
-    //    $("#lblError").text("Atleast one required.");
-    //}
-    //else
-    //{
-        //$("#lblError").text("");
 
-        $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
-        ReArrangePurchaseReturnRequestDetailsData();
+    $("#tblPurchaseReturnRequestItems").find("[id='PurchaseReturnRequestItemRow_" + i + "']").remove();
 
-      
+    ReArrangePurchaseReturnRequestDetailsData();
 
-       
 
-        if (i == 0) {
-            AddPurchaseReturnRequestDetails();
+    var temptablecount = $("#tblPurchaseReturnRequestItems").find('[id^="PurchaseReturnRequestItemRow_"]').size();
 
-            $("#textDiscountPercentage_0").val(0);
+    x = temptablecount;
 
-            CalculateTotal();
 
-            CalculateDiscount();
+    if (x == 0) {
+        AddPurchaseReturnRequestDetails();
 
-            CalculateTax();
-        }
-        else {
+        $("#textDiscountPercentage_0").val(0);
 
-            Add_Validation(i);
+        CalculateTotal();
 
-            CalculateTotal();
+        CalculateDiscount();
 
-            CalculateDiscount();
+        CalculateTax();
+    }
+    else {
 
-            CalculateTax();
-        }
+        Add_Validation(i);
 
-    //}
+        CalculateTotal();
+
+        CalculateDiscount();
+
+        CalculateTax();
+    }
+
 
 }
 
@@ -252,7 +247,7 @@ function ReArrangePurchaseReturnRequestDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Quantity");
-               // $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
+                $(newTR).find("[id^='textQuantity_']").attr("onblur", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {
@@ -282,37 +277,38 @@ function CalculateTotal() {
 
     if (tr.size() > 0) {
         for (var i = 0; i < tr.size() ; i++) {
-           
+
             if ($('[id="textQuantity_' + i + '"]').val() != 0 && $('[id="textQuantity_' + i + '"]').val() != '') {
-                
-                    var Qty = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val());
 
-            //Added by vinod mane on 12/10/2016
-            var Qty = $("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val();
+                var Qty = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val());
 
-            if (Qty == "" || Qty == "NaN")
-            {
-                Qty = 1;
-                $('#textQuantity_' + i).val(1);
+                //Added by vinod mane on 12/10/2016
+                var Qty = $("#tblPurchaseReturnRequestItems").find('[id="textQuantity_' + i + '"]').val();
+
+                if (Qty == "" || Qty == "NaN") {
+                    Qty = 1;
+                    $('#textQuantity_' + i).val(1);
+                }
+                //End
+
+
+                var WSR = ""
+                if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
+                    WSR = 0;
+                }
+                else {
+                    WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
+                }
+
+                var Amount = parseFloat(WSR * Qty);
+                $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
+
+                sumQuantity = sumQuantity + Qty;
+                sumWSRAmount = sumWSRAmount + Amount;
+
             }
-//End
-            var WSR = ""
-            if ($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == "" || $("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val() == undefined) {
-                WSR = 0;
-            }
-            else {
-                WSR = parseFloat($("#tblPurchaseReturnRequestItems").find('[id="textWSR_Price_' + i + '"]').val());
-            }
-
-            var Amount = parseFloat(WSR * Qty);
-            $("#tblPurchaseReturnRequestItems").find('[id="textAmount_' + i + '"]').val(Amount);
-
-            sumQuantity = sumQuantity + Qty;
-            sumWSRAmount = sumWSRAmount + Amount;
 
         }
-
-    }
     }
 
     $("#textTotalQuantity_0").val(sumQuantity);
@@ -445,6 +441,63 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
     
 }
 
+function Get_Purchase_Return_Items_By_Barcode(i) {
+
+    debugger;
+
+    var barcode = $("[name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+    $.ajax({
+
+        url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
+
+        data: { SKU_Code: barcode, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
+
+        method: 'POST',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#hdnBrand_Id_' + i).val(data.Brand_Id);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#hdnCategory_Id_' + i).val(data.Category_Id);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#hdnSubCategory_Id_' + i).val(data.SubCategory_Id);
+
+            $('#textSize_Group_Name_' + i).val(data.Size_Group_Name);
+
+            $('#hdnSize_Group_Id_' + i).val(data.Size_Group_Id);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#hdnSize_Id_' + i).val(data.Size_Id);
+
+            $('#textWSR_Price_' + i).val(data.WSR_Price);
+
+            $('#textQuantity_' + i).val(1);
+        }
+
+    });
+
+    $("#textDiscountPercentage_0").val(0);
+
+    CalculateTotal();
+
+}
+
 function Set_Purchase_Invoice_Id(value) {
 
     $('#hdf_Purchase_Invoice_Id').val(value);
@@ -453,26 +506,54 @@ function Set_Purchase_Invoice_Id(value) {
 
 function Add_Validation(i)
 {
+    //$("#tblPurchaseReturnRequestItems").find(".validate").rules("add", { QuantityCheck: false });
 
     $("#textQuantity_" + i).rules("add", { required: true, digits: true, QuantityCheck:true, messages: { required: "Required field", digits: "Invalid quantity." } });
-    $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
+
+    $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required", } });
   
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
+
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
+        debugger;
+
         var result = true;
-        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
-        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (EnterQty != "" && EnterQty != 0) {
+        var id = $(element).attr('id')
 
-            if (OrgQty >= EnterQty) {
-                result = true;
+        j = id.replace("textQuantity_", "");
+
+
+        var EnterQty = parseInt($('[id="textQuantity_' + j + '"]').val());
+
+        var OrgQty = parseInt($("#hdnQuantity_" + j).val());
+
+
+        if (isNaN($("#hdnQuantity_" + j).val()) || $("#hdnQuantity_" + j).val() == "") {
+            result = true;
+        }
+        else {
+
+            if (EnterQty != "" || $('[id="textQuantity_' + j + '"]').val() != '0') {
+
+                if (OrgQty >= EnterQty) {
+
+                    result = true;
+                }
+                else {
+                    result = false;
+                }
+
             }
             else {
                 result = false;
             }
         }
+
         return result;
 
-    }, "Qty. less than Invoice Quantity.");
+    }, "Quantity less than Invoice Quantity And Not Zero.");
+
+
 }

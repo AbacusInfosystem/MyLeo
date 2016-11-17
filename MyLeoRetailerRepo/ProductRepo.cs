@@ -20,12 +20,10 @@ using System.Text.RegularExpressions;
 using System.Transactions;
 using System.Drawing;
 
-
-
 namespace MyLeoRetailerRepo
 {
     public class ProductRepo
-    { 
+    {
         SQL_Repo sqlHelper = null;
         //string folder_path = System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString());
         //Path.Combine(Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), Product_Image_Name);
@@ -36,16 +34,16 @@ namespace MyLeoRetailerRepo
 
         public DataTable Get_Products(QueryInfo query_Details)
         {
-            Barcode bar = new Barcode();
-            byte[] barcodeInBytes = bar.Generate_Linear_Lib_Barcode("ABCD", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/ABCD22.png");
-            byte[] barcodeInBytes1 = bar.Generate_Linear_Barcode("ABACUSINFOSYSTEMNEW", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/Myleo22.png");
+            //Barcode bar = new Barcode();
+            //byte[] barcodeInBytes = bar.Generate_Linear_Lib_Barcode("ABCD", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/ABCD22.png");
+            //byte[] barcodeInBytes1 = bar.Generate_Linear_Barcode("ABACUSINFOSYSTEMNEW", "E:/backup/27072016/SMS_Portal/Updated SMS/SMS/SMSPortal/UploadedFiles/Myleo22.png");
 
             return sqlHelper.Get_Table_With_Where(query_Details);
         }
 
         #region--Insert--Update--Product-MRP--
         public void Insert_Product_MRP(List<ColorInfo> Colors)
-        { 
+        {
             using (TransactionScope scope = new TransactionScope())
             {
                 foreach (var item in Colors)
@@ -61,6 +59,8 @@ namespace MyLeoRetailerRepo
                             {
                                 if (itm.Product_SKU_Map_Id == 0)
                                 {
+                                    itm.WSR_Code = Generate_WSR_Code(itm.Purchase_Price);
+
                                     int Product_SKU_Map_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Product_SKU(itm, ProductDescription), Storeprocedures.sp_Insert_Update_Product_SKU_Map.ToString(), CommandType.StoredProcedure));
                                     if (Product_SKU_Map_Id != 0)
                                     {
@@ -74,6 +74,8 @@ namespace MyLeoRetailerRepo
                             }
                             else
                             {
+                                itm.WSR_Code = Generate_WSR_Code(itm.Purchase_Price);
+
                                 sqlHelper.ExecuteNonQuery(Set_Values_In_Update_Product_MRP(itm, ProductDescription, MRP_Status), Storeprocedures.sp_Insert_Update_Product_MRP.ToString(), CommandType.StoredProcedure);
                             }
                         }
@@ -108,6 +110,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Purchase_Price", Productmrp.Purchase_Price));
             sqlParams.Add(new SqlParameter("@Status", Mrp_Status));
             sqlParams.Add(new SqlParameter("@MRP_Price", Productmrp.MRP_Price));
+            sqlParams.Add(new SqlParameter("@WSR_Code", Productmrp.WSR_Code));
             sqlParams.Add(new SqlParameter("@Vendor_Color_Code", Productmrp.Vendor_Color_Code));
             sqlParams.Add(new SqlParameter("@Description", ProductDescription));
             sqlParams.Add(new SqlParameter("@Created_Date", Productmrp.Created_Date));
@@ -156,7 +159,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Size_Id", Productmrp.Size_Id));
             sqlParams.Add(new SqlParameter("@Colour_Id", Productmrp.Colour_Id));
             sqlParams.Add(new SqlParameter("@Purchase_Price", Productmrp.Purchase_Price == null ? Productmrp.Purchase_Price.GetValueOrDefault(0m) : Productmrp.Purchase_Price));
-            sqlParams.Add(new SqlParameter("@Product_Barcode", Productmrp.Product_Barcode));
+            sqlParams.Add(new SqlParameter("@WSR_Code", Productmrp.WSR_Code));
             sqlParams.Add(new SqlParameter("@SKU_Code", Productmrp.SKU_Code));
             sqlParams.Add(new SqlParameter("@Vendor_Color_Code", Productmrp.Vendor_Color_Code));
             sqlParams.Add(new SqlParameter("@Created_Date", Productmrp.Created_Date));
@@ -200,10 +203,10 @@ namespace MyLeoRetailerRepo
                     sqlparam1.Add(new SqlParameter("@Updated_Date", Product.Updated_Date));
                     sqlparam1.Add(new SqlParameter("@Updated_By", Product.Updated_By));
                     sqlHelper.ExecuteNonQuery(sqlparam1, Storeprocedures.sp_Insert_Vendor_Article_Mapping.ToString(), CommandType.StoredProcedure);
-                } 
+                }
                 scope.Complete();
                 return ProductId;
-            } 
+            }
         }
 
         public int Update_Product(ProductInfo Product)
@@ -244,7 +247,7 @@ namespace MyLeoRetailerRepo
                         sqlParams.Add(new SqlParameter("@Updated_By", Product.Updated_By));
                         sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Update_Product_Images.ToString(), CommandType.StoredProcedure);
                     }
-                } 
+                }
                 scope.Complete();
                 return ProductId;
             }
@@ -396,66 +399,24 @@ namespace MyLeoRetailerRepo
             else
                 ProductMRP.SKU_Code = Generate_SKU_Code(ProductMRP);
 
-            if (dr["Product_Barcode"] != DBNull.Value)
-            {
-                ProductMRP.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";
-                //string arr = ProductMRP.Barcode_Image_Url.Split('[^\\w-]+')[0];
-                ProductMRP.Product_Barcode = (byte[])dr["Product_Barcode"];
-            }
-            else
-            {
-                if (!String.IsNullOrEmpty(ProductMRP.SKU_Code))
-                {
-                    string SKU_Code = Regex.Replace(ProductMRP.SKU_Code, @"[^0-9a-zA-Z]+", "");
-                    string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), ProductMRP.SKU_Code + ".png");
-                    ProductMRP.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Code, path);//NK_TSHR_TSRN_b_RD
-
-                    //Code added by aditya START[19102016]  // Bind footer to barcode
-                 string product_Barcode = Convert.ToBase64String(ProductMRP.Product_Barcode);
-
-                 using (var streamBitmap = new MemoryStream(ProductMRP.Product_Barcode))
-                 {
-                     using (var img = Image.FromStream(streamBitmap))
-                     {
-                         int footerHeight = 30;
-                         Bitmap bitmapImg = new Bitmap(img);// Original Image
-                         Bitmap bitmapComment = new Bitmap(img.Width, footerHeight);// Footer
-                         Bitmap bitmapNewImage = new Bitmap(img.Width, img.Height + footerHeight);//New Image
-                         Graphics graphicImage = Graphics.FromImage(bitmapNewImage);
-                         graphicImage.Clear(Color.White);
-                         graphicImage.DrawImage(bitmapImg, new Point(0, 0));
-                         graphicImage.DrawImage(bitmapComment, new Point(bitmapComment.Width, 0));
-                         graphicImage.DrawString("M.R.P. "+ProductMRP.MRP_Price, new Font("Arial", 10), new SolidBrush(Color.Black), 10, bitmapImg.Height + footerHeight / 6);
-                         bitmapNewImage.Save(path);
-                         bitmapImg.Dispose();
-                         bitmapComment.Dispose();
-                         bitmapNewImage.Dispose();
-                     }
-                 }
-                 //Code added by aditya END [19102016] 
- 
-                    ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
-                }
-            }
-
+            //if (dr["Product_Barcode"] != DBNull.Value)
+            //{
+            //    ProductMRP.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";
+            //    //string arr = ProductMRP.Barcode_Image_Url.Split('[^\\w-]+')[0];
+            //    ProductMRP.Product_Barcode = (byte[])dr["Product_Barcode"];
+            //}
+            //else
+            //{
+            //    if (!String.IsNullOrEmpty(ProductMRP.SKU_Code))
+            //    {
+            //        string SKU_Code = Regex.Replace(ProductMRP.SKU_Code, @"[^0-9a-zA-Z]+", "$");
+            //        string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), ProductMRP.SKU_Code + ".png");
+            //        ProductMRP.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Code, path);//NK_TSHR_TSRN_b_RD
+            //        ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
+                     
+            //    }
+            //}
             return ProductMRP;
-
-        }
-
-        public Bitmap AppendImageFooter(System.Drawing.Image bmp, string text)
-        {
-            //Create new image that will be bigger then original image to make place for footer
-            Bitmap newImage = new Bitmap(bmp.Height + 200, bmp.Width);
-
-            //Get graphics and copy image and below the footer
-            Graphics g = Graphics.FromImage(bmp);
-            g.DrawImage(bmp, new Point(0, 0));
-            g.FillRectangle(new SolidBrush(Color.Black), 0, bmp.Height, bmp.Width, 200);
-            g.DrawString(text, new Font("Arial", 14), new SolidBrush(Color.White), 20, bmp.Height + 20);
-            //Anything else you like, circles, rectangles, texts etc..
-            g.Dispose();
-
-            return newImage;
         }
 
         public ProductInfo Get_Product_By_Id(int Product_Id)
@@ -536,7 +497,7 @@ namespace MyLeoRetailerRepo
             if (dr["Description"] != null)
                 ProductMRP.Description = Convert.ToString(dr["Description"]);
             return ProductMRP;
-        } 
+        }
 
         public ProductInfo Get_Product_Images(int Product_Id)
         {
@@ -578,7 +539,7 @@ namespace MyLeoRetailerRepo
             if (dr["Vendor_Color_code"] != null)
                 color.Vendor_Color_Code = Convert.ToString(dr["Vendor_Color_code"]);
             return color;
-        } 
+        }
 
         public bool Check_Existing_Article_No(string Article_No)
         {
@@ -604,5 +565,101 @@ namespace MyLeoRetailerRepo
 
             return check;
         }
+
+
+        public string Generate_WSR_Code(decimal? Purchase_Price)
+        {
+            int num = Convert.ToInt32(Purchase_Price);
+            int nextdigit;
+            int numdigits;
+            int[] n = new int[20];
+
+            string wsr_code = "";
+
+            string[] digits = { "A", "B", "C", 
+                        "D", "E", "F", 
+                        "G", "H", "I", 
+                        "J" };
+         
+            nextdigit = 0;
+            numdigits = 0;
+            do
+            {
+                nextdigit = num % 10;
+                n[numdigits] = nextdigit;
+                numdigits++;
+                num = num / 10;
+            } while (num > 0);
+            numdigits--;
+            for (; numdigits >= 0; numdigits--)
+                wsr_code += digits[n[numdigits]];
+            
+            return wsr_code;
+        }
+
+        //public List<ProductMRPInfo> Get_All_Barcodes_toPrint(int Product_Id, int Colour_Id)
+        //{
+        //    List<SqlParameter> sqlParamList1 = new List<SqlParameter>();
+        //    List<ProductMRPInfo> ProductMRPs = new List<ProductMRPInfo>();
+
+        //    sqlParamList1.Add(new SqlParameter("@Product_Id", Product_Id));
+        //    sqlParamList1.Add(new SqlParameter("@Colour_Id", Colour_Id));
+        //    DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList1, Storeprocedures.sp_Get_Barcodes_On_Product_Id.ToString(), CommandType.StoredProcedure);
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        ProductMRPs.Add(Get_Product_Barcodes(dr));
+        //    }
+        //    return ProductMRPs;
+        //}
+
+        //private ProductMRPInfo Get_Product_Barcodes(DataRow dr)
+        //{
+        //    ProductMRPInfo ProductMRP = new ProductMRPInfo();
+        //    //MemoryStream streamBitmap = new MemoryStream();
+        //    string path = "", SKU_Code = "";
+
+        //    if (dr["SKU_Code"] != DBNull.Value)
+        //    {
+        //        ProductMRP.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+        //        SKU_Code = Regex.Replace(ProductMRP.SKU_Code, @"[^0-9a-zA-Z]+", "");
+        //        path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), ProductMRP.SKU_Code + "_Mrp.png");
+        //    }
+        //    if (dr["Product_Barcode"] != DBNull.Value && dr["MRP_Price"] != DBNull.Value)
+        //    {
+        //        ProductMRP.Product_Barcode = (byte[])dr["Product_Barcode"];
+        //        ProductMRP.MRP_Price = Convert.ToDecimal(dr["MRP_Price"]);
+        //        ////Code added by aditya START[19102016]  // Bind footer to barcode
+        //        //string product_Barcode = Convert.ToBase64String(ProductMRP.Product_Barcode);
+
+        //        using (var streamBitmap = new MemoryStream(ProductMRP.Product_Barcode))
+        //        {
+        //            using (var img = Image.FromStream(streamBitmap))
+        //            {
+        //                int footerHeight = 30;
+        //                Bitmap bitmapImg = new Bitmap(img);// Original Image
+        //                Bitmap bitmapComment = new Bitmap(img.Width, footerHeight);// Footer
+        //                Bitmap bitmapNewImage = new Bitmap(img.Width, img.Height + footerHeight);//New Image
+        //                Graphics graphicImage = Graphics.FromImage(bitmapNewImage);
+        //                graphicImage.Clear(Color.White);
+        //                graphicImage.DrawImage(bitmapImg, new Point(0, 0));
+        //                graphicImage.DrawImage(bitmapComment, new Point(bitmapComment.Width, 0));
+        //                graphicImage.DrawString("M.R.P. " + ProductMRP.MRP_Price, new Font("Arial", 10), new SolidBrush(Color.Black), 10, bitmapImg.Height + footerHeight / 6);
+        //                bitmapNewImage.Save(path);
+                        
+        //                //byte[] BitMapImg =  graphicImage;
+        //                //ProductMRP.Barcode_Image_Url = "data:image/jpg;base64," + Convert.ToBase64String(bitmapNewImage.ToArray(), 0, bitmapNewImage.ToArray().Length);
+        //                ProductMRP.Barcode_Image_Url = ProductMRP.SKU_Code + "_Mrp.png";
+        //                bitmapImg.Dispose();
+        //                bitmapComment.Dispose();
+        //                bitmapNewImage.Dispose();
+        //            }
+        //            //ProductMRP.Barcode_Image_Url = "data:image/jpg;base64," + Convert.ToBase64String(streamBitmap.ToArray(), 0, streamBitmap.ToArray().Length);
+        //        }
+        //        ////Code added by aditya END [19102016] 
+        //       // ProductMRP.Barcode_Image_Url = ProductMRP.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])ProductMRP.Product_Barcode) : "";
+        //        //ProductMRP.Barcode_Image_Url = "data:image/jpg;base64," + Convert.ToBase64String(img.ToArray(), 0, img.ToArray().Length);
+        //    }
+        //    return ProductMRP;
+        //}
     }
 }

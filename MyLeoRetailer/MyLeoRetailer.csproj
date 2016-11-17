@@ -180,6 +180,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostLogin\Barcode\BarcodeController.cs" />
     <Compile Include="Controllers\PostLogin\Master\ProductDispatchController.cs" />
     <Compile Include="Controllers\PostLogin\Report\InventoryController.cs" />
     <Compile Include="Controllers\PostLogin\Transaction\PurchaseOrderRequestController.cs" />
@@ -999,6 +1000,8 @@
     <Content Include="Scripts\Modules\Alteration\Alteration_validation.js" />
     <Content Include="Scripts\Modules\Alteration\search_Alteration_events.js" />
     <Content Include="Scripts\Modules\Alteration\search_Alteration_methods.js" />
+    <Content Include="Scripts\Modules\Barcode\barcode_event.js" />
+    <Content Include="Scripts\Modules\Barcode\barcode_method.js" />
     <Content Include="Scripts\Modules\Branch\branch_events.js" />
     <Content Include="Scripts\Modules\Branch\branch_methods.js" />
     <Content Include="Scripts\Modules\Branch\branch_validation.js" />
@@ -1049,6 +1052,7 @@
     <Content Include="Scripts\Modules\ProductDispatch\dispatched_product_listing_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_method.js" />
     <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_event.js" />
+    <Content Include="Scripts\Modules\ProductDispatch\product_dispatch_validation.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_event.js" />
     <Content Include="Scripts\Modules\ProductDispatch\search_product_dispatch_method.js" />
     <Content Include="Scripts\Modules\ProductWarehouse\product_warehouse_notification.js" />
@@ -1098,6 +1102,10 @@
     <Content Include="Scripts\Modules\Role\role-event.js" />
     <Content Include="Scripts\Modules\Role\role-method.js" />
     <Content Include="Scripts\Modules\Role\role-validation.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesreport_search_events.js" />
+    <Content Include="Scripts\Modules\SalesOrder\salesreport_search_methods.js" />
+    <Content Include="Scripts\Modules\SalesOrder\Sales_summary_report_event.js" />
+    <Content Include="Scripts\Modules\SalesOrder\Sales_summary_report_method.js" />
     <Content Include="Scripts\Modules\Size\size_group_events.js" />
     <Content Include="Scripts\Modules\Size\size_group_methods.js" />
     <Content Include="Scripts\Modules\Size\size_group_validation.js" />
@@ -1128,7 +1136,6 @@
     <Content Include="Log4Net.config" />
     <None Include="Properties\PublishProfiles\MYLEO.pubxml" />
     <None Include="Scripts\_references.js" />
-    <Content Include="UploadedFiles\1.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1197,7 +1204,6 @@
     <Content Include="Views\PostLogin\SalesOrder\Search.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Index.cshtml" />
     <Content Include="Views\PostLogin\SalesReturn\Search.cshtml" />
-    <Content Include="Views\PostLogin\Master\Employee\Employee_Branch_Mapping.cshtml" />
     <Content Include="Views\PreLogin\Home\AuthorizationError.cshtml" />
     <Content Include="Views\PreLogin\Home\Error.cshtml" />
     <Content Include="Views\PostLogin\Master\Receivable\Index.cshtml" />
@@ -1235,6 +1241,13 @@
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\View.cshtml" />
     <Content Include="Views\PostLogin\Master\ProductWarehouse\_Warehouse_Notifiation.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseOrder\Index.cshtml" />
+    <Content Include="Views\PostLogin\Master\Product\PrintBarcode.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\SalesReport.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\PostLogin\SalesOrder\_SalesDetailsReport.cshtml" />
+    <Content Include="Views\PostLogin\Barcode\Barcode.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\SalesSummaryReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1249,6 +1262,7 @@
     <Folder Include="Content\Atlant\assets\uploads\Welcome\folder 5\" />
     <Folder Include="Content\Atlant\js\plugins\fileinput\fileinput\" />
     <Folder Include="Scripts\Login\" />
+    <Folder Include="UploadedFiles\" />
     <Folder Include="UploadFiles\" />
   </ItemGroup>
   <ItemGroup>

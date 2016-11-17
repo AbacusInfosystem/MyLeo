@@ -44,7 +44,7 @@
 
                         <div class="row">
 
-                            <div class="col-md-10">
+                            <div class="col-md-4">
 
                                 @*<div class="form-group">
                                         <input type="text" class="form-control" name="Filter.Vendor_Name" placeholder="Enter Vendor to search." />
@@ -65,12 +65,13 @@
                                 @*End*@
                             </div>
 
-                            <div class="col-md-2" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                            <div class="col-md-8" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                                 <div class="btn-group">
                                     @*<button type="button" id="btnCreate" class="btn btn-success active">Create</button>*@
                                     <a type="button" class="btn btn-success active" role="button" href="@Url.Action("Index", "Vendor")">Create </a>
-                                    <button type="button" class="btn btn-danger active" style="display:none;" id="btnedit">Edit</button>@* Code Added by Vinod Mane on 20/09/2016 Set display-none*@
+                                    @*<button type="button" class="btn btn-danger active" style="display:none;" id="btnedit">Edit</button>@* Code Added by Vinod Mane on 20/09/2016 Set display-none*@
+                                    <button role="button" class="btn btn-danger active edit" id="btnedit">Edit</button>
                                     
                                 </div>
 
@@ -120,9 +121,9 @@
 
 
 
-        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
-
-        </div>
+        @*<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">*@
+            <div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+            </div>
 
         <div class="col-md-12" style="padding: 0px;text-align:center;" id="divVendorPager">
 

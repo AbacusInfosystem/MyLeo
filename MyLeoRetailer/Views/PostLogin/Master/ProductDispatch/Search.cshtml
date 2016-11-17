@@ -38,13 +38,13 @@
 
     <div class="row">
 
-        <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
 
             <div class="block">
 
                 <form role="form" id="frmProductDispatch">
 
-                    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+                    
 
                         <div class="row">
 
@@ -96,7 +96,7 @@
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Status.</span>
                                 </div>
                                 <div class="form-group">
-                                    <select id="drpStatus">
+                                    <select id="drpStatus" class="form-control">
                                         <option value="">- Select Status-</option>
                                         <option>Pending</option>
                                         <option>Dispatch</option>
@@ -105,6 +105,20 @@
                                     </select>
 
                                 </div>
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="btn-group pull-right" style="padding-top: 25px;">
+                                    @*  <a class=" btn btn-info active" role="button" id="btnView" style="display:none">
+                                    View </a>*@
+
+                                    @*<a class="btn btn-success active" role="button" id="btnDispatch" style="display:none">Dispatch </a>*@
+
+                                    <button role="button" class="btn btn-success active edit" id="btnDispatch">Dispatch</button>
+
+                                </div>
+
 
                             </div>
 
@@ -119,25 +133,7 @@
 
                             </div>
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-12" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
-
-                                <div class="btn-group pull-right">
-                                    @*  <a class="btn btn-info active" role="button" id="btnView" style="display:none">View </a>*@
-                                    <a class="btn btn-success active" role="button" id="btnDispatch" style="display:none">Dispatch </a>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
+                        </div>   
                 </form>
 
             </div>
@@ -153,9 +149,10 @@
 
 
 
-    <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+    
+        <div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
 
-    </div>
+        </div>
 
     <div class="col-md-12" style="padding: 0px;text-align:center;" id="divProductDispatchPager">
 

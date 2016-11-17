@@ -6,7 +6,7 @@
 
     CalculateTotal();
 
-    debugger;
+    
 
     $.ajax({
 
@@ -36,7 +36,7 @@
 
 function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
 
-    debugger;
+    
 
     $.ajax({
 
@@ -84,6 +84,60 @@ function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
     CalculateTotal();
 }
 
+
+function Get_Purchase_Invoice_Items_By_Barcode(i) {
+
+    debugger;
+
+    var barcode = $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+    $.ajax({
+
+        url: "/PurchaseInvoice/Get_Purchase_Invoice_Items_By_SKU_Code",
+
+        data: { SKU_Code: barcode },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#hdnBrand_Id_' + i).val(data.Brand_Id);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#hdnCategory_Id_' + i).val(data.Category_Id);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#hdnSubCategory_Id_' + i).val(data.SubCategory_Id);
+
+            $('#textSize_Group_Name_' + i).val(data.Size_Group_Name);
+
+            $('#hdnSize_Group_Id_' + i).val(data.Size_Group_Id);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#hdnSize_Id_' + i).val(data.Size_Id);
+
+            $('#textWSR_Price_' + i).val(data.WSR_Price);
+
+        }
+    });
+
+    CalculateTotal();
+}
+
+
 function AddPurchaseInvoiceDetails() {
 
     var html = '';
@@ -98,9 +152,6 @@ function AddPurchaseInvoiceDetails() {
 
     tblHtml += "<tr id='PurchaseInvoiceItemRow_" + i + "' class='item-data-row'>";
 
-    tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' id=textBarcode_No_" + i + "'>";
-    tblHtml += "</td>";
 
     //tblHtml += "<td>";
     //tblHtml += "<input type='text' class='form-control input-sm' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' value='' id='textSKU_No_" + i + "'>";
@@ -112,18 +163,22 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "<div class='input-group'>";
     tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textInvoice_No_" + i + "' placeholder='Enter PO no. to search' value=''  data-table='Purchase_Order' data-col='Purchase_Order_Id,Purchase_Order_No' data-headernames='Purchase Order' data-param='hdf_Vendor_Id' data-field='Vendor_Id' />";
     tblHtml += "<span class='input-group-addon'> <a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
-    tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='x' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_Id' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No' class='auto-complete-label' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
 
     tblHtml += "<td>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Invoice_Items_By_Barcode(" + i + ");' placeholder='Barcode No' id='textBarcode_No_" + i + "'>";
+    tblHtml += "</td>";
+
+    tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU Code to search' value=''  data-table='Product_SKU_Mapping' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdnPurchase_Order_Id_" + i + "' data-field='Purchase_Order_Id' />";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' placeholder='Enter SKU Code to search' value=''  data-table='Product_SKU_Mapping' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdnPurchase_Order_Id_" + i + "' data-field='Purchase_Order_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>";
-    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
 
@@ -162,7 +217,7 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm validate' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity' value='1' onblur='Add_Validation(" + i + "); CalculateTotal()' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -175,8 +230,8 @@ function AddPurchaseInvoiceDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>Add Row</button>";
-    tblHtml += "<button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseInvoiceDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-invoice-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseInvoiceDetailsData(" + i + ")'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
     
@@ -260,7 +315,7 @@ function CalculateDiscount() {
 
 function CalculateTotal() {
 
-    debugger;
+    
 
     var sumQuantity = 0;
     var sumWSRAmount = 0;
@@ -290,47 +345,75 @@ function CalculateTotal() {
 
 }
 
+
 function Add_Validation(i) {
+
+    //$("#tblPurchaseInvoiceItems").find(".validate").rules("add", { QuantityCheck: false });
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity is required.", digits: "Enter only digits." } });
 
     $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Code is required.", } });
-    
-    //$("#hdnSKU_No_" + i).rules("add", { checkSKUExist: true });
 
-    $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
+   // $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Purchase_Order_No']").rules("add", { required: true, messages: { required: "PO No. is required.", } });
 
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
+        debugger;
+
         var result = true;
-        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
-        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (EnterQty != "" && EnterQty != 0) {
+        var id = $(element).attr('id')
 
-            if (OrgQty >= EnterQty) {
-                result = true;
-            }
-            else
-            {
-                result = false;
-            }          
+        j = id.replace("textQuantity_", "");
+
+
+        var EnterQty = parseInt($('[id="textQuantity_' + j + '"]').val());
+
+        var OrgQty = parseInt($("#hdnQuantity_" + j).val());
+
+
+        if (isNaN($("#hdnQuantity_" + j).val()) || $("#hdnQuantity_" + j).val() == "") {
+            result = true;
         }
+        else {
+
+            if (EnterQty != "" || $('[id="textQuantity_' + j + '"]').val() != '0') {
+
+                if (OrgQty >= EnterQty) {
+
+                    result = true;
+                }
+                else {
+                    result = false;
+                }
+
+            }
+            else {
+                result = false;
+            }
+        }
+
         return result;
 
-    }, "Quantity greater than PO Quantity.");
+    }, "Quantity less than Invoice Quantity And Not Zero.");
+
 }
 
 function DeletePurchaseInvoiceDetailsData(i) {
 
-    debugger;
-      
+    
+           
     $("#tblPurchaseInvoiceItems").find("[id='PurchaseInvoiceItemRow_" + i + "']").remove();  
 
-    ReArrangePurchaseInvoiceDetailsData();   
+    ReArrangePurchaseInvoiceDetailsData();
 
-    if (i == 0) {
+    var temptablecount = $("#tblPurchaseInvoiceItems").find('[id^="PurchaseInvoiceItemRow_"]').size();
+
+    x = temptablecount;
+   
+    if (x == 0) {
         AddPurchaseInvoiceDetails();
     }
 
@@ -342,8 +425,7 @@ function DeletePurchaseInvoiceDetailsData(i) {
 }
 
 function ReArrangePurchaseInvoiceDetailsData() {
-
-    debugger;
+       
 
     $("#tblPurchaseInvoiceItems").find("[id^='PurchaseInvoiceItemRow_']").each(function (i, row) {
         if ($(row)[0].id != 'tblHeading') {
@@ -351,11 +433,6 @@ function ReArrangePurchaseInvoiceDetailsData() {
             $(row)[0].id = 'PurchaseInvoiceItemRow_' + i
 
             var newTR = "#" + $(row)[0].id + " td";
-
-            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
-                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
-                $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
-            }
 
             //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
             //    $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
@@ -365,10 +442,15 @@ function ReArrangePurchaseInvoiceDetailsData() {
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='hdnQuantity_']").attr("onchange", "javascript: Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
+            }
+
+            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
+                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
+                $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
             }
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
@@ -422,7 +504,7 @@ function ReArrangePurchaseInvoiceDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Quantity");
-                //$(newTR).find("[id^='textQuantity_']").attr("onchange", "javascript:textQuantity_(" + i + ")");
+                $(newTR).find("[id^='textQuantity_']").attr("onblur", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {

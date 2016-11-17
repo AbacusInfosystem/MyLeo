@@ -1,8 +1,10 @@
 ﻿function Get_Vendor_Tax_Details_By_Id(value) {
-
+        
     $('#tblPurchaseReturnItems tbody tr').remove();
 
     AddPurchaseReturnDetails();
+
+    CalculateTotal();
 
     $.ajax({
 
@@ -49,7 +51,7 @@
 
 function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
-    debugger;
+    
 
     $.ajax({
 
@@ -102,9 +104,66 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
     
 }
 
-function Get_Purchase_Return_PO_By_POI(i) {
+function Get_Purchase_Return_Items_By_Barcode(i) {
 
     debugger;
+
+    var barcode = $("[name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+    $.ajax({
+
+        url: "/PurchaseReturn/Get_Purchase_Return_Items_By_SKU_Code",
+
+        data: { SKU_Code: barcode },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textColor_' + i).val(data.Color);
+
+            $('#hdnColor_Id_' + i).val(data.Color_Id);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#hdnBrand_Id_' + i).val(data.Brand_Id);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#hdnCategory_Id_' + i).val(data.Category_Id);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#hdnSubCategory_Id_' + i).val(data.SubCategory_Id);
+
+            $('#textSize_Group_Name_' + i).val(data.Size_Group_Name);
+
+            $('#hdnSize_Group_Id_' + i).val(data.Size_Group_Id);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#hdnSize_Id_' + i).val(data.Size_Id);
+
+            $('#textWSR_Price_' + i).val(data.WSR_Price);
+
+            Get_Purchase_Return_PO_By_POI(i);
+
+        }
+
+    });
+
+    CalculateTotal();
+
+
+}
+
+function Get_Purchase_Return_PO_By_POI(i) {
+
+    
 
     var purchase_invoice = document.getElementById("drpPurchase_Invoice_Id");
     var purchase_invoice_id = purchase_invoice.options[purchase_invoice.selectedIndex].value;
@@ -147,8 +206,7 @@ function AddPurchaseReturnDetails() {
     tblHtml += "<tr id='PurchaseReturnItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='hidden' name='PurchaseReturn.PurchaseReturns[" + i + "].Item_Ids' id='hdnItem_Ids_" + i + "'' />";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode' value='' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Return_Items_By_Barcode(" + i + ");' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     //tblHtml += "<td>";
@@ -159,10 +217,10 @@ function AddPurchaseReturnDetails() {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Quantity,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Quantity,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
-    tblHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>";
-    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>"; 
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' class='auto-complete-label' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");'/>";
     tblHtml += "</div>";
     tblHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='' name='PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id' />";
     tblHtml += "</div>";
@@ -202,7 +260,7 @@ function AddPurchaseReturnDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='1' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm validate' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='1'  onblur='Add_Validation(" + i + "); CalculateTotal()' id='textQuantity_" + i + "'>";
     //tblHtml += "<input class='form-control input-sm' type='hidden' name='' id='hdnQuantity_" + i + "' value='' /> ";
     tblHtml += "</td>";
 
@@ -216,8 +274,8 @@ function AddPurchaseReturnDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='btn-group'>";
-    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>Add Row</button>";
-    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>Delete</button>";
+    tblHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>x</button>";
     tblHtml += "</div>";
     tblHtml += "</td>";
 
@@ -293,7 +351,7 @@ function CalculateDiscount() {
 
 function CalculateTotal() {
 
-    debugger;
+    
 
     var sumQuantity = 0;
     var sumWSRAmount = 0;
@@ -324,43 +382,71 @@ function CalculateTotal() {
 
 function Add_Validation(i) {
 
-    //$("#frmPurchaseReturn").validate();
+    //$("#tblPurchaseReturnItems").find(".validate").rules("add", { QuantityCheck: false });
 
-    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid quantity." } });
 
-    $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
+    $("#hdnSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required", } });
+
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
+        debugger;
+
         var result = true;
-        var EnterQty = parseInt($('[id="textQuantity_' + i + '"]').val());
-        var OrgQty = parseInt($("#hdnQuantity_" + i).val());
 
-        if (EnterQty != "" && EnterQty != 0) {
+        var id = $(element).attr('id')
 
-            if (OrgQty >= EnterQty) {
-                result = true;
+        j = id.replace("textQuantity_", "");
+        
+
+        var EnterQty = parseInt($('[id="textQuantity_' + j + '"]').val());
+
+        var OrgQty = parseInt($("#hdnQuantity_" + j).val());
+
+
+        if (isNaN($("#hdnQuantity_" + j).val()) || $("#hdnQuantity_" + j).val() == "") {
+            result = true;
+        }
+        else {
+
+            if (EnterQty != "" || $('[id="textQuantity_' + j + '"]').val() != '0') {
+
+                if (OrgQty >= EnterQty) {
+
+                    result = true;
+                }
+                else {
+                    result = false;
+                }
+
             }
             else {
                 result = false;
             }
         }
-        return result;
 
-    }, "Quantity less than Invoice Quantity.");
+        return result;    
+
+    }, "Quantity less than Invoice Quantity And Not Zero.");
 
 }
 
 function DeletePurchaseReturnDetailsData(i) {
 
-    debugger;
+    
 
     $("#tblPurchaseReturnItems").find("[id='PurchaseReturnItemRow_" + i + "']").remove();
 
     ReArrangePurchaseReturnDetailsData();
-       
 
-    if (i == 0) {
+    var temptablecount = $("#tblPurchaseReturnItems").find('[id^="PurchaseReturnItemRow_"]').size();
+
+    x = temptablecount;       
+
+    if (x == 0) {
+       
         AddPurchaseReturnDetails();
     }
     
@@ -375,7 +461,7 @@ function DeletePurchaseReturnDetailsData(i) {
 
 function ReArrangePurchaseReturnDetailsData() {
 
-    debugger;
+    
 
     $("#tblPurchaseReturnItems").find("[id^='PurchaseReturnItemRow_']").each(function (i, row) {
         if ($(row)[0].id != 'tblHeading') {
@@ -387,8 +473,6 @@ function ReArrangePurchaseReturnDetailsData() {
             if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
                 $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Barcode");
-                $(newTR).find("[id^='hdnItem_Ids_']")[0].id = "hdnItem_Ids_" + i;
-                $(newTR).find("[id^='hdnItem_Ids_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Item_Ids");
             }
 
             //if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
@@ -401,10 +485,10 @@ function ReArrangePurchaseReturnDetailsData() {
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("onblur", "javascript: Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code");
+                $(newTR).find("[id^='hdnSKU_No_']").attr("onchange", "javascript: Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']")[0].id = "hdnPurchase_Order_Id_" + i;
                 $(newTR).find("[id^='hdnPurchase_Order_Id_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id");
             }
@@ -460,7 +544,7 @@ function ReArrangePurchaseReturnDetailsData() {
             if ($(newTR).find("[id^='textQuantity_']").length > 0) {
                 $(newTR).find("[id^='textQuantity_']")[0].id = "textQuantity_" + i;
                 $(newTR).find("[id^='textQuantity_']").attr("name", "PurchaseReturn.PurchaseReturns[" + i + "].Quantity");
-                //$(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
+                $(newTR).find("[id^='textQuantity_']").attr("onblur", "Add_Validation(" + i + ");");
             }
 
             if ($(newTR).find("[id^='textWSR_Price_']").length > 0) {
@@ -513,8 +597,8 @@ function Bind_Purchase_Return_Items_Data(data)
     var trHtml = "";
 
     if (data.PurchaseReturns.length > 0)
-    {
-        //$("#tblPurchaseReturnItems").find("[id='PurchaseReturnItemRow_" + i + "']").remove();
+    {       
+
         $('#tblPurchaseReturnItems tbody tr').remove();
        
         for (i = 0; i < data.PurchaseReturns.length; i++) {
@@ -529,10 +613,10 @@ function Bind_Purchase_Return_Items_Data(data)
             trHtml += "<td>";
             trHtml += "<div class='form-group auto-complete'>";
             trHtml += "<div class='input-group'>";
-            trHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' readonly id='textSKU_No_" + i + "' onblur='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' placeholder='Enter SKU to search' value='" + data.PurchaseReturns[i].SKU_Code + "' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
-            //trHtml += "<span class='input-group-addon' disabled><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
+            trHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' placeholder='Enter SKU to search' value='" + data.PurchaseReturns[i].SKU_Code + "' data-table='Purchase_Invoice_Item' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' />";
+            trHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
             trHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='" + data.PurchaseReturns[i].Quantity + "' class='auto-complete-value'/>";
-            trHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='" + data.PurchaseReturns[i].SKU_Code + "' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' class='auto-complete-label' />";
+            trHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='" + data.PurchaseReturns[i].SKU_Code + "' name='PurchaseReturn.PurchaseReturns[" + i + "].SKU_Code' class='auto-complete-label' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");' />";
             trHtml += "</div>";
             trHtml += "<input type='hidden' id='hdnPurchase_Order_Id_" + i + "' value='" + data.PurchaseReturns[i].Purchase_Order_Id + "' name='PurchaseReturn.PurchaseReturns[" + i + "].Purchase_Order_Id' />";
             trHtml += "</div>";
@@ -572,7 +656,7 @@ function Bind_Purchase_Return_Items_Data(data)
             trHtml += "</td>";
 
             trHtml += "<td>";
-            trHtml += "<input type='text' class='form-control input-sm' readonly name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='" + data.PurchaseReturns[i].Quantity + "' onblur='javascript:CalculateTotal();' id='textQuantity_" + i + "'>";
+            trHtml += "<input type='text' class='form-control input-sm validate' name='PurchaseReturn.PurchaseReturns[" + i + "].Quantity' value='" + data.PurchaseReturns[i].Quantity + "' onblur='Add_Validation(" + i + "); CalculateTotal()' id='textQuantity_" + i + "'>";
             trHtml += "</td>";
 
             trHtml += "<td>";
@@ -585,8 +669,8 @@ function Bind_Purchase_Return_Items_Data(data)
 
             trHtml += "<td>";
             trHtml += "<div class='btn-group'>";
-            trHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>Add Row</button>";
-            trHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>Delete</button>";
+            trHtml += "<button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnDetails();'>+</button>";
+            trHtml += "<button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript:DeletePurchaseReturnDetailsData(" + i + ");'>x</button>";
             trHtml += "</div>";
             trHtml += "</td>";
 
@@ -604,7 +688,7 @@ function Bind_Purchase_Return_Items_Data(data)
         var x = $("#tblPurchaseReturnItems").find('[id^="PurchaseReturnItemRow_"]').size();
 
         if (parseInt(x) == 0) {
-
+            
             Add_Validation(0);
 
         }

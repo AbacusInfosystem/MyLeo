@@ -2,10 +2,12 @@
 
 $(function () {
 
+    document.getElementById('btnVendorContact').disabled = true;
+
     Get_Vendor_Contacts();
 
     $("[name='Filter.Vendor_Contact_Name']").focusout(function () {
-
+        document.getElementById('btnVendorContact').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendor_Contacts();
     });
 
@@ -21,7 +23,8 @@ $(function () {
         //alert(); Commented by Vinod Mane on 19/09/2016
         if ($(this).prop('checked')) {
             $("#hdnVendorContact_Id").val(this.value);
-            $("#btnVendorContact").show();
+            //$("#btnVendorContact").show();
+            document.getElementById('btnVendorContact').disabled = false;
         }
     });
 
@@ -41,6 +44,7 @@ $(function () {
 
     //Added By Vinod Mane on 22/09/2016
     $(document).on("change", "#hdnVendorContactId", function () {
+        document.getElementById('btnVendorContact').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendor_Contacts();
     });
     //End

@@ -126,17 +126,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
 
-                aViewModel.Query_Detail = Set_Query_Details(true, "Alteration_ID,Customer_Mobile_No", "", "Alteration", "Customer_Mobile_No", filter, dataOperator); // Set query for grid
+                //aViewModel.Query_Detail = Set_Query_Details(true, "Alteration_ID,Customer_Mobile_No", "", "Alteration", "Customer_Mobile_No", filter, dataOperator); // Set query for grid
 
                 pager = aViewModel.Grid_Detail.Pager;
 
-                aViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_ID,Product_Name,Alteration_Date,Delivery_Date,Customer_Mobile_No,Job_Assigned_To,Additional_Info", "Alteration_ID"); // Set grid info for front end listing
+                aViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Product_Name,Alteration_Date,Delivery_Date,Customer_Mobile_No,Employee_Name,Additional_Info", "Alteration_ID"); // Set grid info for front end listing
 
-                aViewModel.Grid_Detail.Records = bRepo.Get_Alterations(aViewModel.Query_Detail); // Call repo method 
+                aViewModel.Grid_Detail.Records = bRepo.Get_Alterations(aViewModel.Filter); // Call repo method 
 
                 Set_Pagination(pager, aViewModel.Grid_Detail); // set pagination for grid
-               
-               
 
                 aViewModel.Grid_Detail.Pager = pager;
             }
@@ -154,7 +152,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Alteration.Alteration_ID);
+                aViewModel.Alteration = bRepo.Get_Alteration_By_Id(aViewModel.Filter.Alteration_ID);
 
                 //aViewModel.Employees = eRepo.Get_Employees();
                 aViewModel.Employees = bRepo.Get_Employees();//Added by vinod mane on 28/09/2016

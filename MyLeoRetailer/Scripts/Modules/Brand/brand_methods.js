@@ -36,6 +36,15 @@ function Get_Brands()
 			Reset_Brand();
             		   
 			$("#divBrandPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+			var fix = $("[name='Brand.IsActive']").val(1);
+
+			if (fix == 0) {
+			    document.getElementById('Flag').checked = false;
+			}
+			else {
+			    document.getElementById('Flag').checked = true;
+			}
 		}
 	});
 }
@@ -104,11 +113,14 @@ function Reset_Brand()
 
     $("[name='Brand.Brand_Id']").val("");
 
-    $("[name='Brand.IsActive']").val("");
+    $("[name='Brand.IsActive']").val(1);
 
     $("#hdnBrand_Name").val("");
+    $("[name='Brand_List']").removeClass("active");//Added by vinod mane on 25/10/2016
 
     document.getElementById('Flag').checked = false;
+
+   
 }
 
 function Get_Brand_By_Id(obj)

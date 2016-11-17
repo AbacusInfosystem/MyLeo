@@ -91,6 +91,10 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public int Vendor_Id { get; set; }
 
+        //Added by Sushant on 20 oct 2016..Related to Logo
+
+        public string Logo_Path { get; set; }
+
         public int Agent_Id { get; set; }
 
         public string Agent_Name { get; set; }
@@ -158,6 +162,11 @@ namespace MyLeoRetailerInfo.PurchaseOrder
         public int Item_Quantity { get; set; }
 
         public string Comment { get; set; }
+
+
+        public string Company_Name { get; set; }
+
+        public string Company_Address { get; set; }
 
 
         public int Size_Id { get; set; }
@@ -334,6 +343,12 @@ namespace MyLeoRetailerInfo.PurchaseOrder
     public class Filter_PurchaseOrder
     {
         public string Purchase_Order_No
+        {
+            get;
+            set;
+        }
+
+        public int Purchase_Order_Id
         {
             get;
             set;

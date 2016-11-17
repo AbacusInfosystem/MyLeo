@@ -35,6 +35,21 @@ function Get_Colors()
 			Reset_Color();
 
 			$("#divColorPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+		    //*************//
+			$("[name='Color.IsActive']").val(1);
+
+		    //Set IsActive Button Status
+			var fix = $("[name='Color.IsActive']").val();
+
+			if (fix == 0) {
+			    document.getElementById('Flag').checked = false;
+			}
+			else {
+			    document.getElementById('Flag').checked = true;
+			}
+		    //End
+		    //*************//
 		}
 	});
 }
@@ -106,6 +121,18 @@ function Reset_Color()
 
     $("[name='Color.Colour_Id']").val("");
     $("#hdnColour_Name").val("");
+
+    var fix = $("[name='Color.IsActive']").val(1);
+
+    if (fix == 0) {
+        document.getElementById('Flag').checked = false;
+    }
+    else {
+        document.getElementById('Flag').checked = true;
+    }
+    
+    $("[name='Color_List']").removeClass("active");//Added by vinod mane on 24/10/2016
+
 }
 
 function Get_Color_By_Id(obj)
@@ -140,13 +167,13 @@ function Get_Color_By_Id(obj)
 
 	        document.getElementById('iRGBColor').style.backgroundColor = obj.Color.Colour_Code; //"rgb(" + randR + ", " + randG + ", " + randB + ")";
 
-	        if (obj.Color.IsActive == true) {
+	        if (obj.Color.IsActive == 1) {
 	            $("[name='Color.IsActive']")[0].checked = true;
-	            $("[name='Color.IsActive']").val(true);
+	            $("[name='Color.IsActive']").val(1);
 	        }
 	        else {
 	            $("[name='Color.IsActive']")[0].checked = false;
-	            $("[name='Color.IsActive']").val(false);
+	            $("[name='Color.IsActive']").val(0);
 	        }
 	        
 	        $("[name='Color.Colour']").val(obj.Color.Colour);

@@ -21,6 +21,12 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        public string Logo_Path { get; set; }
 
+       public string Brand_Name { get; set; }
+
+       public int Brand_ID { get; set; }
+
+     
+
        //START
 
        public string Mobile { get; set; }
@@ -62,6 +68,10 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        //End Hidden Field
 
+
+       public DateTime From_Date { get; set; }
+
+       public DateTime To_Date { get; set; }
 
        public string Sales_Invoice_No { get; set; }
 
@@ -358,6 +368,16 @@ namespace MyLeoRetailerInfo.SalesInvoice
         public DateTime From_Date { get; set; }
 
         public DateTime To_Date { get; set; }
+
+        public string Brand_Name { get; set; }
+
+        public string Category { get; set; }
+
+        public int Brand_ID { get; set; }
+
+        public int SalesMan_Id { get; set; }
+
+        public int Category_Id { get; set; }
 
         //End Sale Report
 

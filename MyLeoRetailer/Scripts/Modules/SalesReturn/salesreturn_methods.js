@@ -4,7 +4,7 @@
 
         url: "/SalesReturn/Get_Customer_Name_By_Mobile_No",
 
-        data: { MobileNo: $("[name='SalesReturn.Mobile']").val() },
+        data: { MobileNo: $("#txtMobileNo").val() },
 
         method: 'GET',
 
@@ -65,6 +65,54 @@ function Get_Sales_Return_Items_By_SKU_Code(i) {
     
 }
 
+function Get_Sales_Return_Items_By_Barcode(i) {
+
+
+    var barcode = $("[name='SaleReturnItemList[" + i + "].Barcode']").val().replace(/[$]/g, '-');
+
+    $.ajax({
+
+        url: "/SalesReturn/Get_Sales_Return_Items_By_SKU_Code",
+
+        data: {
+
+            Sales_Invoice_Id: $("[name='SaleReturnItemList[" + i + "].Sales_Invoice_Id']").val(),
+
+            SKU_Code: barcode
+
+        },
+
+        method: 'GET',
+
+        async: false,
+
+        success: function (data) {
+
+            $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textBrand_' + i).val(data.Brand);
+
+            $('#textCategory_' + i).val(data.Category);
+
+            $('#textSub_Category_' + i).val(data.SubCategory);
+
+            $('#textSize_Name_' + i).val(data.Size_Name);
+
+            $('#textColour_Name_' + i).val(data.Colour_Name);
+
+            $('#textMRP_Price_' + i).val(data.MRP_Price);
+
+            $('#textQuantity_' + i).val(data.Quantity);
+
+            $('#textDiscount_Percentage_' + i).val(data.Discount_Percentage);
+
+            CalculateTotal();
+
+        }
+    });
+
+}
+
 function AddSalesReturnDetails(i)
 {
 
@@ -92,6 +140,10 @@ function AddSalesReturnDetails(i)
     tblHtml += "</div>";                                               
     tblHtml += "</div>";
     tblHtml += "</td>";
+
+    tblHtml += "<td>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Barcode No' name='SaleReturnItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Return_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
+    tblHtml += "</td>";
                                             
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
@@ -104,52 +156,52 @@ function AddSalesReturnDetails(i)
     tblHtml += "</div>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:80px' placeholder='Article No' name='SaleReturnItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Article No' name='SaleReturnItemList[" + i + "].Article_No' readonly value='' id='textArticle_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Brand' name='SaleReturnItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Brand' name='SaleReturnItemList[" + i + "].Brand' readonly value='' id='textBrand_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Brand_Id' id='hdnBrand_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='Category' name='SaleReturnItemList[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Category' name='SaleReturnItemList[" + i + "].Category' readonly value='' id='textCategory_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Category_Id' id='hdnCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:100px' placeholder='SubCategory' name='SaleReturnItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='SubCategory' name='SaleReturnItemList[" + i + "].SubCategory' readonly value='' id='textSub_Category_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].SubCategory_Id' id='hdnSubCategory_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:50px' placeholder='Size' name='SaleReturnItemList[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Size' name='SaleReturnItemList[" + i + "].Size_Name' readonly value='' id='textSize_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Size_Id' id='hdnSize_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Colour' name='SaleReturnItemList[" + i + "].Colour_Name' readonly value='' id='textColour_Name_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Colour' name='SaleReturnItemList[" + i + "].Colour_Name' readonly value='' id='textColour_Name_" + i + "'>";
     tblHtml += "<input type='hidden' name='SaleReturnItemList[" + i + "].Colour_Id' id='hdnColour_Id_" + i + "' />";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Quantity' name='SaleReturnItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Quantity' name='SaleReturnItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateTotal();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:50px' placeholder='MRP' name='SaleReturnItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='MRP' name='SaleReturnItemList[" + i + "].MRP_Price' readonly value='' id='textMRP_Price_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='Discount %' name='SaleReturnItemList[" + i + "].Discount_Percentage' value='0'  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Discount %' name='SaleReturnItemList[" + i + "].Discount_Percentage' value='0'  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:70px' placeholder='D Amt' name='SaleReturnItemList[" + i + "].SalesReturn_Discount_Amount' readonly value='' id='textSalesReturn_Discount_Amount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='D Amt' name='SaleReturnItemList[" + i + "].SalesReturn_Discount_Amount' readonly value='' id='textSalesReturn_Discount_Amount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' style='width:60px' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly id='textAmount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Amt' name='SaleReturnItemList[" + i + "].Amount' readonly id='textAmount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
@@ -157,7 +209,10 @@ function AddSalesReturnDetails(i)
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript:DeleteSalesReturnDetailsData(" + i + ")'>Delete</button>";
+    tblHtml += "<div class='btn-group'>";
+    tblHtml += "<button type='button' id='btnAddInputRow' class='btn btn-success active' onclick='javascript:AddSalesReturnDetails();'>+</button>";
+    tblHtml += "<button type='button' id='delete-salesreturn-details' class='btn btn-danger active' onclick='javascript:DeleteSalesReturnDetailsData(" + i + ")'>x</button>";
+    tblHtml += "</div>";
     tblHtml += "</td>";
 
 
@@ -202,13 +257,19 @@ function ReArrangeSalesReturnDetailsData()
 
             if ($(newTR).find("[id^='textSales_Invoice_No_']").length > 0) {
                 $(newTR).find("[id^='textSales_Invoice_No_']")[0].id = "textSales_Invoice_No_" + i;
-                $(newTR).find("[id^='textSales_Invoice_No_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_Id");
+                $(newTR).find("[id^='textSales_Invoice_No_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_No");
                 $(newTR).find("[id^='hdnSalesInvoiceID_']")[0].id = "hdnSalesInvoiceID_" + i;
                 $(newTR).find("[id^='hdnSalesInvoiceID_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_Id");
                 $(newTR).find("[id^='hdnSalesInvoiceNo_']")[0].id = "hdnSalesInvoiceNo_" + i;
                 $(newTR).find("[id^='hdnSalesInvoiceNo_']").attr("name", "SaleReturnItemList[" + i + "].Sales_Invoice_No");
                 
             }
+
+            if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
+                $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
+                $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleReturnItemList[" + i + "].Barcode");
+            }
+
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
@@ -303,8 +364,10 @@ function ReArrangeSalesReturnDetailsData()
 
 function Add_Validation(i) {
 
-    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Required field", digits: "Invalid quantity." } });
+    $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid quantity." } });
 
     $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU Required", } });
+
+    $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: { checkBarcodeExist: "Already Mapped" } });
 
 }

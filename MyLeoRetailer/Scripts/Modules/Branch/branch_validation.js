@@ -64,19 +64,13 @@ $(document).ready(function () {
             "Branch.Branch_Landline2": { checkmobileno: true },
 
             "Branch.Branch_Landline1": { checkmobileno: true },
-             
-            "Branch.Branch_Landline1": { required: true },
-
-            "Branch.Branch_Address": { required: true }
         },
         messages: {
 
             "Branch.Branch_Name": { required: "Branch Name is required." },
             "Branch.Branch_Landline1": {digits: "Enter only digits"},
             "Branch.Branch_Landline2": { digits: "Enter only digits"},
-            "Branch.Branch_Pincode": { digits: "Enter only digits" },
-            "Branch.Branch_Landline1": { required: "Landline1 no is required." },
-            "Branch.Branch_Address": { required: "Address is required." }
+            "Branch.Branch_Pincode": {digits: "Enter only digits"},
         }
     });
 
@@ -103,8 +97,8 @@ $(document).ready(function () {
     jQuery.validator.addMethod("checkmobileno", function (value, element) {
 
         var result = true;
-        var Landline1 = parseFloat($("#txtBranch_Landline1").val());
-        var Landline2 = parseFloat($("#txtBranch_Landline2").val());
+        var Landline1 = ($("#txtBranch_Landline1").val());
+        var Landline2 = ($("#txtBranch_Landline2").val());
 
         if (Landline1 != "" && Landline1 != 0 && Landline2 != "" && Landline2 != 0) {
 
@@ -118,7 +112,7 @@ $(document).ready(function () {
         }
         return result;
 
-    }, "You can not enter same mobile no.");
+    }, "You can not enter same landline no.");
 
 });
 //End

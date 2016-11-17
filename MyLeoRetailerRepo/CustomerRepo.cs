@@ -210,51 +210,33 @@ namespace MyLeoRetailerRepo
 
                 Customer.Customer_Gender = Convert.ToInt32(dr["Customer_Gender"]);
 
-                if (dr.IsNull("Customer_DOB"))
+                if (!dr.IsNull("Customer_DOB"))
                 {
-                    Customer.Customer_DOB = DateTime.MinValue;
+                    Customer.Customer_DOB = Convert.ToDateTime(dr["Customer_DOB"]); 
                 }
-                else
-                {
-                    Customer.Customer_DOB = Convert.ToDateTime(dr["Customer_DOB"]);                  
-                }
-               
+                
                 Customer.Customer_Child1_Name = Convert.ToString(dr["Customer_Child1_Name"]);
                 Customer.Customer_Child2_Name = Convert.ToString(dr["Customer_Child2_Name"]);
                 Customer.Customer_Spouse_Name = Convert.ToString(dr["Customer_Spouse_Name"]);
 
-                if (dr.IsNull("Customer_Child1_DOB"))
-                {
-                    Customer.Customer_Child1_DOB = DateTime.MinValue;
-                }
-                else
+                if (!dr.IsNull("Customer_Child1_DOB"))
                 {
                     Customer.Customer_Child1_DOB = Convert.ToDateTime(dr["Customer_Child1_DOB"]);
                 }
+                
 
-                if (dr.IsNull("Customer_Child2_DOB"))
-                {
-                    Customer.Customer_Child2_DOB = DateTime.MinValue;
-                }
-                else
+                if (!dr.IsNull("Customer_Child2_DOB"))
                 {
                     Customer.Customer_Child2_DOB = Convert.ToDateTime(dr["Customer_Child2_DOB"]);
                 }
 
-                if (dr.IsNull("Customer_Spouse_DOB"))
-                {
-                    Customer.Customer_Spouse_DOB = DateTime.MinValue;
-                }
-                else
+                if (!dr.IsNull("Customer_Spouse_DOB"))
                 {
                     Customer.Customer_Spouse_DOB = Convert.ToDateTime(dr["Customer_Spouse_DOB"]);
                 }
+               
 
-                if (dr.IsNull("Customer_Wedding_Anniversary"))
-                {
-                    Customer.Customer_Wedding_Anniversary = DateTime.MinValue;
-                }
-                else
+                if (!dr.IsNull("Customer_Wedding_Anniversary"))
                 {
                     Customer.Customer_Wedding_Anniversary = Convert.ToDateTime(dr["Customer_Wedding_Anniversary"]);
                 }

@@ -30,10 +30,21 @@ function Get_Gift_Vouchers() {
 
             Bind_Grid(obj, "Gift_Voucher_List");
 
+            Reset_GiftVoucher();
+            
             $("#divGiftVoucherPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
     });
 }
+
+function Reset_GiftVoucher() {
+    //$("[name='Filter.Gift_Voucher_No']").val("");
+
+    //$("[name='Filter.Gift_Voucher_Id']").val("");
+
+    document.getElementById("btnGiftVoucher").disabled = true;
+}
+
 
 function Get_Gift_Voucher_By_Id(obj) {
 

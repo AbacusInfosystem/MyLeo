@@ -3,9 +3,17 @@ $(function () {
 
     Get_Employees();
 
+    document.getElementById('btnEditEmployee').disabled = true;
+
+    document.getElementById('btnMapBranchEmployee').disabled = true;
+
     
 
     $("[name='Filter.Employee']").focusout(function () {
+        //Added by vinod mane on 25/10/2016
+        document.getElementById('btnEditEmployee').disabled = true;
+        document.getElementById('btnMapBranchEmployee').disabled = true;
+        //End
         Get_Employees();
     });
 
@@ -26,9 +34,13 @@ $(function () {
             $("#hdf_EmployeeId").val(this.value);
             //Modification
             //$("#btnEdit").show();   
-            $("#btnEditEmployee").show();
-            //End
-            $("#btnMapBranchEmployee").show();
+            //$("#btnEditEmployee").show();
+            ////End
+            //$("#btnMapBranchEmployee").show();
+
+            document.getElementById('btnEditEmployee').disabled = false;
+
+            document.getElementById('btnMapBranchEmployee').disabled = false;
 
         }
     });
@@ -54,6 +66,10 @@ $(function () {
     
     //Added By Vinod Mane on 28/09/2016
     $(document).on("change", "#hdnEmployeeName", function () {
+        //Added by vinod mane on 25/10/2016
+        document.getElementById('btnEditEmployee').disabled = true;
+        document.getElementById('btnMapBranchEmployee').disabled = true;
+        //End
         Get_Employees();
     });
 

@@ -10,14 +10,17 @@ using MyLeoRetailerRepo;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 {
-    public class PurchaseReturnController: BaseController
+    public class PurchaseReturnController : BaseController
     {
         public PurchaseReturnRepo _purchaseReturnRepo;
 
@@ -29,7 +32,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         public VendorRepo _vendorRepo;
 
-        
+
         public PurchaseReturnController()
         {
             _purchaseReturnRepo = new PurchaseReturnRepo();
@@ -131,7 +134,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
                 prViewModel.Pager.PageHtmlString = PageHelper.NumericPagerForAtlant(prViewModel.Pager.TotalRecords, prViewModel.Pager.CurrentPage, prViewModel.Pager.PageSize, prViewModel.Pager.PageLimit, prViewModel.Pager.StartPage, prViewModel.Pager.EndPage, prViewModel.Pager.IsFirst, prViewModel.Pager.IsPrevious, prViewModel.Pager.IsNext, prViewModel.Pager.IsLast, prViewModel.Pager.IsPageAndRecordLabel, prViewModel.Pager.DivObject, prViewModel.Pager.CallBackMethod);
             }
             catch (Exception ex)
-        {
+            {
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseReturnController - Get_Purchase_Return_List : " + ex.ToString());
@@ -139,15 +142,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             return Json(JsonConvert.SerializeObject(prViewModel));
         }
-       
-       
+
+
         public JsonResult Get_Purchase_Return_Items_By_SKU_Code(string SKU_Code)
         {
             PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
 
             try
             {
-            prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_Items_By_SKU_Code(SKU_Code);
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_Items_By_SKU_Code(SKU_Code);
             }
             catch (Exception ex)
             {
@@ -185,16 +188,16 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             try
             {
-            prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Vendor_Details_By_Id(Vendor_Id);
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Vendor_Details_By_Id(Vendor_Id);
 
-            prViewModel.PurchaseReturn.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_No_By_Id(Vendor_Id);
+                prViewModel.PurchaseReturn.PurchaseInvoices = _purchaseinvoiceRepo.Get_Purchase_Invoice_No_By_Id(Vendor_Id);
             }
             catch (Exception ex)
             {
                 prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
 
                 Logger.Error("PurchaseReturnController - Get_Vendor_Details_By_Id : " + ex.ToString());
-            }           
+            }
 
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
@@ -213,12 +216,9 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 Logger.Error("PurchaseReturnController - Get_Purchase_Return_Items_By_Vendor_And_PO :" + ex.ToString());
             }
-                           
+
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
-
-       
-
 
         public PartialViewResult Update_GR_No(int Id)
         {
@@ -226,7 +226,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             try
             {
-                prViewModel.PurchaseReturn.Purchase_Return_Id = Id;
+                prViewModel.Filter.Purchase_Return_Id = Id;
             }
             catch (Exception ex)
             {
@@ -238,49 +238,55 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return PartialView("_Update_GR_No", prViewModel);
         }
 
-         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Create)]
+        [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Create)]
         public ActionResult Insert_Purchase_Return(PurchaseReturnViewModel prViewModel)
         {
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(prViewModel.PurchaseReturn);
-
-                foreach (var item in prViewModel.PurchaseReturn.PurchaseReturns)
+                try
                 {
-                    Set_Date_Session(item);
+                    Set_Date_Session(prViewModel.PurchaseReturn);
+
+                    foreach (var item in prViewModel.PurchaseReturn.PurchaseReturns)
+                    {
+                        Set_Date_Session(item);
+                    }
+
+                    if (prViewModel.PurchaseReturn.Purchase_Return_Id == 0)
+                    {
+                        prViewModel.PurchaseReturn.Debit_Note_No = Utility.Generate_Ref_No("DBN-", "Debit_Note_No", "5", "15", "Purchase_Return");
+
+                        _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
+
+                        prViewModel = new PurchaseReturnViewModel();
+
+                        prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
+                    }
+                    else
+                    {
+                        prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+                    }
+
+                    scope.Complete();
                 }
-
-                if (prViewModel.PurchaseReturn.Purchase_Return_Id == 0)
+                catch (Exception ex)
                 {
-                    prViewModel.PurchaseReturn.Debit_Note_No = Utility.Generate_Ref_No("DBN-", "Debit_Note_No", "5", "15", "Purchase_Return");
-
-                    _purchaseReturnRepo.Insert_Purchase_Return(prViewModel.PurchaseReturn);
-
                     prViewModel = new PurchaseReturnViewModel();
 
-                    prViewModel.FriendlyMessages.Add(MessageStore.Get("POR01"));
+                    prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
+
+                    Logger.Error("PurchaseReturnController - Insert_Purchase_Return : " + ex.ToString());
+
+                    scope.Dispose();
                 }
-                else
-                {
 
-                }
-                
+                TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
+
+                return RedirectToAction("Search", prViewModel);
             }
-            catch (Exception ex)
-            {
-                prViewModel = new PurchaseReturnViewModel();
-
-                prViewModel.FriendlyMessages.Add(MessageStore.Get("SY01"));
-
-                Logger.Error("PurchaseReturnController - Insert_Purchase_Return : " + ex.ToString());
-            }
-
-            
-
-            return View("Search", prViewModel);
         }
 
-         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Edit)]
+        [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Edit)]
         public JsonResult Update_Purchase_Return(PurchaseReturnViewModel prViewModel)
         {
             try
@@ -335,23 +341,23 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return View("View_Purchase_Return_Details", prViewModel);
         }
 
-         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_View)]
+        [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_View)]
         public ActionResult Get_Purchase_Return_Details_By_Id(PurchaseReturnViewModel prViewModel)
         {
             bool CheckFlag = false;
-            
+
 
             try
             {
                 CheckFlag = prViewModel.PurchaseReturn.Flag;
 
-                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_By_Purchase_Return_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_By_Purchase_Return_Id(prViewModel.Filter.Purchase_Return_Id);
 
-                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.Filter.Purchase_Return_Id);
                 if (prViewModel.PurchaseReturn.PurchaseReturns.Count > 0)
                 {
                     CheckFlag = true;
-            }
+                }
             }
             catch (Exception ex)
             {
@@ -363,7 +369,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             if (CheckFlag == true)
             {
                 return View("View_Purchase_Return_Details", prViewModel);
-        }
+            }
             else
             {
                 TempData["siViewModel"] = prViewModel;
@@ -372,6 +378,116 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
 
         }
+
+
+        /*Added by Gauravi on 16-11-2016*/
+
+        public ActionResult Print(PurchaseReturnViewModel prViewModel)
+        {
+            try
+            {
+                if (TempData["prViewModel"] != null)
+                {
+                    prViewModel = (PurchaseReturnViewModel)TempData["prViewModel"];
+                }
+
+                prViewModel.PurchaseReturn.Logo_Path = ConfigurationManager.AppSettings["LogoPath"].ToString();
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseReturnController - Print : " + ex.ToString());
+            }         
+            
+            return View("Print", prViewModel);
+        }
+
+        public ActionResult Send_Purchase_Return_Invoice(PurchaseReturnViewModel prViewModel)
+        {
+            try
+            {
+                if (prViewModel.PurchaseReturn.Purchase_Return_Id != 0)
+                {
+                    prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                    prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.PurchaseReturn.Purchase_Return_Id);
+                    prViewModel.PurchaseReturn.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(prViewModel.PurchaseReturn.PurchaseReturns.Sum(a => a.Amount));
+
+                    MemoryStream attachment = _purchaseReturnRepo.Create_Purchase_Return_Invoice_PDf(prViewModel.PurchaseReturn);
+
+                    var FileExtension = ".pdf";
+
+                    var fileName = "Purchase_Return_Invoice_" + prViewModel.PurchaseReturn.Purchase_Order_Id + "_" + prViewModel.PurchaseReturn.Debit_Note_No;
+
+                    string DirectoryPath = "Invoice";
+
+                    bool directoryExists = System.IO.Directory.Exists(Server.MapPath("/UploadFiles/" + DirectoryPath));
+
+                    if (!directoryExists)
+                    {
+                        System.IO.Directory.CreateDirectory(Server.MapPath("/UploadFiles/" + DirectoryPath));
+                    }
+
+                    string ServerPath = Server.MapPath("/UploadFiles/" + DirectoryPath + "//").ToString();
+                    string folderPath = (ServerPath + fileName + FileExtension);
+
+                    if (System.IO.File.Exists(folderPath))
+                    {
+                        System.IO.File.Delete(folderPath);
+                    }
+
+                    System.IO.File.WriteAllBytes(folderPath, attachment.ToArray());
+
+                    _purchaseReturnRepo.SendDemoEmail(prViewModel.PurchaseReturn, folderPath);
+
+                    prViewModel.FriendlyMessages.Add(MessageStore.Get("PO04"));
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseReturnController - Send_Purchase_Return_Invoice : " + ex.ToString());
+            }
+
+            TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
+
+            return RedirectToAction("Search", prViewModel);
+        }
+
+        public ActionResult Get_Purchase_Return_Details(PurchaseReturnViewModel prViewModel)
+        {
+            try
+            {
+                if (TempData["prViewModel"] != null)
+                {
+                    prViewModel = (PurchaseReturnViewModel)TempData["prViewModel"];
+                }
+
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_Details_By_Id(prViewModel.Filter.Purchase_Return_Id);
+
+                prViewModel.PurchaseReturn.PurchaseReturns = _purchaseReturnRepo.Get_Purchase_Return_Item_By_Id(prViewModel.Filter.Purchase_Return_Id);
+
+                prViewModel.PurchaseReturn.Total_Amount_In_Word = Utility.ConvertDecimalNumbertoWords(prViewModel.PurchaseReturn.PurchaseReturns.Sum(a => a.Amount));
+
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseOrderController - Get_Purchase_Order_Details : " + ex.ToString());
+            }
+
+            //return Print(prViewModel);
+
+            TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
+
+            return RedirectToAction("Print", prViewModel);
+        }
+
+        /*END*/
 
         //public JsonResult Get_Purchase_Returns(PurchaseReturnViewModel prViewModel)
         //{

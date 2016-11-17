@@ -1,9 +1,17 @@
 ﻿
 $(function () {
+   
+
+    document.getElementById('btnEdit').disabled = true;
+
+    document.getElementById('btnProductMRP').disabled = true;
 
     Get_Products();
 
-        $("[name='Filter.Article_No']").focusout(function () {
+    $("[name='Filter.Article_No']").focusout(function () {
+
+        document.getElementById('btnEdit').disabled = true;//Added by vinod mane on 25/10/2016
+        document.getElementById('btnProductMRP').disabled = true;//Added by vinod mane on 25/10/2016
             Get_Products();
         }); 
          
@@ -31,13 +39,21 @@ $(function () {
             if ($(this).prop('checked')) {
                 $("#hdf_ProductId").val(this.value);
                 $("#hdf_SizeGroupId").val($('[name="Size_Group_Id"]').val());
-                $("#btnProductMRP").show();
-                $("#btnEdit").show();
+                //$("#btnProductMRP").show();
+                //$("#btnEdit").show();
+
+
+                document.getElementById('btnEdit').disabled = false;
+
+                document.getElementById('btnProductMRP').disabled = false;
             }
         });
 
     //Added By Vinod Mane on 14/10/2016
         $(document).on("change", "#hdnArticle_No", function () {
+
+            document.getElementById('btnEdit').disabled = true;//Added by vinod mane on 25/10/2016
+            document.getElementById('btnProductMRP').disabled = true;//Added by vinod mane on 25/10/2016
             Get_Products();
         });
 });

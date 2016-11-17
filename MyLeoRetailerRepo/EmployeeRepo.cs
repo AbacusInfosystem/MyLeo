@@ -119,12 +119,15 @@ namespace MyLeoRetailerRepo
                 Employee.Employee_Name = Convert.ToString(dr["Employee_Name"]);
                 Employee.Designation_Id = Convert.ToInt32(dr["Designation_Id"]);
                 //Modification
-                if ((dr["Employee_DOB"]!=DBNull.Value))
+                if ((dr["Employee_DOB"] != DBNull.Value))
                 {
                     Employee.Employee_DOB = Convert.ToDateTime(dr["Employee_DOB"]);
                 }
                
                 //end
+
+               
+
                 Employee.Employee_Gender = Convert.ToInt32(dr["Employee_Gender"]);
                 Employee.Employee_Address = Convert.ToString(dr["Employee_Address"]);
                 Employee.Employee_City = Convert.ToString(dr["Employee_City"]);
@@ -137,6 +140,17 @@ namespace MyLeoRetailerRepo
                 Employee.Employee_Home_Lindline = Convert.ToString(dr["Employee_Home_Lindline"]);
                 Employee.Employee_EmailId = Convert.ToString(dr["Employee_EmailId"]);
                 Employee.IsActive = Convert.ToBoolean(dr["IsActive"]);
+
+                //if (dr["IsActive"] == true)
+                //{
+                //    Employee.IsActive == 1;
+                //}
+
+                //else
+                //{
+                //    Employee.IsActive == 0;
+                //}
+
                 Employee.Created_Date = Convert.ToDateTime(dr["Created_On"]);
                 Employee.Created_By = Convert.ToInt32(dr["Created_By"]);
                 Employee.Updated_Date = Convert.ToDateTime(dr["Updated_On"]);
@@ -407,5 +421,33 @@ namespace MyLeoRetailerRepo
             return check;
         }
         //End
+
+        //Added By Vinod Mane on 18/10/2016
+        public bool Check_Existing_Email_ID(string Email_ID)
+        {
+            bool check = false;
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Employee_EmailId", Email_ID));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Check_Existing_Email_ID.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                foreach (DataRow dr in drList)
+                {
+                    check = Convert.ToBoolean(dr["check_Employee_EmailId"]);
+                }
+            }
+
+            return check;
+        }
+        //End
+
     }
 }

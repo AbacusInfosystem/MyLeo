@@ -138,6 +138,23 @@ namespace MyLeoRetailerInfo.PurchaseReturn
 
         public bool Flag { get; set; }//Added by vinod mane on 29/09/2016
 
+
+        public string Logo_Path { get; set; }
+        
+        public string Company_Name { get; set; }
+
+        public string Company_Address { get; set; }        
+
+        public string Vendor_Email1 { get; set; }
+
+        public string Vendor_Phone1 { get; set; }
+
+        public string Vendor_Phone2 { get; set; }
+
+        public string Vendor_Address { get; set; }
+
+        public string Total_Amount_In_Word { get; set; }
+
     }
 
     public class Filter_Purchase_Return
@@ -148,6 +165,12 @@ namespace MyLeoRetailerInfo.PurchaseReturn
             set;
         }
 
+        public string GR_No
+        {
+            get;
+            set;
+        }
+        
         //Added by vinod mane on 29/09/2016
         public int Purchase_Return_Id
         {

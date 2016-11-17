@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
 
-    //document.getElementById('btnView').disabled = true;
+    document.getElementById('btnView').disabled = true;
 
     Get_Purchase_Return_Requests();
 
@@ -9,13 +9,15 @@
         if ($(this).prop('checked')) {
             $("#hdnPurchase_Return_Request_Id").val(this.value);
             document.getElementById('btnView').disabled = false;
-            document.getElementById('btnCreate').disabled = true;
         }
     });
 
    
     $("#btnCreate").click(function () {
         $("#frmPurchaseReturnRequest").attr("action", "/purchase-return-request/create-purchase-return-request");
+
+        $("#frmPurchaseReturnRequest").attr("method", "POST");
+
         $('#frmPurchaseReturnRequest').submit();
     });
 
@@ -30,7 +32,7 @@
 
         $("#frmPurchaseReturnRequest").attr("action", "/purchase-return-request/view-purchase-return-request");
 
-        //$("#frmPurchaseReturnRequest").attr("method", "POST");
+        $("#frmPurchaseReturnRequest").attr("method", "POST");
 
         $("#frmPurchaseReturnRequest").submit();
     });

@@ -5,10 +5,12 @@
     ViewBag.Title = "Search";
 }
 
+
 <script src="/Scripts/Modules/common_methods.js"></script>
+
 <script src="~/Scripts/Modules/Employee/search_employee_event.js"></script>
 <script src="~/Scripts/Modules/Employee/search_employee_method.js"></script>
-
+@*<script src="~/Scripts/Modules/Employee/employee_events.js"></script>*@
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -97,8 +99,7 @@
 
                     <div class="row">
 
-                        <div class="col-md-8" style="padding: 0px;">
-                         
+                        <div class="col-md-4" style="padding: 0px;">
 
                             <div class="form-group auto-complete">
                                 <div class="input-group">
@@ -117,16 +118,20 @@
 
                         </div>
 
-                        <div class="col-md-4" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-8" style="text-align: right; padding-top: 0px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
                                 @*<button class="btn btn-success active" onclick="location.href='@Url.Action("Index","Employee")'">Create</button>*@
                                 @*<a class="btn btn-success active" role="button" href="@Url.Action("Index", "Employee")">Create </a>
                                     <button class="btn btn-danger active" style="display:none;" id="btnEdit" >Edit</button>*@
-                                <button type="button" class="btn btn-info active" value="Create" id="btnMapBranchEmployee" style="display:none">Map Branch to Employee </button>
+
                                 <button type="button" class="btn btn-success active" value="Create" id="btnCreateEmployee">Create</button>
                                 @*modification*@
-                                <button type="button" class="btn btn-danger active" value="Edit" style="display:none;" id="btnEditEmployee">Edit</button>
+                                @*<button type="button" class="btn btn-danger active" value="Edit" style="display:none;" id="btnEditEmployee">Edit</button>*@
+                                <button role="button" class="btn btn-danger active edit" id="btnEditEmployee">Edit</button>
+                                <button role="button" class="btn btn-info active edit" id="btnMapBranchEmployee">Map Branch to Employee </button>
+
+
                                 @*End*@
                             </div>
 
@@ -146,7 +151,7 @@
 
         @*<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
 
-        </div>*@
+            </div>*@
 
         <div class="col-md-12" style="padding: 0px;text-align:center;" id="divEmployeePager">
 

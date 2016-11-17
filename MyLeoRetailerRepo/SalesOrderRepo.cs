@@ -141,7 +141,11 @@ namespace MyLeoRetailerRepo
             CreditNoteDetails.Credit_Note_Id = Convert.ToInt32(dr["Sales_Credit_Note_Id"]);
             CreditNoteDetails.Credit_Note_No = Convert.ToString(dr["Credit_Note_No"]);
             CreditNoteDetails.Credit_Note_Amount = Convert.ToDecimal(dr["Credit_Note_Amount"]);
-            CreditNoteDetails.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+            if (!dr.IsNull("Created_Date"))
+            {
+                CreditNoteDetails.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
+            }
+            //CreditNoteDetails.Credit_Note_Date = Convert.ToDateTime(dr["Created_Date"]);
 
             return CreditNoteDetails;
         }
@@ -263,16 +267,31 @@ namespace MyLeoRetailerRepo
 
         public DataTable Get_Sales_Report(SalesOrderFilter filter)
         {
-
             DataTable dt = new DataTable();
 
             List<SqlParameter> sqlParam = new List<SqlParameter>();
 
             sqlParam.Add(new SqlParameter("@Branch_Id", filter.Branch_Id));
 
-            sqlParam.Add(new SqlParameter("@From_Date", filter.From_Date));
+            if (filter.From_Date != DateTime.MinValue)
+            {
 
-            sqlParam.Add(new SqlParameter("@To_Date", filter.To_Date));
+                sqlParam.Add(new SqlParameter("@From_Date", filter.From_Date));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@From_Date", null));
+            }
+
+            if (filter.To_Date != DateTime.MinValue)
+            {
+
+                sqlParam.Add(new SqlParameter("@To_Date", filter.To_Date));
+            }
+            else
+            {
+                sqlParam.Add(new SqlParameter("@To_Date", null));
+            }
 
             dt = sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Sales_Report.ToString(), CommandType.StoredProcedure);
 
@@ -653,7 +672,15 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Cheque_Amount", salesInvoice.Cheque_Amount));
                 sqlParams.Add(new SqlParameter("@Card_Amount", salesInvoice.Card_Amount));
                 //sqlParams.Add(new SqlParameter("@Credit_Note_Amount", salesInvoice.Credit_Note_Amount));
-                
+
+                if (salesInvoice.Gift_Voucher_Id != 0)
+                {
+                    sqlParams.Add(new SqlParameter("@Status", "0"));
+                }
+                else
+                {
+                    sqlParams.Add(new SqlParameter("@Status", "1"));
+                }
 
                 if (salesInvoice.Cheque_Date == DateTime.MinValue)
                 {
@@ -681,7 +708,7 @@ namespace MyLeoRetailerRepo
                 sqlParams.Add(new SqlParameter("@Updated_On", DateTime.Now));
                 sqlParams.Add(new SqlParameter("@Updated_Date", DateTime.Now));
 
-                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Receivable_Item_Data.ToString(), CommandType.StoredProcedure);
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Receivable_Item_Data_For_Sales_Order.ToString(), CommandType.StoredProcedure);
             
         }
 
@@ -820,6 +847,77 @@ namespace MyLeoRetailerRepo
             return GiftVoucherDetails;
         }
         //End
+
+        public List<SaleOrderItems> Get_SalesReport_Items_By_Id(int Sales_Invoice_Id)
+        {
+            List<SaleOrderItems> SaleOrderItemList = new List<SaleOrderItems>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Details.ToString(), CommandType.StoredProcedure);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    SaleOrderItems list = new SaleOrderItems();
+
+                    if (!dr.IsNull("SKU_Code"))
+                        list.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+                    if (!dr.IsNull("Quantity"))
+                        list.Quantity = Convert.ToInt32(dr["Quantity"]);
+                    if (!dr.IsNull("MRP_Amount"))
+                        list.Total_MRP_Amount = Convert.ToInt32(dr["MRP_Amount"]);
+                    if (!dr.IsNull("Discount_Percentage"))
+                        list.Discount_Percentage = Convert.ToInt32(dr["Discount_Percentage"]);
+                    if (!dr.IsNull("Total_Amount"))
+                        list.Amount = Convert.ToInt32(dr["Total_Amount"]);
+                    if (!dr.IsNull("Salesman_Name"))
+                        list.SalesMan = Convert.ToString(dr["Salesman_Name"]);
+                    SaleOrderItemList.Add(list);
+                }
+            }
+            return SaleOrderItemList;
+        }
+
+        public DataTable Get_Sales_Summary_Report(SalesOrderFilter Filter)
+        {
+
+            DataTable dt = new DataTable();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            if (Filter.From_Date == DateTime.MinValue)
+            {
+                DateTime? someDate = null;
+                sqlParams.Add(new SqlParameter("@From_Date", someDate));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@From_Date", Filter.From_Date));
+            }
+
+            if (Filter.To_Date == DateTime.MinValue)
+            {
+                DateTime? someDate = null;
+                sqlParams.Add(new SqlParameter("@To_Date", someDate));
+            }
+            else
+            {
+                sqlParams.Add(new SqlParameter("@To_Date", Filter.To_Date));
+            }
+
+
+            sqlParams.Add(new SqlParameter("@Brand", Filter.Brand_Name));
+            sqlParams.Add(new SqlParameter("@Category", Filter.Category));
+            sqlParams.Add(new SqlParameter("@SalesMan_Id", Filter.SalesMan_Id.ToString()));
+
+            dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sales_Summary_Report.ToString(), CommandType.StoredProcedure);
+
+            return dt;
+        }
     }
 }
 

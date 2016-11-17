@@ -5,7 +5,7 @@
 <script src="~/Content/Atlant/js/plugins/maskedinput/jquery.maskedinput.min.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_validation.js"></script>
 <script src="~/Scripts/Modules/Employee/employee_events.js"></script>
-<script src="~/Scripts/Modules/Employee/employee_methods.js"></script>
+@*<script src="~/Scripts/Modules/Employee/employee_methods.js"></script>*@
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -43,7 +43,7 @@
                     <h4 style="margin-top: 0px;">Basic information.</h4>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" id="txtEmployee_Name" maxlength="100"/>
+                        <input type="text" class="form-control" placeholder="Enter employee name." name="Employee.Employee_Name" value="@Model.Employee.Employee_Name" id="txtEmployee_Name" maxlength="50" />
                         <input type="hidden" class="form-control" id="hdn_EmployeeId" name="Employee.Employee_Id" value="@Model.Employee.Employee_Id" />
                         @*Added by vinod mane on 27/09/2016*@
                         <input type="hidden" id="hdnEmployee_Name" value="@Model.Employee.Employee_Name" />
@@ -67,14 +67,22 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
                             <input type="text" class="form-control datepicker" id="txt_DOB" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("MM-dd-yyyy")))" readonly />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </div>
+                    </div>*@
                                      
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Date of birth.</span>
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                            <input type="text" class="form-control datepicker" id="txt_DOB" name="Employee.Employee_DOB" value="@((Model.Employee.Employee_DOB == DateTime.MinValue ? "" : Model.Employee.Employee_DOB.ToString("MM-dd-yyyy")))" readonly placeholder="Enter Employee date of birth" />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                          
 
                     <div class="form-group">
                         <div class="col-xs-6 col-sm-6 col-md-8" style="padding-left: 0px;">
@@ -82,17 +90,17 @@
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-4" style="text-align: right; padding-right: 0px;">
                            <label class="switch">
-                                @* @if (Model.Employee.IsActive == false)
-                                {
-                                    <input value="0" name="Employee.IsActive" type="checkbox">
-                                }
-                                else
-                                {
-                                    
-                                *@
-                                <input value="1" name="Employee.IsActive" checked="checked" type="checkbox">
-                              @*  }*@
-                                <span></span>
+                               @if (Model.Employee.IsActive == true)
+                               {
+                                <input value="true" name="Employee.IsActive" checked="checked" type="checkbox" id="Flag">
+                               }
+                               else
+                               {
+                                <input value="false" name="Employee.IsActive"  type="checkbox" id="Flag">
+                               }
+                               @*<input checked="" id="Flag" value="0" type="checkbox">*@
+                               <span></span>
+                               
                             </label>
                         </div>
                     </div>
@@ -156,11 +164,11 @@
                     <h4 style="margin-top: 0px;">Communication detail.</h4>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter mobile number 1." name="Employee.Employee_Mobile1" value="@Model.Employee.Employee_Mobile1" maxlength="12" />
+                        <input type="text" class="mask_mobile_no form-control" id="txtEmployeeMobile1" placeholder="Enter mobile number 1." name="Employee.Employee_Mobile1" value="@Model.Employee.Employee_Mobile1" />
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter mobile number 2." name="Employee.Employee_Mobile2" value="@Model.Employee.Employee_Mobile2" maxlength="12" />
+                        <input type="text" class="mask_mobile_no form-control" id="txtEmployeeMobile2" placeholder="Enter mobile number 2." name="Employee.Employee_Mobile2" value="@Model.Employee.Employee_Mobile2" />
                     </div>
 
                     <div class="form-group">
@@ -169,7 +177,10 @@
 
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter email address." name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" maxlength="50" />
+                        <input type="text" class="form-control" placeholder="Enter email address." id="txt_Emailid"name="Employee.Employee_EmailId" value="@Model.Employee.Employee_EmailId" maxlength="50" />
+                        @*Added by vinod mane on 18/10/2016*@
+                        <input type="hidden" id="hdnEmp_Emailid" value="@Model.Employee.Employee_EmailId" />
+                        @*End*@
                     </div>
 
                     <div class="form-group">

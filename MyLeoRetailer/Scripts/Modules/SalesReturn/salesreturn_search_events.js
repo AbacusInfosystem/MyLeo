@@ -8,6 +8,7 @@
 
     $("[name='Filter.Sales_Return_No']").focusout(function ()
     {
+        document.getElementById('btnView').disabled = true;
         Get_SalesReturns();
     });
 
@@ -33,6 +34,12 @@
 
     });
 
+    //Added by vinod mane on 25/10/2016
+    $(document).on("change", "#hdnSalesReturnNo", function () {
+        document.getElementById('btnView').disabled = true;
+        Get_SalesReturns();
+    });
+    //End
 });
 
 

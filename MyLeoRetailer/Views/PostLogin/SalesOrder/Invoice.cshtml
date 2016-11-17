@@ -1,10 +1,19 @@
 ﻿@model MyLeoRetailer.Models.SalesInvoiceViewModel
 
-@{
+@*@{
     ViewBag.Title = "Sales Invoice";
 }
 
-<h2>Invoice</h2>
+<h2>Invoice</h2>*@
+
+@*Refered to code written by gauravi in purchase order 20 oct*@
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" type="text/css" id="theme" href="../Content/Atlant/css/theme-default.css" />
+<script type="text/javascript" src="../Content/Atlant/js/plugins/jquery/jquery.min.js"></script>
 
 <script src="~/Scripts/Modules/PrintThis.js"></script>
 
@@ -24,15 +33,21 @@
 
             var divToPrint = document.getElementById('Div_Print');
 
-            var newWin = window.open('', 'Print-Window');
+            //var newWin = window.open('', 'Print-Window');
 
-            newWin.document.open();
+            //newWin.document.open();
 
-            newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+            //Referd to Gauravi print code..just a single line written below..
 
-            newWin.document.close();
+            //window.print();
 
-            setTimeout(function () { newWin.close(); }, 10);
+            $('#Div_Print').printThis();
+
+            //newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+            //newWin.document.close();
+
+            //setTimeout(function () { newWin.close(); }, 10);
         });
 
     });
@@ -60,10 +75,11 @@ img{
                 <div class="row">
                     <div id="divScrollContainer" class="col-md-12">
                         @*@{Html.RenderPartial("_ServerMessage");}*@
-
-                        <h3 class="view_invoice_body_header">
+                        <br />
+                        <br />
+                        @*<h3 class="view_invoice_body_header">
                             Sales Invoice
-                        </h3>
+                        </h3>*@
 
                         <div class="box box-default" id="Div_Print">
                             <div class="box-body">
@@ -71,47 +87,48 @@ img{
 
                                 <!-- title row -->
                                 <div class="row">
+                                    <div class="invoice-col" style="float: left;">
+                                        <img src="@Model.SalesInvoice.Logo_Path" width="42" height="42">
+                                    </div><!-- /.col -->
 
+                                </div>
+
+                            
+
+                                <div class="row">
+                                
                                     <div class="col-md-4 invoice-col">
                                         <div class="form-group">
                                             <label for="txtStore_Name" style="color: #333" @Model.SalesInvoice.Branch_Name class="">Store Name : @Model.SalesInvoice.Branch_Name</label>
                                         </div>
                                     </div><!-- /.col -->
 
-                                    <div class="col-md-3 invoice-col">
-                                        <img src="@Model.SalesInvoice.Logo_Path" width="42" height="42" >
-                                    </div><!-- /.col -->
-
-                                    <div class="col-md-5 invoice-col" style="text-align:right">
-                                        <div class="form-group">
-                                            <label for="txtTel" style="color: #333"  class="">Tel : @Model.SalesInvoice.Branch_Landline1, @Model.SalesInvoice.Branch_Landline2</label>
-                                        </div>
-                                    </div><!-- /.col -->
+                                 
                                 </div>
-
 
                                 <div class="row">
 
-                                    <div class="col-md-12 invoice-col" style="text-align:center; width:1200px;">
-                                        <div class="form-group">
-                                            <label for="txtStore_Address1" style="color: #333" class="">Store Address : @Model.SalesInvoice.Branch_Address, @Model.SalesInvoice.Branch_Pincode,@Model.SalesInvoice.Branch_City,@Model.SalesInvoice.Branch_State,@Model.SalesInvoice.Branch_Country</label>
-
-                                            @*<br />
-
-                                            <label for="txtStore_Address2" style="color: #333" class="">Store Address2</label>
-                                            <br />*@
-
-
+                                    <div class="col-md-6 invoice-col">
+                                        <div class="form-group" >
+                                            <label for="txtStore_Address1" style="color: #333; word-wrap: break-word; width: 300px" class="">Store Address : @Model.SalesInvoice.Branch_Address, @Model.SalesInvoice.Branch_Pincode,@Model.SalesInvoice.Branch_City,@Model.SalesInvoice.Branch_State,@Model.SalesInvoice.Branch_Country</label>
                                         </div>
                                     </div><!-- /.col -->
 
                                 </div>
 
-                                <br />
+                                <div class="row">
+                                    <div class="col-md-6 invoice-col">
+                                        <div class="form-group">
+                                            <label for="txtTel" style="color: #333" class="">Tel : @Model.SalesInvoice.Branch_Landline1, @Model.SalesInvoice.Branch_Landline2</label>
+                                        </div>
+                                    </div><!-- /.col -->
+                                 
+
+                                </div>
 
                                 <div class="row">
-                                    <div class="col-md-10 invoice-col" style="text-align:center; width:1200px;">
-                                        <label for="txtCash_Memo" style="color: #333;text-decoration:underline" class="">CASH MEMO</label>
+                                    <div class="col-md-12 invoice-col" style="text-align:center">
+                                        <label for="txtCash_Memo" style="color: #333; font-size : large" class="">CASH MEMO</label>
                                     </div>
                                 </div>
 
@@ -166,66 +183,80 @@ img{
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th width="10%">SKU Code</th>
-                                                    <th width="10%">Article No</th>
-                                                    <th width="10%">Quantity</th>
-                                                    <th width="10%">Brand</th>
-                                                    <th width="10%">Category</th>
-                                                    <th width="10%">Sub Category</th>
-                                                    <th width="10%">Size_Name</th>
-                                                    <th width="10%">Colour_Name</th>
-                                                    <th width="10%">MRP Amount</th>
-                                                    <th width="10%">Amount</th>
-                                                    <th width="10%">SalesMan</th>
+                                                    <th width="10%" style="text-align:center">SKU Code</th>
+                                                    <th width="10%" style="text-align:center">Article No</th>
+                                                    <th width="10%" style="text-align:center">Quantity</th>
+                                                    <th width="10%" style="text-align:center">Brand</th>
+                                                    <th width="10%" style="text-align:center">Category</th>
+                                                    <th width="10%" style="text-align:center">Sub Category</th>
+                                                    <th width="10%" style="text-align:center">Size Name</th>
+                                                    <th width="10%" style="text-align:center">Colour Name</th>
+                                                    <th width="10%" style="text-align:center">SalesMan</th>
+                                                    <th width="10%" style="text-align:center">MRP Amount</th>
+                                                    <th width="10%" style="text-align:center">Amount</th>
+                                                   
                                                 </tr>
                                             </thead>
 
-                                            @foreach (var item in Model.SaleOrderItemList)
+                                            @{decimal taxamt = 0;
+
+                                            foreach (var item in Model.SaleOrderItemList)
                                             {
+
+                                                taxamt = @Model.SalesInvoice.Gross_Amount * @Model.SalesInvoice.Tax_Percentage / 100;
+                                                
                                                 <tr id=@("SItem"+item.Sales_Invoice_Id.ToString())>
 
-                                                    <td>@item.SKU_Code</td>
+                                                    <td style="text-align:center">@item.SKU_Code</td>
 
-                                                    <td>@item.Article_No</td>
+                                                    <td style="text-align:center">@item.Article_No</td>
 
-                                                    <td>@item.Quantity</td>
+                                                    <td style="text-align:center">@item.Quantity</td>
 
-                                                    <td>@item.Brand</td>
+                                                    <td style="text-align:center">@item.Brand</td>
 
-                                                    <td>@item.Category</td>
+                                                    <td style="text-align:center">@item.Category</td>
 
-                                                    <td>@item.SubCategory</td>
+                                                    <td style="text-align:center">@item.SubCategory</td>
 
-                                                    <td>@item.Size_Name</td>
+                                                    <td style="text-align:center">@item.Size_Name</td>
 
-                                                    <td>@item.Colour_Name</td>
+                                                    <td style="text-align:center">@item.Colour_Name</td>
 
-                                                    <td>@item.MRP_Price</td>
+                                                    <td style="text-align:center">@item.SalesMan</td>
 
-                                                    <td>@item.Amount</td>
+                                                    <td style="text-align:center">@item.MRP_Price</td>
 
-                                                    <td>@item.SalesMan</td>
+                                                    <td style="text-align:center">@item.Amount</td>
 
                                                 </tr>
+                                            }
                                             }
 
                                             <tbody>
                                                 @{
                                                     <tr>
-                                                        <th colspan="9" style="text-align: right;"> Gross Amount : </th>
-                                                        <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Gross_Amount</th>
+                                                        <th colspan="10" style="text-align: right;"> Gross Amount : </th>
+                                                        <th colspan="11" style="text-align: center;"> @Model.SalesInvoice.Gross_Amount</th>
 
                                                     </tr>
 
                                                      <tr>
-                                                        <th colspan="9" style="text-align: right;"> Total Discount Amount : </th>
-                                                         <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Total_Discount_Amount</th>
+                                                        <th colspan="10" style="text-align: right;"> Total Discount Amount : </th>
+                                                         <th colspan="11" style="text-align: center;"> @Model.SalesInvoice.Total_Discount_Amount</th>
+                                                    </tr>
+                                                    
+                                                     <tr>
+                                                        <th colspan="10" style="text-align: right;"> Tax Amount : </th>
+                                                         <th colspan="11" style="text-align: center;"> @taxamt</th>
                                                     </tr>
 
                                                      <tr>
-                                                        <th colspan="9" style="text-align: right;"> Net Amount : </th>
-                                                         <th colspan="10" style="text-align: left;"> @Model.SalesInvoice.Net_Amount</th>
+                                                        <th colspan="10" style="text-align: right;"> Net Amount : </th>
+                                                         <th colspan="11" style="text-align: center;"> @Model.SalesInvoice.Net_Amount</th>
                                                     </tr>
+                                                    
+                                                   
                                                 }
                                             </tbody>
                                         </table>

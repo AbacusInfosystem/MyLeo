@@ -1,7 +1,5 @@
 ﻿@model MyLeoRetailer.Models.ProductDispatchViewModel
 
-
-
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/ProductDispatch/product_dispatch_event.js"></script>
 <script src="~/Scripts/Modules/ProductDispatch/product_dispatch_method.js"></script>
@@ -95,10 +93,12 @@
                             <div class="block">
                                 <div class="block" style="margin-top:0px; ">
                                     <div class="btn-group">
-                                        <a href="javascript:AddProductDispatch();" id="btnProductDispatch" class="btn btn-success active">
+                                        @*<a href="javascript:AddProductDispatch();" id="btnProductDispatch" class="btn btn-success active">
                                             <i class="mdi mdi-plus"></i>
                                             Add
-                                        </a>
+                                        </a>*@
+
+                                        <button type="button" id="btnProductDispatch" class="btn btn-success active">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -129,6 +129,7 @@
 
                                                 <td>
                                                     @item.Quantity
+                                                    @*<input type='hidden' class='form-control input-sm quantity' name='List_product_Dispatch[0].Quantity' value="@item.Quantity" id="textQuantitya_0">*@
                                                 </td>
 
                                                 <td>
@@ -162,8 +163,8 @@
                     <div class="row">
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
-                                <button type="button" id="btnSaveDispatch" class="btn btn-success active">Save</button>
-                                <button type="reset" id="btnCancelDispatch" class="btn btn-danger active">Cancel</button>
+                                <button type="button" value="Save" id="btnSaveDispatch" class="btn btn-success active">Save</button>
+                                <button type="reset" id="btnCancelDispatch" class="btn btn-danger active">Reset</button>
                             </div>
                         </div>
                         <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">

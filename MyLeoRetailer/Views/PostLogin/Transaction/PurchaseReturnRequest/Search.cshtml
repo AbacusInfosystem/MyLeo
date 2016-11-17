@@ -1,4 +1,7 @@
 ﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnRequestViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
+
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-search-event.js"></script>
@@ -32,12 +35,12 @@
             <div class="block">
 
                 <form role="form" id="frmPurchaseReturnRequest">
-                    <input type="hidden" id="hdnPurchase_Return_Request_Id" name="PurchaseReturnRequest.Purchase_Return_Request_Id" value="@Model.PurchaseReturnRequest.Purchase_Return_Request_Id"/>
+                    <input type="hidden" id="hdnPurchase_Return_Request_Id" name="Filter.Purchase_Return_Request_Id" value="@Model.Filter.Purchase_Return_Request_Id" />
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
 
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
                                 <select class="form-control select" name="Filter.Vendor_Id" id="drpVendor_Id">
                                     <option value="">Select Vendor</option>
@@ -53,11 +56,44 @@
                                         }
                                     }
                                 </select>
+                            </div>*@
+
+                            @{
+                                LoginInfo Cookies = new LoginInfo();
+                                Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                                <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                            }
+
+                            <div class="form-group auto-complete">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name</span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="hdnVendorName" placeholder="Enter Vendor name to search" value="" data-table="Purchase_Return_request" data-col="Vendor_Id,Vendor_Name" data-param="hdnBranchIDs" data-field="Branch_Id" data-headernames="Vendor name">
+                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                    <input type="hidden" class="auto-complete-label" />
+                                    <input type="hidden" id="drpVendor_Id" name="Filter.Vendor_Id" class="auto-complete-value" />
+
+                                </div>
+
                             </div>
+
+
+                            @*<div class="form-group auto-complete">
+                                <span class="label label-primary label-form" style="margin-bottom: 1px;">Vendor Name.</span>
+                                <div class="input-group">
+                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="hdnVendorName" placeholder="Enter Vendor Name to search." value="" data-table="Purchase_Return_request" data-col="Vendor_Id,Vendor_Name" data-param="hdnBranchIDs" data-field="Branch_Id" data-headernames="Vendor name">
+                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                    <input type="hidden" id="hdnVendorId" name="Filter.Vendor_Id" class="auto-complete-label" />
+                                    <input type="hidden" id="drpVendor_Id" name="" class="auto-complete-value" />
+
+                                </div>
+
+                            </div>*@
+
 
                         </div>
 
-                        <div class="col-md-7" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-8" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
                                 <button type="button" class="btn btn-success active" value="Create" id="btnCreate">Create</button>
@@ -75,9 +111,10 @@
 
         </div>
 
-        <div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
+        @*<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">*@
+            <div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
 
-        </div>
+            </div>
 
         <div class="col-md-12" style="padding: 0px;text-align:center;" id="divPurchaseReturnRequestPager">
 

@@ -35,6 +35,21 @@ function Get_Sub_Categories()
 			Bind_Anchor_Grid(obj, "Sub_Category_List", $("#SubCategory_Grid"));
 
 			$("#divSubCategoryPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+			//$("[name='SubCategory.IsActive']").val(1);
+
+			//alert(11);
+
+			//if (obj.SubCategory.IsActive == true) {
+			//    $("[name='SubCategory.IsActive']").val(1);
+			//    document.getElementById('SubCateFlag').checked = true;
+			//}
+			//else {
+			//    $("[name='SubCategory.IsActive']").val(0);
+			//    document.getElementById('SubCateFlag').checked = false;
+			//}
+
+
 		}
 	});
 }
@@ -94,6 +109,18 @@ function Save_Sub_Category()
 			Get_Sub_Categories();
 
 			Friendly_Messages(obj);
+
+			$("[name='SubCategory.IsActive']").val(1);
+
+		    //Set IsActive Button Status
+			var fix = $("[name='SubCategory.IsActive']").val();
+
+			if (fix == 0) {
+			    document.getElementById('SubCateFlag').checked = false;
+			}
+			else {
+			    document.getElementById('SubCateFlag').checked = true;
+			}
 		}
 	});
 
@@ -108,6 +135,7 @@ function Reset_Sub_Category()
 
 	$("[name='SubCategory.Sub_Category_Id']").val("");
 	$("#hdnSub_Category").val("");//Added by vinod Mane on 26/09/2016
+	$("[name='Sub_Category_List']").removeClass("active");//Added by vinod mane on 25/10/2016
 }
 
 function Get_Sub_Category_By_Id(obj)

@@ -937,29 +937,17 @@ namespace MyLeoRetailerRepo
 
             PurchaseOrder.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
 
-            if (dr.IsNull("Purchase_Order_Date"))
-            {
-                PurchaseOrder.Purchase_Order_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Purchase_Order_Date"))
             {
                 PurchaseOrder.Purchase_Order_Date = Convert.ToDateTime(dr["Purchase_Order_Date"]);
             }
-
-            if (dr.IsNull("Start_Supply_Date"))
-            {
-                PurchaseOrder.Start_Supply_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Start_Supply_Date"))
             {
                 PurchaseOrder.Start_Supply_Date = Convert.ToDateTime(dr["Start_Supply_Date"]);
             }
-
-            if (dr.IsNull("Stop_Supply_Date"))
-            {
-                PurchaseOrder.Stop_Supply_Date = DateTime.MinValue;
-            }
-            else
+            
+            if (!dr.IsNull("Stop_Supply_Date"))
             {
                 PurchaseOrder.Stop_Supply_Date = Convert.ToDateTime(dr["Stop_Supply_Date"]);
             }
@@ -1157,6 +1145,12 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Vendor_Phone2"))
                     purchaseOrder.Vendor_Phone2 = Convert.ToString(dr["Vendor_Phone2"]);
 
+                if (!dr.IsNull("Company_Name"))
+                    purchaseOrder.Company_Name = Convert.ToString(dr["Company_Name"]);
+
+                if (!dr.IsNull("Company_Address"))
+                    purchaseOrder.Company_Address = Convert.ToString(dr["Company_Address"]);
+
             }
 
             return purchaseOrder;
@@ -1229,6 +1223,9 @@ namespace MyLeoRetailerRepo
 
                 if (!dr.IsNull("Size_Group_Name"))
                     purchaseOrderItem.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+                if (!dr.IsNull("Comment"))
+                    purchaseOrderItem.Comment = Convert.ToString(dr["Comment"]);
 
                 purchaseOrderItem.sizes = Get_Purchase_Order_Item_Sizes(purchaseOrderItem.Purchase_Order_Item_Id);
 
@@ -1306,11 +1303,11 @@ namespace MyLeoRetailerRepo
             StringBuilder htmltblItem = new StringBuilder();
 
             htmldiv.Append("<div style='text-align:center'>");
-            htmldiv.Append("<label>Company Name</label>");
-            htmldiv.Append("<br />");
-            htmldiv.Append("<label>Company Address1</label>");
-            htmldiv.Append("<br />");
-            htmldiv.Append("<label>Company Address2</label>");
+            htmldiv.Append("<h2>" + PurchaseOrder.Company_Name + "</h2>");
+            //htmldiv.Append("<br />");
+            htmldiv.Append("<h5>" + PurchaseOrder.Company_Address + "</h5>");
+            //htmldiv.Append("<br />");
+            //htmldiv.Append("<label>Company Address2</label>");
             htmldiv.Append("<h5> <b>PURCHASE ORDER</b></h5>");
             htmldiv.Append("</div>");
 
@@ -1365,14 +1362,14 @@ namespace MyLeoRetailerRepo
             htmltblItem.Append("<table border='1'>");
             htmltblItem.Append("<tr>");
             htmltblItem.Append("<th>Article No.</th>");
-            htmltblItem.Append("<th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>");
+            htmltblItem.Append("<th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>");
             htmltblItem.Append("<th>QTY</th><th>Center Size</th><th>Size Diff</th><th>Base Rate</th><th>Total Amount</th>");
             htmltblItem.Append("</tr>");
             if (PurchaseOrder.PurchaseOrderItems.Count > 0)
             {
                 foreach (var item in PurchaseOrder.PurchaseOrderItems)
                 {
-                    int colspan = 20;
+                    int colspan = 15;
                     if (item.sizes.Count > 0)
                     {
                         colspan = colspan - item.sizes.Count;
@@ -1382,7 +1379,7 @@ namespace MyLeoRetailerRepo
                         {
                             htmltblItem.Append("<td>" + itm.Size_Name + "</td>");
                         }
-                        int sizecolspan = 25 - item.sizes.Count;
+                        int sizecolspan = 20 - item.sizes.Count;
                         htmltblItem.Append("<td colspan='" + sizecolspan + "'></td>");
                         htmltblItem.Append("</tr>");
                     }
@@ -1408,15 +1405,15 @@ namespace MyLeoRetailerRepo
                 htmltblItem.Append("<tr></tr>");
             }
             htmltblItem.Append("<tr>");
-            htmltblItem.Append("<td colspan='16'>Remark : " + PurchaseOrder.Comment + "</td>");
-            htmltblItem.Append("<td colspan='5'>Total : </td>");
+            htmltblItem.Append("<td colspan='14'>Remark : " + PurchaseOrder.Comment + "</td>");
+            htmltblItem.Append("<td colspan='2' style='text-align: left;'>Total : </td>");
             htmltblItem.Append("<td>" + PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Quantity) + "</td>");
             htmltblItem.Append("<td colspan='3'></td>");
             htmltblItem.Append("<td>" + PurchaseOrder.PurchaseOrderItems.Sum(a => a.Total_Amount) + "</td>");
             htmltblItem.Append("</tr>");
 
             htmltblItem.Append("<tr>");
-            htmltblItem.Append("<td colspan='26'>Amount(In words) : " + PurchaseOrder.Total_Amount_In_Word + "</td>");
+            htmltblItem.Append("<td colspan='21'>Amount(In words) : " + PurchaseOrder.Total_Amount_In_Word + "</td>");
             htmltblItem.Append("</tr>");
             htmltblItem.Append("</table>");
             htmltblItem.Append("</div>");

@@ -24,8 +24,7 @@
         $('#drpSubCategory').rules("remove");
 
 
-        if ($("#hdnTotalQuantity").val() == 0)
-        {
+        if ($("#hdnTotalQuantity").val() == 0) {
             $("#hdnrecords_Validation").show();
             $("#records_Message").html("Minimum one Record  is Required");
             
@@ -35,8 +34,7 @@
             $("#records_Message").html(" ");
         }
 
-        $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function ()
-        {
+        $("#frmPurchaseOrder").find('[id^="textTotal_Quantity_"]').each(function () {
             
             if ($(this).text() == 0) {
                 $("#records_Message").html("Size quantity can not be Zero.");
@@ -54,10 +52,10 @@
             if ($("#records_Message")[0].innerText == " ") //added by aditya
             { 
             if ($("[name='PurchaseOrder.Purchase_Order_Id']").val() == "" || $("[name='PurchaseOrder.Purchase_Order_Id']").val() == 0) {
-                $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Insert_Purchase_Order");
+                $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Insert_Purchase_Order/");
             }
             else {
-                $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Update_Purchase_Order");
+                $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Update_Purchase_Order/");
             }
             $('#frmPurchaseOrder').attr("method", "POST");
             $('#frmPurchaseOrder').submit();
@@ -75,6 +73,8 @@
         $('#drpCategory').rules("remove");
         $('#textSize_Difference').rules("remove");
         $('#drpSubCategory').rules("remove");
+
+        ValidateArticleSizeGroup();
 
         if ($("#frmPurchaseOrder").valid()) {
 
@@ -96,9 +96,9 @@
         $("#drpArticle_No").rules("add", "required");
         $('#drpCenter_Size').rules("add", "required");
         $('#drpBrand').rules("add", "required");
-        $('#textPurchase_Price').rules("add", "required");
+        $('#textPurchase_Price').rules("add", { required: true, digits: true });
         $('#drpCategory').rules("add", "required");
-        $('#textSize_Difference').rules("add", "required");
+        $('#textSize_Difference').rules("add", { required: true, digits: true });
         $('#drpSubCategory').rules("add", "required");
         //Added by aditya [10102016] END
 
@@ -107,6 +107,10 @@
         }
         //CalculateRowAmount();
 
+    });
+
+    $("#btnResetPurchaseOrder").click(function () {
+        Reset_Details();
     });
        
 });

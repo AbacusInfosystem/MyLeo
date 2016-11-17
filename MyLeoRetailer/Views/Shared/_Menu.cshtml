@@ -23,32 +23,38 @@
             <li><a href="/Category/Index"><span class="fa fa-users"></span> Category Management</a></li>
             <li><a href="/Color/Index"><span class="fa fa-users"></span> Color Management</a></li>
             <li><a href="/Size/Index"><span class="fa fa-users"></span> Size Management</a></li>
+            <li><a href="/Product/Search"><span class="fa fa-users"></span> Product Management</a></li> 
             <li><a href="/Tax/Index"><span class="fa fa-users"></span> Tax Management</a></li>
             <li><a href="/Customer/Search"><span class="fa fa-users"></span> Customer Management</a></li>
             <li><a href="/Vendor/Search"><span class="fa fa-users"></span> Vendor Management</a></li>
-            <li><a href="/VendorContact/Search"><span class="fa fa-users"></span> Vendor Contact Management</a></li>
-            <li><a href="/Product/Search"><span class="fa fa-users"></span> Product Management</a></li>
-            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Product Warehouse</a></li>
-            <li><a href="/ProductDispatch/Search"><span class="fa fa-users"></span> Product Dispatch</a></li>
-            <li><a href="/ProductDispatch/Dispatched_Product_Listing"><span class="fa fa-users"></span>Inward Product</a></li>
+            <li><a href="/VendorContact/Search"><span class="fa fa-users"></span> Vendor Contact Management</a></li>                     
             @*<li><a href="/Replacement/Search"><span class="fa fa-users"></span> Replacement</a></li>*@ @*commented bya aditya as pre sanket instruction 26092016*@
         </ul>
     </li>
 
     <li class="xn-openable">
-        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Transactions</span></a>
+        <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Transactions</span></a>
         <ul class="animated zoomIn">
-            <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order </a></li>
             <li><a href="/PurchaseOrderRequest/Search"><span class="fa fa-users"></span> Purchase Order Request </a></li>
-            <li><a href="/PurchaseReturn/Search"><span class="fa fa-users"></span> Purchase Return </a></li>
-            <li><a href="/purchase-return-request/get-purchase-return-request"><span class="fa fa-users"></span> Purchase Return Request</a></li>
+            <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order </a></li>
             <li><a href="/PurchaseInvoice/Search"><span class="fa fa-users"></span> Purchase Invoice </a></li>
+            <li><a href="/purchase-return-request/get-purchase-return-request"><span class="fa fa-users"></span> Purchase Return Request</a></li>
+            <li><a href="/PurchaseReturn/Search"><span class="fa fa-users"></span> Purchase Return </a></li>
+            <li><a href="/Payable/Index"><span class="fa fa-users"></span> Payable </a></li>
             <li><a href="/SalesOrder/Search"><span class="fa fa-users"></span> Sales Invoice</a></li>
             <li><a href="/SalesReturn/Search"><span class="fa fa-users"></span> Sales Return </a></li>
-            <li><a href="/GiftVoucher/Search"><span class="fa fa-users"></span> Gift Voucher Management</a></li>
-            <li><a href="/Alteration/Search"><span class="fa fa-users"></span> Alteration Management</a></li>
-            <li><a href="/Payable/Index"><span class="fa fa-users"></span>Payable</a></li>
-            <li><a href="/Receivable/Index"><span class="fa fa-users"></span>Receivable</a></li>
+            <li><a href="/Receivable/Index"><span class="fa fa-users"></span> Receivable </a></li>
+            <li><a href="/GiftVoucher/Search"><span class="fa fa-users"></span> Gift Voucher </a></li>
+            <li><a href="/Alteration/Search"><span class="fa fa-users"></span> Alteration </a></li>
+        </ul>
+    </li>
+
+    <li class="xn-openable">
+        <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Dispatch</span></a>
+        <ul class="animated zoomIn">
+            <li><a href="/ProductWarehouse/Search"><span class="fa fa-users"></span> Product Warehouse</a></li>
+            <li><a href="/ProductDispatch/Search"><span class="fa fa-users"></span> Product Dispatch</a></li>
+            <li><a href="/ProductDispatch/Dispatched_Product_Listing"><span class="fa fa-users"></span>Inward Product</a></li>
         </ul>
     </li>
 
@@ -56,11 +62,16 @@
     <li class="xn-openable">
         <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Reports</span></a>
         <ul class="animated zoomIn">
-            <li><a href="/Sales/Search"><span class="fa fa-users"></span> Sales </a></li>
+            <li><a href="/SalesOrder/Report"><span class="fa fa-users"></span> Sales </a></li>
             <li><a href="/Inventory/Search"><span class="fa fa-users"></span> Inventory </a></li>
+            <li><a href="/SalesOrder/SalesSummaryReport"><span class="fa fa-users"></span> Sales Summary Report </a></li>
         </ul>
     </li>
     @*End*@
+
+    <li class="xn-openable">
+        <a href="/Barcode/Barcode"><span class="fa fa-files-o"></span> <span class="xn-text">Generate Barcode</span></a>
+    </li>
 
     <!-- SIGN OUT -->
     <li class="xn-icon-button pull-right">
@@ -82,17 +93,29 @@
                     <h3 class="panel-title"><span class="fa fa-tasks"></span></h3>
                 </div>
 
-                <div class="panel-body list-group scroll" style="width: 220px; height: 135px; overflow: auto;">
+                <div class="panel-body list-group scroll" style="width: 220px; height: 150px; overflow: auto;">
                     <div class="page-content-wrap">
 
                     </div>
                 </div>
 
-                <div class="panel-footer text-center">
-                    <div class="btn-group">
-                    </div>
-                </div>
+                @*commented by vinod mane on 24/10/2016*@
+                @*<div class="panel-footer text-center">
+                        <div class="btn-group">
+                        </div>
+                    </div>*@
+                @*End*@
 
+                @*Added by vinod mane on 24/10/2016*@
+                <div class="row">
+                    <div class="panel-heading">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success active" id="btnSaveBranch_Comm">Save</button> @*btnSaveBranch  change by vinod mane on 26/10/2016*@
+                        </div>
+                    </div>
+
+                </div>
+                @*End*@
             </div>
 
             @* End *@
@@ -105,15 +128,18 @@
         Cookies.Warehouse_Notification_Count = Utility.Get_Warehouse_Notification_Count(Cookies.Branch_Ids);
 
         <li class="xn-icon-button pull-right" id="btnNotification">
-            @* <a href="#"><span class="fa fa-tasks"></span></a>*@
-            @*<img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">*@
+            @*<a href="#"><span class="fa fa-tasks"></span></a>
+                <img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">*@
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
-                <img id="notification_Icon" alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+                
+                @*<a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>*@
+                <a href="#" style="height:50px"><img id="notification_Icon" alt="" role="presentation" width="30" height="30" src="../../Images/notification.gif"></a>
             }
             else
             {
-                <img alt="" role="presentation" width="30" height="30" style="margin-top:10px" src="../Images/notification.gif">
+                 @*<a href="#"><img id="notification_Icon" alt="" role="presentation" width="18" height="18" src="../../Images/notification.gif"></a>*@
+                <a href="#" style="height:50px"><img alt="" role="presentation" width="30" height="30" src="../../Images/notification.gif"></a>
             }
             @if (Cookies.Warehouse_Notification_Count > 0)
             {
@@ -121,15 +147,19 @@
             }
             <div class="panel panel-primary animated zoomIn xn-drop-left xn-panel-dragging" id="div_Warehouse_Notification" style="width: 220px;">
 
-                <div class="panel-body list-group scroll" style="width: 220px; height: 235px; overflow: auto;">
+                <div class="panel-body list-group scroll" style="width: 220px; height: 200px; overflow: auto;">
                     <div class="page-content-wrap">
 
                     </div>
                 </div>
-
+                @*Added by vinod mane on 27/10/2016*@
+                <div class="panel-footer text-center">
+                    <a href="/PurchaseOrderRequest/Search">Create Purchase Order Request</a>
+                </div>
+                @*End*@
             </div>
 
-
+            
         </li>
        <!--Added by aditya[07102016] End-->
 
@@ -145,7 +175,13 @@
             function () {
                 setInterval(function () {
                     var randomnumber = Math.floor(Math.random() * 100);
-                    $("#notification_Icon").attr("src", "../Images/notification.gif");
+                    $("#notification_Icon").attr("src", "../../Images/notification.gif");
                 }, 3000);
             });
 </script>
+
+<style>
+    .branch_header {
+        background-image: url("../../Images/notification.gif");
+    }
+</style>

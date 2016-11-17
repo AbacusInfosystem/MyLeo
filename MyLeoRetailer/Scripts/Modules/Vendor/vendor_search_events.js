@@ -1,6 +1,8 @@
 ﻿
 
 $(function () {
+    
+    document.getElementById('btnedit').disabled = true;
 
     Get_Vendors();
 
@@ -9,7 +11,9 @@ $(function () {
         if ($(this).prop('checked'))
         {
             $("#hdnVendorID").val(this.value);
-            $("#btnedit").show(); //Added by Vinod Mane on 19/09/2016
+            //$("#btnedit").show(); //Added by Vinod Mane on 19/09/2016
+
+            document.getElementById('btnedit').disabled = false;
         }
     });
 
@@ -31,13 +35,14 @@ $(function () {
 
 
     $("[name='Filter.Vendor_Name']").focusout(function () {
-
+        document.getElementById('btnedit').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendors();
 
     });
 
     //Added By Vinod Mane on 22/09/2016
     $(document).on("change", "#hdnVendor_ID", function () {
+        document.getElementById('btnedit').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Vendors();
     });
     //End

@@ -32,16 +32,16 @@ namespace MyLeoRetailerRepo
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-            if (PurchaseInvoice.Purchase_Invoice_Id != 0)
-            {
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
-            }
-            else
-            {
+            //if (PurchaseInvoice.Purchase_Invoice_Id != 0)
+            //{
+            //    //sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+            //}
+            //else
+            //{
                 sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
 
                 sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
-            }
+           // }
 
             sqlParams.Add(new SqlParameter("@Purchase_Invoice_No", PurchaseInvoice.Purchase_Invoice_No));
 
@@ -63,7 +63,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Date", null));
             }
 
             if (PurchaseInvoice.Against_Form_Date != DateTime.MinValue)
@@ -72,7 +72,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Against_Form_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Against_Form_Date", null));
             }
 
             if (PurchaseInvoice.Purchase_Packing_Date != DateTime.MinValue)
@@ -81,7 +81,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Purchase_Packing_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Purchase_Packing_Date", null));
             }
 
             if (PurchaseInvoice.Challan_Date != DateTime.MinValue)
@@ -90,7 +90,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Challan_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Challan_Date", null));
             }
 
             sqlParams.Add(new SqlParameter("@Total_Quantity", PurchaseInvoice.Total_Quantity));
@@ -116,7 +116,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Payment_Due_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Payment_Due_Date", null));
             }
 
             sqlParams.Add(new SqlParameter("@Discount_Percentage_Before_Due_Date", PurchaseInvoice.Discount_Percentage_Before_Due_Date));
@@ -131,7 +131,7 @@ namespace MyLeoRetailerRepo
             }
             else
             {
-                sqlParams.Add(new SqlParameter("@Lr_Date", DateTime.MinValue));
+                sqlParams.Add(new SqlParameter("@Lr_Date", null));
             }
 
             sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
@@ -271,42 +271,39 @@ namespace MyLeoRetailerRepo
 
         public int Insert_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
         {
-            using (TransactionScope scope = new TransactionScope())
-            {
+
             PurchaseInvoice.Purchase_Invoice_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Purchase_Invoice(PurchaseInvoice), Storeprocedures.sp_Insert_Purchase_Invoice.ToString(), CommandType.StoredProcedure));
 
             foreach (var item in PurchaseInvoice.PurchaseInvoices)
             {
                 List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-                    item.Purchase_Invoice_Id = PurchaseInvoice.Purchase_Invoice_Id;                    
+                item.Purchase_Invoice_Id = PurchaseInvoice.Purchase_Invoice_Id;
 
-                    sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice_Item(item), Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
-                
-                   
+                sqlHelper.ExecuteNonQuery(Set_Values_In_Purchase_Invoice_Item(item), Storeprocedures.sp_Insert_Purchase_Invoice_Item.ToString(), CommandType.StoredProcedure);
+
+
                 //--------Added by aditya 05102016 [start]------------------------------
-                   sqlParams = new List<SqlParameter>();
-                   
-                   sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
-                   
-                   sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
-                   
-                   sqlParams.Add(new SqlParameter("@Article_Number", item.Article_No));
-                   
-                   sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
-                   
-                   sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
-                   
-                   sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
-                   
-                   sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
-                   
-                   sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
-                   
-                   sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Product_Warehouse.ToString(), CommandType.StoredProcedure);
+                sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Purchase_Invoice_Id", PurchaseInvoice.Purchase_Invoice_Id));
+
+                sqlParams.Add(new SqlParameter("@SKU_Code", item.SKU_Code));
+
+                sqlParams.Add(new SqlParameter("@Article_Number", item.Article_No));
+
+                sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
+
+                sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
+
+                sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));
+
+                sqlParams.Add(new SqlParameter("@Updated_By", PurchaseInvoice.Updated_By));
+
+                sqlParams.Add(new SqlParameter("@Updated_Date", PurchaseInvoice.Updated_Date));
+
+                sqlHelper.ExecuteNonQuery(sqlParams, Storeprocedures.sp_Insert_Product_Warehouse.ToString(), CommandType.StoredProcedure);
                 //--------Added by aditya 05102016 [end]------------------------------
-                }
-                scope.Complete();
 
             }
 
@@ -638,41 +635,26 @@ namespace MyLeoRetailerRepo
             PurchaseInvoice.Challan_No = Convert.ToString(dr["Challan_No"]);
 
 
-            if (dr.IsNull("Purchase_Invoice_Date"))
-            {
-                PurchaseInvoice.Purchase_Invoice_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Purchase_Invoice_Date"))
             {
                 PurchaseInvoice.Purchase_Invoice_Date = Convert.ToDateTime(dr["Purchase_Invoice_Date"]);
             }
-
-            if (dr.IsNull("Against_Form_Date"))
-            {
-                PurchaseInvoice.Against_Form_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Against_Form_Date"))
             {
                 PurchaseInvoice.Against_Form_Date = Convert.ToDateTime(dr["Against_Form_Date"]);
             }
-
-            if (dr.IsNull("Purchase_Packing_Date"))
-            {
-                PurchaseInvoice.Purchase_Packing_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Purchase_Packing_Date"))
             {
                 PurchaseInvoice.Purchase_Packing_Date = Convert.ToDateTime(dr["Purchase_Packing_Date"]);
             }
-
-            if (dr.IsNull("Challan_Date"))
-            {
-                PurchaseInvoice.Challan_Date = DateTime.MinValue;
-            }
-            else
+           
+            if (!dr.IsNull("Challan_Date"))
             {
                 PurchaseInvoice.Challan_Date = Convert.ToDateTime(dr["Challan_Date"]);
             }
+           
 
             PurchaseInvoice.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
 
@@ -688,11 +670,7 @@ namespace MyLeoRetailerRepo
 
             PurchaseInvoice.Net_Amount = Convert.ToDecimal(dr["Net_Amount"]);
 
-            if (dr.IsNull("Payment_Due_Date"))
-            {
-                PurchaseInvoice.Payment_Due_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Payment_Due_Date"))
             {
                 PurchaseInvoice.Payment_Due_Date = Convert.ToDateTime(dr["Payment_Due_Date"]);
             }
@@ -703,15 +681,11 @@ namespace MyLeoRetailerRepo
 
             PurchaseInvoice.Lr_No = Convert.ToString(dr["Lr_No"]);
 
-            if (dr.IsNull("Lr_Date"))
-            {
-                PurchaseInvoice.Lr_Date = DateTime.MinValue;
-            }
-            else
+            if (!dr.IsNull("Lr_Date"))
             {
                 PurchaseInvoice.Lr_Date = Convert.ToDateTime(dr["Lr_Date"]);
             }
-
+           
             PurchaseInvoice.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
 
             PurchaseInvoice.Created_By = Convert.ToInt32(dr["Created_By"]);

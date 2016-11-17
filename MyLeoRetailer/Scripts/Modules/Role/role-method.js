@@ -101,6 +101,8 @@ function Reset_Role() {
     $("[name='role.Is_Active']").val(true);
 
     //$("[name='Filter.Role']").val("");
+    $("[name='Role_List']").removeClass("active");//Added by vinod mane on 25/10/2016
+    
 
     $("#spnRoleName").text("");
     Get_RoleAccess_Functions(0);

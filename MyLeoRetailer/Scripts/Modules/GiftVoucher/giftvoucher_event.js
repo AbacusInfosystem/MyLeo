@@ -20,12 +20,13 @@
 
 
     $("#btnGiftVoucherPrint").click(function () {       
-        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Print");
+        $("#frmGiftVoucher").attr("action", "/GiftVoucher/Print/");
+        $('#frmGiftVoucher').attr("method", "POST");
         $("#frmGiftVoucher").submit();           
     });
 
     if ( $('#hdn_GiftVoucherId').val() != 0) {
-        $("#btnCancel").attr('disabled', true);//Added by vinod mane on 10/10/2016
+        //$("#btnCancel").attr('disabled', true);//Added by vinod mane on 10/10/2016
         if ($('#mode').val() == 2) {
            
             $("#divBankName").show();
@@ -72,6 +73,7 @@
           
             $("#divBankName").hide();
             $("#divCreditCardNo").hide();
+            $("#hdn_GiftVoucherNo").val("");
        // }
     });
 });

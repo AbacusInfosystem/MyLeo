@@ -64,6 +64,16 @@ namespace MyLeoRetailer
             //End
             #endregion
 
+            #region GiftVoucher
+
+            routes.MapRoute(
+            name: "GiftVoucher-1",
+            url: "GiftVoucher/check-gift-voucher-no/{Gift_Voucher_No}",
+            defaults: new { controller = "GiftVoucher", action = "Check_Existing_Gift_Voucher_No", Gift_Voucher_No = UrlParameter.Optional, id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            #endregion
+
             #region Category
 
             routes.MapRoute(
@@ -177,6 +187,14 @@ namespace MyLeoRetailer
            namespaces: new string[] { "MyLeoRetailer.Controllers" });
             //End
 
+            //Added By Vinod Mane on 18/10/2016
+            routes.MapRoute(
+           name: "employee-3",
+           url: "employee/check-Email_ID/{Email_ID}",
+           defaults: new { controller = "Employee", action = "Check_Existing_Email_ID", Email_ID = UrlParameter.Optional, id = UrlParameter.Optional },
+           namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            //End
+
             #endregion
 
             #region Role
@@ -280,6 +298,13 @@ namespace MyLeoRetailer
         url: "product/check-article-no",
         defaults: new { controller = "Product", action = "Check_Existing_Article_No", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
         namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+             routes.MapRoute(
+        name: "Product-12",
+        url: "product/get-all-barcodes",
+        defaults: new { controller = "Product", action = "Get_All_Barcodes_toPrint", color_Name = UrlParameter.Optional, id = UrlParameter.Optional },
+        namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            
             
             #endregion
 

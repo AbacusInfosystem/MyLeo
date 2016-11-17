@@ -36,6 +36,18 @@ function Get_Categories()
 			Reset_Category();
 
 			$("#divCategoryPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+			$("[name='Category.IsActive']").val(1);
+
+		    //Set IsActive Button Status
+			var fix = $("[name='Category.IsActive']").val();
+
+			if (fix == 0) {
+			    document.getElementById('Flag').checked = false;
+			}
+			else {
+			    document.getElementById('Flag').checked = true;
+			}
 		}
 	});
 }
@@ -114,6 +126,7 @@ function Reset_Category()
     //Added by Vinod Mane on 26/09/2016
 	$("#hdnCategory_Name").val("");
     //End
+	$("[name='Category_List']").removeClass("active");//Added by vinod mane on 25/10/2016
 }
 
 function Get_Category_By_Id(obj)

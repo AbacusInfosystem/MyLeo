@@ -1,4 +1,6 @@
 ﻿@model MyLeoRetailer.Models.Transaction.PurchaseReturnRequestViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
 
 <script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-validation.js"></script>
 <script src="~/Scripts/Modules/PurchaseReturnRequest/purchase-return-request-event.js"></script>
@@ -91,7 +93,7 @@
                             <div class="block">
                                 <h4 style="margin-top: 0px;">Purchase Invoice details.</h4>
 
-                                <input type="hidden" class="form-control input-sm" name="Invoice" id="hdf_Purchase_Invoice_Id">
+                                <input type="hidden" class="form-control input-sm" name="Invoice" id="hdf_Purchase_Invoice_Id" value="x">
 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Purchase Invoice No.</span>
@@ -106,9 +108,9 @@
                     </div>
                     
                     <div class="row">
-                        <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                        <div class="table-responsive" style="width:100%; background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
                             <input type="hidden" id="hdnRowIdspecific" value="0" />
-                            <table class="table table-bordered table-hover" id="tblPurchaseReturnRequestItems">
+                            <table class="table table-hover" id="tblPurchaseReturnRequestItems">
                                 <thead>
                                     <tr>
                                         <th style="width:150px;">Barcode No.</th>
@@ -123,20 +125,24 @@
                                         <th style="width:60px;">Quantity</th>
                                         <th style="width:60px;">WSR</th>
                                         <th style="width:60px;">Total Amount</th>
-                                        <th style="width:165px;">Action</th>
+                                        <th style="width:90px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @*<span generated="true" style="color: #b64645;" class="help-block pull-right" id="lblError"></span>*@
                                     <tr id="PurchaseReturnRequestItemRow_0">
-                                        <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Barcode" id="textBarcode_No_0" maxlength="30">
-                                        </td>
-                                        
                                         @*<td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
-                                            <input type="hidden" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Purchase_Order_Id" id="hdnPurchase_Order_Id_0" />
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Barcode" id="textBarcode_No_0" maxlength="30">
                                         </td>*@
+
+                                        <td>
+                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Barcode" id="textBarcode_No_0" onchange="javascript: Get_Purchase_Return_Items_By_Barcode(0);" placeholder="Barcode No">
+                                        </td>
+
+                                        @*<td>
+                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
+                            <input type="hidden" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Purchase_Order_Id" id="hdnPurchase_Order_Id_0" />
+                        </td>*@
 
                                         <td>
                                             <div class="form-group auto-complete">
@@ -177,8 +183,8 @@
                                             <input type="hidden" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Size_Id" id="hdnSize_Id_0" />
                                         </td>
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Quantity" id="textQuantity_0" value="1" onblur="javascript: CalculateTotal();" maxlength="10" />
-                                            @*<input class="form-control input-sm" type="hidden" name="" id="hdnQuantity_0" value="" />*@ 
+                                            <input class="form-control input-sm validate" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Quantity" id="textQuantity_0" value="1" onblur="Add_Validation(0); CalculateTotal()" maxlength="10" />
+                                            @*<input class="form-control input-sm" type="hidden" name="" id="hdnQuantity_0" value="" />*@
                                         </td>
                                         <td>
                                             <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].WSR_Price" id="textWSR_Price_0" value="0" readonly />
@@ -188,8 +194,8 @@
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnRequestDetails();'>Add Row</button>
-                                                <button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript: DeletePurchaseReturnRequestDetailsData(0);'>Delete</button>
+                                                <button type='button' id='addrow-Return-details' class='btn btn-success active' onclick='javascript: AddPurchaseReturnRequestDetails();'>+</button>
+                                                <button type='button' id='delete-Return-details' class='btn btn-danger active' onclick='javascript: DeletePurchaseReturnRequestDetailsData(0);'>x</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -200,14 +206,15 @@
 
 
                     <div class="row">
-                        <div class="table-responsive" style="width:100%;">
-                            <table class="table table-bordered" id="tblPurchaseReturnRequest">
+                        <div class="table-responsive" style="width:100%; background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                            <table class="table" id="tblPurchaseReturnRequest">
                                 <thead>
                                     <tr></tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td colspan="8"></td>
+                                        
                                         <td style="width:80px;">
                                             <label>Total Qty</label>
                                         </td>
@@ -220,7 +227,7 @@
                                         <td style="width:80px;">
                                             <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.Total_Amount" readonly value="0" id="textTotalAmount_0">
                                         </td>
-                                        <td style="width:140px;"></td>
+                                        <td style="width:100px;"></td>
                                     </tr>
                                     <tr>
                                         <td colspan="9"></td>
@@ -288,7 +295,7 @@
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
                                 <button type="button" id="btnSaveRequest" class="btn btn-success active">Save</button>
-                                <button type="reset" id="btnCancelRequest" class="btn btn-danger active">Cancel</button>
+                                <button type="reset" id="btnCancelRequest" class="btn btn-danger active">Reset</button>
                             </div>
                         </div>
                         <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">

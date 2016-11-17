@@ -1,9 +1,12 @@
 ﻿$(document).ready(function () {
 
+    $("input.mask_mobile_no").mask('(99) 99999-99999');
 
     $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "SKU Required", digits: "Invalid quantity." } });
+
     $("#textSKU_No_0").rules("add", { required: true, checkSKUExist: true, messages: { required: "Required field", } });
 
+    $("#textBarcode_No_0").rules("add", { checkBarcodeExist: true });
 
     $('#dtpReturn_Date').datepicker({
 
@@ -123,7 +126,7 @@ function CalculateTotal()
             var Amount = parseFloat(MRP * Qty - DiscountAmt);
             $("#tblSalesReturnItems").find('[id="textAmount_' + i + '"]').val(Amount);
            
-            sumQuantity = sumQuantity + Qty;
+            sumQuantity = parseFloat(sumQuantity) + parseFloat(Qty);
             sumGrossAmount = sumGrossAmount + Amount;
           
         }
