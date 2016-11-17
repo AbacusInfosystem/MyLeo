@@ -20,10 +20,10 @@ function Get_Sales_Summary_Report() {
 
             },
 
-            Grid_Detail: {
+            //Grid_Detail: {
 
-                Pager: Set_Pager($("#divSalesReportPager"))
-            }
+            //    Pager: Set_Pager($("#divSalesReportPager"))
+            //}
         }
 
     $.ajax({
@@ -48,7 +48,7 @@ function Get_Sales_Summary_Report() {
 
             // Reset_Payable();
 
-           $("#divPayablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+          // $("#divPayablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Friendly_Messages(obj);
 

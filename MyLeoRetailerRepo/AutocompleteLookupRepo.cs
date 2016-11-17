@@ -410,6 +410,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Sales_Invoice_table")
+                {
+                    if (fieldName == "Customer_Id")
+                    {
+                        strquery = " Select distinct si.Sales_Invoice_Id,si.Sales_Invoice_No from Sales_Invoice si ";
+                        strquery += "left join Customer c on si.Customer_Id=c.Customer_Id ";
+                        strquery += "where si.Customer_Id in (SELECT * FROM dbo.CSVToTable('" + fieldValue + "'))";
+                    }
+                }
 
                 //if (table_Name == "Sales_Invoice")
                 //{
