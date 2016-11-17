@@ -6,7 +6,11 @@ function Get_Inventories() {
 
 		        Branch_Id: $("[name='Filter.Branch_Id']").val(),
 
-		        Product_SKU: $("[name='Filter.Product_SKU']").val()
+		        Product_SKU: $("[name='Filter.Product_SKU']").val(),
+
+		        Brand_Code: $("[name='Filter.Brand_Code']").val(),
+
+		        Category_Code: $("[name='Filter.Category_Code']").val()
 		    },
 		    Grid_Detail: {
 
@@ -38,6 +42,10 @@ function Get_Inventories() {
 
             Set_Branch_Id();
 
+            Set_Brand_Code();
+
+            Set_Category_Code();
+
             $("#divInventoryPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Friendly_Messages(obj);
@@ -45,11 +53,14 @@ function Get_Inventories() {
     });
 }
 
-function Reset_Inventory()
-{
+function Reset_Inventory() {
     $("[name='Filter.Branch_Id']").val("");
 
     $("[name='Filter.Product_SKU']").val("");
+
+    $("[name='Filter.Brand_Name']").val();
+
+    $("[name='Filter.Category']").val();
 
     $("#hdnBranch_Id").val("");
 
@@ -61,9 +72,23 @@ function Reset_Inventory()
 
     $("#hdntempId").val("");
 
-    $("#textBrand").val("");
+    $("#textBranch").val("");
 
     $("#textSKU_Code").val("");
+
+    $("#hdnBrand_Code").val("");
+
+    $("#hdnBrand_Name").val("");
+
+    $("#textBrand").val("");
+
+    $("#hdnCategory").val("");
+
+    $("#hdnCategory_Code").val("");
+
+    $("#textCategory").val("");
+
+
 }
 
 
@@ -73,15 +98,44 @@ function Set_Branch_Id() {
 
     var Lookup_Id = $("#hdnBranch_Id").val();
 
-    if (Lookup_Id == NaN || Lookup_Id == '')
-    {
+    if (Lookup_Id == NaN || Lookup_Id == '') {
         $("#hdntempId").val(Id);
     }
-    else
-    {
+    else {
         $("#hdntempId").val(Lookup_Id);
     }
 
-    
+
 }
 
+function Set_Brand_Code() {
+
+    var Id = $("#hdnBranchIDs").val();
+
+    var Lookup_Id = $("#hdnBrand_Name").val();
+
+    if (Lookup_Id == NaN || Lookup_Id == '') {
+        $("#hdntempId").val(Id);
+    }
+    else {
+        $("#hdntempId").val(Lookup_Id);
+    }
+
+
+}
+
+function Set_Category_Code() {
+
+    var Id = $("#hdnBranchIDs").val();
+
+    var Lookup_Id = $("#hdnCategory").val();
+
+    if (Lookup_Id == NaN || Lookup_Id == '') {
+        $("#hdntempId").val(Id);
+    }
+    else {
+        $("#hdntempId").val(Lookup_Id);
+    }
+
+
+}
