@@ -74,8 +74,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_Access)]
-        public ActionResult Search(PurchaseOrderViewModel poViewModel)
+        public ActionResult Search(int PurchaseReport_Id)
         {
+            PurchaseOrderViewModel poViewModel = new PurchaseOrderViewModel();
+
+            poViewModel.PurchaseOrder.PurchaseReport_Id = PurchaseReport_Id;
+
+            //poViewModel.PurchaseOrder.PurchaseOrder_Id = PurchaseOrder_Id;
             try
             {
                 if (TempData["poViewModel"] != null)
@@ -383,6 +388,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_View)]
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
         {
+            int Id = poViewModel.PurchaseOrder.PurchaseReport_Id;
             try
             {
                 if (TempData["poViewModel"] != null)
@@ -394,6 +400,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.Filter.Purchase_Order_Id);
 
+                poViewModel.PurchaseOrder.PurchaseReport_Id = Id;
             }
             catch (Exception ex)
             {
