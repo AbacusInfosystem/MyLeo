@@ -10,7 +10,6 @@
 
         document.getElementById('btnPrintPurchaseReturn').disabled = true;
 
-
         Get_Purchase_Returns();
 
         $(document).on('change', '[name="Purchase_Return_List"]', function (event) {
@@ -77,6 +76,29 @@
             $("#frmPurchaseReturn").submit();
         });
 
+
+
+        $("#btnUpdatePurchaseReturn").click(function (event) {
+
+            var PurchaeReturnId = $('#hdnPurchaseReturnId').val();
+            $("#div_Parent_Modal_Fade").find(".modal-body").load("/PurchaseReturn/Update_GR_No", { Id: PurchaeReturnId }, call_back);
+
+            document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+
+        });
+
+        //Added By Vinod Mane on 26/10/2016
+        $(document).on("change", "#hdnPurchaseReturnId", function () {
+
+            Get_Purchase_Returns();
+        });
+
+        $(document).on("change", "#hdnGRNoId", function () {
+
+            Get_Purchase_Returns();
+        });
+
+
     }
     else
     {
@@ -106,31 +128,5 @@
         });
     }
 
-
-
 });
 
-$(function () {
-
-
-    $("#btnUpdatePurchaseReturn").click(function (event) {
-
-        var PurchaeReturnId = $('#hdnPurchaseReturnId').val();
-        $("#div_Parent_Modal_Fade").find(".modal-body").load("/PurchaseReturn/Update_GR_No", { Id: PurchaeReturnId }, call_back);
-
-        document.getElementById('btnUpdatePurchaseReturn').disabled = true;
-
-    });
-
-    //Added By Vinod Mane on 26/10/2016
-    $(document).on("change", "#hdnPurchaseReturnId", function () {
-       
-        Get_Purchase_Returns();
-    });
-
-    $(document).on("change", "#hdnGRNoId", function () {
-
-        Get_Purchase_Returns();
-    });
-    //End
-});
