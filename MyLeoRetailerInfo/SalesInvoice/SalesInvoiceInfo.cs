@@ -23,7 +23,7 @@ namespace MyLeoRetailerInfo.SalesInvoice
 
        public string Brand_Name { get; set; }
 
-       public int Brand_ID { get; set; }
+       //public int Brand_ID { get; set; }
 
      
 

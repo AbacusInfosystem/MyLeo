@@ -91,11 +91,15 @@ function Get_Purchase_Invoice_Items_By_Barcode(i) {
 
     var barcode = $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode']").val().replace(/[$]/g, '-');
 
+    var Final = barcode.split("+");
+
+    var SKU = Final[0];
+
     $.ajax({
 
         url: "/PurchaseInvoice/Get_Purchase_Invoice_Items_By_SKU_Code",
 
-        data: { SKU_Code: barcode },
+        data: { SKU_Code: SKU },
 
         method: 'GET',
 
