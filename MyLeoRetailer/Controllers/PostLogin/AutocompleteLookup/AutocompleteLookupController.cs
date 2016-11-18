@@ -61,6 +61,11 @@ namespace MyLeoRetailer.Controllers
         {
             LookupViewModel LookupVM = new LookupViewModel();
 
+            if(table_Name=="Assign_Branches")
+            {
+                table_Name = "Branch";
+            }
+
             string[] cols;
 
             string[] headerNamesArr;
@@ -78,7 +83,7 @@ namespace MyLeoRetailer.Controllers
             {
                 if (field_Value != null)
                 {
-                    LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_For_Subcategory(field_Value, table_Name, cols);
+                    LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Single_Branch(field_Value, table_Name, cols);
                 }
             }
             catch (Exception ex)

@@ -1,8 +1,10 @@
 ﻿using MyLeoRetailer.Common;
 using MyLeoRetailerHelper;
 using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Branch;
 using MyLeoRetailerInfo.Category;
 using MyLeoRetailerInfo.Common;
+using MyLeoRetailerRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -134,6 +136,25 @@ namespace MyLeoRetailer.Controllers
 				}
 			}
 		}
+           
+     
+        public BranchInfo Set_Branch(string BranchIds)
+        {
+            BranchInfo Branch= new BranchInfo();
+
+            BranchRepo branchRepo = new BranchRepo();
+
+            string[] Ids = BranchIds.Split(',');
+
+            if (Ids.Length == 1)
+            {
+                Branch.Branch_ID = Convert.ToInt32(Ids[0]);
+
+                Branch = branchRepo.Get_Branch_By_Id(Branch.Branch_ID);               
+            }
+
+            return Branch;
+        }
 
 		//public void Set_Sestion()
 		//{

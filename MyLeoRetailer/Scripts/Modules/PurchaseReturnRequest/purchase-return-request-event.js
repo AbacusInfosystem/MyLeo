@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
 
+    if ($("#hdnSelecteddBranchId").val() != "") {
+
+        $("#Branch").find(".autocomplete-text").trigger("focusout");
+    }
+
     Add_Validation(0);
 
     $('#drpVendor_Id').change(function () {

@@ -380,6 +380,13 @@ namespace MyLeoRetailer.Common
 
             #endregion
 
+
+            #region Barcode
+
+            FriendlyMessage BAR01 = new FriendlyMessage("BAR01", MessageType.Success, "Barcode added successfully.");
+            hash.Add("BAR01", BAR01);          
+
+            #endregion
         }
 
 		public static FriendlyMessage Get(string code)

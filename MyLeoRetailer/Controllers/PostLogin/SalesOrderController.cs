@@ -25,11 +25,15 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         public ReceivableRepo rRepo;
 
+        public BranchRepo bRepo;
+
         public SalesOrderController()
         {
             siRepo = new SalesOrderRepo();
 
             rRepo = new ReceivableRepo();
+
+            bRepo = new BranchRepo();
         }
 
         public ActionResult Index(SalesInvoiceViewModel siViewModel)
@@ -45,6 +49,13 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
 
                 siViewModel.GiftVoucherDetails = siRepo.Get_Gift_Voucher_Details_By_Id(); //Added by vinod mane on 10/10/2016
+
+                siViewModel.Branch = Set_Branch(siViewModel.Cookies.Branch_Ids.TrimEnd());
+
+                siViewModel.SalesInvoice.Branch_Id = siViewModel.Branch.Branch_ID;
+
+                siViewModel.SalesInvoice.Branch_Name = siViewModel.Branch.Branch_Name;
+
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)

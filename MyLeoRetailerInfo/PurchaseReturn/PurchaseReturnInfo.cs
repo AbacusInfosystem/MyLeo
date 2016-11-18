@@ -155,6 +155,8 @@ namespace MyLeoRetailerInfo.PurchaseReturn
 
         public string Total_Amount_In_Word { get; set; }
 
+        public int PurchaseReturnReport_Id { get; set; }
+
     }
 
     public class Filter_Purchase_Return

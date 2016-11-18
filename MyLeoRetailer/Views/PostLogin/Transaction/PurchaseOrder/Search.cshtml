@@ -68,12 +68,20 @@
                         <div class="col-md-8" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
                             <div class="btn-group">
-                                <button type="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseOrder">Create</button>
-                                @*<button type="button" class="btn btn-danger active" disabled value="Edit" id="btnEditPurchaseOrder">View</button>
-                                    <button type="button" class="btn btn-info active" disabled value="View" id="btnViewPurchaseOrder">Print</button>*@
 
-                                <button type="button" class="btn btn-danger active edit" disabled value="Edit" id="btnEditPurchaseOrder">View</button>
-                                <button type="button" class="btn btn-info active edit" disabled value="View" id="btnViewPurchaseOrder">Print</button>
+                                <input type="hidden" id="hdnPurchaseReport_Id" name="PurchaseOrder.PurchaseReport_Id" value="@Model.PurchaseOrder.PurchaseReport_Id" />
+                                @if (@Model.PurchaseOrder.PurchaseReport_Id == 1)
+                                {
+                                    <button type="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseOrder">Create</button>
+                                    @*<button type="button" class="btn btn-danger active" disabled value="Edit" id="btnEditPurchaseOrder">View</button>
+                <button type="button" class="btn btn-info active" disabled value="View" id="btnViewPurchaseOrder">Print</button>*@
+                                    <button type="button" class="btn btn-danger active edit" disabled value="Edit" id="btnEditPurchaseOrder">View</button>
+                                    <button type="button" class="btn btn-info active edit" disabled value="View" id="btnViewPurchaseOrder">Print</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-danger active edit" disabled value="Edit" id="btnEditPurchaseOrder">Details</button>
+                                }
                             </div>
 
                         </div>

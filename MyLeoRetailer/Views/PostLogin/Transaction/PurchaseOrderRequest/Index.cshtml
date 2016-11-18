@@ -1,4 +1,6 @@
 ﻿@model MyLeoRetailer.Models.PurchaseOrderRequestViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
 
 <script src="~/Scripts/Modules/PurchaseOrderRequest/purchaseorderrequest_events.js"></script>
 <script src="~/Scripts/Modules/PurchaseOrderRequest/purchaseorderrequest_methods.js"></script>
@@ -38,13 +40,35 @@
 
     <form role="form" id="frmPurchaseOrderRequest">
 
-        <div class="row">
-            @*Added by vinod Mane on 03/10/2016*@
-            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
-                <div class="block">
-                    <h4 style="margin-top: 0px;">Branch Details.</h4>
+        <input type="hidden" id="hdnSelecteddBranchId" value="@Model.PurchaseOrderRequest.Branch_Id">
 
+        <div class="row">
+           
+            <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 150px;">
+                <div class="block" id="divBranch">
+
+                    <h4 style="margin-top: 0px;">Branch details.</h4>
+
+                    @{
+                        LoginInfo Cookies = new LoginInfo();
+                        Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                        <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                    }
                     <div class="form-group auto-complete">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                        <div id="Branch" class="input-group">
+                            <input type="text" class="form-control invoice-filter autocomplete-text lookup-text" name="Branch" id="textBrand" placeholder="Enter Branch to search" value="@Model.PurchaseOrderRequest.Branch_Name" data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
+                            <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                            <input type="hidden" id="hdnBranch_Id" value="@Model.PurchaseOrderRequest.Branch_Id" name="PurchaseOrderRequest.Branch_Id" class="auto-complete-value" />
+                            <input type="hidden" id="hdnBranch_Name" value="@Model.PurchaseOrderRequest.Branch_Name" name="PurchaseOrderRequest.Branch_Name" class="auto-complete-label" />
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*<div class="form-group auto-complete">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch Name.</span>
                         <div class="input-group">
                             <input type="text" class="form-control autocomplete-text" id="textBrand" name="Branch" placeholder="Branch name" value="" data-table="Branch" data-col="Branch_ID,Branch_Name" data-headernames="Branches" data-param="hdnCookiesBranches" data-field="Branch_ID" />
@@ -52,11 +76,9 @@
                             <input type="hidden" id="hdnBranch_Id" value="" name="PurchaseOrderRequest.Branch_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnBranch_Name" value="" name="PurchaseOrderRequest.Branch_Name" class="auto-complete-label" />
                         </div>
-                    </div>
-
-                </div>
+                    </div>*@
             </div>
-            @*End*@
+          
 
             <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; padding: 10px; height: 150px;">
                 <div class="block">

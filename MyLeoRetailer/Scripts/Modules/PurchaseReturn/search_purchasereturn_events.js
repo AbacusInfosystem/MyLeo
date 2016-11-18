@@ -1,78 +1,112 @@
 ﻿$(document).ready(function () {
 
-   
-    document.getElementById('btnEditPurchaseReturn').disabled = true;
+    var PurchaseReturnReport_Id = document.getElementById('hdnPurchaseReturnReport_Id').value
 
-    document.getElementById('btnUpdatePurchaseReturn').disabled = true;
+    if (PurchaseReturnReport_Id == 1) {
 
-    document.getElementById('btnPrintPurchaseReturn').disabled = true;
+        document.getElementById('btnEditPurchaseReturn').disabled = true;
 
-   
-    Get_Purchase_Returns();
+        document.getElementById('btnUpdatePurchaseReturn').disabled = true;
 
-    $(document).on('change', '[name="Purchase_Return_List"]', function (event) {
-        if ($(this).prop('checked')) {
-            $("#hdnPurchaseReturnId").val(this.value);
-            document.getElementById('btnEditPurchaseReturn').disabled = false;
-            document.getElementById('btnPrintPurchaseReturn').disabled = false;
-            document.getElementById('btnUpdatePurchaseReturn').disabled = false;
-        }
-    });
+        document.getElementById('btnPrintPurchaseReturn').disabled = true;
 
-    $("#txtDebit_Note_No").focusout(function () {
-
-        $("[name='Filter.Debit_Note_No']").val($("#txtDebit_Note_No").val());
 
         Get_Purchase_Returns();
 
-        //$("[name='Filter.Debit_Note_No']").val('');
+        $(document).on('change', '[name="Purchase_Return_List"]', function (event) {
+            if ($(this).prop('checked')) {
+                $("#hdnPurchaseReturnId").val(this.value);
+                document.getElementById('btnEditPurchaseReturn').disabled = false;
+                document.getElementById('btnPrintPurchaseReturn').disabled = false;
+                document.getElementById('btnUpdatePurchaseReturn').disabled = false;
+            }
+        });
 
-        //$("[name='Filter.Purchase_Return_Id']").val('');
-    });
+        $("#txtDebit_Note_No").focusout(function () {
 
-    $("#txtGR_No").focusout(function () {
+            $("[name='Filter.Debit_Note_No']").val($("#txtDebit_Note_No").val());
 
-        $("[name='Filter.GR_No']").val($("#txtGR_No").val());
+            Get_Purchase_Returns();
 
+            //$("[name='Filter.Debit_Note_No']").val('');
+
+            //$("[name='Filter.Purchase_Return_Id']").val('');
+        });
+
+        $("#txtGR_No").focusout(function () {
+
+            $("[name='Filter.GR_No']").val($("#txtGR_No").val());
+
+            Get_Purchase_Returns();
+        });
+
+
+        //$(document).on('change', '#txtDebit_Note_No', function (event) {
+
+        //    var dbono = $("#txtDebit_Note_No").val();      
+
+        //    $("[name='Filter.Debit_Note_No']").val(dbono);
+
+        //    Get_Purchase_Returns();    
+        //});
+
+
+        $("#btnCreatePurchaseReturn").click(function () {
+            $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Index/");
+
+            $('#frmPurchaseReturn').attr("method", "POST");
+
+            $("#frmPurchaseReturn").submit();
+        });
+
+        $("#btnEditPurchaseReturn").click(function () {
+
+            $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Get_Purchase_Return_Details_By_Id/");
+
+            $('#frmPurchaseReturn').attr("method", "POST");
+
+            $('#frmPurchaseReturn').submit();
+
+        });
+
+        $("#btnPrintPurchaseReturn").click(function () {
+            $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Get_Purchase_Return_Details/");
+
+            $('#frmPurchaseReturn').attr("method", "POST");
+
+            $("#frmPurchaseReturn").submit();
+        });
+
+    }
+    else
+    {
+        document.getElementById('btnEditPurchaseReturn').disabled = true;
         Get_Purchase_Returns();
-    });
+        $(document).on('change', '[name="Purchase_Return_List"]', function (event) {
+            if ($(this).prop('checked')) {
+                $("#hdnPurchaseReturnId").val(this.value);
+                document.getElementById('btnEditPurchaseReturn').disabled = false;
+            }
+        });
+        $("#txtDebit_Note_No").focusout(function () {
 
-  
-    //$(document).on('change', '#txtDebit_Note_No', function (event) {
+            $("[name='Filter.Debit_Note_No']").val($("#txtDebit_Note_No").val());
 
-    //    var dbono = $("#txtDebit_Note_No").val();      
+            Get_Purchase_Returns();
 
-    //    $("[name='Filter.Debit_Note_No']").val(dbono);
+        });
+        $("#btnEditPurchaseReturn").click(function () {
 
-    //    Get_Purchase_Returns();    
-    //});
+            $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Get_Purchase_Return_Details_By_Id/");
+
+            $('#frmPurchaseReturn').attr("method", "POST");
+
+            $('#frmPurchaseReturn').submit();
+
+        });
+    }
 
 
-    $("#btnCreatePurchaseReturn").click(function () {
-        $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Index/");
-
-        $('#frmPurchaseReturn').attr("method", "POST");
-
-        $("#frmPurchaseReturn").submit();
-    });
-
-    $("#btnEditPurchaseReturn").click(function () {
-
-        $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Get_Purchase_Return_Details_By_Id/");
-
-        $('#frmPurchaseReturn').attr("method", "POST");
-
-        $('#frmPurchaseReturn').submit();
-
-    });
-       
-    $("#btnPrintPurchaseReturn").click(function () {
-        $("#frmPurchaseReturn").attr("action", "/PurchaseReturn/Get_Purchase_Return_Details/");
-
-        $('#frmPurchaseReturn').attr("method", "POST");
-
-        $("#frmPurchaseReturn").submit();
-    });
 
 });
 
