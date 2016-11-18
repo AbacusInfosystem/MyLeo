@@ -98,8 +98,9 @@ namespace MyLeoRetailerInfo.PurchaseInvoice
         public DateTime Updated_Date { get; set; }
 
         public int Updated_By { get; set; }
-               
 
+        public string Barcode { get; set; }
+               
         public int Purchase_Invoice_Item_Id { get; set; }
 
         public int Purchase_Order_Id { get; set; }
