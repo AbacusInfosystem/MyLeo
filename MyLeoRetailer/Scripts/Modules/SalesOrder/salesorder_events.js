@@ -19,6 +19,10 @@
 
     //    $("#divBranch").find(".autocomplete-text").trigger("focusout");
 
+    //$("#btnCustomer").click(function () {
+
+       
+    //});
 
 
 
@@ -131,6 +135,8 @@ $(function ()
         // alert($("#hdnCreateCustomerFlag").val());
 
         $("#frmSalesOrder").validate().cancelSubmit = true;
+
+        //$("#Searchcustomer").hide();
 
         //$('#textSKU_No_0').rules("remove");
 

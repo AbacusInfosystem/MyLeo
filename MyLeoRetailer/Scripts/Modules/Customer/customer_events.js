@@ -49,7 +49,8 @@ $(function () {
     //    document.getElementById('txtcheckbox').checked = false;
 
     //});
-   
+
+    
 
     $("#btnSaveCustomer").click(function () {
 

@@ -67,7 +67,7 @@ function UpdateGRNo() {
 
 		        Purchase_Return_Id: $("#hdnPurchaseReturnId").val(),
 
-		        GR_No: $("#txtGR_No").val()
+		        GR_No: $("[name='PurchaseReturn.GR_No']").val()
 		    }
 		}
 
@@ -119,12 +119,6 @@ function call_back(data) {
     })
    
 }
-
-
-
-
-
-
 
 //function Get_Purchase_Returns() {
 //        var prViewModel =
