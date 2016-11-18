@@ -221,7 +221,7 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
                 pager = siViewModel.Grid_Detail.Pager;
 
-                siViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Branch_Name,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount", "Sales_Invoice_Id,Branch_Id"); // Set grid info for front end listing
+                siViewModel.Grid_Detail = Set_Grid_Details(false, "Sales_Invoice_No,Branch_Name,,Customer,Total_Quantity,Total_MRP_Amount,Total_Discount_Amount,Gross_Amount,Tax_Percentage,Net_Amount", "Sales_Invoice_Id,Branch_Id"); // Set grid info for front end listing
 
                 siViewModel.Grid_Detail.Records = siRepo.Get_Sales_Order_Search_Details(siViewModel.SalesInvoice, siViewModel.Cookies.Branch_Ids, siViewModel.Filter.Sales_Invoice_No); // Call repo method 
 
@@ -444,17 +444,9 @@ namespace MyLeoRetailer.Controllers.PostLogin
             {
                 SalesOrderRepo siRepo = new SalesOrderRepo();
 
-                //Pagination_Info pager = new Pagination_Info();
-
-                //pager = siViewModel.Grid_Detail.Pager;
-
                 siViewModel.Grid_Detail = Set_Grid_Details(false, "SKU_Code,Sales_Invoice_No,Brand,Category,Sub_Category,Colour,Size,MRP_Amount,Discount,Total_Amount,SalesMan,Date", "Sales_Invoice_Id"); // Set grid info for front end listing
 
                 siViewModel.Grid_Detail.Records = siRepo.Get_Sales_Summary_Report(siViewModel.Filter); // Call repo method 
-
-                //Set_Pagination(pager, siViewModel.Grid_Detail); // set pagination for grid
-
-                //siViewModel.Grid_Detail.Pager = pager;
 
             }
 
@@ -465,7 +457,6 @@ namespace MyLeoRetailer.Controllers.PostLogin
             }
 
             return Json(JsonConvert.SerializeObject(siViewModel));
-           // return Json(JsonRequestBehavior.AllowGet);
         }
     }
 }
