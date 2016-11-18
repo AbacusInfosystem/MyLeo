@@ -36,10 +36,10 @@
         <a href="#"><span class="fa fa-file-text-o"></span> <span class="xn-text">Transactions</span></a>
         <ul class="animated zoomIn">
             <li><a href="/PurchaseOrderRequest/Search"><span class="fa fa-users"></span> Purchase Order Request </a></li>
-            <li><a href="/PurchaseOrder/Search"><span class="fa fa-users"></span> Purchase Order </a></li>
+            <li><a href="@Url.Action("Search", "PurchaseOrder", new { PurchaseReport_Id = 1 })"><span class="fa fa-users"></span> Purchase Order </a></li>
             <li><a href="/PurchaseInvoice/Search"><span class="fa fa-users"></span> Purchase Invoice </a></li>
             <li><a href="/purchase-return-request/get-purchase-return-request"><span class="fa fa-users"></span> Purchase Return Request</a></li>
-            <li><a href="/PurchaseReturn/Search"><span class="fa fa-users"></span> Purchase Return </a></li>
+            <li><a href="@Url.Action("Search", "PurchaseReturn", new { PurchaseReport_Id = 1 })"><span class="fa fa-users"></span> Purchase Return </a></li>
             <li><a href="/Payable/Index"><span class="fa fa-users"></span> Payable </a></li>
             <li><a href="/SalesOrder/Search"><span class="fa fa-users"></span> Sales Invoice</a></li>
             <li><a href="/SalesReturn/Search"><span class="fa fa-users"></span> Sales Return </a></li>
@@ -65,6 +65,8 @@
             <li><a href="/SalesOrder/Report"><span class="fa fa-users"></span> Sales </a></li>
             <li><a href="/Inventory/Search"><span class="fa fa-users"></span> Inventory </a></li>
             <li><a href="/SalesOrder/SalesSummaryReport"><span class="fa fa-users"></span> Sales Summary Report </a></li>
+            <li><a href="@Url.Action("Search", "PurchaseOrder", new { PurchaseReport_Id = 2})"><span class="fa fa-users"></span> Purchase Report</a></li>
+            <li><a href="@Url.Action("Search", "PurchaseReturn", new { PurchaseReport_Id = 2 })"><span class="fa fa-users"></span> Purchase Return Report </a></li>
         </ul>
     </li>
     @*End*@
