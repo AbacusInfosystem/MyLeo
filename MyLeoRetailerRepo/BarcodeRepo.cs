@@ -89,11 +89,11 @@ namespace MyLeoRetailerRepo
             {
                 string SKU_Code = Regex.Replace(barcode.Product_SKU, @"[^0-9a-zA-Z]+", "$");
 
-                SKU_Code += "$" + barcode.Product_Barcode_Counter;
+                SKU_Code += "+" + barcode.Product_Barcode_Counter;
 
                 string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), barcode.Product_SKU + ".png");
 
-                barcode.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Code, path);//NK_TSHR_TSRN_b_RD
+                barcode.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Code, path);
 
                 barcode.Barcode_Image_Url = barcode.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])barcode.Product_Barcode) : "";
             }
@@ -121,7 +121,17 @@ namespace MyLeoRetailerRepo
 
         public int Set_Max_Product_SKU_Barcode_Id()
         {
-            int id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(null, Storeprocedures.sp_Get_Max_Product_SKU_Barcode_Id.ToString(), CommandType.StoredProcedure));
+            int id = 0;
+
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Max_Product_SKU_Barcode_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!dr.IsNull("Product_SKU_Barcode_Id"))
+                {
+                    id = Convert.ToInt32(dr["Product_SKU_Barcode_Id"]);
+                }               
+            }
 
             return id;
         }

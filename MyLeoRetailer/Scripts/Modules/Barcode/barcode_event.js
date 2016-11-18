@@ -15,12 +15,14 @@ $(function () {
 
     $("#btnGenerate").click(function () {
 
-        $("#frmBarcodeGenerator").attr("action", "/Barcode/Insert_Barcode");
+        if ($("#frmBarcodeGenerator").valid()) {
 
-        $('#frmBarcodeGenerator').attr("method", "POST");
+            $("#frmBarcodeGenerator").attr("action", "/Barcode/Insert_Barcode");
 
-        $("#frmBarcodeGenerator").submit();
+            $('#frmBarcodeGenerator').attr("method", "POST");
 
+            $("#frmBarcodeGenerator").submit();
+        }
     });
 
     $(document).on("change", "#hdnInventory_Id", function () {

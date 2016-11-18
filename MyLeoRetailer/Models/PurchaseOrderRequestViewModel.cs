@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MyLeoRetailerInfo.PurchaseOrderRequest;
+using MyLeoRetailerInfo.Branch;
 
 namespace MyLeoRetailer.Models
 {
@@ -19,6 +20,8 @@ namespace MyLeoRetailer.Models
 			Query_Detail = new QueryInfo();
 
 			PurchaseOrderRequest = new  PurchaseOrderRequestInfo();
+
+            Branch = new BranchInfo();
 
             Filter = new Filter_Purchase_Order_Request();
 
@@ -50,6 +53,12 @@ namespace MyLeoRetailer.Models
 			get;
 			set;
 		}
+
+        public BranchInfo Branch
+        {
+            get;
+            set;
+        }
 
         public Filter_Purchase_Order_Request Filter
 		{

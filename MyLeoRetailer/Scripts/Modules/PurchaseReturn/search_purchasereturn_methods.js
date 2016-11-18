@@ -30,7 +30,7 @@
                                
             var obj = $.parseJSON(response);
 
-            Bind_Grid(obj, "Purchase_Return_List");                           
+            Bind_Grid(obj, "Purchase_Return_List");
 
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -113,18 +113,12 @@ function call_back(data) {
 
             UpdateGRNo();
              
-          
+            
         }
 
     })
    
 }
-
-
-
-
-
-
 
 //function Get_Purchase_Returns() {
 //        var prViewModel =

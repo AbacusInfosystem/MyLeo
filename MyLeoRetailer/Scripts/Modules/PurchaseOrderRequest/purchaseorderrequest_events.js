@@ -1,5 +1,10 @@
 ﻿$(function () {
 
+    if ($("#hdnSelecteddBranchId").val() != "") {
+
+        $("#Branch").find(".autocomplete-text").trigger("focusout");
+    }
+
     $(".Details").hide();
         
     $("#btnSavePurchaseOrderRequest").click(function () {
