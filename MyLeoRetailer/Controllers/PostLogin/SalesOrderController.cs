@@ -56,8 +56,6 @@ namespace MyLeoRetailer.Controllers.PostLogin
                     siViewModel.SalesInvoice.Branch_Name = "Dadar";
                 }
 
-
-
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)

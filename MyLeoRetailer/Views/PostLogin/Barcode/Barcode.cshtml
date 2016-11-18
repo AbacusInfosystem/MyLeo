@@ -1,4 +1,9 @@
-﻿
+﻿@model MyLeoRetailer.Models.BarcodeViewModel
+
+<script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Barcode/barcode_event.js"></script>
+<script src="~/Scripts/Modules/Barcode/barcode_method.js"></script>
+
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -11,7 +16,7 @@
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
         <div class="page-title">
-            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Inventory Report</h2>
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Generate Barcode</h2>
         </div>
     </div>
 
@@ -28,6 +33,8 @@
 
                 <form role="form" id="frmBarcodeGenerator">
 
+                    <input type="hidden" id="hdf_BarcodeId" name="Barcode.Product_SKU_Barcode_Id" />
+
                     <div class="row">
 
                         <div class="col-md-4">
@@ -37,21 +44,21 @@
                                     <input type="text" class="form-control autocomplete-text" id="textSKU_Code" name="SKU" placeholder="SKU code" value="" data-table="Product_Warehouse" data-col="Product_Warehouse_Id,Product_SKU" data-headernames="Warehouse SKU" />
                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                     <input type="hidden" id="hdnInventory_Id" value="" name="" class="auto-complete-value" />
-                                    <input type="hidden" id="hdnProduct_SKU" value="" name="Filter.Product_SKU" class="auto-complete-label" />
+                                    <input type="hidden" id="hdnProduct_SKU" value="" name="Barcode.Product_SKU" class="auto-complete-label" />
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-4">
-                            <div class="form-group" style="width:500px;">
+                            <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">SKU Quantity.</span>
-                                <input type="text" class="form-control" placeholder="Enter SKU Quantity." name="Brand.Brand_Code" maxlength="5" />
+                                <input type="text" class="form-control" placeholder="Enter SKU Quantity." name="Barcode.SKU_Quantity" maxlength="5" />
                             </div>
                         </div>
 
-                        <div class="col-md-2" style="padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="col-md-4" style="padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
-                            <div class="btn-group">
+                            <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-success active" value="Search" id="btnGenerate">Generate</button>
                             </div>
 
@@ -66,11 +73,40 @@
 
         </div>
 
-        <div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;overflow-y: scroll;height:500px;">
+        @*<div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;overflow-y: scroll;height:500px;">
 
 
 
+        </div>*@
+
+        <div class="col-md-12" style="padding: 0px;" id="divTable">
+            <div class="row">
+                <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                    <table class="table" id="tblBarcode">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Product SKU</th>
+                                <th>Barcode</th>
+                                <th>Barcode Image</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+            </div>
         </div>
+        </div>
+
+        @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+
+        <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divBarcodePager">
+
+
+        </div>*@
+
+
+
+
 
 
     </div>

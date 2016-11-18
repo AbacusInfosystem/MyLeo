@@ -451,5 +451,15 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
+        #region Barcode
+
+        sp_Get_Barcodes,
+
+        sp_Insert_Barcode,
+
+        sp_Get_Max_Product_SKU_Barcode_Id,
+
+        #endregion
+
     }
 }
