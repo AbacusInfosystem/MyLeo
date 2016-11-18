@@ -3,6 +3,7 @@
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/Barcode/barcode_event.js"></script>
 <script src="~/Scripts/Modules/Barcode/barcode_method.js"></script>
+<script src="~/Scripts/Modules/Barcode/barcode_validation.js"></script>
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -79,7 +80,7 @@
 
         </div>*@
 
-        <div class="col-md-12" style="padding: 0px;" id="divTable">
+        <div class="col-md-12" id="divTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;overflow-y: scroll;height:500px;">
             <div class="row">
                 <div class="table-responsive" style="width:100%; margin: 0px 0;">
                     <table class="table" id="tblBarcode">
@@ -93,8 +94,8 @@
                         </thead>
                         <tbody></tbody>
                     </table>
+                </div>
             </div>
-        </div>
         </div>
 
         @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />

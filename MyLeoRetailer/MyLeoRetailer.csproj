@@ -1003,6 +1003,7 @@
     <Content Include="Scripts\Modules\Alteration\search_Alteration_methods.js" />
     <Content Include="Scripts\Modules\Barcode\barcode_event.js" />
     <Content Include="Scripts\Modules\Barcode\barcode_method.js" />
+    <Content Include="Scripts\Modules\Barcode\barcode_validation.js" />
     <Content Include="Scripts\Modules\Branch\branch_events.js" />
     <Content Include="Scripts\Modules\Branch\branch_methods.js" />
     <Content Include="Scripts\Modules\Branch\branch_validation.js" />
