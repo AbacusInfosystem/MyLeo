@@ -2,7 +2,7 @@
 
     var PurchaseReturnReport_Id = document.getElementById('hdnPurchaseReturnReport_Id').value
 
-    if (PurchaseReturnReport_Id == 1) {
+    if (PurchaseReturnReport_Id != 2) {
 
         document.getElementById('btnEditPurchaseReturn').disabled = true;
 

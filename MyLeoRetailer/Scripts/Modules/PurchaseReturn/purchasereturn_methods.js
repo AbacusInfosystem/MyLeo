@@ -110,11 +110,15 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
 
     var barcode = $("[name='PurchaseReturn.PurchaseReturns[" + i + "].Barcode']").val().replace(/[$]/g, '-');
 
+    var Final = barcode.split("+");
+
+    var SKU = Final[0];
+
     $.ajax({
 
         url: "/PurchaseReturn/Get_Purchase_Return_Items_By_SKU_Code",
 
-        data: { SKU_Code: barcode },
+        data: { SKU_Code: SKU },
 
         method: 'GET',
 
@@ -123,6 +127,8 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
         success: function (data) {
 
             $('#textArticle_No_' + i).val(data.Article_No);
+            
+            $('#textSKU_No_' + i).val(data.SKU_Code);
 
             $('#textColor_' + i).val(data.Color);
 

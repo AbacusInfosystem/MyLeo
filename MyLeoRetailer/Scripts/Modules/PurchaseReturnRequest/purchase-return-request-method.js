@@ -447,11 +447,15 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
 
     var barcode = $("[name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode']").val().replace(/[$]/g, '-');
 
+    var Final = barcode.split("+");
+
+    var SKU = Final[0];
+
     $.ajax({
 
         url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
 
-        data: { SKU_Code: barcode, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
+        data: { SKU_Code: SKU, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
 
         method: 'POST',
 
@@ -460,6 +464,8 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
         success: function (data) {
 
             $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textSKU_No_' + i).val(data.SKU_Code);
 
             $('#textColor_' + i).val(data.Color);
 
