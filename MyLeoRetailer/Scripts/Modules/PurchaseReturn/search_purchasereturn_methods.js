@@ -30,11 +30,11 @@
                                
             var obj = $.parseJSON(response);
 
-            Bind_Grid(obj, "Purchase_Return_List");
-
-            Reset_PurchaseReturn();
+            Bind_Grid(obj, "Purchase_Return_List");                           
 
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            Reset_PurchaseReturn();
 
             Friendly_Messages(obj);
         }
@@ -67,7 +67,7 @@ function UpdateGRNo() {
 
 		        Purchase_Return_Id: $("#hdnPurchaseReturnId").val(),
 
-		        GR_No: $("#txtGR_No").val()
+		        GR_No: $("[name='PurchaseReturn.GR_No']").val()
 		    }
 		}
 
@@ -113,7 +113,7 @@ function call_back(data) {
 
             UpdateGRNo();
              
-            
+          
         }
 
     })

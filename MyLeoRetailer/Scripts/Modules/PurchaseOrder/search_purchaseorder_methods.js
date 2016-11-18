@@ -29,10 +29,10 @@ function Get_Purchase_Orders() {
             var obj = $.parseJSON(response);
 
             Bind_Grid(obj, "Purchase_Order_List");
+            
+            $("#divPurchaseOrderPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Reset_PurchaseOrder();
-
-            $("#divPurchaseOrderPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
             Friendly_Messages(obj);
         }

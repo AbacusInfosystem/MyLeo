@@ -28,7 +28,6 @@ $(document).ready(function () {
             Get_Purchase_Orders();
         });
 
-
         $("#btnCreatePurchaseOrder").click(function () {
             $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Index/");
             $('#frmPurchaseOrder').attr("method", "POST");
@@ -55,8 +54,6 @@ $(document).ready(function () {
 
         document.getElementById("btnEditPurchaseOrder").disabled = true;
 
-
-
         Get_Purchase_Orders();
 
         $(document).on('change', '[name="Purchase_Order_List"]', function (event) {
@@ -74,15 +71,11 @@ $(document).ready(function () {
             Get_Purchase_Orders();
         });
 
-
-
-
         $("#btnEditPurchaseOrder").click(function () {
             $("#frmPurchaseOrder").attr("action", "/PurchaseOrder/Get_Purchase_Order_By_Id/");
             $('#frmPurchaseOrder').attr("method", "POST");
             $("#frmPurchaseOrder").submit();
         });
-
 
         $(document).on("change", "#hdnPurchaseOrderNo", function () {
             Get_Purchase_Orders();
