@@ -61,6 +61,11 @@ namespace MyLeoRetailer.Controllers
         {
             LookupViewModel LookupVM = new LookupViewModel();
 
+            if(table_Name=="Assign_Branches")
+            {
+                table_Name = "Branch";
+            }
+
             string[] cols;
 
             string[] headerNamesArr;

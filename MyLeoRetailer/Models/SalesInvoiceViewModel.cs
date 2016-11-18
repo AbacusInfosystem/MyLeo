@@ -51,7 +51,7 @@ namespace MyLeoRetailer.Models
 
             Grid_Detail.Pager.CallBackMethod = "Get_SalesOrders";
 
-            Grid_Detail.Pager.CallBackMethod = "Get_Sales_Summary_Report";
+           // Grid_Detail.Pager.CallBackMethod = "Get_Sales_Summary_Report";
         }
 
 
@@ -84,6 +84,8 @@ namespace MyLeoRetailer.Models
         public GridInfo Grid_Detail { get; set; }
 
         public QueryInfo Query_Detail { get; set; }
+
+        public int Selected_Branch_Id { get; set; }
 
 
     }

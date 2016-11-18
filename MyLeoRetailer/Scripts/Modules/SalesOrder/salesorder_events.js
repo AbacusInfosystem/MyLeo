@@ -1,5 +1,10 @@
 ﻿$(document).ready(function () {
 
+    if ($("#hdnSelecteddBranchId").val() != "")
+    {
+        $("#Branch").find(".autocomplete-text").trigger("focusout");
+    }
+
     $("input.mask_mobile_no").mask('(99) 99999-99999');
 
     $("#textQuantity_0").rules("add", { required: true, digits: true, messages: { required: "Required", digits: "Invalid quantity." } });
@@ -18,6 +23,8 @@
     //if ($('#textSales_Branch_Name_0').val() != 0)
 
     //    $("#divBranch").find(".autocomplete-text").trigger("focusout");
+
+
 
 
 

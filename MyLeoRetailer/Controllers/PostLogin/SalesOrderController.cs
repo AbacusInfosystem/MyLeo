@@ -45,6 +45,19 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 siViewModel.SalesInvoice.Branch_IDS = siViewModel.Cookies.Branch_Ids.TrimEnd();
 
                 siViewModel.GiftVoucherDetails = siRepo.Get_Gift_Voucher_Details_By_Id(); //Added by vinod mane on 10/10/2016
+
+                string BranchIds = siViewModel.Cookies.Branch_Ids.TrimEnd();
+
+                string [] Ids = BranchIds.Split(',');
+
+                if(Ids.Length==1)
+                {
+                    siViewModel.SalesInvoice.Branch_Id = Convert.ToInt32(Ids[0]);
+                    siViewModel.SalesInvoice.Branch_Name = "Dadar";
+                }
+
+
+
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)

@@ -492,7 +492,7 @@ namespace MyLeoRetailerRepo
 
             strquery += " from " + table_Name;
 
-            strquery += " where " + table_Name + "." + col_Id + "=" + Convert.ToInt32(field_Value);
+            strquery += " where " + table_Name + "." + col_Value + "='"+ field_Value+"'" ;
 
             DataTable dt = sqlHelper.ExecuteDataTable(null, strquery, CommandType.Text);
 
