@@ -66,10 +66,9 @@ function Get_Sales_Order_Items_By_Barcode(i) {
 
     var Skucode = $("[name='SaleOrderItemList[" + i + "].Barcode']").val().replace(/[$]/g, '-');
 
-    var Final = Skucode.split("#");
+    var Final = Skucode.split("+");
 
     var SKU = Final[0];
-
 
     $.ajax({
 
