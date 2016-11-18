@@ -35,6 +35,14 @@ namespace MyLeoRetailer.Controllers.PostLogin
                 {
                     srViewModel = (SalesReturnViewModel)TempData["srViewModel"];
                 }
+
+                srViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                srViewModel.Branch = Set_Branch(srViewModel.Cookies.Branch_Ids.TrimEnd());
+
+                srViewModel.SalesReturn.Branch_Id = srViewModel.Branch.Branch_ID;
+
+                srViewModel.SalesReturn.Branch_Name = srViewModel.Branch.Branch_Name;
             }
             //Added by vinod mane on 06/10/2016
             catch (Exception ex)

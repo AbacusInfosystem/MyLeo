@@ -465,7 +465,7 @@ namespace MyLeoRetailerRepo
             return dt;
         }
 
-        public string Get_Lookup_Data_Add_For_Subcategory(string field_Value, string table_Name, string[] columns)
+        public string Get_Lookup_Data_Add_Single_Branch(string field_Value, string table_Name, string[] columns)
         {
             string Value = "";
 
@@ -507,7 +507,7 @@ namespace MyLeoRetailerRepo
 
                 foreach (DataRow dr in drList)
                 {
-                    Value = Convert.ToString(dr[col_Value]);
+                    Value = Convert.ToString(dr[col_Value]) + "_" + dr[col_Id];
                 }
             }
 

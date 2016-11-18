@@ -6,6 +6,11 @@ $(document).ready(function () {
 
     //add_Validation();
 
+    if ($("#hdnSelecteddBranchId").val() != "") {
+
+        $("#Branch").find(".autocomplete-text").trigger("focusout");
+    }
+
     if ($("#hdnPayment_Status1").val() == 1)
     {
         $("#btnSavePay").hide();

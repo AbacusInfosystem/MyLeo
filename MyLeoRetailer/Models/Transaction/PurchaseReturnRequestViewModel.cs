@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MyLeoRetailerInfo.PurchaseReturnRequest;
+using MyLeoRetailerInfo.Branch;
 
 namespace MyLeoRetailer.Models.Transaction
 {
@@ -23,7 +24,7 @@ namespace MyLeoRetailer.Models.Transaction
 
             PurchaseReturnRequests = new List<PurchaseReturnRequestInfo>();
 
-           
+            Branch = new BranchInfo();
 
             Filter = new Request_Filter();
 
@@ -58,6 +59,12 @@ namespace MyLeoRetailer.Models.Transaction
         }
 
         public List<PurchaseReturnRequestInfo> PurchaseReturnRequests
+        {
+            get;
+            set;
+        }
+
+        public BranchInfo Branch
         {
             get;
             set;

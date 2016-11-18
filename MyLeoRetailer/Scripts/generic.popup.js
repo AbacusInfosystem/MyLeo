@@ -118,7 +118,7 @@ function Get_Autocomplete_Lookup(openModal,elementObj, modalExist) {
 
                     if (data != null) {
 
-                        Bind_Selected_Item(data);
+                        Bind_Selected_Item_Data(data);
                     }
                 }
             });
@@ -146,6 +146,42 @@ function Bind_Selected_Item(data) {
 
         //htmltext = "<ul id='lookupUlLookup' class='todo-list ui-sortable'><li ><span class='text'>" + data + "</span><div class='tools'><i class='fa fa-remove'></i></div></li></ul>";
         htmltext = "<ul id='lookupUlLookup' class='list-group border-bottom'><li class='list-group-item'><span class='text'>"+ data +"</span><div class='pull-right'><i class='glyphicon glyphicon-remove'></i></div></li></ul>"
+    }
+    else {
+
+        $("#" + $("#hdnLookupHiddenId").val()).val("");
+
+        //htmltext = "<ul id='lookupUlLookup' class='todo-list ui-sortable'><li ><span class='text'>" + $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find(".lookup-title").text() + " does not exist</span><div class='tools'><i class='fa fa-remove'></i>";
+        htmltext = "<ul id='lookupUlLookup' class='list-group border-bottom'><li ><span class='text'>" + $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find(".lookup-title").text() + " does not exist</span><div class='pull-right'><i class='glyphicon glyphicon-remove'></i>";
+    }
+
+    $("#" + $("#hdnLookupLabelId").val()).val("");
+
+    $("#hdnEditLookupValue").val(data);
+
+    $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').append(htmltext);
+
+    $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
+}
+
+function Bind_Selected_Item_Data(data) {
+
+    var Loookupdata = data.split("_");
+
+    var Id = Loookupdata[1];
+    
+    var Value = Loookupdata[0];
+   
+    var htmltext = "";
+
+    $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find('.todo-list').remove();
+
+    if (data != null) {
+
+        $("#" + $("#hdnLookupHiddenId").val()).val(Id);
+
+        //htmltext = "<ul id='lookupUlLookup' class='todo-list ui-sortable'><li ><span class='text'>" + data + "</span><div class='tools'><i class='fa fa-remove'></i></div></li></ul>";
+        htmltext = "<ul id='lookupUlLookup' class='list-group border-bottom'><li class='list-group-item'><span class='text'>" + Value + "</span><div class='pull-right'><i class='glyphicon glyphicon-remove'></i></div></li></ul>"
     }
     else {
 

@@ -42,6 +42,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             try
             {
                 prViewModel.PurchaseReturnRequest.Vendors = _vRepo.Get_Vendors();
+
+                prViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                prViewModel.Branch = Set_Branch(prViewModel.Cookies.Branch_Ids.TrimEnd());
+
+                prViewModel.PurchaseReturnRequest.Branch_Id = prViewModel.Branch.Branch_ID;
+
+                prViewModel.PurchaseReturnRequest.Branch_Name = prViewModel.Branch.Branch_Name;
             }
             catch (Exception ex)
             {

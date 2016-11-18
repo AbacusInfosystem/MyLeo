@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MyLeoRetailerInfo.Branch;
 
 
 namespace MyLeoRetailer.Models
@@ -36,10 +37,11 @@ namespace MyLeoRetailer.Models
 
             GiftVoucherDetails = new List<SalesInvoiceInfo>();//Added by vinod mane on 10/10/2016
 
-
-          //GiftVoucher = new List<Receivable>();
-
+                     
             CreditNote = new  List<CreditNote>();
+
+            Branch = new BranchInfo();
+
 
             Filter = new SalesOrderFilter();
 
@@ -51,7 +53,7 @@ namespace MyLeoRetailer.Models
 
             Grid_Detail.Pager.CallBackMethod = "Get_SalesOrders";
 
-           // Grid_Detail.Pager.CallBackMethod = "Get_Sales_Summary_Report";
+           // Grid_Detail.Pager.CallBackMethod = "Get_Sales_Summary_Report";           
         }
 
 
@@ -68,16 +70,10 @@ namespace MyLeoRetailer.Models
         public List<SaleOrderItems> SaleOrderItemList { get; set; }
 
         public List<Receivable> ReceivableItem { get; set; }
-
-        //public List<ReceivableInfo> Receivables1
-        //{
-        //    get;
-        //    set;
-        //}
-
-        //public List<Receivable> GiftVoucher { get; set; }
-
+       
         public List<CreditNote> CreditNote { get; set; }
+
+        public BranchInfo Branch { get; set; }
 
         public SalesOrderFilter Filter { get; set; }
 
@@ -86,7 +82,7 @@ namespace MyLeoRetailer.Models
         public QueryInfo Query_Detail { get; set; }
 
         public int Selected_Branch_Id { get; set; }
-
+             
 
     }
 }
