@@ -96,6 +96,8 @@ function Get_Sales_Order_Items_By_Barcode(i) {
 
             $('#textMRP_Price_' + i).val(data.MRP_Price);
 
+            $("#SKU_" + i).find(".autocomplete-text").trigger("focusout");
+
         }
     });
 }

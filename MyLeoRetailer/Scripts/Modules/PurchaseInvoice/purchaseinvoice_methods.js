@@ -84,11 +84,8 @@ function Get_Purchase_Invoice_Items_By_SKU_Code(i) {
     CalculateTotal();
 }
 
-
 function Get_Purchase_Invoice_Items_By_Barcode(i) {
-
-    debugger;
-
+  
     var barcode = $("[name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode']").val().replace(/[$]/g, '-');
 
     var Final = barcode.split("+");
@@ -108,6 +105,8 @@ function Get_Purchase_Invoice_Items_By_Barcode(i) {
         success: function (data) {
 
             $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textSKU_No_' + i).val($("#hdnPurchase_Order_Id_" + i).val());
 
             $('#textColor_' + i).val(data.Color);
 
@@ -135,12 +134,13 @@ function Get_Purchase_Invoice_Items_By_Barcode(i) {
 
             $('#textWSR_Price_' + i).val(data.WSR_Price);
 
+            $("#SKU_" + i).find(".autocomplete-text").trigger("focusout");
+
         }
     });
 
     CalculateTotal();
 }
-
 
 function AddPurchaseInvoiceDetails() {
 
@@ -173,13 +173,13 @@ function AddPurchaseInvoiceDetails() {
     tblHtml += "</div>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Invoice_Items_By_Barcode(" + i + ");' placeholder='Barcode No' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode' value='' onchange='javascript: Get_Purchase_Invoice_Items_By_Barcode(" + i + ");' placeholder='Barcode No' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
-    tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' placeholder='Enter SKU Code to search' value=''  data-table='Product_SKU_Mapping' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdnPurchase_Order_Id_" + i + "' data-field='Purchase_Order_Id' />";
+    tblHtml += "<div id='SKU_" + i + "' class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text lookup-text' id='textSKU_No_" + i + "' placeholder='Enter SKU Code to search' value=''  data-table='Product_SKU_Mapping' data-col='Purchase_Order_Id,SKU_Code' data-headernames='SKU Code' data-param='hdnPurchase_Order_Id_" + i + "' data-field='Purchase_Order_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code' class='auto-complete-label' onchange='javascript:Get_Purchase_Invoice_Items_By_SKU_Code(" + i + ");' />";
@@ -349,7 +349,6 @@ function CalculateTotal() {
 
 }
 
-
 function Add_Validation(i) {
 
     //$("#tblPurchaseInvoiceItems").find(".validate").rules("add", { QuantityCheck: false });
@@ -364,7 +363,7 @@ function Add_Validation(i) {
 
     jQuery.validator.addMethod("QuantityCheck", function (value, element) {
 
-        debugger;
+        
 
         var result = true;
 
@@ -450,10 +449,12 @@ function ReArrangePurchaseInvoiceDetailsData() {
                 $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].SKU_Code");
+                $(newTR).find("[id^='SKU_']")[0].id = "SKU_" + i;
             }
 
             if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
                 $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
+                $(newTR).find("[id^='textBarcode_No_']").attr("onchange", "javascript:Get_Purchase_Invoice_Items_By_Barcode(" + i + ")");
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseInvoice.PurchaseInvoices[" + i + "].Barcode");
             }
 

@@ -191,13 +191,22 @@ function Bind_Selected_Item_Data(data) {
         htmltext = "<ul id='lookupUlLookup' class='list-group border-bottom'><li ><span class='text'>" + $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find(".lookup-title").text() + " does not exist</span><div class='pull-right'><i class='glyphicon glyphicon-remove'></i>";
     }
 
-    $("#" + $("#hdnLookupLabelId").val()).val("");
+    $("#" + $("#hdnLookupLabelId").val()).val(Value);
 
     $("#hdnEditLookupValue").val(data);
 
+    //var id = $("#hdnBranchIDs").val();
+
+    //var splt=id.split(",");
+
+    //if (splt.length == 1)
+    //{
+    //    $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').append(htmltext);
+    //}
+   
     $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').append(htmltext);
 
-    $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
+   // $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
 }
 
 function Close_Pop_Up(cloneObj,elementObj) {
