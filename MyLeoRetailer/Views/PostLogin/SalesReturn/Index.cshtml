@@ -285,18 +285,18 @@
                                         </td>
 
                                         <td>
-                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Barcode" id="textBarcode_No_0" onblur="javascript: Get_Sales_Return_Items_By_Barcode(0);" placeholder="Barcode No">
+                                            <input class="form-control input-sm" type="text" name="SaleReturnItemList[0].Barcode" id="textBarcode_No_0" onchange="javascript: Get_Sales_Return_Items_By_Barcode(0);" placeholder="Barcode No">
                                         </td>
 
                                         <td>
                                             @*<input class="form-control input-sm" type="text" style="width:150px" name="SaleReturnItemList[0].SKU_Code" id="textSKU_No_0" placeholder="SKU Code" onchange="javascript: Get_Sales_Return_Items_By_SKU_Code(0);">*@
 
                                             <div class="form-group auto-complete">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" onblur="javascript: Get_Sales_Return_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Sales_Invoice_Item" data-col="Sales_Invoice_Id,SKU_Code" data-headernames="SKU Code" name="SKU_Code_0" data-param="hdnSalesInvoiceID_0" data-field="Sales_Invoice_Id" />
+                                                <div id="SKU_0" class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text lookup-text" id="textSKU_No_0" onchange="javascript: Get_Sales_Return_Items_By_SKU_Code(0);" placeholder="SKU Code" value="" data-table="Sales_Invoice_Item" data-col="Sales_Invoice_Id,SKU_Code" data-headernames="SKU Code" name="SaleReturnItemList[0].SKU_Code" data-param="hdnSalesInvoiceID_0" data-field="Sales_Invoice_Id" />
                                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                     <input type="hidden" id="hdnProduct_Id_0" value="" class="auto-complete-value" />
-                                                    <input type="hidden" id="hdnSKU_No_0" value="" name="SaleReturnItemList[0].SKU_Code" class="auto-complete-label" />
+                                                    <input type="hidden" id="hdnSKU_No_0" value="" class="auto-complete-label" />
                                                 </div>
                                             </div>
 

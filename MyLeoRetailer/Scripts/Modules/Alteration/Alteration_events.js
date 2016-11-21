@@ -1,7 +1,23 @@
 ﻿
 $(document).ready(function () {
 
-    $("#Employee").find(".autocomplete-text").trigger("focusout");
+    if ($("#text_Employee_Id").val() != 0) {
+
+        $("#Employee").find(".autocomplete-text").trigger("focusout");
+    }
+    else
+    {
+        $("#text_Employee_Id").val('');
+    }
+
+    if ($("#text_Sales_Invoice_Id").val() != 0) {
+
+        $("#Invoice").find(".autocomplete-text").trigger("focusout");
+    }
+    else
+    {
+        $("#text_Sales_Invoice_Id").val('');
+    }
 
     $("input.mask_mobile_no").mask('(99) 99999-99999');
 

@@ -19,7 +19,7 @@
     <div class="content-frame-top">
         <input type="hidden" id="hdnPurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" name="PurchaseReturn.PurchaseReturnReport_Id" />
         <div class="page-title">
-            @if (@Model.PurchaseReturn.PurchaseReturnReport_Id == 1)
+            @if (@Model.PurchaseReturn.PurchaseReturnReport_Id != 2)
             {
             <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return Management</h2>
             }
