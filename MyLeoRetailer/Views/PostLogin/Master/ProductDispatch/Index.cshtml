@@ -1,9 +1,71 @@
 ﻿@model MyLeoRetailer.Models.ProductDispatchViewModel
+@using MyLeoRetailer.Common;
+@using MyLeoRetailerInfo.Common;
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
 <script src="~/Scripts/Modules/ProductDispatch/product_dispatch_event.js"></script>
 <script src="~/Scripts/Modules/ProductDispatch/product_dispatch_method.js"></script>
 
+<style>
+    .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .table > thead > tr > th {
+        color: #fff !important;
+        font-size: 12px !important;
+        background-color: #29343f !important;
+        font-weight: 600 !important;
+    }
+
+    .table > thead > tr > th {
+        /*text-align: center;*/
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #eee;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-color: rgba(153, 153, 153, 0.13) !important;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        background: rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-content {
+        border-width: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .label-read {
+        background-color: transparent;
+        color: #33414e;
+        font-size: 14px;
+        font-weight: 600;
+        border: 1px solid #33414e;
+    }
+
+    .check .icheckbox_minimal-grey, .check .iradio_minimal-grey {
+        background: #ddd;
+        border-radius: 50%;
+    }
+
+    .iradio_minimal-grey.checked {
+        background: #e34724;
+        border-radius: 50%;
+    }
+
+    .input-group-addon {
+        background-color: #33414e !important;
+        color: #fff !important;
+    }
+</style>
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="#">Home</a></li>
@@ -36,7 +98,7 @@
 
                     <input type="hidden" class="form-control input-sm" id="hdn_request_Id" name="product_Dispatch.Request_Id" value="@Model.product_Dispatch.Request_Id">
 
-                    <input type="hidden" class="form-control input-sm" id="hdn_Branch_Id" name="product_Dispatch.Branch_Id" value="@Model.product_Dispatch.Branch_Id">
+                    
 
                     <input type="hidden" class="form-control input-sm" id="hdn_Quantity" name="product_Dispatch.Quantity" value="@Model.product_Dispatch.Quantity">
 
@@ -50,15 +112,34 @@
                         <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
 
                             <div class="block">
+                                @{
+                                    if (Model.product_Dispatch.SKU != null)
+                                { 
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">SKU Name.</span>
                                     <input type="text" class="form-control input-sm" name="product_Dispatch.SKU" id="txtSKU" value="@Model.product_Dispatch.SKU" readonly />
                                 </div>
+                                }
+                                else
+                                { 
+                                       <span class="label label-primary label-form" style="margin-bottom: 1px;">SKU Name.</span>
+                                 <div class="form-group auto-complete">
+                                <div class="input-group">
 
+                                    <input type="text" class="form-control color-filter autocomplete-text" id="textSKU" placeholder="Enter SKU to search." value="" data-table="Product_Warehouse" data-col="Product_Invioce_Id,Product_SKU" data-headernames="SKU Code">
+                                    <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                    <input type="hidden" id="txtSKU" name="product_Dispatch.SKU" class="auto-complete-label" />
+
+                                </div>
+                            </div>
+                                }}
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Product Quantity</span>
 
                                     <input type="text" class="form-control input-sm" name="product_Dispatch.Balance_Quantitya" id="txtBalance_Quantitya" value="@Model.product_Dispatch.Balance_Quantitya" readonly />
+                                  
+                                </div>
+                                <div class="form-group">
                                     <input type="text" class="form-control input-sm" name="product_Dispatch.Quantity" id="txtDispatch_Quantity" placeholder="Enter Dispatch Quantity." value="0" style="display:none" />
                                 </div>
 
@@ -68,7 +149,7 @@
 
 
                         <div class="col-md-3" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
-
+                           
                             <div class="block">
                                 @*<div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Dispatch Date</span>
@@ -77,7 +158,31 @@
                                         <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                     </div>
                                 </div>*@
+                                @{
+                                    LoginInfo Cookies = new LoginInfo();
+                                    Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
+                                    <input type="hidden" id="hdnBranchIDs" value="@Cookies.Branch_Ids" />
+                                }
+                                @if (Model.product_Dispatch.Branch_Id==0)
+                                {
+                               
+
+
+                                    <div class="form-group auto-complete">
+                                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Branch</span>
+                                        <div id="Branch" class="input-group">
+                                            <input type="text" class="form-control invoice-filter autocomplete-text lookup-text"  id="txt_Branch_Name" placeholder="Enter Branch to search"  data-table="Assign_Branches" data-col="Branch_ID,Branch_Name" data-headernames="Branch" data-field="Branch_Id" data-param="hdnBranchIDs">
+                                            <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                                            <input type="hidden" id="hdn_Branch_Id" name="product_Dispatch.Branch_Id" class="auto-complete-value" />
+                                            <input type="hidden" id="hdnBranchName"   class="auto-complete-label" />
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                <input type="hidden" class="form-control input-sm" id="hdn_Branch_Id" name="product_Dispatch.Branch_Id" value="@Model.product_Dispatch.Branch_Id">
+                                }
                                 <div class="form-group">
                                     <span class="label label-primary label-form" style="margin-bottom: 1px;">Barcode</span>
                                     <input type="text" class="form-control input-sm" name="product_Dispatch.Barcode" id="txtBarcode" placeholder="Barcode"  autofocus />
@@ -97,8 +202,6 @@
                                             <i class="mdi mdi-plus"></i>
                                             Add
                                         </a>*@
-
-                                        <button type="button" id="btnProductDispatch" class="btn btn-success active">Add</button>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +213,7 @@
                             <table class="table table-bordered table-hover" id="tblProduct_Dispatch">
                                 <thead>
                                     <tr>
-                                        <th width="150px">SKU No.</th>
+                                        <th width="150px">Barcode.</th>
                                         <th width="70px">Dispatch Quantity</th>
                                         <th width="70px">Dispatch Date</th>
                                         <th width="100px">Action</th>
@@ -123,7 +226,7 @@
                                         {
                                             <tr>
                                                 <td>
-                                                    @Model.product_Dispatch.Barcode
+                                                    @item.Barcode
                                                     <input type="hidden" id="hdn_Dispatch_Item_Id" value="@item.Dispatch_Item_Id" />
                                                 </td>
 
@@ -157,6 +260,7 @@
                                 </tbody>
                             </table>
                         <label id="lbl_Records_Required" style="display:none;"><span style="color:red;">Atleast One Record is required</span></label>
+                            <label id="lbl_Prod_Dispatch" style="display:none;"><span style="color:red;">All the products must be dispatched</span></label>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
 
@@ -164,7 +268,7 @@
                         <div class="col-md-12" style="background: rgba(0, 0, 0, 0.02);padding-left: 20px; padding-right:0px; padding-top: 20px; padding-bottom: 20px; margin-bottom: 15px; border-top: 1px solid #DDD; border-bottom: 1px solid #DDD;">
                             <div class="btn-group">
                                 <button type="button" value="Save" id="btnSaveDispatch" class="btn btn-success active">Save</button>
-                                <button type="reset" id="btnCancelDispatch" class="btn btn-danger active">Reset</button>
+                                @*<button type="reset" id="btnCancelDispatch" class="btn btn-danger active">Reset</button>*@
                             </div>
                         </div>
                         <div class="col-md-12" style="padding-top: 40px; padding-left: 10px; padding-right: 10px;">

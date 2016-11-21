@@ -431,6 +431,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Delete_Dispatch_Product,
         sp_Get_Product_Quantity_Warehouse,
         sp_Reject_Product_Dispatch,
+        sp_Get_Product_To_Dispatch_By_Dispatch_Id,
          #endregion
 
         #region Product Inward

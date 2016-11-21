@@ -410,6 +410,11 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Product_Warehouse")
+                {
+                        strquery = " select * from"+table_Name;
+                }
+
                 if (table_Name == "Sales_Invoice_table")
                 {
                     if (fieldName == "Customer_Id")

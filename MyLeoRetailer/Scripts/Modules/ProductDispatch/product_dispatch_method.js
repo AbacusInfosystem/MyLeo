@@ -5,9 +5,10 @@
     $("#txtDispatch_Quantity").focus();
     $("#txtDispatch_Quantity").blur();
 
-    if ($("#txtBalance_Quantitya").val() > 0 && $("#txtDispatch_Quantity").val() > 0) {
+    if ($("#txtBalance_Quantitya").val() > 0 && $("#txtDispatch_Quantity").val() > 0 && $("#txtBarcode").val() != "") {
 
-        if ($("#txtBalance_Quantitya").val() >= $("#txtDispatch_Quantity").val()) {
+        if ($("#txtBalance_Quantitya").val() >= $("#txtDispatch_Quantity").val())
+        {
             $("#txtBalance_Quantitya").val($("#txtBalance_Quantitya").val() - $("#txtDispatch_Quantity").val());
 
             var currentdate = new Date();
@@ -51,16 +52,24 @@
 
             ReArrange_Index();
 
+            var row_Count = document.getElementById("tblProduct_Dispatch").children[1].rows.length;
+
+            if (row_Count > 0 && $("#hdn_request_Id").val() == 0) {
+                $("#txtBalance_Quantitya").attr("readonly", true);
+
+                $("#textSKU").attr("readonly", true);
+
+                $("#txt_Branch_Name").attr("readonly", true);
+
+                $(".text-muted").prop("disabled", true);
+            }
         }
-
+        $("#txtBarcode").val("");
     }
-    else {
-
-        $("#txtDispatch_Quantity").focus();
-        $("#txtDispatch_Quantity").blur();
-
-    }
+   
     $("#txtDispatch_Quantity").val(0);
+
+   
 }
 
 function DeleteProduct_Dispatch(elem) {
@@ -69,6 +78,18 @@ function DeleteProduct_Dispatch(elem) {
     $("#txtBalance_Quantitya").val(Quantity + addBackQty)
     elem.closest("tr").remove();
     ReArrange_Index();
+
+    var row_Count = document.getElementById("tblProduct_Dispatch").children[1].rows.length;
+
+    if (row_Count ==0 && $("#hdn_request_Id").val() == 0) {
+        $("#txtBalance_Quantitya").attr("readonly", false);
+
+        $("#textSKU").attr("readonly", false);
+
+        $("#txt_Branch_Name").attr("readonly", false);
+
+        $(".text-muted").prop("disabled", false);
+    }
 }
 
 function Delete_Dispatch_Product(elem) {
@@ -82,6 +103,16 @@ function Delete_Dispatch_Product(elem) {
         Delect_Dispatched_Product(DeleteProduct, addBackQty);
 
         $(elem).closest("tr").remove();
+
+        if (row_Count == 0 && $("#hdn_request_Id").val() == 0) {
+            $("#txtBalance_Quantitya").attr("readonly", false);
+
+            $("#textSKU").attr("readonly", false);
+
+            $("#txt_Branch_Name").attr("readonly", false);
+
+            $(".text-muted").prop("disabled", false);
+        }
     }
 }
 
@@ -159,3 +190,6 @@ function Delect_Dispatched_Product(DeleteProduct, addBackQty) {
         }
     });
 }
+
+
+
