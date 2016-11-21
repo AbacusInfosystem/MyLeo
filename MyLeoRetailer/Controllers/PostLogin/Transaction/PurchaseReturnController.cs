@@ -358,6 +358,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             bool CheckFlag = false;
 
             int Id = prViewModel.PurchaseReturn.PurchaseReturnReport_Id;
+
             try
             {
                 CheckFlag = prViewModel.PurchaseReturn.Flag;
