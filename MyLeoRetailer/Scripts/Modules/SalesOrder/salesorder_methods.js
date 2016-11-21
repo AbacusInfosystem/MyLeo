@@ -529,7 +529,7 @@ function Add_Validation(i) {
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
-    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required" } });
+    $("#textSKU_No_" + i).rules("add", { checkSKUExist: true});
 
     $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: {checkBarcodeExist:"Already Mapped"}});
 

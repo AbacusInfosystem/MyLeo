@@ -49,7 +49,7 @@ namespace MyLeoRetailerRepo
 
             sqlParam.Add(new SqlParameter("@Customer_Mobile_No", Alteration.Customer_Mobile_No));
 
-            sqlParam.Add(new SqlParameter("@Job_Assigned_To", Alteration.Job_Assigned_To));
+            sqlParam.Add(new SqlParameter("@Job_Assigned_To", Alteration.Employee_Id));
 
             sqlParam.Add(new SqlParameter("@Additional_Info", Alteration.Additional_Info));
 
@@ -88,7 +88,7 @@ namespace MyLeoRetailerRepo
 
             Alteration.Customer_Mobile_No = Convert.ToString(dr["Customer_Mobile_No"]);
 
-            Alteration.Job_Assigned_To = Convert.ToInt32(dr["Job_Assigned_To"]);
+            Alteration.Employee_Id = Convert.ToInt32(dr["Job_Assigned_To"]);
 
             Alteration.Additional_Info = Convert.ToString(dr["Additional_Info"]);
 

@@ -192,6 +192,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 rViewModel.Receivables = rRepo.Get_Receivable_Items_By_Id(rViewModel.Receivable.Receivable_Id);
 
+                rViewModel.Receivables1 = rRepo.Get_Gift_Voucher_Details_By_Id();
+
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("RECI01"));
 
             }

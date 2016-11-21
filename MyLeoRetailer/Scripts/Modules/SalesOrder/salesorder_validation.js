@@ -83,10 +83,10 @@
                         required: "",
                         number: "Only numbers"
                     },
-                "SaleOrderItemList[0].SKU_Code":
-                        {
-                            required: "SKU Required",
-                        },
+                //"SaleOrderItemList[0].SKU_Code":
+                //        {
+                //            required: "SKU Required",
+                //        },
                 "SaleOrderItemList[0].Quantity":
                     {
                         required: "Quantity Required",

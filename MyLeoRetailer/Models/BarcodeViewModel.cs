@@ -9,7 +9,7 @@ using System.Web;
 
 namespace MyLeoRetailer.Models
 {
-    public class BarcodeViewModel: IGridInfo, IQueryInfo
+    public class BarcodeViewModel
     {
         public BarcodeViewModel() 
 		{	
