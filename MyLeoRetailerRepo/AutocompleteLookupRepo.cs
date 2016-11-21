@@ -514,7 +514,7 @@ namespace MyLeoRetailerRepo
             return Value;
         }
 
-        public string Get_Lookup_Data_Add_Purchase_Return_SKU(string field_Value, string table_Name, string[] columns)
+        public string Get_Lookup_Data_Add_Purchase_Return_SKU(string field_Value)
         {
             List<SqlParameter> paramList = new List<SqlParameter>();
 
@@ -632,7 +632,7 @@ namespace MyLeoRetailerRepo
             return Value;
         }
 
-        public string Get_Lookup_Data_Add_Purchase_Invoice_SKU(string field_Value, string table_Name, string[] columns)
+        public string Get_Lookup_Data_Add_Purchase_Invoice_SKU(string field_Value)
         {
             List<SqlParameter> paramList = new List<SqlParameter>();
 
@@ -708,6 +708,76 @@ namespace MyLeoRetailerRepo
                 foreach (DataRow dr in drList)
                 {
                     Value = Convert.ToString(dr["SKU_Code"]) + "_" + dr["Quantity"];
+                }
+            }
+
+            return Value;
+        }
+
+        public string Get_Lookup_Data_Add_Sales_Invoice_SKU(string field_Value, string table_Name, string[] columns)
+        {
+            List<SqlParameter> paramList = new List<SqlParameter>();
+
+            string Value = "";
+
+            string strquery = "";
+
+            strquery = " Select distinct Inventory.Branch_Id, Inventory.Product_SKU ";
+
+            strquery += "from Inventory inner join Branch on Branch.Branch_Id = Inventory.Branch_Id where Inventory.Branch_Id = @Branch_Id ";
+
+            paramList.Add(new SqlParameter("@Branch_Id", field_Value));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                int count = 0;
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                count = drList.Count();
+
+                foreach (DataRow dr in drList)
+                {
+                    Value = Convert.ToString(dr["Product_SKU"]) + "_" + dr["Branch_Id"];
+                }
+            }
+
+            return Value;
+        }
+
+        public string Get_Lookup_Data_Add_Sales_Return_SKU(string field_Value, string table_Name, string[] columns)
+        {
+            List<SqlParameter> paramList = new List<SqlParameter>();
+
+            string Value = "";
+
+            string strquery = "";
+
+            strquery = " Select Sales_Invoice_Item.Sales_Invoice_Id, Sales_Invoice_Item.SKU_Code ";
+
+            strquery += "from Sales_Invoice_Item ";
+
+            strquery += "where Sales_Invoice_Item.Sales_Invoice_Id = @Sales_Invoice_Id";
+
+            paramList.Add(new SqlParameter("@Sales_Invoice_Id", field_Value));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                int count = 0;
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                count = drList.Count();
+
+                foreach (DataRow dr in drList)
+                {
+                    Value = Convert.ToString(dr["SKU_Code"]) + "_" + dr["Sales_Invoice_Id"];
                 }
             }
 

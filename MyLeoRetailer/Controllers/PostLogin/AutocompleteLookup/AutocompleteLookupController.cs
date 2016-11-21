@@ -91,14 +91,28 @@ namespace MyLeoRetailer.Controllers
                 {
                     if (field_Value != null)
                     {
-                        LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Purchase_Return_SKU(field_Value, table_Name, cols);
+                        LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Purchase_Return_SKU(field_Value);
                     }
                 }
                 else if (table_Name == "Product_SKU_Mapping")
                 {
                     if (field_Value != null)
                     {
-                        LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Purchase_Invoice_SKU(field_Value, table_Name, cols);
+                        LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Purchase_Invoice_SKU(field_Value);
+                    }
+                }
+                else if (table_Name == "Inventorys")
+                {
+                    if (field_Value != null)
+                    {
+                        LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Sales_Invoice_SKU(field_Value, table_Name, cols);
+                    }
+                }
+                else if (table_Name == "Sales_Invoice_Item")
+                {
+                    if (field_Value != null)
+                    {
+                        LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Sales_Return_SKU(field_Value, table_Name, cols);
                     }
                 }
                
