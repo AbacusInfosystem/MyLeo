@@ -74,6 +74,7 @@ namespace MyLeoRetailerRepo
 
                 product.SKU = Convert.ToString(dr["SKU_Code"]);
 
+               
                 product.Balance_Quantitya = Convert.ToInt32(dr["Balance_Quantity"]);
 
                 product.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
@@ -93,6 +94,8 @@ namespace MyLeoRetailerRepo
                 dispatch_Products.Dispatch_Id = Convert.ToInt32(dr["Dispatch_Id"]);
 
                 dispatch_Products.Dispatch_Item_Id = Convert.ToInt32(dr["Dispatch_Item_Id"]);
+
+                dispatch_Products.Barcode = Convert.ToString(dr["Barcode"]);
 
                 dispatch_Products.Quantity = Convert.ToInt32(dr["Dispatch_Quantity"]);
 
@@ -154,6 +157,8 @@ namespace MyLeoRetailerRepo
                 sqlparam.Add(new SqlParameter("@dispatch_Date", item.Dispatch_Date));
 
                 sqlparam.Add(new SqlParameter("@sku_Code", dispatch.SKU));
+
+                sqlparam.Add(new SqlParameter("@barcode", item.Barcode));
 
                 sqlparam.Add(new SqlParameter("@quantity", item.Quantity));
 
@@ -217,8 +222,6 @@ namespace MyLeoRetailerRepo
 
                    sqlparam.Add(new SqlParameter("@Dispatch_Item_Id", item.Dispatch_Item_Id));
 
-                   sqlparam.Add(new SqlParameter("@Request_Id", item.Request_Id));
-
                    sqlparam.Add(new SqlParameter("@Branch_Id", item.Branch_Id));
 
                    sqlparam.Add(new SqlParameter("@Created_By", product.Created_By));
@@ -265,6 +268,60 @@ namespace MyLeoRetailerRepo
                     sqlHelper.ExecuteNonQuery(sqlparam, Storeprocedures.sp_Reject_Product_Dispatch.ToString(), CommandType.StoredProcedure);
                 }
             }
+        }
+
+        public ProductDispatchInfo Get_Product_To_Dispatch_By_Dispatch_Id(int dispatch_Id, string sku)
+        {
+            ProductDispatchInfo product = new ProductDispatchInfo();
+
+            List<SqlParameter> sqlparam = new List<SqlParameter>();
+
+            sqlparam.Add(new SqlParameter("@dispatch_Id", dispatch_Id));
+
+            sqlparam.Add(new SqlParameter("@SKU", sku));
+
+            DataSet ds = sqlHelper.ExecuteDataSet(sqlparam, Storeprocedures.sp_Get_Product_To_Dispatch_By_Dispatch_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+
+                product.SKU = Convert.ToString(dr["SKU"]);
+
+                product.Branch_Id = Convert.ToInt32(dr["Branch_Id"]);
+
+                if (dr["Quantity"]!=DBNull.Value)
+                product.Quantity = Convert.ToInt32(dr["Quantity"]);
+
+            }
+
+            ProductDispatchInfo dispatch_Products;
+
+            List<ProductDispatchInfo> list_dispatch_Products = new List<ProductDispatchInfo>();
+
+            foreach (DataRow dr in ds.Tables[1].Rows) //for binding grid in index page
+            {
+                dispatch_Products = new ProductDispatchInfo();
+
+                dispatch_Products.Dispatch_Id = Convert.ToInt32(dr["Dispatch_Id"]);
+
+                dispatch_Products.Dispatch_Item_Id = Convert.ToInt32(dr["Dispatch_Item_Id"]);
+
+                dispatch_Products.Barcode = Convert.ToString(dr["Barcode"]);
+
+                dispatch_Products.Quantity = Convert.ToInt32(dr["Dispatch_Quantity"]);
+
+                dispatch_Products.Dispatch_Date = Convert.ToDateTime(dr["Dispatch_Date"]);
+
+                dispatch_Products.Accept_Status = Convert.ToString(dr["Accept_status"]);
+
+                list_dispatch_Products.Add(dispatch_Products);
+
+                product.Dispatch_Id = dispatch_Products.Dispatch_Id;
+            }
+
+            product.grid_Dispatch_List = list_dispatch_Products;
+
+            return product;
         }
     }
 }

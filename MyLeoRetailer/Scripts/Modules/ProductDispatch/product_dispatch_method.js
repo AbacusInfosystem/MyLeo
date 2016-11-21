@@ -1,42 +1,75 @@
 ﻿function AddProductDispatch() {
-    if ($("#txtBalance_Quantitya").val() > 0 && $("#txtDispatch_Date").val() != "" && $("#txtDispatch_Quantity").val() != "") {
-        var tblHtml = '';
+    
+    $("#txtDispatch_Quantity").val(parseInt($("#txtDispatch_Quantity").val()) + 1);
 
-        var myTable = $("#tblProduct_Dispatch tbody");
+    $("#txtDispatch_Quantity").focus();
+    $("#txtDispatch_Quantity").blur();
 
-        tblHtml += "<tr class='item-data-row'>";
+    if ($("#txtBalance_Quantitya").val() > 0 && $("#txtDispatch_Quantity").val() > 0 && $("#txtBarcode").val() != "") {
 
-        tblHtml += "<td>";
-        tblHtml += "<label >" + $("#txtSKU").val() + "</label>";
-        tblHtml += "</td>";
+        if ($("#txtBalance_Quantitya").val() >= $("#txtDispatch_Quantity").val())
+        {
+            $("#txtBalance_Quantitya").val($("#txtBalance_Quantitya").val() - $("#txtDispatch_Quantity").val());
 
-        tblHtml += "<td>";
-        tblHtml += "<label >" + $("#txtDispatch_Quantity").val() + "</label>";
-        tblHtml += "<input type='hidden' class='form-control input-sm quantity' name='List_product_Dispatch[0].Quantity' value='" + $("#txtDispatch_Quantity").val() + "' id=textQuantitya_0'>";
-        tblHtml += "</td>";
+            var currentdate = new Date();
+            var datetime = (currentdate.getMonth() + 1) + "-"
+                        + currentdate.getDate() + "-"
+                        + currentdate.getFullYear();
 
-        tblHtml += "<td>";
-        tblHtml += "<label >" + $("#txtDispatch_Date").val() + "</label>";
-        tblHtml += "<input type='hidden' class='form-control input-sm' name='List_product_Dispatch[0].Dispatch_Date' value='" + $("#txtDispatch_Date").val() + "' id=textDispatch_Date_0'>";
-        tblHtml += "</td>";
 
-        tblHtml += "<td>";
-        tblHtml += "<a class='btn btn-danger active' role='button' id='btnDispatch'  onclick='DeleteProduct_Dispatch(this)'>Delete</a>";
-        tblHtml += "</td>";
+            var tblHtml = '';
 
-        tblHtml += "</tr>";
+            var myTable = $("#tblProduct_Dispatch tbody");
 
-        var newRow = $(tblHtml);
+            tblHtml += "<tr class='item-data-row'>";
 
-        myTable.append(newRow);
+            tblHtml += "<td>";
+            tblHtml += "<label >" + $("#txtBarcode").val() + "</label>";
+            tblHtml += "<input type='hidden' class='form-control input-sm quantity' name='List_product_Dispatch[0].Barcode' value='" + $("#txtBarcode").val() + "' id=textBarcode_0'>";
+            tblHtml += "</td>";
 
-        $("#txtBalance_Quantitya").val($("#txtBalance_Quantitya").val() - $("#txtDispatch_Quantity").val());
+            tblHtml += "<td>";
+            tblHtml += "<label >" + $("#txtDispatch_Quantity").val() + "</label>";
+            tblHtml += "<input type='hidden' class='form-control input-sm quantity' name='List_product_Dispatch[0].Quantity' value='" + $("#txtDispatch_Quantity").val() + "' id=textQuantitya_0'>";
+            tblHtml += "</td>";
 
-        $("#txtDispatch_Quantity").val("")
+            tblHtml += "<td>";
+            tblHtml += "<label >" + datetime + "</label>";
+            tblHtml += "<input type='hidden' class='form-control input-sm' name='List_product_Dispatch[0].Dispatch_Date' value='" + datetime + "' id=textDispatch_Date_0'>";
+            tblHtml += "</td>";
 
-        ReArrange_Index();
+            tblHtml += "<td>";
+            tblHtml += "<a class='btn btn-danger active' role='button' id='btnDispatch'  onclick='DeleteProduct_Dispatch(this)'>Delete</a>";
+            tblHtml += "</td>";
+
+            tblHtml += "</tr>";
+
+            var newRow = $(tblHtml);
+
+            myTable.append(newRow);
+
+            $("#txtDispatch_Quantity").val(0);
+
+            ReArrange_Index();
+
+            var row_Count = document.getElementById("tblProduct_Dispatch").children[1].rows.length;
+
+            if (row_Count > 0 && $("#hdn_request_Id").val() == 0) {
+                $("#txtBalance_Quantitya").attr("readonly", true);
+
+                $("#textSKU").attr("readonly", true);
+
+                $("#txt_Branch_Name").attr("readonly", true);
+
+                $(".text-muted").prop("disabled", true);
+            }
+        }
+        $("#txtBarcode").val("");
     }
+   
+    $("#txtDispatch_Quantity").val(0);
 
+   
 }
 
 function DeleteProduct_Dispatch(elem) {
@@ -45,23 +78,57 @@ function DeleteProduct_Dispatch(elem) {
     $("#txtBalance_Quantitya").val(Quantity + addBackQty)
     elem.closest("tr").remove();
     ReArrange_Index();
+
+    var row_Count = document.getElementById("tblProduct_Dispatch").children[1].rows.length;
+
+    if (row_Count ==0 && $("#hdn_request_Id").val() == 0) {
+        $("#txtBalance_Quantitya").attr("readonly", false);
+
+        $("#textSKU").attr("readonly", false);
+
+        $("#txt_Branch_Name").attr("readonly", false);
+
+        $(".text-muted").prop("disabled", false);
+    }
 }
 
 function Delete_Dispatch_Product(elem) {
 
     var r = confirm("Do you want to Delete the Record permanently!");
     if (r == true) {
-    var DeleteProduct = elem.closest("tr").children[0].firstElementChild.value;
+        var DeleteProduct = elem.closest("tr").children[0].firstElementChild.value;
 
-    var addBackQty = parseInt(elem.closest("tr").children[1].innerText);
+        var addBackQty = parseInt(elem.closest("tr").children[1].innerText);
 
-    Delect_Dispatched_Product(DeleteProduct, addBackQty);
+        Delect_Dispatched_Product(DeleteProduct, addBackQty);
 
-    $(elem).closest("tr").remove();
+        $(elem).closest("tr").remove();
+
+        if (row_Count == 0 && $("#hdn_request_Id").val() == 0) {
+            $("#txtBalance_Quantitya").attr("readonly", false);
+
+            $("#textSKU").attr("readonly", false);
+
+            $("#txt_Branch_Name").attr("readonly", false);
+
+            $(".text-muted").prop("disabled", false);
+        }
     }
 }
 
 function ReArrange_Index() {
+
+    if ($("#frmProductDispatch").find("[id^='textBarcode_']").length > 0) {
+        var qtyLength = $("#frmProductDispatch").find("[id^='textBarcode_']").length;
+
+        for (var i = 0; i < qtyLength; i++) {
+            $("#frmProductDispatch").find("[id^='textBarcode_']")[i].id = "textBarcode_" + i;
+            $("#frmProductDispatch").find("[id^='textBarcode_" + i + "']").attr("name", "List_product_Dispatch[" + i + "].Barcode");
+        }
+
+    }
+
+
     if ($("#frmProductDispatch").find("[id^='textQuantitya_']").length > 0) {
         var qtyLength = $("#frmProductDispatch").find("[id^='textQuantitya_']").length;
 
@@ -86,7 +153,7 @@ function ReArrange_Index() {
 
 function Delect_Dispatched_Product(DeleteProduct, addBackQty) {
 
-   
+
     var Quantity = parseInt($("#txtBalance_Quantitya").val());
 
     $("#txtBalance_Quantitya").val(Quantity + addBackQty);
@@ -123,3 +190,6 @@ function Delect_Dispatched_Product(DeleteProduct, addBackQty) {
         }
     });
 }
+
+
+

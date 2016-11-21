@@ -64,7 +64,7 @@
         <div class="page-title">
             <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purhase Order View</h2>
         </div>
-        @if (Model.PurchaseOrder.PurchaseReport_Id == 1)
+        @if (Model.PurchaseOrder.PurchaseReport_Id != 2)
         {
             <button class="btn btn-danger pull-right" onclick="location.href='@Url.Action("Search", "PurchaseOrder", new { PurchaseReport_Id = 1 })'"><i class="fa fa-angle-double-left"></i> BACK</button>
         }

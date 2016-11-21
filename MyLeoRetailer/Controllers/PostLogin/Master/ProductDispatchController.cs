@@ -30,7 +30,15 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         {
             try
             {
-                pViewModel.product_Dispatch = pRepo.Get_Product_To_Dispatch_By_Id(pViewModel.product_Dispatch.Request_Id, pViewModel.product_Dispatch.SKU);
+                if (pViewModel.product_Dispatch.Dispatch_Id != 0)
+                {
+                    pViewModel.product_Dispatch = pRepo.Get_Product_To_Dispatch_By_Dispatch_Id(pViewModel.product_Dispatch.Dispatch_Id, pViewModel.product_Dispatch.SKU);
+                }
+                else
+                {
+                    pViewModel.product_Dispatch = pRepo.Get_Product_To_Dispatch_By_Id(pViewModel.product_Dispatch.Request_Id, pViewModel.product_Dispatch.SKU);
+                }
+                
             }
             catch(Exception ex)
             {
@@ -62,7 +70,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             {
                 pager = pViewModel.Grid_Detail.Pager;
 
-                pViewModel.Grid_Detail = Set_Grid_Details(false, "SKU_Code,Purcahse_Order_Request_Date,Branch_Name,Quantity,Balance_Quantity,Status", "Purchase_Order_Request_Id,Status,SKU_Code"); // Set grid info for front end listing
+                pViewModel.Grid_Detail = Set_Grid_Details(false, "SKU_Code,Purcahse_Order_Request_Date,Branch_Name,Quantity,Balance_Quantity,Status", "Purchase_Order_Request_Id,Status,SKU_Code,Dispatch_Id"); // Set grid info for front end listing
 
                 pViewModel.Grid_Detail.Records = pRepo.Get_Product_To_Dispatch(pViewModel.Filter); // Call repo method 
 
@@ -149,7 +157,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 pViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                pViewModel.Grid_Detail = Set_Grid_Details(false, "SKU,Quantity,Dispatch_Date", "Dispatch_Id,Request_Id,Branch_Id,Dispatch_Item_Id"); // Set grid info for front end listing
+                pViewModel.Grid_Detail = Set_Grid_Details(false, "SKU,Barcode,Quantity,Dispatch_Date", "Dispatch_Id,Request_Id,Branch_Id,Dispatch_Item_Id"); // Set grid info for front end listing
 
                 pViewModel.Grid_Detail.Records = pRepo.Dispatched_Product_Listing(pViewModel.Cookies.Branch_Ids.TrimEnd()); // Call repo method 
 
