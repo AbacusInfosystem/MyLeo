@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MyLeoRetailerInfo.Branch;
 
 namespace MyLeoRetailer.Models
 {
@@ -25,6 +26,8 @@ namespace MyLeoRetailer.Models
             SalesReturns = new List<SalesReturnInfo>();
 
             SaleReturnItemList = new List<SaleReturnItems>();
+
+            Branch = new BranchInfo();
 
             Cookies = new LoginInfo();
 
@@ -47,6 +50,8 @@ namespace MyLeoRetailer.Models
         public List<SalesReturnInfo> SalesReturns { get; set; }
 
         public List<SaleReturnItems> SaleReturnItemList { get; set; }
+
+        public BranchInfo Branch { get; set; }
 
         public LoginInfo Cookies { get; set; }
 

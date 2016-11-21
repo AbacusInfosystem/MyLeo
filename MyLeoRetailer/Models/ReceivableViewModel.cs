@@ -1,4 +1,5 @@
 ﻿using MyLeoRetailerInfo;
+using MyLeoRetailerInfo.Branch;
 using MyLeoRetailerInfo.Common;
 using MyLeoRetailerInfo.GiftVoucher;
 using MyLeoRetailerInfo.Interface;
@@ -27,6 +28,8 @@ namespace MyLeoRetailer.Models
             Receivables = new List<ReceivableInfo>();
 
             Receivables1 = new List<ReceivableInfo>();
+
+            Branch = new BranchInfo();
 
             Cookies = new LoginInfo();
 
@@ -68,6 +71,12 @@ namespace MyLeoRetailer.Models
         }
 
         public List<GiftVoucherInfo> GiftVouchers
+        {
+            get;
+            set;
+        }
+
+        public BranchInfo Branch
         {
             get;
             set;

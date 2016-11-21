@@ -294,6 +294,8 @@ namespace MyLeoRetailerRepo
 
                 sqlParams.Add(new SqlParameter("@Quantity", item.Quantity));
 
+                sqlParams.Add(new SqlParameter("@Barcode", item.Barcode));
+
                 sqlParams.Add(new SqlParameter("@Created_By", PurchaseInvoice.Created_By));
 
                 sqlParams.Add(new SqlParameter("@Created_Date", PurchaseInvoice.Created_Date));

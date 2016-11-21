@@ -222,6 +222,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BarcodeViewModel.cs" />
     <Compile Include="Models\BranchViewModel.cs" />
     <Compile Include="Models\AlterationViewModel.cs" />
     <Compile Include="Models\BrandViewModel.cs" />
@@ -1002,6 +1003,7 @@
     <Content Include="Scripts\Modules\Alteration\search_Alteration_methods.js" />
     <Content Include="Scripts\Modules\Barcode\barcode_event.js" />
     <Content Include="Scripts\Modules\Barcode\barcode_method.js" />
+    <Content Include="Scripts\Modules\Barcode\barcode_validation.js" />
     <Content Include="Scripts\Modules\Branch\branch_events.js" />
     <Content Include="Scripts\Modules\Branch\branch_methods.js" />
     <Content Include="Scripts\Modules\Branch\branch_validation.js" />
@@ -1248,6 +1250,7 @@
     <Content Include="Views\PostLogin\SalesOrder\_SalesDetailsReport.cshtml" />
     <Content Include="Views\PostLogin\Barcode\Barcode.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\SalesSummaryReport.cshtml" />
+    <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -23,13 +23,6 @@ $(document).ready(function () {
         Get_Receivable();
     });
 
-   // commented by vinod mane on 26/10/2016
-    //$("#btnResetReceivable").click(function () {
-    //    Reset_Recevable();//Added By Vinod Mane on 26/10/2016
-    //    //Get_Receivable();
-    //});
-    //End
-
     $("#btnPay").click(function () {
 
         $("#frmReceivable").attr("action", "/Receivable/Get_Receivable_Details_By_Id/");

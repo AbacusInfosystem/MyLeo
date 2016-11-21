@@ -186,6 +186,9 @@ namespace MyLeoRetailerInfo.PurchaseOrder
 
         public string Total_Amount_In_Word { get; set; }
 
+
+        public int PurchaseReport_Id { get; set; }
+
         public List<PurchaseOrderItemInfo> PurchaseOrderItems { get; set; }
     }
 

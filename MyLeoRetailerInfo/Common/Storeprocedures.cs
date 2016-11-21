@@ -120,6 +120,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Update_Gift_Voucher,
         sp_Get_Gift_Voucher_By_Id,
         Check_Existing_Gift_Voucher_No,
+        sp_Get_Gift_Vouchers,
         #endregion
      
         #region Branch
@@ -449,6 +450,16 @@ namespace MyLeoRetailerInfo.Common
         #region Sales Report
 
         sp_Get_Sales_Details,
+
+        #endregion
+
+        #region Barcode
+
+        sp_Get_Barcodes,
+
+        sp_Insert_Barcode,
+
+        sp_Get_Max_Product_SKU_Barcode_Id,
 
         #endregion
 

@@ -74,8 +74,18 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_Access)]
-        public ActionResult Search(PurchaseOrderViewModel poViewModel)
+        public ActionResult Search(int? PurchaseReport_Id)
         {
+            PurchaseOrderViewModel poViewModel = new PurchaseOrderViewModel();
+
+            if (PurchaseReport_Id == null)
+            {
+                PurchaseReport_Id = 1;
+            }
+
+            poViewModel.PurchaseOrder.PurchaseReport_Id = Convert.ToInt32(PurchaseReport_Id);
+
+            //poViewModel.PurchaseOrder.PurchaseOrder_Id = PurchaseOrder_Id;
             try
             {
                 if (TempData["poViewModel"] != null)
@@ -293,8 +303,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 TempData["poViewModel"] = (PurchaseOrderViewModel)poViewModel;
 
-                return RedirectToAction("Search", poViewModel);
-
+                return RedirectToAction("Search");
             }
         }
 
@@ -377,12 +386,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             TempData["poViewModel"] = (PurchaseOrderViewModel)poViewModel;
 
-            return RedirectToAction("Search", poViewModel);
+            return RedirectToAction("Search");
         }
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Order_Management_View)]
         public ActionResult Get_Purchase_Order_By_Id(PurchaseOrderViewModel poViewModel)
         {
+            int Id = poViewModel.PurchaseOrder.PurchaseReport_Id;
             try
             {
                 if (TempData["poViewModel"] != null)
@@ -394,6 +404,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 poViewModel.PurchaseOrder.PurchaseOrderItems = _purchaseorderRepo.Get_Purchase_Order_Items(poViewModel.Filter.Purchase_Order_Id);
 
+                poViewModel.PurchaseOrder.PurchaseReport_Id = Id;
             }
             catch (Exception ex)
             {
@@ -425,7 +436,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             TempData["poViewModel"] = poViewModel;
 
-            return RedirectToAction("Search", poViewModel);
+            return RedirectToAction("Search");
         }
 
         public ActionResult PrintPO(PurchaseOrderViewModel poViewModel)

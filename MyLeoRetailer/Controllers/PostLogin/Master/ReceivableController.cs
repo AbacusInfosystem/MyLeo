@@ -41,6 +41,14 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 //rRepo.Get_Credit_Note_Details_By_Id(rViewModel.Receivable.Sales_Credit_Note_Id);
 
                 //rViewModel.Receivable = rRepo.Get_Receivable_Details_By_Id(rViewModel.Receivable.Sales_Invoice_Id);
+
+                rViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+
+                rViewModel.Branch = Set_Branch(rViewModel.Cookies.Branch_Ids.TrimEnd());
+
+                rViewModel.Receivable.Branch_ID = rViewModel.Branch.Branch_ID;
+
+                rViewModel.Receivable.Branch_Name = rViewModel.Branch.Branch_Name;
             }
             catch (Exception ex)
             {
@@ -183,6 +191,10 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
                 rViewModel.Receivable = rRepo.Get_Receivable_Data_By_Id(rViewModel.Receivable.Sales_Invoice_Id);
 
                 rViewModel.Receivables = rRepo.Get_Receivable_Items_By_Id(rViewModel.Receivable.Receivable_Id);
+
+                rViewModel.Receivables1 = rRepo.Get_Gift_Voucher_Details_By_Id();
+
+                rViewModel.Credit_Notes = rRepo.Get_Credit_Note_Details_By_Id(rViewModel.Receivable.Customer_Id, rViewModel.Receivable.Receivable_Id);
 
                 rViewModel.FriendlyMessages.Add(MessageStore.Get("RECI01"));
 

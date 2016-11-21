@@ -1,27 +1,35 @@
 ﻿
 $(function () {
 
-    Get_Employees();
+    Get_Barcodes();
 
 
-    $(document).on('change', '[name="Employee_List"]', function (event) {
+    $(document).on('change', '[name="Barcode_List"]', function (event) {
 
         if ($(this).prop('checked')) {
 
-            $("#hdf_EmployeeId").val(this.value);
-
-            document.getElementById('btnEditEmployee').disabled = false;
-
-            document.getElementById('btnMapBranchEmployee').disabled = false;
+            $("#hdf_BarcodeId").val(this.value);
 
         }
     });
 
-    $("#btnCreateEmployee").click(function () {
+    $("#btnGenerate").click(function () {
 
-        $("#frmEmployee").attr("action", "/Employee/Index");
-        $("#frmEmployee").submit();
+        if ($("#frmBarcodeGenerator").valid()) {
+
+            $("#frmBarcodeGenerator").attr("action", "/Barcode/Insert_Barcode");
+
+            $('#frmBarcodeGenerator').attr("method", "POST");
+
+            $("#frmBarcodeGenerator").submit();
+        }
+    });
+
+    $(document).on("change", "#hdnInventory_Id", function () {
+
+        Get_Barcodes();
 
     });
+
 
 });

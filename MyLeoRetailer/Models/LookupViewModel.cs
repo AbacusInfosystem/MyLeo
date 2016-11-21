@@ -33,6 +33,5 @@ namespace MyLeoRetailer.Models
 
         //public CookiesInfo Cookies { get; set; }
 
-
     }
 }

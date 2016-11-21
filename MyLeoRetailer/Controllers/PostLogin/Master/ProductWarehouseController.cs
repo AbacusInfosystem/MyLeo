@@ -42,11 +42,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
                 dataOperator = DataOperator.Like.ToString();// set operator for where clause as comma seprated
 
-                pViewModel.Query_Detail = Set_Query_Details(true, "Product_Quntity,Product_SKU,Product_Warehouse_Id", "", "Product_Warehouse", "Product_SKU", filter, dataOperator); // Set query for grid
+                pViewModel.Query_Detail = Set_Query_Details(true, "Product_Quntity,Product_SKU,Barcode,Product_Warehouse_Id", "", "Product_Warehouse", "Product_SKU", filter, dataOperator); // Set query for grid
 
                 pager = pViewModel.Grid_Detail.Pager;
 
-                pViewModel.Grid_Detail = Set_Grid_Details(false, "Product_SKU,Product_Quntity", "Product_Warehouse_Id"); // Set grid info for front end listing
+                pViewModel.Grid_Detail = Set_Grid_Details(false, "Product_SKU,Barcode,Product_Quntity", "Product_Warehouse_Id"); // Set grid info for front end listing
 
                 pViewModel.Grid_Detail.Records = _purchaseinvoiceRepo.Get_WarehouseProducts(pViewModel.Query_Detail); // Call repo method 
 
