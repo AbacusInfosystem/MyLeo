@@ -1,20 +1,23 @@
-﻿//$(function () {
+﻿
+$(document).ready(function () {
 
+    if ($("#text_Employee_Id").val() != 0) {
 
-//    $("#btnSaveAlteration").click(function () {
+        $("#Employee").find(".autocomplete-text").trigger("focusout");
+    }
+    else
+    {
+        $("#text_Employee_Id").val('');
+    }
 
-//        if ($("#frmAlteration1").valid()) {
+    if ($("#text_Sales_Invoice_Id").val() != 0) {
 
-//            Save_Alteration();
-
-
-//        }
-//    });
-
-//});
-
-
-$(function () {
+        $("#Invoice").find(".autocomplete-text").trigger("focusout");
+    }
+    else
+    {
+        $("#text_Sales_Invoice_Id").val('');
+    }
 
     $("input.mask_mobile_no").mask('(99) 99999-99999');
 
