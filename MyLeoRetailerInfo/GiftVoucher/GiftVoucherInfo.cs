@@ -99,4 +99,19 @@ namespace MyLeoRetailerInfo.GiftVoucher
        }
 
     }
+
+   public class Filter_Gift_Voucher
+   {
+       public string Gift_Voucher_No
+       {
+           get;
+           set;
+       }
+
+       public int Gift_Voucher_Id
+       {
+           get;
+           set;
+       }
+   }
 }

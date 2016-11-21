@@ -22,6 +22,8 @@ namespace MyLeoRetailer.Models
 
             Filter = new Filter_Gift_Voucher();
 
+            Cookies = new LoginInfo();
+
             FriendlyMessages = new List<FriendlyMessage>();
 
             Grid_Detail.Pager.DivObject = "divGiftVoucherPager";
@@ -61,20 +63,26 @@ namespace MyLeoRetailer.Models
             set;
         }
 
+        public LoginInfo Cookies
+        {
+            get;
+            set;
+        }
+
 	}
 
-    public class Filter_Gift_Voucher
-    {
-        public string Gift_Voucher_No
-        {
-            get;
-            set;
-        }
+    //public class Filter_Gift_Voucher
+    //{
+    //    public string Gift_Voucher_No
+    //    {
+    //        get;
+    //        set;
+    //    }
 
-        public int Gift_Voucher_Id
-        {
-            get;
-            set;
-        }
-    }
+    //    public int Gift_Voucher_Id
+    //    {
+    //        get;
+    //        set;
+    //    }
+    //}
 }
