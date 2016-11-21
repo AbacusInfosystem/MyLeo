@@ -514,6 +514,204 @@ namespace MyLeoRetailerRepo
             return Value;
         }
 
+        public string Get_Lookup_Data_Add_Purchase_Return_SKU(string field_Value, string table_Name, string[] columns)
+        {
+            List<SqlParameter> paramList = new List<SqlParameter>();
 
+            string Value = "";
+
+            string strquery = "";
+
+            strquery = "IF OBJECT_ID('tempdb..#Temp1') IS NOT NULL " +
+                        "DROP TABLE #Temp1 " +
+
+                        "IF OBJECT_ID('tempdb..#Temp2') IS NOT NULL " +
+                        "DROP TABLE #Temp2 " +
+
+                        "IF OBJECT_ID('tempdb..#Temp3') IS NOT NULL " +
+                        " DROP TABLE #Temp3 " +
+
+                        "CREATE TABLE #Temp1(    invoice_Id int,    SKU Varchar(50),     Qty int ) " +
+
+                        "CREATE TABLE #Temp2(    invoice_Id int,    SKU Varchar(50),     Qty int ) " +
+
+                        "CREATE TABLE #Temp3(    invoice_Id int,    SKU_Code Varchar(50),     Quantity int ) " +
+
+                        "INSERT INTO #Temp1 " +
+                        "SELECT PII.Purchase_Invoice_Id, PII.SKU_Code, SUM(PRRI.Quantity) AS bal  " +
+                        "FROM Purchase_Invoice_Item PII  " +
+                        "JOIN Purchase_Return PRR ON PII.Purchase_Invoice_Id=PRR.Purchase_Invoice_Id  " +
+                        "JOIN Purchase_Return_Item PRRI ON PRR.Purchase_Return_Id=PRRI.Purchase_Return_Id " +
+                        "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id " +
+                        "GROUP BY PII.Purchase_Invoice_Id,PII.SKU_Code,PII.Quantity " +
+
+
+                        "INSERT  INTO #Temp2 " +
+                        "SELECT PII.Purchase_Invoice_Id,PII.SKU_Code, SUM(PRRI.Quantity) AS bal  " +
+                        "FROM Purchase_Invoice_Item PII  " +
+                        "JOIN Purchase_Return_Request PRR ON PII.Purchase_Invoice_Id=PRR.Purchase_Invoice_Id  " +
+                        "JOIN Purchase_Return_Request_Item PRRI ON PRR.Purchase_Return_Request_Id=PRRI.Purchase_Return_Request_Id " +
+                        "AND PII.SKU_Code=PRRI.SKU_Code AND PII.Purchase_Invoice_Id=@Purchase_Invoice_Id and PRRI.Status=0 " +
+                        "GROUP BY PII.Purchase_Invoice_Id,PII.SKU_Code,PII.Quantity " +
+
+                        "declare @table1 int ,   @table2 int " +
+
+                        "set @table1=(select case when exists (select 1 from #Temp1) then 1 else 0 end) " +
+
+                        "set @table2=(select case when exists (select 1 from #Temp2) then 1 else 0 end) " +
+
+
+                        "if(@table1=1 and @table2=0 ) " +
+                        "begin " +
+                        "INSERT INTO #Temp3 " +
+                        "SELECT PII.Purchase_Invoice_Id,t1.SKU,PII.Quantity-t1.Qty AS Qty " +
+                        "FROM #Temp1 t1,Purchase_Invoice_Item PII " +
+                        "WHERE PII.Purchase_Invoice_Id=t1.invoice_Id " +
+                        "group by PII.Purchase_Invoice_Id,t1.SKU ,PII.Quantity,t1.Qty " +
+                        "end " +
+
+                        "if(@table1=0 and @table2=1 ) " +
+                        "begin " +
+                        "INSERT INTO #Temp3 " +
+                        "SELECT PII.Purchase_Invoice_Id,t2.SKU,PII.Quantity-t2.Qty AS Qty  " +
+                        "FROM #Temp2 t2,Purchase_Invoice_Item PII " +
+                        "WHERE PII.Purchase_Invoice_Id=t2.invoice_Id  " +
+                        "group by PII.Purchase_Invoice_Id,t2.SKU ,PII.Quantity,t2.Qty " +
+                        "end " +
+
+                        "if(@table1=1 and @table2=1 ) " +
+                        "begin " +
+                        "INSERT INTO #Temp3 " +
+                        "SELECT PII.Purchase_Invoice_Id,t1.SKU,PII.Quantity-(t1.Qty+t2.Qty)AS Qty  " +
+                        "FROM #Temp1 t1,#Temp2 t2,Purchase_Invoice_Item PII " +
+                        "WHERE PII.Purchase_Invoice_Id=t1.invoice_Id and  " +
+                        "t2.invoice_Id=t1.invoice_Id  " +
+                        "group by PII.Purchase_Invoice_Id,t1.SKU ,PII.Quantity,t1.Qty,t2.Qty " +
+                        "end " +
+
+                        "IF ((SELECT count(*) FROM #Temp3 where  Quantity!=0)>0) " +
+                        "BEGIN " +
+                        "SELECT Quantity, SKU_Code FROM #Temp3 " +
+                        "END " +
+
+                        "IF @@ROWCOUNT=0 and (SELECT COUNT(*) FROM Purchase_Return WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )=0 and  ( SELECT COUNT(*) FROM Purchase_Return_Request WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )=0 " +
+                        "BEGIN " +
+                        "SELECT Quantity, SKU_Code FROM Purchase_Invoice_Item WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id " +
+                        "END " +
+
+                        "ELSE IF (( SELECT COUNT(*) FROM Purchase_Return_Request WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id )>0) " +
+                        "BEGIN " +
+                        "SELECT  PII.Quantity, PII.SKU_Code FROM Purchase_Invoice_Item PII,#Temp3 t3 WHERE Purchase_Invoice_Id=@Purchase_Invoice_Id and " +
+                        "PII.Purchase_Invoice_Id=t3.invoice_Id and  PII.SKU_Code!=t3.SKU_Code " +
+                        "END " +
+
+                        "ELSE IF ((SELECT count(*) FROM #Temp3)=0) " +
+                        "BEGIN " +
+                        "SELECT Quantity, SKU_Code FROM #Temp3 " +
+                        "END";
+
+            paramList.Add(new SqlParameter("@Purchase_Invoice_Id", field_Value));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                int count = 0;
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                count = drList.Count();
+
+                foreach (DataRow dr in drList)
+                {
+                    Value = Convert.ToString(dr["SKU_Code"]) + "_" + dr["Quantity"];
+                }
+            }
+
+            return Value;
+        }
+
+        public string Get_Lookup_Data_Add_Purchase_Invoice_SKU(string field_Value, string table_Name, string[] columns)
+        {
+            List<SqlParameter> paramList = new List<SqlParameter>();
+
+            string Value = "";
+
+            string strquery = "";
+
+            if (field_Value != "x")
+            {
+                strquery = "IF OBJECT_ID('tempdb..#Temp1') IS NOT NULL " +
+                "DROP TABLE #Temp1 " +
+
+                "IF OBJECT_ID('tempdb..#Temp2') IS NOT NULL " +
+                "DROP TABLE #Temp2 " +
+
+                "IF OBJECT_ID('tempdb..#Temp3') IS NOT NULL " +
+                "DROP TABLE #Temp3 " +
+
+                "create table #Temp1(    POI int,     SKU Varchar(50),     Qty int ) " +
+                "create table #Temp2(    POI int,     SKU Varchar(50),     Qty int ) " +
+                "create table #Temp3(    POI int,     SKU Varchar(50),     Qty int ) " +
+
+                "insert into #Temp1 " +
+
+                "select distinct PO.Purchase_Order_Id, PSM.SKU_Code,Sum(POIS.Quantity) as Quantity " +
+                "from Product_SKU_Mapping PSM, Purchase_Order PO, Purchase_Order_Item POI,Purchase_Order_Item_Sizes POIS, Product P " +
+                "where PO.Purchase_Order_Id=POI.Purchase_Order_Id " +
+                "AND POIS.Purchase_Order_Id = POI.Purchase_Order_Id " +
+                "AND POI.Article_No=P.Article_No " +
+                "AND POIS.Purchase_Order_Item_Id =POI.Purchase_Order_Item_Id " +
+                "AND POI.Colour_Id=PSM.Colour_Id " +
+                "AND POIS.Size_Id=PSM.Size_Id " +
+                "AND P.Product_Id=PSM.Product_Id " +
+                "AND PO.Purchase_Order_Id= @Purchase_Order_Id " +
+                "group by PSM.SKU_Code, PO.Purchase_Order_Id " +
+
+                "insert into #Temp2  " +
+                "select t.POI,t.SKU,t.Qty-poi.Quantity as Qty from  Purchase_Invoice_Item poi,#temp1 t " +
+                "where t.POI=poi.Purchase_Order_Id and   t.SKU=poi.SKU_Code " +
+
+                "insert into #Temp3 " +
+                "SELECT t1.POI,t1.SKU, " +
+                "case " +
+                "when t2.Qty is not null then t2.Qty " +
+                "when t2.Qty is null then t1.Qty " +
+                "end " +
+                "as Qty " +
+                "FROM #Temp1 t1 " +
+                "LEFT JOIN #Temp2 t2 " +
+                "ON t1.POI=t2.POI and t1.SKU=t2.SKU " +
+                "ORDER BY t1.SKU; " +
+                "select Qty as Quantity, SKU as SKU_Code from #Temp3 where Qty!=0 ";
+            }
+            else
+            {
+                strquery = " declare @Quantity int =1000000 ";
+                strquery += "select @Quantity as Quantity, SKU_Code from dbo.Product_SKU_Mapping";                
+            }
+
+            paramList.Add(new SqlParameter("@Purchase_Order_Id", field_Value));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                int count = 0;
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                count = drList.Count();
+
+                foreach (DataRow dr in drList)
+                {
+                    Value = Convert.ToString(dr["SKU_Code"]) + "_" + dr["Quantity"];
+                }
+            }
+
+            return Value;
+        }
     }
 }

@@ -162,14 +162,14 @@
                                         </td>
 
                                         @*<td>
-                            <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
-                            <input type="hidden" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Purchase_Order_Id" id="hdnPurchase_Order_Id_0" />
-                        </td>*@
+                                        <input class="form-control input-sm" type="text" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].SKU_Code" id="textSKU_No_0" onchange="javascript: Get_Purchase_Return_Items_By_SKU_Code(0);">
+                                        <input type="hidden" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].Purchase_Order_Id" id="hdnPurchase_Order_Id_0" />
+                                        </td>*@
 
                                         <td>
                                             <div class="form-group auto-complete">
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control invoice-filter autocomplete-text" id="textSKU_No_0" placeholder="Enter SKU to search" value="" data-table="Purchase_Invoice_Item" data-col="Quantity,SKU_Code" data-headernames="SKU Code" data-param="hdf_Purchase_Invoice_Id" data-field="Purchase_Invoice_Id" name="SKU_Code_0" />
+                                                <div id="SKU_0" class="input-group">
+                                                    <input type="text" class="form-control invoice-filter autocomplete-text lookup-text" id="textSKU_No_0" placeholder="Enter SKU to search" value="" data-table="Purchase_Invoice_Item" data-col="Quantity,SKU_Code" data-headernames="SKU Code" data-param="hdf_Purchase_Invoice_Id" data-field="Purchase_Invoice_Id" name="SKU_Code_0" />
                                                     <span class="input-group-addon"><a href="#" class="text-muted" id="hrefDealer" role="button"><i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                                                     <input type="hidden" id="hdnQuantity_0" value="" class="auto-complete-value" />
                                                     <input type="hidden" id="hdnSKU_No_0" value="" name="PurchaseReturnRequest.PurchaseReturnRequestItems[0].SKU_Code" class="auto-complete-label" onchange="javascript:Get_Purchase_Return_Items_By_SKU_Code(0);" />

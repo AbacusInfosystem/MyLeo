@@ -73,12 +73,17 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
         [AuthorizeUserAttribute(AppFunction.Purchase_Return_Management_Access)]
 
-        public ActionResult Search(int PurchaseReport_Id)
+        public ActionResult Search(int? PurchaseReport_Id)
         {
 
             PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
 
-            prViewModel.PurchaseReturn.PurchaseReturnReport_Id = PurchaseReport_Id;
+            if (PurchaseReport_Id == null)
+            {
+                PurchaseReport_Id = 1;
+            }
+
+            prViewModel.PurchaseReturn.PurchaseReturnReport_Id = Convert.ToInt32(PurchaseReport_Id);
 
             try
             {
@@ -288,7 +293,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
                 TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
 
-                return RedirectToAction("Search", prViewModel);
+                return RedirectToAction("Search");
             }
         }
 
@@ -461,7 +466,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             TempData["prViewModel"] = (PurchaseReturnViewModel)prViewModel;
 
-            return RedirectToAction("Search", prViewModel);
+            return RedirectToAction("Search");
         }
 
         public ActionResult Get_Purchase_Return_Details(PurchaseReturnViewModel prViewModel)

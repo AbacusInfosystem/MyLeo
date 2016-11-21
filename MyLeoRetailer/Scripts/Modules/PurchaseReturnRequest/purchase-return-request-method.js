@@ -54,7 +54,7 @@ function AddPurchaseReturnRequestDetails() {
     tblHtml += "<tr id='PurchaseReturnRequestItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode' value='' onblur='javascript: Get_Purchase_Return_Items_By_Barcode(" + i + ");' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode' value='' onchange='javascript: Get_Purchase_Return_Items_By_Barcode(" + i + ");' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
 
@@ -65,8 +65,8 @@ function AddPurchaseReturnRequestDetails() {
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
-    tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Quantity,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' name='SKU_Code_" + i + "'/>";
+    tblHtml += "<div id='SKU_" + i + "' class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text lookup-text' id='textSKU_No_" + i + "' placeholder='Enter SKU to search' value='' data-table='Purchase_Invoice_Item' data-col='Quantity,SKU_Code' data-headernames='SKU Code' data-param='hdf_Purchase_Invoice_Id' data-field='Purchase_Invoice_Id' name='SKU_Code_" + i + "'/>";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnQuantity_" + i + "' value='' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].SKU_Code' class='auto-complete-label' onchange='javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ");'/>";
@@ -186,6 +186,7 @@ function ReArrangePurchaseReturnRequestDetailsData() {
             if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
                 $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
                 $(newTR).find("[id^='textBarcode_No_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode");
+                $(newTR).find("[id^='textBarcode_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_Barcode(" + i + ")");
             }
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
@@ -194,6 +195,7 @@ function ReArrangePurchaseReturnRequestDetailsData() {
                 //$(newTR).find("[id^='textSKU_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnSKU_No_']").attr("onchange", "javascript:Get_Purchase_Return_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnQuantity_']")[0].id = "hdnQuantity_" + i;
+                $(newTR).find("[id^='SKU_']")[0].id = "SKU_" + i;
             }
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
@@ -201,7 +203,7 @@ function ReArrangePurchaseReturnRequestDetailsData() {
                 $(newTR).find("[id^='textArticle_No_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Article_No");
             }
 
-            if ($(newTR).find("[id^='hdnColor_Id_']").length > 0) {
+            if ($(newTR).find("[id^='hdnColor_Imd_']").length > 0) {
                 $(newTR).find("[id^='hdnColor_Id_']")[0].id = "hdnColor_Id_" + i;
                 $(newTR).find("[id^='hdnColor_Id_']").attr("name", "PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Color_Id");
                 $(newTR).find("[id^='textColor_']")[0].id = "textColor_" + i;
@@ -406,6 +408,8 @@ function Get_Purchase_Return_Items_By_SKU_Code(i) {
 
             $('#textColor_' + i).val(data.Color);
 
+            //$('#textSKU_No_' + i).val($("#hdnSKU_No_0").val());
+
             $('#hdnColor_Id_' + i).val(data.Color_Id);
 
             $('#textBrand_' + i).val(data.Brand);
@@ -447,11 +451,15 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
 
     var barcode = $("[name='PurchaseReturnRequest.PurchaseReturnRequestItems[" + i + "].Barcode']").val().replace(/[$]/g, '-');
 
+    var Final = barcode.split("+");
+
+    var SKU = Final[0];
+
     $.ajax({
 
         url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
 
-        data: { SKU_Code: barcode, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
+        data: { SKU_Code: SKU, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
 
         method: 'POST',
 
@@ -460,6 +468,8 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
         success: function (data) {
 
             $('#textArticle_No_' + i).val(data.Article_No);
+
+            $('#textSKU_No_' + i).val($("#hdf_Purchase_Invoice_Id").val());
 
             $('#textColor_' + i).val(data.Color);
 
@@ -488,10 +498,23 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
             $('#textWSR_Price_' + i).val(data.WSR_Price);
 
             $('#textQuantity_' + i).val(1);
+
+            $("#SKU_" + i).find(".autocomplete-text").trigger("focusout");
+
         }
 
     });
 
+
+
+
+
+    //if ($("#hdnQuantity_0").val() != "") {
+
+   
+    // }
+
+   
     $("#textDiscountPercentage_0").val(0);
 
     CalculateTotal();

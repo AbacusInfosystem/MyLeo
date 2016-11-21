@@ -32,9 +32,9 @@
 
             Bind_Grid(obj, "Purchase_Return_List");
 
-            Reset_PurchaseReturn();
-
             $("#divPurchaseReturnPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
+
+            Reset_PurchaseReturn();
 
             Friendly_Messages(obj);
         }

@@ -17,8 +17,17 @@
 
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
+        <input type="hidden" id="hdnPurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" name="PurchaseReturn.PurchaseReturnReport_Id" />
         <div class="page-title">
+            @if (@Model.PurchaseReturn.PurchaseReturnReport_Id == 1)
+            {
             <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return Management</h2>
+            }
+            else
+            {
+                <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Purchase Return Report</h2>
+            }
+
         </div>
     </div>
 
@@ -78,25 +87,27 @@
 
                         <div class="col-md-4" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
-                            <div class="btn-group">
-                                <input type="hidden" id="hdnPurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
-                                @if (@Model.PurchaseReturn.PurchaseReturnReport_Id == 1)
+                            <input type="hidden" id="hdnPurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
+
+                            @if (@Model.PurchaseReturn.PurchaseReturnReport_Id != 2)
                                 {
+                                <div class="btn-group">
                                     <button role="button" class="btn btn-success active" value="Create" id="btnCreatePurchaseReturn">Create</button>
                                     <button class="btn btn-danger active" disabled value="Edit" id="btnEditPurchaseReturn">View</button>
                                     <button type="button" class="btn btn-info active edit" disabled value="View" id="btnPrintPurchaseReturn">Print</button>
                                     <button role="button" type="button" disabled class="btn btn-warning active" value="Update" id="btnUpdatePurchaseReturn" data-toggle="modal" data-target="#div_Parent_Modal_Fade">Update GR No.</button>
+                                </div>
                                 }
                                 else
                                 {
+                                <div class="btn-group">
                                     <button class="btn btn-danger active" disabled value="Edit" id="btnEditPurchaseReturn">View</button>
+                                </div>
                                 }
 
                             </div>
 
                         </div>
-
-                    </div>
 
                     @**@
 
@@ -130,7 +141,7 @@
 
 
 
-        @*<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">*@
+        @*<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">*@<div class="col-md-12" style="padding: 0px;" id="divDynamicTable">
         <div class="col-md-12" id="divDynamicTable" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
 
         </div>
@@ -166,14 +177,43 @@
                         </table>
                 </div>
             </div>
-            </div>*@
+                </div>*@<div class="col-md-12" style="padding: 0px;" id="divTable">
+                <div class="row">
+                    <div class="table-responsive" style="width:100%; margin: 0px 0;">
+                        <table class="table table-bordered table-hover" id="tblPurchaseReturn">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
 
-        @*<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
+                <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
+
+
+                </div>*@<input type="hidden" id="hdfCurrent_Page" name="@Model.Pager.CurrentPage" value="" />
 
             <div class="col-md-12 pagination" style="padding: 0px;text-align:center;" id="divPurchaseReturnPager">
 
 
-            </div>*@
+            </div>
+
+        </div>
 
     </div>
 

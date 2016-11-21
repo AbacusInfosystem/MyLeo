@@ -216,7 +216,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
         {
             try
             {
-                if (piViewModel.PurchaseInvoice.Purchase_Order_Id == 0 || piViewModel.PurchaseInvoice.Purchase_Order_Id == null )
+                if (piViewModel.Filter.Purchase_Invoice_Id == 0)
                 {
 
                 }
