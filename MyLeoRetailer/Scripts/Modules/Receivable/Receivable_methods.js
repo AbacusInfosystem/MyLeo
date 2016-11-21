@@ -404,6 +404,13 @@ function Save_Receivable_Data() {
             }
             $("#drpGift_Voucher_No").append(html);
 
+            $("#drpCredit_Note_No").text("");
+            var html = '<option value=0>Select Credit Note no</option>'
+            for (var i = 0; i < obj.Credit_Notes.length; i++) {
+                html += '<option value=' + obj.Credit_Notes[i].Sales_Credit_Note_Id + '>' + obj.Credit_Notes[i].Credit_Note_No + '</option>';
+            }
+            $("#drpCredit_Note_No").append(html);
+
             document.getElementById("btnResetPay").disabled = false;
 
             document.getElementById("txtCredit_Note_Amount").disabled = false;

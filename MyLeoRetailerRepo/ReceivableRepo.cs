@@ -756,6 +756,10 @@ namespace MyLeoRetailerRepo
 
                        Receivable.Branch_ID = Convert.ToInt32(dr["Branch_ID"]);
 
+                   if (!dr.IsNull("Customer_Id"))
+
+                       Receivable.Customer_Id = Convert.ToInt32(dr["Customer_Id"]);
+
                    if (!dr.IsNull("Payament_Date"))
 
                        Receivable.Payament_Date = Convert.ToDateTime(dr["Payament_Date"]);
@@ -773,7 +777,7 @@ namespace MyLeoRetailerRepo
            return Receivable;
        }
 
-       public List<CreditNote> Get_Credit_Note_Details_By_Id(int Customer_Id, int Receivable_Id) //......
+       public List<CreditNote> Get_Credit_Note_Details_By_Id(int Customer_Id) //......
        {
 
            List<CreditNote> Receivables = new List<CreditNote>();
@@ -781,7 +785,7 @@ namespace MyLeoRetailerRepo
            List<SqlParameter> sqlparam = new List<SqlParameter>();
 
            sqlparam.Add(new SqlParameter("@Customer_Id", Customer_Id));
-           sqlparam.Add(new SqlParameter("@Receivable_Id", Receivable_Id));
+           
 
            DataTable dt = sqlHelper.ExecuteDataTable(sqlparam, Storeprocedures.sp_Get_Credit_Note_Details_By_Customer_Id1.ToString(), CommandType.StoredProcedure);
 
@@ -836,6 +840,7 @@ namespace MyLeoRetailerRepo
            }
            return Receivable;
        }
+
 
     }
 }
