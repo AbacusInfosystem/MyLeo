@@ -101,6 +101,14 @@ namespace MyLeoRetailer.Controllers
                         LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Purchase_Invoice_SKU(field_Value, table_Name, cols);
                     }
                 }
+
+                else if (table_Name == "Alteration_Employee")
+                {
+                    if (field_Value != null)
+                    {
+                        LookupVM.Value = _autoLookupRepo.Get_Lookup_Data_Add_Employee(field_Value, table_Name, cols);
+                    }
+                }
                
             }
             catch (Exception ex)

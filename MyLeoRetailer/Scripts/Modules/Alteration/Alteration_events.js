@@ -1,20 +1,7 @@
-﻿//$(function () {
+﻿
+$(document).ready(function () {
 
-
-//    $("#btnSaveAlteration").click(function () {
-
-//        if ($("#frmAlteration1").valid()) {
-
-//            Save_Alteration();
-
-
-//        }
-//    });
-
-//});
-
-
-$(function () {
+    $("#Employee").find(".autocomplete-text").trigger("focusout");
 
     $("input.mask_mobile_no").mask('(99) 99999-99999');
 

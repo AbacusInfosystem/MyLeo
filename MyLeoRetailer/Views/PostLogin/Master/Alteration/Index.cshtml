@@ -121,11 +121,11 @@
 
                         <div class="form-group auto-complete">
                             <span class="label label-primary label-form" style="margin-bottom: 1px;">Employee name</span>
-                            <div class="input-group">
-                                <input type="text" class="form-control invoice-filter autocomplete-text" @*name="Alteration.Employee_Id"*@ id="text_Employee_Id" placeholder="Enter Employee name to search" value="" data-table="Employee" data-col=" Employee_Id,Employee_Name" data-headernames="Employee">
+                            <div id="Employee" class="input-group">
+                                <input type="text" class="form-control invoice-filter autocomplete-text lookup-text" @*name="Alteration.Employee_Id"*@ id="text_Employee_Id" placeholder="Enter Employee name to search" value="" data-table="Alteration_Employee" data-col=" Employee_Id,Employee_Name" data-field="Employee_Id" data-param="hdnEmployee_Id" data-headernames="Employee">
                                 <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
-                                <input type="hidden" id="hdnEmployee_Id" name="Alteration.Employee_Id" class="auto-complete-value"/>
-                                <input type="hidden" id="hdnEmployee_Name" name="Alteration.Employee_Name"  />
+                                <input type="hidden" id="hdnEmployee_Id" value="" name="Alteration.Employee_Id" class="auto-complete-value" />
+                                <input type="hidden" id="hdnEmployee_Name" name="Alteration.Employee_Name" />
                                 @*End*@
 
                             </div>

@@ -451,6 +451,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Alteration_Employee")
+                {
+                    if (fieldName == "Employee_Id")
+                    {
+                        strquery = " Select distinct Employee_Id,Employee_Name from Employee ";
+                        
+                    }
+                }
+
 
             }
 
@@ -708,6 +717,42 @@ namespace MyLeoRetailerRepo
                 foreach (DataRow dr in drList)
                 {
                     Value = Convert.ToString(dr["SKU_Code"]) + "_" + dr["Quantity"];
+                }
+            }
+
+            return Value;
+        }
+
+        public string Get_Lookup_Data_Add_Employee(string field_Value, string table_Name, string[] columns)
+        {
+            List<SqlParameter> paramList = new List<SqlParameter>();
+
+            string Value = "";
+
+            string strquery = "";
+
+            if (table_Name == "Employee_Table")
+            {
+                if (field_Value == "Employee_Id")
+                {
+                    strquery = " Select distinct Employee_Id,Employee_Name from Employee ";
+                    strquery += "where Employee_Id =" + field_Value;
+                }
+            }
+            DataTable dt = sqlHelper.ExecuteDataTable(paramList, strquery, CommandType.Text);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                int count = 0;
+                List<DataRow> drList = new List<DataRow>();
+
+                drList = dt.AsEnumerable().ToList();
+
+                count = drList.Count();
+
+                foreach (DataRow dr in drList)
+                {
+                    Value = Convert.ToString(dr["Employee_Name"]) + "_" + dr["Employee_Id"];
                 }
             }
 
