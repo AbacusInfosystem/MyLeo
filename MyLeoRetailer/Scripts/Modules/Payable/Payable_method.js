@@ -277,6 +277,13 @@ function Save_Payable_Data() {
 
             Friendly_Messages(obj);
 
+            $("#drpCredit_Note_No").text("");
+            var html = '<option value=0>Select CN no</option>'
+            for (var i = 0; i < obj.CreditNote.length; i++) {
+                html += '<option value=' + obj.CreditNote[i].Purchase_Credit_Note_Id + '>' + obj.CreditNote[i].Credit_Note_No + '</option>';
+            }
+            $("#drpCredit_Note_No").append(html);
+
             document.getElementById("txtPaid_Amount").disabled = false;
 
             document.getElementById("btnResetPay").disabled = false; 

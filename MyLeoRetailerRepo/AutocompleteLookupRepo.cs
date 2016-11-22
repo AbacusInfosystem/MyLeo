@@ -474,6 +474,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Sub_Category")
+                {
+                    if (fieldName == "Sub_Category_Id")
+                    {
+                        strquery = " select Sub_Category_Id,Sub_Category from Sub_Category ";
+                        strquery += "where Category_Id=  " + fieldValue ;
+                    }
+                }
+
             }
 
             if (fieldValue == "" && table_Name == "Product_SKU_Mapping")

@@ -23,7 +23,7 @@ $(function () {
             $("#divBankName").hide();
             //$("#divCreditnoteno").hide();
            // $("#divGiftvoucherno").hide();
-           
+            $('#frmPayable').rules("add", { required: false });
         }
 
         else if ($(this).val() == 1) {
@@ -38,6 +38,8 @@ $(function () {
             //$("#divCreditnoteno").hide();
             //$("#divGiftvoucherno").hide();
 
+            $('#frmPayable').rules("add", { required: true });
+
         }
 
         else if ($(this).val() == 2) {
@@ -51,7 +53,7 @@ $(function () {
             $("#divBankName").hide();
             //$("#divCreditnoteno").hide();
             //$("#divGiftvoucherno").hide();
-           
+            $('#frmPayable').rules("add", { required: false });
         }
 
         else if ($(this).val() == 3) {
@@ -64,6 +66,7 @@ $(function () {
             $("#divBankName").hide();
             //$("#divCreditnoteno").hide();
             //$("#divGiftvoucherno").hide();
+            $('#frmPayable').rules("add", { required: false });
         }
 
         else if ($(this).val() == 4) {
@@ -76,6 +79,7 @@ $(function () {
             $("#divDebitcardno").hide();
             //$("#divCreditnoteno").hide();
             //$("#divGiftvoucherno").hide();
+            $('#frmPayable').rules("add", { required: false });
         }
 
         else {
@@ -87,7 +91,8 @@ $(function () {
             $("#divChequedate").hide();
             $("#divChequeno").hide();
             $("#divBankName").hide();
-           // $("#divCreditnoteno").hide();
+            // $("#divCreditnoteno").hide();
+            $('#frmPayable').rules("add", { required: false });
         }
     });
 
