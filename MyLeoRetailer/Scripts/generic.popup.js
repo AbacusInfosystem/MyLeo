@@ -194,19 +194,21 @@ function Bind_Selected_Item_Data(data) {
     $("#" + $("#hdnLookupLabelId").val()).val(Value);
 
     $("#hdnEditLookupValue").val(data);
-
-    //var id = $("#hdnBranchIDs").val();
-
-    //var splt=id.split(",");
-
-    //if (splt.length == 1)
-    //{
-    //    $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').append(htmltext);
-    //}
-   
+        
     $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').append(htmltext);
 
-   // $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
+    $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
+
+    $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find('.glyphicon-remove').click(function (event) {
+        event.preventDefault();
+        $(this).parents('.form-group').find('input[type=text]').val("");
+        $(this).parents('.form-group').find('.auto-complete-value').val("");
+        $(this).parents('.form-group').find('.auto-complete-label').val("");
+        $(this).parents('.form-group').find('.auto-complete-value').trigger('change');
+        //$(this).parents('.form-group').find('.auto-complete-label').trigger('change');
+        $(this).parents('.form-group').find('#lookupUlLookup').remove();
+    });
+
 }
 
 function Close_Pop_Up(cloneObj,elementObj) {

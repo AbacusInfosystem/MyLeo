@@ -213,40 +213,50 @@ function Bind_custom_Grid(obj, name, list_name, Identity_selection_type) {
 function Bind_custom_Rows(table, obj, name, list_name, Identity_selection_type) {
     var tbody = $("<tbody>").appendTo(table);
 
-    for (var i = 0; i < obj.Grid_Detail['Records'].length; i++) {
-        var row = $("<tr>").appendTo(tbody);
+    if (obj.Grid_Detail['Records'].length > 0) {
 
-        if (obj.Grid_Detail['Identity_Columns'].length > 0) {
-            var td = $("<td>").appendTo(row);
+        for (var i = 0; i < obj.Grid_Detail['Records'].length; i++) {
+            var row = $("<tr>").appendTo(tbody);
 
-            if (Identity_selection_type != "")
-            {
-                var label = $("<label>", { class: "switch switch-small" }).appendTo(td);
-
-                label.css("margin", "0");
-
-                var radio = $("<input>", { type: Identity_selection_type, value: 0, name: list_name + "[" + i + "]." + name }).appendTo(label);
-
-                $("<span>").appendTo(label);
-
-                radio.addClass("rd-list");
-
-                radio.addClass();
-            }
-
-            for (var j = 0; j < obj.Grid_Detail['Identity_Columns'].length; j++) {
-                $("<input>", { type: "hidden", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][j]], name: list_name + "[" + i + "]." + obj.Grid_Detail['Identity_Columns'][j] }).appendTo(td);
-            }
-        }
-
-        for (var j = 0; j < obj.Grid_Detail['Show_Columns'].length; j++) {
-            if (j <= obj.Grid_Detail['Show_Columns'].length) {
+            if (obj.Grid_Detail['Identity_Columns'].length > 0) {
                 var td = $("<td>").appendTo(row);
 
-                td.text(obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Show_Columns'][j]]);
-                $("<input>", { type: "hidden", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Show_Columns'][j]], name: list_name + "[" + i + "]." + obj.Grid_Detail['Show_Columns'][j] }).appendTo(td);
+                if (Identity_selection_type != "") {
+                    var label = $("<label>", { class: "switch switch-small" }).appendTo(td);
+
+                    label.css("margin", "0");
+
+                    var radio = $("<input>", { type: Identity_selection_type, value: 0, name: list_name + "[" + i + "]." + name }).appendTo(label);
+
+                    $("<span>").appendTo(label);
+
+                    radio.addClass("rd-list");
+
+                    radio.addClass();
+                }
+
+                for (var j = 0; j < obj.Grid_Detail['Identity_Columns'].length; j++) {
+                    $("<input>", { type: "hidden", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Identity_Columns'][j]], name: list_name + "[" + i + "]." + obj.Grid_Detail['Identity_Columns'][j] }).appendTo(td);
+                }
             }
+
+            for (var j = 0; j < obj.Grid_Detail['Show_Columns'].length; j++) {
+                if (j <= obj.Grid_Detail['Show_Columns'].length) {
+                    var td = $("<td>").appendTo(row);
+
+                    td.text(obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Show_Columns'][j]]);
+                    $("<input>", { type: "hidden", value: obj.Grid_Detail['Records'][i]['' + obj.Grid_Detail['Show_Columns'][j]], name: list_name + "[" + i + "]." + obj.Grid_Detail['Show_Columns'][j] }).appendTo(td);
+                }
+            }
+
         }
+    }
+    else {
+        var row = $("<tr>").appendTo(tbody);
+        var td = $("<td>").appendTo(row);
+        td.attr('colspan', 3)
+        td.text("No Records Found");
+        td.css("font-weight", "bold");
     }
 }
 
