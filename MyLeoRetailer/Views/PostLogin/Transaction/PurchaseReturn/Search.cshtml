@@ -14,7 +14,7 @@
 <!-- END BREADCRUMB -->
 <!-- START CONTENT FRAME -->
 <div class="content-frame">
-    <input type="hidden" id="hdnPurchaseReturnReport_Id" name="PurchaseReturn.PurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
+    <input type="hidden" id="hdnPurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
         <div class="page-title">
@@ -86,7 +86,7 @@
 
                         <div class="col-md-4" style="text-align: right; padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
 
-                            <input type="hidden" id="hdnPurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
+                            <input type="hidden" id="hdnPurchaseReturnReport_Id" name="PurchaseReturn.PurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
 
                             @if (@Model.PurchaseReturn.PurchaseReturnReport_Id != 2)
                             {

@@ -73,7 +73,7 @@
 <!-- END BREADCRUMB -->
 <!-- START CONTENT FRAME -->
 <div class="content-frame">
-
+    <input type="hidden" id="hdnPurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
     <!-- START CONTENT FRAME TOP -->
     <div class="content-frame-top">
         <div class="page-title">
@@ -107,6 +107,8 @@
                         <div class="col-md-4" style="background: rgba(0, 0, 0, 0.02); border-bottom: 1px solid #DDD; border-right: 1px solid #DDD; padding: 10px; height: 200px;">
 
                             <div class="block">
+
+                                <input type="hidden" id="hdnPurchaseReturnReport_Id" name="PurchaseReturn.PurchaseReturnReport_Id" value="@Model.PurchaseReturn.PurchaseReturnReport_Id" />
 
                                 <input type="hidden" class="form-control input-sm" name="PurchaseReturn.Purchase_Return_Id" id="hdf_PurchaseReturnId" value="@Model.PurchaseReturn.Purchase_Return_Id">
 
