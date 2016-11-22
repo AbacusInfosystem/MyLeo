@@ -397,6 +397,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Credit_Note_Details_By_Customer_Id1,
         sp_Get_Receivable_Search_Details,
         sp_Get_Receivable_Search_Details_new1,
+        sp_Get_Credit_Note_Details,
         #endregion
 
         #region Purchase Return Request
