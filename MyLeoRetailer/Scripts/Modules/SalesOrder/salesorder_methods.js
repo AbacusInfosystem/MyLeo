@@ -682,7 +682,6 @@ function CalculateTax() {
 
 }
 
-
 function CalculateDiscountAmount() {
     var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
 
@@ -822,6 +821,13 @@ function calculate() {
     $("#txtBalance_Amount").val(total_amt - paid_amt);
     //$("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
 
+
+}
+
+function reset() {
+
+    $("#hdnBranchName").parents('.form-group').find('#lookupUlLookup').remove();
+    
 
 }
 

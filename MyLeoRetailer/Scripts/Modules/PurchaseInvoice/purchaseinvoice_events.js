@@ -29,6 +29,11 @@ $(function () {
         }
     });
 
+
+    $("#btnCancelPurchaseInvoice").click(function () {
+        
+        Reset();
+    });
    
 });
 

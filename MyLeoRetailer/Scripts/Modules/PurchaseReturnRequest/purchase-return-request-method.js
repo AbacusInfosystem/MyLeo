@@ -526,7 +526,6 @@ function Set_Purchase_Invoice_Id(value) {
     $('#hdf_Purchase_Invoice_Id').val(value);
 }
 
-
 function Add_Validation(i)
 {
     //$("#tblPurchaseReturnRequestItems").find(".validate").rules("add", { QuantityCheck: false });
@@ -580,5 +579,11 @@ function Add_Validation(i)
 
     }, "Quantity less than Invoice Quantity And Not Zero.");
 
+
+}
+
+function Reset() {
+
+    $("#hdnBranch_Id").parents('.form-group').find('#lookupUlLookup').remove();
 
 }
