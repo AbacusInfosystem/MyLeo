@@ -349,6 +349,13 @@ function CalculateTotal() {
 
 }
 
+function Reset()
+{
+    $("#hdnPurchase_Order_Id_0").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnQuantity_0").parents('.form-group').find('#lookupUlLookup').remove();
+}
+
 function Add_Validation(i) {
 
     //$("#tblPurchaseInvoiceItems").find(".validate").rules("add", { QuantityCheck: false });

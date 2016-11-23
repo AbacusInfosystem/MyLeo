@@ -32,7 +32,6 @@
         }
     });
 
-    
     $("#textGrossAmount_0").change(function () {
         CalculateTax();
     });
@@ -44,11 +43,15 @@
     $("#textDiscountPercentage_0").keyup(function () {
         CalculateDiscount();
     });
+
     $("#textDiscountPercentage_0").change(function () {
         CalculateDiscount();
     });
 
-    
+    $("#btnCancelRequest").click(function () {
+
+        Reset();
+    });
 
 
 });

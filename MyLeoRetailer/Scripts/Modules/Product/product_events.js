@@ -49,6 +49,10 @@ $(function () {
         UploadImage();
     }); 
 
+    $("#btnCancel").click(function () {
+        //if ($('#frmProduct').valid()) {
+        Reset();
+    });
 
     $("input[type='radio']").on("ifChanged", function () {
         if ($(this).prop('checked')) {

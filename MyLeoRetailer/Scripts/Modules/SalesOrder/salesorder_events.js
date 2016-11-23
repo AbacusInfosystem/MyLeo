@@ -175,6 +175,10 @@ $(function ()
 
     });
 
+    $("#btnCancleSalesOrder").click(function () {
+        reset();
+    });
+
 });
 
 //function CalculateQuantityMRP()

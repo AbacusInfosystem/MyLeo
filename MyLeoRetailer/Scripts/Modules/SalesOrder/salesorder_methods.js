@@ -682,7 +682,6 @@ function CalculateTax() {
 
 }
 
-
 function CalculateDiscountAmount() {
     var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
 
@@ -849,6 +848,7 @@ function Reset_Sales_Order()
         $("#hdnSalesManId_" + i).parents('.form-group').find('#lookupUlLookup').remove();
 
         $("#hdnProduct_Id_" + i).parents('.form-group').find('#lookupUlLookup').remove();
+
     }
 }
 

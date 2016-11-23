@@ -50,4 +50,13 @@ function UploadImage() {
         //preview1.src = "";
     }
     $("#productImage").val("");
-}  
+}
+
+function Reset()
+{
+    $("#hdnVendorId").parents('.form-group').find('#lookupUlLookup').remove();
+    $("#hdnBrandId").parents('.form-group').find('#lookupUlLookup').remove();
+    $("#hdnCategoryId").parents('.form-group').find('#lookupUlLookup').remove();
+    $("#hdnSubcategoryId").parents('.form-group').find('#lookupUlLookup').remove();
+    $("#hdnSizeGroupId").parents('.form-group').find('#lookupUlLookup').remove();
+}

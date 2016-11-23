@@ -35,5 +35,9 @@ $(document).ready(function () {
         }
     });
 
+    $("#btnResetAlteration").click(function () {
+        reset();
+    });
+
 });
 
