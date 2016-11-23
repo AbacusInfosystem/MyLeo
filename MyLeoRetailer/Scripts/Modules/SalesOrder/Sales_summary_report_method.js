@@ -1,8 +1,6 @@
 ﻿
-
 function Get_Sales_Summary_Report() {
-
-
+    
     var siViewModel =
         {
             Filter: {
@@ -44,9 +42,7 @@ function Get_Sales_Summary_Report() {
 
             Bind_custom_Grid(obj, "Sales_Summary_List", "Summaries", "");
 
-            //Bind_Grid(obj, "Sales_Summary_List");
-
-            // Reset_Payable();
+            //Bind_Grid(obj, "Sales_Summary_List");          
 
           // $("#divPayablePager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
 
@@ -54,4 +50,36 @@ function Get_Sales_Summary_Report() {
 
         }
     });
+}
+
+function Reset_Sales_Summary_Report() {
+
+    $("[name='Filter.To_Date']").val('');
+
+    $("[name='Filter.From_Date']").val('');
+
+    $("#txtBrandName").val("");
+
+    $("#txtCategory").val("");
+
+    $("#texSalesMan_Name").val("");
+      
+    $("#hdnBrandID").val("");
+
+    $("#hdnBrandName").val("");
+
+    $("#hdnCategory_Id").val("");
+
+    $("#hdnCategory").val("");
+
+    $("#hdnSalesMan_Id").val("x");
+
+    $("#hdnEmployeeName").val("");
+
+    $("#hdnBrandID").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnCategory_Id").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnSalesMan_Id").parents('.form-group').find('#lookupUlLookup').remove();
+
 }

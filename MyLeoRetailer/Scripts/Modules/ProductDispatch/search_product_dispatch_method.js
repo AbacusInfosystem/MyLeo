@@ -40,3 +40,22 @@ function Get_Product_Dispatch() {
         }
     });
 }
+
+function Reset_Product_Dispatch()
+{
+    $("#hdnBranch_Id").val("");
+
+    $("#hdnBranchName").val("");
+
+    $("#txtBranch_Name").val("");
+
+    $("#txtFromRequestdate").val("");
+
+    $("#txtToRequestdate").val("");
+
+    $("#drpStatus").val("");
+
+    $("#hdnBranch_Id").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#btnDateFilter").hide();
+}

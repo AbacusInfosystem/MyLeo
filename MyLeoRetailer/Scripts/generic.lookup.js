@@ -46,10 +46,6 @@ $(document).ready(function () {
 
         if (hiddenTextValue!="")
         {
-            //$("#div_Parent_Modal_Fade").find(".modal-dialog").hasClass("modal-lg");
-
-            //$("#div_Parent_Modal_Fade").find(".modal-dialog").removeClass("modal-lg");
-
             $(Textboxname).parents('.form-group').find('#lookupUlLookup').remove();
 
             $(Textboxname).parents('.form-group').append(htmlText);

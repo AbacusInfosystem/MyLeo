@@ -14,5 +14,12 @@
 
     });
 
+    $("#btnResetInventory").click(function () {
 
+        Reset_Inventory();
+
+        Get_Inventories();
+
+    });
+    
 });

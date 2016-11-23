@@ -1,5 +1,4 @@
 ﻿
-
 function Get_Barcodes() {
 
     var bViewModel =
@@ -30,8 +29,6 @@ function Get_Barcodes() {
         }
     });
 }
-
-
 
 function Bind_Get_Barcodes_Data(data) {
 
@@ -82,3 +79,11 @@ function Bind_Get_Barcodes_Data(data) {
     Friendly_Messages(data);
 }
 
+function Reset_Barcode()
+{  
+    $("#hdnProduct_SKU").val("");
+
+    $("#hdnInventory_Id").val("");
+    
+    $("#hdnInventory_Id").parents('.form-group').find('#lookupUlLookup').remove();
+}

@@ -28,7 +28,7 @@
 
     <div class="row">
 
-        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+        <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
             <div class="block">
 
@@ -53,7 +53,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">SKU Quantity.</span>
-                                <input type="text" class="form-control" placeholder="Enter SKU Quantity." name="Barcode.SKU_Quantity" maxlength="5" />
+                                <input type="text" class="form-control" placeholder="Enter SKU Quantity." id="txtBarcode" name="Barcode.SKU_Quantity" maxlength="5" />
                             </div>
                         </div>
 
@@ -61,6 +61,7 @@
 
                             <div class="btn-group pull-right">
                                 <button type="button" class="btn btn-success active" value="Search" id="btnGenerate">Generate</button>
+                                <button type="reset" class="btn btn-danger active" value="Reset" id="btnResetBarcode">Reset</button>
                             </div>
 
                         </div>

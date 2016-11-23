@@ -97,6 +97,11 @@ $(function ()
     });
 
 
+    $("#btnCancleSalesOrder").click(function ()
+    {
+        Reset_Sales_Order();
+    });
+
     $("#btnSaveSalesOrder").click(function ()
     {
         debugger;

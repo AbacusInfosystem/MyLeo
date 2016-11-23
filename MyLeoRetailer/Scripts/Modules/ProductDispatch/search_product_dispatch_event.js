@@ -17,7 +17,7 @@
 
     $("#drpStatus").change(function () {
        // document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
-       Get_Product_Dispatch();
+        Get_Product_Dispatch();
     });
 
     $(document).on('change', '[name="ProductDispatch_List"]', function (event) {
@@ -111,6 +111,14 @@
 
 
         }
+    });
+
+    $('#btnReset').click(function () {
+
+        Reset_Product_Dispatch();
+
+        Get_Product_Dispatch();
+
     });
 
 

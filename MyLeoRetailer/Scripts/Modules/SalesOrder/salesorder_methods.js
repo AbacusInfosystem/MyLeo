@@ -825,3 +825,30 @@ function calculate() {
 
 }
 
+function Reset_Sales_Order()
+{
+    var temptablecount = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]').size();
+
+    $("#hdnBranchID").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnBranchID").val("");
+
+    $("#hdnBranchName").val("");
+
+    for (var i = 0; i < temptablecount; i++) {             
+
+
+        $("#hdnSalesManId_" + i).val("");
+
+        $("#hdnProduct_Id_" + i).val("");
+
+        $("#hdnSKU_No_" + i).val("");
+
+        $("#hdnSalesMan_" + i).val("");
+
+        $("#hdnSalesManId_" + i).parents('.form-group').find('#lookupUlLookup').remove();
+
+        $("#hdnProduct_Id_" + i).parents('.form-group').find('#lookupUlLookup').remove();
+    }
+}
+

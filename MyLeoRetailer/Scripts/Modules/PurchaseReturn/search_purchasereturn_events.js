@@ -126,6 +126,17 @@
             $('#frmPurchaseReturn').submit();
 
         });
+
+        $(document).on("change", "#hdnPurchaseReturnId", function () {
+
+            Get_Purchase_Returns();
+        });
+
+        $(document).on("change", "#hdnGRNoId", function () {
+
+            Get_Purchase_Returns();
+        });
+
     }
 
 });

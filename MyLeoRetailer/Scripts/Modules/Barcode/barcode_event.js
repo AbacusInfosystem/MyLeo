@@ -31,5 +31,11 @@ $(function () {
 
     });
 
+    $("#btnResetBarcode").click(function () {
 
+        Reset_Barcode();
+
+        Get_Barcodes();
+
+    });
 });

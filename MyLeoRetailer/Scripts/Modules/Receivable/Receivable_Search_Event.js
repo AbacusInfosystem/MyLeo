@@ -1,7 +1,4 @@
 ﻿
-
-
-
 $(document).ready(function () {
 
     document.getElementById('btnPay').disabled = true;
@@ -33,11 +30,17 @@ $(document).ready(function () {
 
     });
 
-    //Added By Vinod Mane on 26/10/2016
-    $(document).on("change", "#hdnSalesInvoiceNo", function () {
-        document.getElementById('btnPay').disabled = true;
+    $("#btnResetReceivable").click(function () {
+
+        Reset_Receivable();
+
         Get_Receivable();
     });
 
-    //End
+    //$(document).on("change", "#hdnSalesInvoiceNo", function () {
+    //    document.getElementById('btnPay').disabled = true;
+    //    Get_Receivable();
+    //});
+
+  
 });
