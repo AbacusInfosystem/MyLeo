@@ -459,6 +459,8 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Max_Product_SKU_Barcode_Id,
 
+        sp_Get_Barcode_Data_Print_Details_By_SKU_Code,
+
         #endregion
 
     }

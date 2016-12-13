@@ -11,24 +11,29 @@ namespace MyLeoRetailer.Models
 {
     public class BarcodeViewModel
     {
-        public BarcodeViewModel() 
-		{	
+        public BarcodeViewModel()
+        {
             Barcode = new BarcodeInfo();
-
-			FriendlyMessages = new List<FriendlyMessage>();
-		}        
+            PrintBarcodeData = new List<BarcodeInfo>();
+            FriendlyMessages = new List<FriendlyMessage>();
+        }
 
         public BarcodeInfo Barcode
-		{
-			get;
-			set;
-		}		
+        {
+            get;
+            set;
+        }
 
-		public List<FriendlyMessage> FriendlyMessages
-		{
-			get;
-			set;
-		}
+        public List<FriendlyMessage> FriendlyMessages
+        {
+            get;
+            set;
+        }
+        public List<BarcodeInfo> PrintBarcodeData
+        {
+            get;
+            set;
+        }
 	}
 	
 }

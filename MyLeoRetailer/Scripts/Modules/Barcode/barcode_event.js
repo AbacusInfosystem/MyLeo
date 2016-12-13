@@ -3,7 +3,6 @@ $(function () {
 
     Get_Barcodes();
 
-
     $(document).on('change', '[name="Barcode_List"]', function (event) {
 
         if ($(this).prop('checked')) {
@@ -31,5 +30,22 @@ $(function () {
 
     });
 
+    $("#btnPrint").click(function () { 
+      
+        $("#frmBarcodeGenerator").validate();
 
+        $('#hdnProduct_SKU').rules("remove");
+
+        $('#SKUQnty').rules("remove");
+        
+        if ($("#frmBarcodeGenerator").valid()) {
+
+            $("#frmBarcodeGenerator").attr("action", "/Barcode/Print_Barcode");
+
+            $('#frmBarcodeGenerator').attr("method", "POST");
+
+            $("#frmBarcodeGenerator").submit();
+        }
+    });
+    
 });

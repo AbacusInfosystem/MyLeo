@@ -51,6 +51,14 @@ function Bind_Get_Barcodes_Data(data) {
             
             tblHTML += "</td>";
 
+            tblHTML += "<input type='hidden' id='hdnId" + i + "' name='Barcode.Barcodes[" + i + "].Product_SKU' value='" + data.Barcode.Barcodes[i].Product_SKU + "' />";
+
+            tblHTML += "</td>";
+            
+            tblHTML += "<input type='hidden' id='hdnId" + i + "' name='Barcode.Barcodes[" + i + "].Barcode_Image_Url' value='" + data.Barcode.Barcodes[i].Barcode_Image_Url + "' />";
+
+            tblHTML += "</td>";
+
             tblHTML += "<td>" + data.Barcode.Barcodes[i].Product_SKU + "</td>";
 
             tblHTML += "<td>" + data.Barcode.Barcodes[i].Product_SKU +"-"+ data.Barcode.Barcodes[i].Product_Barcode_Counter + "</td>";
@@ -73,4 +81,5 @@ function Bind_Get_Barcodes_Data(data) {
       
     Friendly_Messages(data);
 }
+
 

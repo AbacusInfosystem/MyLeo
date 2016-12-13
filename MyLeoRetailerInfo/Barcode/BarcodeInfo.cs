@@ -12,13 +12,22 @@ namespace MyLeoRetailerInfo.Barcode
         public BarcodeInfo()
         {
             Barcodes = new List<BarcodeInfo>();
+            PrintBarcodes = new List<BarcodeInfo>();
         }
 
         public List<BarcodeInfo> Barcodes { get; set; }
+        public List<BarcodeInfo> PrintBarcodes { get; set; }
+
 
         public int Product_SKU_Barcode_Id { get; set; }
 
         public string Product_SKU { get; set; }
+        public string Color_Name { get; set; }//
+        public string Brand_Name { get; set; }//
+        public string Size_Name { get; set; }//
+        public string WSR_Code { get; set; }
+        public string MRP_Price { get; set; }
+
 
         public int SKU_Quantity { get; set; }
 
