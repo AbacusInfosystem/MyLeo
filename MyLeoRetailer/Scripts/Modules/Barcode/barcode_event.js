@@ -47,5 +47,8 @@ $(function () {
             $("#frmBarcodeGenerator").submit();
         }
     });
-    
+
+        Get_Barcodes();
+
+    });
 });

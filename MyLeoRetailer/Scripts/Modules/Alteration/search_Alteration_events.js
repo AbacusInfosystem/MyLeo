@@ -22,6 +22,7 @@ $(function () {
             $("#hdnAlteration_ID").val(this.value);
             //$("#btnEditAlteration").show();
             document.getElementById("btnEditAlteration").disabled = false;
+            $("#Employee").find(".autocomplete-text").trigger("focusout");
         }
     });
 

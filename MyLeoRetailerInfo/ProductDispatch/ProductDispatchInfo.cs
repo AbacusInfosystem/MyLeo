@@ -38,6 +38,8 @@ namespace MyLeoRetailerInfo.ProductDispatch
 
       public string SKU { get; set; }
 
+      public string Barcode { get; set; }
+
       public DateTime Created_Date { get; set; }
 
       public int Created_By { get; set; }

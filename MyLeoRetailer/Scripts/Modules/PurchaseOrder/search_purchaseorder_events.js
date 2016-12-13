@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     var PurchaseReport_Id = document.getElementById("hdnPurchaseReport_Id").value;
 
-    if (PurchaseReport_Id == 1) {
+    if (PurchaseReport_Id != 2) {
 
         document.getElementById("btnEditPurchaseOrder").disabled = true;
 

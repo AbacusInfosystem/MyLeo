@@ -2,7 +2,7 @@
 
     var PurchaseReturnReport_Id = document.getElementById('hdnPurchaseReturnReport_Id').value
 
-    if (PurchaseReturnReport_Id == 1) {
+    if (PurchaseReturnReport_Id != 2) {
 
         document.getElementById('btnEditPurchaseReturn').disabled = true;
 
@@ -126,6 +126,17 @@
             $('#frmPurchaseReturn').submit();
 
         });
+
+        $(document).on("change", "#hdnPurchaseReturnId", function () {
+
+            Get_Purchase_Returns();
+        });
+
+        $(document).on("change", "#hdnGRNoId", function () {
+
+            Get_Purchase_Returns();
+        });
+
     }
 
 });

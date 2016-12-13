@@ -84,6 +84,8 @@ function Get_Sales_Order_Items_By_Barcode(i) {
 
             $('#textArticle_No_' + i).val(data.Article_No);
 
+            $('#textSKU_No_' + i).val($("#hdnBranchID").val());
+
             $('#textBrand_' + i).val(data.Brand);
 
             $('#textCategory_' + i).val(data.Category);
@@ -95,6 +97,8 @@ function Get_Sales_Order_Items_By_Barcode(i) {
             $('#textColour_Name_' + i).val(data.Colour_Name);
 
             $('#textMRP_Price_' + i).val(data.MRP_Price);
+
+            $("#SKU_" + i).find(".autocomplete-text").trigger("focusout");
 
         }
     });
@@ -277,17 +281,17 @@ function AddSalesOrderDetails(i) {
     tblHtml += "<tr id='SalesOrderItemRow_" + i + "' class='item-data-row'>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm barcode' placeholder='' name='SaleOrderItemList[" + i + "].Barcode' onblur='javascript: Get_Sales_Order_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm barcode' placeholder='' name='SaleOrderItemList[" + i + "].Barcode' onchange='javascript: Get_Sales_Order_Items_By_Barcode(" + i + ");' value='' id='textBarcode_No_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
-    tblHtml += "<div class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onblur='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SKU_Code_" + i + "' data-param='hdnBranchID' data-field='Branch_Id'/>";
+    tblHtml += "<div id='SKU_" + i + "' class='input-group'>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onchange='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SaleOrderItemList[" + i + "].SKU_Code' data-param='hdnBranchID' data-field='Branch_Id'/>";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
     //tblHtml += "<input type='hidden' id='hdnBranchID_" + i + "' value='' name='SalesInvoice.Branch_Id' />";
-    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' name='SaleOrderItemList[" + i + "].SKU_Code' class='auto-complete-label' />";
+    tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' class='auto-complete-label' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
 
@@ -423,16 +427,16 @@ function ReArrangeSalesOrderDetailsData() {
 
             if ($(newTR).find("[id^='textBarcode_No_']").length > 0) {
                 $(newTR).find("[id^='textBarcode_No_']")[0].id = "textBarcode_No_" + i;
-                $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleOrderItemList[" + i + "].Barcode");
+                $(newTR).find("[id^='textBarcode_No_']").attr("name", "SaleOrderItemList[" + i + "].Barcode", "onchange", "javascript: Get_Sales_Order_Items_By_Barcode(" + i + ")");
             }
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code", "onblur", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code", "onchange", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
-                $(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
-
+                //$(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
+                $(newTR).find("[id^='SKU_']")[0].id = "SKU_" + i;
             }
 
             if ($(newTR).find("[id^='textArticle_No_']").length > 0) {
@@ -529,7 +533,7 @@ function Add_Validation(i) {
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
-    $("#textSKU_No_" + i).rules("add", { required: true, checkSKUExist: true, messages: { required: "SKU is Required" } });
+    $("#textSKU_No_" + i).rules("add", { checkSKUExist: true});
 
     $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: {checkBarcodeExist:"Already Mapped"}});
 
@@ -678,7 +682,6 @@ function CalculateTax() {
 
 }
 
-
 function CalculateDiscountAmount() {
     var tr = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]');
 
@@ -819,5 +822,33 @@ function calculate() {
     //$("#txtPaid_Amount").val(parseInt(cash) + parseInt(credit) + parseInt(card) + parseInt(gift) + parseInt(check));
 
 
+}
+
+function Reset_Sales_Order()
+{
+    var temptablecount = $("#tblSalesOrderItems").find('[id^="SalesOrderItemRow_"]').size();
+
+    $("#hdnBranchID").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnBranchID").val("");
+
+    $("#hdnBranchName").val("");
+
+    for (var i = 0; i < temptablecount; i++) {             
+
+
+        $("#hdnSalesManId_" + i).val("");
+
+        $("#hdnProduct_Id_" + i).val("");
+
+        $("#hdnSKU_No_" + i).val("");
+
+        $("#hdnSalesMan_" + i).val("");
+
+        $("#hdnSalesManId_" + i).parents('.form-group').find('#lookupUlLookup').remove();
+
+        $("#hdnProduct_Id_" + i).parents('.form-group').find('#lookupUlLookup').remove();
+
+    }
 }
 

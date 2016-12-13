@@ -38,7 +38,7 @@ function Get_Inventories() {
 
             Bind_custom_Grid(obj, "Inventory_List", "Inventories", ""); // added by aditya
 
-            Reset_Inventory();
+            //Reset_Inventory();
 
             Set_Branch_Id();
 
@@ -54,6 +54,7 @@ function Get_Inventories() {
 }
 
 function Reset_Inventory() {
+
     $("[name='Filter.Branch_Id']").val("");
 
     $("[name='Filter.Product_SKU']").val("");
@@ -88,9 +89,15 @@ function Reset_Inventory() {
 
     $("#textCategory").val("");
 
+    $("#hdnBranch_Id").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnInventory_Id").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnBrand_Code").parents('.form-group').find('#lookupUlLookup').remove();
+
+    $("#hdnCategory").parents('.form-group').find('#lookupUlLookup').remove();
 
 }
-
 
 function Set_Branch_Id() {
 

@@ -38,13 +38,11 @@
 
     <div class="row">
 
-        <div class="col-md-12" style="padding-top: 10px; padding-left: 10px; padding-right: 10px;">
+        <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
             <div class="block">
 
-                <form role="form" id="frmProductDispatch">
-
-                    
+                <form role="form" id="frmProductDispatch">                    
 
                         <div class="row">
 
@@ -53,6 +51,8 @@
                             <input type="hidden" id="hdnSKU" value="" name="product_Dispatch.SKU" />
 
                             <input type="hidden" id="hdnIs_View" value="" name="product_Dispatch.Is_View" />
+
+                            <input type="hidden" id="hdnDispatch_Id" value="" name="product_Dispatch.Dispatch_Id" />
 
                             <div class="col-md-2">
 
@@ -101,6 +101,7 @@
                                         <option>Pending</option>
                                         <option>Dispatch</option>
                                         <option>Partially Dispatch</option>
+                                        <option>Free Dispatch</option>
 
                                     </select>
 
@@ -116,6 +117,8 @@
                                     @*<a class="btn btn-success active" role="button" id="btnDispatch" style="display:none">Dispatch </a>*@
 
                                     <button role="button" class="btn btn-success active edit" id="btnDispatch">Dispatch</button>
+
+                                    <button type="reset" class="btn btn-danger active" value="Reset" id="btnReset">Reset</button>
 
                                 </div>
 
@@ -143,7 +146,7 @@
     </div>
 
 
-    <div class="col-md-12" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+    <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
     </div>
 

@@ -1146,6 +1146,8 @@ function Reset_Details() {
     $("#textPurchase_Price").val('');
    
     $("#textSize_Difference").val('');
+
+    $("#hdnBranch_Id").parents('.form-group').find('#lookupUlLookup').remove();
    
 }
 

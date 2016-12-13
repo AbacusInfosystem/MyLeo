@@ -120,6 +120,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Update_Gift_Voucher,
         sp_Get_Gift_Voucher_By_Id,
         Check_Existing_Gift_Voucher_No,
+        sp_Get_Gift_Vouchers,
         #endregion
      
         #region Branch
@@ -396,6 +397,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Credit_Note_Details_By_Customer_Id1,
         sp_Get_Receivable_Search_Details,
         sp_Get_Receivable_Search_Details_new1,
+        sp_Get_Credit_Note_Details,
         #endregion
 
         #region Purchase Return Request
@@ -431,6 +433,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Delete_Dispatch_Product,
         sp_Get_Product_Quantity_Warehouse,
         sp_Reject_Product_Dispatch,
+        sp_Get_Product_To_Dispatch_By_Dispatch_Id,
          #endregion
 
         #region Product Inward

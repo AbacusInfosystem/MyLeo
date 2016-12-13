@@ -191,13 +191,24 @@ function Bind_Selected_Item_Data(data) {
         htmltext = "<ul id='lookupUlLookup' class='list-group border-bottom'><li ><span class='text'>" + $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').find(".lookup-title").text() + " does not exist</span><div class='pull-right'><i class='glyphicon glyphicon-remove'></i>";
     }
 
-    $("#" + $("#hdnLookupLabelId").val()).val("");
+    $("#" + $("#hdnLookupLabelId").val()).val(Value);
 
     $("#hdnEditLookupValue").val(data);
-
+        
     $("#" + $("#hdnLookupLabelId").val()).parents('.form-group').append(htmltext);
 
     $("#" + $("#hdnLookupHiddenId").val()).trigger("change");
+
+    $("#" + $("#hdnLookupHiddenId").val()).parents('.form-group').find('.glyphicon-remove').click(function (event) {
+        event.preventDefault();
+        $(this).parents('.form-group').find('input[type=text]').val("");
+        $(this).parents('.form-group').find('.auto-complete-value').val("");
+        $(this).parents('.form-group').find('.auto-complete-label').val("");
+        $(this).parents('.form-group').find('.auto-complete-value').trigger('change');
+        //$(this).parents('.form-group').find('.auto-complete-label').trigger('change');
+        $(this).parents('.form-group').find('#lookupUlLookup').remove();
+    });
+
 }
 
 function Close_Pop_Up(cloneObj,elementObj) {

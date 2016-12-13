@@ -133,41 +133,37 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
 
         public JsonResult Get_Gift_Vouchers(GiftVoucherViewModel gvViewModel)
         {
-            
-
-            CommonManager cMan = new CommonManager();
-
-            string filter = "";
-
-            string dataOperator = "";
-
-            Pagination_Info pager = new Pagination_Info();
+            gvViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
             try
             {
-                filter = gvViewModel.Filter.Gift_Voucher_No; // Set filter comma seprated
+                GiftVoucherRepo gvRepo = new GiftVoucherRepo();
 
-                dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
-
-                gvViewModel.Query_Detail = Set_Query_Details(true, "Gift_Voucher_Id,Gift_Voucher_No", "", "Gift_Voucher", "Gift_Voucher_No", filter, dataOperator); // Set query for grid
+                Pagination_Info pager = new Pagination_Info();
 
                 pager = gvViewModel.Grid_Detail.Pager;
 
-                gvViewModel.Grid_Detail = Set_Grid_Details(false, "Gift_Voucher_No,Person_Name,Gift_Voucher_Date,Gift_Voucher_Expiry_Date,Gift_Voucher_Amount,Bank_Name,Credit_Card_No", "Gift_Voucher_Id"); // Set grid info for front end listing
+                gvViewModel.Grid_Detail = Set_Grid_Details(false, "Gift_Voucher_No,Person_Name,Gift_Voucher_Date,Gift_Voucher_Expiry_Date,Gift_Voucher_Amount,PaymentMode,Bank_Name,Credit_Card_No", "Gift_Voucher_Id"); // Set grid info for front end listing
 
-                gvViewModel.Grid_Detail.Records = gvRepo.Get_Gift_Vouchers(gvViewModel.Query_Detail); // Call repo method 
+                gvViewModel.Grid_Detail.Records = gvRepo.Get_Gift_Vouchers(gvViewModel.Filter); // Call repo method 
 
                 Set_Pagination(pager, gvViewModel.Grid_Detail); // set pagination for grid
 
                 gvViewModel.Grid_Detail.Pager = pager;
+
             }
+
+
+             //Added by vinod mane on 06/10/2016
             catch (Exception ex)
             {
                 gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                Logger.Error("GiftVoucher Controller - Get_Gift_Vouchers  " + ex.Message);//Added by vinod mane on 06/10/2016
+                Logger.Error("GiftVoucher Controller - Get_Gift_Vouchers  " + ex.Message);
             }
+            //End
 
             return Json(JsonConvert.SerializeObject(gvViewModel));
+
         }
 
         [AuthorizeUserAttribute(AppFunction.Gift_Voucher_Management_View)]
@@ -202,5 +198,44 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
+
+        //public JsonResult Get_Gift_Vouchers(GiftVoucherViewModel gvViewModel)
+        //{
+
+
+        //    CommonManager cMan = new CommonManager();
+
+        //    string filter = "";
+
+        //    string dataOperator = "";
+
+        //    Pagination_Info pager = new Pagination_Info();
+
+        //    try
+        //    {
+        //        filter = gvViewModel.Filter.Gift_Voucher_No; // Set filter comma seprated
+
+        //        dataOperator = DataOperator.Like.ToString(); // set operator for where clause as comma seprated
+
+        //        gvViewModel.Query_Detail = Set_Query_Details(true, "Gift_Voucher_Id,Gift_Voucher_No", "", "Gift_Voucher", "Gift_Voucher_No", filter, dataOperator); // Set query for grid
+
+        //        pager = gvViewModel.Grid_Detail.Pager;
+
+        //        gvViewModel.Grid_Detail = Set_Grid_Details(false, "Gift_Voucher_No,Person_Name,Gift_Voucher_Date,Gift_Voucher_Expiry_Date,Gift_Voucher_Amount,Bank_Name,Credit_Card_No", "Gift_Voucher_Id"); // Set grid info for front end listing
+
+        //        gvViewModel.Grid_Detail.Records = gvRepo.Get_Gift_Vouchers(gvViewModel.Query_Detail); // Call repo method 
+
+        //        Set_Pagination(pager, gvViewModel.Grid_Detail); // set pagination for grid
+
+        //        gvViewModel.Grid_Detail.Pager = pager;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        gvViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+        //        Logger.Error("GiftVoucher Controller - Get_Gift_Vouchers  " + ex.Message);//Added by vinod mane on 06/10/2016
+        //    }
+
+        //    return Json(JsonConvert.SerializeObject(gvViewModel));
+        //}
     }
 }

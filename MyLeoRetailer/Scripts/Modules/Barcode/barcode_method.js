@@ -1,5 +1,4 @@
 ﻿
-
 function Get_Barcodes() {
 
     var bViewModel =
@@ -30,8 +29,6 @@ function Get_Barcodes() {
         }
     });
 }
-
-
 
 function Bind_Get_Barcodes_Data(data) {
 
@@ -75,10 +72,18 @@ function Bind_Get_Barcodes_Data(data) {
 
         }
 
-        $('#tblBarcode tbody').append(tblHTML);
+    }
+    else
+    {
+        tblHTML += "<tr>";
 
+        tblHTML += "<td colspan='3' style='font-weight:bold'> No Records Found </td>";
+
+        tblHTML += "</td>";
     }
       
+    $('#tblBarcode tbody').append(tblHTML);
+
     Friendly_Messages(data);
 }
 

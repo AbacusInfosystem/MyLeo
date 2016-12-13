@@ -1,23 +1,23 @@
 ﻿$(document).ready(function () {
 
-    document.getElementById('btnDispatch').disabled = true;
+   // document.getElementById('btnDispatch').disabled = true;
 
 
     Get_Product_Dispatch();
 
     $("[id='txtBranch_Name']").focusout(function () {
-        document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
+       // document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Product_Dispatch();
     });
 
     $(document).on("change", "#hdnBranchName", function () {
-        document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
+        //document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
         Get_Product_Dispatch();
     });
 
     $("#drpStatus").change(function () {
-        document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
-       Get_Product_Dispatch();
+       // document.getElementById('btnDispatch').disabled = true;//Added by vinod mane on 25/10/2016
+        Get_Product_Dispatch();
     });
 
     $(document).on('change', '[name="ProductDispatch_List"]', function (event) {
@@ -29,12 +29,15 @@
 
             var sku = $(this).closest("td").find("[name='SKU_Code']").val();
 
+            var dispatch_ID = $(this).closest("td").find("[name='Dispatch_Id']").val();
+
             $("#hdnSKU").val(sku);
+
+            $("#hdnDispatch_Id").val(dispatch_ID);
 
             //$('#btnDispatch').show();
 
-            document.getElementById('btnDispatch').disabled = false;
-
+          
             //if (status == "Pending" || status == "Partially Dispatch")
             //{
             //    $('#btnDispatch').show();
@@ -108,6 +111,14 @@
 
 
         }
+    });
+
+    $('#btnReset').click(function () {
+
+        Reset_Product_Dispatch();
+
+        Get_Product_Dispatch();
+
     });
 
 

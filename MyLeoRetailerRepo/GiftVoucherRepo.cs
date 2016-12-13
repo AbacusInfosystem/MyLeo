@@ -152,10 +152,10 @@ namespace MyLeoRetailerRepo
            return sqlParam;
        }
 
-       public DataTable Get_Gift_Vouchers(QueryInfo query_Details)
-       {
-           return sqlHelper.Get_Table_With_Where(query_Details);
-       }
+       //public DataTable Get_Gift_Vouchers(QueryInfo query_Details)
+       //{
+       //    return sqlHelper.Get_Table_With_Where(query_Details);
+       //}
 
        public GiftVoucherInfo Get_Gift_Voucher_By_Id(int Gift_Voucher_Id)
        {
@@ -221,6 +221,20 @@ namespace MyLeoRetailerRepo
            }
 
            return check;
+       }
+
+       public DataTable Get_Gift_Vouchers(Filter_Gift_Voucher Filter)
+       {
+
+           DataTable dt = new DataTable();
+
+           List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+           sqlParams.Add(new SqlParameter("@Gift_Voucher_No", Filter.Gift_Voucher_No));
+
+           dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Gift_Vouchers.ToString(), CommandType.StoredProcedure);
+
+           return dt;
        }
     }
 }

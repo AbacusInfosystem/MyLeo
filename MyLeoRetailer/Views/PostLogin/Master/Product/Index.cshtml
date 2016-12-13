@@ -119,7 +119,7 @@
                     <div id="dvSubC" class="form-group auto-complete">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Sub Category.</span>
                         <div class="input-group">
-                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSub_Category" value="@Model.Product.Sub_Category" placeholder="Enter sub-category" data-table="Sub_Category" data-col="Sub_Category_Id,Sub_Category" data-headernames="Sub_Category" maxlength="50">
+                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSub_Category" value="@Model.Product.Sub_Category" placeholder="Enter sub-category" data-table="Sub_Category" data-col="Sub_Category_Id,Sub_Category" data-headernames="Sub_Category" data-param="hdnCategoryId" data-field="Sub_Category_Id">
                             <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
                             <input type="hidden" id="hdnSubcategoryId" value="@Model.Product.Sub_Category_Id" name="Product.Sub_Category_Id" class="auto-complete-value" />
                             <input type="hidden" id="hdnSubcategoryName" value="@Model.Product.Sub_Category" name="Product.Sub_Category" class="auto-complete-label" />

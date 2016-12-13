@@ -46,6 +46,8 @@ $(document).ready(function () {
 
         if (hiddenTextValue!="")
         {
+            $(Textboxname).parents('.form-group').find('#lookupUlLookup').remove();
+
             $(Textboxname).parents('.form-group').append(htmlText);
         }
         

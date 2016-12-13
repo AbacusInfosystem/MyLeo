@@ -27,6 +27,10 @@ namespace MyLeoRetailerInfo.Alteration
 
         public int Job_Assigned_To { get; set; }
 
+        public int Employee_Id { get; set; }
+
+        public string Employee_Name { get; set; }
+
         public string Additional_Info { get; set; }
 
         public DateTime Created_Date { get; set; }

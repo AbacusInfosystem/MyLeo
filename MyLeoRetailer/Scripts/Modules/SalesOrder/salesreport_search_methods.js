@@ -33,18 +33,15 @@
 
             var obj = $.parseJSON(response);
 
-            $("[name='Filter.Branch_Id']").val(obj.Filter.Branch_Id);
+            //$("[name='Filter.Branch_Id']").val(obj.Filter.Branch_Id);
 
-            $("[name='Filter.From_Date']").val(obj.Filter.From_Date.substring(0, 10));
+            //$("[name='Filter.From_Date']").val(obj.Filter.From_Date.substring(0, 10));
 
-            $("[name='Filter.To_Date']").val(obj.Filter.To_Date.substring(0, 10));
-
-            
+            //$("[name='Filter.To_Date']").val(obj.Filter.To_Date.substring(0, 10));
+                        
             Bind_Grid(obj, "SalesOrder_List");
 
-
-           Reset_SalesOrder();
-            
+           // Reset_Sales_Report();            
         
             $("#divSalesReportPager").html(obj.Grid_Detail['Pager']['PageHtmlString']);
         }
@@ -64,10 +61,8 @@ function call_back(data) {
 }
 
 
-function Reset_SalesOrder() {
-
-    //$("[name='Filter.Sales_Invoice_No']").val("");
-
+function Reset_Sales_Report() {
+   
     $("[name='Filter.Sales_Invoice_Id']").val("");
 
     $("[name='Filter.From_Date']").val("");
@@ -75,5 +70,11 @@ function Reset_SalesOrder() {
     $("[name='Filter.To_Date']").val("");
 
     document.getElementById('btnDetails').disabled = true;
+
+    $("#hdnBranchID").val("");
+
+    $("#hdnBranchName").val("");
+
+    $("#hdnBranchID").parents('.form-group').find('#lookupUlLookup').remove();
 
 }
