@@ -1138,6 +1138,7 @@
     <Content Include="Log4Net.config" />
     <None Include="Properties\PublishProfiles\MYLEO.pubxml" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Scripts\printThis.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1251,6 +1252,7 @@
     <Content Include="Views\PostLogin\Barcode\Barcode.cshtml" />
     <Content Include="Views\PostLogin\SalesOrder\SalesSummaryReport.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Print.cshtml" />
+    <Content Include="Views\PostLogin\Barcode\PrintBarcode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,9 +1,10 @@
 ﻿@model MyLeoRetailer.Models.BarcodeViewModel
 
 <script src="~/Scripts/Modules/common_methods.js"></script>
+<script src="~/Scripts/Modules/Barcode/barcode_validation.js"></script>
 <script src="~/Scripts/Modules/Barcode/barcode_event.js"></script>
 <script src="~/Scripts/Modules/Barcode/barcode_method.js"></script>
-<script src="~/Scripts/Modules/Barcode/barcode_validation.js"></script>
+
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb" style="margin-bottom: 0px;">
@@ -27,12 +28,13 @@
 <div class="page-content-wrap">
 
     <div class="row">
+        <form role="form" id="frmBarcodeGenerator">
 
         <div class="col-md-12" style="padding-top: 0px; padding-left: 10px; padding-right: 10px;">
 
             <div class="block">
 
-                <form role="form" id="frmBarcodeGenerator">
+
 
                     <input type="hidden" id="hdf_BarcodeId" name="Barcode.Product_SKU_Barcode_Id" />
 
@@ -53,7 +55,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <span class="label label-primary label-form" style="margin-bottom: 1px;">SKU Quantity.</span>
-                                <input type="text" class="form-control" placeholder="Enter SKU Quantity." id="txtBarcode" name="Barcode.SKU_Quantity" maxlength="5" />
+                                <input type="text" id="SKUQnty" class="form-control" placeholder="Enter SKU Quantity." name="Barcode.SKU_Quantity" maxlength="5" />
                             </div>
                         </div>
 
@@ -63,12 +65,14 @@
                                 <button type="button" class="btn btn-success active" value="Search" id="btnGenerate">Generate</button>
                                 <button type="reset" class="btn btn-danger active" value="Reset" id="btnResetBarcode">Reset</button>
                             </div>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-success active" value="Search" id="btnPrint">Print</button>
+                            </div>
+                        </div>
 
                         </div>
 
-                    </div>
 
-                </form>
 
             </div>
 
@@ -108,7 +112,7 @@
 
 
 
-
+        </form>
 
 
     </div>

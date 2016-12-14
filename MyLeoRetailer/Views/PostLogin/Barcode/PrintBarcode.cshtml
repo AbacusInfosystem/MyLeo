@@ -1,0 +1,65 @@
+﻿@model MyLeoRetailer.Models.BarcodeViewModel
+@*<script src="~/Scripts/Modules/Barcode/barcode_event.js"></script>
+    <script src="~/Scripts/Modules/Barcode/barcode_method.js"></script>*@
+
+<script src="~/Scripts/printThis.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnPrintDiv').click(function () {
+            $('#Div_Print').printThis();
+        });
+    });
+</script>
+<form role="form" id="frmBarcodePrintData">
+    <div class="content-frame-top">
+        <div class="page-title">
+            <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Print Barcode</h2>
+        </div>
+    </div>
+    <div style="width:100%; overflow:auto;" id="Div_Print">
+        <table style="width:100%; border:1px solid black">
+            <tr>
+                @{  int i = 0;
+                  int n = Model.PrintBarcodeData.Count();
+                  int j = 1;
+                  foreach (var dt in Model.PrintBarcodeData)
+                  {
+                    <td class='all-four-rounded-corners' style=" border-radius: 10px; border: 3px solid #000000;">
+                        <span style=" margin-bottom :1px;">
+                        Brand Name :
+                        </span>
+                        <span style="margin-bottom: 1px;">@dt.Brand_Name</span>
+                        <br />
+                        <span style="margin-bottom: 1px;"> Color Name :</span>
+                        <span style="margin-bottom: 1px;">@dt.Color_Name</span>
+                        <br />
+                        <span style="margin-bottom: 1px;"> Size Name :</span>
+                        <span style="margin-bottom: 1px;"> @dt.Size_Name </span>
+                        <br />
+                        <span style="margin-bottom: 1px;">MRP_Price</span>
+                        <span style="margin-bottom: 1px;">@dt.MRP_Price </span>
+                        <br />
+                        <img src="@Model.Barcode.Barcodes[i].Barcode_Image_Url" class="img-rounded" width="200" height="50">
+                        <br />
+                        <span style="margin-bottom: 1px;"> WSR Code :</span>
+                        <span style="margin-bottom: 1px;"> @dt.WSR_Code</span>
+                        <br />
+                       
+                    </td>
+                      if (j % 4 == 0)
+                      {
+                    <tr> </tr>
+                      }
+                      i++; j++;
+                  }
+                }
+                <tr />
+            </table>
+            <br>
+        </div>
+        <div class="col-md-4" style="padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+            <div class="btn-group pull-right">
+            <button type="button" class="btn btn-success active" value="Print" id="btnPrintDiv">Print</button>
+            </div>
+        </div>
+    </form>

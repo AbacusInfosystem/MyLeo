@@ -26,7 +26,7 @@ namespace MyLeoRetailerRepo
 
         public List<BarcodeInfo> Get_Barcodes(BarcodeInfo Barcode)
         {
-            List<BarcodeInfo> Barcodes = new List<BarcodeInfo>();          
+            List<BarcodeInfo> Barcodes = new List<BarcodeInfo>();
 
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
@@ -39,7 +39,7 @@ namespace MyLeoRetailerRepo
                 BarcodeInfo barcode = new BarcodeInfo();
 
                 if (dr["Product_SKU_Barcode_Id"] != DBNull.Value)
-                    barcode.Product_SKU_Barcode_Id = Convert.ToInt32(dr["Product_SKU_Barcode_Id"]);               
+                    barcode.Product_SKU_Barcode_Id = Convert.ToInt32(dr["Product_SKU_Barcode_Id"]);
 
                 if (dr["Product_SKU"] != DBNull.Value)
                     barcode.Product_SKU = Convert.ToString(dr["Product_SKU"]);
@@ -48,7 +48,7 @@ namespace MyLeoRetailerRepo
                     barcode.Product_Barcode_Counter = Convert.ToInt32(dr["Product_Barcode_Counter"]);
 
                 if (dr["Is_Barcode_Printed"] != DBNull.Value)
-                    barcode.Is_Barcode_Printed = Convert.ToInt32(dr["Is_Barcode_Printed"]);  
+                    barcode.Is_Barcode_Printed = Convert.ToInt32(dr["Is_Barcode_Printed"]);
 
                 if (dr["Product_Barcode"] != DBNull.Value)
                 {
@@ -59,6 +59,51 @@ namespace MyLeoRetailerRepo
                 Barcodes.Add(barcode);
             }
 
+            return Barcodes;
+        }
+
+        public List<BarcodeInfo> Get_Print_Barcodes_Data(List<BarcodeInfo> BarCode)
+        {
+            List<BarcodeInfo> Barcodes = new List<BarcodeInfo>();
+
+            foreach (var item in BarCode)
+            {
+                List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+                sqlParams.Add(new SqlParameter("@Product_SKU", item.Product_SKU));
+
+                DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Barcode_Data_Print_Details_By_SKU_Code.ToString(), CommandType.StoredProcedure);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    BarcodeInfo barcode2 = new BarcodeInfo();
+
+                    if (dr["Product_SKU"] != DBNull.Value)
+                        barcode2.Product_SKU = Convert.ToString(dr["Product_SKU"]);
+
+                    if (dr["Colour_Name"] != DBNull.Value)
+                        barcode2.Color_Name = Convert.ToString(dr["Colour_Name"]);
+
+                    if (dr["Size_Name"] != DBNull.Value)
+                        barcode2.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+                    if (dr["WSR_Code"] != DBNull.Value)
+                        barcode2.WSR_Code = Convert.ToString(dr["WSR_Code"]);
+
+                    if (dr["MRP_Price"] != DBNull.Value)
+                        barcode2.MRP_Price = Convert.ToString(dr["MRP_Price"]);
+
+                    if (dr["Brand_Name"] != DBNull.Value)
+                        barcode2.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+
+                    //if (dr["Product_Barcode"] != DBNull.Value)
+                    //{
+                    //    barcode2.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";
+                    //    barcode2.Product_Barcode = (byte[])dr["Product_Barcode"];
+                    //}
+                    Barcodes.Add(barcode2);
+                }
+            }
             return Barcodes;
         }
 
@@ -75,9 +120,9 @@ namespace MyLeoRetailerRepo
                 Barcode.Product_Barcode_Counter = counter;
 
                 Barcode.Product_SKU_Barcode_Id = Convert.ToInt32(sqlHelper.ExecuteScalerObj(Set_Values_In_Barcode(Barcode), Storeprocedures.sp_Insert_Barcode.ToString(), CommandType.StoredProcedure));
-                               
+
             }
-                        
+
             return Barcode.Product_SKU_Barcode_Id;
         }
 
@@ -130,7 +175,7 @@ namespace MyLeoRetailerRepo
                 if (!dr.IsNull("Product_SKU_Barcode_Id"))
                 {
                     id = Convert.ToInt32(dr["Product_SKU_Barcode_Id"]);
-                }               
+                }
             }
 
             return id;

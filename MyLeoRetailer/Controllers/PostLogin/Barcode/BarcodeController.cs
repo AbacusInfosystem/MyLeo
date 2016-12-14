@@ -31,7 +31,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Barcode
                 if (TempData["bViewModel"] != null)
                 {
                     bViewModel = (BarcodeViewModel)TempData["bViewModel"];
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -45,13 +45,12 @@ namespace MyLeoRetailer.Controllers.PostLogin.Barcode
         public JsonResult Get_Barcodes(BarcodeViewModel bViewModel)
         {
             try
-            {  
+            {
                 bViewModel.Barcode.Barcodes = _barcodeRepo.Get_Barcodes(bViewModel.Barcode);
             }
             catch (Exception ex)
             {
                 bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-
                 Logger.Error(" Barcode - Get_Barcodes : " + ex.ToString());
             }
 
@@ -94,6 +93,20 @@ namespace MyLeoRetailer.Controllers.PostLogin.Barcode
 
             return RedirectToAction("Barcode", bViewModel);
 
+        }
+
+        public ActionResult Print_Barcode(BarcodeViewModel bViewModel)
+        {
+            try
+            {
+                bViewModel.PrintBarcodeData = _barcodeRepo.Get_Print_Barcodes_Data(bViewModel.Barcode.Barcodes);
+            }
+            catch (Exception ex)
+            {
+                bViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+                Logger.Error("Barcode Controller - Barcode : " + ex.ToString());
+            }
+            return View("PrintBarcode", bViewModel);
         }
 
     }
