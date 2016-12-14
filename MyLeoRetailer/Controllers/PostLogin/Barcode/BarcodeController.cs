@@ -99,6 +99,11 @@ namespace MyLeoRetailer.Controllers.PostLogin.Barcode
         {
             try
             {
+                foreach (var item in bViewModel.Barcode.Barcodes)
+                {
+                    Set_Date_Session(item);
+                }
+
                 bViewModel.PrintBarcodeData = _barcodeRepo.Get_Print_Barcodes_Data(bViewModel.Barcode.Barcodes);
             }
             catch (Exception ex)

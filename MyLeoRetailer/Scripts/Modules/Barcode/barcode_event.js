@@ -48,7 +48,24 @@ $(function () {
         }
     });
 
-        Get_Barcodes();
+    $("#btnPrintAll").click(function () {
 
+        $("#frmBarcodeGenerator").validate();
+
+        $('#hdnProduct_SKU').rules("remove");
+
+        $('#SKUQnty').rules("remove");
+
+        Print_All_Barcode();
+
+        if ($("#frmBarcodeGenerator").valid()) {
+
+            $("#frmBarcodeGenerator").attr("action", "/Barcode/Print_Barcode");
+
+            $('#frmBarcodeGenerator').attr("method", "POST");
+
+            $("#frmBarcodeGenerator").submit();
+        }
     });
+    
 });

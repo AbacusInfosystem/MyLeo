@@ -68,40 +68,45 @@ namespace MyLeoRetailerRepo
 
             foreach (var item in BarCode)
             {
-                List<SqlParameter> sqlParams = new List<SqlParameter>();
-
-                sqlParams.Add(new SqlParameter("@Product_SKU", item.Product_SKU));
-
-                DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Barcode_Data_Print_Details_By_SKU_Code.ToString(), CommandType.StoredProcedure);
-
-                foreach (DataRow dr in dt.Rows)
+                if (item.Is_Barcode_Printed == 1)
                 {
-                    BarcodeInfo barcode2 = new BarcodeInfo();
+                    List<SqlParameter> sqlParams = new List<SqlParameter>();
 
-                    if (dr["Product_SKU"] != DBNull.Value)
-                        barcode2.Product_SKU = Convert.ToString(dr["Product_SKU"]);
+                    sqlParams.Add(new SqlParameter("@Product_SKU", item.Product_SKU));
 
-                    if (dr["Colour_Name"] != DBNull.Value)
-                        barcode2.Color_Name = Convert.ToString(dr["Colour_Name"]);
+                    DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Barcode_Data_Print_Details_By_SKU_Code.ToString(), CommandType.StoredProcedure);
 
-                    if (dr["Size_Name"] != DBNull.Value)
-                        barcode2.Size_Name = Convert.ToString(dr["Size_Name"]);
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        BarcodeInfo barcode2 = new BarcodeInfo();
 
-                    if (dr["WSR_Code"] != DBNull.Value)
-                        barcode2.WSR_Code = Convert.ToString(dr["WSR_Code"]);
+                        if (dr["Product_SKU"] != DBNull.Value)
+                            barcode2.Product_SKU = Convert.ToString(dr["Product_SKU"]);
 
-                    if (dr["MRP_Price"] != DBNull.Value)
-                        barcode2.MRP_Price = Convert.ToString(dr["MRP_Price"]);
+                        if (dr["Colour_Name"] != DBNull.Value)
+                            barcode2.Color_Name = Convert.ToString(dr["Colour_Name"]);
 
-                    if (dr["Brand_Name"] != DBNull.Value)
-                        barcode2.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+                        if (dr["Size_Name"] != DBNull.Value)
+                            barcode2.Size_Name = Convert.ToString(dr["Size_Name"]);
 
-                    //if (dr["Product_Barcode"] != DBNull.Value)
-                    //{
-                    //    barcode2.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";
-                    //    barcode2.Product_Barcode = (byte[])dr["Product_Barcode"];
-                    //}
-                    Barcodes.Add(barcode2);
+                        if (dr["WSR_Code"] != DBNull.Value)
+                            barcode2.WSR_Code = Convert.ToString(dr["WSR_Code"]);
+
+                        if (dr["MRP_Price"] != DBNull.Value)
+                            barcode2.MRP_Price = Convert.ToString(dr["MRP_Price"]);
+
+                        if (dr["Brand_Name"] != DBNull.Value)
+                            barcode2.Brand_Name = Convert.ToString(dr["Brand_Name"]);
+
+                        //if (dr["Product_Barcode"] != DBNull.Value)
+                        //{
+                        //    barcode2.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";
+                        //    barcode2.Product_Barcode = (byte[])dr["Product_Barcode"];
+                        //}
+                        Barcodes.Add(barcode2);
+                    }
+
+                    Update_Barcode(item);
                 }
             }
             return Barcodes;
@@ -124,6 +129,21 @@ namespace MyLeoRetailerRepo
             }
 
             return Barcode.Product_SKU_Barcode_Id;
+        }
+
+        public void Update_Barcode(BarcodeInfo Barcode)
+        {
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Product_SKU_Barcode_Id", Barcode.Product_SKU_Barcode_Id));
+
+            sqlParam.Add(new SqlParameter("@Is_Barcode_Printed", Barcode.Is_Barcode_Printed));
+
+            sqlParam.Add(new SqlParameter("@Updated_Date", Barcode.Updated_Date));
+
+            sqlParam.Add(new SqlParameter("@Updated_By", Barcode.Updated_By));
+
+            sqlHelper.ExecuteNonQuery(sqlParam, Storeprocedures.sp_Update_Barcode.ToString(), CommandType.StoredProcedure);    
         }
 
         public List<SqlParameter> Set_Values_In_Barcode(BarcodeInfo barcode)

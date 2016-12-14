@@ -40,10 +40,16 @@ function Bind_Get_Barcodes_Data(data) {
 
         for (var i = 0; i < data.Barcode.Barcodes.length; i++) {
 
-            tblHTML += "<tr>";
+            tblHTML += "<tr id='trBarcode_" + i + "'>";
 
-            tblHTML += "<td><label class='switch'><input checked='' value='1' type='checkbox'><span></span></label>";
-            
+            if (data.Barcode.Barcodes[i].Is_Barcode_Printed == 1) {
+
+                tblHTML += "<td><label class='switch'><input checked='' name='Barcode.Barcodes[" + i + "].Is_Barcode_Printed' id='Flag" + i + "' value='1' type='checkbox'><span></span></label>";
+            }
+            else {
+                tblHTML += "<td><label class='switch'><input name='Barcode.Barcodes[" + i + "].Is_Barcode_Printed' id='Flag" + i + "' value='0' type='checkbox'><span></span></label>";
+            }
+                        
             tblHTML += "<input type='hidden' id='hdnId" + i + "' name='Barcode.Barcodes[" + i + "].Product_SKU_Barcode_Id' value='" + data.Barcode.Barcodes[i].Product_SKU_Barcode_Id + "' />";
             
             tblHTML += "</td>";
@@ -85,6 +91,20 @@ function Bind_Get_Barcodes_Data(data) {
     $('#tblBarcode tbody').append(tblHTML);
 
     Friendly_Messages(data);
+}
+
+function Print_All_Barcode()
+{
+    var temprowcount = $("#tblBarcode").find('[id^="trBarcode_"]').size();
+
+    var x = temprowcount;
+        
+    for (var i = 0; i < x; i++) {
+       
+        $("#Flag" + i).val(1);
+
+        document.getElementById('Flag' + i).checked = true;     
+    }
 }
 
 

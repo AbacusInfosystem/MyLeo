@@ -464,6 +464,8 @@ namespace MyLeoRetailerInfo.Common
 
         sp_Get_Barcode_Data_Print_Details_By_SKU_Code,
 
+        sp_Update_Barcode,
+
         #endregion
 
     }
