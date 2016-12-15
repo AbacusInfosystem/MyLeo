@@ -140,6 +140,8 @@ function Get_Purchase_Invoice_Items_By_Barcode(i) {
     });
 
     CalculateTotal();
+
+    AddPurchaseInvoiceDetails();
 }
 
 function AddPurchaseInvoiceDetails() {

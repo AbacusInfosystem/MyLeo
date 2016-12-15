@@ -166,6 +166,7 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
 
     CalculateTotal();
 
+    AddPurchaseReturnDetails();
 
 }
 

@@ -98,6 +98,10 @@ namespace MyLeoRetailerRepo
                         if (dr["Brand_Name"] != DBNull.Value)
                             barcode2.Brand_Name = Convert.ToString(dr["Brand_Name"]);
 
+                        barcode2.Barcode_Image_Url = item.Barcode_Image_Url;
+
+                        barcode2.Product_Barcode = item.Product_Barcode;
+
                         //if (dr["Product_Barcode"] != DBNull.Value)
                         //{
                         //    barcode2.Barcode_Image_Url = dr["Product_Barcode"] != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])dr["Product_Barcode"]) : "";

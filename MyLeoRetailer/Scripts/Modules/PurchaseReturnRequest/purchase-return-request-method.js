@@ -519,6 +519,8 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
 
     CalculateTotal();
 
+    AddPurchaseReturnRequestDetails();
+
 }
 
 function Set_Purchase_Invoice_Id(value) {

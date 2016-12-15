@@ -70,6 +70,10 @@ function Get_Sales_Return_Items_By_Barcode(i) {
 
     var barcode = $("[name='SaleReturnItemList[" + i + "].Barcode']").val().replace(/[$]/g, '-');
 
+    var Final = barcode.split("+");
+
+    var SKU = Final[0];
+
     $.ajax({
 
         url: "/SalesReturn/Get_Sales_Return_Items_By_SKU_Code",
@@ -78,7 +82,7 @@ function Get_Sales_Return_Items_By_Barcode(i) {
 
             Sales_Invoice_Id: $("[name='SaleReturnItemList[" + i + "].Sales_Invoice_Id']").val(),
 
-            SKU_Code: barcode
+            SKU_Code: SKU
 
         },
 
@@ -112,12 +116,14 @@ function Get_Sales_Return_Items_By_Barcode(i) {
 
             CalculateTotal();
 
+            AddSalesReturnDetails();
+
         }
     });
 
 }
 
-function AddSalesReturnDetails(i)
+function AddSalesReturnDetails()
 {
 
     var html = '';
@@ -231,17 +237,30 @@ function AddSalesReturnDetails(i)
 }
 
 function DeleteSalesReturnDetailsData(i)
-{
-
+{ 
     $("#tblSalesReturnItems").find("[id='SalesReturnItemRow_" + i + "']").remove();
+    
+    if (i == 0) {       
+        AddSalesReturnDetails();
 
-    ReArrangeSalesReturnDetailsData();
+        ReArrangeSalesReturnDetailsData();
 
-    CalculateTotal();
+        $("#textTotalQuantity_0").val('');
 
-    CalculateCreditNoteAmt();
+        $("#textGrossAmount_0").val('');
 
-    Add_Validation(i);
+        $("#textTotalAmountReturnByCreditNote_0").val('');
+    }
+    else
+    {
+        ReArrangeSalesReturnDetailsData();
+
+        CalculateTotal();
+
+        CalculateCreditNoteAmt();
+
+        Add_Validation(i);
+    }    
 
 }
 

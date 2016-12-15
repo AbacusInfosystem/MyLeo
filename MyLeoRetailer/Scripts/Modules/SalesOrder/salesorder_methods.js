@@ -59,7 +59,6 @@ function Get_Sales_Order_Items_By_SKU_Code(i) {
     });
 }
 
-
 function Get_Sales_Order_Items_By_Barcode(i) {
 
     debugger;
@@ -102,8 +101,9 @@ function Get_Sales_Order_Items_By_Barcode(i) {
 
         }
     });
-}
 
+    AddSalesOrderDetails();
+}
 
 function Get_Credit_Note_Data_By_Id(id) {
 
@@ -264,7 +264,7 @@ function Get_Gift_Voucher_Amount_By_Id(id) {
     });
 }
 
-function AddSalesOrderDetails(i) {
+function AddSalesOrderDetails() {
 
     var html = '';
 
@@ -287,7 +287,7 @@ function AddSalesOrderDetails(i) {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div id='SKU_" + i + "' class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text' id='textSKU_No_" + i + "' onchange='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SaleOrderItemList[" + i + "].SKU_Code' data-param='hdnBranchID' data-field='Branch_Id'/>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text lookup-text' id='textSKU_No_" + i + "' onchange='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SaleOrderItemList[" + i + "].SKU_Code' data-param='hdnBranchID' data-field='Branch_Id'/>";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
     tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
     //tblHtml += "<input type='hidden' id='hdnBranchID_" + i + "' value='' name='SalesInvoice.Branch_Id' />";
@@ -379,7 +379,7 @@ function DeleteSalesOrderDetailsData(i) {
     $("#tblSalesOrderItems").find("[id='SalesOrderItemRow_" + i + "']").remove();
     if (i == 0) {
         $('#textTaxPercentage_0').val(0);
-        AddSalesOrderDetails(i);
+        AddSalesOrderDetails();
         CalculateQuantityMRP();
         CalculateTotal();
         CalculateTax();

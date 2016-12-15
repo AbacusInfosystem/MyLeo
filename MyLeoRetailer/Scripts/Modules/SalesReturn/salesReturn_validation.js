@@ -91,7 +91,6 @@
 
     jQuery.validator.addMethod("checkBarcodeExist", function (value, element) {
 
-        debugger;
 
         var result = true;
 
@@ -143,9 +142,7 @@ jQuery.validator.addMethod("MobileNo", function (value, element) {
 
 
 jQuery.validator.addMethod("QuantityCheck", function (value, element) {
-
-    debugger;
-
+    
     var result = true;
 
     if (($("#textQuantity_").val() != "" && $("#hdnQuantity").val() != $("#textQuantity_").val()) && ($("#textSKU_No_").val() != "" && $("#hdnSKU_No_" + $(element).closest("tr").index()).val() != $("#textSKU_No_").val()) && ($("#textSales_Branch_Name_0").val() != "" && $("#hdnBranchID").val() != $("#textSales_Branch_Name_0").val())) {
