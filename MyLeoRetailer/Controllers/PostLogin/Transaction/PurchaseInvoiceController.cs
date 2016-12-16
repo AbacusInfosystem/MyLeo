@@ -194,6 +194,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(piViewModel.PurchaseInvoice, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult Get_Purchase_Invoice_Items_By_Barcode(string Barcode)
+        {
+            PurchaseInvoiceViewModel piViewModel = new PurchaseInvoiceViewModel();
+
+            try
+            {
+                piViewModel.PurchaseInvoice = _purchaseinvoiceRepo.Get_Purchase_Invoice_Items_By_Barcode(Barcode);
+            }
+            catch (Exception ex)
+            {
+                piViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseInvoiceController - Get_Purchase_Invoice_Items_By_Barcode : " + ex.ToString());
+            }
+
+            return Json(piViewModel.PurchaseInvoice, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Get_Vendor_Details_By_Id(int Vendor_Id)
         {
             PurchaseInvoiceViewModel piViewModel = new PurchaseInvoiceViewModel();

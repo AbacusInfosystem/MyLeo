@@ -81,6 +81,28 @@ namespace MyLeoRetailerRepo
             return SalesOrderItems;
         }
 
+        public SalesInvoiceInfo Get_Sales_Order_Items_By_Barcode(string Barcode)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@Barcode", Barcode));
+
+            SalesInvoiceInfo SalesOrderItems = new SalesInvoiceInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Sales_Order_Items_By_Barcode.ToString(), CommandType.StoredProcedure);
+
+            List<DataRow> drList = new List<DataRow>();
+
+            drList = dt.AsEnumerable().ToList();
+
+            foreach (DataRow dr in drList)
+            {
+                SalesOrderItems = Get_Sales_Order_Items_By_SKU_Values(dr);
+            }
+
+            return SalesOrderItems;
+        }
+
         public List<CreditNote> Get_Credit_Note_Data_By_Id(int Customer_Id) 
         {
 

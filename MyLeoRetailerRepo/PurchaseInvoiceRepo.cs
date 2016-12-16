@@ -269,6 +269,28 @@ namespace MyLeoRetailerRepo
             return PurchaseInvoice;
         }
 
+        public PurchaseInvoiceInfo Get_Purchase_Invoice_Items_By_Barcode(string Barcode)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@Barcode", Barcode));
+
+            PurchaseInvoiceInfo PurchaseInvoice = new PurchaseInvoiceInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Invoice_Items_By_Barcode.ToString(), CommandType.StoredProcedure);
+
+            List<DataRow> drList = new List<DataRow>();
+
+            drList = dt.AsEnumerable().ToList();
+
+            foreach (DataRow dr in drList)
+            {
+                PurchaseInvoice = Get_Purchase_Invoice_Items_By_SKU_Values(dr);
+            }
+
+            return PurchaseInvoice;
+        }
+
         public int Insert_Purchase_Invoice(PurchaseInvoiceInfo PurchaseInvoice)
         {
 

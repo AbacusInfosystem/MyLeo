@@ -44,6 +44,9 @@ namespace MyLeoRetailerRepo
                 if (dr["Product_SKU"] != DBNull.Value)
                     barcode.Product_SKU = Convert.ToString(dr["Product_SKU"]);
 
+                if (dr["Product_SKU_Id"] != DBNull.Value)
+                    barcode.Product_SKU_Id = Convert.ToString(dr["Product_SKU_Id"]);
+
                 if (dr["Product_Barcode_Counter"] != DBNull.Value)
                     barcode.Product_Barcode_Counter = Convert.ToInt32(dr["Product_Barcode_Counter"]);
 
@@ -156,13 +159,17 @@ namespace MyLeoRetailerRepo
 
             if (!String.IsNullOrEmpty(barcode.Product_SKU))
             {
-                string SKU_Code = Regex.Replace(barcode.Product_SKU, @"[^0-9a-zA-Z]+", "$");
+                barcode.Product_SKU_Id = Get_SKU_Id_By_SKU_Code(barcode.Product_SKU);
 
-                SKU_Code += "+" + barcode.Product_Barcode_Counter;
+                string SKU_Id = barcode.Product_SKU_Id;
 
-                string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), barcode.Product_SKU + ".png");
+                //string SKU_Code = Regex.Replace(barcode.Product_SKU, @"[^0-9a-zA-Z]+", "$");
 
-                barcode.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Code, path);
+                SKU_Id += "+" + barcode.Product_Barcode_Counter;
+
+                string path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProductImgPath"].ToString()), barcode.Product_SKU_Id + ".png");
+
+                barcode.Product_Barcode = bar.Generate_Linear_Barcode(SKU_Id, path);
 
                 barcode.Barcode_Image_Url = barcode.Product_Barcode != null ? "data:image/jpg;base64," + Convert.ToBase64String((byte[])barcode.Product_Barcode) : "";
             }
@@ -170,6 +177,8 @@ namespace MyLeoRetailerRepo
             List<SqlParameter> sqlParams = new List<SqlParameter>();
 
             sqlParams.Add(new SqlParameter("@Product_SKU", barcode.Product_SKU));
+
+            sqlParams.Add(new SqlParameter("@Product_SKU_Id", barcode.Product_SKU_Id));
 
             sqlParams.Add(new SqlParameter("@Product_Barcode", barcode.Product_Barcode));
 
@@ -203,6 +212,27 @@ namespace MyLeoRetailerRepo
             }
 
             return id;
+        }
+
+        public string Get_SKU_Id_By_SKU_Code(string Product_SKU)
+        {
+            string sku_id = "";
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Product_SKU", Product_SKU));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_SKU_Id_By_SKU_Code.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!dr.IsNull("SKU_Id"))
+                {
+                    sku_id = Convert.ToString(dr["SKU_Id"]);
+                }
+            }
+
+            return sku_id;
         }
     }
 }

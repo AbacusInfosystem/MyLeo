@@ -83,6 +83,30 @@ namespace MyLeoRetailerRepo
             return SalesReturnItems;
         }
 
+        public SalesReturnInfo Get_Sales_Return_Items_By_Barcode(int Sales_Invoice_Id, string Barcode)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
+
+            parameters.Add(new SqlParameter("@Barcode", Barcode));
+
+            parameters.Add(new SqlParameter("@Sales_Invoice_Id", Sales_Invoice_Id));
+
+            SalesReturnInfo SalesReturnItems = new SalesReturnInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Sales_Return_Items_By_Barcode.ToString(), CommandType.StoredProcedure);
+
+            List<DataRow> drList = new List<DataRow>();
+
+            drList = dt.AsEnumerable().ToList();
+
+            foreach (DataRow dr in drList)
+            {
+                SalesReturnItems = Get_Sales_Return_Items_By_SKU_Values(dr);
+            }
+
+            return SalesReturnItems;
+        }
+
         private SalesReturnInfo Get_Sales_Return_Items_By_SKU_Values(DataRow dr)
         {
             SalesReturnInfo SalesReturnItems = new SalesReturnInfo();

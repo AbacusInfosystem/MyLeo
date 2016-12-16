@@ -90,6 +90,26 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         }
 
+        public JsonResult Get_Sales_Return_Items_By_Barcode(int Sales_Invoice_Id, string Barcode)
+        {
+
+            SalesReturnViewModel srViewModel = new SalesReturnViewModel();
+            try
+            {
+                srViewModel.SalesReturn = srRepo.Get_Sales_Return_Items_By_Barcode(Sales_Invoice_Id, Barcode);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("SalesReturn Controller - Get_Sales_Return_Items_By_Barcode  " + ex.Message);
+            }
+
+            return Json(srViewModel.SalesReturn, JsonRequestBehavior.AllowGet);
+
+        }
+
         [AuthorizeUserAttribute(AppFunction.Sales_Return_Management_Access)]
         public ActionResult Search(SalesReturnViewModel srViewModel)
         {

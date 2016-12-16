@@ -116,9 +116,9 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
 
     $.ajax({
 
-        url: "/PurchaseReturn/Get_Purchase_Return_Items_By_SKU_Code",
+        url: "/PurchaseReturn/Get_Purchase_Return_Items_By_Barcode",
 
-        data: { SKU_Code: SKU },
+        data: { Barcode: SKU },
 
         method: 'GET',
 

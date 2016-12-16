@@ -64,11 +64,13 @@ function Bind_Get_Barcodes_Data(data) {
 
             tblHTML += "<td>" + data.Barcode.Barcodes[i].Product_SKU + "</td>";
 
-            tblHTML += "<td>" + data.Barcode.Barcodes[i].Product_SKU +"-"+ data.Barcode.Barcodes[i].Product_Barcode_Counter + "</td>";
+            tblHTML += "<td>" + data.Barcode.Barcodes[i].Product_SKU_Id + "</td>";
+
+            tblHTML += "<td>" + data.Barcode.Barcodes[i].Product_SKU_Id +"-"+ data.Barcode.Barcodes[i].Product_Barcode_Counter + "</td>";
 
             tblHTML += "<td>";
             
-            tblHTML += "<img src='" + (data.Barcode.Barcodes[i].Barcode_Image_Url != null ? data.Barcode.Barcodes[i].Barcode_Image_Url : "") + "' style='width:200px'/>";
+            tblHTML += "<img src='" + (data.Barcode.Barcodes[i].Barcode_Image_Url != null ? data.Barcode.Barcodes[i].Barcode_Image_Url : "") + "' style='width:150px'/>";
             
             tblHTML += "<input type='hidden' id='hdn_Barcode' class='form-control' name='Barcode.Barcodes[" + i + "].Product_Barcode' value='" + (data.Barcode.Barcodes[i].Product_Barcode == null ? '' : data.Barcode.Barcodes[i].Product_Barcode) + "' />";
 

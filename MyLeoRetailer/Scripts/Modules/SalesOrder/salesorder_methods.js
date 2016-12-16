@@ -71,9 +71,9 @@ function Get_Sales_Order_Items_By_Barcode(i) {
 
     $.ajax({
 
-        url: "/SalesOrder/Get_Sales_Order_Items_By_SKU_Code",
+        url: "/SalesOrder/Get_Sales_Order_Items_By_Barcode",
 
-        data: { SKU_Code: SKU },
+        data: { Barcode: SKU },
 
         method: 'GET',
 
@@ -287,9 +287,9 @@ function AddSalesOrderDetails() {
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div id='SKU_" + i + "' class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text lookup-text' id='textSKU_No_" + i + "' onchange='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SaleOrderItemList[" + i + "].SKU_Code' data-param='hdnBranchID' data-field='Branch_Id'/>";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text lookup-text' id='textSKU_No_" + i + "' placeholder='SKU Code' value=''  data-table='Inventorys' data-col='Branch_Id,Product_SKU' data-headernames='SKU_Code' name='SaleOrderItemList[" + i + "].SKU_Code' data-param='hdnBranchID' data-field='Branch_Id'/>";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
-    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "'  onchange='javascript:Get_Sales_Order_Items_By_SKU_Code(" + i + ");' value='' class='auto-complete-value'/>";
     //tblHtml += "<input type='hidden' id='hdnBranchID_" + i + "' value='' name='SalesInvoice.Branch_Id' />";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value='' class='auto-complete-label' />";
     tblHtml += "</div>";
@@ -380,10 +380,12 @@ function DeleteSalesOrderDetailsData(i) {
     if (i == 0) {
         $('#textTaxPercentage_0').val(0);
         AddSalesOrderDetails();
+        ReArrangeSalesOrderDetailsData();
         CalculateQuantityMRP();
         CalculateTotal();
         CalculateTax();
-    } else { 
+    } else {
+        ReArrangeSalesOrderDetailsData();
         CalculateQuantityMRP();
         CalculateTotal();
         CalculateTax();
@@ -432,7 +434,8 @@ function ReArrangeSalesOrderDetailsData() {
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code", "onchange", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");
+                $(newTR).find("[id^='hdnProduct_Id_']").attr("onchange", "javascript: Get_Sales_Order_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 //$(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleOrderItemList[" + i + "].SKU_Code");

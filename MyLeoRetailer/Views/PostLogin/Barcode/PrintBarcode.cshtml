@@ -18,14 +18,14 @@
     </div>
 
     <div style="width:100%; overflow:auto;" id="Div_Print">
-        <table style="border:1px solid black">
+        <table style="border:1px solid black;font-size:10px">
             <tr>
                 @{  int i = 0;
                   int n = Model.PrintBarcodeData.Count();
                   int j = 1;
                   foreach (var dt in Model.PrintBarcodeData)
                   {
-                    <td class='all-four-rounded-corners' style="padding:4px 6px; border-radius: 10px; border: 3px solid #000000; width: 350px;">
+                    <td class='all-four-rounded-corners' style="padding:4px 6px; border-radius: 10px; border: 3px solid #000000; width: 300px;">
                         <div>
                             <span style="margin-bottom: 1px; width:60px;"> @dt.Brand_Name </span>
                         </div>
@@ -49,7 +49,7 @@
                         </div>
 
                         <div>
-                            <img src="@dt.Barcode_Image_Url" class="img-rounded" style="width: 100%;">
+                            <img src="@dt.Barcode_Image_Url" class="img-rounded" style="width: 70%;">
                             @*<img src="@Model.Barcode.Barcodes[i].Barcode_Image_Url" class="img-rounded" style="width: 100%;">*@
                         </div>
 

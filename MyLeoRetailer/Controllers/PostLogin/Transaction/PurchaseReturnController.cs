@@ -173,6 +173,24 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult Get_Purchase_Return_Items_By_Barcode(string Barcode)
+        {
+            PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();
+
+            try
+            {
+                prViewModel.PurchaseReturn = _purchaseReturnRepo.Get_Purchase_Return_Items_By_Barcode(Barcode);
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseReturnController - Get_Purchase_Return_Items_By_Barcode : " + ex.ToString());
+            }
+
+            return Json(prViewModel.PurchaseReturn, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Get_Purchase_Return_PO_By_POI(int Purchase_Invoice_Id, string SKU_Code)
         {
             PurchaseReturnViewModel prViewModel = new PurchaseReturnViewModel();

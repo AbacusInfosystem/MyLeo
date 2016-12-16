@@ -367,10 +367,16 @@ namespace MyLeoRetailer
 
 
             routes.MapRoute(
-      name: "purchase-return-request-8",
-      url: "purchase-return-request/get-quantity-item-by-sku-code",
-      defaults: new { controller = "PurchaseReturnRequest", action = "Get_Quantity_By_SKU_Code", id = UrlParameter.Optional },
-      namespaces: new string[] { "MyLeoRetailer.Controllers" });
+            name: "purchase-return-request-8",
+            url: "purchase-return-request/get-quantity-item-by-sku-code",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Get_Quantity_By_SKU_Code", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
+
+            routes.MapRoute(
+            name: "purchase-return-request-9",
+            url: "purchase-return-request/get-purchase-return-request-item-by-barcode",
+            defaults: new { controller = "PurchaseReturnRequest", action = "Get_Purchase_Return_Item_By_Barcode", id = UrlParameter.Optional },
+            namespaces: new string[] { "MyLeoRetailer.Controllers" });
 
             #endregion
 

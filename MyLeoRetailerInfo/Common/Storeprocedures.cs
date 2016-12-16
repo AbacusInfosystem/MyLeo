@@ -276,7 +276,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Purchase_Invoices,
         Get_Purchase_Invoice_Data_By_Id_Sp1,
 
-
+        sp_Get_Purchase_Invoice_Items_By_Barcode,
 
         #endregion
 
@@ -314,6 +314,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Update_Product_SKU_Map,
         sp_Check_Existing_Article_No,
         sp_Get_Barcodes_On_Product_Id,
+        sp_Get_Max_Product_SKU_Id,
         #endregion
 
         #region Pyable
@@ -357,6 +358,7 @@ namespace MyLeoRetailerInfo.Common
         sp_Insert_Receivable_Item_Data_For_Sales_Order,
         sp_Get_Sales_Summary_Report,
 
+        sp_Get_Sales_Order_Items_By_Barcode,
 
          #endregion
 
@@ -376,6 +378,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Sales_Return_Items_By_Sales_Return_Id,
         sp_Get_Sales_Return_Items_By_SKU_Code,
         Get_Sales_Return_Search_Details,
+        sp_Get_Sales_Return_Items_By_Barcode,
+
         #endregion
 
         #region Receivable
@@ -465,6 +469,8 @@ namespace MyLeoRetailerInfo.Common
         sp_Get_Barcode_Data_Print_Details_By_SKU_Code,
 
         sp_Update_Barcode,
+
+        sp_Get_SKU_Id_By_SKU_Code,
 
         #endregion
 

@@ -457,9 +457,9 @@ function Get_Purchase_Return_Items_By_Barcode(i) {
 
     $.ajax({
 
-        url: "/purchase-return-request/get-purchase-return-request-item-by-sku-code",
+        url: "/purchase-return-request/get-purchase-return-request-item-by-barcode",
 
-        data: { SKU_Code: SKU, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
+        data: { Barcode: SKU, Purchase_Invoice_Id: $("#hdf_Purchase_Invoice_Id").val() },
 
         method: 'POST',
 

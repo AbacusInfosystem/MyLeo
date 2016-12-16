@@ -265,7 +265,27 @@ namespace MyLeoRetailerRepo
             return PurchaseReturn;
         }
 
+        public PurchaseReturnInfo Get_Purchase_Return_Items_By_Barcode(string Barcode)
+        {
+            List<SqlParameter> parameters = new List<SqlParameter>();
 
+            parameters.Add(new SqlParameter("@Barcode", Barcode));
+
+            PurchaseReturnInfo PurchaseReturn = new PurchaseReturnInfo();
+
+            DataTable dt = sqlHelper.ExecuteDataTable(parameters, Storeprocedures.sp_Get_Purchase_Invoice_Items_By_Barcode.ToString(), CommandType.StoredProcedure);
+
+            List<DataRow> drList = new List<DataRow>();
+
+            drList = dt.AsEnumerable().ToList();
+
+            foreach (DataRow dr in drList)
+            {
+                PurchaseReturn = Get_Purchase_Return_Items_By_SKU_Values(dr);
+            }
+
+            return PurchaseReturn;
+        }
 
         private PurchaseReturnInfo Get_Purchase_Return_Values(DataRow dr)
         {

@@ -132,6 +132,26 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
         }
 
+        public JsonResult Get_Sales_Order_Items_By_Barcode(string Barcode)
+        {
+
+            SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();
+            try
+            {
+                siViewModel.SalesInvoice = siRepo.Get_Sales_Order_Items_By_Barcode(Barcode);
+            }
+            //Added by vinod mane on 06/10/2016
+            catch (Exception ex)
+            {
+                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("SalesOrder Controller - Get_Sales_Order_Items_By_Barcode  " + ex.Message);
+            }
+            //end
+            return Json(siViewModel.SalesInvoice, JsonRequestBehavior.AllowGet);
+
+        }
+
         public JsonResult Get_Credit_Note_Details_By_Id_abc(int cust_Id)
         {
             SalesInvoiceViewModel siViewModel = new SalesInvoiceViewModel();

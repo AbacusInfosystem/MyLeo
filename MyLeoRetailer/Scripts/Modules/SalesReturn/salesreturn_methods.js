@@ -76,13 +76,13 @@ function Get_Sales_Return_Items_By_Barcode(i) {
 
     $.ajax({
 
-        url: "/SalesReturn/Get_Sales_Return_Items_By_SKU_Code",
+        url: "/SalesReturn/Get_Sales_Return_Items_By_Barcode",
 
         data: {
 
             Sales_Invoice_Id: $("[name='SaleReturnItemList[" + i + "].Sales_Invoice_Id']").val(),
 
-            SKU_Code: SKU
+            Barcode: SKU
 
         },
 
@@ -158,9 +158,9 @@ function AddSalesReturnDetails()
     tblHtml += "<td>";
     tblHtml += "<div class='form-group auto-complete'>";
     tblHtml += "<div id='SKU_" + i + "' class='input-group'>";
-    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text lookup-text' id='textSKU_No_" + i + "' onchange='javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ");' placeholder='SKU Code' value=''  data-table='Sales_Invoice_Item' data-col='Sales_Invoice_Id,SKU_Code' data-headernames='SKU_Code' name='SaleReturnItemList[" + i + "].SKU_Code' data-param='hdnSalesInvoiceID_" + i + "' data-field='Sales_Invoice_Id' />";
+    tblHtml += "<input type='text' class='form-control invoice-filter autocomplete-text lookup-text' id='textSKU_No_" + i + "' placeholder='SKU Code' value=''  data-table='Sales_Invoice_Item' data-col='Sales_Invoice_Id,SKU_Code' data-headernames='SKU_Code' name='SaleReturnItemList[" + i + "].SKU_Code' data-param='hdnSalesInvoiceID_" + i + "' data-field='Sales_Invoice_Id' />";
     tblHtml += "<span class='input-group-addon'><a href='#' class='text-muted' id='hrefDealer' role='button'> <i class='fa fa-search' style='color:#fff;' aria-hidden='true'></i></a></span>";
-    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' value='' class='auto-complete-value'/>";
+    tblHtml += "<input type='hidden' id='hdnProduct_Id_" + i + "' onchange='javascript:Get_Sales_Return_Items_By_SKU_Code(" + i + ");' value='' class='auto-complete-value'/>";
     tblHtml += "<input type='hidden' id='hdnSKU_No_" + i + "' value=''  class='auto-complete-label' />";
     tblHtml += "</div>";
     tblHtml += "</div>";
@@ -296,7 +296,8 @@ function ReArrangeSalesReturnDetailsData()
 
             if ($(newTR).find("[id^='textSKU_No_']").length > 0) {
                 $(newTR).find("[id^='textSKU_No_']")[0].id = "textSKU_No_" + i;
-                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code", "onchange", "javascript: Get_Sales_Return_Items_By_SKU_Code(" + i + ")");
+                $(newTR).find("[id^='textSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code");
+                $(newTR).find("[id^='hdnProduct_Id_']").attr("onchange", "javascript: Get_Sales_Return_Items_By_SKU_Code(" + i + ")");
                 $(newTR).find("[id^='hdnProduct_Id_']")[0].id = "hdnProduct_Id_" + i;
                 $(newTR).find("[id^='hdnSKU_No_']")[0].id = "hdnSKU_No_" + i;
                 //$(newTR).find("[id^='hdnSKU_No_']").attr("name", "SaleReturnItemList[" + i + "].SKU_Code");

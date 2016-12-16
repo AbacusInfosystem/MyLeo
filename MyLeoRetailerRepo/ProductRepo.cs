@@ -166,8 +166,47 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Created_By", Productmrp.Created_By));
             sqlParams.Add(new SqlParameter("@Updated_Date", Productmrp.Updated_Date));
             sqlParams.Add(new SqlParameter("@Updated_By", Productmrp.Updated_By));
-
+            sqlParams.Add(new SqlParameter("@SKU_Id", sp_Get_Max_Product_SKU_Id()));                
+           
             return sqlParams;
+        }
+
+        private string sp_Get_Max_Product_SKU_Id()
+        {
+            string id = "00000000";
+
+            DataTable dt = sqlHelper.ExecuteDataTable(null, Storeprocedures.sp_Get_Max_Product_SKU_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (!dr.IsNull("SKU_Id"))
+                {
+                    id = Convert.ToString(dr["SKU_Id"]);
+                }  
+            }
+
+            int i = int.Parse(id);
+
+            i = i + 1;
+
+            string new_id = string.Format("{0:00}", i);
+
+            if (new_id.Length != 8)
+            {
+                int count = new_id.Length;
+
+                string zeros = "";
+
+                for (int j = count; j < 8; j++)
+                {
+                    zeros = zeros + "0";
+                }
+
+                new_id = zeros + new_id;
+
+            }
+
+            return new_id;
         }
         #endregion
 

@@ -136,8 +136,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
 
             return Json(JsonConvert.SerializeObject(prViewModel));
         }
-
-
+        
         public JsonResult Get_Purchase_Return_Item_By_SKU_Code(string SKU_Code, int Purchase_Invoice_Id)
         {
             PurchaseReturnRequestViewModel prViewModel = new PurchaseReturnRequestViewModel();
@@ -158,6 +157,26 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             return Json(prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItem, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult Get_Purchase_Return_Item_By_Barcode(string Barcode, int Purchase_Invoice_Id)
+        {
+            PurchaseReturnRequestViewModel prViewModel = new PurchaseReturnRequestViewModel();
+
+            try
+            {
+                prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItem = _prRepo.Get_Purchase_Return_Item_By_Barcode(Barcode);
+                // prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItem.Quantity = _prRepo.Get_Quantity_By_SKU_Code(SKU_Code, Purchase_Invoice_Id);
+            }
+            catch (Exception ex)
+            {
+                prViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                Logger.Error("PurchaseReturnRequestController - Get_Purchase_Return_Item_By_Barcode : " + ex.ToString());
+            }
+
+
+            return Json(prViewModel.PurchaseReturnRequest.PurchaseReturnRequestItem, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Get_Quantity_By_SKU_Code(string SKU_Code, int Purchase_Invoice_Id, int Quantity)
         {
             bool check = false;
@@ -171,7 +190,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Transaction
             }
             return Json(check, JsonRequestBehavior.AllowGet);
         }
-
+     
         public JsonResult Get_Vendor_Details_By_Id(int Vendor_Id)
         {
             PurchaseReturnRequestViewModel prViewModel = new PurchaseReturnRequestViewModel();

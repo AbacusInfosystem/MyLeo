@@ -94,9 +94,9 @@ function Get_Purchase_Invoice_Items_By_Barcode(i) {
 
     $.ajax({
 
-        url: "/PurchaseInvoice/Get_Purchase_Invoice_Items_By_SKU_Code",
+        url: "/PurchaseInvoice/Get_Purchase_Invoice_Items_By_Barcode",
 
-        data: { SKU_Code: SKU },
+        data: { Barcode: SKU },
 
         method: 'GET',
 
