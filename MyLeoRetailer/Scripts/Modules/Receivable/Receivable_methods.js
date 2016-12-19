@@ -424,8 +424,6 @@ function Save_Receivable_Data() {
 
 function Bind_Receivable_Grid_Items(data) {
 
-    alert(12);
-
     $("#tblReceivableItems").html("");
 
     var htmlText = "";
@@ -443,6 +441,12 @@ function Bind_Receivable_Grid_Items(data) {
     $("#txtNet_Amount").val(data.Receivable.Net_Amount),
 
     $("#txtBalance_Amount").val(data.Receivable.Balance_Amount);
+
+    $('#txtPayament_Date').datepicker('setDate', 'today');
+
+    $('#txtCheque_Date').datepicker('setDate', 'today');
+
+    $('#txtCredit_Note_Date').datepicker('setDate', 'today');
 
     if (data.Receivables.length > 0) {
 
@@ -675,9 +679,9 @@ function ClearReceivableData() {
 
     $("#txtCheque_No").val('');
 
-    $("#txtCheque_Date").val('');
+    //$("#txtCheque_Date").val('');
 
-    $("#txtPayament_Date").val('');
+    //$("#txtPayament_Date").val('');
 
     $("#txtBank_Name").val('');
 
@@ -687,7 +691,7 @@ function ClearReceivableData() {
 
     $("#txtCredit_Card_No").val('');
 
-    $("#txtCredit_Note_Date").val('');
+    //$("#txtCredit_Note_Date").val('');
 
     $("#txtCard_Amount").val('');
 
@@ -695,7 +699,7 @@ function ClearReceivableData() {
 
     $("#txtGift_Voucher_Amount").val('');
 
-    $("#text_Branch_Name").val('');
+    //$("#text_Branch_Name").val('');
 
     $("#txtDiscount_Percentage").val('');
 

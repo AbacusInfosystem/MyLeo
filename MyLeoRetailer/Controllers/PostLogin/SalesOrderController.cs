@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Transactions;
 
 namespace MyLeoRetailer.Controllers.PostLogin
 {
@@ -274,40 +275,47 @@ namespace MyLeoRetailer.Controllers.PostLogin
         public ActionResult Insert_SalesOrder(SalesInvoiceViewModel siViewModel)
         {
             //string arr [] ;
-
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(siViewModel.SalesInvoice);
+                try
+                {
+                    Set_Date_Session(siViewModel.SalesInvoice);
 
-                //siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                    //siViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                //string[] arr  = siViewModel.Cookies.Branch_Ids.Split(',');  Multiple Branches Refer to the Commented Code
+                    //string[] arr  = siViewModel.Cookies.Branch_Ids.Split(',');  Multiple Branches Refer to the Commented Code
 
-                //string Branch_Id = siViewModel.Cookies.Branch_Ids.TrimEnd();
+                    //string Branch_Id = siViewModel.Cookies.Branch_Ids.TrimEnd();
 
-                //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
+                    //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
 
-                //for (int i = 0; i < arr.Length; i++)
-                //{
-                //Set_Date_Session(siViewModel.SalesInvoice);
+                    //for (int i = 0; i < arr.Length; i++)
+                    //{
+                    //Set_Date_Session(siViewModel.SalesInvoice);
 
-                siViewModel.SalesInvoice.Sales_Invoice_No = Utility.Generate_Ref_No("SI-", "Sales_Invoice_No", "4", "15", "Sales_Invoice");
+                    siViewModel.SalesInvoice.Sales_Invoice_No = Utility.Generate_Ref_No("SI-", "Sales_Invoice_No", "4", "15", "Sales_Invoice");
 
-                siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, siViewModel.ReceivableItem);   //arr[i] instead of Branch_Id
+                    siViewModel.SalesInvoice.Sales_Invoice_Id = siRepo.Insert_SalesOrder(siViewModel.SalesInvoice, siViewModel.SaleOrderItemList, siViewModel.ReceivableItem);   //arr[i] instead of Branch_Id
 
-                //}
+                    //}
 
-                siViewModel.FriendlyMessages.Add(MessageStore.Get("SI01"));
+                    siViewModel.FriendlyMessages.Add(MessageStore.Get("SI01"));
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                    Logger.Error("SalesOrder Controller - Insert_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
+
+                    scope.Dispose();
+                }
+
+                TempData["siViewModel"] = (SalesInvoiceViewModel)siViewModel;
+
+                return RedirectToAction("Search");
             }
-            catch (Exception ex)
-            {
-                siViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                Logger.Error("SalesOrder Controller - Insert_SalesOrder  " + ex.Message);//Added by vinod mane on 06/10/2016
-            }
-
-            TempData["siViewModel"] = (SalesInvoiceViewModel)siViewModel;
-
-            return RedirectToAction("Search");
         }
 
         public ActionResult Invoice(SalesInvoiceViewModel siViewModel)
