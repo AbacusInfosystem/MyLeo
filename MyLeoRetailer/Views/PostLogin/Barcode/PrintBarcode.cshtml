@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div style="width:100%; overflow:auto;" id="Div_Print">
+    @*<div style="width:100%; overflow:auto;" id="Div_Print">
         <table style="border:1px solid black;font-size:10px">
             <tr>
                 @{  int i = 0;
@@ -64,7 +64,118 @@
                 <tr />
             </table>
             <br>
+        </div>*@
+
+    <div style="width:100%; overflow:auto;" id="Div_Print">
+        <table style="font-size:10px">
+            <tr>
+                @{  int i = 0;
+                  int n = Model.PrintBarcodeData.Count();
+                  int j = 1;
+                  foreach (var dt in Model.PrintBarcodeData)
+                  {
+                    <td class='all-four-rounded-corners' style="padding:4px 6px; border-radius: 10px; width: 250px;">
+                        <div>
+                            <span style="margin-bottom: 1px; width:60px;"> @dt.Brand_Name </span>
+                            <input type="hidden" name="Barcode.Barcodes[@i].Brand_Name" value="@dt.Brand_Name" />
+                            <input type="hidden" name="Barcode.Barcodes[@i].Is_Barcode_Printed" value="1" />
+                        </div>
+
+                        <div style="transform: rotate(90deg); float: right;">
+                            <span>@dt.Color_Name</span>
+                            <input type="hidden" name="Barcode.Barcodes[@i].Color_Name" value="@dt.Color_Name" />
+                        </div>
+
+                        <div>
+                            <span style="margin-bottom: 1px;"> Size </span>
+                            <span style="margin-bottom: 1px;"><b>@dt.Size_Name</b></span>
+                            <input type="hidden" name="Barcode.Barcodes[@i].Size_Name" value="@dt.Size_Name" />
+                        </div>
+
+                        <div>
+                            <span style="margin-bottom: 1px;">MRP</span>
+                            <span style="margin-bottom: 1px;"><b>@dt.MRP_Price</b></span>
+                            <input type="hidden" name="Barcode.Barcodes[@i].MRP_Price" value="@dt.MRP_Price" />
+                        </div>
+
+                        <div>
+                            <span style="margin: 0 6px 1px 0; width: 50px; float: right;"><b>@dt.WSR_Code</b></span>
+                            <input type="hidden" name="Barcode.Barcodes[@i].WSR_Code" value="@dt.WSR_Code" />
+                        </div>
+
+                        <div>
+                            <img src="@dt.Barcode_Image_Url" class="img-rounded" style="width: 200px;height:50px;">
+                            <input type="hidden" name="Barcode.Barcodes[@i].Barcode_Image_Url" value="@dt.Barcode_Image_Url" />
+                            <input type="hidden" name="Barcode.Barcodes[@i].Product_Barcode" value="@dt.Product_Barcode" />
+                        </div>
+
+                    </td>
+                      if (j % 3 == 0)
+                      {
+                    <tr> </tr>
+                      }
+                      i++; j++;
+                  }
+                }
+                <tr />
+            </table>
+            <br>
         </div>
+
+        @*<div style="width:100%; overflow:auto;" id="Div_Print">
+                <table style="font-size:10px">
+
+                    @{  int k = 0;
+
+                      foreach (var dt in Model.PrintBarcodeData)
+                      {
+                        <tr>
+                            <td class='all-four-rounded-corners' style="padding:4px 6px; border-radius: 10px;width: 250px;">
+                                <div>
+                                    <span style="margin-bottom: 1px; width:60px;"> @dt.Brand_Name </span>
+                                    <input type="hidden" name="Barcode.Barcodes[@k].Brand_Name" value="@dt.Brand_Name" />
+                                    <input type="hidden" name="Barcode.Barcodes[@k].Is_Barcode_Printed" value="1" />
+                                </div>
+
+                                <div style="transform: rotate(90deg); float: right;">
+                                    <span>@dt.Color_Name</span>
+                                    <input type="hidden" name="Barcode.Barcodes[@k].Color_Name" value="@dt.Color_Name" />
+                                </div>
+
+                                <div>
+                                    <span style="margin-bottom: 1px;"> Size </span>
+                                    <span style="margin-bottom: 1px;"><b>@dt.Size_Name</b></span>
+                                    <input type="hidden" name="Barcode.Barcodes[@k].Size_Name" value="@dt.Size_Name" />
+                                </div>
+
+                                <div>
+                                    <span style="margin-bottom: 1px;">MRP</span>
+                                    <span style="margin-bottom: 1px;"><b>@dt.MRP_Price</b></span>
+                                    <input type="hidden" name="Barcode.Barcodes[@k].MRP_Price" value="@dt.MRP_Price" />
+                                </div>
+
+                                <div>
+                                    <span style="margin: 0 6px 1px 0; width: 50px; float: right;"><b>@dt.WSR_Code</b></span>
+                                    <input type="hidden" name="Barcode.Barcodes[@k].WSR_Code" value="@dt.WSR_Code" />
+                                </div>
+
+                                <div>
+                                    <img src="@dt.Barcode_Image_Url" class="img-rounded" style="width: 200px;height:50px;">
+                                    <input type="hidden" name="Barcode.Barcodes[@k].Barcode_Image_Url" value="@dt.Barcode_Image_Url" />
+                                    <input type="hidden" name="Barcode.Barcodes[@k].Product_Barcode" value="@dt.Product_Barcode" />
+                                </div>
+
+                            </td>
+
+                        </tr>
+                        <tr><td><br /><br /></td></tr>
+                          k++;
+                      }
+                    }
+
+                </table>
+                <br>
+            </div>*@
 
     <div class="row" style="padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px; text-align:center;">
             <div class="btn-group">
