@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -164,40 +165,47 @@ namespace MyLeoRetailer.Controllers.PostLogin
         [AuthorizeUserAttribute(AppFunction.Sales_Return_Management_Create)]
         public ActionResult Insert_SalesReturn(SalesReturnViewModel srViewModel)
         {
-
-            try
+            using (TransactionScope scope = new TransactionScope())
             {
-                Set_Date_Session(srViewModel.SalesReturn);
+                try
+                {
+                    Set_Date_Session(srViewModel.SalesReturn);
 
-                //srViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
+                    //srViewModel.Cookies = Utility.Get_Login_User("MyLeoLoginInfo", "MyLeoToken", "Branch_Ids");
 
-                //string[] arr = srViewModel.Cookies.Branch_Ids.Split(',');
+                    //string[] arr = srViewModel.Cookies.Branch_Ids.Split(',');
 
-                //string Branch_Id = srViewModel.Cookies.Branch_Ids.TrimEnd();
+                    //string Branch_Id = srViewModel.Cookies.Branch_Ids.TrimEnd();
 
-                //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
+                    //siViewModel.SalesInvoice.Branch_Id = siViewModel.Cookies.Branch_Ids;
 
-                //for (int i = 0; i < arr.Length; i++)
-                //{
+                    //for (int i = 0; i < arr.Length; i++)
+                    //{
 
-                srViewModel.SalesReturn.Sales_Return_No = Utility.Generate_Ref_No("SR-", "Sales_Return_No", "4", "15", "Sales_Return");
+                    srViewModel.SalesReturn.Sales_Return_No = Utility.Generate_Ref_No("SR-", "Sales_Return_No", "4", "15", "Sales_Return");
 
-                //srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList);
+                    //srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList);
 
-                srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList);
-                //}
+                    srViewModel.SalesReturn.Sales_Return_Id = srRepo.Insert_SalesReturn(srViewModel.SalesReturn, srViewModel.SaleReturnItemList);
+                    //}
 
-                srViewModel.FriendlyMessages.Add(MessageStore.Get("SR01"));
+                    srViewModel.FriendlyMessages.Add(MessageStore.Get("SR01"));
+
+                    scope.Complete();
+                }
+                catch (Exception ex)
+                {
+                    srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
+
+                    Logger.Error("SalesReturn Controller - Insert_SalesReturn  " + ex.Message); //Added by vinod mane on 06/10/2016
+
+                    scope.Dispose();
+                }
+
+                TempData["srViewModel"] = (SalesReturnViewModel)srViewModel;
+
+                return RedirectToAction("Search");
             }
-            catch (Exception ex)
-            {
-                srViewModel.FriendlyMessages.Add(MessageStore.Get("SYS01"));
-                Logger.Error("SalesReturn Controller - Insert_SalesReturn  " + ex.Message); //Added by vinod mane on 06/10/2016
-            }
-
-            TempData["srViewModel"] = (SalesReturnViewModel)srViewModel;
-
-            return RedirectToAction("Search");
         }
 
         public JsonResult Check_Mobile_No(string MobileNo)

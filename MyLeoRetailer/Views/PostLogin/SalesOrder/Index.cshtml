@@ -183,14 +183,11 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Invoice date</span>
-
                                         <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                                            <input type="text" class="form-control datepicker" id="dtpInvoice_Date" name="SalesInvoice.Invoice_Date" value="@((Model.SalesInvoice.Invoice_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Invoice_Date.ToString("MM-dd-yyyy")))" readonly />
+                                            <input type="text" class="form-control datepicker" id="dtpInvoice_Date" name="SalesInvoice.Invoice_Date" value="@((Model.SalesInvoice.Invoice_Date == DateTime.MinValue ? DateTime.Now.ToShortDateString() : Model.SalesInvoice.Invoice_Date.ToString("MM-dd-yyyy")))" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
-
                                     </div>
                                 </div>
 
@@ -487,7 +484,7 @@
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Payment date</span>
                                         <div class="input-group date" id="txtPayament_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Payament_Date" value="@((Model.SalesInvoice.Payament_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Payament_Date.ToString("MM-dd-yyyy")))" readonly />
+                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Payament_Date" value="@((Model.SalesInvoice.Payament_Date == DateTime.MinValue ? DateTime.Now.ToShortDateString() : Model.SalesInvoice.Payament_Date.ToString("MM-dd-yyyy")))" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -528,7 +525,7 @@
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Cheque Date</span>
                                         <div class="input-group date" id="txtCheque_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Cheque_Date" value="@((Model.SalesInvoice.Cheque_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Cheque_Date.ToString("MM-dd-yyyy")))" readonly />
+                                            <input type="text" class="form-control datepicker" name="SalesInvoice.Cheque_Date" value="@((Model.SalesInvoice.Cheque_Date == DateTime.MinValue ? DateTime.Now.ToShortDateString() : Model.SalesInvoice.Cheque_Date.ToString("MM-dd-yyyy")))" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>
@@ -576,7 +573,7 @@
                                     <div class="form-group">
                                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Credit Note Date</span>
                                         <div class="input-group date" id="txtCredit_Note_Date" data-date="" data-date-format="MM-dd-yyyy">
-                                            <input type="text" class="form-control datepicker" id="dtpCreditNoteDate" name="SalesInvoice.Credit_Note_Date" value="@((Model.SalesInvoice.Credit_Note_Date == DateTime.MinValue ? "" : Model.SalesInvoice.Credit_Note_Date.ToString("MM-dd-yyyy")))" readonly />
+                                            <input type="text" class="form-control datepicker" id="dtpCreditNoteDate" name="SalesInvoice.Credit_Note_Date" value="@((Model.SalesInvoice.Credit_Note_Date == DateTime.MinValue ? DateTime.Now.ToShortDateString() : Model.SalesInvoice.Credit_Note_Date.ToString("MM-dd-yyyy")))" />
                                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                                         </div>
                                     </div>

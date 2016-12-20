@@ -217,6 +217,23 @@ namespace MyLeoRetailerRepo
         }
 
 
+        public string Get_Role_Name_By_User_Id(int User_Id)
+        {
+            string role_name = "";
+
+            List<SqlParameter> sqlParam = new List<SqlParameter>();
+
+            sqlParam.Add(new SqlParameter("@Employee_Id", User_Id));
+
+            DataTable dt = _sqlHelper.ExecuteDataTable(sqlParam, Storeprocedures.sp_Get_Role_Name_By_User_Id.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                role_name = Convert.ToString(dr["Role_Name"]);                   
+            }
+
+            return role_name;
+        }
 
     }
 }

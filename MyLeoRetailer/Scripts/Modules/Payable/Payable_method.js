@@ -318,6 +318,14 @@ function Bind_Payable_Grid_Items(data) {
 
     $("#txtFinal_amount").val(data.Payable.Balance_Amount);
 
+    //$("#txtPayament_Date").val(DateTime.Now.ToShortDateString());
+
+    //$("#txtCheque_Date").val(DateTime.Now.ToShortDateString());
+
+    $('#txtPayament_Date').datepicker('setDate', 'today');
+
+    $('#txtCheque_Date').datepicker('setDate', 'today');
+
     if (data.Payables.length > 0) {
 
         htmlText += "<tr>";

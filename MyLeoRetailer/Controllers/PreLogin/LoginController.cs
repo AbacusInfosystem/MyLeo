@@ -86,6 +86,7 @@ namespace MyLeoRetailer.Controllers.PreLogin
         {
             try
             {
+                string role_name = "";
                
                 LoginInfo cookies = _loginRepo.AuthenticateUser(lViewModel.Cookies.User_Name, lViewModel.Cookies.Password);
                 
@@ -95,7 +96,16 @@ namespace MyLeoRetailer.Controllers.PreLogin
                     {
                         SetUsersCookies(cookies.User_Id, lViewModel.Cookies.Branch_Ids);
 
-                        return RedirectToAction("Index", "Dashboard");
+                        role_name = _loginRepo.Get_Role_Name_By_User_Id(cookies.User_Id);
+
+                        if (role_name == "Sales Manager")
+                        {
+                            return RedirectToAction("Index", "SalesOrder");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Dashboard");
+                        }                        
                     }
                     else
                     {

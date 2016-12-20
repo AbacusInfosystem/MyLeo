@@ -140,11 +140,13 @@ namespace MyLeoRetailerInfo.Common
 
         #endregion
 
-        #region Logion
+        #region Login
 
         Get_User_Data_By_Token_sp,
         Authenticate_User_sp,
         Sp_Insert_Token_In_User_Table,
+
+        sp_Get_Role_Name_By_User_Id,
 
         #endregion
                  

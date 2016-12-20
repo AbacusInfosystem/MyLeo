@@ -1,8 +1,18 @@
 ﻿
-
-
-
 $(function () {
+
+    
+    if ($("#hdnCreateCustomerFlag").val() == "True") {
+        $("#Searchcustomer").hide();
+    }
+    else {
+        if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == "0") {
+            $("#Searchcustomer").show();
+        }
+        else {
+            $("#Searchcustomer").hide();
+        }      
+    }
 
     //Commented by Vinod Mane on 22/09/2016
     //if ($("[name='Customer.Customer_Id']").val() == "" || $("[name='Customer.Customer_Id']").val() == 0) {
