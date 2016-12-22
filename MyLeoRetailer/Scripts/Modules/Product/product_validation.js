@@ -20,13 +20,15 @@ $(function () {
 
             "Product.Center_Size": { required: true, digits: true },
 
-            "Product.Size_Difference": { required: true, positiveNumber: true },//digits: true
+            "Product.Size_Difference": { number: true },//digits: true
 
             "Product.Purchase_Price": { required: true, digits: true },
 
-            "Product.MRP_Difference": { required: true, positiveNumber: true },// digits: true
+            "Product.WSR": { required: true, digits: true },
 
-            "Product.MRP_Percentage": { required: true, digits: true, positiveNumber: true },
+            "Product.MRP_Difference": { number: true },// digits: true
+
+            "Product.MRP_Percentage": { number: true },
 
             "Product.MRP_Price": { required: true, digits: true },
 
@@ -56,13 +58,15 @@ $(function () {
 
             "Product.Center_Size": { required: "Center Size is required.", digits: "Enter Digits" },
 
-            "Product.Size_Difference": { required: "Size Difference is required." },//digits: "Enter Digits"
+            "Product.Size_Difference": { required: "Size Difference is required.", number: "Enter Numbers" },//digits: "Enter Digits"
 
             "Product.Purchase_Price": { required: "Purchase Price is required.", digits: "Enter Digits" },
 
-            "Product.MRP_Difference": { required: "MRP Difference is required." },//digits: "Enter Digits"
+            "Product.WSR": { required: "WSR is required.", digits: "Enter Digits" },
 
-            "Product.MRP_Percentage": { required: "MRP Percentage is required.", digits: "Enter Digits" },
+            "Product.MRP_Difference": { required: "MRP Difference is required.", number: "Enter Numbers" },//digits: "Enter Digits"
+
+            "Product.MRP_Percentage": { required: "MRP Percentage is required.", number: "Enter Numbers" },
 
             "Product.MRP_Price": { required: "MRP Price is required.", digits: "Enter Digits" },
 

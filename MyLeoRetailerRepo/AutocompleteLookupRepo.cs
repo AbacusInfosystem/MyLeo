@@ -483,6 +483,15 @@ namespace MyLeoRetailerRepo
                     }
                 }
 
+                if (table_Name == "Size")
+                {
+                    if (fieldName == "Size_Group_Id")
+                    {
+                        strquery = " select Size_Id, Size_Name From Size ";
+                        strquery += "where Size_Group_Id=  " + fieldValue;
+                    }
+                }
+
             }
 
             if (fieldValue == "" && table_Name == "Product_SKU_Mapping")

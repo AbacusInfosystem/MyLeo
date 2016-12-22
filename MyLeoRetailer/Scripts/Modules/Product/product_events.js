@@ -21,7 +21,7 @@ $(function () {
         $("#btnProductMRP").show(); 
     }
 
-    $("#btnProductSave").click(function () {
+    $("#btnProductSave").click(function () {                   
         if ($("#frmProduct").valid()) {
             if ($("#hdn_ProductId").val() == 0) {
                 $("#frmProduct").attr("action", "/Product/Insert_Product/");

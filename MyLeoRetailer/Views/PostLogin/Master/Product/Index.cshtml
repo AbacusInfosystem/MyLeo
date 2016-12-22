@@ -145,12 +145,27 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        @*<span class="label label-primary label-form" style="margin-bottom: 1px;">Launch date.</span>*@
+                    <div class="form-group auto-complete">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Center Size.</span>
+                        <div class="input-group">
+                            <input type="text" class="form-control autocomplete-text lookup-text" id="txtSize_Name" value="@Model.Product.Size_Name" placeholder="Enter Size" data-table="Size" data-col="Size_Id,Size_Name" data-headernames="Size" data-param="hdnSizeGroupId" data-field="Size_Group_Id">
+                            <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                            <input type="hidden" id="hdnCenter_Size" value="@Model.Product.Center_Size" name="Product.Center_Size" class="auto-complete-value" />
+                            <input type="hidden" id="hdnCenterSizeName" class="auto-complete-label" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">                       
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">WSR.</span>
+                        <input type="text" class="form-control" placeholder="Enter WSR." id="txtWSR" name="Product.WSR" value="@(Model.Product.WSR == 0 ? "" : Model.Product.WSR.ToString())" maxlength="5" />
+                    </div>
+
+                    @*<div class="form-group">
+                      
                         <label for="txtCenter_Size" style="color: #333" class="">Center Size</label>
                         <input type="text" class="form-control input-sm" name="Product.Center_Size" id="txtCenter_Size" value="@Model.Product.Center_Size" placeholder="Enter Center Size" maxlength="10" />
 
-                    </div>
+                    </div>*@
 
                     @*</form>*@
                 </div>
@@ -167,8 +182,8 @@
 
 
                     <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Size Difference.</span>
-                        <input type="text" class="form-control" placeholder="Enter size difference." name="Product.Size_Difference" value="@(Model.Product.Size_Difference == 0 ? "" : Model.Product.Size_Difference.ToString())" maxlength="5" />
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">WSR Size Difference.</span>
+                        <input type="text" class="form-control" placeholder="Enter size difference." id="txtSize_Difference" name="Product.Size_Difference" value="@(Model.Product.Size_Difference == 0 ? "" : Model.Product.Size_Difference.ToString())" maxlength="5" />
 
                     </div>
 
@@ -179,16 +194,16 @@
                         </div>*@
 
                     <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Difference.</span>
-                        <input type="text" class="form-control" placeholder="Enter MRP difference." name="Product.MRP_Difference" value="@(Model.Product.MRP_Difference == 0 ? "" : Model.Product.MRP_Difference.ToString())" maxlength="8" />
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Percentage.</span>
+                        <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." id="txtMRP_Percentage" name="Product.MRP_Percentage" value="@(Model.Product.MRP_Percentage == 0 ? "" : Model.Product.MRP_Percentage.ToString())" maxlength="5" />
 
                     </div>
 
                     <div class="form-group">
-                        <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Percentage.</span>
-                        <input type="text" class="form-control" placeholder="Enter MRP (in percentage)." name="Product.MRP_Percentage" value="@(Model.Product.MRP_Percentage == 0 ? "" : Model.Product.MRP_Percentage.ToString())" maxlength="8" />
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">MRP Size Difference.</span>
+                        <input type="text" class="form-control" placeholder="Enter MRP difference." id="txtMRP_Difference" name="Product.MRP_Difference" value="@(Model.Product.MRP_Difference == 0 ? "" : Model.Product.MRP_Difference.ToString())" maxlength="5" />
 
-                    </div>
+                    </div>                    
 
                     @*<div class="form-group">
 

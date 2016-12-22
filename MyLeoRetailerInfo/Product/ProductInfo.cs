@@ -46,6 +46,10 @@ namespace MyLeoRetailerInfo.Product
 
         public string Center_Size { get; set; }
 
+        public decimal? WSR { get; set; }
+
+        public string Size_Name { get; set; }
+
        // public decimal Purchase_Price { get; set; }
 
         public decimal? Size_Difference { get; set; }

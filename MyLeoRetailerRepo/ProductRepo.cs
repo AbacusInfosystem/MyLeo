@@ -19,6 +19,7 @@ using System.Web;
 using System.Text.RegularExpressions;
 using System.Transactions;
 using System.Drawing;
+using MyLeoRetailerInfo.Size;
 
 namespace MyLeoRetailerRepo
 {
@@ -334,6 +335,7 @@ namespace MyLeoRetailerRepo
             sqlParams.Add(new SqlParameter("@Sub_Category_Id", Product.Sub_Category_Id));
             sqlParams.Add(new SqlParameter("@Size_Group_Id", Product.Size_Group_Id));
             sqlParams.Add(new SqlParameter("@Center_Size", Product.Center_Size));
+            sqlParams.Add(new SqlParameter("@WSR", Product.WSR));
             // sqlParams.Add(new SqlParameter("@Purchase_Price", Product.Purchase_Price));
             sqlParams.Add(new SqlParameter("@Size_Difference", Product.Size_Difference));
             sqlParams.Add(new SqlParameter("@MRP_Difference", Product.MRP_Difference));
@@ -378,6 +380,21 @@ namespace MyLeoRetailerRepo
                     //ProductMRPs.Add(Get_Product_MRP(dr1));
                     ProductDescription[i].ProductMRPs.Add(Get_Product_MRP(dr1, Colour_Id));
                 }
+
+                List<ProductMRPInfo> Product_MRP_List = new List<ProductMRPInfo>();
+
+                Product_MRP_List = Calculate_WSR_MRP(Product_Id);
+
+                for (int j = 0; j < ProductDescription[i].ProductMRPs.Count; j++)
+                {
+                    if (ProductDescription[i].ProductMRPs[j].Purchase_Price == 0 || ProductDescription[i].ProductMRPs[j].Purchase_Price == null)
+                    {   
+                        ProductDescription[i].ProductMRPs[j].Purchase_Price = Product_MRP_List[j].Purchase_Price;
+
+                        ProductDescription[i].ProductMRPs[j].MRP_Price = Product_MRP_List[j].MRP_Price;
+                    }
+                }
+
             }
             return ProductDescription;
         }
@@ -481,6 +498,8 @@ namespace MyLeoRetailerRepo
                 Product.Sub_Category = Convert.ToString(dr["Sub_Category"]);
                 Product.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
                 Product.Center_Size = Convert.ToString(dr["Center_Size"]);
+                Product.Size_Name = Convert.ToString(dr["Size_Name"]);
+                Product.WSR = Convert.ToDecimal(dr["WSR"]);
                 Product.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
                 Product.MRP_Difference = Convert.ToDecimal(dr["MRP_Difference"]);
                 Product.MRP_Percentage = Convert.ToInt32(dr["MRP_Percentage"]);
@@ -634,6 +653,225 @@ namespace MyLeoRetailerRepo
                 wsr_code += digits[n[numdigits]];
             
             return wsr_code;
+        }
+
+        public List<ProductMRPInfo> Calculate_WSR_MRP(int Product_Id)
+        {
+            #region Product
+
+            /* Product Information to get WSR, MRP Diff, Size Diff, MRP % */
+
+            ProductInfo Product = new ProductInfo();
+
+            List<SqlParameter> sqlParamList = new List<SqlParameter>();
+
+            sqlParamList.Add(new SqlParameter("@Product_Id", Product_Id));
+
+            DataTable dt = sqlHelper.ExecuteDataTable(sqlParamList, Storeprocedures.sp_Get_Product_On_ProductId.ToString(), CommandType.StoredProcedure);
+           
+            foreach (DataRow dr in dt.Rows)
+            {
+                Product.Product_Id = Convert.ToInt32(dr["Product_Id"]);
+               
+                Product.Size_Group_Id = Convert.ToInt32(dr["Size_Group_Id"]);
+               
+                Product.Size_Group_Name = Convert.ToString(dr["Size_Group_Name"]);
+
+                Product.Center_Size = Convert.ToString(dr["Center_Size"]);
+
+                Product.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+                Product.WSR = Convert.ToDecimal(dr["WSR"]);
+
+                if (dr["Size_Difference"] != DBNull.Value)
+                    Product.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
+                else
+                    Product.Size_Difference = 0;
+
+                if (dr["MRP_Difference"] != DBNull.Value)
+                    Product.MRP_Difference = Convert.ToDecimal(dr["MRP_Difference"]);
+                else
+                    Product.MRP_Difference = 0;
+
+                if (dr["MRP_Percentage"] != DBNull.Value)
+                    Product.MRP_Percentage = Convert.ToInt32(dr["MRP_Percentage"]);   
+                else
+                    Product.MRP_Percentage = 0;         
+            }
+
+            /* END Product */
+
+            #endregion
+
+            #region Size
+
+            /* Get Size for Center Size */
+
+            List<SizeGroupInfo> Sizes = new List<SizeGroupInfo>();
+
+            List<SqlParameter> sqlParams = new List<SqlParameter>();
+
+            sqlParams.Add(new SqlParameter("@Size_Group_Id", Product.Size_Group_Id));
+
+            DataTable Size_dt = sqlHelper.ExecuteDataTable(sqlParams, Storeprocedures.sp_Get_Sizes_By_Size_Group_Id.ToString(), CommandType.StoredProcedure);
+
+            if (Size_dt != null && Size_dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in Size_dt.Rows)
+                {
+                    SizeGroupInfo retVal = new SizeGroupInfo();
+
+                    retVal.Size_Id = Convert.ToInt32(dr["Size_Id"]);
+
+                    retVal.Size_Name = Convert.ToString(dr["Size_Name"]);
+
+                    Sizes.Add(retVal);
+                }
+            }
+
+            /* END Size */
+
+            #endregion
+
+            #region Calculations
+
+            /* Product MRP & WSR Calculations */
+
+            int size_id = Convert.ToInt32(Product.Center_Size);
+
+            string center_size = Product.Center_Size;
+
+            decimal purchase_price = Convert.ToDecimal(Product.WSR);
+
+            decimal size_difference = Convert.ToDecimal(Product.Size_Difference);
+
+            decimal mrp_diffrence = Convert.ToDecimal(Product.MRP_Difference);
+                       
+            decimal mrp_percentage = Convert.ToDecimal(Product.MRP_Percentage);
+           
+            int index = Sizes.IndexOf(Sizes.Single(i => i.Size_Id == size_id));
+
+            int count = Sizes.Count;
+
+            List<ProductMRPInfo> Product_MRP_List = new List<ProductMRPInfo>();
+
+            for (int i = 0; i < count; i++)
+            {
+                ProductMRPInfo PMRP = new ProductMRPInfo();
+
+                PMRP.WSR_Code = null;
+
+                Product_MRP_List.Add(PMRP);
+            }
+
+            index = index + 1;  
+
+            //////////////////////////////////////////////////////////////////////////////////////
+
+            decimal size_difference_temp = 0;
+
+            decimal size_diff_count = size_difference;
+                      
+            for (int j = index; j > 0; j--)
+            {
+                if (j == index)
+                {
+                    Product_MRP_List[j-1].Purchase_Price = purchase_price;
+
+                    if (mrp_diffrence != 0 && mrp_percentage != 0)
+                    {
+                        var percentage = (purchase_price * mrp_percentage) / 100;
+
+                        Product_MRP_List[j - 1].MRP_Price = purchase_price + mrp_diffrence + percentage;                        
+                    }
+                    else if(mrp_percentage!=0)
+                    {
+                        var percentage = (purchase_price * mrp_percentage) / 100;
+
+                        Product_MRP_List[j - 1].MRP_Price = purchase_price + percentage;
+                    }
+                    else if (mrp_diffrence != 0)
+                    {
+                        Product_MRP_List[j - 1].MRP_Price = purchase_price + mrp_diffrence;
+                    }
+                    else
+                    {
+                        Product_MRP_List[j - 1].MRP_Price = purchase_price;
+                    }
+
+                }
+                else
+                {
+                    var computation = purchase_price - size_difference_temp;
+
+                    Product_MRP_List[j-1].Purchase_Price = computation;
+
+                    if ( mrp_diffrence != 0 && mrp_percentage != 0)
+                    {
+                        var percentage = (computation * mrp_percentage) / 100;
+
+                        Product_MRP_List[j - 1].MRP_Price = computation + mrp_diffrence + percentage;
+                    }
+                    else if (mrp_percentage != 0)
+                    {
+                        var percentage = (computation * mrp_percentage) / 100;
+
+                        Product_MRP_List[j - 1].MRP_Price = computation + percentage;
+                    }
+                    else if (mrp_diffrence != 0)
+                    {
+                        Product_MRP_List[j - 1].MRP_Price = computation + mrp_diffrence;
+                    }
+                    else
+                    {
+                        Product_MRP_List[j - 1].MRP_Price = computation;
+                    }
+                }
+
+                size_difference_temp = size_difference_temp + size_diff_count;
+            }
+
+            //////////////////////////////////////////////////////////////////////////////////////
+
+            size_difference_temp = 0;
+
+            size_diff_count = size_difference;
+
+            for (int j = index + 1; j <= count; j++)
+            {
+                size_difference_temp = size_difference_temp + size_diff_count;
+
+                var computation = purchase_price + size_difference_temp;
+
+                Product_MRP_List[j-1].Purchase_Price = computation;
+
+                if (mrp_diffrence != 0 && mrp_percentage != 0)
+                {
+                    var percentage = (computation * mrp_percentage) / 100;
+
+                    Product_MRP_List[j - 1].MRP_Price = computation + mrp_diffrence + percentage;
+                }
+                else if (mrp_percentage != 0)
+                {
+                    var percentage = (computation * mrp_percentage) / 100;
+
+                    Product_MRP_List[j - 1].MRP_Price = computation + percentage;
+                }
+                else if (mrp_diffrence != 0)
+                {
+                    Product_MRP_List[j - 1].MRP_Price = computation + mrp_diffrence;
+                }
+                else
+                {
+                    Product_MRP_List[j - 1].MRP_Price = computation;
+                }
+            }
+
+            /* END Calculations */
+
+            #endregion
+
+            return Product_MRP_List;
         }
 
         //public List<ProductMRPInfo> Get_All_Barcodes_toPrint(int Product_Id, int Colour_Id)
