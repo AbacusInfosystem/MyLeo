@@ -24,7 +24,7 @@ $(function () {
 
             "Product.Purchase_Price": { required: true, digits: true },
 
-            "Product.WSR": { required: true, digits: true },
+            "Product.WSR": { required: true, number: true },
 
             "Product.MRP_Difference": { number: true },// digits: true
 
@@ -62,7 +62,7 @@ $(function () {
 
             "Product.Purchase_Price": { required: "Purchase Price is required.", digits: "Enter Digits" },
 
-            "Product.WSR": { required: "WSR is required.", digits: "Enter Digits" },
+            "Product.WSR": { required: "WSR is required.", number: "Enter Numbers" },
 
             "Product.MRP_Difference": { required: "MRP Difference is required.", number: "Enter Numbers" },//digits: "Enter Digits"
 

@@ -500,9 +500,20 @@ namespace MyLeoRetailerRepo
                 Product.Center_Size = Convert.ToString(dr["Center_Size"]);
                 Product.Size_Name = Convert.ToString(dr["Size_Name"]);
                 Product.WSR = Convert.ToDecimal(dr["WSR"]);
-                Product.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
-                Product.MRP_Difference = Convert.ToDecimal(dr["MRP_Difference"]);
-                Product.MRP_Percentage = Convert.ToInt32(dr["MRP_Percentage"]);
+                if (dr["Size_Difference"] != DBNull.Value)
+                    Product.Size_Difference = Convert.ToDecimal(dr["Size_Difference"]);
+                else
+                    Product.Size_Difference = 0;
+
+                if (dr["MRP_Difference"] != DBNull.Value)
+                    Product.MRP_Difference = Convert.ToDecimal(dr["MRP_Difference"]);
+                else
+                    Product.MRP_Difference = 0;
+
+                if (dr["MRP_Percentage"] != DBNull.Value)
+                    Product.MRP_Percentage = Convert.ToInt32(dr["MRP_Percentage"]);
+                else
+                    Product.MRP_Percentage = 0; 
                 Product.Launch_Start_Date = Convert.ToDateTime(dr["Launch_Start_Date"]);
                 Product.Launch_End_Date = Convert.ToDateTime(dr["Launch_End_Date"]);
                 Product.Comment = Convert.ToString(dr["Comment"]);
