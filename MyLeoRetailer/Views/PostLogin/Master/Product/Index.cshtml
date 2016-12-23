@@ -68,7 +68,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Launch date.</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                            <input type="text" class="form-control datepicker" name="Product.Launch_Start_Date" readonly value="@((Model.Product.Launch_Start_Date == DateTime.MinValue ? "" : Model.Product.Launch_Start_Date.ToString("MM-dd-yyyy")))" />
+                            <input type="text" class="form-control datepicker" name="Product.Launch_Start_Date" readonly value="@((Model.Product.Launch_Start_Date == DateTime.MinValue ? DateTime.Now.ToShortDateString() : Model.Product.Launch_Start_Date.ToShortDateString()))" />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">End date.</span>
                         <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
-                            <input type="text" class="form-control datepicker" name="Product.Launch_End_Date" readonly value="@((Model.Product.Launch_End_Date == DateTime.MinValue ? "" : Model.Product.Launch_End_Date.ToString("MM-dd-yyyy")))" />
+                            <input type="text" class="form-control datepicker" name="Product.Launch_End_Date" readonly value="@((Model.Product.Launch_End_Date == DateTime.MinValue ? DateTime.Now.ToShortDateString() : Model.Product.Launch_End_Date.ToShortDateString()))" />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
