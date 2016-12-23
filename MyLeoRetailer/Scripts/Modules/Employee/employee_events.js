@@ -67,6 +67,13 @@ $(function () {
        //// alert($('[name="Employee.IsActive"]').val());
        // //End
 
+        if ($("#hdn_EmployeeId").val() != 0)
+        {
+            $("#txtPassword").rules("remove", "pwdcheck");
+            $('#txtPassword').rules("remove");
+            $('#txtConfirmPassword').rules("remove");
+           
+        }
 
         if ($("#frmEmployee").valid()) {
             if ($("#hdn_EmployeeId").val() == 0) {
