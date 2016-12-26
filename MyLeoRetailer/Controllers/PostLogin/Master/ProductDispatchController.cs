@@ -91,6 +91,7 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
         [AuthorizeUserAttribute(AppFunction.Product_Dispatch_Management_Create)]
         public ActionResult Insert(ProductDispatchViewModel pViewModel)
         {
+            
             TransactionScope scope = new TransactionScope();
             try
             {
@@ -238,11 +239,13 @@ namespace MyLeoRetailer.Controllers.PostLogin.Master
             return RedirectToAction("Dispatched_Product_Listing");
         }
 
-        public JsonResult Get_Product_Quantity_Warehouse(string sku)
+        public JsonResult Get_Product_Quantity_Warehouse(string barcode)
         {
+            var data = barcode.Split('+');
+            barcode = data[0];
             var quantity = 0;
 
-            quantity = pRepo.Get_Product_Quantity_Warehouse(sku);
+            quantity = pRepo.Get_Product_Quantity_Warehouse(barcode);
 
             return Json(quantity, JsonRequestBehavior.AllowGet);
         }

@@ -11,9 +11,11 @@
         if ($("#hdn_request_Id").val() != 0) {
             if (row_Count > 0) {
 
+                $("#lbl_Records_Required").hide();
+
                 Save();
 
-                $("#lbl_Records_Required").hide();
+            
             }
             else {
                 $("#lbl_Records_Required").show();
@@ -22,11 +24,11 @@
         else {
             if (row_Count == $("#hdn_Quantity").val()) {
                
-                Save();
-
                 $("#lbl_Prod_Dispatch").hide();
 
                 $("#lbl_Records_Required").hide();
+
+                Save();
             }
             else if (row_Count != $("#hdn_Quantity").val() && row_Count > 0) {
                 $("#lbl_Records_Required").hide();
@@ -65,14 +67,14 @@
             {
 
                 number: true,
-                validate_Quantity: true
+                //validate_Quantity: true
             },
 
             "product_Dispatch.Balance_Quantitya":
             {
 
                 number: true,
-                validateBal_Quantity: true
+                //validateBal_Quantity: true
             }
         },
         messages: {
@@ -113,7 +115,7 @@ jQuery.validator.addMethod("validate_Quantity", function (value, element) {
 
             url: "/ProductDispatch/Get_Product_Quantity_Warehouse",
 
-            data: { sku: $("#txtSKU").val() },
+            data: { barcode: $("#txtBarcode").val() },
 
             method: 'GET',
 
@@ -148,7 +150,7 @@ jQuery.validator.addMethod("validateBal_Quantity", function (value, element) {
 
             url: "/ProductDispatch/Get_Product_Quantity_Warehouse",
 
-            data: { sku: $("#txtSKU").val() },
+            data: { barcode: $("#txtBarcode").val() },
 
             method: 'GET',
 

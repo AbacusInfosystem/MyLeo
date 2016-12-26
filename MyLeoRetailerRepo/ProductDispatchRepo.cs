@@ -154,7 +154,7 @@ namespace MyLeoRetailerRepo
 
                 sqlparam.Add(new SqlParameter("@dispatch_Id", dispatch.Dispatch_Id));
 
-                sqlparam.Add(new SqlParameter("@dispatch_Date", item.Dispatch_Date));
+                sqlparam.Add(new SqlParameter("@dispatch_Date", DateTime.Now));
 
                 sqlparam.Add(new SqlParameter("@sku_Code", dispatch.SKU));
 
@@ -216,7 +216,7 @@ namespace MyLeoRetailerRepo
 
                    sqlparam.Add(new SqlParameter("@Quantity", item.Quantity));
 
-                   sqlparam.Add(new SqlParameter("@Dispatch_Date", item.Dispatch_Date));
+                   sqlparam.Add(new SqlParameter("@Dispatch_Date", DateTime.Now));
 
                    sqlparam.Add(new SqlParameter("@Dispatch_Id", item.Dispatch_Id));
 
@@ -237,16 +237,28 @@ namespace MyLeoRetailerRepo
            }
         }
 
-        public int Get_Product_Quantity_Warehouse(string sku)
+        public int Get_Product_Quantity_Warehouse(string barcode)
         {
+            int Quantity = 0;
 
             List<SqlParameter> sqlparam = new List<SqlParameter>();
 
-            sqlparam.Add(new SqlParameter("@sku", sku));
+            sqlparam.Add(new SqlParameter("@Barcode", barcode));
 
-            var quantity = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Get_Product_Quantity_Warehouse.ToString(), CommandType.StoredProcedure));
 
-            return quantity;
+            DataSet ds = sqlHelper.ExecuteDataSet(sqlparam, Storeprocedures.sp_Get_Product_Quantity_Warehouse.ToString(), CommandType.StoredProcedure);
+
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+
+                if (dr["Product_Quntity"] != DBNull.Value)
+                    Quantity = Convert.ToInt32(dr["Product_Quntity"]);
+
+            }
+
+            //var quantity = Convert.ToInt32(sqlHelper.ExecuteScalerObj(sqlparam, Storeprocedures.sp_Get_Product_Quantity_Warehouse.ToString(), CommandType.StoredProcedure));
+
+            return Quantity;
         }
 
         public void Reject_Product_Dispatch(List<ProductDispatchInfo> list_Product, ProductDispatchInfo product)
