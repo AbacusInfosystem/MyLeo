@@ -329,15 +329,15 @@ function AddSalesOrderDetails() {
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Quantity' name='SaleOrderItemList[" + i + "].Quantity' value='1' onblur='javascript: CalculateQuantityMRP();' id='textQuantity_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Disc %' name='SaleOrderItemList[" + i + "].Discount_Percentage' value=''  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='Disc %' name='SaleOrderItemList[" + i + "].Discount_Percentage' value='0'  onblur='javascript: CalculateTotal();' id='textDiscount_Percentage_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
-    tblHtml += "<input type='text' class='form-control input-sm' placeholder='D Amt' name='SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount' readonly value='' id='textSalesOrder_Discount_Amount_" + i + "'>";
+    tblHtml += "<input type='text' class='form-control input-sm' placeholder='D Amt' name='SaleOrderItemList[" + i + "].SalesOrder_Discount_Amount' readonly value='0' id='textSalesOrder_Discount_Amount_" + i + "'>";
     tblHtml += "</td>";
 
     tblHtml += "<td>";
