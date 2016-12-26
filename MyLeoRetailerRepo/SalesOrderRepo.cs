@@ -402,7 +402,9 @@ namespace MyLeoRetailerRepo
             salesinvoice.Branch_State = Convert.ToString(dr["Branch_State"]);
             salesinvoice.Branch_Country = Convert.ToString(dr["Branch_Country"]);
             salesinvoice.Branch_Pincode = Convert.ToInt32(dr["Branch_Pincode"]);
+            if (!dr.IsNull("Branch_Landline1"))
             salesinvoice.Branch_Landline1 = Convert.ToString(dr["Branch_Landline1"]);
+            if (!dr.IsNull("Branch_Landline2"))
             salesinvoice.Branch_Landline2 = Convert.ToString(dr["Branch_Landline2"]);
             salesinvoice.Sales_Invoice_No = Convert.ToString(dr["Sales_Invoice_No"]);
             salesinvoice.Created_Date = Convert.ToDateTime(dr["Created_Date"]);
@@ -413,20 +415,24 @@ namespace MyLeoRetailerRepo
             salesinvoice.Gross_Amount = Convert.ToInt32(dr["Gross_Amount"]);
             salesinvoice.Total_MRP_Amount = Convert.ToInt32(dr["Total_MRP_Amount"]);
             salesinvoice.Total_Quantity = Convert.ToInt32(dr["Total_Quantity"]);
+            if (!dr.IsNull("Tax_Percentage"))
             salesinvoice.Tax_Percentage = Convert.ToInt32(dr["Tax_Percentage"]);
 
             if (salesinvoice.Round_Off_Amount == 0)
             {
+                if (!dr.IsNull("Round_Off_Amount"))
                 sqlParams.Add(new SqlParameter("@Round_Off_Amount", 0));
             }
             else
             {
+                if (!dr.IsNull("Round_Off_Amount"))
                 salesinvoice.Round_Off_Amount = Convert.ToInt32(dr["Round_Off_Amount"]);           
             }
 
 
-
+            if (!dr.IsNull("Total_Discount_Amount"))
             salesinvoice.Total_Discount_Amount = Convert.ToInt32(dr["Total_Discount_Amount"]);
+            if (!dr.IsNull("Net_Amount"))
             salesinvoice.Net_Amount = Convert.ToInt32(dr["Net_Amount"]);
 
             return salesinvoice;

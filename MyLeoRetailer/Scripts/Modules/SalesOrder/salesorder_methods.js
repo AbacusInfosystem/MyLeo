@@ -102,6 +102,8 @@ function Get_Sales_Order_Items_By_Barcode(i) {
         }
     });
 
+    CalculateTotal();
+
     AddSalesOrderDetails();
 }
 

@@ -1,4 +1,6 @@
 ﻿function AddProductDispatch() {
+
+   // $("#hdn_Quantity").val($("#txtBalance_Quantitya").val());
     
     $("#txtDispatch_Quantity").val(parseInt($("#txtDispatch_Quantity").val()) + 1);
 
@@ -35,7 +37,7 @@
 
             tblHtml += "<td>";
             tblHtml += "<label >" + datetime + "</label>";
-            tblHtml += "<input type='hidden' class='form-control input-sm' name='List_product_Dispatch[0].Dispatch_Date' value='" + datetime + "' id=textDispatch_Date_0'>";
+            tblHtml += "<input type='hidden' class='form-control input-sm' name='List_product_Dispatch[0].Dispatch_Date' value='" + currentdate + "' id=textDispatch_Date_0'>";
             tblHtml += "</td>";
 
             tblHtml += "<td>";
@@ -55,7 +57,7 @@
             var row_Count = document.getElementById("tblProduct_Dispatch").children[1].rows.length;
 
             if (row_Count > 0 && $("#hdn_request_Id").val() == 0) {
-                $("#txtBalance_Quantitya").attr("readonly", true);
+                $("#txtBalance_Quantitya").attr("readonly", true);              
 
                 $("#textSKU").attr("readonly", true);
 
@@ -190,6 +192,11 @@ function Delect_Dispatched_Product(DeleteProduct, addBackQty) {
         }
     });
 }
+
+function AddQuantity() {
+
+    $("#hdn_Quantity").val($("#txtBalance_Quantitya").val());
+};
 
 
 

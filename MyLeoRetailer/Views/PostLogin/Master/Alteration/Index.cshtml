@@ -154,23 +154,38 @@
                 <div class="block">
                     <h4 style="margin-top: 0px;">Date detail.</h4>
 
+                    <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Alteration date.</span>
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                            <input type="text" class="form-control datepicker" id="txtAlterationDate" name="Alteration.Alteration_Date" value="@((Model.Alteration.Alteration_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.Alteration.Alteration_Date.ToString("MM-dd-yyyy")))" />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
 
                     <div class="form-group">
+                        <span class="label label-primary label-form" style="margin-bottom: 1px;">Delivery date.</span>
+                        <div class="input-group date" id="dp-2" data-date="" data-date-format="MM-dd-yyyy">
+                            <input type="text" class="form-control datepicker" id="txtDeliveryDate" name="Alteration.Delivery_Date" value="@((Model.Alteration.Delivery_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.Alteration.Delivery_Date.ToString("MM-dd-yyyy")))" />
+                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Alteration date.</span>
                         <div class="input-group date"  data-date="" data-date-format="MM-dd-yyyy">
                             <input type="text" class="form-control datepicker" id="txtAlterationDate" name="Alteration.Alteration_Date" placeholder="Alteration date." value="@((Model.Alteration.Alteration_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.Alteration.Alteration_Date.ToString("MM-dd-yyyy")))" />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </div>
+                    </div>*@
 
 
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <span class="label label-primary label-form" style="margin-bottom: 1px;">Delivery date</span>
                         <div class="input-group date"  data-date="" data-date-format="MM-dd-yyyy">
                             <input type="text" class="form-control datepicker" id="txtDeliveryDate" placeholder="Delivery date." name="Alteration.Delivery_Date" value="@((Model.Alteration.Delivery_Date == DateTime.MinValue ? DateTime.Now.ToString("MM-dd-yyyy") : Model.Alteration.Delivery_Date.ToString("MM-dd-yyyy")))" />
                             <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
-                    </div>  
+                    </div>*@  
 
 
                 </div>
