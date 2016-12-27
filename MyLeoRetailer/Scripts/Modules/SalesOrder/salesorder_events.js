@@ -31,10 +31,7 @@
 
 
 
-
-
     $('#dtpInvoice_Date').datepicker({
-
         dateFormat: "dd-MM-yy",
         changeMonth: true,
         changeYear: true,
@@ -44,12 +41,9 @@
     });
 
 
-    debugger
-
     if ($('#hdnSalesInvoiceID').val() != 0) {
 
-        debugger;
-
+      
         //$('#btnAddInputRow').attr("disabled", "disabled");
 
         $('#btnSaveSalesOrder').attr("disabled", "disabled");
@@ -57,9 +51,6 @@
         $('#btnCustomer').attr("disabled", "disabled");
 
     }
-
-
-    debugger;
 
     //CalculateDiscountAmount();
 
@@ -72,11 +63,19 @@
 $(function ()
 {
 
+    //$("#txtMobileNo").focus();
 
-    $("[name='SalesInvoice.Mobile']").focusout(function ()
+    //$("[name='SalesInvoice.Mobile']").focus(function () {
+    //    Get_Customer_Name_By_Mobile_No();
+
+    //});
+
+    $("#txtMobileNo").focus();
+
+
+    $("[name='SalesInvoice.Mobile']").blur(function ()
     {
-        Get_Customer_Name_By_Mobile_No();
-
+        Get_Customer_Name_By_Mobile_No();    
     });
 
 
@@ -84,7 +83,6 @@ $(function ()
 
         Get_Credit_Note_Amount_By_Id($(this).val());
 
-        
 
     });
 
@@ -104,7 +102,7 @@ $(function ()
 
     $("#btnSaveSalesOrder").click(function ()
     {
-        debugger;
+      
 
         $("#tblSalesOrderItems").find("[id^='SalesOrderItemRow_']").each(function (i, row)
         {
@@ -140,8 +138,7 @@ $(function ()
 
     $("#btnCustomer").click(function () {
 
-        debugger;
-
+      
         $("#hdnCreateCustomerFlag").val(true);
 
         // alert($("#hdnCreateCustomerFlag").val());
@@ -183,7 +180,7 @@ $(function ()
 
 //function CalculateQuantityMRP()
 //{
-//    debugger;
+//  
 
 //    var sumQuantity = 0;
 //    var sumMRPAmount = 0;
@@ -350,7 +347,7 @@ $(function ()
 
 //function CalculatePaidAmt() {
 
-//    debugger;
+//  
 
 //   // alert();
 
