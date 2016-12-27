@@ -1253,6 +1253,8 @@
     <Content Include="Views\PostLogin\SalesOrder\SalesSummaryReport.cshtml" />
     <Content Include="Views\PostLogin\Transaction\PurchaseReturn\Print.cshtml" />
     <Content Include="Views\PostLogin\Barcode\PrintBarcode.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\DummySalesOrderList.cshtml" />
+    <Content Include="Views\PostLogin\SalesOrder\DummySalesOrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
