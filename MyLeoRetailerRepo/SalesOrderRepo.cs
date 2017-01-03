@@ -267,6 +267,11 @@ namespace MyLeoRetailerRepo
                 SalesOrderItems.MRP_Price = Convert.ToInt32(dr["MRP_Price"]);
             }
 
+            if (!dr.IsNull("SKU_Code"))
+            {
+                SalesOrderItems.SKU_Code = Convert.ToString(dr["SKU_Code"]);
+            }
+
             return SalesOrderItems;
         }
 

@@ -83,7 +83,7 @@ function Get_Sales_Order_Items_By_Barcode(i) {
 
             $('#textArticle_No_' + i).val(data.Article_No);
 
-            $('#textSKU_No_' + i).val($("#hdnBranchID").val());
+            $('#textSKU_No_' + i).val(data.SKU_Code);
 
             $('#textBrand_' + i).val(data.Brand);
 
@@ -538,7 +538,7 @@ function Add_Validation(i) {
 
     $("#textQuantity_" + i).rules("add", { required: true, QuantityCheck: true, digits: true, messages: { required: "Quantity", digits: "Invalid Quantity." } });
 
-    $("#textSKU_No_" + i).rules("add", { checkSKUExist: true});
+    //$("#textSKU_No_" + i).rules("add", { checkSKUExist: true});
 
     $("#textBarcode_No_" + i).rules("add", { checkBarcodeExist: true, messages: {checkBarcodeExist:"Already Mapped"}});
 

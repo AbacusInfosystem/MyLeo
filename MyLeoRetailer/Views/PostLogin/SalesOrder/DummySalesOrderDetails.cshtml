@@ -2,4 +2,126 @@
     ViewBag.Title = "DummySalesOrderDetails";
 }
 
-<h2>DummySalesOrderDetails</h2>
+<div class="page-container">
+    <div class="page-content">
+        <ul class="breadcrumb" style="margin-bottom: 0px;">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Online Orders</a></li>
+            <li class="active">Sales Order Details</li>
+        </ul>
+
+        <div class="content-frame">
+            <div class="content-frame-top">
+                <div class="page-title">
+                    <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Order Details</h2>
+                </div>
+            </div>
+
+            <div class="page-content-wrap">
+
+                <div class="row" style="background: rgba(0, 0, 0, 0.02);">
+                    <div class="col-md-12">
+                        <div class="block" style="margin-bottom: 0;">
+                            <h3><span class="fa fa-bar-chart-o"></span>&nbsp;&nbsp; Order No. : ORD-123<small class="pull-right"><b>Date:</b> 21/11/2016</small></h3>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="background: rgba(0, 0, 0, 0.02);">
+                    <div class="col-md-12">
+                        <div class="block">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">Sr.No.</th>
+                                        <th width="45%">Product Name</th>
+                                        <th width="15%">Quantity</th>
+                                        <th width="15%" style="text-align:right">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Levis T-Shirt</td>
+                                        <td>15</td>
+                                        <td style="text-align:right">5000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Myleo T-Shirt</td>
+                                        <td>10</td>
+                                        <td style="text-align:right">2000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Levis Shirt</td>
+                                        <td>5</td>
+                                        <td style="text-align:right">5000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Myleo Shirt</td>
+                                        <td>50</td>
+                                        <td style="text-align:right">8000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Myleo Pant</td>
+                                        <td>4</td>
+                                        <td style="text-align:right">10000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:right">Total:</td>
+                                        <td style="text-align:right"><i class="fa fa-inr"></i>  30,000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:right">Service Tax(%):</td>
+                                        <td style="text-align:right"><i class="fa fa-inr"></i> 3,000.00</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="3" style="text-align:right">Grand Total:</td>
+                                        <td style="text-align:right"><i class="fa fa-inr"></i> 27,000.00</td>
+                                    </tr>
+
+                                </tbody>
+
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="background: rgba(0, 0, 0, 0.02);">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Order Status</span>
+
+                            <select style="color: #656d78;" disabled="" id="drpOrderStatus" class="form-control" name="Sales_Order.Status_Id">
+                                <option value="0">-Select Transaction Type-</option>
+                                <option value="1">Order Received</option>
+                                <option value="2" selected="selected">Order Confirmed</option>
+                                <option value="3">Order Dispatched</option>
+                                <option value="4">Order Delivered</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Shipping Date</span>
+                            <div class="input-group">
+                                <input style="color: #656d78;" readonly="" type="text" class="form-control" id="txtRecDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" name="Sales_Order.Shipping_Date" value="28-11-2016 ">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
