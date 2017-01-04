@@ -640,7 +640,8 @@ function CalculateTotal() {
     $("#textMRPAmount_0").val(sumMRPAmount.toFixed(2));
     $("#textDiscountAmount_0").val(sumDiscountAmount.toFixed(2));
     $("#textGrossAmount_0").val(sumGrossAmount.toFixed(2));
-
+      
+    CalculateTax();
 }
 
 function CalculateTax() {
