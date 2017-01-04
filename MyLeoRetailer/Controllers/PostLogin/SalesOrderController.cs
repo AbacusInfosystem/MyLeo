@@ -497,5 +497,15 @@ namespace MyLeoRetailer.Controllers.PostLogin
 
             return Json(JsonConvert.SerializeObject(siViewModel));
         }
+
+        public ActionResult DummySalesOrderList()
+        {
+            return View("DummySalesOrderList");
+        }
+
+        public ActionResult DummySalesOrderDetails()
+        {
+            return View("DummySalesOrderDetails");
+        }
     }
 }

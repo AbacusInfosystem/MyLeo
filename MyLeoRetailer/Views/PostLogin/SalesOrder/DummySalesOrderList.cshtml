@@ -1,0 +1,212 @@
+﻿@{
+    ViewBag.Title = "DummySalesOrderList";
+}
+
+<div class="page-container">
+    <div class="page-content">
+        <ul class="breadcrumb" style="margin-bottom: 0px;">
+            <li><a href="#">Home</a></li>
+            <li class="active">Online Orders</li>
+        </ul>
+
+        <div class="content-frame">
+            <div class="content-frame-top">
+                <div class="page-title">
+                    <h2><span class="fa fa-image"></span>&nbsp;&nbsp; Sales Order List</h2>
+                </div>
+            </div>
+
+            <div class="page-content-wrap">
+                <div class="row" style="background: rgba(0, 0, 0, 0.02);">
+                    <div class="col-md-3">
+                        <div class="block">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Order No.</span>
+                            <div class="input-group">
+                                <input type="text" class="form-control color-filter" name="" id="" placeholder="Enter order no. to search.">
+                                <span class="input-group-addon"> <a href="#" class="text-muted" id="hrefDealer" role="button"> <i class="fa fa-search" style="color:#fff;" aria-hidden="true"></i></a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="block">
+                            <span class="label label-primary label-form" style="margin-bottom: 1px;">Status</span>
+                            <select id="" class="form-control">
+                                <option value="">-Select Status-</option>
+                                <option value="1">Order Received</option>
+                                <option value="2">Order Confirmed</option>
+                                <option value="3">Order Dispatched</option>
+                                <option value="4">Order Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding-top: 25px; padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                        <div class="block">
+                            <div class="btn-group">
+                                <button role="button" class="btn btn-info" id="btnVendorContact">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="background: rgba(0, 0, 0, 0.02);">
+                    <div class="col-md-12" style="text-align: right;">
+                        <div class="block" style="margin-bottom: 0;">
+                            <div class="btn-group">
+                                <button role="button" class="btn btn-primary" onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'" id="btnVendorContact">Order Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" style="background: rgba(0, 0, 0, 0.06); border-top: 1px solid #DDD; padding-top: 0px; padding-bottom:0; margin-bottom: 0; padding-left: 0; padding-right: 0;">
+                        <table class="table table-hover" style="margin-bottom: 0;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 5%;"></th>
+                                    <th>Order No.</th>
+                                    <th>Order Date</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-123</a>
+                                    </td>
+                                    <td>12/08/2016</td>
+                                    <td>20000.00</td>
+                                    <td>
+                                        <span class="label label-success">Confirmed</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-124</a>
+                                    </td>
+                                    <td>02/08/2016</td>
+                                    <td>28000.00</td>
+                                    <td>
+                                        <span class="label label-danger">Failed</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-125</a>
+                                    </td>
+                                    <td>20/08/2016</td>
+                                    <td>18000.00</td>
+                                    <td>
+                                        <span class="label label-info">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-126</a>
+                                    </td>
+                                    <td>20/08/2016</td>
+                                    <td>35000.00</td>
+                                    <td>
+                                        <span class="label label-info">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-127</a>
+                                    </td>
+                                    <td>20/08/2016</td>
+                                    <td>40000.00</td>
+                                    <td>
+                                        <span class="label label-info">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-128</a>
+                                    </td>
+                                    <td>12/08/2016</td>
+                                    <td>20000.00</td>
+                                    <td>
+                                        <span class="label label-success">Confirmed</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-129</a>
+                                    </td>
+                                    <td>02/08/2016</td>
+                                    <td>28000.00</td>
+                                    <td>
+                                        <span class="label label-danger">Failed</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-130</a>
+                                    </td>
+                                    <td>20/08/2016</td>
+                                    <td>18000.00</td>
+                                    <td>
+                                        <span class="label label-info">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-131</a>
+                                    </td>
+                                    <td>20/08/2016</td>
+                                    <td>35000.00</td>
+                                    <td>
+                                        <span class="label label-info">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="switch switch-small" style="margin: 0px;"><input type="radio" value="1" name="Vendor_Contact_List" class="rd-list"><span></span></label>
+                                    </td>
+                                    <td>
+                                        <a onclick="location.href='@Url.Action("DummySalesOrderDetails", "SalesOrder")'">ORD-132</a>
+                                    </td>
+                                    <td>20/08/2016</td>
+                                    <td>40000.00</td>
+                                    <td>
+                                        <span class="label label-info">Pending</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

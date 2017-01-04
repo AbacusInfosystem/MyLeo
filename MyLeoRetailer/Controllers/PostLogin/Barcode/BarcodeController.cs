@@ -60,6 +60,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Barcode
         public ActionResult Insert_Barcode(BarcodeViewModel bViewModel)
         {
 
+            string SKU = bViewModel.Barcode.Product_SKU;
+
             try
             {
                 Set_Date_Session(bViewModel.Barcode);
@@ -88,6 +90,8 @@ namespace MyLeoRetailer.Controllers.PostLogin.Barcode
                 Logger.Error(" Barcode - Insert_Barcode : " + ex.ToString());
 
             }
+
+            bViewModel.Barcode.Product_SKU = SKU;
 
             TempData["bViewModel"] = (BarcodeViewModel)bViewModel;
 
